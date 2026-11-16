@@ -3,7 +3,7 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.3 — 16/11/2026 — statut : **à valider**
+> Version 1.3 — 16/11/2026 — statut : **validée** (PR #3)
 >
 > | Version | Date | Changements |
 > |---|---|---|
