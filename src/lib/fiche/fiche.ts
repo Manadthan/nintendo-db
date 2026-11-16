@@ -1,0 +1,69 @@
+import { versionAffichee } from "@/lib/catalogue/catalogue";
+import { versJeuCatalogue, type LigneJeu } from "@/lib/catalogue/lignes";
+import {
+  REGIONS,
+  type JeuCatalogue,
+  type Marche,
+  type Region,
+  type SortieCatalogue,
+} from "@/lib/catalogue/types";
+
+/** Une sortie telle que la fiche l'affiche : celle du catalogue, plus l'éditeur et le code produit de la région. */
+export type SortieFiche = SortieCatalogue & {
+  editeur: string | null;
+  codeProduit: string | null;
+};
+
+/** Un jeu tel que la fiche l'affiche (US-04) ; utilisable partout où un jeu du catalogue l'est. */
+export type JeuFiche = JeuCatalogue & {
+  franchise: string | null;
+  genre: string | null;
+  wikipediaUrl: string | null;
+  console: { slug: string; nom: string };
+  sorties: Record<Region, SortieFiche>;
+};
+
+/** Une ligne de `games` avec sa console et ses `releases`, telle que la renvoie la requête de la fiche. */
+export type LigneFiche = Omit<LigneJeu, "releases"> & {
+  franchise: string | null;
+  genre: string | null;
+  wikipedia_url: string | null;
+  consoles: { slug: string; nom: string };
+  releases: (LigneJeu["releases"][number] & { code_produit: string | null })[];
+};
+
+export function versJeuFiche(ligne: LigneFiche, baseUrl: string): JeuFiche {
+  const jeu = versJeuCatalogue(ligne, baseUrl);
+  const parRegion = new Map(ligne.releases.map((r) => [r.region, r]));
+  const sorties = Object.fromEntries(
+    REGIONS.map((region) => {
+      const r = parRegion.get(region);
+      const sortie: SortieFiche = {
+        ...jeu.sorties[region],
+        editeur: r?.editeur ?? null,
+        codeProduit: r?.code_produit ?? null,
+      };
+      return [region, sortie];
+    }),
+  ) as Record<Region, SortieFiche>;
+
+  return {
+    ...jeu,
+    franchise: ligne.franchise,
+    genre: ligne.genre,
+    wikipediaUrl: ligne.wikipedia_url,
+    console: ligne.consoles,
+    sorties,
+  };
+}
+
+/**
+ * Région ouverte à l'arrivée sur la fiche (US-04) : le marché choisi dans le catalogue si le jeu y est sorti,
+ * sinon la version que le catalogue affiche avec « Tous » (PAL, puis US, puis JAP).
+ */
+export function regionParDefaut(jeu: JeuCatalogue, marche: Marche): Region {
+  return (
+    (versionAffichee(jeu, marche) ?? versionAffichee(jeu, "TOUS"))?.region ??
+    "PAL"
+  );
+}
