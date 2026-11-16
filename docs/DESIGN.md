@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 0.2 — 16/11/2026 — statut : **brouillon, à valider**
+> Version 0.3 — 16/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.3 | 16/11/2026 | ADR-02 : plus de région globale (marché dans le catalogue, région sur la fiche) ; ADR-05 : recherche dans le navigateur en v1 ; routes |
 > | 0.2 | 16/11/2026 | v1 Wii U ; sources Wikipédia + IGDB (Wikidata, MobyGames écartés) ; jaquettes copiées chez nous |
 > | 0.1 | 16/11/2026 | Premier brouillon (Wikidata + Wikipédia, liens d'images externes) |
 
@@ -51,12 +52,13 @@ Propriétaire (connecté) ──────────▶├──▶ Supabase
 au compte du propriétaire, créé à la main ; inscriptions désactivées. La RLS vérifie l'écriture côté base, en
 plus des contrôles des server actions.
 
-**ADR-02 — Pages publiques statiques, région choisie dans le navigateur.** Les pages contiennent les données
-des **3 régions** ; la région est un attribut `data-region` sur `<html>`, posé par un petit script **avant
-l'affichage** (comme le thème sur gamecartdb) à partir de `localStorage` (défaut PAL). Le CSS n'affiche que la
-région active. *Pourquoi* : pages cachables (rapides) et bascule instantanée sans rechargement (US-03), sans
-« flash » de la mauvaise région. Écartée : région en cookie lue par le serveur (pages non cachables). Après une
-modification, `revalidatePath` régénère les pages concernées.
+**ADR-02 — Pages publiques statiques, choix faits dans le navigateur.** Le catalogue et les fiches contiennent
+les données des **3 régions** et sont préparés à l'avance (ISR). Le **marché** du catalogue (US-03), la
+recherche et le tri sont des états du navigateur, reflétés dans l'adresse (`?marche=jap&q=zelda`) et le marché
+retenu dans `localStorage`. Sur la fiche, la **région** (US-04) est un état local, ouvert sur le marché choisi.
+*Pourquoi* : pages rapides et cachables, bascules instantanées sans rechargement. Remplace la région globale de la
+v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. Après une modification,
+`revalidatePath` régénère les pages concernées.
 
 **ADR-03 — Import Wikipédia + IGDB, aperçu puis enregistrement.**
 1. **Wikipédia** (référence) : tableau de la liste des jeux de la console, lu avec cheerio. Retenus : éditeur
@@ -80,8 +82,10 @@ bucket public ; écriture réservée au propriétaire. Toute image est **ré-enc
 Mention « Jaquette : IGDB » (ou « Photo ») sous la jaquette. *Pourquoi* : rendu net et rapide comme gamecartdb,
 pas d'image cassée si la source change, et IGDB préfère qu'on stocke ses images. Remplace l'ADR-04 de la v0.1.
 
-**ADR-05 — Recherche dans Postgres.** Titre normalisé (minuscules, sans accents ni ponctuation, `unaccent`)
-sur chaque sortie + index trigramme (`pg_trgm`) : une requête trouve un jeu par n'importe lequel de ses 3 titres.
+**ADR-05 — Recherche dans le navigateur en v1.** Le catalogue Wii U (≈ 50 jeux) est déjà chargé : la recherche
+filtre la liste au fil de la frappe, sur un titre normalisé (minuscules, sans accents ni ponctuation) calculé
+pour les 3 régions + éditeur + développeur. *Pourquoi* : instantané, aucun aller-retour serveur, simple à tester.
+Quand plusieurs consoles seront en ligne : recherche globale dans Postgres (`unaccent` + `pg_trgm`).
 
 **ADR-06 — Adresses stables.** `/consoles/{console}` et `/jeux/{console}/{jeu}` avec un *slug* tiré du titre
 PAL (sinon US, sinon romanisé), figé à la création. En v1, `/` affiche le catalogue Wii U (US-01 en S).
@@ -108,14 +112,13 @@ import_runs(id, console_id, lance_le, resume jsonb)
 
 | Route | Contenu | US |
 |---|---|---|
-| `/` → `/consoles/wii-u` | Catalogue grille de jaquettes / liste, tri, groupes par année, filtres | US-02, 03, 06 |
-| `/jeux/[console]/[jeu]` | Grande jaquette, onglets JAP/US/PAL, tableau des 3 régions, sources | US-04 |
-| `/recherche?q=` | Résultats | US-05 |
+| `/` → `/consoles/wii-u` | Catalogue à la manière de gamecartdb : présentation, « Tous les jeux », recherche, marché, tri, grille/liste, groupes par année | US-02, 03, 05, 06 |
+| `/jeux/[console]/[jeu]` | Grande jaquette et sélecteur JAP/US/PAL dessous, informations, disponibilité, sources | US-04 |
 | `/a-propos` | Non-affiliation, sources (Wikipédia, IGDB) et licences | US-07 |
 | `/admin/connexion`, `/admin/import` | Connexion ; import avec aperçu et lots | US-09, 10 |
 | `/jeux/[console]/[jeu]/modifier` | Correction, jaquettes par région | US-11, 12 |
 
-Le sélecteur JAP / US / PAL est dans l'en-tête, collé en haut de l'écran. Les jaquettes sont l'élément visuel
+Pas de sélecteur de région global : le marché se choisit dans le catalogue, la région sur la fiche. Les jaquettes sont l'élément visuel
 principal (priorité du propriétaire) : grille à bords fins, proportions de boîte respectées, pas de recadrage.
 
 ## 7. Tests
@@ -123,8 +126,8 @@ principal (priorité du propriétaire) : grille à bords fins, proportions de bo
 | Niveau | Quoi |
 |---|---|
 | Vitest | lecture du tableau Wikipédia **sur fixture** (50 jeux Nintendo en boîte attendus), réponses IGDB **sur fixtures**, rapprochement, normalisation, slug, verrous, conversion WebP |
-| pgTAP | RLS (anon lit, n'écrit pas), bucket, unicité `(game_id, region)`, recherche sans accents |
-| Playwright | catalogue → fiche, bascule de région sans flash, recherche, connexion, correction |
+| pgTAP | RLS (anon lit, n'écrit pas), bucket, unicité `(game_id, region)` |
+| Playwright | catalogue → fiche, filtre par marché, recherche au fil de la frappe, bascule de région sur la fiche, connexion, correction |
 | CI | lint, types, unitaires, build, e2e sur base Supabase locale, types générés à jour |
 
 Fixtures : copie datée de « List of Wii U games » et de quelques réponses IGDB (+ README d'origine) ; aucun
@@ -133,11 +136,11 @@ test n'appelle les sites en direct.
 ## 8. Plan par étapes (milestones)
 
 1. **Socle** : Next.js, Tailwind, ESLint, Vitest, Playwright, CI, déploiement Vercel.
-2. **Base** : Supabase, migrations (schéma, RLS, bucket, recherche), console Wii U, connexion US-09.
-3. **Consultation** : US-02, US-03, US-04 avec 3–4 jeux Wii U saisis en données de départ → *site visible tôt*.
+2. **Base** : Supabase, migrations (schéma, RLS, bucket), console Wii U, connexion US-09.
+3. **Consultation** : US-02, US-03, US-04, US-05 avec 3–4 jeux Wii U saisis en données de départ → *site visible tôt*.
 4. **Import Wii U** : US-10 (Wikipédia + IGDB + jaquettes).
 5. **Correction** : US-11, US-12.
-6. **Recherche et filtres** : US-05, US-06.
+6. **Filtres** : US-06.
 7. **Finitions** : US-07, US-08, référencement. Puis console suivante.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
@@ -165,4 +168,4 @@ npm run db:start | db:test | db:types
 
 ## 11. Prochaines étapes
 
-Valider ce document → maquettes des 3 écrans de la v1 (catalogue, fiche, recherche) → issues de l'étape 1.
+Valider ce document avec les maquettes v0.2 → issues de l'étape 1.
