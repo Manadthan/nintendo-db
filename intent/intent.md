@@ -1,7 +1,7 @@
 # Intention — Nintendo DB
 
 > Étape 1 du playbook : **quoi et pourquoi**, pas encore comment.
-> Version 0.1 — 16/11/2026 — statut : **brouillon, à valider par le propriétaire**
+> Version 0.2 — 16/11/2026 — statut : **brouillon, décisions 1, 3, 4, 5 prises**
 
 ## Problème
 
@@ -20,7 +20,7 @@ Les sites existants (ex. gamecartdb.com) couvrent tous les éditeurs ou ne compa
 ## Utilisateurs
 
 - Le propriétaire (collectionneur), principalement sur **iPhone 12 mini / Safari**.
-- Éventuellement d'autres visiteurs (voir question ouverte n° 4).
+- **Site public en lecture** : tout le monde consulte, seul le propriétaire modifie.
 
 ## Périmètre envisagé
 
@@ -35,6 +35,15 @@ Switch, Switch 2 — à confirmer (question 2).
 - **Droits** : jaquettes et photos appartiennent à Nintendo ou aux photographes ; leur usage doit être
   compatible avec la source choisie.
 - Le scraping éventuel se fait côté serveur, testé sur fixtures, en respectant les conditions des sites.
+
+## Décisions prises (16/11/2026)
+
+| # | Question | Décision |
+|---|---|---|
+| 1 | Quels jeux | Sorties **physiques** dont Nintendo est **éditeur** dans au moins une région ; pas de dématérialisé en v1 |
+| 3 | Source des données | **Base ouverte** (Wikidata / Wikipedia, licence libre) importée, puis corrigée à la main |
+| 4 | Accès | **Public en lecture**, modification réservée au propriétaire |
+| 5 | Suivi de collection | **Plus tard** : la v1 est une base de consultation |
 
 ## Questions ouvertes (à trancher avant la spec)
 
