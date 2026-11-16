@@ -3,10 +3,12 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 0.2 — 16/11/2026 — statut : **brouillon, à valider**
+> Version 1.1 — 16/11/2026 — statut : **validée** (1.0 validée au merge de la PR #1)
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.1 | 16/11/2026 | US-12 : jaquette = **lien vers une image externe** (pas de copie, pas de photo en v1) |
+> | 1.0 | 16/11/2026 | Validée (PR #1) |
 > | 0.2 | 16/11/2026 | Questions 1 à 3 tranchées : titre JAP double, PAL par défaut, code produit complété à la main |
 > | 0.1 | 16/11/2026 | Premier brouillon |
 
@@ -111,8 +113,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Les champs obligatoires sont vérifiés (titre non vide, date valide).
 
 #### US-12 — Ajouter une jaquette à une sortie (S)
-- [ ] J'ajoute une image (photo ou adresse) pour une région donnée ; elle remplace l'éventuelle image existante.
-- [ ] Sans jaquette, une vignette neutre affiche le titre et la console.
+- [ ] Je colle l'**adresse d'une image externe** (https) pour une région donnée ; elle remplace l'éventuelle adresse existante.
+- [ ] L'image n'est **pas copiée** sur notre serveur : elle est affichée depuis son site, avec la mention de ce site.
+- [ ] Sans jaquette, ou si l'image ne se charge plus, une vignette neutre affiche le titre et la console.
 
 ## 5. Exigences non fonctionnelles
 
@@ -148,7 +151,7 @@ DS, 3DS.
 | 1 | Titre japonais | Écriture **japonaise** avec la version **romanisée** en dessous |
 | 2 | Région par défaut | **PAL** |
 | 3 | Code produit | Souvent « — » après l'import, **complété à la main** ; une source complémentaire sera cherchée en conception |
-| 4 | Images | Reporté en conception ; vignette neutre en attendant (US-12) |
+| 4 | Images | **Liens vers des images externes**, saisis à la main, jamais copiés ; vignette neutre sinon (US-12) |
 
 ## 9. Prochaine étape
 
