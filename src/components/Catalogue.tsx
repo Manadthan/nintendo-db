@@ -7,7 +7,18 @@ import {
   grouperParAnnee,
   trier,
 } from "@/lib/catalogue/catalogue";
-import type { JeuCatalogue, Tri, VersionAffichee } from "@/lib/catalogue/types";
+import {
+  MARCHES,
+  abonnerMarche,
+  enregistrerMarche,
+  lireMarche,
+} from "@/lib/catalogue/marche";
+import type {
+  JeuCatalogue,
+  Marche,
+  Tri,
+  VersionAffichee,
+} from "@/lib/catalogue/types";
 import { Disponibilite } from "./Disponibilite";
 import { Jaquette } from "./Jaquette";
 
@@ -39,7 +50,7 @@ function enregistrerVue(vue: Vue) {
 
 type Props = { jeux: JeuCatalogue[]; consoleSlug: string; consoleNom: string };
 
-/** Catalogue d'une console (US-02) : tri, grille / liste, groupes par année. */
+/** Catalogue d'une console (US-02) : marché (US-03), tri, grille / liste, groupes par année. */
 export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
   const [tri, setTri] = useState<Tri>("anciens");
   // Page préparée à l'avance, identique pour tous (ADR-02) : « grille » au premier affichage,
@@ -47,7 +58,14 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
   const vue = useSyncExternalStore(abonner, lireVue, () => "grille" as Vue);
   const changerVue = enregistrerVue;
 
-  const versions = trier(jeux, tri, "TOUS");
+  // Marché (US-03) : « Tous » au premier affichage (page identique pour tous), puis l'adresse ou ce navigateur.
+  const marche = useSyncExternalStore<Marche>(
+    abonnerMarche,
+    lireMarche,
+    () => "TOUS",
+  );
+
+  const versions = trier(jeux, tri, marche);
   const groupes = grouperParAnnee(versions, tri);
   const lien = (v: VersionAffichee) => `/jeux/${consoleSlug}/${v.jeu.slug}`;
 
@@ -63,6 +81,24 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
         <span className="text-[15px] font-semibold text-texte-discret">
           {jeux.length}
         </span>
+      </div>
+
+      <div role="group" aria-label="Marché" className="flex flex-wrap gap-1.5">
+        {MARCHES.map((m) => (
+          <button
+            key={m.valeur}
+            type="button"
+            aria-pressed={marche === m.valeur}
+            onClick={() => enregistrerMarche(m.valeur)}
+            className={`h-9 rounded-full border px-3.5 text-[13px] ${
+              marche === m.valeur
+                ? "border-texte bg-texte font-semibold text-white"
+                : "border-[#d6d9e0] bg-carte font-medium"
+            }`}
+          >
+            {m.libelle}
+          </button>
+        ))}
       </div>
 
       <div className="flex items-center gap-2">
