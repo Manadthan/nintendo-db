@@ -30,9 +30,7 @@ test("un marché ne garde que ses jeux, dans sa version, sans recharger la page"
 
   await marche(page).getByRole("button", { name: "Amérique du Nord" }).click();
   await expect(page.getByText("3 jeux affichés sur 4")).toBeVisible();
-  await expect(
-    page.getByText("Kirby and the Rainbow Curse").first(),
-  ).toBeVisible();
+  await expect(page.getByText("Kirby and the Rainbow Curse").first()).toBeVisible();
   await expect(page.getByText("Wii Karaoke U")).toHaveCount(0); // jamais sorti en Amérique du Nord
   await expect(page).toHaveURL("/?marche=us");
 

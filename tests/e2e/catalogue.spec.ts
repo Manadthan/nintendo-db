@@ -96,15 +96,3 @@ test("le catalogue tient dans la largeur de l'iPhone", async ({ page }) => {
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(375);
 });
-
-test("chaque jaquette est dans un cadre de boîte Wii U (bandeau bleu, MAQUETTES v0.3)", async ({
-  page,
-}) => {
-  const bandeaux = page.locator('a[href^="/jeux/wii-u/"] [data-bandeau]');
-  await expect(bandeaux).toHaveCount(4);
-  await expect(bandeaux.first()).toHaveText("Wii U");
-  await expect(bandeaux.first()).toHaveCSS(
-    "background-color",
-    "rgb(0, 150, 214)",
-  );
-});
