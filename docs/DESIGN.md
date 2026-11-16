@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 0.3 — 16/11/2026 — statut : **validée** (PR #3)
+> Version 0.4 — 16/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.4 | 16/11/2026 | §5 aligné sur la migration 0001 (#17) : plus de `titre_normalise` (recherche dans le navigateur, ADR-05) ; valeurs fixes en types énumérés Postgres |
 > | 0.3 | 16/11/2026 | ADR-02 : plus de région globale (marché dans le catalogue, région sur la fiche) ; ADR-05 : recherche dans le navigateur en v1 ; routes |
 > | 0.2 | 16/11/2026 | v1 Wii U ; sources Wikipédia + IGDB (Wikidata, MobyGames écartés) ; jaquettes copiées chez nous |
 > | 0.1 | 16/11/2026 | Premier brouillon (Wikidata + Wikipédia, liens d'images externes) |
@@ -98,12 +99,14 @@ games(id, console_id → consoles, slug, igdb_id, wikipedia_url, developpeur, fr
       physique bool, verrous text[], created_at, updated_at)
 releases(id, game_id → games, region 'JAP'|'US'|'PAL', sortie bool, titre, titre_romanise (JAP),
          date_sortie date, precision_date 'jour'|'mois'|'annee', code_produit, editeur,
-         jaquette_path, jaquette_source 'igdb'|'photo'|'url', titre_normalise (calculé), verrous text[], updated_at)
+         jaquette_path, jaquette_source 'igdb'|'photo'|'url', verrous text[], updated_at)
          unique (game_id, region)
 import_runs(id, console_id, lance_le, resume jsonb)
 ```
 
 - Un jeu = une œuvre sur une console ; ses 3 sorties sont toujours créées (`sortie = false` si absente).
+- Valeurs fixes (`type`, `region`, `precision_date`, `jaquette_source`) en **types énumérés** Postgres : refusées
+  par la base si invalides, et devenues des types TypeScript exacts.
 - **RLS** : `select` pour tous ; `insert/update/delete` pour `authenticated` seulement (inscriptions
   désactivées ⇒ seul le propriétaire). Même règle pour le bucket d'images. Testé en pgTAP.
 - Évolution du schéma **uniquement** par `supabase/migrations/` ; types TypeScript générés et vérifiés en CI.

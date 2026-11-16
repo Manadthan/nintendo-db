@@ -24,7 +24,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.1 validée |
 | `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.3 validée |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v0.3 validée |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v0.4 validée |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.2 validée |
 
 ## Règles de travail
@@ -67,8 +67,9 @@ npm run db:types   # régénérer src/types/database.ts après une migration
 ```
 src/app/                 pages (App Router) — layout.tsx, page.tsx, globals.css (couleurs des maquettes)
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
+src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
 tests/e2e/               tests Playwright
-supabase/                config.toml (inscriptions désactivées), migrations/, tests/database/ (pgTAP)
+supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS), tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
 ```
@@ -83,7 +84,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
 - [x] Phase 3 — Issues de l'étape 1 (#4 à #9), milestone « Étape 1 — Socle » (n° 1)
 - [ ] Phase 4+ — Développement par étapes (DESIGN.md §8)
   - [x] Étape 1 — Socle : #4 à #9
-  - [ ] Étape 2 — Base : #16 (cette PR), #17 schéma + RLS, #18 jaquettes, #19 US-09 connexion
+  - [ ] Étape 2 — Base : #16 ✅, #17 schéma + RLS (cette PR), #18 jaquettes, #19 US-09 connexion
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes
