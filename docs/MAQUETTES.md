@@ -1,9 +1,10 @@
 # Maquettes
 
-> Version 0.2 — 16/11/2026 — statut : **validée** (PR #3)
+> Version 0.3 — 16/11/2026 — statut : **validée** (#40, retour après l'import réel)
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.3 | 16/11/2026 | Cadre de boîte Wii U : bandeau bleu « Wii U » au-dessus de chaque jaquette, réelle ou neutre (#40) |
 > | 0.2 | 16/11/2026 | Retour du propriétaire (PR #3) : trame de gamecartdb, recherche dans le catalogue, région choisie sur la fiche ; écran de recherche séparé supprimé |
 > | 0.1 | 16/11/2026 | 3 écrans : catalogue, fiche, recherche ; sélecteur de région global |
 
@@ -37,6 +38,9 @@ emplacements, remplacés par les jaquettes IGDB de chaque région à l'import.
 - Polices **Inter** (texte) et **Space Grotesk** (titres) ; fond gris clair `#F4F5F7`, cartes blanches.
 - Un seul accent : bleu `#2541B2`.
 - **Les jaquettes priment** : proportions de boîte Wii U (27 × 38), jamais recadrées, ombre douce sur la fiche.
+- **Cadre de boîte** (v0.3) : bandeau **bleu `#0096D6`** en haut, « Wii U » en blanc à gauche (texte simple, pas le logo
+  officiel), puis la jaquette dessous. Les jaquettes IGDB n'ont pas ce bandeau et sont un peu moins hautes qu'une boîte :
+  bandeau + jaquette retrouvent la forme de la boîte. Même cadre pour la vignette neutre ; en liste, bandeau fin sans texte.
 - Cibles tactiles ≥ 44 px ; champ de recherche en 16 px (évite le zoom automatique de Safari iOS).
 
 ## À faire après validation

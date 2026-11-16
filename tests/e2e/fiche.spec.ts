@@ -97,3 +97,10 @@ test("la fiche tient dans la largeur de l'iPhone", async ({ page }) => {
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(375);
 });
+
+test("la grande jaquette de la fiche a aussi son bandeau « Wii U »", async ({
+  page,
+}) => {
+  await page.goto(KIRBY);
+  await expect(page.locator("main [data-bandeau]")).toHaveText("Wii U");
+});
