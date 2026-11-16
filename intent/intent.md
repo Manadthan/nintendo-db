@@ -1,7 +1,7 @@
 # Intention — Nintendo DB
 
 > Étape 1 du playbook : **quoi et pourquoi**, pas encore comment.
-> Version 1.0 — 16/11/2026 — statut : **validée**
+> Version 1.1 — 16/11/2026 — statut : **validée** (1.1 : v1 limitée à la Wii U, sources et images revues)
 
 ## Problème
 
@@ -54,13 +54,14 @@ Nintendo éditeur seulement, en français, région JAP incluse.
 | # | Question | Décision |
 |---|---|---|
 | 1 | Quels jeux | Sorties **physiques** dont Nintendo est **éditeur** dans au moins une région ; pas de dématérialisé en v1 |
-| 2 | Consoles | **Toutes**, y compris Satellaview, e-Reader et Pokémon Mini |
-| 3 | Source des données | **Base ouverte** (Wikidata / Wikipedia, licence libre) importée, puis corrigée à la main |
+| 2 | Consoles | **Toutes** à terme, y compris Satellaview, e-Reader et Pokémon Mini ; **v1 limitée à la Wii U** (hypothèse simplificatrice du propriétaire) |
+| 3 | Source des données | **Wikipédia** (liste, dates par région, jeux en boîte) + **IGDB** (jaquettes et titres par région), puis corrections à la main ; Wikidata et MobyGames écartés (voir DESIGN §1) |
 | 4 | Accès | **Public en lecture**, modification réservée au propriétaire |
 | 5 | Suivi de collection | **Plus tard** : la v1 est une base de consultation |
 | 6 | Variantes | **Plus tard** : rééditions et variantes de pays PAL hors v1 |
 | 7 | Stack | **Même stack** que `mon-site-sdlc` : Next.js, Tailwind, Supabase, Vercel — rendu dans l'esprit de gamecartdb (gamecartdb utilise lui-même Next.js) |
 
-## Reporté en conception
+## Images
 
-- **Images** (jaquettes, cartouches) : source et droits à trancher dans `docs/DESIGN.md` (site public).
+- Jaquettes **par région**, en haute définition, **copiées chez nous** depuis IGDB (qui l'autorise, avec mention),
+  comme le fait gamecartdb. L'aspect visuel est une priorité du propriétaire.

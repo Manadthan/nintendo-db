@@ -4,7 +4,7 @@ Lu par Claude au début de chaque session. Court par principe : les détails son
 
 ## Objectif
 
-Site de référence des **jeux publiés par Nintendo**, sur **toutes les consoles Nintendo**, avec
+Site de référence des **jeux publiés par Nintendo**, sur **toutes les consoles Nintendo** (**v1 : Wii U**), avec
 bascule entre les versions **JAP / US / PAL** (titre, date, code produit, visuels propres à chaque région).
 Inspiration : gamecartdb.com, limité à Nintendo éditeur.
 
@@ -22,9 +22,9 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | Fichier | Contenu | Statut |
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 à valider |
-| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.0 validée |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.1 validée |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v0.1 brouillon |
+| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.2 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.2 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v0.2 brouillon |
 
 ## Règles de travail
 
