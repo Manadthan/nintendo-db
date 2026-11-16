@@ -93,7 +93,7 @@ const texte = ($: CheerioAPI, el: Cheerio<AnyNode>) =>
   el.text().replace(/\s+/g, " ").trim();
 
 /** Liste « a, b » d'une cellule (listes à puces de Wikipédia ou texte simple). */
-function liste($: CheerioAPI, cellule: Cheerio<AnyNode>): string | null {
+function joindreListe($: CheerioAPI, cellule: Cheerio<AnyNode>): string | null {
   const items = cellule
     .find("li")
     .toArray()
@@ -131,7 +131,7 @@ function editeursParRegion(
     }
     return editeurs;
   }
-  const unique = liste($, cellule);
+  const unique = joindreListe($, cellule);
   return { JAP: unique, US: unique, PAL: unique };
 }
 
@@ -195,14 +195,27 @@ function colonnes($: CheerioAPI, table: Cheerio<AnyNode>) {
 }
 
 /** Jeux en boîte (†) dont Nintendo est éditeur dans au moins une région (SPEC décision 1, US-10). */
-export function lireListeWikipedia(html: string): JeuWikipedia[] {
+/** Lecture complète : les jeux retenus, et ceux écartés avec leur raison (résumé de l'aperçu, US-10). */
+export type ListeWikipedia = {
+  jeux: JeuWikipedia[];
+  /** Jeux d'autres éditeurs (nombre seulement : ils ne concernent pas ce site). */
+  autresEditeurs: number;
+  /** Jeux Nintendo sans boîte (téléchargeables seulement), écartés par la SPEC (décision 1). */
+  telechargeables: string[];
+};
+
+export function lireListeWikipediaDetaillee(html: string): ListeWikipedia {
   const $ = cheerio.load(html);
   const table = $("table.wikitable").first();
   if (!table.length)
     throw new Error("Tableau des jeux introuvable dans la page Wikipédia");
   const col = colonnes($, table);
 
-  const jeux: JeuWikipedia[] = [];
+  const liste: ListeWikipedia = {
+    jeux: [],
+    autresEditeurs: 0,
+    telechargeables: [],
+  };
   table
     .find("tr")
     .slice(2)
@@ -222,20 +235,40 @@ export function lireListeWikipedia(html: string): JeuWikipedia[] {
       const nintendo = REGIONS.some((r) =>
         sorties[r]?.editeur?.includes("Nintendo"),
       );
-      if (!enBoite || !nintendo) return;
-
       const t = titres($, cellule(col.titre));
+
+      if (!nintendo) {
+        liste.autresEditeurs++;
+        return;
+      }
+      if (!enBoite) {
+        liste.telechargeables.push(t.PAL || t.US);
+        return;
+      }
+
       const lien = cellule(col.titre)
         .find("a[href*='/wiki/']")
         .first()
         .attr("href");
-      jeux.push({
+      liste.jeux.push({
         slug: slugifier(t.PAL || t.US),
         titres: t,
-        developpeur: liste($, cellule(col.developpeur)),
+        developpeur: joindreListe($, cellule(col.developpeur)),
         wikipediaUrl: lien ? lien.replace(/#.*$/, "") : null,
         sorties,
       });
     });
-  return jeux;
+  return liste;
+}
+
+/** Jeux en boîte (†) dont Nintendo est éditeur dans au moins une région (SPEC décision 1, US-10). */
+export function lireListeWikipedia(html: string): JeuWikipedia[] {
+  return lireListeWikipediaDetaillee(html).jeux;
+}
+
+/** Adresse de la page « rendue » (contenu seul, sans menus) à partir de l'adresse d'un article Wikipédia. */
+export function urlRendu(urlArticle: string): string {
+  const url = new URL(urlArticle);
+  const titre = decodeURIComponent(url.pathname.replace(/^\/wiki\//, ""));
+  return `${url.origin}/w/index.php?${new URLSearchParams({ title: titre, action: "render" })}`;
 }

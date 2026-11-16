@@ -1,9 +1,18 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { lireDate, lireListeWikipedia, slugifier } from "./wikipedia";
+import {
+  lireDate,
+  lireListeWikipedia,
+  lireListeWikipediaDetaillee,
+  slugifier,
+  urlRendu,
+} from "./wikipedia";
 
-const FIXTURE = readFileSync(join(__dirname, "__fixtures__/wii-u-wikipedia.html"), "utf8");
+const FIXTURE = readFileSync(
+  join(__dirname, "__fixtures__/wii-u-wikipedia.html"),
+  "utf8",
+);
 const jeux = lireListeWikipedia(FIXTURE);
 const jeu = (slug: string) => jeux.find((j) => j.slug === slug);
 
@@ -46,7 +55,10 @@ describe("lireListeWikipedia — fixture « List of Wii U games » (révision 13
   });
 
   it("garde un jeu dont Nintendo n'est éditeur que dans une région", () => {
-    expect(jeu("rayman-legends")?.sorties).toMatchObject({ JAP: { editeur: "Nintendo" }, US: { editeur: "Ubisoft" } });
+    expect(jeu("rayman-legends")?.sorties).toMatchObject({
+      JAP: { editeur: "Nintendo" },
+      US: { editeur: "Ubisoft" },
+    });
   });
 
   it("écarte les jeux d'autres éditeurs et les jeux sans boîte", () => {
@@ -55,7 +67,12 @@ describe("lireListeWikipedia — fixture « List of Wii U games » (révision 13
   });
 
   it("retrouve l'adresse des 4 jeux de départ (pas de doublon à l'import)", () => {
-    for (const slug of ["mario-kart-8", "splatoon", "kirby-and-the-rainbow-paintbrush", "wii-karaoke-u"]) {
+    for (const slug of [
+      "mario-kart-8",
+      "splatoon",
+      "kirby-and-the-rainbow-paintbrush",
+      "wii-karaoke-u",
+    ]) {
       expect(jeu(slug), slug).toBeDefined();
     }
   });
@@ -78,9 +95,18 @@ describe("lireListeWikipedia — forme inattendue (R6)", () => {
 
 describe("lireDate", () => {
   it("lit une date complète, un mois ou une année", () => {
-    expect(lireDate("November 18, 2012")).toEqual({ date: "2012-11-18", precision: "jour" });
-    expect(lireDate("March 2013")).toEqual({ date: "2013-03-01", precision: "mois" });
-    expect(lireDate("2013")).toEqual({ date: "2013-01-01", precision: "annee" });
+    expect(lireDate("November 18, 2012")).toEqual({
+      date: "2012-11-18",
+      precision: "jour",
+    });
+    expect(lireDate("March 2013")).toEqual({
+      date: "2013-03-01",
+      precision: "mois",
+    });
+    expect(lireDate("2013")).toEqual({
+      date: "2013-01-01",
+      precision: "annee",
+    });
   });
 
   it("renvoie null pour une région où le jeu n'est pas sorti", () => {
@@ -95,10 +121,36 @@ describe("lireDate", () => {
 
 describe("slugifier (ADR-06)", () => {
   it("fabrique une adresse en minuscules, chiffres et tirets", () => {
-    expect(slugifier("The Legend of Zelda: Breath of the Wild")).toBe("the-legend-of-zelda-breath-of-the-wild");
+    expect(slugifier("The Legend of Zelda: Breath of the Wild")).toBe(
+      "the-legend-of-zelda-breath-of-the-wild",
+    );
     expect(slugifier("Yoshi's Woolly World")).toBe("yoshis-woolly-world");
-    expect(slugifier("Mario & Sonic at the Rio 2016 Olympic Games")).toBe("mario-sonic-at-the-rio-2016-olympic-games");
-    expect(slugifier("Tokyo Mirage Sessions ♯FE")).toBe("tokyo-mirage-sessions-fe");
+    expect(slugifier("Mario & Sonic at the Rio 2016 Olympic Games")).toBe(
+      "mario-sonic-at-the-rio-2016-olympic-games",
+    );
+    expect(slugifier("Tokyo Mirage Sessions ♯FE")).toBe(
+      "tokyo-mirage-sessions-fe",
+    );
     expect(slugifier("Pokkén Tournament")).toBe("pokken-tournament");
+  });
+});
+
+describe("lireListeWikipediaDetaillee — jeux écartés (résumé de l'aperçu, US-10)", () => {
+  const liste = lireListeWikipediaDetaillee(FIXTURE);
+
+  it("compte les jeux d'autres éditeurs et liste les jeux Nintendo seulement téléchargeables", () => {
+    expect(liste.jeux).toHaveLength(50);
+    expect(
+      liste.autresEditeurs + liste.telechargeables.length + liste.jeux.length,
+    ).toBe(792);
+    expect(liste.telechargeables).toContain("Ark Rush");
+  });
+});
+
+describe("urlRendu", () => {
+  it("donne l'adresse du contenu seul de l'article", () => {
+    expect(urlRendu("https://en.wikipedia.org/wiki/List_of_Wii_U_games")).toBe(
+      "https://en.wikipedia.org/w/index.php?title=List_of_Wii_U_games&action=render",
+    );
   });
 });

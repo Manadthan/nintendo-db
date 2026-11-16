@@ -66,15 +66,16 @@ npm run db:types   # régénérer src/types/database.ts après une migration
 
 ```
 src/app/                 pages (App Router) — layout.tsx, page.tsx, globals.css (couleurs des maquettes)
-src/app/admin/           administration (US-09) : connexion/, accueil ; actions/auth.ts (connexion, déconnexion)
+src/app/admin/           administration (US-09) : connexion/, accueil, import/ (aperçu US-10) ; actions/auth.ts, actions/import.ts
+src/lib/auth/proprietaire.ts  exigerProprietaire() : en tête de CHAQUE action d'administration
 src/proxy.ts             contrôle de connexion, sur /admin SEULEMENT (les pages publiques restent statiques)
 src/lib/auth/routes.ts   règles de redirection de l'administration + tests
 src/lib/catalogue/       version affichée, dates en français, tri, groupes (catalogue.ts), marché : adresse ?marche= puis navigateur (marche.ts), recherche ?q= (recherche.ts), lecture (charger.ts) + tests
 src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; src/app/not-found.tsx : 404 en français
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
-src/components/          EnTete, Catalogue (client : recherche, marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), Jaquette (ou vignette neutre), Disponibilite
+src/components/          EnTete, Catalogue (client : recherche, marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu par lots), Jaquette (ou vignette neutre), Disponibilite
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
-src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games »), igdb.ts (rapprochement, titres et jaquettes par région, client) + tests ; __fixtures__/ (copies datées, README)
+src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games »), igdb.ts (rapprochement, titres et jaquettes par région, client), apercu.ts (aperçu, lots de 10), env.ts (identifiants IGDB) + tests ; __fixtures__/ (copies datées, README)
 scripts/                 fixture-wikipedia.mjs ; capture-igdb.mjs (workflow manuel « Capturer les fixtures IGDB », secrets IGDB_* du dépôt)
 src/lib/jaquettes/       chemins et URL des jaquettes ({game_id}/{région}-{300|600}.webp, ADR-04) + tests
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
@@ -97,7 +98,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
   - [x] Étape 1 — Socle : #4 à #9
   - [x] Étape 2 — Base : #16 à #19
   - [x] Étape 3 — Consultation : #24 à #27
-  - [ ] Étape 4 — Import : #32 ✅, #33 IGDB (cette PR), #34 aperçu (US-10), #35 enregistrement + jaquettes (US-10)
+  - [ ] Étape 4 — Import : #32 ✅, #33 ✅, #34 aperçu (US-10, cette PR), #35 enregistrement + jaquettes (US-10)
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes
