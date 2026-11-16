@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 0.1 — 16/11/2026 — statut : **brouillon, à valider**
+> Version 0.2 — 16/11/2026 — statut : **brouillon, à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.2 | 16/11/2026 | Questions 1 à 3 tranchées : titre JAP double, PAL par défaut, code produit complété à la main |
 > | 0.1 | 16/11/2026 | Premier brouillon |
 
 ## 1. Contexte et objectif
@@ -22,7 +23,7 @@ Rendu dans l'esprit de gamecartdb.com, en français, pensé d'abord pour l'iPhon
 | Visiteurs | Tout le monde, **sans compte**, en lecture seule |
 | Administrateur | Le propriétaire, seul à pouvoir modifier (compte créé à la main) |
 | Appareil principal | iPhone 12 mini (375 × 812), Safari iOS ; utilisable aussi sur ordinateur |
-| Langue | Interface en français ; titres des jeux tels que publiés dans chaque région |
+| Langue | Interface en français ; titres des jeux tels que publiés dans chaque région ; titre JAP en **japonais + romanisé** en dessous |
 
 ## 3. Vocabulaire
 
@@ -66,7 +67,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Des onglets JAP / US / PAL sur la fiche permettent de comparer sans changer la région du site.
 - [ ] Sont aussi affichés : console, développeur, franchise, genre (si connus).
 - [ ] La **source** des données est citée (lien vers la fiche d'origine).
-- [ ] Une donnée inconnue s'affiche « — », jamais vide ni inventée.
+- [ ] Une donnée inconnue s'affiche « — », jamais vide ni inventée (fréquent pour le code produit au début, complété via US-11).
 - [ ] La fiche a une adresse stable que l'on peut partager.
 
 #### US-05 — Rechercher un jeu (M)
@@ -140,13 +141,14 @@ DS, 3DS.
 - Comptes visiteurs, commentaires, notes Metacritic, bandes-annonces.
 - Régions hors JAP / US / PAL (Corée, Chine…).
 
-## 8. Questions ouvertes (à trancher avant validation)
+## 8. Décisions
 
-1. **Titre japonais** : afficher l'écriture japonaise (スーパーマリオ64), la version romanisée, ou les deux ?
-2. **Région par défaut** : PAL proposé (tu es en France) — d'accord ?
-3. **Code produit** : la base ouverte ne l'a pas toujours ; acceptable qu'il soit souvent « — » au début et
-   complété à la main (US-11) ?
-4. **Images** en v1 : à trancher en conception (droits, site public) ; la spec prévoit la vignette neutre en attendant.
+| # | Question | Décision |
+|---|---|---|
+| 1 | Titre japonais | Écriture **japonaise** avec la version **romanisée** en dessous |
+| 2 | Région par défaut | **PAL** |
+| 3 | Code produit | Souvent « — » après l'import, **complété à la main** ; une source complémentaire sera cherchée en conception |
+| 4 | Images | Reporté en conception ; vignette neutre en attendant (US-12) |
 
 ## 9. Prochaine étape
 
