@@ -3,16 +3,20 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 0.2 — 16/11/2026 — statut : **brouillon, à valider**
+> Version 1.2 — 16/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.2 | 16/11/2026 | **v1 = Wii U seule** ; US-01 en S ; US-10 depuis Wikipédia + IGDB ; US-12 : jaquettes copiées chez nous |
+> | 1.1 | 16/11/2026 | US-12 : jaquette = **lien vers une image externe** (pas de copie, pas de photo en v1) |
+> | 1.0 | 16/11/2026 | Validée (PR #1) |
 > | 0.2 | 16/11/2026 | Questions 1 à 3 tranchées : titre JAP double, PAL par défaut, code produit complété à la main |
 > | 0.1 | 16/11/2026 | Premier brouillon |
 
 ## 1. Contexte et objectif
 
-Site public de référence des **jeux physiques édités par Nintendo**, sur **toutes les consoles Nintendo**,
+Site public de référence des **jeux physiques édités par Nintendo**, sur **toutes les consoles Nintendo**
+(**v1 : Wii U seule**, ≈ 50 jeux ; les autres consoles suivront avec la même structure),
 avec une bascule **JAP / US / PAL** qui change le titre, la date, le code produit et la jaquette affichés.
 Rendu dans l'esprit de gamecartdb.com, en français, pensé d'abord pour l'iPhone.
 
@@ -38,8 +42,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 ### Consultation (visiteurs)
 
-#### US-01 — Voir les consoles (M)
+#### US-01 — Voir les consoles (S — dès la 2ᵉ console)
 *En tant que visiteur, je vois toutes les consoles Nintendo pour choisir celle qui m'intéresse.*
+- [ ] Tant qu'une seule console est disponible (v1 : Wii U), l'accueil **est** son catalogue (US-02).
 - [ ] L'accueil liste les consoles par **ordre chronologique**, avec nom, année de sortie et nombre de jeux.
 - [ ] Les consoles sont regroupées en **salon** et **portables** (Game & Watch, e-Reader, etc. classés en annexe/portables).
 - [ ] Un tap ouvre le catalogue de la console.
@@ -97,13 +102,15 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       même en appelant directement le serveur.
 - [ ] Un bouton permet de se déconnecter.
 
-#### US-10 — Importer les jeux d'une console depuis la base ouverte (M)
+#### US-10 — Importer les jeux d'une console depuis Wikipédia et IGDB (M)
 *En tant que propriétaire, je remplis le catalogue d'une console sans tout saisir à la main.*
 - [ ] Je choisis une console et lance l'import ; un **aperçu** montre les jeux trouvés avant d'enregistrer.
 - [ ] Ne sont retenus que les jeux **physiques** dont Nintendo est **éditeur dans au moins une région**.
 - [ ] Un nouvel import **n'écrase pas** mes corrections manuelles ; il signale les différences.
 - [ ] Un résumé indique : ajoutés, mis à jour, ignorés (avec la raison).
-- [ ] Chaque jeu importé garde le lien vers sa fiche d'origine.
+- [ ] Chaque jeu importé garde le lien vers sa fiche d'origine (Wikipédia, IGDB).
+- [ ] Les **jaquettes de chaque région** sont récupérées sur IGDB et copiées chez nous ; une région sans jaquette
+      IGDB est signalée dans le résumé.
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
@@ -111,7 +118,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Les champs obligatoires sont vérifiés (titre non vide, date valide).
 
 #### US-12 — Ajouter une jaquette à une sortie (S)
-- [ ] J'ajoute une image (photo ou adresse) pour une région donnée ; elle remplace l'éventuelle image existante.
+- [ ] Je remplace la jaquette d'une région par une **photo** ou l'**adresse d'une image** ; elle est copiée chez nous.
+- [ ] Les jaquettes sont affichées en **haute définition** (nettes sur l'écran Retina de l'iPhone), chargées au fil du défilement.
+- [ ] La source de la jaquette est mentionnée (ex. « Jaquette : IGDB »).
 - [ ] Sans jaquette, une vignette neutre affiche le titre et la console.
 
 ## 5. Exigences non fonctionnelles
@@ -128,6 +137,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 ## 6. Consoles couvertes
 
+**v1 : Wii U.** Puis, une à une :
 **Salon** : Color TV-Game, NES / Famicom (+ Famicom Disk System), Super Nintendo / Super Famicom (+ Satellaview),
 Nintendo 64 (+ 64DD), GameCube, Wii, Wii U, Switch, Switch 2.
 **Portables** : Game & Watch, Game Boy, Game Boy Color, Virtual Boy, Game Boy Advance (+ e-Reader), Pokémon Mini,
@@ -148,9 +158,9 @@ DS, 3DS.
 | 1 | Titre japonais | Écriture **japonaise** avec la version **romanisée** en dessous |
 | 2 | Région par défaut | **PAL** |
 | 3 | Code produit | Souvent « — » après l'import, **complété à la main** ; une source complémentaire sera cherchée en conception |
-| 4 | Images | Reporté en conception ; vignette neutre en attendant (US-12) |
+| 4 | Images | Jaquettes par région **copiées chez nous** depuis IGDB (remplace la décision « liens externes » de la v1.1) |
+| 5 | Périmètre v1 | **Wii U seule** ; l'architecture reste multi-consoles |
 
 ## 9. Prochaine étape
 
-Valider cette spec → `docs/DESIGN.md` (modèle de données, import, images) et maquettes des 4 écrans :
-accueil, catalogue, fiche, recherche.
+Valider cette spec avec `docs/DESIGN.md` v0.2 → maquettes des 3 écrans de la v1 : catalogue Wii U, fiche, recherche.
