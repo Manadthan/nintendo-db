@@ -5,7 +5,7 @@
 > **un seul propriétaire**, qui travaille surtout depuis l'**iPhone**, et qui apprend le SDLC.
 > Complétées par les leçons du projet précédent (`mon-site-sdlc`, `docs/BILAN.md`).
 >
-> Version 1.0 — 16/11/2026 — statut : **à valider**
+> Version 1.0 — 16/11/2026 — statut : **validée**
 
 ## 1. Principes
 

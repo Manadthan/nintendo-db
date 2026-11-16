@@ -1,6 +1,6 @@
 # Maquettes
 
-> Version 0.2 — 16/11/2026 — statut : **à valider**
+> Version 0.2 — 16/11/2026 — statut : **validée** (PR #3)
 >
 > | Version | Date | Changements |
 > |---|---|---|
