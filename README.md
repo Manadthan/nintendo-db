@@ -36,6 +36,18 @@ npm run e2e        # tests de bout en bout (Playwright, 375 × 812)
 
 La CI (GitHub Actions) lance tout cela sur chaque pull request, avec WebKit (Safari) en plus.
 
+## Base de données (Supabase)
+
+Le schéma évolue **uniquement** par des fichiers dans `supabase/migrations/`, appliqués en production au merge
+sur `main` (workflow « Déploiement du schéma »). Base locale : Docker requis.
+
+```
+npm run db:start   # base Supabase locale (Docker)
+npm run db:test    # tests pgTAP du schéma et de la sécurité
+npm run db:types   # régénérer src/types/database.ts après une migration
+npm run db:stop
+```
+
 ## Stack
 
 Next.js (App Router, TypeScript strict) · Tailwind CSS · Supabase · Vercel (région Paris) — détails dans
