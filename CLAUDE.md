@@ -67,9 +67,11 @@ npm run db:types   # régénérer src/types/database.ts après une migration
 ```
 src/app/                 pages (App Router) — layout.tsx, page.tsx, globals.css (couleurs des maquettes)
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
+src/lib/jaquettes/       chemins et URL des jaquettes ({game_id}/{région}-{300|600}.webp, ADR-04) + tests
+src/lib/supabase/        env.ts : lecture vérifiée des variables Supabase + tests
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
 tests/e2e/               tests Playwright
-supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS), tests/database/ (pgTAP)
+supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes), tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
 ```
@@ -84,7 +86,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
 - [x] Phase 3 — Issues de l'étape 1 (#4 à #9), milestone « Étape 1 — Socle » (n° 1)
 - [ ] Phase 4+ — Développement par étapes (DESIGN.md §8)
   - [x] Étape 1 — Socle : #4 à #9
-  - [ ] Étape 2 — Base : #16 ✅, #17 schéma + RLS (cette PR), #18 jaquettes, #19 US-09 connexion
+  - [ ] Étape 2 — Base : #16 ✅, #17 ✅, #18 jaquettes (cette PR), #19 US-09 connexion
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes
