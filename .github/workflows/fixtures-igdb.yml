@@ -1,0 +1,39 @@
+name: Capturer les fixtures IGDB
+
+# Interroge IGDB avec les secrets du dépôt et enregistre les réponses comme fixtures dans la branche
+# (les tests n'appellent jamais IGDB en direct). Lancé à la main (onglet Actions), ou quand le script change.
+# Jamais sur main : les fixtures arrivent sur main par une PR, comme tout le reste.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "scripts/capture-igdb.mjs"
+      - ".github/workflows/fixtures-igdb.yml"
+
+permissions:
+  contents: write # pour enregistrer les fixtures dans la branche
+
+jobs:
+  capture:
+    name: Capturer les réponses IGDB
+    if: github.ref_name != 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - name: Interroger IGDB
+        env:
+          IGDB_CLIENT_ID: ${{ secrets.IGDB_CLIENT_ID }}
+          IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
+        run: node scripts/capture-igdb.mjs
+      - name: Enregistrer les fixtures dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/lib/import/__fixtures__/igdb
+          if git diff --cached --quiet; then echo "Fixtures inchangées"; exit 0; fi
+          git commit -m "test: fixtures IGDB capturées le $(date -u +%d/%m/%Y)"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

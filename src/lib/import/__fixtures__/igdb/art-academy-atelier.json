@@ -1,0 +1,39 @@
+{
+  "requete": "search \"Art Academy: Home Studio\"; fields name,platforms,first_release_date,cover.image_id,alternative_names.name,alternative_names.comment,game_localizations.name,game_localizations.region.identifier,game_localizations.cover.image_id; where platforms = (41); limit 10;",
+  "reponse": [
+    {
+      "id": 21839,
+      "alternative_names": [
+        {
+          "id": 7709,
+          "comment": "European Title",
+          "name": "Art Academy: Atelier"
+        },
+        {
+          "id": 293381,
+          "comment": "Alternative spelling",
+          "name": "Art Academy Atelier"
+        }
+      ],
+      "cover": {
+        "id": 319403,
+        "image_id": "co6ugb"
+      },
+      "first_release_date": 1435190400,
+      "name": "Art Academy: Home Studio",
+      "platforms": [
+        41
+      ],
+      "game_localizations": [
+        {
+          "id": 5940,
+          "name": "じっくり絵心教室",
+          "region": {
+            "id": 3,
+            "identifier": "ja-JP"
+          }
+        }
+      ]
+    }
+  ]
+}
