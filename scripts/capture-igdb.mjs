@@ -1,6 +1,10 @@
 // Capture de réponses IGDB réelles pour les fixtures de l'import (#33). Lancé par le workflow
 // « Capturer les fixtures IGDB », avec les secrets IGDB_CLIENT_ID et IGDB_CLIENT_SECRET.
-// N'écrit que les réponses d'IGDB (une ligne « FIXTURE <nom> <json> » par titre), jamais les identifiants.
+// Enregistre les réponses d'IGDB dans src/lib/import/__fixtures__/igdb/<nom>.json, jamais les identifiants.
+import { mkdirSync, writeFileSync } from "node:fs";
+
+const DOSSIER = "src/lib/import/__fixtures__/igdb";
+mkdirSync(DOSSIER, { recursive: true });
 
 const { IGDB_CLIENT_ID: clientId, IGDB_CLIENT_SECRET: secret } = process.env;
 if (!clientId || !secret) throw new Error("Secrets IGDB_CLIENT_ID / IGDB_CLIENT_SECRET manquants");
@@ -46,6 +50,8 @@ for (const [nom, titre] of Object.entries(TITRES)) {
     body: corps,
   });
   if (!reponse.ok) throw new Error(`IGDB « ${titre} » : HTTP ${reponse.status} ${await reponse.text()}`);
-  console.log(`FIXTURE ${nom} ${JSON.stringify({ requete: corps, reponse: await reponse.json() })}`);
+  const resultats = await reponse.json();
+  writeFileSync(`${DOSSIER}/${nom}.json`, JSON.stringify({ requete: corps, reponse: resultats }, null, 2) + "\n");
+  console.log(`${nom} : ${resultats.length} résultat(s) — ${resultats.map((r) => r.name).join(" | ")}`);
   await new Promise((r) => setTimeout(r, 300)); // 4 requêtes/s au plus (R7)
 }
