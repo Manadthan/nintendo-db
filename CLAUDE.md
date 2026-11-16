@@ -51,8 +51,8 @@ Vercel (région Paris `cdg1`, `vercel.json`) ; Supabase (`supabase/`, migrations
 ```
 npm run dev        # serveur local
 npm run check      # lint + typecheck + tests unitaires : à lancer avant chaque commit, sortie montrée
-npm run build      # build de production
-npm run e2e        # Playwright 375 × 812 (Chromium ici ; WebKit seulement en CI)
+npm run build      # build de production : lit la base (accueil préparé à l'avance) → variables Supabase requises
+npm run e2e        # Playwright 375 × 812 (Chromium ici ; WebKit seulement en CI) ; base requise (CI : base jetable)
 npm run db:start   # base locale (Docker : absent de l'environnement de Claude → la CI fait foi)
 npm run db:test    # tests pgTAP
 npm run db:types   # régénérer src/types/database.ts après une migration
@@ -69,12 +69,14 @@ src/app/                 pages (App Router) — layout.tsx, page.tsx, globals.cs
 src/app/admin/           administration (US-09) : connexion/, accueil ; actions/auth.ts (connexion, déconnexion)
 src/proxy.ts             contrôle de connexion, sur /admin SEULEMENT (les pages publiques restent statiques)
 src/lib/auth/routes.ts   règles de redirection de l'administration + tests
+src/lib/catalogue/       version affichée, dates en français, tri, groupes (catalogue.ts), lecture de la base (charger.ts) + tests
+src/components/          Catalogue (client : tri, grille/liste), Jaquette (ou vignette neutre), Disponibilite
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
 src/lib/jaquettes/       chemins et URL des jaquettes ({game_id}/{région}-{300|600}.webp, ADR-04) + tests
-src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts, client.ts
+src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
 tests/e2e/               tests Playwright ; connexion.spec.ts ignoré sans base locale (tourne en CI)
-supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes), tests/database/ (pgTAP)
+supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U), tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
 ```
@@ -89,7 +91,8 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
 - [x] Phase 3 — Issues de l'étape 1 (#4 à #9), milestone « Étape 1 — Socle » (n° 1)
 - [ ] Phase 4+ — Développement par étapes (DESIGN.md §8)
   - [x] Étape 1 — Socle : #4 à #9
-  - [ ] Étape 2 — Base : #16 ✅, #17 ✅, #18 ✅, #19 US-09 connexion (cette PR)
+  - [x] Étape 2 — Base : #16 à #19
+  - [ ] Étape 3 — Consultation : #24 US-02 catalogue (cette PR), #25 US-04 fiche, #26 US-03 marché, #27 US-05 recherche
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes

@@ -13,6 +13,8 @@ concurrency:
 permissions:
   contents: read
 
+# ⚠️ Les noms des jobs (« name: ») sont ceux exigés par la protection de main : ne pas les renommer
+# sans mettre à jour la règle dans GitHub (Settings → Branches), sinon les PR restent bloquées.
 jobs:
   verifications:
     name: Lint, types, tests, build
@@ -26,7 +28,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
-      - run: npm run build
+      # Le build lit le catalogue dans la base (pages préparées à l'avance, ADR-02) : il est fait par le job e2e,
+      # qui dispose d'une base locale.
 
   e2e:
     name: Tests e2e (iPhone 12 mini, Chromium + WebKit)

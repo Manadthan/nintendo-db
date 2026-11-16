@@ -26,14 +26,14 @@ set local role authenticated;
 set local request.jwt.claims = '{"sub": "00000000-0000-0000-0000-00000000000a", "role": "authenticated"}';
 
 insert into public.games (id, console_id, slug, developpeur)
-select '20000000-0000-0000-0000-000000000001', id, 'mario-kart-8', 'Nintendo EAD'
+select '20000000-0000-0000-0000-000000000001', id, 'jeu-de-test', 'Studio de test'
 from public.consoles where slug = 'wii-u';
 insert into public.releases (game_id, region, sortie, titre, date_sortie, precision_date) values
-  ('20000000-0000-0000-0000-000000000001', 'JAP', true, 'マリオカート8', '2014-05-29', 'jour'),
-  ('20000000-0000-0000-0000-000000000001', 'US', true, 'Mario Kart 8', '2014-05-30', 'jour'),
-  ('20000000-0000-0000-0000-000000000001', 'PAL', true, 'Mario Kart 8', '2014-05-30', 'jour');
+  ('20000000-0000-0000-0000-000000000001', 'JAP', true, 'テストゲーム', '2014-05-29', 'jour'),
+  ('20000000-0000-0000-0000-000000000001', 'US', true, 'Test Game', '2014-05-30', 'jour'),
+  ('20000000-0000-0000-0000-000000000001', 'PAL', true, 'Jeu de test', '2014-05-30', 'jour');
 
-select is((select count(*)::int from public.releases), 3, 'le propriétaire ajoute un jeu et ses 3 sorties');
+select is((select count(*)::int from public.releases where game_id = '20000000-0000-0000-0000-000000000001'), 3, 'le propriétaire ajoute un jeu et ses 3 sorties');
 select throws_ok(
   $$insert into public.releases (game_id, region, sortie, titre)
     values ('20000000-0000-0000-0000-000000000001', 'PAL', true, 'Doublon')$$,
@@ -44,11 +44,11 @@ select throws_ok(
   '22P02', null, 'seules les régions JAP, US et PAL existent'
 );
 select throws_ok(
-  $$update public.releases set titre = null where region = 'US'$$,
+  $$update public.releases set titre = null where game_id = '20000000-0000-0000-0000-000000000001' and region = 'US'$$,
   '23514', null, 'une sortie publiée a toujours un titre'
 );
 select throws_ok(
-  $$insert into public.games (console_id, slug) select id, 'mario-kart-8' from public.consoles$$,
+  $$insert into public.games (console_id, slug) select id, 'jeu-de-test' from public.consoles$$,
   '23505', null, 'deux jeux d''une console ne partagent pas une adresse'
 );
 select throws_ok(
@@ -57,12 +57,12 @@ select throws_ok(
 );
 
 select is(
-  (select updated_at from public.games where slug = 'mario-kart-8'),
+  (select updated_at from public.games where slug = 'jeu-de-test'),
   now(),
   'updated_at est rempli à la création'
 );
 select lives_ok(
-  $$update public.games set franchise = 'Mario Kart' where slug = 'mario-kart-8'$$,
+  $$update public.games set franchise = 'Test' where slug = 'jeu-de-test'$$,
   'le propriétaire modifie un jeu'
 );
 select lives_ok(
@@ -76,7 +76,7 @@ set local role anon;
 set local request.jwt.claims = '{"role": "anon"}';
 
 select is((select count(*)::int from public.consoles), 1, 'un visiteur voit les consoles');
-select is((select count(*)::int from public.releases), 3, 'un visiteur voit les sorties');
+select is((select count(*)::int from public.releases where game_id = '20000000-0000-0000-0000-000000000001'), 3, 'un visiteur voit les sorties');
 select is_empty('select * from public.import_runs', 'un visiteur ne voit pas l''historique des imports');
 select throws_ok(
   $$insert into public.games (console_id, slug) select id, 'intrus' from public.consoles$$,
