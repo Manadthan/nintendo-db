@@ -49,3 +49,24 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+
+  base-de-donnees:
+    name: Base de données (migrations, tests pgTAP)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # Supabase écoute sur des ports fixes (54320-54329), situés dans la plage des ports temporaires
+      # que Linux attribue aux connexions sortantes (32768-60999) : l'un d'eux peut déjà être pris
+      # (« address already in use », vu dans mon-site-sdlc). On déplace cette plage au-dessus.
+      - name: Libérer les ports de Supabase
+        run: sudo sysctl -w net.ipv4.ip_local_port_range="60000 65000"
+      # Base Supabase locale et jetable : les migrations y sont appliquées depuis zéro, jamais en production.
+      - run: npx supabase db start
+      - name: Tests pgTAP (schéma, Row Level Security, stockage)
+        run: npm run db:test

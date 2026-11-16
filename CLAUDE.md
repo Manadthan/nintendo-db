@@ -46,14 +46,21 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 ## Stack et commandes
 
 Next.js 16 (App Router, TypeScript strict) · Tailwind 4 · Vitest · Playwright · GitHub Actions ;
-Vercel (région Paris `cdg1`, `vercel.json`) ; Supabase à venir (DESIGN.md §2).
+Vercel (région Paris `cdg1`, `vercel.json`) ; Supabase (`supabase/`, migrations appliquées en production au merge).
 
 ```
 npm run dev        # serveur local
 npm run check      # lint + typecheck + tests unitaires : à lancer avant chaque commit, sortie montrée
 npm run build      # build de production
 npm run e2e        # Playwright 375 × 812 (Chromium ici ; WebKit seulement en CI)
+npm run db:start   # base locale (Docker : absent de l'environnement de Claude → la CI fait foi)
+npm run db:test    # tests pgTAP
+npm run db:types   # régénérer src/types/database.ts après une migration
 ```
+
+- Le schéma évolue **uniquement** par `supabase/migrations/`. Une migration appliquée en production ne se modifie
+  jamais : on en ajoute une nouvelle. Les prévisualisations Vercel partagent la base de production : le signaler
+  dans toute PR qui touche la base.
 
 ## Arborescence
 
@@ -61,6 +68,7 @@ npm run e2e        # Playwright 375 × 812 (Chromium ici ; WebKit seulement en C
 src/app/                 pages (App Router) — layout.tsx, page.tsx, globals.css (couleurs des maquettes)
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
 tests/e2e/               tests Playwright
+supabase/                config.toml (inscriptions désactivées), migrations/, tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
 ```
@@ -74,7 +82,8 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
 - [x] Phase 2 — Spec, design, maquettes validés
 - [x] Phase 3 — Issues de l'étape 1 (#4 à #9), milestone « Étape 1 — Socle » (n° 1)
 - [ ] Phase 4+ — Développement par étapes (DESIGN.md §8)
-  - [ ] Étape 1 — Socle : #4 ✅, #5 ✅, #6 ✅, #7 ✅, #9 ✅, #8 Vercel (cette PR + réglage du propriétaire)
+  - [x] Étape 1 — Socle : #4 à #9
+  - [ ] Étape 2 — Base : #16 (cette PR), #17 schéma + RLS, #18 jaquettes, #19 US-09 connexion
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes
