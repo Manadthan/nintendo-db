@@ -74,6 +74,8 @@ src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; 
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
 src/components/          EnTete, Catalogue (client : recherche, marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), Jaquette (ou vignette neutre), Disponibilite
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
+src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games ») + tests ; __fixtures__/ (copies datées, README)
+scripts/                 fixture-wikipedia.mjs (fabrique la fixture Wikipédia)
 src/lib/jaquettes/       chemins et URL des jaquettes ({game_id}/{région}-{300|600}.webp, ADR-04) + tests
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
@@ -94,7 +96,8 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
 - [ ] Phase 4+ — Développement par étapes (DESIGN.md §8)
   - [x] Étape 1 — Socle : #4 à #9
   - [x] Étape 2 — Base : #16 à #19
-  - [ ] Étape 3 — Consultation : #24 ✅, #25 ✅, #26 ✅, #27 US-05 recherche (cette PR)
+  - [x] Étape 3 — Consultation : #24 à #27
+  - [ ] Étape 4 — Import : #32 Wikipédia (cette PR), #33 IGDB, #34 aperçu (US-10), #35 enregistrement + jaquettes (US-10)
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes
