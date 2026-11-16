@@ -68,6 +68,7 @@ describe("versInfosIgdb (R2) — titres et jaquettes par région", () => {
     expect(versInfosIgdb(fatalFrame)).toEqual({
       igdbId: 51149,
       titreJaponais: "零 濡鴉ノ巫女",
+      titreRomanise: "Fatal Frame: Maiden of Black Water",
       jaquettes: { JAP: "coc4a5", US: "co2zcv", PAL: "coc1qm" },
     });
   });
@@ -80,8 +81,19 @@ describe("versInfosIgdb (R2) — titres et jaquettes par région", () => {
     expect(versInfosIgdb(kirby)).toEqual({
       igdbId: 7338,
       titreJaponais: "タッチ！カービィ スーパーレインボー",
+      titreRomanise: "Kirby and the Rainbow Curse",
       jaquettes: { JAP: null, US: "co1wcc", PAL: "cob8mp" },
     });
+  });
+});
+
+describe("versInfosIgdb — forme romanisée", () => {
+  it("préfère la romanisation connue d'IGDB au titre principal", () => {
+    const zelda = rapprocher(
+      ["Hyrule Warriors"],
+      fixture("hyrule-warriors"),
+    ).jeu!;
+    expect(versInfosIgdb(zelda).titreRomanise).toBe("Zelda Musou");
   });
 });
 
@@ -135,6 +147,26 @@ describe("creerClientIgdb", () => {
     expect(String(igdb[1]!.init?.body)).toContain(
       'search "Titre \\"entre guillemets\\""',
     );
+  });
+
+  it("lit plusieurs jeux par leurs identifiants en une seule requête", async () => {
+    const corps: string[] = [];
+    const fetch = vi.fn(async (url: string, init?: RequestInit) => {
+      if (url.startsWith("https://id.twitch.tv"))
+        return reponse({ access_token: "jeton", expires_in: 3600 });
+      corps.push(String(init?.body));
+      return reponse([]);
+    });
+    const client = creerClientIgdb({
+      clientId: "id",
+      clientSecret: "secret",
+      fetch,
+      pause: async () => {},
+    });
+    await client.parIds([2350, 7335]);
+    expect(await client.parIds([])).toEqual([]);
+    expect(corps).toHaveLength(1);
+    expect(corps[0]).toContain("where id = (2350,7335); limit 2;");
   });
 
   it("échoue clairement si Twitch refuse les identifiants, sans les révéler", async () => {

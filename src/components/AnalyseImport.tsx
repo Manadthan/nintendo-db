@@ -3,10 +3,19 @@
 import { useState } from "react";
 import {
   analyserListe,
+  enregistrerLot,
   rapprocherLot,
+  terminerImport,
   type RapprochementLeger,
 } from "@/app/actions/import";
-import { decouperEnLots, resumer, type Apercu } from "@/lib/import/apercu";
+import {
+  decouperEnLots,
+  resumer,
+  resumerEnregistrement,
+  type Apercu,
+  type ResultatEnregistrement,
+  type ResumeEnregistrement,
+} from "@/lib/import/apercu";
 import { REGIONS } from "@/lib/catalogue/types";
 
 type Etat =
@@ -14,6 +23,8 @@ type Etat =
   | { etape: "wikipedia" }
   | { etape: "igdb"; fait: number; total: number }
   | { etape: "fini" }
+  | { etape: "enregistrement"; fait: number; total: number }
+  | { etape: "enregistre"; resume: ResumeEnregistrement }
   | { etape: "erreur"; message: string };
 
 const STATUTS = {
@@ -28,7 +39,10 @@ const STATUTS = {
   },
 } as const;
 
-/** Aperçu de l'import (US-10, ADR-03) : Wikipédia, puis IGDB par lots de 10. N'écrit rien en base. */
+/**
+ * Import (US-10, ADR-03) : aperçu (Wikipédia, puis IGDB par lots de 10), qui n'écrit rien ; puis, sur
+ * confirmation, enregistrement par lots de 10 avec copie des jaquettes, et résumé.
+ */
 export function AnalyseImport({
   consoleSlug,
   consoleNom,
@@ -72,7 +86,46 @@ export function AnalyseImport({
     }
   }
 
-  const enCours = etat.etape === "wikipedia" || etat.etape === "igdb";
+  async function enregistrer() {
+    if (!apercu) return;
+    const total = apercu.lignes.length;
+    if (
+      !window.confirm(
+        `Enregistrer ${total} jeux dans la base du site ? Tes corrections manuelles seront gardées.`,
+      )
+    ) {
+      return;
+    }
+    const resultats: ResultatEnregistrement[] = [];
+    try {
+      for (const [i, lot] of decouperEnLots(apercu.lignes, 10).entries()) {
+        setEtat({ etape: "enregistrement", fait: i * 10, total });
+        resultats.push(
+          ...(await enregistrerLot(
+            consoleSlug,
+            lot.map((l) => ({
+              wikipedia: l.wikipedia,
+              // Choix fait à la main, sinon le jeu IGDB proposé (sûr ou à vérifier).
+              igdbId:
+                l.slug in choix
+                  ? choix[l.slug]!
+                  : (igdb[l.slug]?.jeu?.id ?? null),
+            })),
+          )),
+        );
+      }
+      const resume = resumerEnregistrement(resultats);
+      await terminerImport(consoleSlug, resume);
+      setEtat({ etape: "enregistre", resume });
+    } catch (e) {
+      setEtat({
+        etape: "erreur",
+        message: e instanceof Error ? e.message : "Erreur inconnue",
+      });
+    }
+  }
+
+  const enCours = ["wikipedia", "igdb", "enregistrement"].includes(etat.etape);
   const resume = apercu
     ? resumer(
         apercu,
@@ -97,6 +150,8 @@ export function AnalyseImport({
           `Rapprochement IGDB : ${etat.fait} / ${etat.total} jeux`}
         {etat.etape === "fini" &&
           "Analyse terminée. Rien n'a encore été enregistré."}
+        {etat.etape === "enregistrement" &&
+          `Enregistrement et copie des jaquettes : ${etat.fait} / ${etat.total} jeux`}
       </p>
 
       {etat.etape === "erreur" && (
@@ -106,6 +161,72 @@ export function AnalyseImport({
         >
           {etat.message}
         </div>
+      )}
+
+      {etat.etape === "fini" && apercu && (
+        <button
+          type="button"
+          onClick={enregistrer}
+          className="h-12 rounded-xl border-2 border-accent bg-carte text-base font-semibold text-accent"
+        >
+          Enregistrer l&apos;import ({apercu.lignes.length} jeux)
+        </button>
+      )}
+
+      {etat.etape === "enregistre" && (
+        <section
+          aria-label="Import enregistré"
+          className="flex flex-col gap-2 rounded-xl border border-bordure bg-carte p-4 text-sm"
+        >
+          <h2 className="font-titre text-lg font-bold">Import enregistré</h2>
+          <p>
+            {etat.resume.ajoutes} jeux ajoutés, {etat.resume.misAJour} mis à
+            jour, {etat.resume.jaquettes} jaquettes copiées. Le catalogue se met
+            à jour dans quelques instants.
+          </p>
+          {etat.resume.erreurs.length > 0 && (
+            <div role="alert" className="text-[#b42318]">
+              <p className="font-semibold">
+                {etat.resume.erreurs.length} jeu(x) en erreur :
+              </p>
+              <ul className="list-disc pl-5">
+                {etat.resume.erreurs.map((e) => (
+                  <li key={e.titre}>
+                    {e.titre} — {e.erreur}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {etat.resume.secours.length > 0 && (
+            <details>
+              <summary className="cursor-pointer font-semibold">
+                Jaquette principale utilisée en secours (
+                {etat.resume.secours.length})
+              </summary>
+              <p className="mt-1 text-texte-doux">
+                IGDB n&apos;a pas de jaquette propre à ces régions :
+              </p>
+              <ul className="list-disc pl-5 text-texte-doux">
+                {etat.resume.secours.map((s) => (
+                  <li key={s}>{s}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+          {etat.resume.ecarts.length > 0 && (
+            <details>
+              <summary className="cursor-pointer font-semibold">
+                Corrections manuelles gardées ({etat.resume.ecarts.length})
+              </summary>
+              <ul className="mt-1 list-disc pl-5 text-texte-doux">
+                {etat.resume.ecarts.map((e) => (
+                  <li key={e}>{e}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </section>
       )}
 
       {apercu && resume && (
