@@ -1,0 +1,29 @@
+name: Capturer les fixtures IGDB
+
+# Interroge IGDB avec les secrets du dépôt et écrit les réponses dans le journal, pour en faire des fixtures
+# (les tests n'appellent jamais IGDB en direct). Lancé à la main (onglet Actions), ou quand le script change.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "scripts/capture-igdb.mjs"
+      - ".github/workflows/fixtures-igdb.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    name: Capturer les réponses IGDB
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - name: Interroger IGDB
+        env:
+          IGDB_CLIENT_ID: ${{ secrets.IGDB_CLIENT_ID }}
+          IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
+        run: node scripts/capture-igdb.mjs
