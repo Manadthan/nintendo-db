@@ -13,9 +13,11 @@ concurrency:
 permissions:
   contents: read
 
+# ⚠️ Les noms des jobs (« name: ») sont ceux exigés par la protection de main : ne pas les renommer
+# sans mettre à jour la règle dans GitHub (Settings → Branches), sinon les PR restent bloquées.
 jobs:
   verifications:
-    name: Lint, types, tests unitaires
+    name: Lint, types, tests, build
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -30,7 +32,7 @@ jobs:
       # qui dispose d'une base locale.
 
   e2e:
-    name: Build et tests e2e (iPhone 12 mini, Chromium + WebKit)
+    name: Tests e2e (iPhone 12 mini, Chromium + WebKit)
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
