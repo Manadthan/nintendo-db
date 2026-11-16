@@ -7,7 +7,10 @@ const champ =
   "h-12 rounded-[10px] border border-[#d6d9e0] bg-carte px-3 text-base text-texte outline-none focus:border-accent focus:ring-2 focus:ring-accent/20";
 
 export function FormulaireConnexion() {
-  const [etat, action, enCours] = useActionState<EtatConnexion, FormData>(seConnecter, {});
+  const [etat, action, enCours] = useActionState<EtatConnexion, FormData>(
+    seConnecter,
+    {},
+  );
 
   return (
     <form action={action} className="flex flex-col gap-3.5" noValidate>
@@ -35,7 +38,13 @@ export function FormulaireConnexion() {
 
       <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-texte-doux">
         Mot de passe
-        <input name="password" type="password" autoComplete="current-password" required className={champ} />
+        <input
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          required
+          className={champ}
+        />
       </label>
 
       <button
