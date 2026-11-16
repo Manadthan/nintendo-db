@@ -102,20 +102,20 @@ export type Database = {
           console_id: string;
           id: string;
           lance_le: string;
-          resume: Json;
+          resume: NonNullable<Json>;
         };
         ComputedFields: never;
         Insert: {
           console_id: string;
           id?: string;
           lance_le?: string;
-          resume?: Json;
+          resume?: NonNullable<Json>;
         };
         Update: {
           console_id?: string;
           id?: string;
           lance_le?: string;
-          resume?: Json;
+          resume?: NonNullable<Json>;
         };
         Relationships: [
           {
