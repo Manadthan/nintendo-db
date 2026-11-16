@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.2 — 16/11/2026 — statut : **à valider**
+> Version 1.3 — 16/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.3 | 16/11/2026 | Retour sur les maquettes (PR #3) : trame de gamecartdb ; région choisie **sur la fiche** (US-04) ; catalogue filtré par **marché** (US-03) ; recherche **dans le catalogue** (US-05) |
 > | 1.2 | 16/11/2026 | **v1 = Wii U seule** ; US-01 en S ; US-10 depuis Wikipédia + IGDB ; US-12 : jaquettes copiées chez nous |
 > | 1.1 | 16/11/2026 | US-12 : jaquette = **lien vers une image externe** (pas de copie, pas de photo en v1) |
 > | 1.0 | 16/11/2026 | Validée (PR #1) |
@@ -50,37 +51,40 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Un tap ouvre le catalogue de la console.
 
 #### US-02 — Parcourir le catalogue d'une console (M)
-*En tant que visiteur, je parcours les jeux Nintendo d'une console.*
+*En tant que visiteur, je parcours les jeux Nintendo d'une console, présentés comme sur gamecartdb.*
+- [ ] En tête de page : le nom du site, un menu (Catalogue, À propos) et une phrase de présentation.
+- [ ] Section « Tous les jeux » avec le **nombre total**, puis la barre d'outils : recherche (US-05), marché (US-03),
+      tri, grille / liste, filtres (US-06), et « N jeux affichés sur M ».
 - [ ] Les jeux s'affichent en **grille de jaquettes** (2 par ligne sur iPhone) ou en **liste** ; le dernier choix est retenu.
-- [ ] Chaque jeu montre jaquette, titre et date **de la région affichée**.
-- [ ] Tri : date de sortie (par défaut) ou A → Z ; regroupement **par année** en mode date.
-- [ ] Le compteur indique le nombre de jeux affichés (ex. « 87 jeux »).
+- [ ] Chaque jeu montre jaquette, titre, date et sa **disponibilité par région** (JAP · US · PAL, cochées si sorti).
+- [ ] Tri : plus anciens d'abord (par défaut), plus récents d'abord, A → Z ; regroupement **par année** en tri par date.
 - [ ] La page reste fluide avec 300 jeux (images chargées au fil du défilement).
 
-#### US-03 — Basculer entre JAP / US / PAL (M)
-*En tant que visiteur, je choisis une région pour voir les versions de ce marché.*
-- [ ] Un sélecteur **JAP / US / PAL** est accessible sur toutes les pages, à une main.
-- [ ] Changer de région met à jour titres, dates, jaquettes et codes **sans recharger la page entière**.
-- [ ] La région choisie est conservée à la visite suivante ; par défaut : **PAL**.
-- [ ] Un jeu **non sorti** dans la région affichée apparaît grisé avec la mention « Non sorti en US » (par exemple),
-      et un filtre permet de le masquer.
+#### US-03 — Filtrer le catalogue par marché (M)
+*En tant que visiteur, je ne vois que les jeux sortis sur un marché, dans la version de ce marché.*
+- [ ] Choix du marché : **Tous** (par défaut), **Europe**, **Amérique du Nord**, **Japon**.
+- [ ] Avec un marché choisi : seuls les jeux sortis sur ce marché sont listés, avec **le titre, la date et la
+      jaquette de ce marché**, sans recharger la page.
+- [ ] Avec « Tous » : titre, date et jaquette **PAL**, sinon US, sinon JAP pour un jeu non sorti en Europe.
+- [ ] Le marché choisi est conservé à la visite suivante.
 
 #### US-04 — Voir la fiche d'un jeu (M)
-*En tant que visiteur, j'ouvre un jeu pour voir le détail de ses sorties.*
-- [ ] La fiche montre la **jaquette** et, pour la région affichée : titre, date de sortie, code produit, éditeur.
-- [ ] Un tableau récapitule les **3 régions** : sorti ou non, titre, date, code produit.
-- [ ] Des onglets JAP / US / PAL sur la fiche permettent de comparer sans changer la région du site.
-- [ ] Sont aussi affichés : console, développeur, franchise, genre (si connus).
+*En tant que visiteur, j'ouvre un jeu et je bascule entre ses versions JAP / US / PAL.*
+- [ ] Sous la jaquette, un sélecteur **JAP / US / PAL** change la **jaquette**, le titre, la date et le code produit
+      affichés ; une région où le jeu n'est pas sorti est désactivée (« non sorti »).
+- [ ] La région ouverte par défaut est celle du marché choisi dans le catalogue, sinon PAL.
+- [ ] Un bloc **Disponibilité** liste les 3 régions : coché ou non, date, titre s'il diffère.
+- [ ] Sont aussi affichés : console, éditeur, développeur, franchise, genre (si connus), lien « Retour au catalogue ».
 - [ ] La **source** des données est citée (lien vers la fiche d'origine).
 - [ ] Une donnée inconnue s'affiche « — », jamais vide ni inventée (fréquent pour le code produit au début, complété via US-11).
 - [ ] La fiche a une adresse stable que l'on peut partager.
 
 #### US-05 — Rechercher un jeu (M)
-*En tant que visiteur, je trouve un jeu en tapant une partie de son titre.*
-- [ ] La recherche porte sur les titres des **3 régions** et sur **toutes les consoles**.
+*En tant que visiteur, je trouve un jeu en tapant une partie de son titre, directement dans le catalogue.*
+- [ ] Le champ de recherche est **dans la barre d'outils du catalogue** ; la liste se filtre **au fil de la frappe**.
+- [ ] La recherche porte sur les titres des **3 régions**, l'éditeur et le développeur.
 - [ ] Elle ignore majuscules, accents et ponctuation (« pokemon » trouve « Pokémon »).
-- [ ] Les résultats indiquent la console ; un tap ouvre la fiche.
-- [ ] Aucun résultat → message clair.
+- [ ] Aucun résultat → message clair et bouton pour effacer la recherche.
 
 #### US-06 — Filtrer le catalogue (S)
 - [ ] Filtres combinables : disponibilité (sorti dans la région affichée / dans les 3 régions / exclusif à une région),
@@ -163,4 +167,4 @@ DS, 3DS.
 
 ## 9. Prochaine étape
 
-Valider cette spec avec `docs/DESIGN.md` v0.2 → maquettes des 3 écrans de la v1 : catalogue Wii U, fiche, recherche.
+Valider avec les maquettes v0.2 (2 écrans : catalogue, fiche) → issues de l'étape 1.
