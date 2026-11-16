@@ -22,7 +22,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | Fichier | Contenu | Statut |
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 à valider |
-| `intent/intent.md` | Problème, résultat attendu, contraintes, questions ouvertes | v0.1 brouillon |
+| `intent/intent.md` | Problème, résultat attendu, contraintes, questions ouvertes | v0.3 brouillon |
 | `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | à faire |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | à faire |
 
