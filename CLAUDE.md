@@ -22,8 +22,8 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | Fichier | Contenu | Statut |
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 à valider |
-| `intent/intent.md` | Problème, résultat attendu, contraintes, questions ouvertes | v0.3 brouillon |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | à faire |
+| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.0 validée |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v0.1 brouillon |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | à faire |
 
 ## Règles de travail
@@ -42,11 +42,11 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 
 ## Commandes
 
-À définir avec la stack (DESIGN.md).
+Stack retenue : Next.js, Tailwind, Supabase, Vercel. Commandes à définir dans DESIGN.md.
 
 ## Avancement
 
-- [ ] Phase 1 — Intention : `intent/intent.md` validée
+- [x] Phase 1 — Intention : `intent/intent.md` validée
 - [ ] Phase 2 — Spec, design, maquettes validés
 - [ ] Phase 3 — Issues et milestones de la première étape
 - [ ] Phase 4+ — Développement par étapes

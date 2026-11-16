@@ -1,7 +1,7 @@
 # Intention — Nintendo DB
 
 > Étape 1 du playbook : **quoi et pourquoi**, pas encore comment.
-> Version 0.3 — 16/11/2026 — statut : **brouillon, reste la stack**
+> Version 1.0 — 16/11/2026 — statut : **validée**
 
 ## Problème
 
@@ -59,8 +59,8 @@ Nintendo éditeur seulement, en français, région JAP incluse.
 | 4 | Accès | **Public en lecture**, modification réservée au propriétaire |
 | 5 | Suivi de collection | **Plus tard** : la v1 est une base de consultation |
 | 6 | Variantes | **Plus tard** : rééditions et variantes de pays PAL hors v1 |
+| 7 | Stack | **Même stack** que `mon-site-sdlc` : Next.js, Tailwind, Supabase, Vercel — rendu dans l'esprit de gamecartdb (gamecartdb utilise lui-même Next.js) |
 
-## Questions ouvertes (à trancher avant la spec)
+## Reporté en conception
 
-1. **Stack** : réutiliser celle du projet précédent (Next.js, Supabase, Vercel), déjà maîtrisée ?
-2. **Images** (jaquettes) : à préciser en conception selon les droits de la source (site public).
+- **Images** (jaquettes, cartouches) : source et droits à trancher dans `docs/DESIGN.md` (site public).
