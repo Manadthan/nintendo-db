@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Catalogue } from "@/components/Catalogue";
+import { EnTete } from "@/components/EnTete";
 import { chargerCatalogue } from "@/lib/catalogue/charger";
 
 // Page préparée à l'avance et régénérée au plus toutes les 5 minutes (ADR-02) :
@@ -14,26 +14,7 @@ export default async function Accueil() {
 
   return (
     <>
-      <header className="flex h-14 items-center justify-between border-b border-bordure bg-carte px-4">
-        <Link
-          href="/"
-          className="font-titre text-[19px] font-bold tracking-tight"
-        >
-          Nintendo DB
-        </Link>
-        <nav aria-label="Navigation principale" className="flex gap-1 text-sm">
-          <Link
-            href="/"
-            aria-current="page"
-            className="flex h-11 items-center px-2.5 font-semibold"
-          >
-            Catalogue
-          </Link>
-          <span className="flex h-11 items-center px-2.5 text-texte-doux">
-            À propos
-          </span>
-        </nav>
-      </header>
+      <EnTete surCatalogue />
 
       <main>
         <section className="flex flex-col gap-1.5 border-b border-bordure bg-carte px-4 pt-[22px] pb-5">

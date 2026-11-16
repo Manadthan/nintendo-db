@@ -1,0 +1,99 @@
+import { expect, test } from "@playwright/test";
+
+// US-04 — Voir la fiche d'un jeu (docs/SPEC.md), sur les jeux de départ (migration 0004).
+
+const KIRBY = "/jeux/wii-u/kirby-and-the-rainbow-paintbrush";
+
+test("une vignette du catalogue ouvre la fiche, qui ramène au catalogue", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("link", { name: /Mario Kart 8/ })
+    .first()
+    .click();
+  await expect(page).toHaveURL("/jeux/wii-u/mario-kart-8");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Mario Kart 8",
+  );
+  await page.getByRole("link", { name: /Retour au catalogue/ }).click();
+  await expect(page).toHaveURL("/");
+});
+
+test("la fiche s'ouvre sur la version PAL et le sélecteur change de version", async ({
+  page,
+}) => {
+  await page.goto(KIRBY);
+  const titre = page.getByRole("heading", { level: 1 });
+  await expect(titre).toHaveText("Kirby and the Rainbow Paintbrush");
+  await expect(page.getByText("Sorti le 8 mai 2015 · Europe")).toBeVisible();
+
+  await page.getByRole("button", { name: "Version Amérique du Nord" }).click();
+  await expect(titre).toHaveText("Kirby and the Rainbow Curse");
+  await expect(
+    page.getByText("Sorti le 20 février 2015 · Amérique du Nord"),
+  ).toBeVisible();
+
+  // Version japonaise : titre japonais, forme romanisée dessous (SPEC décision 1).
+  await page.getByRole("button", { name: "Version Japon" }).click();
+  await expect(titre).toHaveText("タッチ! カービィ スーパーレインボー");
+  await expect(page.getByText("Touch! Kirby Super Rainbow")).toBeVisible();
+});
+
+test("une région où le jeu n'est pas sorti est désactivée", async ({
+  page,
+}) => {
+  await page.goto("/jeux/wii-u/wii-karaoke-u");
+  await expect(
+    page.getByRole("button", { name: "Amérique du Nord : non sorti" }),
+  ).toBeDisabled();
+});
+
+test("le bloc Disponibilité liste les 3 régions, avec le titre quand il diffère", async ({
+  page,
+}) => {
+  await page.goto(KIRBY);
+  const dispo = page.getByRole("region", { name: "Disponibilité" });
+  await expect(dispo.getByRole("listitem")).toHaveCount(3);
+  await expect(dispo).toContainText("Japon · 22 janvier 2015");
+  await expect(dispo).toContainText("Kirby and the Rainbow Curse");
+});
+
+test("une donnée inconnue s'affiche « — » et la source est citée", async ({
+  page,
+}) => {
+  await page.goto("/jeux/wii-u/splatoon");
+  await expect(page.getByText("Code produit").locator("..")).toContainText("—");
+  await expect(page.getByRole("link", { name: "Wikipédia" })).toHaveAttribute(
+    "href",
+    /wikipedia\.org/,
+  );
+});
+
+test("la fiche s'ouvre sur le marché choisi dans le catalogue", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.evaluate(() => localStorage.setItem("nintendo-db:marche", "US"));
+  await page.goto(KIRBY);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Kirby and the Rainbow Curse",
+  );
+});
+
+test("une adresse inconnue affiche une page introuvable en français", async ({
+  page,
+}) => {
+  const reponse = await page.goto("/jeux/wii-u/jeu-qui-n-existe-pas");
+  expect(reponse?.status()).toBe(404);
+  await expect(
+    page.getByRole("heading", { name: "Page introuvable" }),
+  ).toBeVisible();
+});
+
+test("la fiche tient dans la largeur de l'iPhone", async ({ page }) => {
+  await page.goto(KIRBY);
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(375);
+});
