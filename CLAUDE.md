@@ -69,10 +69,10 @@ src/app/                 pages (App Router) — layout.tsx, page.tsx, globals.cs
 src/app/admin/           administration (US-09) : connexion/, accueil ; actions/auth.ts (connexion, déconnexion)
 src/proxy.ts             contrôle de connexion, sur /admin SEULEMENT (les pages publiques restent statiques)
 src/lib/auth/routes.ts   règles de redirection de l'administration + tests
-src/lib/catalogue/       version affichée, dates en français, tri, groupes (catalogue.ts), marché : adresse ?marche= puis navigateur (marche.ts), lecture (charger.ts) + tests
+src/lib/catalogue/       version affichée, dates en français, tri, groupes (catalogue.ts), marché : adresse ?marche= puis navigateur (marche.ts), recherche ?q= (recherche.ts), lecture (charger.ts) + tests
 src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; src/app/not-found.tsx : 404 en français
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
-src/components/          EnTete, Catalogue (client : marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), Jaquette (ou vignette neutre), Disponibilite
+src/components/          EnTete, Catalogue (client : recherche, marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), Jaquette (ou vignette neutre), Disponibilite
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
 src/lib/jaquettes/       chemins et URL des jaquettes ({game_id}/{région}-{300|600}.webp, ADR-04) + tests
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
@@ -94,7 +94,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
 - [ ] Phase 4+ — Développement par étapes (DESIGN.md §8)
   - [x] Étape 1 — Socle : #4 à #9
   - [x] Étape 2 — Base : #16 à #19
-  - [ ] Étape 3 — Consultation : #24 ✅, #25 ✅, #26 US-03 marché (cette PR), #27 US-05 recherche
+  - [ ] Étape 3 — Consultation : #24 ✅, #25 ✅, #26 ✅, #27 US-05 recherche (cette PR)
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes

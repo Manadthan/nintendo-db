@@ -13,6 +13,12 @@ import {
   enregistrerMarche,
   lireMarche,
 } from "@/lib/catalogue/marche";
+import {
+  abonnerRecherche,
+  correspond,
+  enregistrerRecherche,
+  lireRecherche,
+} from "@/lib/catalogue/recherche";
 import type {
   JeuCatalogue,
   Marche,
@@ -50,7 +56,7 @@ function enregistrerVue(vue: Vue) {
 
 type Props = { jeux: JeuCatalogue[]; consoleSlug: string; consoleNom: string };
 
-/** Catalogue d'une console (US-02) : marché (US-03), tri, grille / liste, groupes par année. */
+/** Catalogue d'une console (US-02) : recherche (US-05), marché (US-03), tri, grille / liste, groupes par année. */
 export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
   const [tri, setTri] = useState<Tri>("anciens");
   // Page préparée à l'avance, identique pour tous (ADR-02) : « grille » au premier affichage,
@@ -65,7 +71,18 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
     () => "TOUS",
   );
 
-  const versions = trier(jeux, tri, marche);
+  // Recherche (US-05) : dans l'adresse (?q=), filtrée dans le navigateur au fil de la frappe (ADR-05).
+  const recherche = useSyncExternalStore(
+    abonnerRecherche,
+    lireRecherche,
+    () => "",
+  );
+
+  const versions = trier(
+    jeux.filter((j) => correspond(j, recherche)),
+    tri,
+    marche,
+  );
   const groupes = grouperParAnnee(versions, tri);
   const lien = (v: VersionAffichee) => `/jeux/${consoleSlug}/${v.jeu.slug}`;
 
@@ -81,6 +98,30 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
         <span className="text-[15px] font-semibold text-texte-discret">
           {jeux.length}
         </span>
+      </div>
+
+      <div className="flex h-11 items-center gap-2 rounded-xl border border-[#d6d9e0] bg-carte px-3">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#5b6170"
+          strokeWidth="2"
+          strokeLinecap="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="M20 20l-3.5-3.5" />
+        </svg>
+        <input
+          type="search"
+          aria-label="Rechercher un jeu"
+          placeholder="Titre, éditeur, développeur"
+          value={recherche}
+          onChange={(e) => enregistrerRecherche(e.target.value)}
+          className="min-w-0 flex-1 bg-transparent text-base outline-none"
+        />
       </div>
 
       <div role="group" aria-label="Marché" className="flex flex-wrap gap-1.5">
@@ -136,6 +177,27 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
         {versions.length} jeu{versions.length > 1 ? "x" : ""} affiché
         {versions.length > 1 ? "s" : ""} sur {jeux.length}
       </p>
+
+      {versions.length === 0 && (
+        <div className="flex flex-col items-center gap-2.5 rounded-xl border border-bordure bg-carte px-4 py-7 text-center">
+          <p className="text-[15px] font-semibold">Aucun jeu ne correspond</p>
+          <p className="text-[13px] text-texte-discret">
+            {recherche.trim()
+              ? `Rien pour « ${recherche.trim()} »`
+              : "Aucun jeu sur ce marché"}{" "}
+            : essayez un autre titre ou un autre marché.
+          </p>
+          {recherche.trim() && (
+            <button
+              type="button"
+              onClick={() => enregistrerRecherche("")}
+              className="h-10 rounded-[10px] bg-accent px-4 text-sm font-semibold text-white"
+            >
+              Effacer la recherche
+            </button>
+          )}
+        </div>
+      )}
 
       {groupes.map((groupe) => (
         <div key={groupe.titre ?? "az"} className="flex flex-col gap-3">
