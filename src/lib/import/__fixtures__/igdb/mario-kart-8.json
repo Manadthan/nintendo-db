@@ -1,0 +1,135 @@
+{
+  "requete": "search \"Mario Kart 8\"; fields name,platforms,first_release_date,cover.image_id,alternative_names.name,alternative_names.comment,game_localizations.name,game_localizations.region.identifier,game_localizations.cover.image_id; where platforms = (41); limit 10;",
+  "reponse": [
+    {
+      "id": 399503,
+      "cover": {
+        "id": 561451,
+        "image_id": "coc17v"
+      },
+      "first_release_date": 1409097600,
+      "name": "Mario Kart 8: Mercedez-Benz X Mario Kart 8",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 2350,
+      "alternative_names": [
+        {
+          "id": 104709,
+          "comment": "Acronym",
+          "name": "MK8"
+        },
+        {
+          "id": 137648,
+          "comment": "Korean acronym title",
+          "name": "마카8"
+        }
+      ],
+      "cover": {
+        "id": 94742,
+        "image_id": "co213q"
+      },
+      "first_release_date": 1401321600,
+      "name": "Mario Kart 8",
+      "platforms": [
+        41
+      ],
+      "game_localizations": [
+        {
+          "id": 3471,
+          "name": "マリオカート8",
+          "cover": {
+            "id": 622495,
+            "image_id": "codcbj"
+          },
+          "region": {
+            "id": 3,
+            "identifier": "ja-JP"
+          }
+        },
+        {
+          "id": 28642,
+          "name": "마리오 카트 8",
+          "region": {
+            "id": 2,
+            "identifier": "ko-KR"
+          }
+        }
+      ]
+    },
+    {
+      "id": 340982,
+      "cover": {
+        "id": 452491,
+        "image_id": "co9p57"
+      },
+      "first_release_date": 1540598400,
+      "name": "Fawful Mod Mario Kart 8",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 399501,
+      "cover": {
+        "id": 561452,
+        "image_id": "coc17w"
+      },
+      "first_release_date": 1429747200,
+      "name": "Mario Kart 8: Update 4.0",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 22141,
+      "cover": {
+        "id": 474241,
+        "image_id": "coa5xd"
+      },
+      "first_release_date": 1415836800,
+      "name": "Mario Kart 8: DLC Pack One",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 22146,
+      "cover": {
+        "id": 474242,
+        "image_id": "coa5xe"
+      },
+      "first_release_date": 1429747200,
+      "name": "Mario Kart 8: DLC Pack Two",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 45161,
+      "cover": {
+        "id": 120169,
+        "image_id": "co2kq1"
+      },
+      "first_release_date": 1401408000,
+      "name": "Mario Kart 8: Limited Edition",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 231789,
+      "cover": {
+        "id": 280810,
+        "image_id": "co60oa"
+      },
+      "first_release_date": 1446681600,
+      "name": "Mario Kart 8 + Splatoon Premium Pack",
+      "platforms": [
+        41
+      ]
+    }
+  ]
+}

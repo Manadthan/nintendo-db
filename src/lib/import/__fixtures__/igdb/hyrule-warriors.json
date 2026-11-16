@@ -1,0 +1,181 @@
+{
+  "requete": "search \"Hyrule Warriors\"; fields name,platforms,first_release_date,cover.image_id,alternative_names.name,alternative_names.comment,game_localizations.name,game_localizations.region.identifier,game_localizations.cover.image_id; where platforms = (41); limit 10;",
+  "reponse": [
+    {
+      "id": 5314,
+      "alternative_names": [
+        {
+          "id": 71746,
+          "comment": "Japanese title - romanization",
+          "name": "Zelda Musou"
+        }
+      ],
+      "cover": {
+        "id": 172395,
+        "image_id": "co3p0r"
+      },
+      "first_release_date": 1407974400,
+      "name": "Hyrule Warriors",
+      "platforms": [
+        41
+      ],
+      "game_localizations": [
+        {
+          "id": 579,
+          "name": "ゼルダ無双",
+          "cover": {
+            "id": 593704,
+            "image_id": "cocq3s"
+          },
+          "region": {
+            "id": 3,
+            "identifier": "ja-JP"
+          }
+        },
+        {
+          "id": 580,
+          "cover": {
+            "id": 239654,
+            "image_id": "co54x2"
+          },
+          "region": {
+            "id": 4,
+            "identifier": "EU"
+          }
+        }
+      ]
+    },
+    {
+      "id": 95043,
+      "cover": {
+        "id": 216226,
+        "image_id": "co4mua"
+      },
+      "first_release_date": 1412121600,
+      "name": "Hyrule Warriors: Hero of Hyrule Pack",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 95048,
+      "cover": {
+        "id": 216352,
+        "image_id": "co4mxs"
+      },
+      "first_release_date": 1467244800,
+      "name": "Hyrule Warriors: Legends of Hyrule Pack",
+      "platforms": [
+        37,
+        41
+      ]
+    },
+    {
+      "id": 95042,
+      "cover": {
+        "id": 213553,
+        "image_id": "co4ks1"
+      },
+      "first_release_date": 1424908800,
+      "name": "Hyrule Warriors: Boss Pack",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 83790,
+      "alternative_names": [
+        {
+          "id": 61166,
+          "comment": "Alternative title",
+          "name": "Zelda Musou Hyrule Warriors Treasure Box Limited Edition"
+        },
+        {
+          "id": 62837,
+          "comment": "Japanese title - romanization",
+          "name": "Zelda Musou Treasure Box"
+        }
+      ],
+      "cover": {
+        "id": 319582,
+        "image_id": "co6ula"
+      },
+      "first_release_date": 1407974400,
+      "name": "Hyrule Warriors: Treasure Box",
+      "platforms": [
+        41
+      ],
+      "game_localizations": [
+        {
+          "id": 10248,
+          "name": "ゼルダ無双 Treasure Box",
+          "region": {
+            "id": 3,
+            "identifier": "ja-JP"
+          }
+        }
+      ]
+    },
+    {
+      "id": 95041,
+      "cover": {
+        "id": 213595,
+        "image_id": "co4kt7"
+      },
+      "first_release_date": 1422489600,
+      "name": "Hyrule Warriors: Majora's Mask Pack",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 23825,
+      "cover": {
+        "id": 213815,
+        "image_id": "co4kzb"
+      },
+      "first_release_date": 1412121600,
+      "name": "Hyrule Warriors: Master Quest Pack",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 95040,
+      "cover": {
+        "id": 213381,
+        "image_id": "co4kn9"
+      },
+      "first_release_date": 1417046400,
+      "name": "Hyrule Warriors: Twilight Princess Pack",
+      "platforms": [
+        41
+      ]
+    },
+    {
+      "id": 95045,
+      "cover": {
+        "id": 213455,
+        "image_id": "co4kpb"
+      },
+      "first_release_date": 1467244800,
+      "name": "Hyrule Warriors: Link's Awakening Pack",
+      "platforms": [
+        37,
+        41
+      ]
+    },
+    {
+      "id": 95044,
+      "cover": {
+        "id": 213382,
+        "image_id": "co4kna"
+      },
+      "first_release_date": 1467244800,
+      "name": "Hyrule Warriors: Legends Character Pack",
+      "platforms": [
+        41
+      ]
+    }
+  ]
+}
