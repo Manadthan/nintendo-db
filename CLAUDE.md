@@ -32,6 +32,8 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 - **Jamais de commit direct sur `main`.** Une issue → une branche → une PR → revue du propriétaire → merge.
 - Branches : `feat/us-xx-…`, `fix/…`, `docs/…`, `chore/…`. Commits **Conventional Commits**.
 - PR petites (< 300 lignes), décrivent les critères couverts **et ce qui n'a pas été vérifié**.
+- **Donner le lien de prévisualisation Vercel dès l'ouverture d'une PR** (message au propriétaire + « Comment tester ») :
+  `https://nintendo-db-git-<branche, / remplacés par ->-manadthan.vercel.app`.
 - **Plan validé avant de coder** chaque étape.
 - Toute fonctionnalité arrive avec ses tests ; CI verte avant merge ; montrer la sortie des tests.
 - Bug : d'abord un test qui échoue, puis la correction sans modifier le test.
@@ -44,7 +46,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 ## Stack et commandes
 
 Next.js 16 (App Router, TypeScript strict) · Tailwind 4 · Vitest · Playwright · GitHub Actions ;
-Supabase et Vercel à venir (DESIGN.md §2).
+Vercel (région Paris `cdg1`, `vercel.json`) ; Supabase à venir (DESIGN.md §2).
 
 ```
 npm run dev        # serveur local
@@ -70,9 +72,9 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
 
 - [x] Phase 1 — Intention : `intent/intent.md` validée
 - [x] Phase 2 — Spec, design, maquettes validés
-- [x] Phase 3 — Issues de l'étape 1 (#4 à #9) ; milestone à créer par le propriétaire
+- [x] Phase 3 — Issues de l'étape 1 (#4 à #9), milestone « Étape 1 — Socle » (n° 1)
 - [ ] Phase 4+ — Développement par étapes (DESIGN.md §8)
-  - [ ] Étape 1 — Socle : #4 ✅, #5 ✅, #6 ✅, #7 ✅, #9 (cette PR), #8 Vercel (réglage depuis le PC)
+  - [ ] Étape 1 — Socle : #4 ✅, #5 ✅, #6 ✅, #7 ✅, #9 ✅, #8 Vercel (cette PR + réglage du propriétaire)
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes
