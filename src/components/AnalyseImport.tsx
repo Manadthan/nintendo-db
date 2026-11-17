@@ -5,6 +5,7 @@ import {
   analyserListe,
   enregistrerLot,
   rapprocherLot,
+  supprimerJeux,
   terminerImport,
   type RapprochementLeger,
 } from "@/app/actions/import";
@@ -89,9 +90,13 @@ export function AnalyseImport({
   async function enregistrer() {
     if (!apercu) return;
     const total = apercu.lignes.length;
+    const aSupprimer = apercu.aSupprimer.length;
     if (
       !window.confirm(
-        `Enregistrer ${total} jeux dans la base du site ? Tes corrections manuelles seront gardées.`,
+        `Enregistrer ${total} jeux dans la base du site ? Tes corrections manuelles seront gardées.` +
+          (aSupprimer
+            ? `\n\n${aSupprimer} jeu(x) sans boîte Nintendo seront supprimés : ${apercu.aSupprimer.join(", ")}.`
+            : ""),
       )
     ) {
       return;
@@ -114,7 +119,10 @@ export function AnalyseImport({
           )),
         );
       }
-      const resume = resumerEnregistrement(resultats);
+      const supprimes = aSupprimer
+        ? await supprimerJeux(consoleSlug, apercu.aSupprimer)
+        : [];
+      const resume = resumerEnregistrement(resultats, supprimes);
       await terminerImport(consoleSlug, resume);
       setEtat({ etape: "enregistre", resume });
     } catch (e) {
@@ -145,7 +153,8 @@ export function AnalyseImport({
       </button>
 
       <p role="status" className="text-sm text-texte-doux">
-        {etat.etape === "wikipedia" && "Lecture de la liste Wikipédia…"}
+        {etat.etape === "wikipedia" &&
+          "Lecture de la liste Wikipédia et de la base GameTDB…"}
         {etat.etape === "igdb" &&
           `Rapprochement IGDB : ${etat.fait} / ${etat.total} jeux`}
         {etat.etape === "fini" &&
@@ -198,17 +207,23 @@ export function AnalyseImport({
               </ul>
             </div>
           )}
-          {etat.resume.secours.length > 0 && (
+          {etat.resume.supprimes.length > 0 && (
+            <p>
+              Supprimés (sans boîte Nintendo) :{" "}
+              {etat.resume.supprimes.join(", ")}.
+            </p>
+          )}
+          {etat.resume.sansScan.length > 0 && (
             <details>
               <summary className="cursor-pointer font-semibold">
-                Jaquette principale utilisée en secours (
-                {etat.resume.secours.length})
+                Sans scan de boîte ({etat.resume.sansScan.length})
               </summary>
               <p className="mt-1 text-texte-doux">
-                IGDB n&apos;a pas de jaquette propre à ces régions :
+                GameTDB n&apos;a pas de scan pour ces régions : image IGDB à la
+                place, à remplacer à la main.
               </p>
               <ul className="list-disc pl-5 text-texte-doux">
-                {etat.resume.secours.map((s) => (
+                {etat.resume.sansScan.map((s) => (
                   <li key={s}>{s}</li>
                 ))}
               </ul>
@@ -318,6 +333,17 @@ export function AnalyseImport({
             })}
           </ul>
 
+          {apercu.aSupprimer.length > 0 && (
+            <p
+              role="alert"
+              className="rounded-xl border border-[#f1c4c4] bg-[#fff5f5] p-3 text-sm text-[#b42318]"
+            >
+              {apercu.aSupprimer.length} jeu(x) en base n&apos;ont plus de boîte
+              Nintendo et seront supprimés à l&apos;enregistrement :{" "}
+              {apercu.aSupprimer.join(", ")}.
+            </p>
+          )}
+
           <details className="rounded-xl border border-bordure bg-carte p-3 text-sm">
             <summary className="cursor-pointer font-semibold">
               Jeux ignorés ({resume.ignores})
@@ -330,6 +356,17 @@ export function AnalyseImport({
             <ul className="mt-1 list-disc pl-5 text-texte-doux">
               {apercu.ignores.telechargeables.map((t) => (
                 <li key={t}>{t}</li>
+              ))}
+            </ul>
+            <p className="mt-2 text-texte-doux">
+              {apercu.ecartes.length} jeux de la liste sans boîte Nintendo
+              (GameTDB) :
+            </p>
+            <ul className="mt-1 list-disc pl-5 text-texte-doux">
+              {apercu.ecartes.map((e) => (
+                <li key={e.titre}>
+                  {e.titre} — {e.raison}
+                </li>
               ))}
             </ul>
           </details>

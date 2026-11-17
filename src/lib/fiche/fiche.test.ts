@@ -19,6 +19,7 @@ const release = (
   editeur: date ? "Nintendo" : null,
   code_produit: null,
   jaquette_path: null,
+  jaquette_source: null,
   ...extra,
 });
 

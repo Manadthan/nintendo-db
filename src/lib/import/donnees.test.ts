@@ -8,10 +8,15 @@ import {
   type JeuEnBase,
 } from "./donnees";
 import { rapprocher, versInfosIgdb, type ResultatIgdb } from "./igdb";
+import { lireGameTdb, regrouperGameTdb } from "./gametdb";
+import { appliquerGameTdb } from "./physique";
 import { lireListeWikipedia } from "./wikipedia";
 
-const wiki = lireListeWikipedia(
-  readFileSync(join(__dirname, "__fixtures__/wii-u-wikipedia.html"), "utf8"),
+const lire = (nom: string) =>
+  readFileSync(join(__dirname, "__fixtures__", nom), "utf8");
+const { jeux: wiki } = appliquerGameTdb(
+  lireListeWikipedia(lire("wii-u-wikipedia.html")),
+  regrouperGameTdb(lireGameTdb(lire("wiiutdb.xml"))),
 );
 const igdb = (nom: string, titre: string) => {
   const reponse: ResultatIgdb[] = JSON.parse(
@@ -43,6 +48,7 @@ describe("construireJeu (US-10)", () => {
       date_sortie: "2015-01-22",
       precision_date: "jour",
       editeur: "Nintendo",
+      code_produit: `WUP-P-${KIRBY.disques.JAP!.slice(0, 4)}`,
     });
     expect(jeu.releases.US).toMatchObject({
       sortie: true,
@@ -63,6 +69,7 @@ describe("construireJeu (US-10)", () => {
       date_sortie: null,
       precision_date: null,
       editeur: null,
+      code_produit: null,
     });
   });
 
@@ -97,6 +104,8 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
         sortie: true,
         verrous: [],
         jaquette_path: null,
+        jaquette_source: null,
+        code_produit: null,
       },
       US: {
         titre: null,
@@ -107,6 +116,8 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
         sortie: false,
         verrous: [],
         jaquette_path: null,
+        jaquette_source: null,
+        code_produit: null,
       },
       PAL: {
         titre: "Mon titre",
@@ -117,6 +128,8 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
         sortie: true,
         verrous: ["titre"],
         jaquette_path: null,
+        jaquette_source: null,
+        code_produit: null,
       },
     },
   };
@@ -135,7 +148,8 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
     expect(f.releases.PAL).not.toHaveProperty("titre");
     expect(f.ecarts).toEqual([
       "developpeur : « Xing (corrigé) » gardé (import : « Xing »)",
-      "PAL titre : « Mon titre » gardé (import : « Wii Karaoke U »)",
+      // Wii Karaoke U n'est sorti en PAL qu'en téléchargement : l'import propose « non sorti ».
+      "PAL titre : « Mon titre » gardé (import : « — »)",
     ]);
   });
 
@@ -146,36 +160,70 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
   });
 });
 
-describe("choisirJaquettes (ADR-04, R2)", () => {
-  it("prend la jaquette de chaque région, et la principale en secours pour une région sortie sans jaquette propre", () => {
+describe("choisirJaquettes (ADR-04, R2, R6)", () => {
+  const scans = (id: string, langues: string[]) =>
+    langues.map((l) => ({
+      source: "gametdb",
+      url: `https://art.gametdb.com/wiiu/coverHQ/${l}/${id}.jpg`,
+    }));
+
+  it("essaie d'abord le scan de la boîte, puis l'image IGDB de la région, ou la principale en secours", () => {
     const infos = igdb(
       "kirby-and-the-rainbow-paintbrush",
       "Kirby and the Rainbow Curse",
     );
     const jeu = construireJeu(KIRBY, infos);
-    expect(choisirJaquettes(jeu, infos, null)).toEqual({
-      JAP: { imageId: "co1wcc", secours: true },
-      US: { imageId: "co1wcc", secours: false },
-      PAL: { imageId: "cob8mp", secours: false },
+    expect(choisirJaquettes(jeu, KIRBY.disques, infos, null)).toEqual({
+      JAP: [
+        ...scans(KIRBY.disques.JAP!, ["JA"]),
+        { source: "igdb", imageId: "co1wcc", secours: true },
+      ],
+      US: [
+        ...scans(KIRBY.disques.US!, ["US"]),
+        { source: "igdb", imageId: "co1wcc", secours: false },
+      ],
+      PAL: [
+        ...scans(KIRBY.disques.PAL!, ["EN", "FR", "DE"]),
+        { source: "igdb", imageId: "cob8mp", secours: false },
+      ],
     });
   });
 
-  it("ne copie rien pour une région non sortie, ni pour une région qui a déjà sa jaquette", () => {
-    const infos = igdb("wii-karaoke-u", "Wii Karaoke U");
-    const jeu = construireJeu(KARAOKE, infos);
-    const dejaLa = { JAP: "x/jap", US: null, PAL: null };
-    expect(choisirJaquettes(jeu, infos, dejaLa)).toEqual({
+  it("ne touche ni aux régions non sorties, ni aux jaquettes ajoutées à la main ou déjà scannées", () => {
+    const infos = igdb(
+      "kirby-and-the-rainbow-paintbrush",
+      "Kirby and the Rainbow Curse",
+    );
+    const jeu = construireJeu(KIRBY, infos);
+    const existantes = {
+      JAP: { path: "x/jap", source: "photo" as const },
+      US: { path: "x/us", source: "gametdb" as const },
+    };
+    expect(
+      choisirJaquettes(jeu, KIRBY.disques, infos, existantes),
+    ).toMatchObject({
       JAP: null,
       US: null,
-      PAL: { imageId: "co7dr3", secours: true },
     });
+    expect(
+      choisirJaquettes(
+        construireJeu(KARAOKE, null),
+        KARAOKE.disques,
+        null,
+        null,
+      ),
+    ).toMatchObject({ US: null, PAL: null });
   });
 
-  it("ne copie rien sans jeu IGDB", () => {
-    expect(choisirJaquettes(construireJeu(KARAOKE, null), null, null)).toEqual({
-      JAP: null,
-      US: null,
-      PAL: null,
+  it("remplace une image IGDB déjà copiée par le scan, jamais par une autre image IGDB", () => {
+    const infos = igdb(
+      "kirby-and-the-rainbow-paintbrush",
+      "Kirby and the Rainbow Curse",
+    );
+    const jeu = construireJeu(KIRBY, infos);
+    const choix = choisirJaquettes(jeu, KIRBY.disques, infos, {
+      PAL: { path: "x/pal", source: "igdb" },
     });
+    expect(choix.PAL).toEqual(scans(KIRBY.disques.PAL!, ["EN", "FR", "DE"]));
   });
 });

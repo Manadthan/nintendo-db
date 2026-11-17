@@ -8,10 +8,20 @@ import {
   type SortieCatalogue,
 } from "@/lib/catalogue/types";
 
-/** Une sortie telle que la fiche l'affiche : celle du catalogue, plus l'éditeur et le code produit de la région. */
+/** Source affichée sous la jaquette (US-12) : « Jaquette : GameTDB ». */
+export const SOURCES_JAQUETTE = {
+  gametdb: "GameTDB",
+  igdb: "IGDB",
+  photo: "Photo",
+  url: "Image ajoutée",
+} as const;
+export type SourceJaquette = keyof typeof SOURCES_JAQUETTE;
+
+/** Une sortie telle que la fiche l'affiche : celle du catalogue, plus l'éditeur, le code produit et la source. */
 export type SortieFiche = SortieCatalogue & {
   editeur: string | null;
   codeProduit: string | null;
+  sourceJaquette: SourceJaquette | null;
 };
 
 /** Un jeu tel que la fiche l'affiche (US-04) ; utilisable partout où un jeu du catalogue l'est. */
@@ -29,7 +39,10 @@ export type LigneFiche = Omit<LigneJeu, "releases"> & {
   genre: string | null;
   wikipedia_url: string | null;
   consoles: { slug: string; nom: string };
-  releases: (LigneJeu["releases"][number] & { code_produit: string | null })[];
+  releases: (LigneJeu["releases"][number] & {
+    code_produit: string | null;
+    jaquette_source: SourceJaquette | null;
+  })[];
 };
 
 export function versJeuFiche(ligne: LigneFiche, baseUrl: string): JeuFiche {
@@ -42,6 +55,7 @@ export function versJeuFiche(ligne: LigneFiche, baseUrl: string): JeuFiche {
         ...jeu.sorties[region],
         editeur: r?.editeur ?? null,
         codeProduit: r?.code_produit ?? null,
+        sourceJaquette: r?.jaquette_path ? r.jaquette_source : null,
       };
       return [region, sortie];
     }),

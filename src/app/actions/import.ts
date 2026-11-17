@@ -13,9 +13,16 @@ import {
   choisirJaquettes,
   construireJeu,
   fusionner,
-  type JaquetteChoisie,
+  type CandidatJaquette,
   type JeuEnBase,
+  type SourceJaquette,
 } from "@/lib/import/donnees";
+import {
+  URL_BASE_GAMETDB,
+  lireArchiveGameTdb,
+  lireGameTdb,
+  regrouperGameTdb,
+} from "@/lib/import/gametdb";
 import { lireIgdbEnv } from "@/lib/import/env";
 import {
   creerClientIgdb,
@@ -24,12 +31,9 @@ import {
   versInfosIgdb,
   type Rapprochement,
 } from "@/lib/import/igdb";
-import { convertirEnWebp, telechargerImageIgdb } from "@/lib/import/jaquettes";
-import {
-  lireListeWikipediaDetaillee,
-  urlRendu,
-  type JeuWikipedia,
-} from "@/lib/import/wikipedia";
+import { convertirEnWebp, telechargerImage } from "@/lib/import/jaquettes";
+import { appliquerGameTdb, type JeuAImporter } from "@/lib/import/physique";
+import { lireListeWikipediaDetaillee, urlRendu } from "@/lib/import/wikipedia";
 import {
   BUCKET_JAQUETTES,
   TAILLES_JAQUETTE,
@@ -55,17 +59,37 @@ async function chargerConsole(consoleSlug: string) {
   return data;
 }
 
-/** Étape 1 de l'aperçu (US-10) : lit la liste Wikipédia du jour. N'écrit rien. */
-export async function analyserListe(consoleSlug: string): Promise<Apercu> {
-  const fiche = await chargerConsole(consoleSlug);
-  const reponse = await fetch(urlRendu(fiche.wikipedia_liste!), {
+async function telecharger(url: string, source: string): Promise<Response> {
+  const reponse = await fetch(url, {
     headers: { "User-Agent": USER_AGENT },
     cache: "no-store",
   });
   if (!reponse.ok)
-    throw new Error(`Wikipédia indisponible (HTTP ${reponse.status})`);
-  const liste = lireListeWikipediaDetaillee(await reponse.text());
-  return preparerApercu(liste, new Set(fiche.games.map((g) => g.slug)));
+    throw new Error(`${source} indisponible (HTTP ${reponse.status})`);
+  return reponse;
+}
+
+/**
+ * Étape 1 de l'aperçu (US-10) : liste Wikipédia et base GameTDB du jour, puis règle du physique (SPEC v1.4) :
+ * régions et jeux réduits aux boîtes, compilations ajoutées. N'écrit rien.
+ */
+export async function analyserListe(consoleSlug: string): Promise<Apercu> {
+  const fiche = await chargerConsole(consoleSlug);
+  const [wikipedia, gametdb] = await Promise.all([
+    telecharger(urlRendu(fiche.wikipedia_liste!), "Wikipédia").then((r) =>
+      r.text(),
+    ),
+    telecharger(URL_BASE_GAMETDB, "GameTDB").then((r) => r.arrayBuffer()),
+  ]);
+  const liste = lireListeWikipediaDetaillee(wikipedia);
+  const physique = appliquerGameTdb(
+    liste.jeux,
+    regrouperGameTdb(lireGameTdb(lireArchiveGameTdb(new Uint8Array(gametdb)))),
+  );
+  return preparerApercu(
+    { ...liste, ...physique },
+    new Set(fiche.games.map((g) => g.slug)),
+  );
 }
 
 export type RapprochementLeger = { slug: string } & Pick<
@@ -102,18 +126,19 @@ export async function rapprocherLot(
   return resultats;
 }
 
-/** Un jeu à enregistrer : ses données Wikipédia (aperçu) et le jeu IGDB retenu (sûr ou choisi à la main). */
+/** Un jeu à enregistrer : ses données (aperçu) et le jeu IGDB retenu (sûr ou choisi à la main). */
 export type JeuAEnregistrer = {
-  wikipedia: JeuWikipedia;
+  wikipedia: JeuAImporter;
   igdbId: number | null;
 };
 
 const COLONNES_EXISTANT =
-  "id, slug, developpeur, wikipedia_url, igdb_id, physique, verrous, releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, verrous, jaquette_path)";
+  "id, slug, developpeur, wikipedia_url, igdb_id, physique, verrous, releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, code_produit, verrous, jaquette_path, jaquette_source)";
 
 /**
  * Enregistre un lot de 10 jeux au plus (US-10, ADR-03), piloté par le navigateur : jeux et sorties (corrections
- * manuelles gardées), puis jaquettes IGDB copiées en WebP (ADR-04). Une erreur sur un jeu n'arrête pas le lot.
+ * manuelles gardées), puis jaquettes copiées en WebP (ADR-04) : scan GameTDB, sinon image IGDB. Une erreur sur
+ * un jeu n'arrête pas le lot.
  */
 export async function enregistrerLot(
   consoleSlug: string,
@@ -190,22 +215,31 @@ export async function enregistrerLot(
       if (e) throw new Error(e.message);
 
       const existantes = existant
-        ? (Object.fromEntries(
+        ? Object.fromEntries(
             REGIONS.map((r) => [
               r,
-              existant.releases[r]?.jaquette_path ?? null,
+              {
+                path: existant.releases[r]?.jaquette_path ?? null,
+                source: existant.releases[r]?.jaquette_source ?? null,
+              },
             ]),
-          ) as Record<Region, string | null>)
+          )
         : null;
-      const choix = choisirJaquettes(jeu, infos, existantes);
+      const choix = choisirJaquettes(jeu, wikipedia.disques, infos, existantes);
       const copiees = await copierJaquettes(supabase, gameId!, choix);
 
+      // Régions sorties dont la jaquette finale n'est pas un scan ni un ajout manuel : à remplacer (R6).
+      const sansScan = REGIONS.filter((r) => {
+        if (!jeu.releases[r].sortie) return false;
+        const source = copiees[r] ?? existantes?.[r]?.source ?? null;
+        return source === null || source === "igdb";
+      });
       resultats.push({
         slug: wikipedia.slug,
         titre,
         statut: existant ? "mis-a-jour" : "ajoute",
-        jaquettes: copiees,
-        secours: REGIONS.filter((r) => choix[r]?.secours),
+        jaquettes: Object.keys(copiees).length,
+        sansScan,
         ecarts: fusion.ecarts,
       });
     } catch (e) {
@@ -214,7 +248,7 @@ export async function enregistrerLot(
         titre,
         statut: "erreur",
         jaquettes: 0,
-        secours: [],
+        sansScan: [],
         ecarts: [],
         erreur: e instanceof Error ? e.message : "erreur inconnue",
       });
@@ -223,50 +257,107 @@ export async function enregistrerLot(
   return resultats;
 }
 
-/** Copie les jaquettes choisies : une image IGDB → WebP 300 et 600 px → bucket « jaquettes » (ADR-04). */
+/**
+ * Copie les jaquettes choisies (ADR-04) : pour chaque région, la première image disponible parmi les candidats
+ * (scan GameTDB dans l'ordre des langues, puis IGDB) → WebP 300 et 600 px → bucket « jaquettes ». Rend la source
+ * copiée de chaque région ; une région sans aucune image disponible garde sa jaquette actuelle.
+ */
 async function copierJaquettes(
   supabase: Awaited<ReturnType<typeof exigerProprietaire>>,
   gameId: string,
-  choix: Record<Region, JaquetteChoisie>,
-): Promise<number> {
+  choix: Record<Region, CandidatJaquette[] | null>,
+): Promise<Partial<Record<Region, SourceJaquette>>> {
   const converties = new Map<
     string,
     Awaited<ReturnType<typeof convertirEnWebp>>
   >();
-  let copiees = 0;
+  const copiees: Partial<Record<Region, SourceJaquette>> = {};
   for (const region of REGIONS) {
-    const c = choix[region];
-    if (!c) continue;
-    if (!converties.has(c.imageId)) {
-      converties.set(
-        c.imageId,
-        await convertirEnWebp(
-          await telechargerImageIgdb(urlImageIgdb(c.imageId, "t_1080p")),
-        ),
-      );
+    let trouvee: {
+      source: SourceJaquette;
+      tailles: Awaited<ReturnType<typeof convertirEnWebp>>;
+    } | null = null;
+    for (const c of choix[region] ?? []) {
+      const url =
+        c.source === "gametdb" ? c.url : urlImageIgdb(c.imageId, "t_1080p");
+      try {
+        if (!converties.has(url))
+          converties.set(
+            url,
+            await convertirEnWebp(await telechargerImage(url)),
+          );
+        trouvee = { source: c.source, tailles: converties.get(url)! };
+        break;
+      } catch {
+        // Scan absent dans cette langue (404) ou image illisible : candidat suivant.
+      }
     }
-    const tailles = converties.get(c.imageId)!;
+    if (!trouvee) continue;
     for (const taille of TAILLES_JAQUETTE) {
       const { error } = await supabase.storage
         .from(BUCKET_JAQUETTES)
-        .upload(cheminJaquette(gameId, region, taille), tailles[taille], {
-          contentType: "image/webp",
-          upsert: true,
-        });
+        .upload(
+          cheminJaquette(gameId, region, taille),
+          trouvee.tailles[taille],
+          {
+            contentType: "image/webp",
+            upsert: true,
+          },
+        );
       if (error) throw new Error(`Jaquette ${region} : ${error.message}`);
     }
     const { error } = await supabase
       .from("releases")
       .update({
         jaquette_path: `${gameId}/${region.toLowerCase()}`,
-        jaquette_source: "igdb",
+        jaquette_source: trouvee.source,
       })
       .eq("game_id", gameId)
       .eq("region", region);
     if (error) throw new Error(`Jaquette ${region} : ${error.message}`);
-    copiees++;
+    copiees[region] = trouvee.source;
   }
   return copiees;
+}
+
+/**
+ * Supprime les jeux qui ne sont plus retenus (sans boîte Nintendo, SPEC v1.4), sur confirmation dans l'aperçu :
+ * leurs jaquettes, puis le jeu (ses sorties suivent). Rend les titres supprimés.
+ */
+export async function supprimerJeux(
+  consoleSlug: string,
+  slugs: string[],
+): Promise<string[]> {
+  const fiche = await chargerConsole(consoleSlug);
+  const supabase = await exigerProprietaire();
+  const { data, error } = await supabase
+    .from("games")
+    .select("id, slug, releases(region, titre)")
+    .eq("console_id", fiche.id)
+    .in("slug", slugs);
+  if (error) throw new Error(`Lecture des jeux à supprimer : ${error.message}`);
+
+  const supprimes: string[] = [];
+  for (const jeu of data ?? []) {
+    const chemins = REGIONS.flatMap((r) =>
+      TAILLES_JAQUETTE.map((t) => cheminJaquette(jeu.id, r, t)),
+    );
+    const { error: e1 } = await supabase.storage
+      .from(BUCKET_JAQUETTES)
+      .remove(chemins);
+    if (e1) throw new Error(`Jaquettes de « ${jeu.slug} » : ${e1.message}`);
+    const { error: e2 } = await supabase
+      .from("games")
+      .delete()
+      .eq("id", jeu.id);
+    if (e2) throw new Error(`Suppression de « ${jeu.slug} » : ${e2.message}`);
+    supprimes.push(
+      jeu.releases.find((r) => r.region === "PAL")?.titre ??
+        jeu.releases.find((r) => r.titre)?.titre ??
+        jeu.slug,
+    );
+  }
+  return supprimes;
 }
 
 /** Fin de l'import : résumé gardé dans import_runs, catalogue et fiches régénérés (ADR-02). */

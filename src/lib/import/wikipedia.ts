@@ -14,8 +14,13 @@ import {
 
 export type DateLue = { date: string; precision: PrecisionDate };
 
-/** Une sortie lue sur Wikipédia ; null pour une région où le jeu n'est pas sorti. */
-export type SortieWikipedia = (DateLue & { editeur: string | null }) | null;
+/**
+ * Une sortie (lue sur Wikipédia, ou sur GameTDB pour un jeu absent de Wikipédia) ; null pour une région où le jeu
+ * n'est pas sorti. Date inconnue possible (disque GameTDB sans date) : « — » sur le site.
+ */
+export type SortieWikipedia =
+  | ((DateLue | { date: null; precision: null }) & { editeur: string | null })
+  | null;
 
 export type JeuWikipedia = {
   slug: string;

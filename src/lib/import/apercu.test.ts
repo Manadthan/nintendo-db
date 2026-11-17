@@ -7,23 +7,34 @@ import {
   resumer,
   resumerEnregistrement,
 } from "./apercu";
+import { lireGameTdb, regrouperGameTdb } from "./gametdb";
+import { appliquerGameTdb } from "./physique";
 import { lireListeWikipediaDetaillee } from "./wikipedia";
 
-const liste = lireListeWikipediaDetaillee(
-  readFileSync(join(__dirname, "__fixtures__/wii-u-wikipedia.html"), "utf8"),
-);
+const lire = (nom: string) =>
+  readFileSync(join(__dirname, "__fixtures__", nom), "utf8");
+const wikipedia = lireListeWikipediaDetaillee(lire("wii-u-wikipedia.html"));
+const liste = {
+  ...wikipedia,
+  ...appliquerGameTdb(
+    wikipedia.jeux,
+    regrouperGameTdb(lireGameTdb(lire("wiiutdb.xml"))),
+  ),
+};
 const DEPART = [
   "mario-kart-8",
   "splatoon",
   "kirby-and-the-rainbow-paintbrush",
   "wii-karaoke-u",
 ];
+// Jeu en base qui n'a plus de boîte Nintendo : à supprimer.
+const EN_BASE = [...DEPART, "shovel-knight"];
 
 describe("preparerApercu (US-10)", () => {
-  const apercu = preparerApercu(liste, new Set(DEPART));
+  const apercu = preparerApercu(liste, new Set(EN_BASE));
 
   it("propose d'ajouter les nouveaux jeux et de mettre à jour ceux déjà en base, sans doublon", () => {
-    expect(apercu.lignes).toHaveLength(50);
+    expect(apercu.lignes).toHaveLength(48);
     expect(
       apercu.lignes
         .filter((l) => l.action === "mettre-a-jour")
@@ -31,7 +42,7 @@ describe("preparerApercu (US-10)", () => {
         .sort(),
     ).toEqual([...DEPART].sort());
     expect(apercu.lignes.filter((l) => l.action === "ajouter")).toHaveLength(
-      46,
+      44,
     );
   });
 
@@ -40,7 +51,8 @@ describe("preparerApercu (US-10)", () => {
       {
         titre: "Wii Karaoke U",
         titres: { US: "Wii Karaoke U", PAL: "Wii Karaoke U" },
-        regions: { JAP: true, US: false, PAL: true },
+        // Wikipédia indique aussi PAL, mais seulement en téléchargement : seule la boîte japonaise compte.
+        regions: { JAP: true, US: false, PAL: false },
       },
     );
   });
@@ -48,6 +60,11 @@ describe("preparerApercu (US-10)", () => {
   it("garde les jeux écartés et leur raison", () => {
     expect(apercu.ignores.telechargeables).toContain("Ark Rush");
     expect(apercu.ignores.autresEditeurs).toBeGreaterThan(700);
+    expect(apercu.ecartes.map((e) => e.titre)).toContain("NES Remix");
+  });
+
+  it("liste les jeux en base qui ne sont plus retenus, à supprimer", () => {
+    expect(apercu.aSupprimer).toEqual(["shovel-knight"]);
   });
 });
 
@@ -60,10 +77,12 @@ describe("resumer", () => {
       splatoon: "introuvable",
     } as const;
     expect(resumer(apercu, rapprochements)).toEqual({
-      ajoutes: 46,
+      ajoutes: 44,
       misAJour: 4,
       ignores:
-        apercu.ignores.autresEditeurs + apercu.ignores.telechargeables.length,
+        apercu.ignores.autresEditeurs +
+        apercu.ignores.telechargeables.length +
+        apercu.ecartes.length,
       aVerifier: 2,
     });
   });
@@ -81,42 +100,46 @@ describe("decouperEnLots", () => {
 });
 
 describe("resumerEnregistrement (US-10)", () => {
-  it("compte ajoutés, mis à jour, erreurs et jaquettes ; liste les jaquettes de secours et les corrections gardées", () => {
+  it("compte ajoutés, mis à jour, erreurs et jaquettes ; liste les régions sans scan, les corrections gardées et les suppressions", () => {
     expect(
-      resumerEnregistrement([
-        {
-          slug: "a",
-          titre: "Splatoon",
-          statut: "mis-a-jour",
-          jaquettes: 3,
-          secours: ["PAL"],
-          ecarts: [],
-        },
-        {
-          slug: "b",
-          titre: "Pikmin 3",
-          statut: "ajoute",
-          jaquettes: 2,
-          secours: [],
-          ecarts: ["PAL titre : « X » gardé (import : « Y »)"],
-        },
-        {
-          slug: "c",
-          titre: "NES Remix",
-          statut: "erreur",
-          jaquettes: 0,
-          secours: [],
-          ecarts: [],
-          erreur: "IGDB indisponible",
-        },
-      ]),
+      resumerEnregistrement(
+        [
+          {
+            slug: "a",
+            titre: "Splatoon",
+            statut: "mis-a-jour",
+            jaquettes: 3,
+            sansScan: ["PAL"],
+            ecarts: [],
+          },
+          {
+            slug: "b",
+            titre: "Pikmin 3",
+            statut: "ajoute",
+            jaquettes: 2,
+            sansScan: [],
+            ecarts: ["PAL titre : « X » gardé (import : « Y »)"],
+          },
+          {
+            slug: "c",
+            titre: "NES Remix",
+            statut: "erreur",
+            jaquettes: 0,
+            sansScan: [],
+            ecarts: [],
+            erreur: "IGDB indisponible",
+          },
+        ],
+        ["Shovel Knight"],
+      ),
     ).toEqual({
       ajoutes: 1,
       misAJour: 1,
       erreurs: [{ titre: "NES Remix", erreur: "IGDB indisponible" }],
       jaquettes: 5,
-      secours: ["Splatoon (PAL)"],
+      sansScan: ["Splatoon (PAL)"],
       ecarts: ["Pikmin 3 — PAL titre : « X » gardé (import : « Y »)"],
+      supprimes: ["Shovel Knight"],
     });
   });
 });

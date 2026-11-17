@@ -6,29 +6,32 @@ import {
 
 const POIDS_MAX = 5 * 1024 * 1024;
 
+/** Seuls hôtes d'où l'import copie des images (scans GameTDB, images IGDB). */
+const HOTES_IMAGES = new Set(["images.igdb.com", "art.gametdb.com"]);
+
 /**
- * Télécharge une image IGDB. Seule l'adresse https://images.igdb.com est acceptée : le serveur ne va jamais
- * chercher une image sur un site arbitraire (protection SSRF). Image de 5 Mo au plus.
+ * Télécharge une jaquette. Seules les adresses https://art.gametdb.com et https://images.igdb.com sont
+ * acceptées : le serveur ne va jamais chercher une image sur un site arbitraire (protection SSRF). 5 Mo au plus.
  */
-export async function telechargerImageIgdb(
+export async function telechargerImage(
   url: string,
   fetch: (url: string) => Promise<Response> = globalThis.fetch,
 ): Promise<Buffer> {
   const adresse = new URL(url);
-  if (adresse.protocol !== "https:" || adresse.hostname !== "images.igdb.com") {
+  if (adresse.protocol !== "https:" || !HOTES_IMAGES.has(adresse.hostname)) {
     throw new Error(
-      `Adresse refusée : seules les images de https://images.igdb.com sont copiées (${url})`,
+      `Adresse refusée : seules les images de GameTDB et d'IGDB sont copiées (${url})`,
     );
   }
   const reponse = await fetch(url);
   if (!reponse.ok)
-    throw new Error(`Image IGDB introuvable (HTTP ${reponse.status})`);
+    throw new Error(`Image introuvable (HTTP ${reponse.status})`);
   if (!reponse.headers.get("content-type")?.startsWith("image/")) {
-    throw new Error("La réponse d'IGDB n'est pas une image");
+    throw new Error("La réponse n'est pas une image");
   }
   const image = Buffer.from(await reponse.arrayBuffer());
   if (image.length > POIDS_MAX)
-    throw new Error("Image IGDB trop lourde (5 Mo au plus)");
+    throw new Error("Image trop lourde (5 Mo au plus)");
   return image;
 }
 
