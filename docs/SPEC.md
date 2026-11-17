@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.4 — 17/11/2026 — statut : **validée** (étude GameTDB)
+> Version 1.5 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.5 | 17/11/2026 | US-09 : lien discret « Administration » en pied de page (demande du propriétaire) |
 > | 1.4 | 17/11/2026 | US-08 avancée, US-15 logo ; US-10 : **boîte Nintendo exigée**, sortie par région = en boîte dans la région, compilations ; jaquettes = **scans de boîtes** (GameTDB en priorité) et codes produit importés ; US-12 : page « Jaquettes » |
 > | 1.3 | 16/11/2026 | Retour sur les maquettes (PR #3) : trame de gamecartdb ; région choisie **sur la fiche** (US-04) ; catalogue filtré par **marché** (US-03) ; recherche **dans le catalogue** (US-05) |
 > | 1.2 | 16/11/2026 | **v1 = Wii U seule** ; US-01 en S ; US-10 depuis Wikipédia + IGDB ; US-12 : jaquettes copiées chez nous |
@@ -108,7 +109,8 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 ### Administration (propriétaire)
 
 #### US-09 — Se connecter (M)
-- [ ] Une page de connexion (e-mail + mot de passe), sans lien visible pour les visiteurs.
+- [ ] Une page de connexion (e-mail + mot de passe), atteinte par un lien discret « Administration » en pied du
+      catalogue et des fiches (v1.5) ; une fois connecté, ce lien mène directement à l'administration.
 - [ ] Les fonctions de modification n'apparaissent qu'une fois connecté ; un visiteur ne peut rien modifier,
       même en appelant directement le serveur.
 - [ ] Un bouton permet de se déconnecter.

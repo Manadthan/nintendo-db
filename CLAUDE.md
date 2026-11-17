@@ -23,7 +23,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.1 validée |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.4 validée |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.5 validée |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v0.7 validée |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.5 validée |
 
@@ -73,7 +73,7 @@ src/lib/auth/routes.ts   règles de redirection de l'administration + tests
 src/lib/catalogue/       version affichée, dates en français, tri, groupes (catalogue.ts), marché : adresse ?marche= puis navigateur (marche.ts), recherche ?q= (recherche.ts), lecture (charger.ts) + tests
 src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; src/app/not-found.tsx : 404 en français
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
-src/components/          EnTete, Catalogue (client : recherche, marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite
+src/components/          EnTete, PiedDePage (lien Administration), Catalogue (client : recherche, marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
 src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games »), igdb.ts (rapprochement, titres et jaquettes par région, client), apercu.ts (aperçu, lots de 10, résumés), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (téléchargement IGDB seulement, WebP 300/600/768 via sharp), gametdb.ts (boîtes par région, compilations, codes produit ; lu depuis le relais), resultat.ts (erreurs des actions rendues lisibles), physique.ts (règle : boîte Nintendo exigée, sorties par région), env.ts (identifiants IGDB) + tests ; __fixtures__/ (copies datées, README)
 scripts/                 fixture-wikipedia.mjs, fixture-gametdb.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : base + scans → bucket privé gametdb, secrets SUPABASE_URL / SUPABASE_SECRET_KEY) ; capture-igdb.mjs (workflow manuel « Capturer les fixtures IGDB », secrets IGDB_* du dépôt)
@@ -99,7 +99,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
   - [x] Étape 2 — Base : #16 à #19
   - [x] Étape 3 — Consultation : #24 à #27
   - [x] Étape 4 — Import : #32 à #35, #40
-  - [ ] Étape 5 — Correction (milestone n° 5) : #46 GameTDB (lecture ✅, import ✅), #48 jaquette HD ✅, #53 relais GameTDB (cette PR), #49 sombre + logo, #42 à #45
+  - [ ] Étape 5 — Correction (milestone n° 5) : #46 GameTDB (lecture ✅, import ✅), #48 jaquette HD ✅, #53 relais GameTDB ✅, lien Administration (cette PR), retrait d'IGDB, #49 sombre + logo, #42 à #45
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes

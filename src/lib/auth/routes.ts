@@ -1,4 +1,4 @@
-/** Page de connexion du propriétaire (US-09) : aucun lien n'y mène depuis les pages publiques. */
+/** Page de connexion du propriétaire (US-09) : atteinte par le lien discret « Administration » du pied de page. */
 export const PAGE_CONNEXION = "/admin/connexion";
 /** Accueil de l'administration. */
 export const PAGE_ADMIN = "/admin";

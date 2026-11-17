@@ -1,5 +1,6 @@
 import { Catalogue } from "@/components/Catalogue";
 import { EnTete } from "@/components/EnTete";
+import { PiedDePage } from "@/components/PiedDePage";
 import { chargerCatalogue } from "@/lib/catalogue/charger";
 
 // Page préparée à l'avance et régénérée au plus toutes les 5 minutes (ADR-02) :
@@ -36,6 +37,7 @@ export default async function Accueil() {
           consoleNom={CONSOLE.nom}
         />
       </main>
+      <PiedDePage />
     </>
   );
 }
