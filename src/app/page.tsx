@@ -1,11 +1,14 @@
 import { Catalogue } from "@/components/Catalogue";
 import { EnTete } from "@/components/EnTete";
 import { PiedDePage } from "@/components/PiedDePage";
+import type { Metadata } from "next";
 import { chargerCatalogue } from "@/lib/catalogue/charger";
 
 // Page préparée à l'avance et régénérée au plus toutes les 5 minutes (ADR-02) :
 // rapide pour les visiteurs, à jour peu après une migration ou une correction.
 export const revalidate = 300;
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 // v1 : une seule console, l'accueil EST son catalogue (US-01 en S, ADR-06).
 const CONSOLE = { slug: "wii-u", nom: "Wii U" };
