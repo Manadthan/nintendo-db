@@ -28,7 +28,10 @@ test("le propriétaire repère les jaquettes à remplacer, et une adresse intern
     .getByLabel("Adresse de l'image")
     .fill("http://127.0.0.1/jaquette.jpg");
   await page.getByRole("button", { name: "Remplacer la jaquette" }).click();
-  await expect(page.getByRole("alert")).toContainText("réseau interne");
+  // Filtre sur le texte : Next.js a aussi un annonceur de navigation de rôle « alert ».
+  await expect(
+    page.getByRole("alert").filter({ hasText: "réseau interne" }),
+  ).toBeVisible();
 });
 
 test("le propriétaire remplace une jaquette par une photo (US-12)", async ({
