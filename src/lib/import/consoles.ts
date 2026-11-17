@@ -1,3 +1,4 @@
+import { estCarteDuCommerce } from "./relais-portables";
 import { estDisqueWiiDuCommerce } from "./relais-wii";
 
 /**
@@ -13,14 +14,21 @@ export type SourceConsole = {
   base: string;
   /** Dossier des scans dans le bucket du relais. */
   scans: string;
-  /** Code produit = préfixe + 4 premiers caractères de l'identifiant (`WUP-P-ALZP`, `RVL-RMCP`). */
-  prefixeCode: string;
-  /** Disque en boîte du commerce, d'après les champs GameTDB `type`, `id`, `region` et le titre anglais. */
+  /**
+   * Code produit = préfixe + 4 premiers caractères de l'identifiant (`WUP-P-ALZP`, `RVL-RMCP`, `NTR-A2DP`) ; préfixe
+   * selon l'identifiant quand la console en a plusieurs (3DS : `CTR-P-`, New 3DS : `KTR-P-`).
+   */
+  prefixeCode: string | ((id: string) => string);
+  /**
+   * Disque ou carte en boîte du commerce, d'après les champs GameTDB `type`, `id`, `region`, le titre anglais et le
+   * genre.
+   */
   estDisque: (
     type: string,
     id: string,
     region: string,
     titre: string,
+    genre: string,
   ) => boolean;
 };
 
@@ -43,6 +51,26 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
     scans: "wii/faces",
     prefixeCode: "RVL-",
     estDisque: (type, id, region) => estDisqueWiiDuCommerce(type, id, region),
+  },
+  // Étape 9 (DESIGN v1.3 §1 ter) : GameTDB seul, scans de la face (haute définition, sinon moyens).
+  ds: {
+    slug: "ds",
+    wikipedia: false,
+    base: "ds/dstdb.xml",
+    scans: "ds/scans",
+    prefixeCode: "NTR-",
+    estDisque: (type, id, region, titre, genre) =>
+      estCarteDuCommerce("ds", type, id, region, titre, genre),
+  },
+  "3ds": {
+    slug: "3ds",
+    wikipedia: false,
+    base: "3ds/3dstdb.xml",
+    scans: "3ds/scans",
+    // Les cartes New 3DS (identifiant en C) portent KTR-P- (Xenoblade Chronicles 3D : KTR-P-CAFP).
+    prefixeCode: (id) => (id.startsWith("C") ? "KTR-P-" : "CTR-P-"),
+    estDisque: (type, id, region, titre, genre) =>
+      estCarteDuCommerce("3ds", type, id, region, titre, genre),
   },
 };
 

@@ -9,9 +9,9 @@ select results_eq(
   'la Wii est une console de salon de 2006, importée sans liste Wikipédia'
 );
 select results_eq(
-  $$select slug from public.consoles order by ordre$$,
+  $$select slug from public.consoles where slug in ('wii', 'wii-u') order by ordre$$,
   $$values ('wii'), ('wii-u')$$,
-  'les consoles sont rangées par ordre chronologique'
+  'la Wii passe avant la Wii U (ordre chronologique)'
 );
 
 select * from finish();

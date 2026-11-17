@@ -61,6 +61,20 @@ export default async function PageAdmin() {
         <span aria-hidden="true">›</span>
       </Link>
       <Link
+        href="/admin/import?console=ds"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Import DS (GameTDB)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
+        href="/admin/import?console=3ds"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Import 3DS (GameTDB)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
         href="/admin/jaquettes"
         className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
       >

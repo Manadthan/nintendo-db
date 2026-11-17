@@ -49,3 +49,18 @@ Fabriquée par :
 ```
 node scripts/fixture-gametdb-wii.mjs <wiitdb.zip> > src/lib/import/__fixtures__/wiitdb.xml
 ```
+
+## `dstdb.xml` et `3dstdb.xml` (étape 9)
+
+| | |
+|---|---|
+| Source | https://www.gametdb.com/dstdb.zip?LANG=EN (version 20261117152530) et https://www.gametdb.com/3dstdb.zip?LANG=EN (version 20261117153429), téléchargées le 17/11/2026 |
+| Conditions | Comme la base Wii U ci-dessus |
+| Contenu | Bases **réduites comme le dépose le relais** (`reduireBasePortable`) : cartes du commerce des jeux dont au moins une carte est éditée par Nintendo (« Nintendo » ou « 任天堂 »), sans démos, bornes, logiciels, jeux Super Nintendo ou eShop ; DS : 358 cartes (114 jeux après les rééditions), 3DS : 295 cartes (118 jeux) |
+
+Fabriquées par :
+
+```
+node scripts/fixture-gametdb-portable.mjs ds <dstdb.zip> > src/lib/import/__fixtures__/dstdb.xml
+node scripts/fixture-gametdb-portable.mjs 3ds <3dstdb.zip> > src/lib/import/__fixtures__/3dstdb.xml
+```
