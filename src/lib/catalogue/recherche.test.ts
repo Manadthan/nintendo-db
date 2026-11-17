@@ -15,6 +15,7 @@ const KIRBY: JeuCatalogue = {
   id: "1",
   slug: "kirby",
   developpeur: "HAL Laboratory, Nintendo SPD",
+  genres: [],
   editeur: "Nintendo",
   sorties: {
     JAP: {
@@ -31,6 +32,7 @@ const POKKEN: JeuCatalogue = {
   id: "2",
   slug: "pokken",
   developpeur: "Bandai Namco Studios",
+  genres: [],
   sorties: {
     JAP: sortie("ポッ拳"),
     US: sortie("Pokkén Tournament"),

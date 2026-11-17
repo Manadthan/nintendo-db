@@ -8,6 +8,16 @@ import {
   trier,
 } from "@/lib/catalogue/catalogue";
 import {
+  SANS_FILTRE,
+  abonnerFiltres,
+  anneesProposees,
+  enregistrerFiltres,
+  filtrer,
+  genresProposes,
+  lireFiltres,
+  nombreActifs,
+} from "@/lib/catalogue/filtres";
+import {
   MARCHES,
   abonnerMarche,
   enregistrerMarche,
@@ -26,6 +36,7 @@ import type {
   VersionAffichee,
 } from "@/lib/catalogue/types";
 import { Disponibilite } from "./Disponibilite";
+import { FiltresActifs, PanneauFiltres } from "./Filtres";
 import { Jaquette } from "./Jaquette";
 
 type Vue = "grille" | "liste";
@@ -56,7 +67,10 @@ function enregistrerVue(vue: Vue) {
 
 type Props = { jeux: JeuCatalogue[]; consoleSlug: string; consoleNom: string };
 
-/** Catalogue d'une console (US-02) : recherche (US-05), marché (US-03), tri, grille / liste, groupes par année. */
+/**
+ * Catalogue d'une console (US-02) : recherche (US-05), marché (US-03), tri, filtres (US-06), grille / liste,
+ * groupes par année.
+ */
 export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
   const [tri, setTri] = useState<Tri>("anciens");
   // Page préparée à l'avance, identique pour tous (ADR-02) : « grille » au premier affichage,
@@ -78,10 +92,24 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
     () => "",
   );
 
-  const versions = trier(
-    jeux.filter((j) => correspond(j, recherche)),
-    tri,
-    marche,
+  // Filtres (US-06) : dans l'adresse (?dispo=, ?annee=, ?genre=), comme la recherche.
+  const filtres = useSyncExternalStore(
+    abonnerFiltres,
+    lireFiltres,
+    () => SANS_FILTRE,
+  );
+  const [panneauOuvert, setPanneauOuvert] = useState(false);
+  const actifs = nombreActifs(filtres);
+
+  // Choix proposés : ceux du marché choisi, sans tenir compte de la recherche ni des autres filtres.
+  const duMarche = trier(jeux, "anciens", marche);
+  const versions = filtrer(
+    trier(
+      jeux.filter((j) => correspond(j, recherche)),
+      tri,
+      marche,
+    ),
+    filtres,
   );
   const groupes = grouperParAnnee(versions, tri);
   const lien = (v: VersionAffichee) => `/jeux/${consoleSlug}/${v.jeu.slug}`;
@@ -156,6 +184,19 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
           <option value="recents">Plus récents</option>
           <option value="az">A → Z</option>
         </select>
+        <button
+          type="button"
+          aria-expanded={panneauOuvert}
+          aria-controls="panneau-filtres"
+          onClick={() => setPanneauOuvert(!panneauOuvert)}
+          className={`h-9 rounded-[10px] border px-3 text-[13px] font-medium ${
+            actifs
+              ? "border-accent bg-accent-doux text-accent-fonce"
+              : "border-champ bg-carte"
+          }`}
+        >
+          Filtres{actifs ? ` · ${actifs}` : ""}
+        </button>
         <div className="flex-1" />
         <div role="group" aria-label="Affichage" className="flex gap-0.5">
           {(["grille", "liste"] as const).map((v) => (
@@ -173,6 +214,14 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
           ))}
         </div>
       </div>
+      {panneauOuvert && (
+        <PanneauFiltres
+          filtres={filtres}
+          annees={anneesProposees(duMarche)}
+          genres={genresProposes(duMarche)}
+        />
+      )}
+      <FiltresActifs filtres={filtres} />
       <p className="text-[13px] text-texte-discret">
         {versions.length} jeu{versions.length > 1 ? "x" : ""} affiché
         {versions.length > 1 ? "s" : ""} sur {jeux.length}
@@ -184,8 +233,10 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
           <p className="text-[13px] text-texte-discret">
             {recherche.trim()
               ? `Rien pour « ${recherche.trim()} »`
-              : "Aucun jeu sur ce marché"}{" "}
-            : essayez un autre titre ou un autre marché.
+              : actifs
+                ? "Aucun jeu avec ces filtres"
+                : "Aucun jeu sur ce marché"}{" "}
+            : essayez un autre titre, un autre marché ou d&apos;autres filtres.
           </p>
           {recherche.trim() && (
             <button
@@ -194,6 +245,15 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
               className="h-10 rounded-[10px] bg-accent px-4 text-sm font-semibold text-inverse"
             >
               Effacer la recherche
+            </button>
+          )}
+          {actifs > 0 && (
+            <button
+              type="button"
+              onClick={() => enregistrerFiltres(SANS_FILTRE)}
+              className="h-10 rounded-[10px] border border-champ bg-carte px-4 text-sm font-semibold"
+            >
+              Effacer les filtres
             </button>
           )}
         </div>

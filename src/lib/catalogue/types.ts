@@ -27,6 +27,8 @@ export type JeuCatalogue = {
   slug: string;
   developpeur: string | null;
   editeur: string | null;
+  /** Genres (US-06), traduits à l'import ; vide si inconnus. */
+  genres: string[];
   sorties: Record<Region, SortieCatalogue>;
 };
 

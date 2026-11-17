@@ -1,0 +1,79 @@
+import { expect, test, type Page } from "@playwright/test";
+
+// US-06 — Filtrer le catalogue (docs/SPEC.md), sur les jeux de départ (migration 0004) : Mario Kart 8, Splatoon et
+// Kirby sortis dans les 3 régions, Wii Karaoke U au Japon et en Europe. Le genre, vide dans ces données, est
+// couvert par les tests unitaires (filtres.test.ts).
+
+const boutonFiltres = (page: Page) =>
+  page.getByRole("button", { name: /^Filtres/ });
+const liste = (page: Page, nom: string) =>
+  page.getByRole("combobox", { name: nom, exact: true });
+const actifs = (page: Page) =>
+  page.getByRole("list", { name: "Filtres actifs" });
+
+test("le panneau s'ouvre depuis le bouton « Filtres »", async ({ page }) => {
+  await page.goto("/");
+  await expect(boutonFiltres(page)).toHaveAttribute("aria-expanded", "false");
+  await boutonFiltres(page).click();
+  await expect(boutonFiltres(page)).toHaveAttribute("aria-expanded", "true");
+  await expect(liste(page, "Disponibilité")).toBeVisible();
+  await expect(liste(page, "Année")).toBeVisible();
+  await expect(liste(page, "Genre")).toBeVisible();
+});
+
+test("les filtres se combinent, se voient en pastilles et restent dans l'adresse", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await boutonFiltres(page).click();
+
+  await liste(page, "Disponibilité").selectOption({
+    label: "Sorti dans les 3 régions",
+  });
+  await expect(page.getByText("3 jeux affichés sur 4")).toBeVisible();
+  await expect(page.getByText("Wii Karaoke U")).toHaveCount(0);
+
+  await liste(page, "Année").selectOption("2015");
+  await expect(page.getByText("2 jeux affichés sur 4")).toBeVisible();
+  await expect(page).toHaveURL("/?dispo=toutes&annee=2015");
+  await expect(boutonFiltres(page)).toHaveText("Filtres · 2");
+  await expect(actifs(page).getByRole("button")).toHaveText([
+    "Sorti dans les 3 régions",
+    "2015",
+    "Tout effacer",
+  ]);
+
+  // Lien partagé : la vue filtrée s'ouvre telle quelle.
+  await page.goto("/?dispo=toutes&annee=2015");
+  await expect(page.getByText("2 jeux affichés sur 4")).toBeVisible();
+});
+
+test("un filtre s'efface en un tap, tous d'un coup avec « Tout effacer »", async ({
+  page,
+}) => {
+  await page.goto("/?dispo=toutes&annee=2015");
+  await actifs(page)
+    .getByRole("button", { name: "Retirer le filtre 2015", exact: true })
+    .click();
+  await expect(page.getByText("3 jeux affichés sur 4")).toBeVisible();
+  await expect(page).toHaveURL("/?dispo=toutes");
+
+  await page.goto("/?dispo=toutes&annee=2015");
+  await actifs(page)
+    .getByRole("button", { name: "Tout effacer", exact: true })
+    .click();
+  await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
+  await expect(actifs(page)).toHaveCount(0);
+  await expect(page).toHaveURL("/");
+});
+
+test("aucun résultat : message et bouton pour effacer les filtres", async ({
+  page,
+}) => {
+  await page.goto("/?dispo=jap");
+  await expect(page.getByText("Aucun jeu ne correspond")).toBeVisible();
+  await page
+    .getByRole("button", { name: "Effacer les filtres", exact: true })
+    .click();
+  await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
+});

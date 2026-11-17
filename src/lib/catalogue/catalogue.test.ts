@@ -33,6 +33,7 @@ const jeu = (
   slug,
   developpeur: null,
   editeur: "Nintendo",
+  genres: [],
   sorties: {
     JAP: sortie(`${titre} (JAP)`, jap),
     US: sortie(`${titre} (US)`, us),
