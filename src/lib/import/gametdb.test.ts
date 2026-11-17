@@ -31,7 +31,39 @@ describe("lireGameTdb — base GameTDB réelle (fixture)", () => {
       editeur: "Nintendo",
       developpeur: "Nintendo",
       date: { date: "2017-03-03", precision: "jour" },
+      genres: ["Action", "Aventure"],
     });
+  });
+
+  it("traduit les genres en français avec les traductions de la base (US-06)", () => {
+    expect(disques.find((d) => d.id === "AMKP01")?.genres).toEqual([
+      "Course",
+      "Party",
+      "Karting",
+    ]);
+  });
+
+  it("garde le nom anglais d'un genre sans traduction, et retire les doublons", () => {
+    const [disque] = lireGameTdb(`<datafile>
+      <genres><maingenre name="action"><loc lang="FR">action</loc>
+        <subgenre name="3D platformer"><loc lang="FR">plates-formes 3D</loc></subgenre></maingenre></genres>
+      <game><id>ZZZP01</id><type>WiiU</type><region>PAL</region>
+        <locale lang="EN"><title>Essai</title></locale><publisher>Nintendo</publisher>
+        <genre>3d platformer, metroidvania,Action,action</genre></game>
+    </datafile>`);
+    expect(disque?.genres).toEqual([
+      "Plates-formes 3D",
+      "Metroidvania",
+      "Action",
+    ]);
+  });
+
+  it("donne une liste vide pour un disque sans genre", () => {
+    const [disque] = lireGameTdb(`<datafile>
+      <game><id>ZZZP01</id><type>WiiU</type><region>PAL</region>
+        <locale lang="EN"><title>Essai</title></locale><publisher>Nintendo</publisher></game>
+    </datafile>`);
+    expect(disque?.genres).toEqual([]);
   });
 
   it("ne garde que les disques en boîte : ni eShop, ni boîte à code de téléchargement", () => {

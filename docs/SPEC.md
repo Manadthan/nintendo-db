@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.6 — 17/11/2026 — statut : **validée**
+> Version 1.7 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.7 | 17/11/2026 | US-06 : filtre « sorti dans la région affichée » retiré (doublon du marché) ; genres = ceux de GameTDB, **tous traduits** en français |
 > | 1.6 | 17/11/2026 | US-10 : **IGDB retiré** (#58), GameTDB donne aussi les titres japonais ; sans scan → vignette neutre |
 > | 1.5 | 17/11/2026 | US-09 : lien discret « Administration » en pied de page (demande du propriétaire) |
 > | 1.4 | 17/11/2026 | US-08 avancée, US-15 logo ; US-10 : **boîte Nintendo exigée**, sortie par région = en boîte dans la région, compilations ; jaquettes = **scans de boîtes** (GameTDB en priorité) et codes produit importés ; US-12 : page « Jaquettes » |
@@ -90,8 +91,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Aucun résultat → message clair et bouton pour effacer la recherche.
 
 #### US-06 — Filtrer le catalogue (S)
-- [ ] Filtres combinables : disponibilité (sorti dans la région affichée / dans les 3 régions / exclusif à une région),
-      année, genre.
+- [ ] Filtres combinables : disponibilité (sorti dans les 3 régions / exclusif à une région : JAP, US ou PAL),
+      année, genre. Le marché (US-03) filtre déjà sur « sorti dans cette région ».
+- [ ] Les genres sont ceux de GameTDB, **tous traduits** en français ; un jeu peut en avoir plusieurs.
 - [ ] Les filtres actifs sont visibles et effaçables en un tap.
 
 #### US-07 — Mentions et sources (M)

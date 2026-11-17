@@ -12,6 +12,8 @@ export type SourceJaquette = Database["public"]["Enums"]["jaquette_source"];
 /** Champs d'un jeu écrits par l'import (le slug, adresse stable, ne change jamais : ADR-06). */
 export type ChampsJeu = {
   developpeur: string | null;
+  /** Genres séparés par « , » (US-06), ou null si GameTDB n'en donne pas. */
+  genre: string | null;
   wikipedia_url: string | null;
   physique: boolean;
 };
@@ -34,7 +36,7 @@ export type JeuImporte = {
 
 /**
  * Assemble un jeu : Wikipédia (titres NA/PAL, dates, éditeurs, développeur ; régions déjà réduites aux boîtes par
- * GameTDB) + GameTDB (titre japonais et sa romanisation, code produit imprimé sur la boîte).
+ * GameTDB) + GameTDB (titre japonais et sa romanisation, code produit imprimé sur la boîte, genres).
  */
 export function construireJeu(wiki: JeuAImporter): JeuImporte {
   const titreAnglais = wiki.titres.PAL || wiki.titres.US;
@@ -76,6 +78,7 @@ export function construireJeu(wiki: JeuAImporter): JeuImporte {
     game: {
       slug: wiki.slug,
       developpeur: wiki.developpeur,
+      genre: wiki.genres.length ? wiki.genres.join(", ") : null,
       wikipedia_url: wiki.wikipediaUrl,
       physique: true,
     },
@@ -136,8 +139,8 @@ export function fusionner(
   nouveau: JeuImporte,
 ): Fusion {
   const ecarts: string[] = [];
-  const { developpeur, wikipedia_url, physique } = nouveau.game;
-  const champsJeu: ChampsJeu = { developpeur, wikipedia_url, physique };
+  const { developpeur, genre, wikipedia_url, physique } = nouveau.game;
+  const champsJeu: ChampsJeu = { developpeur, genre, wikipedia_url, physique };
   const game = garderVerrous(
     champsJeu,
     existant ?? undefined,

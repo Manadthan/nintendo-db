@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 0.9 — 17/11/2026 — statut : **validée**
+> Version 1.0 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.0 | 17/11/2026 | **Genres** lus dans GameTDB (48 jeux sur 48), traduits en français, gardés dans `games.genre` (US-06) |
 > | 0.9 | 17/11/2026 | Routes de correction sous `/admin` (protégées par le proxy) : `/admin/jeux`, `/admin/jaquettes` (#42 à #45) |
 > | 0.8 | 17/11/2026 | **IGDB retiré** (#58) : GameTDB donne aussi les titres japonais ; plus de rapprochement ni de secrets Twitch |
 > | 0.7 | 17/11/2026 | **Relais GameTDB** (#53) : GameTDB refuse les serveurs de Vercel ; une tâche GitHub dépose base et scans dans un bucket privé |
@@ -86,6 +87,9 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
    pas la 4ᵉ lettre : un disque PAL peut finir en D, F…). Titre japonais : locale JA du disque japonais ; sa
    forme romanisée (ou anglaise) : son titre EN. Compilations en boîte absentes de la liste Wikipédia
    (NES Remix Pack / Famicom Remix 1 + 2, New Super Mario Bros. U + New Super Luigi U) : fiches propres.
+   **Genres** (US-06) : champ `genre` de GameTDB (« action,3d platformer »), réunis sur les disques du jeu,
+   traduits par une table (`src/lib/import/genres.ts` ; un genre inconnu garde son nom anglais) et écrits dans
+   `games.genre` séparés par « , » (pas de migration). Verrouillable comme les autres champs.
 3. **Aperçu** (n'écrit rien) : jeux retenus, ajoutés / modifiés / ignorés avec la raison. Puis enregistrement **par lots de 10** piloté par le
    navigateur, jaquettes comprises (même principe que l'ADR-03 de `mon-site-sdlc`, évite les délais Vercel).
 4. **Verrous** : tout champ modifié à la main est verrouillé ; l'import ne le remplace jamais et signale l'écart.

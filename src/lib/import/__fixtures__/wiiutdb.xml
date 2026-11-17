@@ -1,10 +1,342 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datafile xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="wiiutdb.xsd">
-	<WiiUTDB version="20261117040958" filter="EN" games="2860"/>
+	<WiiUTDB version="20261117145358" filter="EN" games="2860"/>
 	<!--
  GameTDB: WiiU, Database started in 2012 (https://www.gametdb.com)
  Never modify this file manually, it will get overwritten when you update. You can add games and fixes on the website.
 	-->
+	<genres>
+		<maingenre name="theme">
+			<loc lang="FR">th&#xe8;me</loc>
+			<subgenre name="fantasy">
+				<loc lang="FR">fantasy</loc>
+			</subgenre>
+			<subgenre name="historic">
+				<loc lang="FR">historique</loc>
+			</subgenre>
+			<subgenre name="horror">
+				<loc lang="FR">horreur</loc>
+			</subgenre>
+			<subgenre name="modern day">
+				<loc lang="FR">contemporain</loc>
+			</subgenre>
+			<subgenre name="sci-fi">
+				<loc lang="FR">science-fiction</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="general">
+			<loc lang="FR">g&#xe9;n&#xe9;ral</loc>
+			<subgenre name="arcade">
+				<loc lang="FR">arcade</loc>
+			</subgenre>
+			<subgenre name="party">
+				<loc lang="FR">party</loc>
+			</subgenre>
+			<subgenre name="puzzle">
+				<loc lang="FR">r&#xe9;flexion</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="action">
+			<loc lang="FR">action</loc>
+			<subgenre name="platformer">
+				<loc lang="FR">plates-formes</loc>
+			</subgenre>
+			<subgenre name="2D platformer">
+				<loc lang="FR">plates-formes 2D</loc>
+			</subgenre>
+			<subgenre name="3D platformer">
+				<loc lang="FR">plates-formes 3D</loc>
+			</subgenre>
+			<subgenre name="shooter">
+				<loc lang="FR">tir</loc>
+			</subgenre>
+			<subgenre name="first-person shooter">
+				<loc lang="FR">tir &#xe0; la premi&#xe8;re personne</loc>
+			</subgenre>
+			<subgenre name="third-person shooter">
+				<loc lang="FR">tir &#xe0; la troisi&#xe8;me personne</loc>
+			</subgenre>
+			<subgenre name="rail shooter">
+				<loc lang="FR">tir sur rails</loc>
+			</subgenre>
+			<subgenre name="run and gun">
+				<loc lang="FR">run and gun</loc>
+			</subgenre>
+			<subgenre name="shoot &apos;em up">
+				<loc lang="FR">shoot &apos;em up</loc>
+			</subgenre>
+			<subgenre name="stealth action">
+				<loc lang="FR">infiltration</loc>
+			</subgenre>
+			<subgenre name="survival horror">
+				<loc lang="FR">survival horror</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="sports">
+			<loc lang="FR">sport</loc>
+			<subgenre name="baseball">
+				<loc lang="FR">baseball</loc>
+			</subgenre>
+			<subgenre name="basketball">
+				<loc lang="FR">basketball</loc>
+			</subgenre>
+			<subgenre name="billiards">
+				<loc lang="FR">billard</loc>
+			</subgenre>
+			<subgenre name="bowling">
+				<loc lang="FR">bowling</loc>
+			</subgenre>
+			<subgenre name="boxing">
+				<loc lang="FR">boxe</loc>
+			</subgenre>
+			<subgenre name="cricket">
+				<loc lang="FR">cricket</loc>
+			</subgenre>
+			<subgenre name="soccer">
+				<loc lang="FR">football</loc>
+			</subgenre>
+			<subgenre name="football">
+				<loc lang="FR">football am&#xe9;ricain</loc>
+			</subgenre>
+			<subgenre name="rugby">
+				<loc lang="FR">rugby</loc>
+			</subgenre>
+			<subgenre name="golf">
+				<loc lang="FR">golf</loc>
+			</subgenre>
+			<subgenre name="hockey">
+				<loc lang="FR">hockey</loc>
+			</subgenre>
+			<subgenre name="martial arts">
+				<loc lang="FR">arts martiaux</loc>
+			</subgenre>
+			<subgenre name="p&#xe9;tanque">
+				<loc lang="FR">p&#xe9;tanque</loc>
+			</subgenre>
+			<subgenre name="skateboarding">
+				<loc lang="FR">skate</loc>
+			</subgenre>
+			<subgenre name="ski">
+				<loc lang="FR">ski</loc>
+			</subgenre>
+			<subgenre name="snowboarding">
+				<loc lang="FR">snowboard</loc>
+			</subgenre>
+			<subgenre name="surfing">
+				<loc lang="FR">surf</loc>
+			</subgenre>
+			<subgenre name="table tennis">
+				<loc lang="FR">tennis de table</loc>
+			</subgenre>
+			<subgenre name="tennis">
+				<loc lang="FR">tennis</loc>
+			</subgenre>
+			<subgenre name="volleyball">
+				<loc lang="FR">volleyball</loc>
+			</subgenre>
+			<subgenre name="wrestling">
+				<loc lang="FR">catch</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="adventure">
+			<loc lang="FR">aventure</loc>
+			<subgenre name="hidden object">
+				<loc lang="FR">objet cach&#xe9;</loc>
+			</subgenre>
+			<subgenre name="interactive fiction">
+				<loc lang="FR">fiction interactive</loc>
+			</subgenre>
+			<subgenre name="interactive movie">
+				<loc lang="FR">film interactif</loc>
+			</subgenre>
+			<subgenre name="point-and-click">
+				<loc lang="FR">point-and-click</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="music">
+			<loc lang="FR">musique</loc>
+			<subgenre name="dance">
+				<loc lang="FR">danse</loc>
+			</subgenre>
+			<subgenre name="karaoke">
+				<loc lang="FR">karaok&#xe9;</loc>
+			</subgenre>
+			<subgenre name="rhythm">
+				<loc lang="FR">rythme</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="racing">
+			<loc lang="FR">course</loc>
+			<subgenre name="bike racing">
+				<loc lang="FR">course de v&#xe9;los</loc>
+			</subgenre>
+			<subgenre name="futuristic racing">
+				<loc lang="FR">course futuriste</loc>
+			</subgenre>
+			<subgenre name="kart racing">
+				<loc lang="FR">karting</loc>
+			</subgenre>
+			<subgenre name="motorcycle racing">
+				<loc lang="FR">course de motos</loc>
+			</subgenre>
+			<subgenre name="off-road racing">
+				<loc lang="FR">rally</loc>
+			</subgenre>
+			<subgenre name="sim racing">
+				<loc lang="FR">simulation de conduite</loc>
+			</subgenre>
+			<subgenre name="truck racing">
+				<loc lang="FR">course de camions</loc>
+			</subgenre>
+			<subgenre name="watercraft racing">
+				<loc lang="FR">course aquatique</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="fighting">
+			<loc lang="FR">combat</loc>
+			<subgenre name="2D fighting">
+				<loc lang="FR">combat 2D</loc>
+			</subgenre>
+			<subgenre name="3D fighting">
+				<loc lang="FR">combat 3D</loc>
+			</subgenre>
+			<subgenre name="beat &apos;em up">
+				<loc lang="FR">beat &apos;em up</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="simulation">
+			<loc lang="FR">simulation</loc>
+			<subgenre name="cooking">
+				<loc lang="FR">cuisine</loc>
+			</subgenre>
+			<subgenre name="fishing">
+				<loc lang="FR">p&#xea;che</loc>
+			</subgenre>
+			<subgenre name="hunting">
+				<loc lang="FR">chasse</loc>
+			</subgenre>
+			<subgenre name="business simulation">
+				<loc lang="FR">simulation d&apos;entreprise</loc>
+			</subgenre>
+			<subgenre name="construction simulation">
+				<loc lang="FR">simulation de construction</loc>
+			</subgenre>
+			<subgenre name="flight simulation">
+				<loc lang="FR">simulation de vol</loc>
+			</subgenre>
+			<subgenre name="life simulation">
+				<loc lang="FR">simulation de vie</loc>
+			</subgenre>
+			<subgenre name="management simulation">
+				<loc lang="FR">simulation de gestion</loc>
+			</subgenre>
+			<subgenre name="train simulation">
+				<loc lang="FR">simulation ferroviaire</loc>
+			</subgenre>
+			<subgenre name="virtual pet">
+				<loc lang="FR">animal virtuel</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="role-playing">
+			<loc lang="FR">jeu de r&#xf4;le</loc>
+			<subgenre name="action RPG">
+				<loc lang="FR">action RPG</loc>
+			</subgenre>
+			<subgenre name="strategy RPG">
+				<loc lang="FR">strategy RPG</loc>
+			</subgenre>
+			<subgenre name="tactical RPG">
+				<loc lang="FR">tactical RPG</loc>
+			</subgenre>
+			<subgenre name="MMORPG">
+				<loc lang="FR">MMORPG</loc>
+			</subgenre>
+			<subgenre name="roguelike">
+				<loc lang="FR">roguelike</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="strategy">
+			<loc lang="FR">strat&#xe9;gie</loc>
+			<subgenre name="4X">
+				<loc lang="FR">4X</loc>
+			</subgenre>
+			<subgenre name="real-time strategy">
+				<loc lang="FR">strat&#xe9;gie temps r&#xe9;el</loc>
+			</subgenre>
+			<subgenre name="turn-based strategy">
+				<loc lang="FR">strat&#xe9;gie tour par tour</loc>
+			</subgenre>
+			<subgenre name="tower defense">
+				<loc lang="FR">tower defense</loc>
+			</subgenre>
+			<subgenre name="wargame">
+				<loc lang="FR">wargame</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="traditional">
+			<loc lang="FR">traditionnel</loc>
+			<subgenre name="board game">
+				<loc lang="FR">jeu de soci&#xe9;t&#xe9;</loc>
+			</subgenre>
+			<subgenre name="cards">
+				<loc lang="FR">cartes</loc>
+			</subgenre>
+			<subgenre name="chess">
+				<loc lang="FR">&#xe9;checs</loc>
+			</subgenre>
+			<subgenre name="darts">
+				<loc lang="FR">fl&#xe9;chettes</loc>
+			</subgenre>
+			<subgenre name="pinball">
+				<loc lang="FR">flipper</loc>
+			</subgenre>
+			<subgenre name="poker">
+				<loc lang="FR">poker</loc>
+			</subgenre>
+			<subgenre name="trivia">
+				<loc lang="FR">quizz</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="health">
+			<loc lang="FR">sant&#xe9;</loc>
+			<subgenre name="coaching">
+				<loc lang="FR">coaching</loc>
+			</subgenre>
+			<subgenre name="exercise">
+				<loc lang="FR">exercice</loc>
+			</subgenre>
+			<subgenre name="fitness">
+				<loc lang="FR">gymnastique</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="others">
+			<loc lang="FR">autres</loc>
+			<subgenre name="educational">
+				<loc lang="FR">&#xe9;ducatif</loc>
+			</subgenre>
+			<subgenre name="drawing">
+				<loc lang="FR">dessin</loc>
+			</subgenre>
+			<subgenre name="compilation">
+				<loc lang="FR">compilation</loc>
+			</subgenre>
+			<subgenre name="demo">
+				<loc lang="FR">d&#xe9;mo</loc>
+			</subgenre>
+			<subgenre name="sampler">
+				<loc lang="FR">d&#xe9;mos</loc>
+			</subgenre>
+			<subgenre name="multimedia">
+				<loc lang="FR">multim&#xe9;dia</loc>
+			</subgenre>
+			<subgenre name="emulator">
+				<loc lang="FR">&#xe9;mulateur</loc>
+			</subgenre>
+			<subgenre name="software">
+				<loc lang="FR">logiciel</loc>
+			</subgenre>
+		</maingenre>
+	</genres>
 	<game name="Bayonetta (Europe) (EN,FR,DE,ES,IT)">
 		<id>AAFD01</id>
 		<type>WiiU</type>
@@ -24,6 +356,7 @@
 		<developer>Platinum Games Inc.</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="10" day="24"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Bayonetta (USA) (EN)">
 		<id>AAFE01</id>
@@ -35,6 +368,7 @@
 		<developer>Platinum Games Inc.</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="10" day="24"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Bayonetta (Japan) (JA)">
 		<id>AAFJ01</id>
@@ -49,6 +383,7 @@
 		<developer>Platinum Games Inc.</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="9" day="20"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Animal Crossing: Amiibo Festival (USA) (EN)">
 		<id>AALE01</id>
@@ -78,6 +413,7 @@
 		<developer>Nd Cube</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="11" day="13"/>
+		<genre>party</genre>
 	</game>
 	<game name="Doubutsu no Mori: Amiibo Festival (Japan) (JA)">
 		<id>AALJ01</id>
@@ -110,6 +446,7 @@
 		<developer>Nd Cube</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="11" day="21"/>
+		<genre>party</genre>
 	</game>
 	<game name="Animal Crossing: Amiibo Festival (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>AALP01</id>
@@ -139,6 +476,7 @@
 		<developer>Nd Cube</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="11" day="20"/>
+		<genre>party,board game</genre>
 	</game>
 	<game name="Mario Party 10 (USA) (EN)">
 		<id>ABAE01</id>
@@ -168,6 +506,7 @@
 		<developer>Nintendo, Nd Cube</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="3" day="20"/>
+		<genre>party</genre>
 	</game>
 	<game name="Mario Party 10 (Japan) (JA)">
 		<id>ABAJ01</id>
@@ -200,6 +539,7 @@
 		<developer>Nintendo, Nd Cube</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="3" day="12"/>
+		<genre>party</genre>
 	</game>
 	<game name="Mario Party 10 (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>ABAP01</id>
@@ -229,6 +569,7 @@
 		<developer>Nintendo, Nd Cube</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="3" day="20"/>
+		<genre>party,board game</genre>
 	</game>
 	<game name="Mario &amp; Sonic at the Rio 2016 Olympic Games (USA) (EN)">
 		<id>ABJE01</id>
@@ -258,6 +599,7 @@
 		<developer>SEGA</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="6" day="24"/>
+		<genre>sports</genre>
 	</game>
 	<game name="Mario &amp; Sonic at Rio Olympic (Japan) (JA)">
 		<id>ABJJ01</id>
@@ -290,6 +632,7 @@
 		<developer>SEGA</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="6" day="23"/>
+		<genre>sports</genre>
 	</game>
 	<game name="Mario &amp; Sonic at the Rio 2016 Olympic Games (Europe) (EN,FR,DE,ES,IT,NL)">
 		<id>ABJP01</id>
@@ -319,6 +662,7 @@
 		<developer>SEGA</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="6" day="24"/>
+		<genre>sports</genre>
 	</game>
 	<game name="Pikmin 3 (USA) (EN)">
 		<id>AC3E01</id>
@@ -348,6 +692,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="8" day="4"/>
+		<genre>strategy</genre>
 	</game>
 	<game name="Pikmin 3 (Japan) (EN,JA)">
 		<id>AC3J01</id>
@@ -380,6 +725,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="7" day="13"/>
+		<genre>strategy</genre>
 	</game>
 	<game name="Pikmin 3 (Europe) (EN,FR,DE,ES,IT)">
 		<id>AC3P01</id>
@@ -409,6 +755,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="7" day="26"/>
+		<genre>strategy</genre>
 	</game>
 	<game name="The Wonderful 101 (USA) (EN)">
 		<id>ACME01</id>
@@ -438,6 +785,7 @@
 		<developer>PlatinumGames</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="9" day="15"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="The Wonderful 101 (Japan) (EN,JA)">
 		<id>ACMJ01</id>
@@ -470,6 +818,7 @@
 		<developer>Platinum Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="8" day="24"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="The Wonderful 101 (Europe) (EN,FR,DE,ES,IT)">
 		<id>ACMP01</id>
@@ -499,6 +848,7 @@
 		<developer>PlatinumGames</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="8" day="23"/>
+		<genre>action,adventure,fighting</genre>
 	</game>
 	<game name="Devil&apos;s Third (USA) (EN)">
 		<id>ADNE01</id>
@@ -528,6 +878,7 @@
 		<developer>Valhalla Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="12" day="11"/>
+		<genre>action,first-person shooter</genre>
 	</game>
 	<game name="Devil&apos;s Third (Japan) (JA)">
 		<id>ADNJ01</id>
@@ -560,6 +911,7 @@
 		<developer>Valhalla Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="8" day="4"/>
+		<genre>action,third-person shooter</genre>
 	</game>
 	<game name="Devil&apos;s Third (Europe) (EN,FR,DE,ES)">
 		<id>ADNP01</id>
@@ -589,6 +941,7 @@
 		<developer>Valhalla Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="8" day="28"/>
+		<genre>action,first-person shooter</genre>
 	</game>
 	<game name="NES Remix Pack (USA) (EN)">
 		<id>AFDE01</id>
@@ -600,6 +953,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="12" day="5"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Famicom Remix 1 + 2 (Japan) (JA)">
 		<id>AFDJ01</id>
@@ -614,6 +968,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="4" day="24"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Star Fox Zero (USA) (EN)">
 		<id>AFXE01</id>
@@ -643,6 +998,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="4" day="22"/>
+		<genre>action,first-person shooter</genre>
 	</game>
 	<game name="Star Fox Zero (Japan) (JA)">
 		<id>AFXJ01</id>
@@ -675,6 +1031,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="4" day="21"/>
+		<genre>action,first-person shooter</genre>
 	</game>
 	<game name="Star Fox Zero (Europe) (EN,FR,DE,ES,IT)">
 		<id>AFXP01</id>
@@ -704,6 +1061,7 @@
 		<developer>Platinum Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="4" day="22"/>
+		<genre>action,first-person shooter</genre>
 	</game>
 	<game name="Splatoon (USA) (EN,FR,ES)">
 		<id>AGME01</id>
@@ -733,6 +1091,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="5" day="29"/>
+		<genre>action,third-person shooter</genre>
 	</game>
 	<game name="Splatoon (Japan) (JA)">
 		<id>AGMJ01</id>
@@ -765,6 +1124,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="5" day="28"/>
+		<genre>action,third-person shooter</genre>
 	</game>
 	<game name="Splatoon (Europe) (EN,FR,DE,ES,IT)">
 		<id>AGMP01</id>
@@ -794,6 +1154,7 @@
 		<developer>Nintendo EAD</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="5" day="29"/>
+		<genre>action,shooter,third-person shooter</genre>
 	</game>
 	<game name="Just Dance Wii U (Japan) (JA)">
 		<id>AJ5J01</id>
@@ -808,6 +1169,7 @@
 		<developer>Ubisoft</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="4" day="3"/>
+		<genre>action,music,3d platformer,dance,rhythm</genre>
 	</game>
 	<game name="Captain Toad: Treasure Tracker (USA) (EN)">
 		<id>AKBE01</id>
@@ -837,6 +1199,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="12" day="5"/>
+		<genre>action,puzzle,platformer</genre>
 	</game>
 	<game name="Susume! Kinopio Taichou (Japan) (JA)">
 		<id>AKBJ01</id>
@@ -869,6 +1232,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="11" day="13"/>
+		<genre>action,puzzle,platformer</genre>
 	</game>
 	<game name="Captain Toad: Treasure Tracker (Europe) (EN,FR,DE,ES,IT)">
 		<id>AKBP01</id>
@@ -898,6 +1262,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="1" day="2"/>
+		<genre>action,puzzle,platformer</genre>
 	</game>
 	<game name="Zero: Nuregarasu no Miko (Japan) (JA)">
 		<id>AL5J01</id>
@@ -930,6 +1295,7 @@
 		<developer>Koei Tecmo Holdings, Nintendo Software Planning and Development</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="9" day="27"/>
+		<genre>action,adventure,horror,survival horror</genre>
 	</game>
 	<game name="Project Zero: Maiden of Black Water (Europe) (EN,FR,DE)">
 		<id>AL5P01</id>
@@ -959,6 +1325,7 @@
 		<developer>Koei Tecmo Holdings, Nintendo Software Planning and Development</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="10" day="30"/>
+		<genre>adventure,horror</genre>
 	</game>
 	<game name="Nintendo Land (USA) (EN)">
 		<id>ALCE01</id>
@@ -988,6 +1355,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2012" month="11" day="18"/>
+		<genre>party</genre>
 	</game>
 	<game name="Nintendo Land (Japan) (JA)">
 		<id>ALCJ01</id>
@@ -1020,6 +1388,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2012" month="12" day="8"/>
+		<genre>party</genre>
 	</game>
 	<game name="Nintendo Land (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>ALCP01</id>
@@ -1049,6 +1418,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2012" month="11" day="30"/>
+		<genre>party</genre>
 	</game>
 	<game name="The Legend of Zelda: Breath of the Wild (USA) (EN)">
 		<id>ALZE01</id>
@@ -1078,6 +1448,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2017" month="3" day="3"/>
+		<genre>action,adventure,role-playing</genre>
 	</game>
 	<game name="Zelda no Densetsu: Breath of the Wild (Japan) (JA)">
 		<id>ALZJ01</id>
@@ -1110,6 +1481,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2017" month="3" day="3"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="The Legend of Zelda: Breath of the Wild (Europe) (EN,FR,DE,ES,IT,NL,RU)">
 		<id>ALZP01</id>
@@ -1139,6 +1511,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2017" month="3" day="3"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Super Mario Maker (USA) (EN)">
 		<id>AMAE01</id>
@@ -1168,6 +1541,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="9" day="11"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="Super Mario Maker (Japan) (JA)">
 		<id>AMAJ01</id>
@@ -1200,6 +1574,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="9" day="10"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="Super Mario Maker (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>AMAP01</id>
@@ -1229,6 +1604,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="9" day="11"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="Mario Kart 8 (USA) (EN)">
 		<id>AMKE01</id>
@@ -1258,6 +1634,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="5" day="30"/>
+		<genre>racing</genre>
 	</game>
 	<game name="Mario Kart 8 (Japan) (JA)">
 		<id>AMKJ01</id>
@@ -1290,6 +1667,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="5" day="29"/>
+		<genre>racing</genre>
 	</game>
 	<game name="Mario Kart 8 (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>AMKP01</id>
@@ -1319,6 +1697,7 @@
 		<developer>Nintendo EAD</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="5" day="30"/>
+		<genre>racing,party,kart racing</genre>
 	</game>
 	<game name="Ninja Gaiden 3: Razor&apos;s Edge (USA) (EN,JA)">
 		<id>ANGE01</id>
@@ -1345,6 +1724,7 @@
 		<developer>TEAM NINJA / KOEI TECMO</developer>
 		<publisher>Koei</publisher>
 		<date year="2012" month="12" day="10"/>
+		<genre>action</genre>
 	</game>
 	<game name="Ninja Gaiden 3: Razor&apos;s Edge (Europe) (EN,JA)">
 		<id>ANGP01</id>
@@ -1371,6 +1751,7 @@
 		<developer>TEAM NINJA / KOEI TECMO</developer>
 		<publisher>Koei</publisher>
 		<date year="2012" month="12" day="10"/>
+		<genre>action</genre>
 	</game>
 	<game name="Wii Party U (USA) (EN,FR,ES)">
 		<id>ANXE01</id>
@@ -1400,6 +1781,7 @@
 		<developer>Nd Cube, Nintendo SPD Group No.4</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="10" day="25"/>
+		<genre>party</genre>
 	</game>
 	<game name="Wii Party U (Japan) (EN,JA)">
 		<id>ANXJ01</id>
@@ -1432,6 +1814,7 @@
 		<developer>Nd Cube, Nintendo SPD Group No.4</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="10" day="31"/>
+		<genre>party</genre>
 	</game>
 	<game name="Wii Party U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>ANXP01</id>
@@ -1461,6 +1844,7 @@
 		<developer>Nd Cube, Nintendo SPD Group No.4</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="10" day="25"/>
+		<genre>party</genre>
 	</game>
 	<game name="Pokken Tournament (USA) (EN)">
 		<id>APKE01</id>
@@ -1472,6 +1856,7 @@
 		<developer>The Pok&#xe9;mon Company / Bandai Namco Entertainment</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="3" day="18"/>
+		<genre>fighting,arcade</genre>
 	</game>
 	<game name="Pokken: Pokken Tournament (Japan) (JA)">
 		<id>APKJ2P</id>
@@ -1486,6 +1871,7 @@
 		<developer>The Pok&#xe9;mon Company / Bandai Namco Entertainment</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="3" day="18"/>
+		<genre>fighting,arcade</genre>
 	</game>
 	<game name="Pokken Tournament (Europe) (EN,FR,DE,ES,IT)">
 		<id>APKP01</id>
@@ -1503,6 +1889,7 @@
 		<developer>The Pok&#xe9;mon Company / Bandai Namco Entertainment</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="3" day="18"/>
+		<genre>fighting,arcade</genre>
 	</game>
 	<game name="LEGO City Undercover (USA) (EN)">
 		<id>APLE01</id>
@@ -1532,6 +1919,7 @@
 		<developer>TT Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="3" day="18"/>
+		<genre>action,adventure,3d platformer</genre>
 	</game>
 	<game name="LEGO City Undercover (Japan) (JA)">
 		<id>APLJ01</id>
@@ -1564,6 +1952,7 @@
 		<developer>TT Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="7" day="25"/>
+		<genre>action,adventure,3d platformer</genre>
 	</game>
 	<game name="LEGO City Undercover (Europe) (EN,FR,DE,ES,IT,NL,PT,DK,RU)">
 		<id>APLP01</id>
@@ -1593,6 +1982,7 @@
 		<developer>TT Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="1" day="1"/>
+		<genre>action,adventure,3d platformer</genre>
 	</game>
 	<game name="Bayonetta 2 (USA) (EN)">
 		<id>AQUE01</id>
@@ -1622,6 +2012,7 @@
 		<developer>Platinum Games Inc.</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="10" day="24"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Bayonetta 2 (Japan) (JA)">
 		<id>AQUJ01</id>
@@ -1654,6 +2045,7 @@
 		<developer>Platinum Games Inc.</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="9" day="20"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Bayonetta 2 (Europe) (EN,FR,DE,ES,IT)">
 		<id>AQUP01</id>
@@ -1683,6 +2075,7 @@
 		<developer>Platinum Games Inc.</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="10" day="24"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Super Mario 3D World (USA) (EN)">
 		<id>ARDE01</id>
@@ -1712,6 +2105,7 @@
 		<developer>Nintendo EAD Tokyo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="11" day="22"/>
+		<genre>action,platformer,3d platformer</genre>
 	</game>
 	<game name="Super Mario 3D World (Japan) (EN,JA)">
 		<id>ARDJ01</id>
@@ -1744,6 +2138,7 @@
 		<developer>Nintendo EAD Tokyo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="11" day="21"/>
+		<genre>action,platformer,3d platformer</genre>
 	</game>
 	<game name="Super Mario 3D World (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>ARDP01</id>
@@ -1776,6 +2171,7 @@
 		<developer>Nintendo EAD Tokyo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="11" day="29"/>
+		<genre>action,platformer,3d platformer</genre>
 	</game>
 	<game name="Donkey Kong Country: Tropical Freeze (USA) (EN)">
 		<id>ARKE01</id>
@@ -1805,6 +2201,7 @@
 		<developer>Retro Studios / Monster Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="2" day="21"/>
+		<genre>action,platformer,2d platformer</genre>
 	</game>
 	<game name="Donkey Kong: Tropical Freeze (Japan) (JA)">
 		<id>ARKJ01</id>
@@ -1837,6 +2234,7 @@
 		<developer>Retro Studios / Monster Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="2" day="13"/>
+		<genre>action,platformer,2d platformer</genre>
 	</game>
 	<game name="Donkey Kong Country: Tropical Freeze (Europe) (EN,FR,DE,ES,IT)">
 		<id>ARKP01</id>
@@ -1866,6 +2264,7 @@
 		<developer>Retro Studios / Monster Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="2" day="21"/>
+		<genre>action,platformer,2d platformer</genre>
 	</game>
 	<game name="Rayman Legends (Japan) (EN,FR,DE,ES,IT,NL,JA)">
 		<id>ARMJ01</id>
@@ -1898,6 +2297,7 @@
 		<developer>Ubisoft Montpellier</developer>
 		<publisher>Ubi Soft Entertainment</publisher>
 		<date year="2013" month="10" day="17"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="New Super Mario Bros. U (USA) (EN)">
 		<id>ARPE01</id>
@@ -1912,6 +2312,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2012" month="11" day="18"/>
+		<genre>action,2d platformer</genre>
 	</game>
 	<game name="New Super Mario Bros. U (Japan) (EN,JA)">
 		<id>ARPJ01</id>
@@ -1929,6 +2330,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2012" month="12" day="8"/>
+		<genre>action,2d platformer</genre>
 	</game>
 	<game name="New Super Mario Bros. U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>ARPP01</id>
@@ -1949,6 +2351,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2012" month="11" day="30"/>
+		<genre>action,2d platformer</genre>
 	</game>
 	<game name="New Super Luigi U (USA) (EN)">
 		<id>ARSE01</id>
@@ -1978,6 +2381,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="6" day="20"/>
+		<genre>action,adventure,2d platformer</genre>
 	</game>
 	<game name="New Super Luigi U (Japan) (EN,JA)">
 		<id>ARSJ01</id>
@@ -2010,6 +2414,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="7" day="13"/>
+		<genre>action,adventure,2d platformer</genre>
 	</game>
 	<game name="New Super Luigi U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>ARSP01</id>
@@ -2039,6 +2444,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="6" day="20"/>
+		<genre>action,adventure,2d platformer</genre>
 	</game>
 	<game name="Game &amp; Wario (USA) (EN)">
 		<id>ASAE01</id>
@@ -2068,6 +2474,7 @@
 		<developer>Nintendo/Intelligent Systems</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="6" day="23"/>
+		<genre>party</genre>
 	</game>
 	<game name="Game &amp; Wario (Japan) (EN,JA)">
 		<id>ASAJ01</id>
@@ -2100,6 +2507,7 @@
 		<developer>Nintendo/Intelligent Systems</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="3" day="28"/>
+		<genre>party</genre>
 	</game>
 	<game name="Game &amp; Wario (Europe) (EN,FR,DE,ES,IT)">
 		<id>ASAP01</id>
@@ -2129,6 +2537,7 @@
 		<developer>Nintendo / INTELLIGENT SYSTEMS</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="6" day="28"/>
+		<genre>party</genre>
 	</game>
 	<game name="Scribblenauts Unlimited (Europe) (EN,FR,DE,ES,IT,NL)">
 		<id>ASCP01</id>
@@ -2158,6 +2567,7 @@
 		<developer>5TH Cell</developer>
 		<publisher>Warner Bros. Interactive Entertainment Inc.</publisher>
 		<date year="2013" month="12" day="6"/>
+		<genre>action,puzzle,platformer</genre>
 	</game>
 	<game name="Tokyo Mirage Sessions FE (USA) (EN)">
 		<id>ASEE01</id>
@@ -2187,6 +2597,7 @@
 		<developer>Atlus</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="6" day="24"/>
+		<genre>role-playing</genre>
 	</game>
 	<game name="Gen&apos;ei Ibunroku FE (Japan) (JA)">
 		<id>ASEJ01</id>
@@ -2219,6 +2630,7 @@
 		<developer>Intelligent Systems, Atlus</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="12" day="26"/>
+		<genre>role-playing</genre>
 	</game>
 	<game name="Tokyo Mirage Sessions FE (Europe) (EN)">
 		<id>ASEP01</id>
@@ -2248,6 +2660,7 @@
 		<developer>Atlus</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="6" day="24"/>
+		<genre>role-playing</genre>
 	</game>
 	<game name="Wii Fit U (USA) (EN,FR,ES,JA)">
 		<id>ASTE01</id>
@@ -2277,6 +2690,7 @@
 		<developer>Nintendo Japan</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="12" day="13"/>
+		<genre>health,coaching,exercise,fitness</genre>
 	</game>
 	<game name="Wii Fit U (Japan) (JA)">
 		<id>ASTJ01</id>
@@ -2309,6 +2723,7 @@
 		<developer>Nintendo Japan</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="2" day="1"/>
+		<genre>health,coaching,exercise,fitness</genre>
 	</game>
 	<game name="Wii Fit U (Europe) (EN,FR,DE,ES,IT,JA)">
 		<id>ASTP01</id>
@@ -2338,6 +2753,7 @@
 		<developer>Nintendo Japan</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="12" day="13"/>
+		<genre>health,coaching,exercise,fitness</genre>
 	</game>
 	<game name="Sing Party (USA) (EN)">
 		<id>ASWE01</id>
@@ -2367,6 +2783,7 @@
 		<developer>FreeStyleGames</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2012" month="12" day="10"/>
+		<genre>music,karaoke</genre>
 	</game>
 	<game name="Sing Party (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>ASWP01</id>
@@ -2396,6 +2813,7 @@
 		<developer>FreeStyleGames</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="1" day="18"/>
+		<genre>music,party,karaoke</genre>
 	</game>
 	<game name="New Super Mario Bros. U + New Super Luigi U (USA) (EN)">
 		<id>ATWE01</id>
@@ -2425,6 +2843,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="10" day="16"/>
+		<genre>action,adventure,3d platformer</genre>
 	</game>
 	<game name="New Super Mario Bros. U + New Super Luigi U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>ATWP01</id>
@@ -2454,6 +2873,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="1" day="1"/>
+		<genre>action,adventure,3d platformer</genre>
 	</game>
 	<game name="Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games (USA) (EN,JA)">
 		<id>AURE01</id>
@@ -2483,6 +2903,7 @@
 		<developer>Nintendo / SEGA</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="12" day="15"/>
+		<genre>sports</genre>
 	</game>
 	<game name="Mario &amp; Sonic at the Sochi Olympic (Japan) (JA)">
 		<id>AURJ01</id>
@@ -2515,6 +2936,7 @@
 		<developer>Nintendo / SEGA</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="12" day="5"/>
+		<genre>sports</genre>
 	</game>
 	<game name="Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games (Europe) (EN,FR,DE,ES,IT,NL,JA,RU)">
 		<id>AURP01</id>
@@ -2547,6 +2969,7 @@
 		<developer>Nintendo / SEGA</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="11" day="8"/>
+		<genre>sports,party</genre>
 	</game>
 	<game name="Mario Tennis: Ultra Smash (USA) (EN)">
 		<id>AVXE01</id>
@@ -2576,6 +2999,7 @@
 		<developer>Camelot Software Planning</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="11" day="20"/>
+		<genre>sports,tennis</genre>
 	</game>
 	<game name="Mario Tennis: Ultra Smash (Japan) (JA)">
 		<id>AVXJ01</id>
@@ -2608,6 +3032,7 @@
 		<developer>Camelot Software Planning</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="1" day="28"/>
+		<genre>sports,tennis</genre>
 	</game>
 	<game name="Mario Tennis: Ultra Smash (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>AVXP01</id>
@@ -2637,6 +3062,7 @@
 		<developer>Camelot Software Planning</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="11" day="20"/>
+		<genre>sports,tennis</genre>
 	</game>
 	<game name="Wii Sports Club (USA) (EN)">
 		<id>AWSE01</id>
@@ -2648,6 +3074,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="7" day="25"/>
+		<genre>sports,baseball,bowling,boxing,tennis</genre>
 	</game>
 	<game name="Wii Sports Club (Japan) (JA)">
 		<id>AWSJ01</id>
@@ -2662,6 +3089,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="7" day="17"/>
+		<genre>sports</genre>
 	</game>
 	<game name="Wii Sports Club (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>AWSP01</id>
@@ -2682,6 +3110,7 @@
 		<developer>Nintendo, Bandai Namco</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="7" day="11"/>
+		<genre>sports,bowling,boxing,golf,tennis</genre>
 	</game>
 	<game name="Xenoblade Chronicles X (Europe) (EN,FR,DE,ES,IT)">
 		<id>AX5D01</id>
@@ -2711,6 +3140,7 @@
 		<developer>Monolith Software</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="12" day="4"/>
+		<genre>role-playing,action rpg</genre>
 	</game>
 	<game name="Xenoblade Chronicles X (USA) (EN)">
 		<id>AX5E01</id>
@@ -2740,6 +3170,7 @@
 		<developer>Monolith Software</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="12" day="4"/>
+		<genre>role-playing,action rpg</genre>
 	</game>
 	<game name="XenobladeX (Japan) (JA)">
 		<id>AX5J01</id>
@@ -2772,6 +3203,7 @@
 		<developer>Monolith Software</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="4" day="29"/>
+		<genre>role-playing,action rpg</genre>
 	</game>
 	<game name="Super Smash Bros. for Wii U (USA) (EN,FR,ES)">
 		<id>AXFE01</id>
@@ -2801,6 +3233,7 @@
 		<developer>Sora Ltd. / Bandai Namco Studios Inc.</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="11" day="21"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Dairantou Smash Brothers for Wii U (Japan) (JA)">
 		<id>AXFJ01</id>
@@ -2833,6 +3266,7 @@
 		<developer>Sora Ltd. / Bandai Namco Studios Inc.</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="12" day="6"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Super Smash Bros. for Wii U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>AXFP01</id>
@@ -2862,6 +3296,7 @@
 		<developer>Sora Ltd. / Bandai Namco Studios Inc.</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="11" day="28"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Kirby and the Rainbow Curse (USA) (EN)">
 		<id>AXYE01</id>
@@ -2891,6 +3326,7 @@
 		<developer>Nintendo / HAL Laboratory</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="2" day="13"/>
+		<genre>action</genre>
 	</game>
 	<game name="Touch! Kirby Super Rainbow (Japan) (JA)">
 		<id>AXYJ01</id>
@@ -2923,6 +3359,7 @@
 		<developer>Nintendo / HAL Laboratory</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="1" day="22"/>
+		<genre>action</genre>
 	</game>
 	<game name="Kirby and the Rainbow Paintbrush (Europe) (EN,FR,DE,ES,IT)">
 		<id>AXYP01</id>
@@ -2952,6 +3389,7 @@
 		<developer>Nintendo / HAL Laboratory</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="5" day="8"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="Yoshi&apos;s Woolly World (USA) (EN)">
 		<id>AYCE01</id>
@@ -2981,6 +3419,7 @@
 		<developer>Good-Feel</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="10" day="16"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="Yoshi Wool World (Japan) (JA)">
 		<id>AYCJ01</id>
@@ -3013,6 +3452,7 @@
 		<developer>Good-Feel</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="7" day="16"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="Yoshi&apos;s Woolly World (Europe) (EN,FR,DE,ES,IT,NL)">
 		<id>AYCP01</id>
@@ -3042,6 +3482,7 @@
 		<developer>Good-Feel</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="6" day="26"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="The Legend of Zelda: Twilight Princess HD (USA) (EN)">
 		<id>AZAE01</id>
@@ -3071,6 +3512,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="1" day="4"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Zelda no Densetsu: Twilight Princess HD (Japan) (JA)">
 		<id>AZAJ01</id>
@@ -3103,6 +3545,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="3" day="10"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="The Legend of Zelda: Twilight Princess HD (Europe) (EN,FR,DE,ES,IT)">
 		<id>AZAP01</id>
@@ -3132,6 +3575,7 @@
 		<developer>Nintendo EAD</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="3" day="4"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="The Legend of Zelda: The Wind Waker HD (USA) (EN)">
 		<id>BCZE01</id>
@@ -3161,6 +3605,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="10" day="4"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Zelda no Densetsu: Kaze no Takt HD (Japan) (EN,JA)">
 		<id>BCZJ01</id>
@@ -3193,6 +3638,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="9" day="26"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="The Legend of Zelda: The Wind Waker HD (Europe) (EN,FR,DE,ES,IT)">
 		<id>BCZP01</id>
@@ -3222,6 +3668,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="10" day="4"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Star Fox Guard (USA) (EN)">
 		<id>BWFE01</id>
@@ -3233,6 +3680,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="4" day="22"/>
+		<genre>action,strategy</genre>
 	</game>
 	<game name="Star Fox Guard (Japan) (JA)">
 		<id>BWFJ01</id>
@@ -3247,6 +3695,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="4" day="21"/>
+		<genre>action,strategy</genre>
 	</game>
 	<game name="Star Fox Guard (Europe) (EN,FR,DE,ES,IT)">
 		<id>BWFP01</id>
@@ -3267,6 +3716,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="4" day="22"/>
+		<genre>action,strategy</genre>
 	</game>
 	<game name="Hyrule Warriors (USA) (EN,FR,ES)">
 		<id>BWPE01</id>
@@ -3296,6 +3746,7 @@
 		<developer>Team Ninja, Tecmo Koei, Omega Force </developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="9" day="26"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Zelda Musou (Japan) (JA)">
 		<id>BWPJC8</id>
@@ -3328,6 +3779,7 @@
 		<developer>Team Ninja, Tecmo Koei, Omega Force</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="8" day="14"/>
+		<genre>action,fighting</genre>
 	</game>
 	<game name="Hyrule Warriors (Europe) (EN,FR,DE,ES,IT)">
 		<id>BWPP01</id>
@@ -3357,6 +3809,7 @@
 		<developer>Team Ninja, Tecmo Koei, Omega Force </developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="9" day="19"/>
+		<genre>action,adventure,fighting,fantasy,beat &apos;em up</genre>
 	</game>
 	<game name="Jikkuri Egokoro Kyoushitsu (Japan) (JA)">
 		<id>BXAJ01</id>
@@ -3389,6 +3842,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="11" day="12"/>
+		<genre>drawing</genre>
 	</game>
 	<game name="Art Academy: Atelier (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>BXAP01</id>
@@ -3418,6 +3872,7 @@
 		<developer>Headstrong Games</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="6" day="26"/>
+		<genre>educational,drawing</genre>
 	</game>
 	<game name="Paper Mario: Color Splash (USA) (EN,FR,ES)">
 		<id>CNFE01</id>
@@ -3447,6 +3902,7 @@
 		<developer>Nintendo / Intelligent Systems</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="10" day="7"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Paper Mario: Color Splash (Japan) (JA)">
 		<id>CNFJ01</id>
@@ -3479,6 +3935,7 @@
 		<developer>Nintendo / Intelligent Systems</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="10" day="13"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Paper Mario: Color Splash (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
 		<id>CNFP01</id>
@@ -3508,6 +3965,7 @@
 		<developer>Nintendo / Intelligent Systems</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2016" month="10" day="7"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Mario vs. Donkey Kong: Minna de Mini Land (Japan) (JA)">
 		<id>WAFJ01</id>
@@ -3522,6 +3980,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="3" day="19"/>
+		<genre>puzzle</genre>
 	</game>
 	<game name="Mario vs. Donkey Kong: Tipping Stars (Download Code) (Europe) (EN)">
 		<id>WAFP01</id>
@@ -3536,6 +3995,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2015" month="3" day="20"/>
+		<genre>puzzle</genre>
 	</game>
 	<game name="Wii Karaoke U (Japan) (JA)">
 		<id>WAHJ01</id>
@@ -3550,6 +4010,7 @@
 		<developer>TOSE</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2012" month="12" day="8"/>
+		<genre>music,karaoke,demo</genre>
 	</game>
 	<game name="Shovel Knight (USA) (EN)">
 		<id>WKNEAY</id>
@@ -3561,6 +4022,7 @@
 		<developer>Yacht Club Games</developer>
 		<publisher>Yacht Club Games</publisher>
 		<date year="2015" month="11" day="3"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Shovel Knight (Europe) (EN,FR,DE,ES,IT)">
 		<id>WKNPAY</id>
@@ -3578,6 +4040,7 @@
 		<developer>Yacht Club Games</developer>
 		<publisher>Yacht Club Games</publisher>
 		<date year="2015" month="10" day="30"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="NES Remix 2 (USA) (EN)">
 		<id>WF2E</id>
@@ -3589,6 +4052,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="1" day="1"/>
+		<genre>action,adventure</genre>
 	</game>
 	<game name="Famicom Remix 2 (Japan) (JA)">
 		<id>WF2J</id>
@@ -3603,6 +4067,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="4" day="24"/>
+		<genre>action,arcade</genre>
 	</game>
 	<game name="NES Remix 2 (Europe) (EN,FR,DE,ES,IT)">
 		<id>WF2P</id>
@@ -3617,6 +4082,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="4" day="25"/>
+		<genre>action,arcade</genre>
 	</game>
 	<game name="Shovel Knight (USA) (EN)">
 		<id>WKNE</id>
@@ -3628,6 +4094,7 @@
 		<developer>Yacht Club Games</developer>
 		<publisher>Yacht Club Games</publisher>
 		<date year="2014" month="6" day="26"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="Shovel Knight (Japan) (JA)">
 		<id>WKNJ</id>
@@ -3642,6 +4109,7 @@
 		<developer>Yacht Club Games</developer>
 		<publisher>Yacht Club Games</publisher>
 		<date year="2016" month="6" day="30"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="Shovel Knight (Europe) (EN,FR,DE,ES,IT)">
 		<id>WKNP</id>
@@ -3656,6 +4124,7 @@
 		<developer>Yacht Club Games</developer>
 		<publisher>Yacht Club Games</publisher>
 		<date year="2014" month="11" day="6"/>
+		<genre>action,platformer</genre>
 	</game>
 	<game name="NES Remix (USA) (EN)">
 		<id>WMGE</id>
@@ -3667,6 +4136,7 @@
 		<developer>Nintendo</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2014" month="12" day="18"/>
+		<genre>action</genre>
 	</game>
 	<game name="Famicom Remix (Japan) (JA)">
 		<id>WMGJ</id>
@@ -3681,6 +4151,7 @@
 		<developer>Indies Zero</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="12" day="19"/>
+		<genre>action</genre>
 	</game>
 	<game name="NES Remix (Europe) (EN)">
 		<id>WMGP</id>
@@ -3695,6 +4166,7 @@
 		<developer>Indies Zero</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2013" month="12" day="18"/>
+		<genre>action</genre>
 	</game>
 </datafile>
 

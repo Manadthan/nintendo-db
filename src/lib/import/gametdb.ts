@@ -14,6 +14,8 @@ export type DisqueGameTdb = {
   editeur: string;
   developpeur: string | null;
   date: { date: string; precision: PrecisionDate } | null;
+  /** Genres du disque, traduits en français (US-06). */
+  genres: string[];
 };
 
 const REGIONS_GAMETDB: Record<string, Region> = {
@@ -37,12 +39,43 @@ function lireDate(
   return { date: `${a}-${deux(m)}-${deux(j)}`, precision: "jour" };
 }
 
+const majuscule = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+
+/**
+ * Traductions françaises des genres, données par la base elle-même (bloc `<genres>`) : nom anglais en minuscules
+ * (« 3d platformer ») → français (« plates-formes 3D »).
+ */
+function lireTraductionsGenres($: cheerio.CheerioAPI): Map<string, string> {
+  const traductions = new Map<string, string>();
+  $("genres maingenre, genres subgenre").each((_, el) => {
+    const genre = $(el);
+    const fr = genre.children("loc[lang=FR]").first().text().trim();
+    const nom = genre.attr("name")?.trim().toLowerCase();
+    if (nom && fr) traductions.set(nom, fr);
+  });
+  return traductions;
+}
+
+/** Genres d'un disque (« action,3d platformer »), traduits ; un genre sans traduction garde son nom anglais. */
+function traduireGenres(
+  champ: string,
+  traductions: Map<string, string>,
+): string[] {
+  const genres = champ
+    .split(",")
+    .map((g) => g.trim())
+    .filter(Boolean)
+    .map((g) => majuscule(traductions.get(g.toLowerCase()) ?? g));
+  return [...new Set(genres)];
+}
+
 /**
  * Disques en boîte de la base GameTDB. Écartés : l'eShop et la Console virtuelle (type autre que `WiiU`), les
  * boîtes qui ne contiennent qu'un code de téléchargement, les régions non suivies (Corée, Russie…).
  */
 export function lireGameTdb(xml: string): DisqueGameTdb[] {
   const $ = cheerio.load(xml, { xml: true });
+  const traductions = lireTraductionsGenres($);
   const disques: DisqueGameTdb[] = [];
   $("game").each((_, el) => {
     const jeu = $(el);
@@ -67,6 +100,7 @@ export function lireGameTdb(xml: string): DisqueGameTdb[] {
         date.attr("month") ?? "",
         date.attr("day") ?? "",
       ),
+      genres: traduireGenres(champ("genre"), traductions),
     });
   });
   return disques;

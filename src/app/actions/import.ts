@@ -107,7 +107,7 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
 export type JeuAEnregistrer = { wikipedia: JeuAImporter };
 
 const COLONNES_EXISTANT =
-  "id, slug, developpeur, wikipedia_url, physique, verrous, releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, code_produit, verrous, jaquette_path, jaquette_source)";
+  "id, slug, developpeur, genre, wikipedia_url, physique, verrous, releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, code_produit, verrous, jaquette_path, jaquette_source)";
 
 /**
  * Enregistre un lot de 10 jeux au plus (US-10, ADR-03), piloté par le navigateur : jeux et sorties (corrections

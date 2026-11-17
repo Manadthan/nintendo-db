@@ -26,6 +26,7 @@ describe("construireJeu (US-10)", () => {
     expect(jeu.game).toEqual({
       slug: "kirby-and-the-rainbow-paintbrush",
       developpeur: "HAL Laboratory, Nintendo SPD",
+      genre: "Action, Plates-formes",
       wikipedia_url:
         "https://en.wikipedia.org/wiki/Kirby_and_the_Rainbow_Curse",
       physique: true,
@@ -48,6 +49,10 @@ describe("construireJeu (US-10)", () => {
       titre: "Kirby and the Rainbow Paintbrush",
       date_sortie: "2015-05-08",
     });
+  });
+
+  it("écrit les genres séparés par « , », ou null si GameTDB n'en donne aucun (US-06)", () => {
+    expect(construireJeu({ ...KIRBY, genres: [] }).game.genre).toBeNull();
   });
 
   it("note « non sorti » une région sans boîte, sans titre ni date", () => {
@@ -77,9 +82,10 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
   const existant: JeuEnBase = {
     id: "20000000-0000-0000-0000-000000000004",
     developpeur: "Xing (corrigé)",
+    genre: "Karaoké",
     wikipedia_url: null,
     physique: true,
-    verrous: ["developpeur"],
+    verrous: ["developpeur", "genre"],
     releases: {
       JAP: {
         titre: "Wii カラオケ U",
@@ -131,9 +137,11 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
   it("ne remplace jamais un champ verrouillé, et signale l'écart", () => {
     const f = fusionner(existant, nouveau);
     expect(f.game).not.toHaveProperty("developpeur");
+    expect(f.game).not.toHaveProperty("genre");
     expect(f.releases.PAL).not.toHaveProperty("titre");
     expect(f.ecarts).toEqual([
       "developpeur : « Xing (corrigé) » gardé (import : « Xing »)",
+      "genre : « Karaoké » gardé (import : « Musique, Karaoké, Démo »)",
       // Wii Karaoke U n'est sorti en PAL qu'en téléchargement : l'import propose « non sorti ».
       "PAL titre : « Mon titre » gardé (import : « — »)",
     ]);
