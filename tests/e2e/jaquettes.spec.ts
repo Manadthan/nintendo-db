@@ -1,0 +1,32 @@
+import { expect, test } from "@playwright/test";
+import { BASE_LOCALE_DISPONIBLE, seConnecter } from "./utilisateur";
+
+// US-12 — Page « Jaquettes » et remplacement par adresse (#42). Base Supabase locale (CI) : jeux de départ (0004).
+test.skip(!BASE_LOCALE_DISPONIBLE, "Base Supabase locale nécessaire (CI)");
+
+test("la page « Jaquettes » est réservée au propriétaire", async ({ page }) => {
+  await page.goto("/admin/jaquettes");
+  await expect(page).toHaveURL("/admin/connexion");
+});
+
+test("le propriétaire repère les jaquettes à remplacer, et une adresse interne est refusée", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.getByRole("link", { name: /Jaquettes/ }).click();
+  await expect(page).toHaveURL(/\/admin\/jaquettes/);
+  await expect(page.getByRole("heading", { name: "Jaquettes" })).toBeVisible();
+
+  // Les jeux de départ n'ont pas de jaquette : toutes sont « à remplacer ».
+  const remplacer = page.getByRole("link", { name: "Remplacer" });
+  await expect(remplacer.first()).toBeVisible();
+  await remplacer.first().click();
+  await expect(page).toHaveURL(/\/admin\/jaquettes\/[a-z0-9-]+\/(jap|us|pal)$/);
+
+  // Protection SSRF : le serveur ne va jamais chercher une image sur le réseau interne.
+  await page
+    .getByLabel("Adresse de l'image")
+    .fill("http://127.0.0.1/jaquette.jpg");
+  await page.getByRole("button", { name: "Remplacer la jaquette" }).click();
+  await expect(page.getByRole("alert")).toContainText("réseau interne");
+});
