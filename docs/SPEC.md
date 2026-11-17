@@ -139,7 +139,8 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Le **code produit** de chaque région est importé quand la source le connaît (ex. `WUP-P-ALZP`).
 - [ ] **Wii** (SPEC v1.9) : liste, titres par région, dates, développeurs, genres et titres japonais viennent de
       **GameTDB seul** (disques du commerce, identifiant en R ou S) ; la fiche cite GameTDB comme source. Même règle
-      qu'en Wii U : au moins une boîte éditée par Nintendo, toutes les régions sorties en boîte listées.
+      qu'en Wii U : au moins une boîte éditée par Nintendo, toutes les régions sorties en boîte listées. Un disque qui
+      n'est pas un jeu (genre GameTDB « software », ex. Wii Startup Disc, #90) est écarté.
 - [ ] Wii : code produit `RVL-` + 4 caractères (ex. `RVL-RMCP`) ; le suffixe de pays imprimé sur la boîte (`-UKV`,
       `-USA`…) n'est pas connu de la source, il se complète à la main.
 - [ ] Wii : la jaquette est la **face avant** découpée dans le scan complet de la boîte (≈ 485 px de large, aucune

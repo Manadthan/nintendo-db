@@ -46,7 +46,8 @@ Base `wiitdb.zip` du 17/11 : disques du commerce (identifiant en **R** ou **S** 
 | Autres sources d'images | libretro-thumbnails : même résolution (≈ 486–512 px), noms à deviner ; The Cover Project : inaccessible d'ici ; IGDB : pas des scans |
 
 Jeux édités par Nintendo dans une seule région : 14 (Just Dance 2, GoldenEye 007, Epic Mickey au Japon ; Trauma
-Center en Europe…), gardés selon la règle Wii U (décision du propriétaire).
+Center en Europe…), gardés selon la règle Wii U (décision du propriétaire). Le Wii Startup Disc (genre « software »)
+n'est pas un jeu : écarté à l'import (#90), soit **87 jeux**.
 
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
 Vercel avec un cache d'un an). C'est le modèle retenu (ADR-04).
