@@ -18,7 +18,7 @@ test("le propriétaire repère les jaquettes à remplacer, et une adresse intern
   await expect(page.getByRole("heading", { name: "Jaquettes" })).toBeVisible();
 
   // Les jeux de départ n'ont pas de jaquette : toutes sont « à remplacer ».
-  const remplacer = page.getByRole("link", { name: "Remplacer" });
+  const remplacer = page.getByRole("link", { name: "Remplacer", exact: true });
   await expect(remplacer.first()).toBeVisible();
   await remplacer.first().click();
   await expect(page).toHaveURL(/\/admin\/jaquettes\/[a-z0-9-]+\/(jap|us|pal)$/);
