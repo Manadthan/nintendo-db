@@ -109,7 +109,7 @@ export function AnalyseImport({
         type="button"
         onClick={analyser}
         disabled={enCours}
-        className="h-12 rounded-xl bg-accent text-base font-semibold text-white disabled:opacity-60"
+        className="h-12 rounded-xl bg-accent text-base font-semibold text-inverse disabled:opacity-60"
       >
         {enCours ? "Analyse en cours…" : `Analyser la ${consoleNom}`}
       </button>
@@ -126,7 +126,7 @@ export function AnalyseImport({
       {etat.etape === "erreur" && (
         <div
           role="alert"
-          className="rounded-[10px] border border-[#f1c4c4] bg-[#fff5f5] px-3 py-2.5 text-sm text-[#b42318]"
+          className="rounded-[10px] border border-erreur-bordure bg-erreur-fond px-3 py-2.5 text-sm text-erreur"
         >
           {etat.message}
         </div>
@@ -167,7 +167,7 @@ export function AnalyseImport({
             à jour dans quelques instants.
           </p>
           {etat.resume.erreurs.length > 0 && (
-            <div role="alert" className="text-[#b42318]">
+            <div role="alert" className="text-erreur">
               <p className="font-semibold">
                 {etat.resume.erreurs.length} jeu(x) en erreur :
               </p>
@@ -244,7 +244,7 @@ export function AnalyseImport({
               return (
                 <li
                   key={ligne.slug}
-                  className="flex flex-col gap-1.5 border-t border-[#eef0f3] px-3 py-2.5 first:border-t-0"
+                  className="flex flex-col gap-1.5 border-t border-separateur px-3 py-2.5 first:border-t-0"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <span className="text-sm font-semibold">{ligne.titre}</span>
@@ -260,8 +260,8 @@ export function AnalyseImport({
                         key={region}
                         className={`rounded px-1.5 py-0.5 font-bold ${
                           ligne.regions[region]
-                            ? "bg-[#e4e9fb] text-accent-fonce"
-                            : "bg-[#eceef2] text-texte-discret"
+                            ? "bg-accent-doux text-accent-fonce"
+                            : "bg-surface text-texte-discret"
                         }`}
                       >
                         {region}
@@ -276,7 +276,7 @@ export function AnalyseImport({
           {apercu.aSupprimer.length > 0 && (
             <p
               role="alert"
-              className="rounded-xl border border-[#f1c4c4] bg-[#fff5f5] p-3 text-sm text-[#b42318]"
+              className="rounded-xl border border-erreur-bordure bg-erreur-fond p-3 text-sm text-erreur"
             >
               {apercu.aSupprimer.length} jeu(x) en base n&apos;ont plus de boîte
               Nintendo et seront supprimés à l&apos;enregistrement :{" "}

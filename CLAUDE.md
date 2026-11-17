@@ -25,7 +25,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.1 validée |
 | `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.6 validée |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v0.8 validée |
-| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.5 validée |
+| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
 
 ## Règles de travail
 
@@ -73,10 +73,11 @@ src/lib/auth/routes.ts   règles de redirection de l'administration + tests
 src/lib/catalogue/       version affichée, dates en français, tri, groupes (catalogue.ts), marché : adresse ?marche= puis navigateur (marche.ts), recherche ?q= (recherche.ts), lecture (charger.ts) + tests
 src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; src/app/not-found.tsx : 404 en français
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
-src/components/          EnTete, PiedDePage (lien Administration), Catalogue (client : recherche, marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite
+src/components/          EnTete (Logo, BoutonTheme), PiedDePage (lien Administration), Catalogue (client : recherche, marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite
+src/lib/theme/           choix du thème : auto/clair/sombre, script anti-éclair (US-08) + tests
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
 src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games »), apercu.ts (aperçu, lots de 10, résumés), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (WebP 300/600/768 via sharp), gametdb.ts (boîtes par région, titres japonais, compilations, codes produit ; lu depuis le relais), resultat.ts (erreurs des actions rendues lisibles), physique.ts (règle : boîte Nintendo exigée, sorties par région) + tests ; __fixtures__/ (copies datées, README)
-scripts/                 fixture-wikipedia.mjs, fixture-gametdb.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : base + scans → bucket privé gametdb, secrets SUPABASE_URL / SUPABASE_SECRET_KEY)
+scripts/                 icones.mjs (apple-icon.png), fixture-wikipedia.mjs, fixture-gametdb.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : base + scans → bucket privé gametdb, secrets SUPABASE_URL / SUPABASE_SECRET_KEY)
 src/lib/jaquettes/       chemins et URL des jaquettes ({game_id}/{région}-{version}-{300|600|768}.webp, ADR-04, version : #60) + tests
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
@@ -86,8 +87,8 @@ supabase/                config.toml (inscriptions désactivées), migrations/ (
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
 ```
 
-Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `carte`, `texte`, `texte-doux`,
-`texte-discret`, `bordure`, `accent`, `accent-fonce` ; polices `font-sans` (Inter), `font-titre` (Space Grotesk).
+Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair/sombre de globals.css, jamais de couleur en dur) : `fond`, `carte`, `texte`, `texte-doux`,
+`texte-discret`, `bordure`, `accent`, `accent-fonce`, `inverse`, `accent-doux`, `surface`, `champ`, `erreur`… ; polices `font-sans` (Inter), `font-titre` (Space Grotesk).
 
 ## Avancement
 
@@ -99,7 +100,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
   - [x] Étape 2 — Base : #16 à #19
   - [x] Étape 3 — Consultation : #24 à #27
   - [x] Étape 4 — Import : #32 à #35, #40
-  - [ ] Étape 5 — Correction (milestone n° 5) : #46 GameTDB (lecture ✅, import ✅), #48 jaquette HD ✅, #53 relais GameTDB ✅, #56 lien Administration ✅, #58 retrait d'IGDB (cette PR), #49 sombre + logo, #42 à #45
+  - [ ] Étape 5 — Correction (milestone n° 5) : #46 GameTDB (lecture ✅, import ✅), #48 jaquette HD ✅, #53 relais GameTDB ✅, #56 lien Administration ✅, #58 retrait d'IGDB ✅, #60 cache des jaquettes ✅, #49 sombre + logo (cette PR), #42 à #45
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes

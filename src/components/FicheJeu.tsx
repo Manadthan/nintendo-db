@@ -75,7 +75,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
         <div
           role="group"
           aria-label="Version"
-          className="grid w-[230px] grid-cols-3 gap-1 rounded-xl bg-[#e4e6eb] p-1"
+          className="grid w-[230px] grid-cols-3 gap-1 rounded-xl bg-segment p-1"
         >
           {REGIONS.map((r) => {
             const sorti = jeu.sorties[r].sortie;
@@ -94,7 +94,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
                     ? "bg-carte font-semibold shadow-sm"
                     : sorti
                       ? "font-medium text-texte-doux"
-                      : "font-medium text-[#9aa0ab] line-through"
+                      : "font-medium text-absent line-through"
                 }`}
               >
                 {r}
@@ -111,10 +111,10 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
 
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap gap-1.5">
-          <span className="flex h-6 items-center rounded-md bg-texte px-2 text-xs font-semibold text-white">
+          <span className="flex h-6 items-center rounded-md bg-texte px-2 text-xs font-semibold text-inverse">
             {jeu.console.nom}
           </span>
-          <span className="flex h-6 items-center rounded-md border border-[#d6d9e0] bg-carte px-2 text-xs font-semibold">
+          <span className="flex h-6 items-center rounded-md border border-champ bg-carte px-2 text-xs font-semibold">
             En boîte
           </span>
         </div>
@@ -152,11 +152,11 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             return (
               <li
                 key={r}
-                className="flex gap-3 border-t border-[#eef0f3] px-3.5 py-3 first:border-t-0"
+                className="flex gap-3 border-t border-separateur px-3.5 py-3 first:border-t-0"
               >
                 <span
                   aria-hidden="true"
-                  className={`w-4 font-bold ${s.sortie ? "text-accent-fonce" : "text-[#9aa0ab]"}`}
+                  className={`w-4 font-bold ${s.sortie ? "text-accent-fonce" : "text-absent"}`}
                 >
                   {s.sortie ? "✓" : "–"}
                 </span>

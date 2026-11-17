@@ -29,7 +29,7 @@ export function Jaquette({
         alt={`Jaquette de ${titre}`}
         loading="lazy"
         decoding="async"
-        className="aspect-[27/38] w-full rounded-md border border-[#cdd1d9] bg-[#d9dde4] object-contain"
+        className="aspect-[27/38] w-full rounded-md border border-vignette-bordure bg-vignette object-contain"
       />
     );
   }
@@ -37,10 +37,10 @@ export function Jaquette({
     <div
       role="img"
       aria-label={`${titre} — jaquette à venir`}
-      className="flex aspect-[27/38] w-full flex-col overflow-hidden rounded-md border border-[#cdd1d9] bg-[#d9dde4]"
+      className="flex aspect-[27/38] w-full flex-col overflow-hidden rounded-md border border-vignette-bordure bg-vignette"
     >
       <div
-        className={`flex items-center bg-[#3a3f4b] px-2 font-bold tracking-wider text-white ${petite ? "h-2" : "h-[18px] text-[9px]"}`}
+        className={`flex items-center bg-vignette-bandeau px-2 font-bold tracking-wider text-white ${petite ? "h-2" : "h-[18px] text-[9px]"}`}
       >
         {!petite && console.toUpperCase()}
       </div>
