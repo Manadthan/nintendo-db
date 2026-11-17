@@ -40,6 +40,13 @@ function lireDate(
   return { date: `${a}-${deux(m)}-${deux(j)}`, precision: "jour" };
 }
 
+/**
+ * Genre GameTDB des disques qui ne sont pas des jeux : « software » (Wii Startup Disc, #90). Pas « demo » : Wii
+ * Karaoke U est un disque d'essai vendu en boîte, gardé au catalogue (les démos DS/3DS : étape 9).
+ */
+export const pasUnJeu = (champGenre: string) =>
+  champGenre.split(",").some((g) => g.trim().toLowerCase() === "software");
+
 const majuscule = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 
 /**
@@ -89,6 +96,7 @@ export function lireGameTdb(
     const titre = jeu.find("locale[lang=EN] > title").first().text().trim();
     if (!region || !titre) return;
     if (!estDisque(champ("type"), champ("id"), champ("region"), titre)) return;
+    if (pasUnJeu(champ("genre"))) return;
     const date = jeu.children("date").first();
     disques.push({
       id: champ("id"),

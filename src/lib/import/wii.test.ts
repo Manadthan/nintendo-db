@@ -20,10 +20,10 @@ const jeu = (slug: string) => {
 };
 
 describe("import Wii depuis GameTDB seul", () => {
-  it("lit les 234 disques du commerce et retient les 88 jeux Nintendo, chacun à une adresse distincte", () => {
-    expect(disques).toHaveLength(234);
-    expect(jeux).toHaveLength(88);
-    expect(new Set(jeux.map((j) => j.slug)).size).toBe(88);
+  it("lit les 233 disques du commerce (sans le Wii Startup Disc, #90) et retient les 87 jeux Nintendo, chacun à une adresse distincte", () => {
+    expect(disques).toHaveLength(233);
+    expect(jeux).toHaveLength(87);
+    expect(new Set(jeux.map((j) => j.slug)).size).toBe(87);
     expect(ecartes).toEqual([]);
   });
 
@@ -75,6 +75,11 @@ describe("import Wii depuis GameTDB seul", () => {
     expect(ms.sorties.JAP?.editeur).toBe("Nintendo");
     expect(ms.sorties.US?.editeur).toBe("Sega of America");
     expect(ms.sorties.PAL?.editeur).toBe("Sega");
+  });
+
+  it("écarte les disques qui ne sont pas des jeux : genre GameTDB « software » (Wii Startup Disc)", () => {
+    expect(jeux.map((j) => j.slug)).not.toContain("wii-startup-disc");
+    expect(disques.map((d) => d.id)).not.toContain("RAAE01");
   });
 
   it("un jeu sorti au Japon seulement n'a pas de sortie US ni PAL", () => {
