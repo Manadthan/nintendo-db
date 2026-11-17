@@ -1,22 +1,26 @@
 import type { SortieCatalogue } from "@/lib/catalogue/types";
+import { classeProportions } from "@/lib/jaquettes/proportions";
 
 type Props = {
   sortie: SortieCatalogue;
   titre: string;
   console: string;
+  /** Adresse de la console : la vignette prend les proportions de sa boîte (étape 9). */
+  consoleSlug: string;
   /** Largeur affichée, pour que le navigateur choisisse la bonne taille d'image (ADR-04). */
   sizes: string;
   petite?: boolean;
 };
 
 /**
- * Jaquette d'une sortie (proportions d'une boîte Wii U, jamais recadrée), chargée au fil du défilement.
+ * Jaquette d'une sortie (proportions de la boîte de sa console, jamais recadrée), chargée au fil du défilement.
  * Sans jaquette (avant l'import, étape 4) : vignette neutre avec le titre et la console (US-12).
  */
 export function Jaquette({
   sortie,
   titre,
   console,
+  consoleSlug,
   sizes,
   petite = false,
 }: Props) {
@@ -29,7 +33,7 @@ export function Jaquette({
         alt={`Jaquette de ${titre}`}
         loading="lazy"
         decoding="async"
-        className="aspect-[27/38] w-full rounded-md border border-vignette-bordure bg-vignette object-contain"
+        className={`${classeProportions(consoleSlug)} w-full rounded-md border border-vignette-bordure bg-vignette object-contain`}
       />
     );
   }
@@ -37,7 +41,7 @@ export function Jaquette({
     <div
       role="img"
       aria-label={`${titre} — jaquette à venir`}
-      className="flex aspect-[27/38] w-full flex-col overflow-hidden rounded-md border border-vignette-bordure bg-vignette"
+      className={`flex ${classeProportions(consoleSlug)} w-full flex-col overflow-hidden rounded-md border border-vignette-bordure bg-vignette`}
     >
       <div
         className={`flex items-center bg-vignette-bandeau px-2 font-bold tracking-wider text-white ${petite ? "h-2" : "h-[18px] text-[9px]"}`}

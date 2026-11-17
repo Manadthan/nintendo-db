@@ -7,6 +7,7 @@ import {
 } from "@/lib/admin/jaquettes";
 import { SelecteurConsole } from "@/components/SelecteurConsole";
 import { consoleChoisie } from "@/lib/admin/consoles";
+import { classeProportions } from "@/lib/jaquettes/proportions";
 import { SOURCES_JAQUETTE } from "@/lib/fiche/fiche";
 import { supabaseEnv } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -117,7 +118,9 @@ export default async function PageJaquettes({
       <ul aria-label="Jaquettes" className="grid grid-cols-3 gap-3">
         {vignettes.map((v) => (
           <li key={`${v.slug}-${v.region}`} className="flex flex-col gap-1">
-            <div className="aspect-[27/38] w-full overflow-hidden rounded-md border border-vignette-bordure bg-vignette">
+            <div
+              className={`${classeProportions(laConsole.slug)} w-full overflow-hidden rounded-md border border-vignette-bordure bg-vignette`}
+            >
               {v.srcset ? (
                 // eslint-disable-next-line @next/next/no-img-element -- WebP déjà prêts (ADR-04)
                 <img
