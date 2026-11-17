@@ -1,22 +1,27 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 5)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.0 — 17/11/2026 — statut : **validé**
+> Version 1.1 — 17/11/2026 — statut : **validé**
+>
+> | Version | Date | Changements |
+> |---|---|---|
+> | 1.1 | 17/11/2026 | **Bilan final de la v1** : étapes 6 (filtres) et 7 (finitions) ajoutées (§7), chiffres mis à jour, pistes |
+> | 1.0 | 17/11/2026 | Bilan des étapes 1 à 5 |
 
 ## 1. En chiffres
 
 | | |
 |---|---|
 | Durée | 2 jours (16 → 17/11/2026), depuis un iPhone 12 mini |
-| Étapes du plan | 5 sur 7 : socle, base, consultation, import, correction. Restent les filtres (US-06) et les finitions (US-07, référencement) |
-| User stories livrées | US-02, 03, 04, 05, 08, 09, 10, 11, 12, et **US-15 (logo)**, ajoutée en cours de route |
-| Pull requests mergées | 36, toutes passées par la CI et la revue du propriétaire |
-| Tests automatiques | 146 unitaires (Vitest), 45 de bout en bout lancés sur Chromium et WebKit (iPhone 12 mini), 39 sur la base (pgTAP) |
+| Étapes du plan | **7 sur 7** : socle, base, consultation, import, correction, filtres, finitions — **v1 Wii U terminée** |
+| User stories livrées | US-02 à US-12, et **US-15 (logo)**, ajoutée en cours de route ; exigence « Référencement » |
+| Pull requests mergées | 41, toutes passées par la CI et la revue du propriétaire |
+| Tests automatiques | 173 unitaires (Vitest), 55 de bout en bout lancés sur Chromium et WebKit (iPhone 12 mini), 39 sur la base (pgTAP) |
 | Migrations de base | 6, appliquées automatiquement en production au merge |
-| Code applicatif | ≈ 5 500 lignes (hors tests) |
-| Données en ligne | 48 jeux Wii U en boîte, 132 scans de vraies boîtes sur 135 disques, codes produit de chaque région |
+| Code applicatif | ≈ 6 300 lignes (hors tests) |
+| Données en ligne | 48 jeux Wii U en boîte, 132 scans de vraies boîtes sur 135 disques, codes produit de chaque région, genres en français |
 
 ## 2. Ce qui a bien marché
 
@@ -63,8 +68,13 @@
 
 ## 5. Pistes pour la suite
 
-- **Étape 6 — Filtres** (US-06) et **étape 7 — Finitions** (US-07 mentions et sources, référencement), puis la
-  console suivante, avec une étude GameTDB de cette console dès le départ.
+- **Étape 8 — Wii** (décidée le 17/11) : jeux en boîte édités par Nintendo, avec une étude GameTDB de la Wii **avant
+  la spec** (leçon 1).
+- Idées du propriétaire, à étudier ensuite (intention à mettre à jour d'abord) : **comptes utilisateurs et jeux
+  possédés**, **tableau de complétion par console** sur la page utilisateur, **note Metacritic** et **valeur estimée**
+  sur la fiche (sources à mesurer avant tout : accès, coût, licence).
+- **Import automatique après un changement des données importées** : aujourd'hui il faut relancer l'import à la main
+  (genres, §7).
 - Déverrouiller un champ corrigé à la main, pour que l'import puisse de nouveau le mettre à jour.
 - Liste d'exclusion : un jeu importé supprimé à la main revient aujourd'hui au prochain import.
 - Base de prévisualisation séparée (branches Supabase) pour tester migrations et import avant le merge.
@@ -77,3 +87,25 @@
 | Ce qui a le plus aidé | **Les questions à choix** : décider vite, depuis l'iPhone, sur des options préparées. |
 | Ce qui a ralenti | **Les surprises des sources** : chaque problème de données découvert après le merge. |
 | À faire différemment | **Tester les sources d'abord**, avant d'écrire la spec. |
+
+## 7. Étapes 6 et 7 : filtres et finitions
+
+| | |
+|---|---|
+| Livré | Genres de GameTDB traduits par la base elle-même (#70) ; panneau « Filtres » : disponibilité, année, genre, pastilles, adresse partageable (#71) ; page « À propos » (#74) ; référencement : sitemap, robots, adresses canoniques, aperçus de partage avec jaquette, données schema.org (#75) |
+| Méthode | 2 PR indépendantes par étape, mergeables dans n'importe quel ordre (au lieu de PR empilées, §3) ; spec mise à jour avant le code (SPEC v1.7 puis v1.8 : filtre en doublon retiré, référencement précisé) |
+| Incident | Tests e2e qui se gênaient sur la base partagée, **2ᵉ fois** : un jeu de test ajouté en administration apparaissait dans le catalogue d'un autre test. Corrigé à la racine (tests d'administration après les tests publics) et règle ajoutée à `CLAUDE.md` |
+
+| Question | Réponse du propriétaire |
+|---|---|
+| Ce qui a le plus aidé | **Les explications sur ce qu'il fallait tester** (« Comment tester », « Ce qui n'a pas été vérifié »). |
+| Ce qui a ralenti | **Réimporter les données** pour remplir le champ Genre. |
+| À faire différemment | Rien. |
+
+Leçons ajoutées :
+
+7. **Dire précisément quoi tester, et ce qui n'a pas été vérifié** : c'est ce qui rend la revue possible depuis un
+   téléphone. À garder dans chaque PR.
+8. **Une donnée importée nouvelle ne doit pas exiger de geste manuel** : prévoir, dès la PR, comment la production
+   est mise à jour (import relancé automatiquement, ou rattrapage par migration).
+
