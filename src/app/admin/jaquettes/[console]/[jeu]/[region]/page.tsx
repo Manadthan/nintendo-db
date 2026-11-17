@@ -56,6 +56,7 @@ export default async function PageRemplacerJaquette({
           sortie={sortie}
           titre={sortie.titre ?? slug}
           console={jeu.console.nom}
+          consoleSlug={jeu.console.slug}
           sizes="180px"
         />
       </div>
