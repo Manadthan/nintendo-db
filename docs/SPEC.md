@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.3 — 16/11/2026 — statut : **validée** (PR #3)
+> Version 1.4 — 17/11/2026 — statut : **validée** (étude GameTDB)
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.4 | 17/11/2026 | US-08 avancée, US-15 logo ; US-10 : **boîte Nintendo exigée**, sortie par région = en boîte dans la région, compilations ; jaquettes = **scans de boîtes** (GameTDB en priorité) et codes produit importés ; US-12 : page « Jaquettes » |
 > | 1.3 | 16/11/2026 | Retour sur les maquettes (PR #3) : trame de gamecartdb ; région choisie **sur la fiche** (US-04) ; catalogue filtré par **marché** (US-03) ; recherche **dans le catalogue** (US-05) |
 > | 1.2 | 16/11/2026 | **v1 = Wii U seule** ; US-01 en S ; US-10 depuis Wikipédia + IGDB ; US-12 : jaquettes copiées chez nous |
 > | 1.1 | 16/11/2026 | US-12 : jaquette = **lien vers une image externe** (pas de copie, pas de photo en v1) |
@@ -95,8 +96,14 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Une page « À propos » indique que le site est un projet de fan **non affilié à Nintendo**, que les titres et
       visuels appartiennent à leurs propriétaires, et liste les sources de données avec leur licence.
 
-#### US-08 — Thème clair / sombre (C)
+#### US-08 — Thème clair / sombre (S, avancée à l'étape 5)
 - [ ] Le site suit le réglage de l'iPhone ; un bouton permet de forcer clair ou sombre.
+- [ ] Le choix forcé est retenu d'une visite à l'autre ; aucun éclair blanc au chargement en mode sombre.
+
+#### US-15 — Logo du site (S)
+- [ ] Un petit logo **cartouche** (grise, étiquette bleue « DB », sans texte ni logo Nintendo) figure dans l'en-tête,
+      lisible en clair comme en sombre.
+- [ ] Il sert d'icône d'onglet et d'icône d'écran d'accueil iPhone.
 
 ### Administration (propriétaire)
 
@@ -106,15 +113,21 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       même en appelant directement le serveur.
 - [ ] Un bouton permet de se déconnecter.
 
-#### US-10 — Importer les jeux d'une console depuis Wikipédia et IGDB (M)
+#### US-10 — Importer les jeux d'une console depuis Wikipédia, IGDB et GameTDB (M)
 *En tant que propriétaire, je remplis le catalogue d'une console sans tout saisir à la main.*
 - [ ] Je choisis une console et lance l'import ; un **aperçu** montre les jeux trouvés avant d'enregistrer.
-- [ ] Ne sont retenus que les jeux **physiques** dont Nintendo est **éditeur dans au moins une région**.
+- [ ] Ne sont retenus que les jeux ayant **au moins une boîte éditée par Nintendo** (disque en boîte ; une boîte
+      ne contenant qu'un code de téléchargement ne compte pas).
+- [ ] Une région n'est affichée comme « sortie » que si le jeu y est sorti **en boîte** ; une sortie seulement en
+      téléchargement compte comme non sortie.
+- [ ] Un jeu vendu en boîte seulement dans une **compilation** (ex. NES Remix + NES Remix 2 → « NES Remix Pack »)
+      a une fiche pour la compilation, pas pour chaque jeu.
 - [ ] Un nouvel import **n'écrase pas** mes corrections manuelles ; il signale les différences.
 - [ ] Un résumé indique : ajoutés, mis à jour, ignorés (avec la raison).
 - [ ] Chaque jeu importé garde le lien vers sa fiche d'origine (Wikipédia, IGDB).
-- [ ] Les **jaquettes de chaque région** sont récupérées sur IGDB et copiées chez nous ; une région sans jaquette
-      IGDB est signalée dans le résumé.
+- [ ] Les **jaquettes de chaque région** sont récupérées et copiées chez nous : en priorité le **scan de la vraie
+      boîte** (GameTDB), sinon l'image IGDB ; une région sans scan est signalée dans le résumé.
+- [ ] Le **code produit** de chaque région est importé quand la source le connaît (ex. `WUP-P-ALZP`).
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
@@ -124,7 +137,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 #### US-12 — Ajouter une jaquette à une sortie (S)
 - [ ] Je remplace la jaquette d'une région par une **photo** ou l'**adresse d'une image** ; elle est copiée chez nous.
 - [ ] Les jaquettes sont affichées en **haute définition** (nettes sur l'écran Retina de l'iPhone), chargées au fil du défilement.
-- [ ] La source de la jaquette est mentionnée (ex. « Jaquette : IGDB »).
+- [ ] Une page d'administration « Jaquettes » montre toutes les jaquettes côte à côte, avec leur source et un
+      bouton **Remplacer** sur chacune, pour repérer d'un coup d'œil celles qui ne sont pas des scans de boîte.
+- [ ] La source de la jaquette est mentionnée (ex. « Jaquette : GameTDB »).
 - [ ] Sans jaquette, une vignette neutre affiche le titre et la console.
 
 ## 5. Exigences non fonctionnelles
@@ -161,8 +176,8 @@ DS, 3DS.
 |---|---|---|
 | 1 | Titre japonais | Écriture **japonaise** avec la version **romanisée** en dessous |
 | 2 | Région par défaut | **PAL** |
-| 3 | Code produit | Souvent « — » après l'import, **complété à la main** ; une source complémentaire sera cherchée en conception |
-| 4 | Images | Jaquettes par région **copiées chez nous** depuis IGDB (remplace la décision « liens externes » de la v1.1) |
+| 3 | Code produit | **Importé de GameTDB** (v1.4) ; sinon « — », complété à la main |
+| 4 | Images | Jaquettes par région **copiées chez nous** : scans de boîtes GameTDB en priorité, IGDB en secours (v1.4) |
 | 5 | Périmètre v1 | **Wii U seule** ; l'architecture reste multi-consoles |
 
 ## 9. Prochaine étape
