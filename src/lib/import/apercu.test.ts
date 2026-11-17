@@ -66,6 +66,15 @@ describe("preparerApercu (US-10)", () => {
   it("liste les jeux en base qui ne sont plus retenus, à supprimer", () => {
     expect(apercu.aSupprimer).toEqual(["shovel-knight"]);
   });
+
+  it("ne supprime jamais un jeu ajouté à la main (US-11)", () => {
+    const avecManuel = preparerApercu(
+      liste,
+      new Set([...EN_BASE, "mon-jeu"]),
+      new Set(["mon-jeu"]),
+    );
+    expect(avecManuel.aSupprimer).toEqual(["shovel-knight"]);
+  });
 });
 
 describe("resumer", () => {
