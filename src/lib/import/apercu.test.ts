@@ -1,7 +1,12 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { decouperEnLots, preparerApercu, resumer } from "./apercu";
+import {
+  decouperEnLots,
+  preparerApercu,
+  resumer,
+  resumerEnregistrement,
+} from "./apercu";
 import { lireListeWikipediaDetaillee } from "./wikipedia";
 
 const liste = lireListeWikipediaDetaillee(
@@ -72,5 +77,46 @@ describe("decouperEnLots", () => {
     );
     expect(lots.map((l) => l.length)).toEqual([10, 10, 3]);
     expect(decouperEnLots([], 10)).toEqual([]);
+  });
+});
+
+describe("resumerEnregistrement (US-10)", () => {
+  it("compte ajoutés, mis à jour, erreurs et jaquettes ; liste les jaquettes de secours et les corrections gardées", () => {
+    expect(
+      resumerEnregistrement([
+        {
+          slug: "a",
+          titre: "Splatoon",
+          statut: "mis-a-jour",
+          jaquettes: 3,
+          secours: ["PAL"],
+          ecarts: [],
+        },
+        {
+          slug: "b",
+          titre: "Pikmin 3",
+          statut: "ajoute",
+          jaquettes: 2,
+          secours: [],
+          ecarts: ["PAL titre : « X » gardé (import : « Y »)"],
+        },
+        {
+          slug: "c",
+          titre: "NES Remix",
+          statut: "erreur",
+          jaquettes: 0,
+          secours: [],
+          ecarts: [],
+          erreur: "IGDB indisponible",
+        },
+      ]),
+    ).toEqual({
+      ajoutes: 1,
+      misAJour: 1,
+      erreurs: [{ titre: "NES Remix", erreur: "IGDB indisponible" }],
+      jaquettes: 5,
+      secours: ["Splatoon (PAL)"],
+      ecarts: ["Pikmin 3 — PAL titre : « X » gardé (import : « Y »)"],
+    });
   });
 });

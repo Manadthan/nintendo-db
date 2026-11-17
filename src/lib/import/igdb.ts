@@ -62,6 +62,8 @@ export function rapprocher(
 export type InfosIgdb = {
   igdbId: number;
   titreJaponais: string | null;
+  /** Sous le titre japonais (SPEC décision 1) : romanisation connue d'IGDB, sinon son titre principal. */
+  titreRomanise: string;
   /** Identifiants d'image IGDB par région ; null quand IGDB n'a pas de jaquette propre à la région (R2). */
   jaquettes: Record<Region, string | null>;
 };
@@ -75,9 +77,13 @@ export function versInfosIgdb(jeu: ResultatIgdb): InfosIgdb {
     jeu.game_localizations?.find(
       (l) => l.region && REGIONS_IGDB[l.region.identifier] === region,
     );
+  const romanisation = jeu.alternative_names?.find((a) =>
+    /japanese.*romani[sz]ation/i.test(a.comment ?? ""),
+  )?.name;
   return {
     igdbId: jeu.id,
     titreJaponais: localisation("JAP")?.name ?? null,
+    titreRomanise: romanisation ?? jeu.name,
     jaquettes: {
       JAP: localisation("JAP")?.cover?.image_id ?? null,
       US: jeu.cover?.image_id ?? null,
@@ -149,26 +155,36 @@ export function creerClientIgdb({
     return access_token;
   }
 
+  async function requete(corps: string, quoi: string): Promise<ResultatIgdb[]> {
+    const token = await obtenirJeton();
+    await pause();
+    const reponse = await fetch("https://api.igdb.com/v4/games", {
+      method: "POST",
+      headers: {
+        "Client-ID": clientId,
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+      body: corps,
+    });
+    if (!reponse.ok)
+      throw new Error(`IGDB a refusé ${quoi} (HTTP ${reponse.status})`);
+    return (await reponse.json()) as ResultatIgdb[];
+  }
+
   return {
+    /** Jeux IGDB par identifiants (un lot de 10 au plus : une seule requête). */
+    async parIds(ids: number[]): Promise<ResultatIgdb[]> {
+      if (!ids.length) return [];
+      return requete(
+        `fields ${CHAMPS}; where id = (${ids.join(",")}); limit ${ids.length};`,
+        "la lecture des jeux choisis",
+      );
+    },
     /** Jeux d'une plateforme IGDB (Wii U : 41) dont le titre ressemble à `titre`. */
     async chercher(titre: string, plateforme: number): Promise<ResultatIgdb[]> {
-      const token = await obtenirJeton();
-      await pause();
       const corps = `search "${titre.replace(/"/g, '\\"')}"; fields ${CHAMPS}; where platforms = (${plateforme}); limit 10;`;
-      const reponse = await fetch("https://api.igdb.com/v4/games", {
-        method: "POST",
-        headers: {
-          "Client-ID": clientId,
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-        },
-        body: corps,
-      });
-      if (!reponse.ok)
-        throw new Error(
-          `IGDB a refusé la recherche « ${titre} » (HTTP ${reponse.status})`,
-        );
-      return (await reponse.json()) as ResultatIgdb[];
+      return requete(corps, `la recherche « ${titre} »`);
     },
   };
 }
