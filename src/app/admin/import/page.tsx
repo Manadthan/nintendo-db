@@ -25,9 +25,10 @@ export default function PageImport() {
           Import Wii U
         </h1>
         <p className="text-sm text-texte-doux">
-          Lit la liste Wikipédia et retrouve chaque jeu sur IGDB. L&apos;analyse{" "}
-          <strong>n&apos;enregistre rien</strong> : elle montre ce que
-          l&apos;import ferait.
+          Lit la liste Wikipédia, garde les jeux sortis en boîte d&apos;après
+          GameTDB (scans de boîtes, codes produit) et retrouve chaque jeu sur
+          IGDB. L&apos;analyse <strong>n&apos;enregistre rien</strong> : elle
+          montre ce que l&apos;import ferait.
         </p>
       </section>
       <AnalyseImport consoleSlug="wii-u" consoleNom="Wii U" />
