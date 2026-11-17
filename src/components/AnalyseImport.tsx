@@ -17,6 +17,7 @@ import {
   type ResultatEnregistrement,
   type ResumeEnregistrement,
 } from "@/lib/import/apercu";
+import { valeur } from "@/lib/import/resultat";
 import { REGIONS } from "@/lib/catalogue/types";
 
 type Etat =
@@ -65,15 +66,17 @@ export function AnalyseImport({
     setChoix({});
     try {
       setEtat({ etape: "wikipedia" });
-      const resultat = await analyserListe(consoleSlug);
+      const resultat = valeur(await analyserListe(consoleSlug));
       setApercu(resultat);
 
       const lots = decouperEnLots(resultat.lignes, 10);
       for (const [i, lot] of lots.entries()) {
         setEtat({ etape: "igdb", fait: i * 10, total: resultat.lignes.length });
-        const rapprochements = await rapprocherLot(
-          consoleSlug,
-          lot.map((l) => ({ slug: l.slug, titres: l.titres })),
+        const rapprochements = valeur(
+          await rapprocherLot(
+            consoleSlug,
+            lot.map((l) => ({ slug: l.slug, titres: l.titres })),
+          ),
         );
         setIgdb((avant) => ({
           ...avant,
@@ -108,25 +111,27 @@ export function AnalyseImport({
       for (const [i, lot] of decouperEnLots(apercu.lignes, 10).entries()) {
         setEtat({ etape: "enregistrement", fait: i * 10, total });
         resultats.push(
-          ...(await enregistrerLot(
-            consoleSlug,
-            lot.map((l) => ({
-              wikipedia: l.wikipedia,
-              // Choix fait à la main, sinon le jeu IGDB proposé (sûr ou à vérifier).
-              igdbId:
-                l.slug in choix
-                  ? choix[l.slug]!
-                  : (igdb[l.slug]?.jeu?.id ?? null),
-            })),
-            recopier,
-          )),
+          ...valeur(
+            await enregistrerLot(
+              consoleSlug,
+              lot.map((l) => ({
+                wikipedia: l.wikipedia,
+                // Choix fait à la main, sinon le jeu IGDB proposé (sûr ou à vérifier).
+                igdbId:
+                  l.slug in choix
+                    ? choix[l.slug]!
+                    : (igdb[l.slug]?.jeu?.id ?? null),
+              })),
+              recopier,
+            ),
+          ),
         );
       }
       const supprimes = aSupprimer
-        ? await supprimerJeux(consoleSlug, apercu.aSupprimer)
+        ? valeur(await supprimerJeux(consoleSlug, apercu.aSupprimer))
         : [];
       const resume = resumerEnregistrement(resultats, supprimes);
-      await terminerImport(consoleSlug, resume);
+      valeur(await terminerImport(consoleSlug, resume));
       setEtat({ etape: "enregistre", resume });
     } catch (e) {
       setEtat({
