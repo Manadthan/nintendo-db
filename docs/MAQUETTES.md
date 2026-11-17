@@ -1,9 +1,10 @@
 # Maquettes
 
-> Version 0.5 — 17/11/2026 — statut : **validée**
+> Version 0.6 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.6 | 17/11/2026 | **Thème sombre** (anthracite doux, accent éclairci) et **logo cartouche** dans l'en-tête, validés sur captures (#49) |
 > | 0.5 | 17/11/2026 | Fiche : grande jaquette **presque pleine largeur** (≈ 340 px sur iPhone 12 mini), en HD, comme gamecartdb |
 > | 0.4 | 16/11/2026 | Jaquette = **scan de la vraie boîte**, bandeau Wii U compris ; aucun bandeau dessiné par le site (#40) |
 > | 0.3 | 16/11/2026 | *(abandonnée)* Cadre de boîte Wii U : bandeau bleu « Wii U » au-dessus de chaque jaquette, réelle ou neutre (#40) |
@@ -43,6 +44,10 @@ emplacements, remplacés par les scans de boîtes GameTDB de chaque région à l
 - **Jaquette = scan de la vraie boîte** (v0.4) : bandeau Wii U, logo, PEGI/ESRB/CERO compris, tels qu'imprimés.
   Le site **ne dessine aucun bandeau** (essai v0.3 abandonné : un bandeau imité ne ressemble pas au vrai). Une image
   sans scan de boîte est **à remplacer** par un scan, photo ou adresse (US-12).
+- **Thème sombre** (v0.6, US-08) : fond anthracite `#1C1F26`, cartes `#252931`, accent éclairci `#8EA2FF` (lisible
+  sur fond sombre) ; bouton ◐ dans l'en-tête : automatique → clair → sombre.
+- **Logo** (v0.6, US-15) : cartouche grise, étiquette bleue « DB », touche jaune, à gauche du nom ; icône d'onglet
+  (silhouette) et d'écran d'accueil (sur carré bleu).
 - Cibles tactiles ≥ 44 px ; champ de recherche en 16 px (évite le zoom automatique de Safari iOS).
 
 ## À faire après validation

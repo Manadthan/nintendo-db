@@ -13,8 +13,8 @@ export function Disponibilite({ jeu }: { jeu: JeuCatalogue }) {
           aria-label={`${NOMS[region]} : ${sorti ? "sorti" : "non sorti"}`}
           className={`flex h-5 items-center rounded px-1.5 text-[10px] font-bold ${
             sorti
-              ? "bg-[#e4e9fb] text-accent-fonce"
-              : "bg-[#eceef2] text-texte-discret"
+              ? "bg-accent-doux text-accent-fonce"
+              : "bg-surface text-texte-discret"
           }`}
         >
           {region}

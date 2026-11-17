@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { seConnecter, type EtatConnexion } from "@/app/actions/auth";
 
 const champ =
-  "h-12 rounded-[10px] border border-[#d6d9e0] bg-carte px-3 text-base text-texte outline-none focus:border-accent focus:ring-2 focus:ring-accent/20";
+  "h-12 rounded-[10px] border border-champ bg-carte px-3 text-base text-texte outline-none focus:border-accent focus:ring-2 focus:ring-accent/20";
 
 export function FormulaireConnexion() {
   const [etat, action, enCours] = useActionState<EtatConnexion, FormData>(
@@ -17,7 +17,7 @@ export function FormulaireConnexion() {
       {etat.erreur && (
         <div
           role="alert"
-          className="rounded-[10px] border border-[#f1c4c4] bg-[#fff5f5] px-3 py-2.5 text-sm leading-snug text-[#b42318]"
+          className="rounded-[10px] border border-erreur-bordure bg-erreur-fond px-3 py-2.5 text-sm leading-snug text-erreur"
         >
           {etat.erreur}
         </div>
@@ -50,7 +50,7 @@ export function FormulaireConnexion() {
       <button
         type="submit"
         disabled={enCours}
-        className="mt-1.5 h-[50px] rounded-xl bg-accent text-base font-semibold text-white disabled:opacity-60"
+        className="mt-1.5 h-[50px] rounded-xl bg-accent text-base font-semibold text-inverse disabled:opacity-60"
       >
         {enCours ? "Connexion…" : "Se connecter"}
       </button>

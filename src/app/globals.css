@@ -10,8 +10,82 @@
   --color-bordure: #e3e5ea;
   --color-accent: #2541b2;
   --color-accent-fonce: #1a2f86;
+  /* Texte posé sur un fond accent ou texte (boutons, onglet actif). */
+  --color-inverse: #ffffff;
+  --color-accent-doux: #e4e9fb;
+  --color-surface: #eceef2;
+  --color-segment: #e4e6eb;
+  --color-champ: #d6d9e0;
+  --color-separateur: #eef0f3;
+  --color-filet: #dde0e6;
+  --color-absent: #9aa0ab;
+  --color-vignette: #d9dde4;
+  --color-vignette-bordure: #cdd1d9;
+  --color-vignette-bandeau: #3a3f4b;
+  --color-erreur: #b42318;
+  --color-erreur-fond: #fff5f5;
+  --color-erreur-bordure: #f1c4c4;
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-titre: var(--font-space-grotesk), var(--font-inter), sans-serif;
+}
+
+/*
+ * Thème sombre (US-08) : suit le réglage de l'iPhone, sauf choix forcé (data-theme sur <html>, posé avant
+ * l'affichage par le script de layout.tsx : aucun éclair blanc). Contrastes AA vérifiés (texte ≥ 4,5:1).
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="clair"]) {
+    --color-fond: #1c1f26;
+    --color-carte: #252931;
+    --color-texte: #eef0f3;
+    --color-texte-doux: #b4b9c4;
+    --color-texte-discret: #9ca2b0;
+    --color-bordure: #353a44;
+    --color-accent: #8ea2ff;
+    --color-accent-fonce: #b7c3ff;
+    --color-inverse: #1c1f26;
+    --color-accent-doux: #2b3560;
+    --color-surface: #30343d;
+    --color-segment: #2c3038;
+    --color-champ: #474d59;
+    --color-separateur: #2c3038;
+    --color-filet: #353a44;
+    --color-absent: #6b7180;
+    --color-vignette: #30343d;
+    --color-vignette-bordure: #3d424d;
+    --color-vignette-bandeau: #3a3f4b;
+    --color-erreur: #ff8a80;
+    --color-erreur-fond: #3a2124;
+    --color-erreur-bordure: #6a3537;
+    color-scheme: dark;
+  }
+}
+
+/* Même palette, forcée par le bouton de l'en-tête (le choix l'emporte sur le réglage de l'iPhone). */
+:root[data-theme="sombre"] {
+  --color-fond: #1c1f26;
+  --color-carte: #252931;
+  --color-texte: #eef0f3;
+  --color-texte-doux: #b4b9c4;
+  --color-texte-discret: #9ca2b0;
+  --color-bordure: #353a44;
+  --color-accent: #8ea2ff;
+  --color-accent-fonce: #b7c3ff;
+  --color-inverse: #1c1f26;
+  --color-accent-doux: #2b3560;
+  --color-surface: #30343d;
+  --color-segment: #2c3038;
+  --color-champ: #474d59;
+  --color-separateur: #2c3038;
+  --color-filet: #353a44;
+  --color-absent: #6b7180;
+  --color-vignette: #30343d;
+  --color-vignette-bordure: #3d424d;
+  --color-vignette-bandeau: #3a3f4b;
+  --color-erreur: #ff8a80;
+  --color-erreur-fond: #3a2124;
+  --color-erreur-bordure: #6a3537;
+  color-scheme: dark;
 }
 
 body {

@@ -100,7 +100,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
         </span>
       </div>
 
-      <div className="flex h-11 items-center gap-2 rounded-xl border border-[#d6d9e0] bg-carte px-3">
+      <div className="flex h-11 items-center gap-2 rounded-xl border border-champ bg-carte px-3">
         <svg
           width="18"
           height="18"
@@ -133,8 +133,8 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
             onClick={() => enregistrerMarche(m.valeur)}
             className={`h-9 rounded-full border px-3.5 text-[13px] ${
               marche === m.valeur
-                ? "border-texte bg-texte font-semibold text-white"
-                : "border-[#d6d9e0] bg-carte font-medium"
+                ? "border-texte bg-texte font-semibold text-inverse"
+                : "border-champ bg-carte font-medium"
             }`}
           >
             {m.libelle}
@@ -150,7 +150,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
           id="tri"
           value={tri}
           onChange={(e) => setTri(e.target.value as Tri)}
-          className="h-9 rounded-[10px] border border-[#d6d9e0] bg-carte px-2.5 text-[13px] font-medium"
+          className="h-9 rounded-[10px] border border-champ bg-carte px-2.5 text-[13px] font-medium"
         >
           <option value="anciens">Plus anciens</option>
           <option value="recents">Plus récents</option>
@@ -165,7 +165,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
               aria-pressed={vue === v}
               onClick={() => changerVue(v)}
               className={`h-9 rounded-lg px-2.5 text-[13px] font-medium ${
-                vue === v ? "bg-texte text-white" : "text-texte-doux"
+                vue === v ? "bg-texte text-inverse" : "text-texte-doux"
               }`}
             >
               {v === "grille" ? "Grille" : "Liste"}
@@ -191,7 +191,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
             <button
               type="button"
               onClick={() => enregistrerRecherche("")}
-              className="h-10 rounded-[10px] bg-accent px-4 text-sm font-semibold text-white"
+              className="h-10 rounded-[10px] bg-accent px-4 text-sm font-semibold text-inverse"
             >
               Effacer la recherche
             </button>
@@ -204,7 +204,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
           {groupe.titre && (
             <div className="flex items-center gap-2.5">
               <h3 className="text-[15px] font-bold">{groupe.titre}</h3>
-              <div className="h-px flex-1 bg-[#dde0e6]" />
+              <div className="h-px flex-1 bg-filet" />
               <span className="text-xs text-texte-discret">
                 {groupe.versions.length} jeu
                 {groupe.versions.length > 1 ? "x" : ""}
@@ -241,7 +241,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
               {groupe.versions.map((v) => (
                 <li
                   key={v.jeu.id}
-                  className="border-t border-[#eef0f3] first:border-t-0"
+                  className="border-t border-separateur first:border-t-0"
                 >
                   <Link
                     href={lien(v)}
