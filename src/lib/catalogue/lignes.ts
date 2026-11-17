@@ -53,7 +53,7 @@ export function versJeuCatalogue(
         date: r.date_sortie,
         precision: r.precision_date,
         jaquetteSrcset: r.jaquette_path
-          ? srcsetJaquette(ligne.id, region, baseUrl)
+          ? srcsetJaquette(r.jaquette_path, baseUrl)
           : null,
       };
       return [region, sortie];

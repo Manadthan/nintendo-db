@@ -95,7 +95,7 @@ de la région (`coverHQ`, 768 × 1080 ; PAL : langue EN, sinon FR, DE) ; sans sc
 main (US-12). Les anciennes jaquettes IGDB (v0.2 à v0.7) restent jusqu'à leur remplacement. Une jaquette `photo` ou `url` n'est jamais
 remplacée par l'import. Image convertie avec sharp en **trois tailles WebP** : 300, 600 et **768 px** de large
 (768 = largeur d'un scan GameTDB, pour la grande jaquette de la fiche sur écran ×3 ; jamais d'agrandissement),
-servies avec `srcset` : le catalogue charge les petites, la fiche la HD. Chemin : `{game_id}/{region}-{taille}.webp` dans un
+servies avec `srcset` : le catalogue charge les petites, la fiche la HD. Chemin : `{game_id}/{region}-{version}-{taille}.webp` (version nouvelle à chaque copie, cache d'un an, #60) dans un
 bucket public ; écriture réservée au propriétaire. Toute image est **ré-encodée** (jamais servie telle quelle).
 Mention « Jaquette : GameTDB » (ou « Photo », « Image ajoutée ») sous la jaquette. *Pourquoi* : rendu net et rapide comme gamecartdb,
 pas d'image cassée si la source change. Remplace l'ADR-04 de la v0.1.
