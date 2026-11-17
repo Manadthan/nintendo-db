@@ -36,7 +36,7 @@ test("le propriétaire remplace une jaquette par une photo (US-12)", async ({
 }) => {
   await seConnecter(page);
   await page.goto("/admin/jaquettes");
-  await page.getByRole("link", { name: "Remplacer" }).first().click();
+  await page.getByRole("link", { name: "Remplacer", exact: true }).first().click();
 
   // Une « photo » de 600 × 800 fabriquée pour le test.
   const sharp = (await import("sharp")).default;
