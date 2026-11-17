@@ -37,10 +37,10 @@ Base `wiitdb.zip` du 17/11 : disques du commerce (identifiant en **R** ou **S** 
 
 | Mesure | Résultat |
 |---|---|
-| Jeux avec au moins une boîte Nintendo (code `01`) | **86** (62 dans les 3 régions, 12 Japon seul, 12 autres combinaisons) ; 228 disques |
+| Jeux avec au moins une boîte Nintendo (code `01` ou éditeur « Nintendo », comme en Wii U) | **88** (64 dans les 3 régions, 12 Japon seul, 12 autres combinaisons) ; 234 disques |
 | Dates (au jour près), genres, titres japonais (locale JA) | **100 %** des disques |
-| Développeur | 226 disques sur 228 |
-| Scans de boîtes `coverfullHQ` (boîte dépliée 1024 × 680, PNG ≈ 1 Mo) | **209 sorties sur 220** (95 %) ; les 11 manquantes sont japonaises |
+| Développeur | 232 disques sur 234 |
+| Scans de boîtes `coverfullHQ` (boîte dépliée 1024 × 680, PNG ≈ 1 Mo) | **215 sorties sur 226** (95 %) ; les 11 manquantes sont japonaises |
 | `coverHQ` (face seule, comme la Wii U) | **N'existe pas** pour la Wii |
 | Wikipédia « List of Wii games » | Une page de 4 Mo, structure différente : le lecteur Wii U ne la lit pas |
 | Autres sources d'images | libretro-thumbnails : même résolution (≈ 486–512 px), noms à deviner ; The Cover Project : inaccessible d'ici ; IGDB : pas des scans |
