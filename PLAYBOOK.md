@@ -85,6 +85,8 @@
 5. Regrouper les **réglages de comptes** (clés, variables, secrets) dans une session faite depuis un
    ordinateur (Remote Control) ; garder l'iPhone pour relire, tester, décider.
 6. Prévoir une base de prévisualisation séparée si des migrations doivent être testées avant le merge.
+7. **Tester les sources de données d'abord** (bilan Nintendo DB) : prototyper l'import réel, depuis l'hébergeur
+   de production et avec les vraies images, avant d'écrire la spec.
 
 ## 5. Liste de contrôle
 
