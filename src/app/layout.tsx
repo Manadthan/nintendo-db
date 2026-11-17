@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import {
+  NOM_SITE,
+  OPEN_GRAPH_DE_BASE,
+  URL_SITE,
+} from "@/lib/referencement/referencement";
 import { SCRIPT_THEME } from "@/lib/theme/theme";
 import "./globals.css";
 
@@ -11,10 +16,19 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
 });
 
+const DESCRIPTION =
+  "Les jeux Nintendo en boîte, version par version : jaquettes, titres et dates au Japon, en Amérique du Nord et en Europe.";
+
 export const metadata: Metadata = {
-  title: "Nintendo DB",
-  description:
-    "Les jeux Nintendo en boîte, version par version : jaquettes, titres et dates au Japon, en Amérique du Nord et en Europe.",
+  // Base des adresses relatives (canoniques, aperçus de partage) : toujours le site de production.
+  metadataBase: new URL(URL_SITE),
+  title: NOM_SITE,
+  description: DESCRIPTION,
+  openGraph: {
+    ...OPEN_GRAPH_DE_BASE,
+    title: NOM_SITE,
+    description: DESCRIPTION,
+  },
   formatDetection: { telephone: false },
 };
 

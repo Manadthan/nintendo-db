@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.0 — 17/11/2026 — statut : **validée**
+> Version 1.1 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.1 | 17/11/2026 | **Référencement** (étape 7) : `src/lib/referencement/`, `sitemap.ts`, `robots.ts`, `metadataBase` = adresse de production |
 > | 1.0 | 17/11/2026 | **Genres** lus dans GameTDB (48 jeux sur 48), traduits en français, gardés dans `games.genre` (US-06) |
 > | 0.9 | 17/11/2026 | Routes de correction sous `/admin` (protégées par le proxy) : `/admin/jeux`, `/admin/jaquettes` (#42 à #45) |
 > | 0.8 | 17/11/2026 | **IGDB retiré** (#58) : GameTDB donne aussi les titres japonais ; plus de rapprochement ni de secrets Twitch |
@@ -169,6 +170,9 @@ test n'appelle les sites en direct.
 5. **Correction** : import GameTDB (scans de boîtes, codes produit), jaquette HD, US-08 (sombre) + US-15 (logo), US-12 (page « Jaquettes »), US-11.
 6. **Filtres** : US-06.
 7. **Finitions** : US-07, référencement. Puis console suivante.
+   Référencement : adresses canoniques et aperçus absolus sur `https://nintendo-db.vercel.app` (`metadataBase`),
+   même depuis une prévisualisation (Vercel y ajoute déjà `noindex`) ; aperçu de partage = jaquette 600 px de la
+   version « Tous » ; données schema.org `VideoGame` (JSON échappé) ; `robots.txt` exclut `/admin`.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.

@@ -23,8 +23,8 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.1 validée |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.7 validée |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.0 validée |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.8 validée |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.1 validée |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
 | `docs/BILAN.md` | Rétrospective des étapes 1 à 5 : chiffres, réussites, difficultés, leçons | v1.0 |
 
@@ -75,6 +75,7 @@ src/lib/catalogue/       version affichée, dates en français, tri, groupes (ca
 src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; src/app/not-found.tsx : 404 en français
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
 src/components/          EnTete (Logo, BoutonTheme), PiedDePage (lien Administration), Catalogue (client : recherche, marché, tri, filtres, grille/liste), Filtres (panneau et pastilles, US-06), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite
+src/lib/referencement/   adresse du site, sitemap, robots, métadonnées et données structurées des fiches (étape 7) + tests ; src/app/sitemap.ts, robots.ts
 src/lib/theme/           choix du thème : auto/clair/sombre, script anti-éclair (US-08) + tests
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
 src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games »), apercu.ts (aperçu, lots de 10, résumés), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (WebP 300/600/768 via sharp), gametdb.ts (boîtes par région, titres japonais, compilations, codes produit ; lu depuis le relais), resultat.ts (erreurs des actions rendues lisibles), physique.ts (règle : boîte Nintendo exigée, sorties par région) + tests ; __fixtures__/ (copies datées, README)
@@ -104,7 +105,8 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 3 — Consultation : #24 à #27
   - [x] Étape 4 — Import : #32 à #35, #40
   - [x] Étape 5 — Correction : GameTDB (#46, relais #53), jaquette HD #48, sombre + logo #49, Jaquettes #42 #43, fiches #44 #45, et #56, #58, #60
-  - [ ] Étape 6 — Filtres (US-06) · Étape 7 — Finitions (US-07, référencement)
+  - [x] Étape 6 — Filtres : genres #68, panneau #69
+  - [ ] Étape 7 — Finitions : À propos (US-07) #72, référencement #73
 - [x] Bilan des étapes 1 à 5 : `docs/BILAN.md` (le bilan final suivra l'étape 7)
 
 ## Erreurs récurrentes

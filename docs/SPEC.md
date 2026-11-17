@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.7 — 17/11/2026 — statut : **validée**
+> Version 1.8 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.8 | 17/11/2026 | Référencement précisé (étape 7) : plan du site, robots sans l'administration, adresses canoniques, aperçu de partage avec la jaquette, données structurées |
 > | 1.7 | 17/11/2026 | US-06 : filtre « sorti dans la région affichée » retiré (doublon du marché) ; genres = ceux de GameTDB, **tous traduits** en français |
 > | 1.6 | 17/11/2026 | US-10 : **IGDB retiré** (#58), GameTDB donne aussi les titres japonais ; sans scan → vignette neutre |
 > | 1.5 | 17/11/2026 | US-09 : lien discret « Administration » en pied de page (demande du propriétaire) |
@@ -156,7 +157,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 | Rapidité | Catalogue affiché en moins de 2 s en 4G ; pages publiques préparées à l'avance |
 | Sécurité | Écriture réservée au propriétaire, vérifiée côté serveur ; aucun secret dans le dépôt |
 | Données | Chaque jeu cite sa source ; licences respectées (attribution si exigée) |
-| Référencement | Chaque fiche a un titre et une description lisibles par les moteurs de recherche |
+| Référencement | Chaque fiche a un titre, une description, une **adresse canonique**, un **aperçu de partage** avec sa jaquette et des **données structurées** (schema.org `VideoGame`) ; **plan du site** (`sitemap.xml`) ; l'administration est exclue des moteurs (`robots.txt`) |
 | Accessibilité | Contrastes suffisants, images avec texte alternatif, navigation possible au clavier |
 | Tests | Import testé sur des **fixtures**, jamais sur la source en direct |
 
