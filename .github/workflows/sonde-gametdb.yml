@@ -1,0 +1,13 @@
+# Sonde temporaire (#53) : GameTDB est-il joignable depuis GitHub Actions ? (Vercel : délai de connexion dépassé)
+name: Sonde GameTDB
+on:
+  push:
+    branches: [chore/sonde-gametdb]
+jobs:
+  sonde:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for u in "https://www.gametdb.com/wiiutdb.zip?LANG=EN" https://art.gametdb.com/wiiu/coverHQ/EN/ALZP01.jpg; do
+            curl -sS -o /dev/null --max-time 30 -w "$u %{http_code} %{size_download} %{time_total}s\n" "$u" || echo "$u ÉCHEC"
+          done
