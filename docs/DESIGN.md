@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 0.7 — 17/11/2026 — statut : **validée**
+> Version 0.8 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.8 | 17/11/2026 | **IGDB retiré** (#58) : GameTDB donne aussi les titres japonais ; plus de rapprochement ni de secrets Twitch |
 > | 0.7 | 17/11/2026 | **Relais GameTDB** (#53) : GameTDB refuse les serveurs de Vercel ; une tâche GitHub dépose base et scans dans un bucket privé |
 > | 0.6 | 17/11/2026 | Jaquettes en 3 tailles (300/600/**768**) ; **GameTDB** : scans de boîtes par région (prioritaires sur IGDB) et codes produit (étude du 17/11) ; R6 et R8 traités |
 > | 0.5 | 16/11/2026 | R6 : jaquettes IGDB qui ne sont pas des scans de boîte (#40) |
@@ -19,10 +20,10 @@
 | Source | Ce qu'elle apporte | Conditions | Verdict |
 |---|---|---|---|
 | **Wikipédia** « List of Wii U games » | 792 jeux, dont **67 édités par Nintendo**, **50 en boîte** (marqués †) ; dates **Japon / Amérique du Nord / Australasie / Europe** ; titres NA et PAL quand ils diffèrent | CC BY-SA 4.0 : attribution | **Retenue** : liste de référence et dates |
-| **IGDB** (Twitch) | **Jaquettes par région** (`game_localizations`), haute définition ; titres régionaux ; dates par région | Gratuit, y compris commercial ; **stockage encouragé** ; mention visible d'IGDB ; compte développeur Twitch | **Retenue** : jaquettes et titres japonais |
+| **IGDB** (Twitch) | **Jaquettes par région** (`game_localizations`), haute définition ; titres régionaux ; dates par région | Gratuit, y compris commercial ; **stockage encouragé** ; mention visible d'IGDB ; compte développeur Twitch | Retenue (v0.2), **retirée en v0.8** (#58) : GameTDB couvre titres japonais et jaquettes |
 | Wikidata | Liste et titre japonais corrects ; dates PAL 15–23 % ; aucun code produit ; pas de jaquettes ; pas de distinction boîte / dématérialisé | CC0 | Écartée (redondante avec les deux autres) |
 | MobyGames | Données riches | Page « Just a moment… » anti-robots : conditions illisibles par un programme ; API devenue payante (à confirmer) | Écartée |
-| **GameTDB** (étude du 17/11/2026) | **Scans de vraies boîtes** par région (bandeau Wii U, PEGI/ESRB/CERO), 768 × 1080 = proportions d'une boîte ; base XML téléchargeable (identifiants de disque → **codes produit**, dates, éditeur) | Pas de licence formelle ; base « pour que chacun l'utilise dans tout projet lié aux jeux » ; images propriété des éditeurs (comme IGDB) | **Retenue** : jaquettes (127 sorties sur 143, 89 %) et codes produit |
+| **GameTDB** (étude du 17/11/2026) | **Scans de vraies boîtes** par région (bandeau Wii U, PEGI/ESRB/CERO), 768 × 1080 = proportions d'une boîte ; base XML téléchargeable (identifiants de disque → **codes produit**, dates, éditeur) | Pas de licence formelle ; base « pour que chacun l'utilise dans tout projet lié aux jeux » ; images propriété des éditeurs (comme IGDB) | **Retenue** : boîtes par région, scans (132 sur 135 disques), titres japonais (locale JA), codes produit |
 | Redump / No-Intro | Codes produit des disques | Redump injoignable depuis l'environnement | À revoir pour les codes produit (piste) |
 
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
@@ -37,7 +38,7 @@ Identique à `mon-site-sdlc` (décision 7 de l'intention) :
 | Pages et serveur | **Next.js** (App Router, TypeScript strict), server actions |
 | Styles | **Tailwind CSS**, mobile d'abord, thèmes clair/sombre |
 | Base, connexion, images | **Supabase** : Postgres (RLS), Auth (inscriptions désactivées), Storage (bucket public) |
-| Import | **cheerio** (tableau Wikipédia), API **IGDB** (côté serveur), **sharp** (WebP) |
+| Import | **cheerio** (tableau Wikipédia, base GameTDB), **sharp** (WebP), relais GameTDB par GitHub Actions |
 | Tests | **Vitest**, **Playwright** (375 × 812, WebKit + Chromium), **pgTAP** |
 | Hébergement, CI | **Vercel** (région Paris `cdg1`), **GitHub Actions** |
 
@@ -48,7 +49,7 @@ Visiteur (iPhone) ──HTTPS──▶ Vercel / Next.js ── pages publiques p
                                    │                └─ jaquettes WebP ◀── Supabase Storage (public)
 Propriétaire (connecté) ──────────▶├──▶ Supabase (Postgres + Auth + Storage)
                                    │
-                                   └──▶ en.wikipedia.org, api.igdb.com, images.igdb.com, www.gametdb.com, art.gametdb.com  (import, côté serveur)
+                                   └──▶ en.wikipedia.org (import) ; GameTDB via le relais GitHub → bucket privé « gametdb »
 ```
 
 ## 4. Décisions (ADR)
@@ -65,14 +66,12 @@ retenu dans `localStorage`. Sur la fiche, la **région** (US-04) est un état lo
 v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. Après une modification,
 `revalidatePath` régénère les pages concernées.
 
-**ADR-03 — Import Wikipédia + IGDB, aperçu puis enregistrement.**
+**ADR-03 — Import Wikipédia + GameTDB, aperçu puis enregistrement.**
 1. **Wikipédia** (référence) : tableau de la liste des jeux de la console, lu avec cheerio. Retenus : éditeur
    contenant « Nintendo » dans au moins une région **et** marqué † (en boîte). Récupérés : titres (NA, PAL),
    développeur, éditeur, dates **JAP** (colonne Japan), **US** (North America), **PAL** (Europe ; Australasie
    ignorée), « Unreleased » = non sorti.
-2. **IGDB** : pour chaque jeu, recherche par titre sur la plateforme Wii U → identifiant IGDB ; puis
-   `game_localizations` (titre et jaquette par région) et la jaquette principale en secours. Le titre japonais
-   vient de la localisation Japon ; sa forme romanisée est le titre IGDB principal ou saisie à la main.
+2. *(v0.2 à v0.7 : IGDB, retiré en v0.8, #58.)*
 2 bis. **GameTDB** : la base `wiiutdb.zip` donne les identifiants de disque (ex. `ALZP01`). Rapprochement par
    titre US ou PAL ; les 3 premiers caractères sont communs aux 3 régions (`ALZE01`, `ALZJ01`, `ALZP01`), ce qui
    donne la sortie JAP même quand son titre diffère. Code produit = `WUP-P-` + 4 premiers caractères
@@ -83,24 +82,23 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
    GameTDB **tranche le physique** (Wikipédia mélange boîte et téléchargement) : type `WiiU` = disque en boîte,
    `eShop` = téléchargement, titre « (Download Code) » = boîte à code, écartée. Jeu retenu si au moins une boîte
    a l'éditeur Nintendo (code `01`) ; sortie d'une région = une boîte existe dans cette région (champ `region`,
-   pas la 4ᵉ lettre : un disque PAL peut finir en D, F…). Compilations en boîte absentes de la liste Wikipédia
+   pas la 4ᵉ lettre : un disque PAL peut finir en D, F…). Titre japonais : locale JA du disque japonais ; sa
+   forme romanisée (ou anglaise) : son titre EN. Compilations en boîte absentes de la liste Wikipédia
    (NES Remix Pack / Famicom Remix 1 + 2, New Super Mario Bros. U + New Super Luigi U) : fiches propres.
-3. **Aperçu** (n'écrit rien) : jeux, rapprochement IGDB proposé (corrigeable à la main si le titre est ambigu),
-   ajoutés / modifiés / ignorés avec la raison. Puis enregistrement **par lots de 10** piloté par le
+3. **Aperçu** (n'écrit rien) : jeux retenus, ajoutés / modifiés / ignorés avec la raison. Puis enregistrement **par lots de 10** piloté par le
    navigateur, jaquettes comprises (même principe que l'ADR-03 de `mon-site-sdlc`, évite les délais Vercel).
 4. **Verrous** : tout champ modifié à la main est verrouillé ; l'import ne le remplace jamais et signale l'écart.
-5. **Identifiants IGDB** (Client ID et secret Twitch) : variables d'environnement côté serveur sur Vercel, jamais
-   dans le dépôt ni dans le navigateur ; jeton d'accès demandé à la volée et gardé en mémoire.
+5. *(Identifiants IGDB : supprimés avec IGDB, v0.8.)*
 
 **ADR-04 — Jaquettes copiées chez nous, en WebP haute définition.** Source par ordre de priorité : **scan GameTDB**
-de la région (`coverHQ`, 768 × 1080 ; PAL : langue EN, sinon FR, DE), puis IGDB en `t_cover_big_2x`
-(528 × 748) ou plus grand, puis jaquette principale IGDB en secours. Une jaquette `photo` ou `url` n'est jamais
+de la région (`coverHQ`, 768 × 1080 ; PAL : langue EN, sinon FR, DE) ; sans scan, vignette neutre, remplaçable à la
+main (US-12). Les anciennes jaquettes IGDB (v0.2 à v0.7) restent jusqu'à leur remplacement. Une jaquette `photo` ou `url` n'est jamais
 remplacée par l'import. Image convertie avec sharp en **trois tailles WebP** : 300, 600 et **768 px** de large
 (768 = largeur d'un scan GameTDB, pour la grande jaquette de la fiche sur écran ×3 ; jamais d'agrandissement),
 servies avec `srcset` : le catalogue charge les petites, la fiche la HD. Chemin : `{game_id}/{region}-{taille}.webp` dans un
 bucket public ; écriture réservée au propriétaire. Toute image est **ré-encodée** (jamais servie telle quelle).
-Mention « Jaquette : GameTDB » (ou IGDB, « Photo ») sous la jaquette. *Pourquoi* : rendu net et rapide comme gamecartdb,
-pas d'image cassée si la source change, et IGDB préfère qu'on stocke ses images. Remplace l'ADR-04 de la v0.1.
+Mention « Jaquette : GameTDB » (ou « Photo », « Image ajoutée ») sous la jaquette. *Pourquoi* : rendu net et rapide comme gamecartdb,
+pas d'image cassée si la source change. Remplace l'ADR-04 de la v0.1.
 
 **ADR-05 — Recherche dans le navigateur en v1.** Le catalogue Wii U (≈ 50 jeux) est déjà chargé : la recherche
 filtre la liste au fil de la frappe, sur un titre normalisé (minuscules, sans accents ni ponctuation) calculé
@@ -113,7 +111,7 @@ PAL (sinon US, sinon romanisé), figé à la création. En v1, `/` affiche le ca
 ## 5. Modèle de données
 
 ```
-consoles(id, slug, nom, type 'salon'|'portable', annee, ordre, wikipedia_liste, igdb_platform_id)
+consoles(id, slug, nom, type 'salon'|'portable', annee, ordre, wikipedia_liste, igdb_platform_id — inutilisé depuis v0.8)
 games(id, console_id → consoles, slug, igdb_id, wikipedia_url, developpeur, franchise, genre,
       physique bool, verrous text[], created_at, updated_at)
 releases(id, game_id → games, region 'JAP'|'US'|'PAL', sortie bool, titre, titre_romanise (JAP),
@@ -136,7 +134,7 @@ import_runs(id, console_id, lance_le, resume jsonb)
 |---|---|---|
 | `/` → `/consoles/wii-u` | Catalogue à la manière de gamecartdb : présentation, « Tous les jeux », recherche, marché, tri, grille/liste, groupes par année | US-02, 03, 05, 06 |
 | `/jeux/[console]/[jeu]` | Grande jaquette et sélecteur JAP/US/PAL dessous, informations, disponibilité, sources | US-04 |
-| `/a-propos` | Non-affiliation, sources (Wikipédia, IGDB) et licences | US-07 |
+| `/a-propos` | Non-affiliation, sources (Wikipédia, GameTDB) et licences | US-07 |
 | `/admin/connexion`, `/admin/import` | Connexion ; import avec aperçu et lots | US-09, 10 |
 | `/jeux/[console]/[jeu]/modifier` | Correction, jaquettes par région | US-11, 12 |
 
@@ -147,12 +145,12 @@ principal (priorité du propriétaire) : grille à bords fins, proportions de bo
 
 | Niveau | Quoi |
 |---|---|
-| Vitest | lecture du tableau Wikipédia **sur fixture** (50 jeux Nintendo en boîte attendus), réponses IGDB **sur fixtures**, rapprochement, normalisation, slug, verrous, conversion WebP |
+| Vitest | lecture du tableau Wikipédia **sur fixture** (50 jeux Nintendo en boîte attendus), base GameTDB **sur fixture**, règle du physique, rapprochement, normalisation, slug, verrous, conversion WebP |
 | pgTAP | RLS (anon lit, n'écrit pas), bucket, unicité `(game_id, region)` |
 | Playwright | catalogue → fiche, filtre par marché, recherche au fil de la frappe, bascule de région sur la fiche, connexion, correction |
 | CI | lint, types, unitaires, build, e2e sur base Supabase locale, types générés à jour |
 
-Fixtures : copie datée de « List of Wii U games » et de quelques réponses IGDB (+ README d'origine) ; aucun
+Fixtures : copies datées de « List of Wii U games » et d'un extrait de la base GameTDB (+ README d'origine) ; aucun
 test n'appelle les sites en direct.
 
 ## 8. Plan par étapes (milestones)
@@ -160,7 +158,7 @@ test n'appelle les sites en direct.
 1. **Socle** : Next.js, Tailwind, ESLint, Vitest, Playwright, CI, déploiement Vercel.
 2. **Base** : Supabase, migrations (schéma, RLS, bucket), console Wii U, connexion US-09.
 3. **Consultation** : US-02, US-03, US-04, US-05 avec 3–4 jeux Wii U saisis en données de départ → *site visible tôt*.
-4. **Import Wii U** : US-10 (Wikipédia + IGDB + jaquettes).
+4. **Import Wii U** : US-10 (Wikipédia + IGDB + jaquettes ; IGDB remplacé par GameTDB à l'étape 5).
 5. **Correction** : import GameTDB (scans de boîtes, codes produit), jaquette HD, US-08 (sombre) + US-15 (logo), US-12 (page « Jaquettes »), US-11.
 6. **Filtres** : US-06.
 7. **Finitions** : US-07, référencement. Puis console suivante.
@@ -172,15 +170,15 @@ faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 
 | # | Risque | Parade |
 |---|---|---|
-| R1 | Rapprochement Wikipédia ↔ IGDB erroné (titres proches) | Aperçu avec identifiant IGDB corrigeable ; tests sur fixtures de cas ambigus |
-| R2 | Pas de jaquette IGDB pour une région | Jaquette principale en secours, signalée dans le résumé ; remplaçable (US-12) |
+| R1 | Rapprochement Wikipédia ↔ GameTDB manqué (titre différent) | Jeu écarté avec la raison dans l'aperçu ; correction ou ajout à la main (US-11) ; tests sur fixtures |
+| R2 | Pas de scan GameTDB pour une région | Vignette neutre, signalée dans le résumé ; remplaçable (US-12) |
 | R3 | Droits des jaquettes | Mention de la source ; « non affilié » (US-07) ; retrait sur demande |
-| R4 | Attributions (CC BY-SA Wikipédia, IGDB) | Lien source sur chaque fiche + page À propos |
+| R4 | Attributions (CC BY-SA Wikipédia, GameTDB) | Lien source sur chaque fiche + page À propos |
 | R5 | Prévisualisation Vercel partageant la base de production | Prévenir dans la PR ; piste : branches Supabase |
 | R6 | Image IGDB = illustration sans bandeau Wii U, pas un scan de boîte | Scans GameTDB en priorité ; restes remplacés à la main (US-12) ; aucun bandeau imité par le site |
-| R9 | GameTDB indisponible, bloqué ou scan retiré | Relais par GitHub (#53) ; jaquette déjà copiée conservée ; IGDB en secours ; mention de la source, retrait sur demande |
+| R9 | GameTDB indisponible, bloqué ou scan retiré | Relais par GitHub (#53) ; jaquette déjà copiée conservée ; mention de la source, retrait sur demande |
 | R6 | Forme du tableau Wikipédia qui change | Lecture par en-têtes de colonnes, test sur fixture ; échec explicite plutôt que données fausses |
-| R7 | Limites IGDB (4 requêtes/s) | Lots de 10, requêtes groupées ; ≈ 50 jeux en v1 |
+| R7 | *(Limites IGDB : sans objet depuis v0.8.)* | — |
 | R8 | Codes produit absents | Déduits de l'identifiant GameTDB ; sinon saisie manuelle (US-11) |
 
 ## 10. Commandes (dès l'étape 1)

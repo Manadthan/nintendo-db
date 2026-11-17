@@ -15,7 +15,7 @@ où JAP / US / PAL change la jaquette) :
 https://claude.ai/artifact/7Eve51uAdaqgkkz4G9fRvZ
 
 Format : iPhone 12 mini, 375 × 812. Données réelles de la Wii U (Wikipédia) ; les jaquettes sont des
-emplacements, remplacés par les jaquettes IGDB de chaque région à l'import.
+emplacements, remplacés par les scans de boîtes GameTDB de chaque région à l'import.
 
 ## Écrans de la v1
 
@@ -42,7 +42,7 @@ emplacements, remplacés par les jaquettes IGDB de chaque région à l'import.
 - **Les jaquettes priment** : proportions de boîte Wii U (27 × 38), jamais recadrées, ombre douce sur la fiche ; sur la fiche, jaquette **presque pleine largeur** (marges de 16 px) et nette sur écran ×3 (v0.5).
 - **Jaquette = scan de la vraie boîte** (v0.4) : bandeau Wii U, logo, PEGI/ESRB/CERO compris, tels qu'imprimés.
   Le site **ne dessine aucun bandeau** (essai v0.3 abandonné : un bandeau imité ne ressemble pas au vrai). Une image
-  IGDB qui n'est qu'une illustration (sans bandeau) est **à remplacer** par un scan, photo ou adresse (US-12).
+  sans scan de boîte est **à remplacer** par un scan, photo ou adresse (US-12).
 - Cibles tactiles ≥ 44 px ; champ de recherche en 16 px (évite le zoom automatique de Safari iOS).
 
 ## À faire après validation

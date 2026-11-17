@@ -24,7 +24,7 @@ export type SortieWikipedia =
 
 export type JeuWikipedia = {
   slug: string;
-  /** Wikipédia anglais donne les titres nord-américain et européen ; le japonais viendra d'IGDB. */
+  /** Wikipédia anglais donne les titres nord-américain et européen ; le japonais vient de GameTDB. */
   titres: { US: string; PAL: string };
   developpeur: string | null;
   wikipediaUrl: string | null;

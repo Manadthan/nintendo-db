@@ -19,22 +19,6 @@ node scripts/fixture-wikipedia.mjs <page.html> > src/lib/import/__fixtures__/wii
 
 Résultat attendu de la lecture : **50 jeux** en boîte (†) dont Nintendo est éditeur dans au moins une région.
 
-## `igdb/*.json`
-
-| | |
-|---|---|
-| Source | API IGDB v4 (`POST https://api.igdb.com/v4/games`), plateforme Wii U (41) |
-| Capture | Workflow « Capturer les fixtures IGDB » (`scripts/capture-igdb.mjs`), le 16/11/2026 |
-| Conditions | IGDB (Twitch Developer Service Agreement) : stockage autorisé, mention d'IGDB visible sur le site |
-| Contenu | Une recherche par fichier : `requete` envoyée et `reponse` brute d'IGDB |
-
-10 titres choisis pour leurs pièges : DLC et packs renvoyés par la recherche (Mario Kart 8, Hyrule Warriors),
-suites et compilations (NES Remix, Star Fox Zero), titres régionaux (Kirby, Art Academy, Fatal Frame / Project Zero),
-titre seulement proche (« Wii Karaoke U by Joysound »).
-
-Pour recapturer : onglet Actions → « Capturer les fixtures IGDB » → Run workflow, sur une branche (jamais `main`) ;
-les fichiers sont enregistrés par un commit dans cette branche.
-
 ## `wiiutdb.xml`
 
 | | |

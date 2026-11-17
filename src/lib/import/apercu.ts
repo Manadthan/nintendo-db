@@ -1,5 +1,4 @@
 import { REGIONS, type Region } from "@/lib/catalogue/types";
-import type { Rapprochement } from "./igdb";
 import type { JeuAImporter, JeuEcarte } from "./physique";
 import type { ListeWikipedia } from "./wikipedia";
 
@@ -60,14 +59,11 @@ export type Resume = {
   ajoutes: number;
   misAJour: number;
   ignores: number;
-  aVerifier: number;
+  aSupprimer: number;
 };
 
-/** Résumé affiché en tête de l'aperçu ; « à vérifier » : rapprochement IGDB incertain ou introuvable (R1). */
-export function resumer(
-  apercu: Apercu,
-  statuts: Partial<Record<string, Rapprochement["statut"]>>,
-): Resume {
+/** Résumé affiché en tête de l'aperçu. */
+export function resumer(apercu: Apercu): Resume {
   return {
     ajoutes: apercu.lignes.filter((l) => l.action === "ajouter").length,
     misAJour: apercu.lignes.filter((l) => l.action === "mettre-a-jour").length,
@@ -75,7 +71,7 @@ export function resumer(
       apercu.ignores.autresEditeurs +
       apercu.ignores.telechargeables.length +
       apercu.ecartes.length,
-    aVerifier: Object.values(statuts).filter((s) => s && s !== "sur").length,
+    aSupprimer: apercu.aSupprimer.length,
   };
 }
 
@@ -93,7 +89,7 @@ export type ResultatEnregistrement = {
   titre: string;
   statut: "ajoute" | "mis-a-jour" | "erreur";
   jaquettes: number;
-  /** Régions sorties sans scan de boîte GameTDB : image IGDB à la place (ou rien), à remplacer à la main (R6). */
+  /** Régions sorties sans scan de boîte GameTDB : ancienne image ou vignette neutre, à remplacer à la main (#42). */
   sansScan: Region[];
   ecarts: string[];
   erreur?: string;

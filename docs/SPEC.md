@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.4 — 17/11/2026 — statut : **validée** (étude GameTDB)
+> Version 1.6 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.6 | 17/11/2026 | US-10 : **IGDB retiré** (#58), GameTDB donne aussi les titres japonais ; sans scan → vignette neutre |
 > | 1.4 | 17/11/2026 | US-08 avancée, US-15 logo ; US-10 : **boîte Nintendo exigée**, sortie par région = en boîte dans la région, compilations ; jaquettes = **scans de boîtes** (GameTDB en priorité) et codes produit importés ; US-12 : page « Jaquettes » |
 > | 1.3 | 16/11/2026 | Retour sur les maquettes (PR #3) : trame de gamecartdb ; région choisie **sur la fiche** (US-04) ; catalogue filtré par **marché** (US-03) ; recherche **dans le catalogue** (US-05) |
 > | 1.2 | 16/11/2026 | **v1 = Wii U seule** ; US-01 en S ; US-10 depuis Wikipédia + IGDB ; US-12 : jaquettes copiées chez nous |
@@ -113,7 +114,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       même en appelant directement le serveur.
 - [ ] Un bouton permet de se déconnecter.
 
-#### US-10 — Importer les jeux d'une console depuis Wikipédia, IGDB et GameTDB (M)
+#### US-10 — Importer les jeux d'une console depuis Wikipédia et GameTDB (M)
 *En tant que propriétaire, je remplis le catalogue d'une console sans tout saisir à la main.*
 - [ ] Je choisis une console et lance l'import ; un **aperçu** montre les jeux trouvés avant d'enregistrer.
 - [ ] Ne sont retenus que les jeux ayant **au moins une boîte éditée par Nintendo** (disque en boîte ; une boîte
@@ -124,9 +125,10 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       a une fiche pour la compilation, pas pour chaque jeu.
 - [ ] Un nouvel import **n'écrase pas** mes corrections manuelles ; il signale les différences.
 - [ ] Un résumé indique : ajoutés, mis à jour, ignorés (avec la raison).
-- [ ] Chaque jeu importé garde le lien vers sa fiche d'origine (Wikipédia, IGDB).
+- [ ] Chaque jeu importé garde le lien vers sa fiche d'origine (Wikipédia).
+- [ ] Le titre japonais (en japonais, avec sa forme romanisée) vient de GameTDB.
 - [ ] Les **jaquettes de chaque région** sont récupérées et copiées chez nous : en priorité le **scan de la vraie
-      boîte** (GameTDB), sinon l'image IGDB ; une région sans scan est signalée dans le résumé.
+      boîte** (GameTDB) ; une région sans scan garde une vignette neutre, signalée dans le résumé.
 - [ ] Le **code produit** de chaque région est importé quand la source le connaît (ex. `WUP-P-ALZP`).
 
 #### US-11 — Corriger une fiche (M)
@@ -177,7 +179,7 @@ DS, 3DS.
 | 1 | Titre japonais | Écriture **japonaise** avec la version **romanisée** en dessous |
 | 2 | Région par défaut | **PAL** |
 | 3 | Code produit | **Importé de GameTDB** (v1.4) ; sinon « — », complété à la main |
-| 4 | Images | Jaquettes par région **copiées chez nous** : scans de boîtes GameTDB en priorité, IGDB en secours (v1.4) |
+| 4 | Images | Jaquettes par région **copiées chez nous** : scans de boîtes GameTDB (v1.4) ; IGDB retiré (v1.6) |
 | 5 | Périmètre v1 | **Wii U seule** ; l'architecture reste multi-consoles |
 
 ## 9. Prochaine étape

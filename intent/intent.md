@@ -55,7 +55,7 @@ Nintendo éditeur seulement, en français, région JAP incluse.
 |---|---|---|
 | 1 | Quels jeux | Sorties **physiques** dont Nintendo est **éditeur** dans au moins une région ; pas de dématérialisé en v1 |
 | 2 | Consoles | **Toutes** à terme, y compris Satellaview, e-Reader et Pokémon Mini ; **v1 limitée à la Wii U** (hypothèse simplificatrice du propriétaire) |
-| 3 | Source des données | **Wikipédia** (liste, dates par région, jeux en boîte) + **IGDB** (jaquettes et titres par région), puis corrections à la main ; Wikidata et MobyGames écartés (voir DESIGN §1) |
+| 3 | Source des données | **Wikipédia** (liste, dates par région, jeux en boîte) + **GameTDB** (boîtes, scans, titres japonais, codes produit ; remplace IGDB, voir DESIGN v0.8), puis corrections à la main ; Wikidata et MobyGames écartés (voir DESIGN §1) |
 | 4 | Accès | **Public en lecture**, modification réservée au propriétaire |
 | 5 | Suivi de collection | **Plus tard** : la v1 est une base de consultation |
 | 6 | Variantes | **Plus tard** : rééditions et variantes de pays PAL hors v1 |
@@ -63,5 +63,5 @@ Nintendo éditeur seulement, en français, région JAP incluse.
 
 ## Images
 
-- Jaquettes **par région**, en haute définition, **copiées chez nous** depuis IGDB (qui l'autorise, avec mention),
+- Jaquettes **par région**, en haute définition, **copiées chez nous** depuis GameTDB (scans de boîtes, avec mention),
   comme le fait gamecartdb. L'aspect visuel est une priorité du propriétaire.

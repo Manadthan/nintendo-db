@@ -5,7 +5,6 @@ import {
 } from "@/lib/catalogue/types";
 import type { Database } from "@/types/database";
 import { cheminScan, codeProduit } from "./gametdb";
-import type { InfosIgdb } from "./igdb";
 import type { JeuAImporter } from "./physique";
 
 export type SourceJaquette = Database["public"]["Enums"]["jaquette_source"];
@@ -14,7 +13,6 @@ export type SourceJaquette = Database["public"]["Enums"]["jaquette_source"];
 export type ChampsJeu = {
   developpeur: string | null;
   wikipedia_url: string | null;
-  igdb_id: number | null;
   physique: boolean;
 };
 
@@ -36,12 +34,9 @@ export type JeuImporte = {
 
 /**
  * Assemble un jeu : Wikipédia (titres NA/PAL, dates, éditeurs, développeur ; régions déjà réduites aux boîtes par
- * GameTDB) + IGDB (titre japonais, lien) + GameTDB (code produit imprimé sur la boîte).
+ * GameTDB) + GameTDB (titre japonais et sa romanisation, code produit imprimé sur la boîte).
  */
-export function construireJeu(
-  wiki: JeuAImporter,
-  igdb: InfosIgdb | null,
-): JeuImporte {
+export function construireJeu(wiki: JeuAImporter): JeuImporte {
   const titreAnglais = wiki.titres.PAL || wiki.titres.US;
   const releases = Object.fromEntries(
     REGIONS.map((region) => {
@@ -61,12 +56,11 @@ export function construireJeu(
       const japon = region === "JAP";
       const sortie: ChampsSortie = {
         sortie: true,
-        // Une sortie publiée a toujours un titre (contrainte de la base) : l'anglais si IGDB n'a pas le japonais.
+        // Une sortie publiée a toujours un titre (contrainte de la base) : l'anglais sans titre japonais connu.
         titre: japon
-          ? (igdb?.titreJaponais ?? titreAnglais)
+          ? (wiki.japonais?.titre ?? titreAnglais)
           : wiki.titres[region],
-        titre_romanise:
-          japon && igdb?.titreJaponais ? igdb.titreRomanise : null,
+        titre_romanise: japon ? (wiki.japonais?.romanise ?? null) : null,
         date_sortie: s.date,
         precision_date: s.precision,
         editeur: s.editeur,
@@ -83,7 +77,6 @@ export function construireJeu(
       slug: wiki.slug,
       developpeur: wiki.developpeur,
       wikipedia_url: wiki.wikipediaUrl,
-      igdb_id: igdb?.igdbId ?? null,
       physique: true,
     },
     releases,
@@ -143,13 +136,8 @@ export function fusionner(
   nouveau: JeuImporte,
 ): Fusion {
   const ecarts: string[] = [];
-  const { developpeur, wikipedia_url, igdb_id, physique } = nouveau.game;
-  const champsJeu: ChampsJeu = {
-    developpeur,
-    wikipedia_url,
-    igdb_id,
-    physique,
-  };
+  const { developpeur, wikipedia_url, physique } = nouveau.game;
+  const champsJeu: ChampsJeu = { developpeur, wikipedia_url, physique };
   const game = garderVerrous(
     champsJeu,
     existant ?? undefined,
@@ -175,11 +163,6 @@ export function fusionner(
   return { game, releases, ecarts };
 }
 
-/** Une image à essayer pour une région : scan de boîte GameTDB, ou image IGDB (de la région, ou principale). */
-export type CandidatJaquette =
-  | { source: "gametdb"; chemin: string }
-  | { source: "igdb"; imageId: string; secours: boolean };
-
 /** Jaquette déjà en base pour une région. */
 export type JaquetteEnBase = {
   path: string | null;
@@ -187,36 +170,26 @@ export type JaquetteEnBase = {
 };
 
 /**
- * Images à essayer, dans l'ordre, pour chaque région sortie (ADR-04) : le scan GameTDB de la boîte (déposé par le
- * relais, #53), puis l'image IGDB de la région, puis la principale en secours (R2). Rien à faire (null) pour une
- * région non sortie, une jaquette ajoutée à la main ou déjà scannée ; une image IGDB déjà copiée n'est remplacée
- * que par un scan. `recopier` : tout recopier sauf les ajouts à la main (nouvelle taille d'image, #48).
+ * Scan GameTDB à copier pour chaque région sortie (ADR-04 ; déposé par le relais, #53) : son chemin dans le
+ * bucket du relais, ou null. Rien pour une région non sortie ou sans disque connu, ni pour une jaquette ajoutée à
+ * la main ou déjà scannée ; une ancienne image IGDB est remplacée par le scan. `recopier` : recopier aussi les
+ * scans déjà copiés (nouvelle taille d'image, #48), jamais les ajouts à la main.
  */
 export function choisirJaquettes(
   jeu: JeuImporte,
   disques: JeuAImporter["disques"],
-  igdb: InfosIgdb | null,
   existantes: Partial<Record<Region, JaquetteEnBase>> | null,
   recopier = false,
-): Record<Region, CandidatJaquette[] | null> {
+): Record<Region, string | null> {
   return Object.fromEntries(
     REGIONS.map((r) => {
       const deja = existantes?.[r];
       const manuelle = deja?.source === "photo" || deja?.source === "url";
-      const garder =
-        deja?.path && (manuelle || (!recopier && deja.source !== "igdb"));
-      if (!jeu.releases[r].sortie || garder) return [r, null];
+      const scanne = deja?.path && deja.source === "gametdb";
       const id = disques[r];
-      const candidats: CandidatJaquette[] = id
-        ? [{ source: "gametdb", chemin: cheminScan(id) }]
-        : [];
-      if ((!deja?.path || recopier) && igdb) {
-        const propre = igdb.jaquettes[r];
-        const imageId = propre ?? igdb.jaquettes.US;
-        if (imageId)
-          candidats.push({ source: "igdb", imageId, secours: !propre });
-      }
-      return [r, candidats.length ? candidats : null];
+      if (!jeu.releases[r].sortie || !id || manuelle || (scanne && !recopier))
+        return [r, null];
+      return [r, cheminScan(id)];
     }),
-  ) as Record<Region, CandidatJaquette[] | null>;
+  ) as Record<Region, string | null>;
 }
