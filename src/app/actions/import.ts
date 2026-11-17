@@ -14,7 +14,6 @@ import {
   choisirJaquettes,
   construireJeu,
   fusionner,
-  type CandidatJaquette,
   type JeuEnBase,
   type SourceJaquette,
 } from "@/lib/import/donnees";
@@ -24,15 +23,7 @@ import {
   lireGameTdb,
   regrouperGameTdb,
 } from "@/lib/import/gametdb";
-import { lireIgdbEnv } from "@/lib/import/env";
-import {
-  creerClientIgdb,
-  rapprocher,
-  urlImageIgdb,
-  versInfosIgdb,
-  type Rapprochement,
-} from "@/lib/import/igdb";
-import { convertirEnWebp, telechargerImage } from "@/lib/import/jaquettes";
+import { convertirEnWebp } from "@/lib/import/jaquettes";
 import { appliquerGameTdb, type JeuAImporter } from "@/lib/import/physique";
 import { lireListeWikipediaDetaillee, urlRendu } from "@/lib/import/wikipedia";
 import {
@@ -48,15 +39,14 @@ async function chargerConsole(consoleSlug: string) {
   const supabase = await exigerProprietaire();
   const { data, error } = await supabase
     .from("consoles")
-    .select("id, wikipedia_liste, igdb_platform_id, games(slug)")
+    .select("id, wikipedia_liste, games(slug)")
     .eq("slug", consoleSlug)
     .single();
   if (error || !data) throw new Error(`Console « ${consoleSlug} » introuvable`);
-  if (!data.wikipedia_liste || !data.igdb_platform_id) {
+  if (!data.wikipedia_liste)
     throw new Error(
-      `Console « ${consoleSlug} » : liste Wikipédia ou plateforme IGDB non renseignée`,
+      `Console « ${consoleSlug} » : liste Wikipédia non renseignée`,
     );
-  }
   return data;
 }
 
@@ -111,53 +101,16 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
   );
 }
 
-export type RapprochementLeger = { slug: string } & Pick<
-  Rapprochement,
-  "statut" | "candidats"
-> & {
-    jeu: { id: number; name: string } | null;
-  };
-
-/** Étape 2 (lot de 10 au plus, piloté par le navigateur) : rapproche chaque jeu d'IGDB. N'écrit rien. */
-async function rapprocherLotInterne(
-  consoleSlug: string,
-  jeux: { slug: string; titres: { US: string; PAL: string } }[],
-): Promise<RapprochementLeger[]> {
-  if (jeux.length > 10) throw new Error("Lot trop grand (10 jeux au plus)");
-  const fiche = await chargerConsole(consoleSlug);
-  const client = creerClientIgdb(lireIgdbEnv(process.env));
-
-  const resultats: RapprochementLeger[] = [];
-  for (const jeu of jeux) {
-    const titres = [...new Set([jeu.titres.US, jeu.titres.PAL])];
-    const trouves = await client.chercher(
-      jeu.titres.US,
-      fiche.igdb_platform_id!,
-    );
-    const r = rapprocher(titres, trouves);
-    resultats.push({
-      slug: jeu.slug,
-      statut: r.statut,
-      jeu: r.jeu ? { id: r.jeu.id, name: r.jeu.name } : null,
-      candidats: r.candidats,
-    });
-  }
-  return resultats;
-}
-
-/** Un jeu à enregistrer : ses données (aperçu) et le jeu IGDB retenu (sûr ou choisi à la main). */
-export type JeuAEnregistrer = {
-  wikipedia: JeuAImporter;
-  igdbId: number | null;
-};
+/** Un jeu à enregistrer : ses données, telles que l'aperçu les a préparées. */
+export type JeuAEnregistrer = { wikipedia: JeuAImporter };
 
 const COLONNES_EXISTANT =
-  "id, slug, developpeur, wikipedia_url, igdb_id, physique, verrous, releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, code_produit, verrous, jaquette_path, jaquette_source)";
+  "id, slug, developpeur, wikipedia_url, physique, verrous, releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, code_produit, verrous, jaquette_path, jaquette_source)";
 
 /**
  * Enregistre un lot de 10 jeux au plus (US-10, ADR-03), piloté par le navigateur : jeux et sorties (corrections
- * manuelles gardées), puis jaquettes copiées en WebP (ADR-04) : scan GameTDB, sinon image IGDB. Une erreur sur
- * un jeu n'arrête pas le lot.
+ * manuelles gardées), puis scans de boîtes GameTDB copiés en WebP (ADR-04). Une erreur sur un jeu n'arrête pas
+ * le lot.
  */
 async function enregistrerLotInterne(
   consoleSlug: string,
@@ -167,12 +120,6 @@ async function enregistrerLotInterne(
   if (jeux.length > 10) throw new Error("Lot trop grand (10 jeux au plus)");
   const fiche = await chargerConsole(consoleSlug);
   const supabase = await exigerProprietaire();
-
-  const ids = jeux
-    .map((j) => j.igdbId)
-    .filter((id): id is number => id !== null);
-  const trouves = await creerClientIgdb(lireIgdbEnv(process.env)).parIds(ids);
-  const infosIgdb = new Map(trouves.map((r) => [r.id, versInfosIgdb(r)]));
 
   const { data: lignes, error } = await supabase
     .from("games")
@@ -195,12 +142,11 @@ async function enregistrerLotInterne(
   );
 
   const resultats: ResultatEnregistrement[] = [];
-  for (const { wikipedia, igdbId } of jeux) {
+  for (const { wikipedia } of jeux) {
     const titre = wikipedia.titres.PAL || wikipedia.titres.US;
     const existant = existants.get(wikipedia.slug) ?? null;
     try {
-      const infos = igdbId !== null ? (infosIgdb.get(igdbId) ?? null) : null;
-      const jeu = construireJeu(wikipedia, infos);
+      const jeu = construireJeu(wikipedia);
       const fusion = fusionner(existant, jeu);
 
       let gameId = existant?.id;
@@ -248,7 +194,6 @@ async function enregistrerLotInterne(
       const choix = choisirJaquettes(
         jeu,
         wikipedia.disques,
-        infos,
         existantes,
         recopierJaquettes,
       );
@@ -284,65 +229,45 @@ async function enregistrerLotInterne(
 }
 
 /**
- * Copie les jaquettes choisies (ADR-04) : pour chaque région, la première image disponible parmi les candidats
- * (scan GameTDB dans l'ordre des langues, puis IGDB) → WebP 300 et 600 px → bucket « jaquettes ». Rend la source
- * copiée de chaque région ; une région sans aucune image disponible garde sa jaquette actuelle.
+ * Copie les scans choisis (ADR-04) : scan déposé par le relais GameTDB (#53) → WebP 300, 600 et 768 px → bucket
+ * « jaquettes ». Rend les régions copiées ; un scan absent du relais laisse la jaquette actuelle (ou la vignette
+ * neutre), signalée « sans scan » dans le résumé.
  */
 async function copierJaquettes(
   supabase: Awaited<ReturnType<typeof exigerProprietaire>>,
   gameId: string,
-  choix: Record<Region, CandidatJaquette[] | null>,
+  choix: Record<Region, string | null>,
 ): Promise<Partial<Record<Region, SourceJaquette>>> {
-  const converties = new Map<
-    string,
-    Awaited<ReturnType<typeof convertirEnWebp>>
-  >();
   const copiees: Partial<Record<Region, SourceJaquette>> = {};
   for (const region of REGIONS) {
-    let trouvee: {
-      source: SourceJaquette;
-      tailles: Awaited<ReturnType<typeof convertirEnWebp>>;
-    } | null = null;
-    for (const c of choix[region] ?? []) {
-      const cle = c.source === "gametdb" ? c.chemin : c.imageId;
-      try {
-        if (!converties.has(cle)) {
-          const image =
-            c.source === "gametdb"
-              ? Buffer.from(await (await lireRelais(c.chemin)).arrayBuffer())
-              : await telechargerImage(urlImageIgdb(c.imageId, "t_1080p"));
-          converties.set(cle, await convertirEnWebp(image));
-        }
-        trouvee = { source: c.source, tailles: converties.get(cle)! };
-        break;
-      } catch {
-        // Scan absent du relais, image IGDB introuvable ou illisible : candidat suivant.
-      }
+    const chemin = choix[region];
+    if (!chemin) continue;
+    let tailles: Awaited<ReturnType<typeof convertirEnWebp>>;
+    try {
+      const scan = Buffer.from(await (await lireRelais(chemin)).arrayBuffer());
+      tailles = await convertirEnWebp(scan);
+    } catch {
+      continue; // Scan absent du relais (GameTDB n'en a pas) ou illisible.
     }
-    if (!trouvee) continue;
     for (const taille of TAILLES_JAQUETTE) {
       const { error } = await supabase.storage
         .from(BUCKET_JAQUETTES)
-        .upload(
-          cheminJaquette(gameId, region, taille),
-          trouvee.tailles[taille],
-          {
-            contentType: "image/webp",
-            upsert: true,
-          },
-        );
+        .upload(cheminJaquette(gameId, region, taille), tailles[taille], {
+          contentType: "image/webp",
+          upsert: true,
+        });
       if (error) throw new Error(`Jaquette ${region} : ${error.message}`);
     }
     const { error } = await supabase
       .from("releases")
       .update({
         jaquette_path: `${gameId}/${region.toLowerCase()}`,
-        jaquette_source: trouvee.source,
+        jaquette_source: "gametdb",
       })
       .eq("game_id", gameId)
       .eq("region", region);
     if (error) throw new Error(`Jaquette ${region} : ${error.message}`);
-    copiees[region] = trouvee.source;
+    copiees[region] = "gametdb";
   }
   return copiees;
 }
@@ -407,12 +332,6 @@ export async function analyserListe(
   consoleSlug: string,
 ): Promise<Resultat<Apercu>> {
   return capturer(() => analyserListeInterne(consoleSlug));
-}
-export async function rapprocherLot(
-  consoleSlug: string,
-  jeux: { slug: string; titres: { US: string; PAL: string } }[],
-): Promise<Resultat<RapprochementLeger[]>> {
-  return capturer(() => rapprocherLotInterne(consoleSlug, jeux));
 }
 export async function enregistrerLot(
   consoleSlug: string,

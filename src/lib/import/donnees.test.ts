@@ -7,7 +7,6 @@ import {
   fusionner,
   type JeuEnBase,
 } from "./donnees";
-import { rapprocher, versInfosIgdb, type ResultatIgdb } from "./igdb";
 import { lireGameTdb, regrouperGameTdb } from "./gametdb";
 import { appliquerGameTdb } from "./physique";
 import { lireListeWikipedia } from "./wikipedia";
@@ -18,33 +17,23 @@ const { jeux: wiki } = appliquerGameTdb(
   lireListeWikipedia(lire("wii-u-wikipedia.html")),
   regrouperGameTdb(lireGameTdb(lire("wiiutdb.xml"))),
 );
-const igdb = (nom: string, titre: string) => {
-  const reponse: ResultatIgdb[] = JSON.parse(
-    readFileSync(join(__dirname, `__fixtures__/igdb/${nom}.json`), "utf8"),
-  ).reponse;
-  return versInfosIgdb(rapprocher([titre], reponse).jeu!);
-};
 const KARAOKE = wiki.find((j) => j.slug === "wii-karaoke-u")!;
 const KIRBY = wiki.find((j) => j.slug === "kirby-and-the-rainbow-paintbrush")!;
 
 describe("construireJeu (US-10)", () => {
-  it("assemble Wikipédia (dates, titres NA/PAL, éditeurs) et IGDB (titre japonais, romanisation, lien)", () => {
-    const jeu = construireJeu(
-      KIRBY,
-      igdb("kirby-and-the-rainbow-paintbrush", "Kirby and the Rainbow Curse"),
-    );
+  it("assemble Wikipédia (dates, titres NA/PAL, éditeurs) et GameTDB (titre japonais, romanisation, code produit)", () => {
+    const jeu = construireJeu(KIRBY);
     expect(jeu.game).toEqual({
       slug: "kirby-and-the-rainbow-paintbrush",
       developpeur: "HAL Laboratory, Nintendo SPD",
       wikipedia_url:
         "https://en.wikipedia.org/wiki/Kirby_and_the_Rainbow_Curse",
-      igdb_id: 7338,
       physique: true,
     });
     expect(jeu.releases.JAP).toEqual({
       sortie: true,
-      titre: "タッチ！カービィ スーパーレインボー",
-      titre_romanise: "Kirby and the Rainbow Curse",
+      titre: "タッチ! カービィ スーパーレインボー",
+      titre_romanise: "Touch! Kirby Super Rainbow",
       date_sortie: "2015-01-22",
       precision_date: "jour",
       editeur: "Nintendo",
@@ -61,8 +50,8 @@ describe("construireJeu (US-10)", () => {
     });
   });
 
-  it("note « non sorti » une région absente, sans titre ni date", () => {
-    expect(construireJeu(KARAOKE, null).releases.US).toEqual({
+  it("note « non sorti » une région sans boîte, sans titre ni date", () => {
+    expect(construireJeu(KARAOKE).releases.US).toEqual({
       sortie: false,
       titre: null,
       titre_romanise: null,
@@ -73,25 +62,22 @@ describe("construireJeu (US-10)", () => {
     });
   });
 
-  it("sans IGDB, garde le titre anglais pour une sortie japonaise (jamais de sortie sans titre)", () => {
-    expect(construireJeu(KARAOKE, null).releases.JAP).toMatchObject({
+  it("sans titre japonais connu, garde le titre anglais (jamais de sortie sans titre)", () => {
+    const sansJaponais = { ...KARAOKE, japonais: null };
+    expect(construireJeu(sansJaponais).releases.JAP).toMatchObject({
       sortie: true,
       titre: "Wii Karaoke U",
+      titre_romanise: null,
     });
-    expect(construireJeu(KARAOKE, null).game.igdb_id).toBeNull();
   });
 });
 
 describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
-  const nouveau = construireJeu(
-    KARAOKE,
-    igdb("wii-karaoke-u", "Wii Karaoke U"),
-  );
+  const nouveau = construireJeu(KARAOKE);
   const existant: JeuEnBase = {
     id: "20000000-0000-0000-0000-000000000004",
     developpeur: "Xing (corrigé)",
     wikipedia_url: null,
-    igdb_id: null,
     physique: true,
     verrous: ["developpeur"],
     releases: {
@@ -136,7 +122,7 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
 
   it("met à jour les champs non verrouillés (ex. titre japonais faux des données de départ)", () => {
     const f = fusionner(existant, nouveau);
-    expect(f.releases.JAP.titre).toBe("カラオケJoysound for Wii U");
+    expect(f.releases.JAP.titre).toBe("WiiカラオケU トライアルディスク");
     expect(f.game.wikipedia_url).toBe(
       "https://en.wikipedia.org/wiki/Wii_Karaoke_U",
     );
@@ -160,95 +146,53 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
   });
 });
 
-describe("choisirJaquettes (ADR-04, R2, R6)", () => {
-  // Le relais (#53) a déjà choisi la langue : un seul scan par disque.
-  const scans = (id: string) => [
-    { source: "gametdb", chemin: `scans/${id}.jpg` },
-  ];
+describe("choisirJaquettes (ADR-04, R6)", () => {
+  const scan = (id: string) => `scans/${id}.jpg`;
 
-  it("essaie d'abord le scan de la boîte, puis l'image IGDB de la région, ou la principale en secours", () => {
-    const infos = igdb(
-      "kirby-and-the-rainbow-paintbrush",
-      "Kirby and the Rainbow Curse",
+  it("copie le scan de la boîte de chaque région sortie", () => {
+    expect(choisirJaquettes(construireJeu(KIRBY), KIRBY.disques, null)).toEqual(
+      {
+        JAP: scan(KIRBY.disques.JAP!),
+        US: scan(KIRBY.disques.US!),
+        PAL: scan(KIRBY.disques.PAL!),
+      },
     );
-    const jeu = construireJeu(KIRBY, infos);
-    expect(choisirJaquettes(jeu, KIRBY.disques, infos, null)).toEqual({
-      JAP: [
-        ...scans(KIRBY.disques.JAP!),
-        { source: "igdb", imageId: "co1wcc", secours: true },
-      ],
-      US: [
-        ...scans(KIRBY.disques.US!),
-        { source: "igdb", imageId: "co1wcc", secours: false },
-      ],
-      PAL: [
-        ...scans(KIRBY.disques.PAL!),
-        { source: "igdb", imageId: "cob8mp", secours: false },
-      ],
-    });
   });
 
   it("ne touche ni aux régions non sorties, ni aux jaquettes ajoutées à la main ou déjà scannées", () => {
-    const infos = igdb(
-      "kirby-and-the-rainbow-paintbrush",
-      "Kirby and the Rainbow Curse",
-    );
-    const jeu = construireJeu(KIRBY, infos);
     const existantes = {
       JAP: { path: "x/jap", source: "photo" as const },
       US: { path: "x/us", source: "gametdb" as const },
     };
     expect(
-      choisirJaquettes(jeu, KIRBY.disques, infos, existantes),
-    ).toMatchObject({
-      JAP: null,
-      US: null,
-    });
+      choisirJaquettes(construireJeu(KIRBY), KIRBY.disques, existantes),
+    ).toEqual({ JAP: null, US: null, PAL: scan(KIRBY.disques.PAL!) });
     expect(
-      choisirJaquettes(
-        construireJeu(KARAOKE, null),
-        KARAOKE.disques,
-        null,
-        null,
-      ),
+      choisirJaquettes(construireJeu(KARAOKE), KARAOKE.disques, null),
     ).toMatchObject({ US: null, PAL: null });
   });
 
-  it("sur demande, recopie tout (nouvelle taille d'image) sauf les ajouts à la main", () => {
-    const infos = igdb(
-      "kirby-and-the-rainbow-paintbrush",
-      "Kirby and the Rainbow Curse",
-    );
-    const jeu = construireJeu(KIRBY, infos);
+  it("remplace une ancienne image IGDB par le scan", () => {
+    const choix = choisirJaquettes(construireJeu(KIRBY), KIRBY.disques, {
+      PAL: { path: "x/pal", source: "igdb" },
+    });
+    expect(choix.PAL).toBe(scan(KIRBY.disques.PAL!));
+  });
+
+  it("sur demande, recopie les scans (nouvelle taille d'image), jamais les ajouts à la main", () => {
     const choix = choisirJaquettes(
-      jeu,
+      construireJeu(KIRBY),
       KIRBY.disques,
-      infos,
       {
-        JAP: { path: "x/jap", source: "photo" },
+        JAP: { path: "x/jap", source: "url" },
         US: { path: "x/us", source: "gametdb" },
-        PAL: { path: "x/pal", source: "igdb" },
       },
       true,
     );
-    expect(choix.JAP).toBeNull();
-    expect(choix.US?.[0]).toEqual(scans(KIRBY.disques.US!)[0]);
-    expect(choix.PAL?.at(-1)).toEqual({
-      source: "igdb",
-      imageId: "cob8mp",
-      secours: false,
+    expect(choix).toEqual({
+      JAP: null,
+      US: scan(KIRBY.disques.US!),
+      PAL: scan(KIRBY.disques.PAL!),
     });
-  });
-
-  it("remplace une image IGDB déjà copiée par le scan, jamais par une autre image IGDB", () => {
-    const infos = igdb(
-      "kirby-and-the-rainbow-paintbrush",
-      "Kirby and the Rainbow Curse",
-    );
-    const jeu = construireJeu(KIRBY, infos);
-    const choix = choisirJaquettes(jeu, KIRBY.disques, infos, {
-      PAL: { path: "x/pal", source: "igdb" },
-    });
-    expect(choix.PAL).toEqual(scans(KIRBY.disques.PAL!));
   });
 });

@@ -27,6 +27,7 @@ describe("lireGameTdb — base GameTDB réelle (fixture)", () => {
       id: "ALZP01",
       region: "PAL",
       titre: "The Legend of Zelda: Breath of the Wild",
+      titreJaponais: null,
       editeur: "Nintendo",
       developpeur: "Nintendo",
       date: { date: "2017-03-03", precision: "jour" },
@@ -38,6 +39,13 @@ describe("lireGameTdb — base GameTDB réelle (fixture)", () => {
     expect(ids).not.toContain("WMGE"); // NES Remix, eShop
     expect(ids).not.toContain("WAFP01"); // Tipping Stars PAL : boîte contenant un code
     expect(ids).toContain("WAFJ01"); // Tipping Stars JAP : vrai disque
+  });
+
+  it("lit le titre japonais d'un disque japonais", () => {
+    expect(disques.find((d) => d.id === "ALZJ01")).toMatchObject({
+      titre: "Zelda no Densetsu: Breath of the Wild",
+      titreJaponais: "ゼルダの伝説 ブレス オブ ザ ワイルド",
+    });
   });
 
   it("lit la région dans le champ region, pas dans l'identifiant (AX5D01 est PAL)", () => {

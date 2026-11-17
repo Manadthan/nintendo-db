@@ -7,7 +7,10 @@ export type DisqueGameTdb = {
   /** Identifiant du disque, ex. `ALZP01` : 3 caractères du jeu, la région, l'éditeur. */
   id: string;
   region: Region;
+  /** Titre anglais ; pour un disque japonais, forme romanisée ou anglaise (« Zelda no Densetsu: … »). */
   titre: string;
+  /** Titre en japonais (locale JA de GameTDB), pour les disques japonais. */
+  titreJaponais: string | null;
   editeur: string;
   developpeur: string | null;
   date: { date: string; precision: PrecisionDate } | null;
@@ -53,6 +56,10 @@ export function lireGameTdb(xml: string): DisqueGameTdb[] {
       id: champ("id"),
       region,
       titre,
+      titreJaponais:
+        region === "JAP"
+          ? jeu.find("locale[lang=JA] > title").first().text().trim() || null
+          : null,
       editeur: champ("publisher"),
       developpeur: champ("developer") || null,
       date: lireDate(

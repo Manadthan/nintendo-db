@@ -15,6 +15,15 @@ import {
 /** Un jeu à importer : données au format Wikipédia, et l'identifiant GameTDB du disque de chaque région sortie. */
 export type JeuAImporter = JeuWikipedia & {
   disques: Partial<Record<Region, string>>;
+  /** Titre du disque japonais (GameTDB, #58) : en japonais, et sa forme romanisée ou anglaise. */
+  japonais: { titre: string; romanise: string } | null;
+};
+
+const titreJaponais = (g: JeuGameTdb): JeuAImporter["japonais"] => {
+  const d = g.disques.JAP;
+  return d?.titreJaponais
+    ? { titre: d.titreJaponais, romanise: d.titre }
+    : null;
 };
 
 /** Jeu de la liste Wikipédia écarté par la règle du physique (SPEC v1.4), avec la raison affichée. */
@@ -66,7 +75,12 @@ export function appliquerGameTdb(
         return [r, d ? (wiki.sorties[r] ?? sortieDuDisque(d)) : null];
       }),
     ) as Record<Region, SortieWikipedia>;
-    jeux.push({ ...wiki, sorties, disques: identifiants(g) });
+    jeux.push({
+      ...wiki,
+      sorties,
+      disques: identifiants(g),
+      japonais: titreJaponais(g),
+    });
   }
 
   for (const g of jeuxSansWikipedia(gametdb, bases)) {
@@ -87,6 +101,7 @@ export function appliquerGameTdb(
         }),
       ) as Record<Region, SortieWikipedia>,
       disques: identifiants(g),
+      japonais: titreJaponais(g),
     });
   }
   return { jeux, ecartes };

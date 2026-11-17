@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { BASE_LOCALE_DISPONIBLE, seConnecter } from "./utilisateur";
 
-// US-10 — Aperçu de l'import (#34). L'analyse elle-même interroge Wikipédia et IGDB : jamais lancée en test
+// US-10 — Aperçu de l'import (#34). L'analyse elle-même lit Wikipédia et le relais GameTDB : jamais lancée en test
 // (règle : fixtures seulement) ; sa logique est testée en unitaire sur les fixtures.
 test.skip(!BASE_LOCALE_DISPONIBLE, "Base Supabase locale nécessaire (CI)");
 

@@ -4,10 +4,8 @@ import { useState } from "react";
 import {
   analyserListe,
   enregistrerLot,
-  rapprocherLot,
   supprimerJeux,
   terminerImport,
-  type RapprochementLeger,
 } from "@/app/actions/import";
 import {
   decouperEnLots,
@@ -23,26 +21,13 @@ import { REGIONS } from "@/lib/catalogue/types";
 type Etat =
   | { etape: "attente" }
   | { etape: "wikipedia" }
-  | { etape: "igdb"; fait: number; total: number }
   | { etape: "fini" }
   | { etape: "enregistrement"; fait: number; total: number }
   | { etape: "enregistre"; resume: ResumeEnregistrement }
   | { etape: "erreur"; message: string };
 
-const STATUTS = {
-  sur: { libelle: "sûr", classe: "bg-[#e4e9fb] text-accent-fonce" },
-  "a-verifier": {
-    libelle: "à vérifier",
-    classe: "bg-[#fff1d6] text-[#7a4a00]",
-  },
-  introuvable: {
-    libelle: "introuvable",
-    classe: "bg-[#fde4e4] text-[#b42318]",
-  },
-} as const;
-
 /**
- * Import (US-10, ADR-03) : aperçu (Wikipédia, puis IGDB par lots de 10), qui n'écrit rien ; puis, sur
+ * Import (US-10, ADR-03) : aperçu (Wikipédia et GameTDB), qui n'écrit rien ; puis, sur
  * confirmation, enregistrement par lots de 10 avec copie des jaquettes, et résumé.
  */
 export function AnalyseImport({
@@ -54,35 +39,16 @@ export function AnalyseImport({
 }) {
   const [etat, setEtat] = useState<Etat>({ etape: "attente" });
   const [apercu, setApercu] = useState<Apercu | null>(null);
-  const [igdb, setIgdb] = useState<Record<string, RapprochementLeger>>({});
-  // Choix fait à la main pour un rapprochement incertain (R1) ; repris par l'enregistrement (#35).
-  const [choix, setChoix] = useState<Record<string, number | null>>({});
   // Recopier les jaquettes déjà en place (sauf ajouts à la main), après un changement de taille d'image (#48).
   const [recopier, setRecopier] = useState(false);
 
   async function analyser() {
     setApercu(null);
-    setIgdb({});
-    setChoix({});
     try {
       setEtat({ etape: "wikipedia" });
       const resultat = valeur(await analyserListe(consoleSlug));
       setApercu(resultat);
 
-      const lots = decouperEnLots(resultat.lignes, 10);
-      for (const [i, lot] of lots.entries()) {
-        setEtat({ etape: "igdb", fait: i * 10, total: resultat.lignes.length });
-        const rapprochements = valeur(
-          await rapprocherLot(
-            consoleSlug,
-            lot.map((l) => ({ slug: l.slug, titres: l.titres })),
-          ),
-        );
-        setIgdb((avant) => ({
-          ...avant,
-          ...Object.fromEntries(rapprochements.map((r) => [r.slug, r])),
-        }));
-      }
       setEtat({ etape: "fini" });
     } catch (e) {
       setEtat({
@@ -114,14 +80,7 @@ export function AnalyseImport({
           ...valeur(
             await enregistrerLot(
               consoleSlug,
-              lot.map((l) => ({
-                wikipedia: l.wikipedia,
-                // Choix fait à la main, sinon le jeu IGDB proposé (sûr ou à vérifier).
-                igdbId:
-                  l.slug in choix
-                    ? choix[l.slug]!
-                    : (igdb[l.slug]?.jeu?.id ?? null),
-              })),
+              lot.map((l) => ({ wikipedia: l.wikipedia })),
               recopier,
             ),
           ),
@@ -141,13 +100,8 @@ export function AnalyseImport({
     }
   }
 
-  const enCours = ["wikipedia", "igdb", "enregistrement"].includes(etat.etape);
-  const resume = apercu
-    ? resumer(
-        apercu,
-        Object.fromEntries(Object.entries(igdb).map(([s, r]) => [s, r.statut])),
-      )
-    : null;
+  const enCours = ["wikipedia", "enregistrement"].includes(etat.etape);
+  const resume = apercu ? resumer(apercu) : null;
 
   return (
     <div className="flex flex-col gap-4">
@@ -163,8 +117,6 @@ export function AnalyseImport({
       <p role="status" className="text-sm text-texte-doux">
         {etat.etape === "wikipedia" &&
           "Lecture de la liste Wikipédia et de la base GameTDB…"}
-        {etat.etape === "igdb" &&
-          `Rapprochement IGDB : ${etat.fait} / ${etat.total} jeux`}
         {etat.etape === "fini" &&
           "Analyse terminée. Rien n'a encore été enregistré."}
         {etat.etape === "enregistrement" &&
@@ -240,8 +192,8 @@ export function AnalyseImport({
                 Sans scan de boîte ({etat.resume.sansScan.length})
               </summary>
               <p className="mt-1 text-texte-doux">
-                GameTDB n&apos;a pas de scan pour ces régions : image IGDB à la
-                place, à remplacer à la main.
+                GameTDB n&apos;a pas de scan pour ces régions : à remplacer à la
+                main.
               </p>
               <ul className="list-disc pl-5 text-texte-doux">
                 {etat.resume.sansScan.map((s) => (
@@ -272,7 +224,7 @@ export function AnalyseImport({
               ["À ajouter", resume.ajoutes],
               ["À mettre à jour", resume.misAJour],
               ["Ignorés", resume.ignores],
-              ["IGDB à vérifier", resume.aVerifier],
+              ["À supprimer", resume.aSupprimer],
             ].map(([libelle, nombre]) => (
               <div
                 key={libelle}
@@ -289,7 +241,6 @@ export function AnalyseImport({
             className="flex flex-col overflow-hidden rounded-xl border border-bordure bg-carte"
           >
             {apercu.lignes.map((ligne) => {
-              const r = igdb[ligne.slug];
               return (
                 <li
                   key={ligne.slug}
@@ -316,39 +267,7 @@ export function AnalyseImport({
                         {region}
                       </span>
                     ))}
-                    {r && (
-                      <span
-                        className={`rounded px-1.5 py-0.5 font-semibold ${STATUTS[r.statut].classe}`}
-                      >
-                        IGDB {STATUTS[r.statut].libelle}
-                        {r.jeu && ` : ${r.jeu.name}`}
-                      </span>
-                    )}
                   </div>
-                  {r && r.statut !== "sur" && (
-                    <label className="flex flex-col gap-1 text-xs text-texte-doux">
-                      Jeu IGDB à retenir
-                      <select
-                        value={choix[ligne.slug] ?? r.jeu?.id ?? ""}
-                        onChange={(e) =>
-                          setChoix((avant) => ({
-                            ...avant,
-                            [ligne.slug]: e.target.value
-                              ? Number(e.target.value)
-                              : null,
-                          }))
-                        }
-                        className="h-10 rounded-lg border border-[#d6d9e0] bg-carte px-2 text-base"
-                      >
-                        <option value="">Aucun (pas de jaquette IGDB)</option>
-                        {r.candidats.map((c) => (
-                          <option key={c.id} value={c.id}>
-                            {c.name}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                  )}
                 </li>
               );
             })}

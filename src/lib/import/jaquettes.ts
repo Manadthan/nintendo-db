@@ -4,36 +4,6 @@ import {
   type TailleJaquette,
 } from "@/lib/jaquettes/stockage";
 
-const POIDS_MAX = 5 * 1024 * 1024;
-
-/** Seul hôte d'où l'import télécharge des images (les scans GameTDB passent par le relais, #53). */
-const HOTES_IMAGES = new Set(["images.igdb.com"]);
-
-/**
- * Télécharge une image IGDB. Seule l'adresse https://images.igdb.com est acceptée : le serveur ne va jamais chercher une image sur un site arbitraire (protection SSRF). 5 Mo au plus.
- */
-export async function telechargerImage(
-  url: string,
-  fetch: (url: string) => Promise<Response> = globalThis.fetch,
-): Promise<Buffer> {
-  const adresse = new URL(url);
-  if (adresse.protocol !== "https:" || !HOTES_IMAGES.has(adresse.hostname)) {
-    throw new Error(
-      `Adresse refusée : seules les images d'IGDB sont copiées (${url})`,
-    );
-  }
-  const reponse = await fetch(url);
-  if (!reponse.ok)
-    throw new Error(`Image introuvable (HTTP ${reponse.status})`);
-  if (!reponse.headers.get("content-type")?.startsWith("image/")) {
-    throw new Error("La réponse n'est pas une image");
-  }
-  const image = Buffer.from(await reponse.arrayBuffer());
-  if (image.length > POIDS_MAX)
-    throw new Error("Image trop lourde (5 Mo au plus)");
-  return image;
-}
-
 /**
  * Ré-encode une jaquette en WebP 300, 600 et 768 px de large (ADR-04) : jamais servie telle quelle, jamais agrandie,
  * proportions gardées (pas de recadrage). Échoue si le fichier n'est pas une image.

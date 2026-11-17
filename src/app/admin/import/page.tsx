@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// Un lot de 10 recherches IGDB prend quelques secondes : marge sur la durée des actions de cette page (Vercel).
+// Un lot de 10 jeux (scans à convertir) prend quelques secondes : marge sur la durée des actions de cette page (Vercel).
 export const maxDuration = 60;
 
 // Aperçu de l'import Wii U (US-10, #34). Page réservée au propriétaire (proxy /admin, US-09).
@@ -26,8 +26,8 @@ export default function PageImport() {
         </h1>
         <p className="text-sm text-texte-doux">
           Lit la liste Wikipédia, garde les jeux sortis en boîte d&apos;après
-          GameTDB (scans de boîtes, codes produit) et retrouve chaque jeu sur
-          IGDB. L&apos;analyse <strong>n&apos;enregistre rien</strong> : elle
+          GameTDB (titres japonais, scans de boîtes, codes produit).
+          L&apos;analyse <strong>n&apos;enregistre rien</strong> : elle
           montre ce que l&apos;import ferait.
         </p>
       </section>

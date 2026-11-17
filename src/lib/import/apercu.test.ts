@@ -69,21 +69,16 @@ describe("preparerApercu (US-10)", () => {
 });
 
 describe("resumer", () => {
-  it("compte ajoutés, mis à jour et ignorés, et les rapprochements IGDB à vérifier", () => {
-    const apercu = preparerApercu(liste, new Set(DEPART));
-    const rapprochements = {
-      "mario-kart-8": "sur",
-      "wii-karaoke-u": "a-verifier",
-      splatoon: "introuvable",
-    } as const;
-    expect(resumer(apercu, rapprochements)).toEqual({
+  it("compte ajoutés, mis à jour, ignorés et jeux à supprimer", () => {
+    const apercu = preparerApercu(liste, new Set([...DEPART, "shovel-knight"]));
+    expect(resumer(apercu)).toEqual({
       ajoutes: 44,
       misAJour: 4,
       ignores:
         apercu.ignores.autresEditeurs +
         apercu.ignores.telechargeables.length +
         apercu.ecartes.length,
-      aVerifier: 2,
+      aSupprimer: 1,
     });
   });
 });
@@ -127,7 +122,7 @@ describe("resumerEnregistrement (US-10)", () => {
             jaquettes: 0,
             sansScan: [],
             ecarts: [],
-            erreur: "IGDB indisponible",
+            erreur: "Scan illisible",
           },
         ],
         ["Shovel Knight"],
@@ -135,7 +130,7 @@ describe("resumerEnregistrement (US-10)", () => {
     ).toEqual({
       ajoutes: 1,
       misAJour: 1,
-      erreurs: [{ titre: "NES Remix", erreur: "IGDB indisponible" }],
+      erreurs: [{ titre: "NES Remix", erreur: "Scan illisible" }],
       jaquettes: 5,
       sansScan: ["Splatoon (PAL)"],
       ecarts: ["Pikmin 3 — PAL titre : « X » gardé (import : « Y »)"],
