@@ -138,6 +138,39 @@ describe("decouperFaceAvant", () => {
     expect(dominant.r).toBeLessThan(50);
   });
 
+  it("ne garde aucune colonne de la tranche blanche quand elle déborde sur la face (bande blanche, Mario Party 8)", async () => {
+    // Scans réels : la tranche blanche finit entre x = 539 et 545, au-delà de 1024 − 487 = 537.
+    const blanc = 545;
+    const scanReel = await sharp({
+      create: { width: 1024, height: 680, channels: 3, background: "#ffffff" },
+    })
+      .composite([
+        {
+          input: {
+            create: {
+              width: 1024 - blanc,
+              height: 680,
+              channels: 3,
+              background: "#2050c0",
+            },
+          },
+          left: blanc,
+          top: 0,
+        },
+      ])
+      .png()
+      .toBuffer();
+    const face = await decouperFaceAvant(scanReel);
+    const { width } = await sharp(face).metadata();
+    expect(width).toBe(1024 - blanc);
+    // Première colonne de la face : bleue, pas blanche.
+    const { data } = await sharp(face)
+      .extract({ left: 0, top: 0, width: 1, height: 680 })
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    expect(data[0]).toBeLessThan(100);
+  });
+
   it("refuse une image qui n'est pas une boîte dépliée", async () => {
     const portrait = await sharp({
       create: { width: 400, height: 600, channels: 3, background: "#fff" },

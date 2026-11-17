@@ -99,9 +99,28 @@ export function reduireBaseWii(xml: string): {
 }
 
 /**
+ * Colonne de la tranche : presque entièrement blanche (85 % des pixels ≥ 240 en niveaux de gris). Pas « uniforme » :
+ * la tranche des boîtes PAL porte un liseré vert en bas.
+ */
+function colonneBlanche(
+  gris: Buffer,
+  largeur: number,
+  hauteur: number,
+  x: number,
+): boolean {
+  let blancs = 0;
+  for (let y = 0; y < hauteur; y++) if (gris[y * largeur + x]! >= 240) blancs++;
+  return blancs >= hauteur * 0.85;
+}
+
+/** Colonnes de tranche blanche qu'on peut encore retirer à gauche de la face (scans réels : 2 à 8). */
+const DEBORDEMENT_MAX = 12;
+
+/**
  * Face avant d'un scan `coverfullHQ` (boîte dépliée : dos, tranche, face). Un boîtier Wii mesure 135 mm de large
- * par face et 14 mm de tranche : la face est la partie droite, sur 135/284 de la largeur totale. Sortie JPEG, sans
- * agrandissement.
+ * par face et 14 mm de tranche : la face est la partie droite, sur environ 135/284 de la largeur totale. La tranche
+ * blanche déborde souvent de quelques pixels sur cette limite (bande blanche à gauche, #87) : ses colonnes blanches et
+ * uniformes sont retirées, sur 12 pixels au plus. Sortie JPEG, sans agrandissement.
  */
 export async function decouperFaceAvant(scan: Uint8Array): Promise<Buffer> {
   const image = sharp(scan);
@@ -111,9 +130,17 @@ export async function decouperFaceAvant(scan: Uint8Array): Promise<Buffer> {
     throw new Error(
       `Scan inattendu : ${width} × ${height} (boîte dépliée attendue, plus large que haute)`,
     );
-  const largeur = Math.round((width * 135) / 284);
+  const gris = await sharp(scan)
+    .flatten({ background: "#ffffff" })
+    .toColourspace("b-w")
+    .raw()
+    .toBuffer();
+  let gauche = width - Math.round((width * 135) / 284);
+  const limite = Math.min(width - 1, gauche + DEBORDEMENT_MAX);
+  while (gauche < limite && colonneBlanche(gris, width, height, gauche))
+    gauche++;
   return image
-    .extract({ left: width - largeur, top: 0, width: largeur, height })
+    .extract({ left: gauche, top: 0, width: width - gauche, height })
     .flatten({ background: "#ffffff" })
     .jpeg({ quality: 90, mozjpeg: true })
     .toBuffer();

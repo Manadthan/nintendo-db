@@ -2,7 +2,8 @@
 // ce script dépose dans le bucket privé « gametdb » de Supabase, pour chaque console :
 //   - Wii U : wiiutdb.xml (la base du jour) et scans/{identifiant}.jpg (scan `coverHQ` de la face de la boîte) ;
 //   - Wii (étape 8) : wii/wiitdb.xml (base RÉDUITE aux jeux Nintendo du commerce : 10 Mo → 300 Ko) et
-//     wii/scans/{identifiant}.jpg (face avant DÉCOUPÉE dans le scan `coverfullHQ` de la boîte dépliée).
+//     wii/faces/{identifiant}.jpg (face avant DÉCOUPÉE dans le scan `coverfullHQ` de la boîte dépliée, sans la
+//     tranche : #87 ; l'ancien dossier wii/scans n'est plus lu).
 // Seulement les disques des jeux dont au moins une boîte est éditée par Nintendo, dans la première langue
 // disponible (PAL : EN, puis FR, DE). Un scan déjà déposé n'est pas retéléchargé.
 // Variables : SUPABASE_URL, SUPABASE_SECRET_KEY (secrets du dépôt ; jamais affichées).
@@ -60,6 +61,7 @@ const CONSOLES = [
   {
     nom: "Wii U",
     dossier: "",
+    scans: "scans",
     langues: { "NTSC-J": ["JA"], "NTSC-U": ["US"], PAL: ["EN", "FR", "DE"] },
     async preparer() {
       const xml = await base("https://www.gametdb.com/wiiutdb.zip?LANG=EN");
@@ -72,6 +74,8 @@ const CONSOLES = [
   {
     nom: "Wii",
     dossier: "wii/",
+    // Faces avant recoupées sans la bande blanche de la tranche (#87) : nouveau dossier, donc toutes refaites.
+    scans: "wii/faces",
     langues: LANGUES_SCAN_WII,
     async preparer() {
       const { xml, disques } = reduireBaseWii(strFromU8(await base("https://www.gametdb.com/wiitdb.zip?LANG=EN")));
@@ -91,7 +95,7 @@ for (const console_ of CONSOLES) {
   console.log(`${console_.nom} : base déposée (${Math.round(xml.length / 1024)} Ko)`);
 
   // 2. Les scans manquants, 6 à la fois.
-  const { data: deja, error } = await stockage.list(`${console_.dossier}scans`, { limit: 2000 });
+  const { data: deja, error } = await stockage.list(console_.scans, { limit: 2000 });
   if (error) throw new Error(`Liste des scans : ${error.message}`);
   const presents = new Set(deja.map((f) => f.name));
   const aFaire = disques.filter((d) => !presents.has(`${d.id}.jpg`));
@@ -103,7 +107,7 @@ for (const console_ of CONSOLES) {
         for (const langue of console_.langues[region]) {
           const scan = await console_.scan(id, langue);
           if (scan) {
-            await deposer(`${console_.dossier}scans/${id}.jpg`, scan, "image/jpeg");
+            await deposer(`${console_.scans}/${id}.jpg`, scan, "image/jpeg");
             deposes++;
             return;
           }
