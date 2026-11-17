@@ -157,9 +157,9 @@ test n'appelle les sites en direct.
 2. **Base** : Supabase, migrations (schéma, RLS, bucket), console Wii U, connexion US-09.
 3. **Consultation** : US-02, US-03, US-04, US-05 avec 3–4 jeux Wii U saisis en données de départ → *site visible tôt*.
 4. **Import Wii U** : US-10 (Wikipédia + IGDB + jaquettes).
-5. **Correction** : import GameTDB (scans de boîtes, codes produit), US-12 (page « Jaquettes »), US-11.
+5. **Correction** : import GameTDB (scans de boîtes, codes produit), jaquette HD, US-08 (sombre) + US-15 (logo), US-12 (page « Jaquettes »), US-11.
 6. **Filtres** : US-06.
-7. **Finitions** : US-07, US-08, référencement. Puis console suivante.
+7. **Finitions** : US-07, référencement. Puis console suivante.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.

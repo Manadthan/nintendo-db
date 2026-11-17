@@ -7,7 +7,7 @@
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 1.4 | 17/11/2026 | US-10 : **boîte Nintendo exigée**, sortie par région = en boîte dans la région, compilations ; jaquettes = **scans de boîtes** (GameTDB en priorité) et codes produit importés ; US-12 : page « Jaquettes » |
+> | 1.4 | 17/11/2026 | US-08 avancée, US-15 logo ; US-10 : **boîte Nintendo exigée**, sortie par région = en boîte dans la région, compilations ; jaquettes = **scans de boîtes** (GameTDB en priorité) et codes produit importés ; US-12 : page « Jaquettes » |
 > | 1.3 | 16/11/2026 | Retour sur les maquettes (PR #3) : trame de gamecartdb ; région choisie **sur la fiche** (US-04) ; catalogue filtré par **marché** (US-03) ; recherche **dans le catalogue** (US-05) |
 > | 1.2 | 16/11/2026 | **v1 = Wii U seule** ; US-01 en S ; US-10 depuis Wikipédia + IGDB ; US-12 : jaquettes copiées chez nous |
 > | 1.1 | 16/11/2026 | US-12 : jaquette = **lien vers une image externe** (pas de copie, pas de photo en v1) |
@@ -96,8 +96,14 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Une page « À propos » indique que le site est un projet de fan **non affilié à Nintendo**, que les titres et
       visuels appartiennent à leurs propriétaires, et liste les sources de données avec leur licence.
 
-#### US-08 — Thème clair / sombre (C)
+#### US-08 — Thème clair / sombre (S, avancée à l'étape 5)
 - [ ] Le site suit le réglage de l'iPhone ; un bouton permet de forcer clair ou sombre.
+- [ ] Le choix forcé est retenu d'une visite à l'autre ; aucun éclair blanc au chargement en mode sombre.
+
+#### US-15 — Logo du site (S)
+- [ ] Un petit logo **cartouche** (grise, étiquette bleue « DB », sans texte ni logo Nintendo) figure dans l'en-tête,
+      lisible en clair comme en sombre.
+- [ ] Il sert d'icône d'onglet et d'icône d'écran d'accueil iPhone.
 
 ### Administration (propriétaire)
 
