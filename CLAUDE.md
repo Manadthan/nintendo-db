@@ -107,7 +107,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 5 — Correction : GameTDB (#46, relais #53), jaquette HD #48, sombre + logo #49, Jaquettes #42 #43, fiches #44 #45, et #56, #58, #60
   - [x] Étape 6 — Filtres : genres #68, panneau #69
   - [x] Étape 7 — Finitions : À propos (US-07) #72, référencement #73
-  - [ ] Étape 8 — Wii : étude GameTDB de la Wii d'abord (bilan, leçon 1)
+  - [ ] Étape 8 — Wii : étude (DESIGN §1 bis, #77), relais #78, import #79, admin #83, catalogue #80
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1
 
 ## Erreurs récurrentes
