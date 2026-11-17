@@ -12,6 +12,7 @@ export type LigneJeu = {
   id: string;
   slug: string;
   developpeur: string | null;
+  genre: string | null;
   releases: {
     region: Region;
     sortie: boolean;
@@ -65,6 +66,11 @@ export function versJeuCatalogue(
     slug: ligne.slug,
     developpeur: ligne.developpeur,
     editeur: ligne.releases.find((r) => r.editeur)?.editeur ?? null,
+    // Écrits par l'import séparés par « , » (DESIGN ADR-03).
+    genres: (ligne.genre ?? "")
+      .split(",")
+      .map((g) => g.trim())
+      .filter(Boolean),
     sorties,
   };
 }

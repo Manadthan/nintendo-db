@@ -8,6 +8,7 @@ const ligne: LigneJeu = {
   id: ID,
   slug: "wii-karaoke-u",
   developpeur: "Xing",
+  genre: "Musique, Karaoké, Démo",
   releases: [
     {
       region: "PAL",
@@ -43,6 +44,13 @@ describe("versJeuCatalogue", () => {
     });
     expect(jeu.sorties.US.sortie).toBe(false);
     expect(jeu.editeur).toBe("Nintendo");
+  });
+
+  it("découpe les genres écrits par l'import (US-06), vide s'ils sont inconnus", () => {
+    expect(jeu.genres).toEqual(["Musique", "Karaoké", "Démo"]);
+    expect(versJeuCatalogue({ ...ligne, genre: null }, BASE).genres).toEqual(
+      [],
+    );
   });
 
   it("compte une région absente de la base comme non sortie", () => {

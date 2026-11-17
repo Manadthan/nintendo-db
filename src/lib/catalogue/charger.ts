@@ -12,7 +12,7 @@ export async function chargerCatalogue(
   const { data, error } = await supabase
     .from("games")
     .select(
-      "id, slug, developpeur, consoles!inner(slug), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, jaquette_path)",
+      "id, slug, developpeur, genre, consoles!inner(slug), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, jaquette_path)",
     )
     .eq("consoles.slug", consoleSlug);
   if (error)
