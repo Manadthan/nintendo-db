@@ -197,7 +197,7 @@ test n'appelle les sites en direct.
 
 8. **Wii** (v1.2, plan à valider) — 3 PR :
    1. **Relais Wii** : la tâche GitHub dépose aussi `wii/wiitdb.xml` et, pour chaque disque Nintendo, la **face avant
-      découpée** du scan `coverfullHQ` (moitié droite, sans la tranche), en JPEG ≈ 485 × 680 (`wii/scans/{id}.jpg`) :
+      découpée** du scan `coverfullHQ` (moitié droite, sans la tranche), en JPEG ≈ 485 × 680 (`wii/faces/{id}.jpg` ; recoupées sans la bande blanche de la tranche, #87) :
       ≈ 100 Ko par scan au lieu d'1 Mo. Fixture `wiitdb.xml` réduite (+ README).
    2. **Import Wii** : migration (console `wii`, salon, 2006) ; import paramétré par console : Wii = GameTDB seul
       (même lecteur, type « disque Wii », codes `RVL-XXXX`) ; tailles de jaquette sans agrandissement (300 et 485 px

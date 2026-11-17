@@ -98,9 +98,84 @@ export function reduireBaseWii(xml: string): {
   };
 }
 
+/** Part des lignes `[y0, y1)` où la luminosité saute (écart > 25) entre les colonnes x − 1 et x. */
+function sautVertical(
+  gris: Buffer,
+  largeur: number,
+  x: number,
+  y0: number,
+  y1: number,
+): number {
+  let sauts = 0;
+  for (let y = y0; y < y1; y++)
+    if (Math.abs(gris[y * largeur + x]! - gris[y * largeur + x - 1]!) > 25)
+      sauts++;
+  return sauts / (y1 - y0);
+}
+
+/** Colonne de [debut, fin] où l'image change le plus souvent, sur les lignes [y0, y1), et ce score. */
+function meilleureLimite(
+  gris: Buffer,
+  largeur: number,
+  debut: number,
+  fin: number,
+  y0: number,
+  y1: number,
+): { x: number; score: number } {
+  let meilleure = { x: debut, score: -1 };
+  for (let x = debut; x <= fin; x++) {
+    const score = sautVertical(gris, largeur, x, y0, y1);
+    if (score > meilleure.score) meilleure = { x, score };
+  }
+  return meilleure;
+}
+
+/** Une limite est nette quand l'image change sur au moins 40 % des lignes à cet endroit. */
+const NETTE = 0.4;
+
 /**
- * Face avant d'un scan `coverfullHQ` (boîte dépliée : dos, tranche, face). Un boîtier Wii mesure 135 mm de large
- * par face et 14 mm de tranche : la face est la partie droite, sur 135/284 de la largeur totale. Sortie JPEG, sans
+ * Première colonne de la face (#87). Mesure sur 44 vrais scans : la limite tranche–face est une colonne où l'image
+ * change brusquement, entre x = 535 et 544 sur 1024, quelle que soit la couleur de la tranche. On la cherche sur
+ * toute la hauteur, puis sur le quart haut et le quart bas : un scan penché donne deux limites, on garde la plus à
+ * droite (aucune ligne ne commence par la tranche). Limite floue (blanc contre blanc) : repli prudent après la plus
+ * grande limite observée.
+ */
+export function debutDeLaFace(
+  gris: Buffer,
+  largeur: number,
+  hauteur: number,
+): number {
+  const echelle = (x: number) => Math.round((x * largeur) / 1024);
+  const [debut, fin] = [echelle(528), echelle(556)];
+  const quart = Math.round(hauteur / 4);
+  const partout = meilleureLimite(gris, largeur, debut, fin, 0, hauteur);
+  const haut = meilleureLimite(gris, largeur, debut, fin, 0, quart);
+  const bas = meilleureLimite(
+    gris,
+    largeur,
+    debut,
+    fin,
+    hauteur - quart,
+    hauteur,
+  );
+  const net = (l: { score: number }) => l.score >= NETTE;
+  if (net(partout)) {
+    // Limite nette : le haut ou le bas ne la décalent que de quelques colonnes (léger penché), jamais au-delà
+    // (un contour du dessin de la face n'est pas la tranche).
+    const proches = [haut, bas].filter(
+      (l) => net(l) && Math.abs(l.x - partout.x) <= echelle(6),
+    );
+    return Math.max(partout.x, ...proches.map((l) => l.x));
+  }
+  // Pas de limite nette sur toute la hauteur : scan penché si le haut et le bas en ont une, proches l'une de l'autre.
+  if (net(haut) && net(bas) && Math.abs(haut.x - bas.x) <= echelle(8))
+    return Math.max(haut.x, bas.x);
+  return echelle(547);
+}
+
+/**
+ * Face avant d'un scan `coverfullHQ` (boîte dépliée : dos, tranche, face) : tout ce qui est à droite de la limite
+ * tranche–face (`debutDeLaFace`). La face d'un boîtier Wii fait 135 mm sur 284 de boîte dépliée. Sortie JPEG, sans
  * agrandissement.
  */
 export async function decouperFaceAvant(scan: Uint8Array): Promise<Buffer> {
@@ -111,9 +186,14 @@ export async function decouperFaceAvant(scan: Uint8Array): Promise<Buffer> {
     throw new Error(
       `Scan inattendu : ${width} × ${height} (boîte dépliée attendue, plus large que haute)`,
     );
-  const largeur = Math.round((width * 135) / 284);
+  const gris = await sharp(scan)
+    .flatten({ background: "#ffffff" })
+    .toColourspace("b-w")
+    .raw()
+    .toBuffer();
+  const gauche = debutDeLaFace(gris, width, height);
   return image
-    .extract({ left: width - largeur, top: 0, width: largeur, height })
+    .extract({ left: gauche, top: 0, width: width - gauche, height })
     .flatten({ background: "#ffffff" })
     .jpeg({ quality: 90, mozjpeg: true })
     .toBuffer();

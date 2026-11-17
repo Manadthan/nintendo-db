@@ -39,7 +39,8 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
     slug: "wii",
     wikipedia: false,
     base: "wii/wiitdb.xml",
-    scans: "wii/scans",
+    // Faces recoupées sans la bande blanche de la tranche (#87).
+    scans: "wii/faces",
     prefixeCode: "RVL-",
     estDisque: (type, id, region) => estDisqueWiiDuCommerce(type, id, region),
   },

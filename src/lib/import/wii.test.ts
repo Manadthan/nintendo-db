@@ -53,7 +53,7 @@ describe("import Wii depuis GameTDB seul", () => {
     expect(releases.JAP.code_produit).toBe("RVL-RMCJ");
   });
 
-  it("jaquettes : faces avant déposées par le relais dans wii/scans", () => {
+  it("jaquettes : faces avant déposées par le relais dans wii/faces", () => {
     const mk = jeu("mario-kart-wii");
     expect(
       choisirJaquettes(
@@ -64,9 +64,9 @@ describe("import Wii depuis GameTDB seul", () => {
         WII.scans,
       ),
     ).toEqual({
-      JAP: "wii/scans/RMCJ01.jpg",
-      US: "wii/scans/RMCE01.jpg",
-      PAL: "wii/scans/RMCP01.jpg",
+      JAP: "wii/faces/RMCJ01.jpg",
+      US: "wii/faces/RMCE01.jpg",
+      PAL: "wii/faces/RMCP01.jpg",
     });
   });
 

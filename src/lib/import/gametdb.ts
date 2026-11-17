@@ -196,7 +196,7 @@ export const BUCKET_GAMETDB = "gametdb";
 
 /**
  * Chemin du scan de boîte d'un disque dans le bucket du relais (langue déjà choisie par le relais) ; Wii : face
- * avant déjà découpée, dans `wii/scans`.
+ * avant déjà découpée, dans `wii/faces` (#87).
  */
 export function cheminScan(id: string, dossier = "scans"): string {
   if (!/^[A-Z0-9]{6}$/.test(id))
