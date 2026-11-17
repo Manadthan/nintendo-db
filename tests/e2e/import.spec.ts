@@ -39,3 +39,18 @@ test("l'import Wii s'ouvre depuis l'administration, avec GameTDB pour seule sour
     page.getByRole("button", { name: "Analyser la Wii", exact: true }),
   ).toBeEnabled();
 });
+
+test("les imports DS et 3DS s'ouvrent depuis l'administration (étape 9)", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.getByRole("link", { name: /Import DS \(GameTDB\)/ }).click();
+  await expect(page).toHaveURL("/admin/import?console=ds");
+  await expect(
+    page.getByRole("button", { name: "Analyser la DS", exact: true }),
+  ).toBeEnabled();
+  await page.goto("/admin/import?console=3ds");
+  await expect(
+    page.getByRole("heading", { name: "Import 3DS", exact: true }),
+  ).toBeVisible();
+});

@@ -40,8 +40,8 @@ export type JeuImporte = {
  */
 export function construireJeu(
   wiki: JeuAImporter,
-  /** Préfixe des codes produit de la console (Wii U par défaut). */
-  prefixeCode = "WUP-P-",
+  /** Préfixe des codes produit de la console (Wii U par défaut), ou sa règle selon l'identifiant (3DS). */
+  prefixeCode: string | ((id: string) => string) = "WUP-P-",
 ): JeuImporte {
   const titreAnglais = wiki.titres.PAL || wiki.titres.US;
   const releases = Object.fromEntries(

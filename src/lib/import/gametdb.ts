@@ -2,6 +2,7 @@ import * as cheerio from "cheerio";
 import type { PrecisionDate, Region } from "@/lib/catalogue/types";
 import { normaliser } from "@/lib/recherche/normaliser";
 import { SOURCES_CONSOLES, type SourceConsole } from "./consoles";
+import { EDITEUR_NINTENDO, rangCartePal } from "./relais-portables";
 
 /** Un disque en boîte d'une région (type `WiiU` de GameTDB ; l'eShop et les boîtes à code sont écartés). */
 export type DisqueGameTdb = {
@@ -95,7 +96,16 @@ export function lireGameTdb(
     const region = REGIONS_GAMETDB[champ("region")];
     const titre = jeu.find("locale[lang=EN] > title").first().text().trim();
     if (!region || !titre) return;
-    if (!estDisque(champ("type"), champ("id"), champ("region"), titre)) return;
+    if (
+      !estDisque(
+        champ("type"),
+        champ("id"),
+        champ("region"),
+        titre,
+        champ("genre"),
+      )
+    )
+      return;
     if (pasUnJeu(champ("genre"))) return;
     const date = jeu.children("date").first();
     disques.push({
@@ -128,7 +138,7 @@ export type JeuGameTdb = {
 };
 
 const estNintendo = (d: DisqueGameTdb) =>
-  d.id.slice(4, 6) === "01" || /nintendo/i.test(d.editeur);
+  d.id.slice(4, 6) === "01" || EDITEUR_NINTENDO.test(d.editeur);
 
 /**
  * Regroupe les disques par jeu : les 3 premiers caractères de l'identifiant sont communs aux régions (`ALZE01`,
@@ -143,8 +153,14 @@ export function regrouperGameTdb(
     const base = d.id.slice(0, 3);
     const jeu = jeux.get(base) ?? { base, disques: {}, nintendo: false };
     const deja = jeu.disques[d.region];
-    if (!deja || (!estNintendo(deja) && estNintendo(d)))
-      jeu.disques[d.region] = d;
+    // Préférence : une carte de Nintendo ; à égalité, en Europe, la carte anglaise (titre anglais, #95).
+    const meilleure =
+      !deja ||
+      (!estNintendo(deja) && estNintendo(d)) ||
+      (estNintendo(deja) === estNintendo(d) &&
+        d.region === "PAL" &&
+        rangCartePal(d.id) < rangCartePal(deja.id));
+    if (meilleure) jeu.disques[d.region] = d;
     jeu.nintendo ||= estNintendo(d);
     jeux.set(base, jeu);
   }
@@ -192,8 +208,12 @@ export function jeuxSansWikipedia(
  * Code produit imprimé sur la boîte : préfixe de la console + les 4 premiers caractères de l'identifiant
  * (Wii U : ALZP01 → WUP-P-ALZP ; Wii : RMCP01 → RVL-RMCP, sans le suffixe de pays que GameTDB ne donne pas).
  */
-export function codeProduit(id: string, prefixe = "WUP-P-"): string {
-  return `${prefixe}${id.slice(0, 4)}`;
+export function codeProduit(
+  id: string,
+  prefixe: string | ((id: string) => string) = "WUP-P-",
+): string {
+  const debut = typeof prefixe === "function" ? prefixe(id) : prefixe;
+  return `${debut}${id.slice(0, 4)}`;
 }
 
 /**
@@ -207,7 +227,8 @@ export const BUCKET_GAMETDB = "gametdb";
  * avant déjà découpée, dans `wii/faces` (#87).
  */
 export function cheminScan(id: string, dossier = "scans"): string {
-  if (!/^[A-Z0-9]{6}$/.test(id))
+  // 6 caractères (Wii, Wii U) ou 4 (DS, 3DS).
+  if (!/^[A-Z0-9]{4}([A-Z0-9]{2})?$/.test(id))
     throw new Error(`Identifiant GameTDB invalide : « ${id} »`);
   return `${dossier}/${id}.jpg`;
 }

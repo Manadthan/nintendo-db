@@ -1,6 +1,7 @@
 // Relais GameTDB (#53) : GameTDB refuse les serveurs de Vercel. Lancé par la tâche GitHub « Relais GameTDB »,
 // ce script dépose dans le bucket privé « gametdb » de Supabase, pour chaque console :
 //   - Wii U : wiiutdb.xml (la base du jour) et scans/{identifiant}.jpg (scan `coverHQ` de la face de la boîte) ;
+//   - DS et 3DS (étape 9) : ds/dstdb.xml, 3ds/3dstdb.xml (bases réduites) et {ds,3ds}/scans/{identifiant}.jpg ;
 //   - Wii (étape 8) : wii/wiitdb.xml (base RÉDUITE aux jeux Nintendo du commerce : 10 Mo → 300 Ko) et
 //     wii/faces/{identifiant}.jpg (face avant DÉCOUPÉE dans le scan `coverfullHQ` de la boîte dépliée, sans la
 //     tranche : #87 ; l'ancien dossier wii/scans n'est plus lu).
@@ -12,6 +13,7 @@ import { createClient } from "@supabase/supabase-js";
 import * as cheerio from "cheerio";
 import { strFromU8, unzipSync } from "fflate";
 import { decouperFaceAvant, LANGUES_SCAN_WII, reduireBaseWii } from "../src/lib/import/relais-wii.ts";
+import { languesScan, reduireBasePortable } from "../src/lib/import/relais-portables.ts";
 
 const AGENT = { "User-Agent": "nintendo-db/1.0 (https://nintendo-db.vercel.app)" };
 
@@ -86,6 +88,26 @@ const CONSOLES = [
       return boite && decouperFaceAvant(boite);
     },
   },
+  // Étape 9 : DS et 3DS, face seule ; scan haute définition (768 × 680), sinon moyen (400 × 352, cartes japonaises).
+  ...["ds", "3ds"].map((portable) => ({
+    nom: portable.toUpperCase(),
+    dossier: `${portable}/`,
+    scans: `${portable}/scans`,
+    languesDe: (id) => languesScan(id),
+    async preparer() {
+      const { xml, disques } = reduireBasePortable(
+        portable,
+        strFromU8(await base(`https://www.gametdb.com/${portable}tdb.zip?LANG=EN`)),
+      );
+      return { fichier: `${portable}tdb.xml`, xml: new TextEncoder().encode(xml), disques };
+    },
+    async scan(id, langue) {
+      return (
+        (await telecharger(`https://art.gametdb.com/${portable}/coverHQ/${langue}/${id}.jpg`)) ??
+        (await telecharger(`https://art.gametdb.com/${portable}/coverM/${langue}/${id}.jpg`))
+      );
+    },
+  })),
 ];
 
 for (const console_ of CONSOLES) {
@@ -104,7 +126,7 @@ for (const console_ of CONSOLES) {
   for (let i = 0; i < aFaire.length; i += 6) {
     await Promise.all(
       aFaire.slice(i, i + 6).map(async ({ id, region }) => {
-        for (const langue of console_.langues[region]) {
+        for (const langue of console_.languesDe?.(id) ?? console_.langues[region]) {
           const scan = await console_.scan(id, langue);
           if (scan) {
             await deposer(`${console_.scans}/${id}.jpg`, scan, "image/jpeg");

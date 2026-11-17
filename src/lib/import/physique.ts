@@ -91,14 +91,29 @@ export function appliquerGameTdb(
     });
   }
 
-  for (const g of jeuxSansWikipedia(gametdb, bases)) {
+  // Le jeu sorti dans le plus de régions d'abord : une réédition au même titre (ressortie japonaise de New Super
+  // Mario Bros., A85J) est écartée au profit du jeu d'origine (rééditions hors v1, intention décision 6 ; #95).
+  const slugs = new Set(jeux.map((j) => j.slug));
+  const parRegions = [...jeuxSansWikipedia(gametdb, bases)].sort(
+    (a, b) => Object.keys(b.disques).length - Object.keys(a.disques).length,
+  );
+  for (const g of parRegions) {
     const premier = (g.disques.PAL ?? g.disques.US ?? g.disques.JAP)!;
     const titres = {
       US: g.disques.US?.titre ?? premier.titre,
       PAL: g.disques.PAL?.titre ?? premier.titre,
     };
+    const slug = slugifier(titres.PAL);
+    if (slugs.has(slug)) {
+      ecartes.push({
+        titre: titres.PAL,
+        raison: `réédition ou variante d'un jeu déjà retenu (${premier.id})`,
+      });
+      continue;
+    }
+    slugs.add(slug);
     jeux.push({
-      slug: slugifier(titres.PAL),
+      slug,
       titres,
       developpeur: premier.developpeur,
       wikipediaUrl: null,

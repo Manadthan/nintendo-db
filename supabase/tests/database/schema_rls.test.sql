@@ -75,7 +75,7 @@ reset role;
 set local role anon;
 set local request.jwt.claims = '{"role": "anon"}';
 
-select is((select count(*)::int from public.consoles), 2, 'un visiteur voit les consoles (Wii, Wii U)');
+select is((select count(*)::int from public.consoles), 4, 'un visiteur voit les consoles (DS, Wii, 3DS, Wii U)');
 select is((select count(*)::int from public.releases where game_id = '20000000-0000-0000-0000-000000000001'), 3, 'un visiteur voit les sorties');
 select is_empty('select * from public.import_runs', 'un visiteur ne voit pas l''historique des imports');
 select throws_ok(

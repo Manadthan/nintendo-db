@@ -24,6 +24,18 @@ const CONSOLES = {
     description:
       "Lit la base GameTDB seule (SPEC v1.9) : jeux du commerce dont au moins une boîte est éditée par Nintendo, titres par région, dates, genres, faces avant des boîtes.",
   },
+  ds: {
+    nom: "DS",
+    sources: "la base GameTDB",
+    description:
+      "Lit la base GameTDB seule (SPEC v1.10) : cartes du commerce dont au moins une est éditée par Nintendo, sans démos ni rééditions, titres par région, dates, genres, scans des boîtes.",
+  },
+  "3ds": {
+    nom: "3DS",
+    sources: "la base GameTDB",
+    description:
+      "Lit la base GameTDB seule (SPEC v1.10) : cartes du commerce dont au moins une est éditée par Nintendo, sans jeux Super Nintendo ni eShop, titres par région, dates, genres, scans des boîtes.",
+  },
 } as const;
 
 type Slug = keyof typeof CONSOLES;
