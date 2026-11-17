@@ -18,7 +18,7 @@ test("le propriétaire repère les jaquettes à remplacer, et une adresse intern
   await expect(page.getByRole("heading", { name: "Jaquettes" })).toBeVisible();
 
   // Les jeux de départ n'ont pas de jaquette : toutes sont « à remplacer ».
-  const remplacer = page.getByRole("link", { name: "Remplacer" });
+  const remplacer = page.getByRole("link", { name: "Remplacer", exact: true });
   await expect(remplacer.first()).toBeVisible();
   await remplacer.first().click();
   await expect(page).toHaveURL(/\/admin\/jaquettes\/[a-z0-9-]+\/(jap|us|pal)$/);
@@ -36,7 +36,7 @@ test("le propriétaire remplace une jaquette par une photo (US-12)", async ({
 }) => {
   await seConnecter(page);
   await page.goto("/admin/jaquettes");
-  await page.getByRole("link", { name: "Remplacer" }).first().click();
+  await page.getByRole("link", { name: "Remplacer", exact: true }).first().click();
 
   // Une « photo » de 600 × 800 fabriquée pour le test.
   const sharp = (await import("sharp")).default;
