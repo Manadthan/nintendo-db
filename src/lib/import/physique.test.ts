@@ -62,4 +62,11 @@ describe("appliquerGameTdb — règle du physique (fixtures réelles)", () => {
       editeur: "Nintendo",
     });
   });
+
+  it("réunit les genres des disques de toutes les régions (Kirby : « plates-formes » en PAL seulement)", () => {
+    const kirby = jeux.find(
+      (j) => j.slug === "kirby-and-the-rainbow-paintbrush",
+    );
+    expect(kirby?.genres).toEqual(["Action", "Plates-formes"]);
+  });
 });

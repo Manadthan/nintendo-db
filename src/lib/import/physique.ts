@@ -17,7 +17,14 @@ export type JeuAImporter = JeuWikipedia & {
   disques: Partial<Record<Region, string>>;
   /** Titre du disque japonais (GameTDB, #58) : en japonais, et sa forme romanisée ou anglaise. */
   japonais: { titre: string; romanise: string } | null;
+  /** Genres du jeu (US-06) : réunion des genres de ses disques, déjà traduits. */
+  genres: string[];
 };
+
+/** Les disques d'une région peuvent donner des genres différents (Kirby : « plates-formes » en PAL seulement). */
+const genresDuJeu = (g: JeuGameTdb): string[] => [
+  ...new Set(REGIONS.flatMap((r) => g.disques[r]?.genres ?? [])),
+];
 
 const titreJaponais = (g: JeuGameTdb): JeuAImporter["japonais"] => {
   const d = g.disques.JAP;
@@ -80,6 +87,7 @@ export function appliquerGameTdb(
       sorties,
       disques: identifiants(g),
       japonais: titreJaponais(g),
+      genres: genresDuJeu(g),
     });
   }
 
@@ -102,6 +110,7 @@ export function appliquerGameTdb(
       ) as Record<Region, SortieWikipedia>,
       disques: identifiants(g),
       japonais: titreJaponais(g),
+      genres: genresDuJeu(g),
     });
   }
   return { jeux, ecartes };

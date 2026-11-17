@@ -3,7 +3,8 @@
 // <wiiutdb.zip> : https://www.gametdb.com/wiiutdb.zip?LANG=EN
 // On garde les disques en boîte édités par Nintendo (code 01) et ceux qui partagent leurs 3 premiers caractères d'identifiant avec un
 // jeu de la liste Wikipédia (ex. Shovel Knight, édité par un autre en boîte), sans les résumés ni les empreintes
-// de disque (<synopsis>, <rom>, <input>…) : seuls les champs lus par l'import restent.
+// de disque (<synopsis>, <rom>, <input>…) : seuls les champs lus par l'import restent, avec les genres et leur
+// traduction française (US-06).
 import { readFileSync } from "node:fs";
 import { unzipSync, strFromU8 } from "fflate";
 import * as cheerio from "cheerio";
@@ -15,7 +16,7 @@ const $ = cheerio.load(strFromU8(fichiers[nom]), { xml: true });
 
 // Cas de test hors Nintendo ou hors boîte : Shovel Knight (boîtes éditées par Yacht Club), NES Remix (eShop).
 const AUTRES = new Set(["WKN", "WMG", "WF2"]);
-const GARDER = new Set(["id", "type", "region", "locale", "developer", "publisher", "date"]);
+const GARDER = new Set(["id", "type", "region", "locale", "developer", "publisher", "date", "genre"]);
 $("game").each((_, el) => {
   const jeu = $(el);
   const id = jeu.children("id").text();
@@ -31,5 +32,7 @@ $("game").each((_, el) => {
   });
   jeu.find("locale").children(":not(title)").remove();
 });
-$("datafile").children(":not(game, WiiUTDB)").remove();
+// <genres> : traductions françaises des genres (US-06).
+$("datafile").children(":not(game, WiiUTDB, genres)").remove();
+$("genres loc:not([lang=FR])").remove();
 process.stdout.write($.xml().replace(/\n\s*\n/g, "\n") + "\n");
