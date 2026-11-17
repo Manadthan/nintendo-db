@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.1 — 17/11/2026 — statut : **validée**
+> Version 1.2 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.2 | 17/11/2026 | **Wii** (étape 8) : étude GameTDB (§1 bis), import GameTDB seul, relais étendu (face avant découpée), catalogue toutes consoles (ADR-06), plan §8 |
 > | 1.1 | 17/11/2026 | **Référencement** (étape 7) : `src/lib/referencement/`, `sitemap.ts`, `robots.ts`, `metadataBase` = adresse de production |
 > | 1.0 | 17/11/2026 | **Genres** lus dans GameTDB (48 jeux sur 48), traduits en français, gardés dans `games.genre` (US-06) |
 > | 0.9 | 17/11/2026 | Routes de correction sous `/admin` (protégées par le proxy) : `/admin/jeux`, `/admin/jaquettes` (#42 à #45) |
@@ -28,6 +29,24 @@
 | MobyGames | Données riches | Page « Just a moment… » anti-robots : conditions illisibles par un programme ; API devenue payante (à confirmer) | Écartée |
 | **GameTDB** (étude du 17/11/2026) | **Scans de vraies boîtes** par région (bandeau Wii U, PEGI/ESRB/CERO), 768 × 1080 = proportions d'une boîte ; base XML téléchargeable (identifiants de disque → **codes produit**, dates, éditeur) | Pas de licence formelle ; base « pour que chacun l'utilise dans tout projet lié aux jeux » ; images propriété des éditeurs (comme IGDB) | **Retenue** : boîtes par région, scans (132 sur 135 disques), titres japonais (locale JA), codes produit |
 | Redump / No-Intro | Codes produit des disques | Redump injoignable depuis l'environnement | À revoir pour les codes produit (piste) |
+
+## 1 bis. Étude GameTDB pour la Wii (17/11/2026)
+
+Base `wiitdb.zip` du 17/11 : disques du commerce (identifiant en **R** ou **S** ; écartés : disques système, démos,
+`CUSTOM`), régions NTSC-J / NTSC-U / PAL.
+
+| Mesure | Résultat |
+|---|---|
+| Jeux avec au moins une boîte Nintendo (code `01`) | **86** (62 dans les 3 régions, 12 Japon seul, 12 autres combinaisons) ; 228 disques |
+| Dates (au jour près), genres, titres japonais (locale JA) | **100 %** des disques |
+| Développeur | 226 disques sur 228 |
+| Scans de boîtes `coverfullHQ` (boîte dépliée 1024 × 680, PNG ≈ 1 Mo) | **209 sorties sur 220** (95 %) ; les 11 manquantes sont japonaises |
+| `coverHQ` (face seule, comme la Wii U) | **N'existe pas** pour la Wii |
+| Wikipédia « List of Wii games » | Une page de 4 Mo, structure différente : le lecteur Wii U ne la lit pas |
+| Autres sources d'images | libretro-thumbnails : même résolution (≈ 486–512 px), noms à deviner ; The Cover Project : inaccessible d'ici ; IGDB : pas des scans |
+
+Jeux édités par Nintendo dans une seule région : 14 (Just Dance 2, GoldenEye 007, Epic Mickey au Japon ; Trauma
+Center en Europe…), gardés selon la règle Wii U (décision du propriétaire).
 
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
 Vercel avec un cache d'un an). C'est le modèle retenu (ADR-04).
@@ -113,7 +132,9 @@ pour les 3 régions + éditeur + développeur. *Pourquoi* : instantané, aucun a
 Quand plusieurs consoles seront en ligne : recherche globale dans Postgres (`unaccent` + `pg_trgm`).
 
 **ADR-06 — Adresses stables.** `/consoles/{console}` et `/jeux/{console}/{jeu}` avec un *slug* tiré du titre
-PAL (sinon US, sinon romanisé), figé à la création. En v1, `/` affiche le catalogue Wii U (US-01 en S).
+PAL (sinon US, sinon romanisé), figé à la création. En v1, `/` affiche le catalogue Wii U (US-01 en S). **Dès la Wii
+(v1.2)** : `/` est le catalogue de **toutes les consoles**, filtrable par `?console=wii` (panneau Filtres) ; la
+console se lit sur chaque vignette ; les fiches gardent `/jeux/{console}/{jeu}`.
 
 ## 5. Modèle de données
 
@@ -174,6 +195,16 @@ test n'appelle les sites en direct.
    même depuis une prévisualisation (Vercel y ajoute déjà `noindex`) ; aperçu de partage = jaquette 600 px de la
    version « Tous » ; données schema.org `VideoGame` (JSON échappé) ; `robots.txt` exclut `/admin`.
 
+8. **Wii** (v1.2, plan à valider) — 3 PR :
+   1. **Relais Wii** : la tâche GitHub dépose aussi `wii/wiitdb.xml` et, pour chaque disque Nintendo, la **face avant
+      découpée** du scan `coverfullHQ` (moitié droite, sans la tranche), en JPEG ≈ 485 × 680 (`wii/scans/{id}.jpg`) :
+      ≈ 100 Ko par scan au lieu d'1 Mo. Fixture `wiitdb.xml` réduite (+ README).
+   2. **Import Wii** : migration (console `wii`, salon, 2006) ; import paramétré par console : Wii = GameTDB seul
+      (même lecteur, type « disque Wii », codes `RVL-XXXX`) ; tailles de jaquette sans agrandissement (300 et 485 px
+      réels). L'import Wii se lance depuis l'admin après le merge (une fois).
+   3. **Catalogue toutes consoles** : accueil = tous les jeux, console sur chaque vignette, filtre **Console** dans
+      le panneau, sitemap et « À propos » à jour.
+
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 
@@ -183,6 +214,7 @@ faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 |---|---|---|
 | R1 | Rapprochement Wikipédia ↔ GameTDB manqué (titre différent) | Jeu écarté avec la raison dans l'aperçu ; correction ou ajout à la main (US-11) ; tests sur fixtures |
 | R2 | Pas de scan GameTDB pour une région | Vignette neutre, signalée dans le résumé ; remplaçable (US-12) |
+| R9 | Wii : jaquettes moins grandes que la Wii U (≈ 485 px) ; découpe de la face mal placée sur certains scans | Découpe testée sur des scans réels (fixtures) ; photo du propriétaire en remplacement (US-12) |
 | R3 | Droits des jaquettes | Mention de la source ; « non affilié » (US-07) ; retrait sur demande |
 | R4 | Attributions (CC BY-SA Wikipédia, GameTDB) | Lien source sur chaque fiche + page À propos |
 | R5 | Prévisualisation Vercel partageant la base de production | Prévenir dans la PR ; piste : branches Supabase |
