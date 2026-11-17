@@ -4,9 +4,12 @@ import { BASE_LOCALE_DISPONIBLE, PROPRIETAIRE_TEST, seConnecter } from "./utilis
 // US-09 — Se connecter (docs/SPEC.md)
 test.skip(!BASE_LOCALE_DISPONIBLE, "Base Supabase locale nécessaire (CI)");
 
-test("le site public ne montre aucun lien vers la connexion", async ({ page }) => {
+test("le site public n'a qu'un lien discret vers l'administration, en pied de page (SPEC v1.5)", async ({
+  page,
+}) => {
   await page.goto("/");
-  await expect(page.locator('a[href^="/admin"]')).toHaveCount(0);
+  await expect(page.locator('a[href^="/admin"]')).toHaveCount(1);
+  await expect(page.getByRole("contentinfo").locator('a[href="/admin"]')).toHaveText("Administration");
 });
 
 test("sans être connecté, l'administration renvoie vers la connexion", async ({ page }) => {
