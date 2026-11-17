@@ -2,10 +2,21 @@ import type { Metadata } from "next";
 import { EnTete } from "@/components/EnTete";
 import { PiedDePage } from "@/components/PiedDePage";
 
+const DESCRIPTION =
+  "Nintendo DB est un site de fan non affilié à Nintendo : son but, ses sources de données et leurs licences.";
+
 export const metadata: Metadata = {
   title: "À propos · Nintendo DB",
-  description:
-    "Nintendo DB est un site de fan non affilié à Nintendo : son but, ses sources de données et leurs licences.",
+  description: DESCRIPTION,
+  alternates: { canonical: "/a-propos" },
+  openGraph: {
+    siteName: "Nintendo DB",
+    locale: "fr_FR",
+    type: "website",
+    title: "À propos · Nintendo DB",
+    description: DESCRIPTION,
+    url: "/a-propos",
+  },
 };
 
 /** Sources de données (US-07, SPEC §5 « Données ») : ce qu'elles apportent et leurs conditions. */
