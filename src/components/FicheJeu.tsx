@@ -5,7 +5,11 @@ import { useState, useSyncExternalStore } from "react";
 import { formaterDate } from "@/lib/catalogue/catalogue";
 import { lireMarche } from "@/lib/catalogue/marche";
 import { REGIONS, type Marche, type Region } from "@/lib/catalogue/types";
-import { regionParDefaut, type JeuFiche } from "@/lib/fiche/fiche";
+import {
+  SOURCES_JAQUETTE,
+  regionParDefaut,
+  type JeuFiche,
+} from "@/lib/fiche/fiche";
 import { Jaquette } from "./Jaquette";
 
 const NOMS: Record<Region, string> = {
@@ -36,6 +40,14 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
     () => "TOUS",
   );
   const [choix, setChoix] = useState<Region | null>(null);
+  // Sources à créditer en pied de fiche (attribution, R4) : les ajouts à la main n'en ont pas.
+  const sourcesExternes = [
+    ...new Set(
+      REGIONS.map((r) => jeu.sorties[r].sourceJaquette)
+        .filter((s) => s === "gametdb" || s === "igdb")
+        .map((s) => SOURCES_JAQUETTE[s]),
+    ),
+  ];
   const region = choix ?? regionParDefaut(jeu, marche);
   const sortie = jeu.sorties[region];
   const titre =
@@ -89,8 +101,10 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             );
           })}
         </div>
-        {sortie.jaquetteSrcset && (
-          <p className="text-[11px] text-texte-discret">Jaquette : IGDB</p>
+        {sortie.jaquetteSrcset && sortie.sourceJaquette && (
+          <p className="text-[11px] text-texte-discret">
+            Jaquette : {SOURCES_JAQUETTE[sortie.sourceJaquette]}
+          </p>
         )}
       </div>
 
@@ -180,8 +194,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
           "Wikipédia"
         )}{" "}
         (CC BY-SA)
-        {REGIONS.some((r) => jeu.sorties[r].jaquetteSrcset) &&
-          " · jaquettes IGDB"}
+        {sourcesExternes.length > 0 &&
+          ` · jaquettes ${sourcesExternes.join(", ")}`}
         . Site de fan non affilié à Nintendo.
       </p>
     </main>

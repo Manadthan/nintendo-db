@@ -159,7 +159,9 @@ const LANGUES_SCAN: Record<Region, string[]> = {
 };
 
 /** Adresses du scan de la boîte (768 × 1080), à essayer dans l'ordre jusqu'à en trouver une. */
-export function urlsScan(disque: DisqueGameTdb): string[] {
+export function urlsScan(
+  disque: Pick<DisqueGameTdb, "id" | "region">,
+): string[] {
   return LANGUES_SCAN[disque.region].map(
     (langue) =>
       `https://art.gametdb.com/wiiu/coverHQ/${langue}/${disque.id}.jpg`,

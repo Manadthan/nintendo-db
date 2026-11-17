@@ -1,6 +1,6 @@
 import sharp from "sharp";
 import { describe, expect, it } from "vitest";
-import { convertirEnWebp, telechargerImageIgdb } from "./jaquettes";
+import { convertirEnWebp, telechargerImage } from "./jaquettes";
 
 const png = (largeur: number, hauteur: number) =>
   sharp({
@@ -43,42 +43,44 @@ describe("convertirEnWebp (ADR-04)", () => {
   });
 });
 
-describe("telechargerImageIgdb", () => {
-  it("télécharge une image d'images.igdb.com", async () => {
+describe("telechargerImage", () => {
+  it("télécharge un scan d'art.gametdb.com ou une image d'images.igdb.com", async () => {
     const image = await png(10, 10);
     const fetch = async () => reponse(image);
-    expect(
-      await telechargerImageIgdb(
-        "https://images.igdb.com/igdb/image/upload/t_1080p/co213q.jpg",
-        fetch,
-      ),
-    ).toEqual(image);
+    for (const url of [
+      "https://art.gametdb.com/wiiu/coverHQ/EN/ALZP01.jpg",
+      "https://images.igdb.com/igdb/image/upload/t_1080p/co213q.jpg",
+    ])
+      expect(await telechargerImage(url, fetch)).toEqual(image);
   });
 
   it("refuse toute autre adresse (pas de requête vers un site arbitraire)", async () => {
     const fetch = async () => reponse(Buffer.from(""));
     await expect(
-      telechargerImageIgdb("https://exemple.com/x.jpg", fetch),
-    ).rejects.toThrow(/images.igdb.com/);
+      telechargerImage("https://exemple.com/x.jpg", fetch),
+    ).rejects.toThrow(/Adresse refusée/);
     await expect(
-      telechargerImageIgdb("http://images.igdb.com/x.jpg", fetch),
-    ).rejects.toThrow(/images.igdb.com/);
+      telechargerImage("http://images.igdb.com/x.jpg", fetch),
+    ).rejects.toThrow(/Adresse refusée/);
+    await expect(
+      telechargerImage("https://art.gametdb.com.exemple.com/x.jpg", fetch),
+    ).rejects.toThrow(/Adresse refusée/);
   });
 
   it("refuse une réponse qui n'est pas une image, ou trop lourde", async () => {
     const url = "https://images.igdb.com/igdb/image/upload/t_1080p/x.jpg";
     await expect(
-      telechargerImageIgdb(url, async () =>
+      telechargerImage(url, async () =>
         reponse(Buffer.from("<html>"), "text/html"),
       ),
     ).rejects.toThrow(/image/);
     await expect(
-      telechargerImageIgdb(url, async () =>
+      telechargerImage(url, async () =>
         reponse(Buffer.alloc(6 * 1024 * 1024)),
       ),
     ).rejects.toThrow(/lourde/);
     await expect(
-      telechargerImageIgdb(url, async () =>
+      telechargerImage(url, async () =>
         reponse(Buffer.from(""), "image/jpeg", false),
       ),
     ).rejects.toThrow(/404/);

@@ -3,8 +3,12 @@ import {
   type PrecisionDate,
   type Region,
 } from "@/lib/catalogue/types";
+import type { Database } from "@/types/database";
+import { codeProduit, urlsScan } from "./gametdb";
 import type { InfosIgdb } from "./igdb";
-import type { JeuWikipedia } from "./wikipedia";
+import type { JeuAImporter } from "./physique";
+
+export type SourceJaquette = Database["public"]["Enums"]["jaquette_source"];
 
 /** Champs d'un jeu écrits par l'import (le slug, adresse stable, ne change jamais : ADR-06). */
 export type ChampsJeu = {
@@ -22,6 +26,7 @@ export type ChampsSortie = {
   date_sortie: string | null;
   precision_date: PrecisionDate | null;
   editeur: string | null;
+  code_produit: string | null;
 };
 
 export type JeuImporte = {
@@ -29,9 +34,12 @@ export type JeuImporte = {
   releases: Record<Region, ChampsSortie>;
 };
 
-/** Assemble un jeu : Wikipédia (titres NA/PAL, dates, éditeurs, développeur) + IGDB (titre japonais, lien). */
+/**
+ * Assemble un jeu : Wikipédia (titres NA/PAL, dates, éditeurs, développeur ; régions déjà réduites aux boîtes par
+ * GameTDB) + IGDB (titre japonais, lien) + GameTDB (code produit imprimé sur la boîte).
+ */
 export function construireJeu(
-  wiki: JeuWikipedia,
+  wiki: JeuAImporter,
   igdb: InfosIgdb | null,
 ): JeuImporte {
   const titreAnglais = wiki.titres.PAL || wiki.titres.US;
@@ -46,6 +54,7 @@ export function construireJeu(
           date_sortie: null,
           precision_date: null,
           editeur: null,
+          code_produit: null,
         };
         return [region, absente];
       }
@@ -61,6 +70,9 @@ export function construireJeu(
         date_sortie: s.date,
         precision_date: s.precision,
         editeur: s.editeur,
+        code_produit: wiki.disques[region]
+          ? codeProduit(wiki.disques[region])
+          : null,
       };
       return [region, sortie];
     }),
@@ -81,6 +93,7 @@ export function construireJeu(
 type SortieEnBase = ChampsSortie & {
   verrous: string[];
   jaquette_path: string | null;
+  jaquette_source: SourceJaquette | null;
 };
 
 /** Un jeu déjà en base, avec ses champs verrouillés (corrections manuelles, US-11). */
@@ -162,23 +175,48 @@ export function fusionner(
   return { game, releases, ecarts };
 }
 
-export type JaquetteChoisie = { imageId: string; secours: boolean } | null;
+/** Une image à essayer pour une région : scan de boîte GameTDB, ou image IGDB (de la région, ou principale). */
+export type CandidatJaquette =
+  | { source: "gametdb"; url: string }
+  | { source: "igdb"; imageId: string; secours: boolean };
+
+/** Jaquette déjà en base pour une région. */
+export type JaquetteEnBase = {
+  path: string | null;
+  source: SourceJaquette | null;
+};
 
 /**
- * Jaquette IGDB à copier pour chaque région (ADR-04) : celle de la région, sinon la principale en secours (R2).
- * Rien pour une région non sortie, ni pour une région qui a déjà sa jaquette (copiée ou ajoutée à la main).
+ * Images à essayer, dans l'ordre, pour chaque région sortie (ADR-04) : le scan GameTDB de la boîte (langues PAL
+ * EN, FR, DE), puis l'image IGDB de la région, puis la principale en secours (R2). Rien à faire (null) pour une
+ * région non sortie, une jaquette ajoutée à la main ou déjà scannée ; une image IGDB déjà copiée n'est remplacée
+ * que par un scan.
  */
 export function choisirJaquettes(
   jeu: JeuImporte,
+  disques: JeuAImporter["disques"],
   igdb: InfosIgdb | null,
-  existantes: Record<Region, string | null> | null,
-): Record<Region, JaquetteChoisie> {
+  existantes: Partial<Record<Region, JaquetteEnBase>> | null,
+): Record<Region, CandidatJaquette[] | null> {
   return Object.fromEntries(
     REGIONS.map((r) => {
-      if (!igdb || !jeu.releases[r].sortie || existantes?.[r]) return [r, null];
-      const propre = igdb.jaquettes[r];
-      const imageId = propre ?? igdb.jaquettes.US;
-      return [r, imageId ? { imageId, secours: !propre } : null];
+      const deja = existantes?.[r];
+      const garder = deja?.path && deja.source !== "igdb";
+      if (!jeu.releases[r].sortie || garder) return [r, null];
+      const id = disques[r];
+      const candidats: CandidatJaquette[] = id
+        ? urlsScan({ id, region: r }).map((url) => ({
+            source: "gametdb" as const,
+            url,
+          }))
+        : [];
+      if (!deja?.path && igdb) {
+        const propre = igdb.jaquettes[r];
+        const imageId = propre ?? igdb.jaquettes.US;
+        if (imageId)
+          candidats.push({ source: "igdb", imageId, secours: !propre });
+      }
+      return [r, candidats.length ? candidats : null];
     }),
-  ) as Record<Region, JaquetteChoisie>;
+  ) as Record<Region, CandidatJaquette[] | null>;
 }
