@@ -76,6 +76,11 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
    titre US ou PAL ; les 3 premiers caractères sont communs aux 3 régions (`ALZE01`, `ALZJ01`, `ALZP01`), ce qui
    donne la sortie JAP même quand son titre diffère. Code produit = `WUP-P-` + 4 premiers caractères
    (`WUP-P-ALZP`). Base lue à chaque import (pas de copie dans le dépôt, sauf la fixture des tests).
+   GameTDB **tranche le physique** (Wikipédia mélange boîte et téléchargement) : type `WiiU` = disque en boîte,
+   `eShop` = téléchargement, titre « (Download Code) » = boîte à code, écartée. Jeu retenu si au moins une boîte
+   a l'éditeur Nintendo (code `01`) ; sortie d'une région = une boîte existe dans cette région (champ `region`,
+   pas la 4ᵉ lettre : un disque PAL peut finir en D, F…). Compilations en boîte absentes de la liste Wikipédia
+   (NES Remix Pack / Famicom Remix 1 + 2, New Super Mario Bros. U + New Super Luigi U) : fiches propres.
 3. **Aperçu** (n'écrit rien) : jeux, rapprochement IGDB proposé (corrigeable à la main si le titre est ambigu),
    ajoutés / modifiés / ignorés avec la raison. Puis enregistrement **par lots de 10** piloté par le
    navigateur, jaquettes comprises (même principe que l'ADR-03 de `mon-site-sdlc`, évite les délais Vercel).

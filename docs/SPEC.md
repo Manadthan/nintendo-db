@@ -7,7 +7,7 @@
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 1.4 | 17/11/2026 | US-10 : jaquettes = **scans de boîtes** (GameTDB en priorité) et codes produit importés ; US-12 : page « Jaquettes » |
+> | 1.4 | 17/11/2026 | US-10 : **boîte Nintendo exigée**, sortie par région = en boîte dans la région, compilations ; jaquettes = **scans de boîtes** (GameTDB en priorité) et codes produit importés ; US-12 : page « Jaquettes » |
 > | 1.3 | 16/11/2026 | Retour sur les maquettes (PR #3) : trame de gamecartdb ; région choisie **sur la fiche** (US-04) ; catalogue filtré par **marché** (US-03) ; recherche **dans le catalogue** (US-05) |
 > | 1.2 | 16/11/2026 | **v1 = Wii U seule** ; US-01 en S ; US-10 depuis Wikipédia + IGDB ; US-12 : jaquettes copiées chez nous |
 > | 1.1 | 16/11/2026 | US-12 : jaquette = **lien vers une image externe** (pas de copie, pas de photo en v1) |
@@ -110,7 +110,12 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 #### US-10 — Importer les jeux d'une console depuis Wikipédia, IGDB et GameTDB (M)
 *En tant que propriétaire, je remplis le catalogue d'une console sans tout saisir à la main.*
 - [ ] Je choisis une console et lance l'import ; un **aperçu** montre les jeux trouvés avant d'enregistrer.
-- [ ] Ne sont retenus que les jeux **physiques** dont Nintendo est **éditeur dans au moins une région**.
+- [ ] Ne sont retenus que les jeux ayant **au moins une boîte éditée par Nintendo** (disque en boîte ; une boîte
+      ne contenant qu'un code de téléchargement ne compte pas).
+- [ ] Une région n'est affichée comme « sortie » que si le jeu y est sorti **en boîte** ; une sortie seulement en
+      téléchargement compte comme non sortie.
+- [ ] Un jeu vendu en boîte seulement dans une **compilation** (ex. NES Remix + NES Remix 2 → « NES Remix Pack »)
+      a une fiche pour la compilation, pas pour chaque jeu.
 - [ ] Un nouvel import **n'écrase pas** mes corrections manuelles ; il signale les différences.
 - [ ] Un résumé indique : ajoutés, mis à jour, ignorés (avec la raison).
 - [ ] Chaque jeu importé garde le lien vers sa fiche d'origine (Wikipédia, IGDB).
