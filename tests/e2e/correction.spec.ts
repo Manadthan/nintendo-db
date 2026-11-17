@@ -31,7 +31,7 @@ test("une version sortie sans titre est refusée", async ({ page }) => {
   await page.goto("/admin/jeux/splatoon");
   await page.locator('input[name="US.titre"]').fill("");
   await page.getByRole("button", { name: "Enregistrer la fiche" }).click();
-  await expect(page.getByRole("alert")).toContainText(
-    "le titre est obligatoire",
-  );
+  await expect(
+    page.getByRole("alert").filter({ hasText: "le titre est obligatoire" }),
+  ).toBeVisible();
 });
