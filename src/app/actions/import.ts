@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { capturer, type Resultat } from "@/lib/import/resultat";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
 import {
@@ -63,6 +64,10 @@ async function telecharger(url: string, source: string): Promise<Response> {
   const reponse = await fetch(url, {
     headers: { "User-Agent": USER_AGENT },
     cache: "no-store",
+    // Message clair plutôt qu'un dépassement de la limite de 60 s de Vercel (#53).
+    signal: AbortSignal.timeout(20_000),
+  }).catch((e: unknown) => {
+    throw new Error(`${source} injoignable`, { cause: e });
   });
   if (!reponse.ok)
     throw new Error(`${source} indisponible (HTTP ${reponse.status})`);
@@ -73,7 +78,7 @@ async function telecharger(url: string, source: string): Promise<Response> {
  * Étape 1 de l'aperçu (US-10) : liste Wikipédia et base GameTDB du jour, puis règle du physique (SPEC v1.4) :
  * régions et jeux réduits aux boîtes, compilations ajoutées. N'écrit rien.
  */
-export async function analyserListe(consoleSlug: string): Promise<Apercu> {
+async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
   const fiche = await chargerConsole(consoleSlug);
   const [wikipedia, gametdb] = await Promise.all([
     telecharger(urlRendu(fiche.wikipedia_liste!), "Wikipédia").then((r) =>
@@ -100,7 +105,7 @@ export type RapprochementLeger = { slug: string } & Pick<
   };
 
 /** Étape 2 (lot de 10 au plus, piloté par le navigateur) : rapproche chaque jeu d'IGDB. N'écrit rien. */
-export async function rapprocherLot(
+async function rapprocherLotInterne(
   consoleSlug: string,
   jeux: { slug: string; titres: { US: string; PAL: string } }[],
 ): Promise<RapprochementLeger[]> {
@@ -140,7 +145,7 @@ const COLONNES_EXISTANT =
  * manuelles gardées), puis jaquettes copiées en WebP (ADR-04) : scan GameTDB, sinon image IGDB. Une erreur sur
  * un jeu n'arrête pas le lot.
  */
-export async function enregistrerLot(
+async function enregistrerLotInterne(
   consoleSlug: string,
   jeux: JeuAEnregistrer[],
   recopierJaquettes = false,
@@ -331,7 +336,7 @@ async function copierJaquettes(
  * Supprime les jeux qui ne sont plus retenus (sans boîte Nintendo, SPEC v1.4), sur confirmation dans l'aperçu :
  * leurs jaquettes, puis le jeu (ses sorties suivent). Rend les titres supprimés.
  */
-export async function supprimerJeux(
+async function supprimerJeuxInterne(
   consoleSlug: string,
   slugs: string[],
 ): Promise<string[]> {
@@ -368,7 +373,7 @@ export async function supprimerJeux(
 }
 
 /** Fin de l'import : résumé gardé dans import_runs, catalogue et fiches régénérés (ADR-02). */
-export async function terminerImport(
+async function terminerImportInterne(
   consoleSlug: string,
   resume: ResumeEnregistrement,
 ): Promise<void> {
@@ -380,4 +385,38 @@ export async function terminerImport(
   if (error)
     throw new Error(`Résumé de l'import non enregistré : ${error.message}`);
   revalidatePath("/", "layout");
+}
+
+// Actions appelées par le navigateur : erreurs rendues, pas lancées (#53, voir resultat.ts).
+export async function analyserListe(
+  consoleSlug: string,
+): Promise<Resultat<Apercu>> {
+  return capturer(() => analyserListeInterne(consoleSlug));
+}
+export async function rapprocherLot(
+  consoleSlug: string,
+  jeux: { slug: string; titres: { US: string; PAL: string } }[],
+): Promise<Resultat<RapprochementLeger[]>> {
+  return capturer(() => rapprocherLotInterne(consoleSlug, jeux));
+}
+export async function enregistrerLot(
+  consoleSlug: string,
+  jeux: JeuAEnregistrer[],
+  recopierJaquettes = false,
+): Promise<Resultat<ResultatEnregistrement[]>> {
+  return capturer(() =>
+    enregistrerLotInterne(consoleSlug, jeux, recopierJaquettes),
+  );
+}
+export async function supprimerJeux(
+  consoleSlug: string,
+  slugs: string[],
+): Promise<Resultat<string[]>> {
+  return capturer(() => supprimerJeuxInterne(consoleSlug, slugs));
+}
+export async function terminerImport(
+  consoleSlug: string,
+  resume: ResumeEnregistrement,
+): Promise<Resultat<void>> {
+  return capturer(() => terminerImportInterne(consoleSlug, resume));
 }
