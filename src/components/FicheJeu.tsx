@@ -184,7 +184,10 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
 
       <p className="text-xs leading-relaxed text-texte-discret">
         Sources :{" "}
-        {jeu.wikipediaUrl ? (
+        {/* La Wii est importée de GameTDB seul (SPEC v1.9) ; la Wii U, de Wikipédia et GameTDB. */}
+        {jeu.console.slug === "wii" ? (
+          "GameTDB"
+        ) : jeu.wikipediaUrl ? (
           <a
             href={jeu.wikipediaUrl}
             className="text-accent underline-offset-2 hover:underline"
@@ -193,8 +196,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
           </a>
         ) : (
           "Wikipédia"
-        )}{" "}
-        (CC BY-SA)
+        )}
+        {jeu.console.slug !== "wii" && " (CC BY-SA)"}
         {sourcesExternes.length > 0 &&
           ` · jaquettes ${sourcesExternes.join(", ")}`}
         . Site de fan non affilié à Nintendo.
