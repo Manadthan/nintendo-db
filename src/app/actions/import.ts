@@ -29,6 +29,7 @@ import { lireListeWikipediaDetaillee, urlRendu } from "@/lib/import/wikipedia";
 import {
   BUCKET_JAQUETTES,
   TAILLES_JAQUETTE,
+  baseJaquette,
   cheminJaquette,
 } from "@/lib/jaquettes/stockage";
 
@@ -197,7 +198,12 @@ async function enregistrerLotInterne(
         existantes,
         recopierJaquettes,
       );
-      const copiees = await copierJaquettes(supabase, gameId!, choix);
+      const copiees = await copierJaquettes(
+        supabase,
+        gameId!,
+        choix,
+        existantes,
+      );
 
       // Régions sorties dont la jaquette finale n'est pas un scan ni un ajout manuel : à remplacer (R6).
       const sansScan = REGIONS.filter((r) => {
@@ -230,15 +236,18 @@ async function enregistrerLotInterne(
 
 /**
  * Copie les scans choisis (ADR-04) : scan déposé par le relais GameTDB (#53) → WebP 300, 600 et 768 px → bucket
- * « jaquettes ». Rend les régions copiées ; un scan absent du relais laisse la jaquette actuelle (ou la vignette
- * neutre), signalée « sans scan » dans le résumé.
+ * « jaquettes », sous un chemin versionné (#60) : nouvelle adresse à chaque copie, donc jamais d'ancienne image
+ * servie par un cache ; fichiers gardés en cache un an, puis l'ancienne jaquette est supprimée. Rend les régions
+ * copiées ; un scan absent du relais laisse la jaquette actuelle (ou la vignette neutre), signalée « sans scan ».
  */
 async function copierJaquettes(
   supabase: Awaited<ReturnType<typeof exigerProprietaire>>,
   gameId: string,
   choix: Record<Region, string | null>,
+  anciennes: Partial<Record<Region, { path: string | null }>> | null,
 ): Promise<Partial<Record<Region, SourceJaquette>>> {
   const copiees: Partial<Record<Region, SourceJaquette>> = {};
+  const version = Date.now().toString(36);
   for (const region of REGIONS) {
     const chemin = choix[region];
     if (!chemin) continue;
@@ -249,25 +258,31 @@ async function copierJaquettes(
     } catch {
       continue; // Scan absent du relais (GameTDB n'en a pas) ou illisible.
     }
+    const base = baseJaquette(gameId, region, version);
     for (const taille of TAILLES_JAQUETTE) {
       const { error } = await supabase.storage
         .from(BUCKET_JAQUETTES)
-        .upload(cheminJaquette(gameId, region, taille), tailles[taille], {
+        .upload(cheminJaquette(base, taille), tailles[taille], {
           contentType: "image/webp",
+          cacheControl: "31536000",
           upsert: true,
         });
       if (error) throw new Error(`Jaquette ${region} : ${error.message}`);
     }
     const { error } = await supabase
       .from("releases")
-      .update({
-        jaquette_path: `${gameId}/${region.toLowerCase()}`,
-        jaquette_source: "gametdb",
-      })
+      .update({ jaquette_path: base, jaquette_source: "gametdb" })
       .eq("game_id", gameId)
       .eq("region", region);
     if (error) throw new Error(`Jaquette ${region} : ${error.message}`);
     copiees[region] = "gametdb";
+
+    // L'ancienne jaquette n'est plus référencée : ses fichiers sont supprimés (sans bloquer l'import).
+    const ancienne = anciennes?.[region]?.path;
+    if (ancienne && ancienne !== base)
+      await supabase.storage
+        .from(BUCKET_JAQUETTES)
+        .remove(TAILLES_JAQUETTE.map((t) => cheminJaquette(ancienne, t)));
   }
   return copiees;
 }
@@ -291,12 +306,16 @@ async function supprimerJeuxInterne(
 
   const supprimes: string[] = [];
   for (const jeu of data ?? []) {
-    const chemins = REGIONS.flatMap((r) =>
-      TAILLES_JAQUETTE.map((t) => cheminJaquette(jeu.id, r, t)),
-    );
-    const { error: e1 } = await supabase.storage
+    // Toutes les jaquettes du jeu, quelle que soit leur version (#60) : le contenu de son dossier.
+    const { data: fichiers, error: e0 } = await supabase.storage
       .from(BUCKET_JAQUETTES)
-      .remove(chemins);
+      .list(jeu.id, { limit: 1000 });
+    if (e0) throw new Error(`Jaquettes de « ${jeu.slug} » : ${e0.message}`);
+    const { error: e1 } = fichiers?.length
+      ? await supabase.storage
+          .from(BUCKET_JAQUETTES)
+          .remove(fichiers.map((f) => `${jeu.id}/${f.name}`))
+      : { error: null };
     if (e1) throw new Error(`Jaquettes de « ${jeu.slug} » : ${e1.message}`);
     const { error: e2 } = await supabase
       .from("games")

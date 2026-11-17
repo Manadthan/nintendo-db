@@ -1,18 +1,30 @@
 import { describe, expect, it } from "vitest";
-import { cheminJaquette, srcsetJaquette, urlJaquette } from "./stockage";
+import {
+  baseJaquette,
+  cheminJaquette,
+  srcsetJaquette,
+  urlJaquette,
+} from "./stockage";
 
 const JEU = "20000000-0000-0000-0000-000000000001";
 const BASE = "https://exemple.supabase.co";
 
-describe("cheminJaquette", () => {
-  it("range les jaquettes par jeu, puis par région et taille (ADR-04)", () => {
-    expect(cheminJaquette(JEU, "PAL", 600)).toBe(`${JEU}/pal-600.webp`);
-    expect(cheminJaquette(JEU, "JAP", 300)).toBe(`${JEU}/jap-300.webp`);
+describe("baseJaquette, cheminJaquette (ADR-04, #60)", () => {
+  it("range les jaquettes par jeu, région, version et taille", () => {
+    const base = baseJaquette(JEU, "PAL", "mi3x9k");
+    expect(base).toBe(`${JEU}/pal-mi3x9k`);
+    expect(cheminJaquette(base, 600)).toBe(`${JEU}/pal-mi3x9k-600.webp`);
   });
 
-  it("refuse un identifiant de jeu qui n'est pas un UUID (pas de chemin fabriqué)", () => {
-    expect(() => cheminJaquette("../autre", "US", 300)).toThrow();
-    expect(() => cheminJaquette("", "US", 300)).toThrow();
+  it("lit encore les jaquettes copiées avant les versions", () => {
+    expect(cheminJaquette(`${JEU}/jap`, 300)).toBe(`${JEU}/jap-300.webp`);
+  });
+
+  it("refuse un chemin fabriqué (identifiant, région ou version douteux)", () => {
+    expect(() => baseJaquette("../autre", "US", "a1")).toThrow();
+    expect(() => baseJaquette(JEU, "US", "../x")).toThrow();
+    expect(() => cheminJaquette("../autre/pal", 300)).toThrow();
+    expect(() => cheminJaquette(`${JEU}/eu`, 300)).toThrow();
   });
 });
 
@@ -32,7 +44,7 @@ describe("urlJaquette", () => {
 
 describe("srcsetJaquette", () => {
   it("propose les deux tailles, la grande pour l'écran Retina", () => {
-    expect(srcsetJaquette(JEU, "PAL", BASE)).toBe(
+    expect(srcsetJaquette(`${JEU}/pal`, BASE)).toBe(
       `${BASE}/storage/v1/object/public/jaquettes/${JEU}/pal-300.webp 300w, ` +
         `${BASE}/storage/v1/object/public/jaquettes/${JEU}/pal-600.webp 600w, ` +
         `${BASE}/storage/v1/object/public/jaquettes/${JEU}/pal-768.webp 768w`,

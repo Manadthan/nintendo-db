@@ -53,6 +53,21 @@ describe("versJeuCatalogue", () => {
     });
   });
 
+  it("suit le chemin versionné de la jaquette : une jaquette remplacée change d'adresse (#60)", () => {
+    const remplacee = versJeuCatalogue(
+      {
+        ...ligne,
+        releases: [
+          { ...ligne.releases[0]!, jaquette_path: `${ID}/pal-mi3x9k` },
+        ],
+      },
+      BASE,
+    );
+    expect(remplacee.sorties.PAL.jaquetteSrcset).toContain(
+      `/jaquettes/${ID}/pal-mi3x9k-600.webp 600w`,
+    );
+  });
+
   it("donne les adresses des jaquettes seulement quand il y en a une (sinon vignette neutre)", () => {
     expect(jeu.sorties.PAL.jaquetteSrcset).toContain(
       `/jaquettes/${ID}/pal-600.webp 600w`,

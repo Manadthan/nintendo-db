@@ -77,7 +77,7 @@ src/components/          EnTete, PiedDePage (lien Administration), Catalogue (cl
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
 src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games »), apercu.ts (aperçu, lots de 10, résumés), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (WebP 300/600/768 via sharp), gametdb.ts (boîtes par région, titres japonais, compilations, codes produit ; lu depuis le relais), resultat.ts (erreurs des actions rendues lisibles), physique.ts (règle : boîte Nintendo exigée, sorties par région) + tests ; __fixtures__/ (copies datées, README)
 scripts/                 fixture-wikipedia.mjs, fixture-gametdb.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : base + scans → bucket privé gametdb, secrets SUPABASE_URL / SUPABASE_SECRET_KEY)
-src/lib/jaquettes/       chemins et URL des jaquettes ({game_id}/{région}-{300|600|768}.webp, ADR-04) + tests
+src/lib/jaquettes/       chemins et URL des jaquettes ({game_id}/{région}-{version}-{300|600|768}.webp, ADR-04, version : #60) + tests
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
 tests/e2e/               tests Playwright ; connexion.spec.ts ignoré sans base locale (tourne en CI)
