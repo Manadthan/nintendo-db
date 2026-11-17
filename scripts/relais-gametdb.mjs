@@ -14,6 +14,7 @@ import * as cheerio from "cheerio";
 import { strFromU8, unzipSync } from "fflate";
 import { decouperFaceAvant, LANGUES_SCAN_WII, reduireBaseWii } from "../src/lib/import/relais-wii.ts";
 import { languesScan, reduireBasePortable } from "../src/lib/import/relais-portables.ts";
+import { avecReessais, decrireErreurStockage } from "../src/lib/import/reessais.ts";
 
 const AGENT = { "User-Agent": "nintendo-db/1.0 (https://nintendo-db.vercel.app)" };
 
@@ -27,9 +28,12 @@ async function telecharger(url) {
   return new Uint8Array(await reponse.arrayBuffer());
 }
 
+// Un envoi peut échouer de façon passagère (erreur sans message, 17/11/2026) : 3 essais, code HTTP dans le message (#92).
 async function deposer(chemin, contenu, type) {
-  const { error } = await stockage.upload(chemin, contenu, { contentType: type, upsert: true });
-  if (error) throw new Error(`${chemin} : ${error.message}`);
+  await avecReessais(async () => {
+    const { error } = await stockage.upload(chemin, contenu, { contentType: type, upsert: true });
+    if (error) throw new Error(`${chemin} : ${decrireErreurStockage(error)}`);
+  });
 }
 
 async function base(url) {
@@ -117,8 +121,11 @@ for (const console_ of CONSOLES) {
   console.log(`${console_.nom} : base déposée (${Math.round(xml.length / 1024)} Ko)`);
 
   // 2. Les scans manquants, 6 à la fois.
-  const { data: deja, error } = await stockage.list(console_.scans, { limit: 2000 });
-  if (error) throw new Error(`Liste des scans : ${error.message}`);
+  const deja = await avecReessais(async () => {
+    const { data, error } = await stockage.list(console_.scans, { limit: 2000 });
+    if (error) throw new Error(`Liste des scans : ${decrireErreurStockage(error)}`);
+    return data;
+  });
   const presents = new Set(deja.map((f) => f.name));
   const aFaire = disques.filter((d) => !presents.has(`${d.id}.jpg`));
   let deposes = 0;
