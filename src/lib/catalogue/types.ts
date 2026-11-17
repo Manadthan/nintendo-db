@@ -25,6 +25,8 @@ export type SortieCatalogue = {
 export type JeuCatalogue = {
   id: string;
   slug: string;
+  /** Console du jeu (étape 8 : un seul catalogue pour toutes les consoles). */
+  console: { slug: string; nom: string };
   developpeur: string | null;
   editeur: string | null;
   /** Genres (US-06), traduits à l'import ; vide si inconnus. */

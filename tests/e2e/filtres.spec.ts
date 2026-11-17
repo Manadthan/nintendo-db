@@ -16,6 +16,7 @@ test("le panneau s'ouvre depuis le bouton « Filtres »", async ({ page }) => {
   await expect(boutonFiltres(page)).toHaveAttribute("aria-expanded", "false");
   await boutonFiltres(page).click();
   await expect(boutonFiltres(page)).toHaveAttribute("aria-expanded", "true");
+  await expect(liste(page, "Console")).toBeVisible();
   await expect(liste(page, "Disponibilité")).toBeVisible();
   await expect(liste(page, "Année")).toBeVisible();
   await expect(liste(page, "Genre")).toBeVisible();
@@ -76,4 +77,29 @@ test("aucun résultat : message et bouton pour effacer les filtres", async ({
     .getByRole("button", { name: "Effacer les filtres", exact: true })
     .click();
   await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
+});
+
+test("filtre Console : consoles qui ont des jeux, avec leur nombre ; console sur chaque vignette (étape 8)", async ({
+  page,
+}) => {
+  await page.goto("/");
+  // Données de départ : 4 jeux Wii U ; la Wii n'a pas encore de jeux, elle n'est pas proposée.
+  await expect(
+    page.getByRole("link", { name: /Mario Kart 8/ }).first(),
+  ).toContainText("Wii U");
+  await boutonFiltres(page).click();
+  const consoles = liste(page, "Console");
+  await expect(consoles.getByRole("option")).toHaveText([
+    "Toutes",
+    "Wii U (4)",
+  ]);
+  await consoles.selectOption({ label: "Wii U (4)" });
+  await expect(page).toHaveURL("/?console=wii-u");
+  await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
+  await expect(
+    actifs(page).getByRole("button", {
+      name: "Retirer le filtre Wii U",
+      exact: true,
+    }),
+  ).toBeVisible();
 });

@@ -18,9 +18,9 @@ import {
   type JeuEnBase,
   type SourceJaquette,
 } from "@/lib/import/donnees";
+import { sourceConsole } from "@/lib/import/consoles";
 import {
   BUCKET_GAMETDB,
-  CHEMIN_BASE_GAMETDB,
   lireGameTdb,
   regrouperGameTdb,
 } from "@/lib/import/gametdb";
@@ -33,6 +33,7 @@ import { supprimerJeuEtJaquettes } from "@/lib/jaquettes/supprimer";
 const USER_AGENT = "nintendo-db/1.0 (https://nintendo-db.vercel.app)";
 
 async function chargerConsole(consoleSlug: string) {
+  const source = sourceConsole(consoleSlug);
   const supabase = await exigerProprietaire();
   const { data, error } = await supabase
     .from("consoles")
@@ -40,11 +41,11 @@ async function chargerConsole(consoleSlug: string) {
     .eq("slug", consoleSlug)
     .single();
   if (error || !data) throw new Error(`Console « ${consoleSlug} » introuvable`);
-  if (!data.wikipedia_liste)
+  if (source.wikipedia && !data.wikipedia_liste)
     throw new Error(
       `Console « ${consoleSlug} » : liste Wikipédia non renseignée`,
     );
-  return data;
+  return { ...data, source };
 }
 
 async function telecharger(url: string, source: string): Promise<Response> {
@@ -76,21 +77,24 @@ async function lireRelais(chemin: string): Promise<Blob> {
 }
 
 /**
- * Étape 1 de l'aperçu (US-10) : liste Wikipédia du jour et base GameTDB déposée par le relais (#53), puis règle
- * du physique (SPEC v1.4) : régions et jeux réduits aux boîtes, compilations ajoutées. N'écrit rien.
+ * Étape 1 de l'aperçu (US-10) : liste Wikipédia du jour (Wii U ; la Wii n'en a pas, SPEC v1.9) et base GameTDB
+ * déposée par le relais (#53), puis règle du physique (SPEC v1.4) : régions et jeux réduits aux boîtes,
+ * compilations ajoutées. Sans Wikipédia, tous les jeux viennent de GameTDB. N'écrit rien.
  */
 async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
   const fiche = await chargerConsole(consoleSlug);
-  const [wikipedia, gametdb] = await Promise.all([
-    telecharger(urlRendu(fiche.wikipedia_liste!), "Wikipédia").then((r) =>
-      r.text(),
-    ),
-    lireRelais(CHEMIN_BASE_GAMETDB).then((b) => b.text()),
+  const { source } = fiche;
+  const [liste, gametdb] = await Promise.all([
+    source.wikipedia
+      ? telecharger(urlRendu(fiche.wikipedia_liste!), "Wikipédia").then(
+          async (r) => lireListeWikipediaDetaillee(await r.text()),
+        )
+      : { jeux: [], autresEditeurs: 0, telechargeables: [] },
+    lireRelais(source.base).then((b) => b.text()),
   ]);
-  const liste = lireListeWikipediaDetaillee(wikipedia);
   const physique = appliquerGameTdb(
     liste.jeux,
-    regrouperGameTdb(lireGameTdb(gametdb)),
+    regrouperGameTdb(lireGameTdb(gametdb, source.estDisque)),
   );
   return preparerApercu(
     { ...liste, ...physique },
@@ -148,7 +152,7 @@ async function enregistrerLotInterne(
     const titre = wikipedia.titres.PAL || wikipedia.titres.US;
     const existant = existants.get(wikipedia.slug) ?? null;
     try {
-      const jeu = construireJeu(wikipedia);
+      const jeu = construireJeu(wikipedia, fiche.source.prefixeCode);
       const fusion = fusionner(existant, jeu);
 
       let gameId = existant?.id;
@@ -198,6 +202,7 @@ async function enregistrerLotInterne(
         wikipedia.disques,
         existantes,
         recopierJaquettes,
+        fiche.source.scans,
       );
       const copiees = await copierJaquettes(
         supabase,

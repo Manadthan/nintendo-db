@@ -11,14 +11,23 @@ import {
 const CHAMP =
   "h-11 w-full rounded-[10px] border border-champ bg-carte px-2.5 text-base";
 
+type ConsoleProposee = { slug: string; nom: string; nombre: number };
+
 type PropsPanneau = {
   filtres: Filtres;
+  /** Consoles qui ont des jeux, par ordre chronologique (étape 8, US-01). */
+  consoles: ConsoleProposee[];
   annees: string[];
   genres: string[];
 };
 
 /** Panneau des filtres (US-06) : listes natives, confortables sur iPhone ; chaque choix s'applique aussitôt. */
-export function PanneauFiltres({ filtres, annees, genres }: PropsPanneau) {
+export function PanneauFiltres({
+  filtres,
+  consoles,
+  annees,
+  genres,
+}: PropsPanneau) {
   const changer = (patch: Partial<Filtres>) =>
     enregistrerFiltres({ ...filtres, ...patch });
   // Un filtre venu d'un lien partagé reste choisissable même s'il ne correspond plus à rien.
@@ -30,6 +39,25 @@ export function PanneauFiltres({ filtres, annees, genres }: PropsPanneau) {
       id="panneau-filtres"
       className="flex flex-col gap-3 rounded-xl border border-bordure bg-carte p-3"
     >
+      <label className="flex flex-col gap-1 text-[13px] text-texte-doux">
+        Console
+        <select
+          value={filtres.console ?? ""}
+          onChange={(e) => changer({ console: e.target.value || null })}
+          className={CHAMP}
+        >
+          <option value="">Toutes</option>
+          {consoles.map((c) => (
+            <option key={c.slug} value={c.slug}>
+              {c.nom} ({c.nombre})
+            </option>
+          ))}
+          {filtres.console &&
+            !consoles.some((c) => c.slug === filtres.console) && (
+              <option value={filtres.console}>{filtres.console}</option>
+            )}
+        </select>
+      </label>
       <label className="flex flex-col gap-1 text-[13px] text-texte-doux">
         Disponibilité
         <select
@@ -86,8 +114,21 @@ export function PanneauFiltres({ filtres, annees, genres }: PropsPanneau) {
 }
 
 /** Filtres actifs en pastilles (US-06) : chacun s'efface en un tap, ou tous d'un coup. */
-export function FiltresActifs({ filtres }: { filtres: Filtres }) {
+export function FiltresActifs({
+  filtres,
+  consoles,
+}: {
+  filtres: Filtres;
+  /** Pour afficher le nom de la console choisie (« Wii » plutôt que « wii »). */
+  consoles: { slug: string; nom: string }[];
+}) {
   const pastilles = [
+    filtres.console && {
+      libelle:
+        consoles.find((c) => c.slug === filtres.console)?.nom ??
+        filtres.console,
+      retirer: { console: null },
+    },
     filtres.disponibilite && {
       libelle: DISPONIBILITES.find((d) => d.valeur === filtres.disponibilite)!
         .libelle,

@@ -16,19 +16,19 @@ export default async function PageCorrection({
   params,
   searchParams,
 }: {
-  params: Promise<{ jeu: string }>;
+  params: Promise<{ console: string; jeu: string }>;
   searchParams: Promise<{ nouveau?: string }>;
 }) {
-  const { jeu: slug } = await params;
+  const { console: consoleSlug, jeu: slug } = await params;
   const { nouveau } = await searchParams;
   const { data } = await (
     await createSupabaseServerClient()
   )
     .from("games")
     .select(
-      "id, slug, developpeur, verrous, consoles!inner(slug), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, code_produit, editeur, verrous)",
+      "id, slug, developpeur, verrous, consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, code_produit, editeur, verrous)",
     )
-    .eq("consoles.slug", "wii-u")
+    .eq("consoles.slug", consoleSlug)
     .eq("slug", slug)
     .maybeSingle();
   if (!data) notFound();
@@ -52,7 +52,7 @@ export default async function PageCorrection({
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-5 px-4 py-6">
       <Link
-        href="/admin/jeux"
+        href={`/admin/jeux?console=${consoleSlug}`}
         className="flex h-11 items-center gap-1 text-sm font-medium"
       >
         <span aria-hidden="true">‹</span> Jeux
@@ -62,7 +62,7 @@ export default async function PageCorrection({
           {titre}
         </h1>
         <Link
-          href={`/jeux/wii-u/${slug}`}
+          href={`/jeux/${consoleSlug}/${slug}`}
           className="text-sm text-accent underline-offset-2 hover:underline"
         >
           Voir la fiche publique
@@ -83,7 +83,11 @@ export default async function PageCorrection({
         verrousJeu={data.verrous}
         sorties={sorties}
       />
-      <BoutonSupprimerJeu gameId={data.id} nom={titre} />
+      <BoutonSupprimerJeu
+        gameId={data.id}
+        nom={titre}
+        consoleSlug={consoleSlug}
+      />
     </main>
   );
 }

@@ -11,6 +11,7 @@ import {
   SANS_FILTRE,
   abonnerFiltres,
   anneesProposees,
+  consolesProposees,
   enregistrerFiltres,
   filtrer,
   genresProposes,
@@ -65,13 +66,17 @@ function enregistrerVue(vue: Vue) {
   for (const rappel of abonnes) rappel();
 }
 
-type Props = { jeux: JeuCatalogue[]; consoleSlug: string; consoleNom: string };
+type Props = {
+  jeux: JeuCatalogue[];
+  /** Consoles du site, par ordre chronologique (filtre « Console », étape 8). */
+  consoles: { slug: string; nom: string }[];
+};
 
 /**
- * Catalogue d'une console (US-02) : recherche (US-05), marché (US-03), tri, filtres (US-06), grille / liste,
- * groupes par année.
+ * Catalogue de toutes les consoles (US-01, US-02) : recherche (US-05), marché (US-03), tri, filtres (US-06, dont
+ * la console), grille / liste, groupes par année.
  */
-export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
+export function Catalogue({ jeux, consoles }: Props) {
   const [tri, setTri] = useState<Tri>("anciens");
   // Page préparée à l'avance, identique pour tous (ADR-02) : « grille » au premier affichage,
   // puis le choix enregistré dans ce navigateur.
@@ -92,7 +97,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
     () => "",
   );
 
-  // Filtres (US-06) : dans l'adresse (?dispo=, ?annee=, ?genre=), comme la recherche.
+  // Filtres (US-06) : dans l'adresse (?console=, ?dispo=, ?annee=, ?genre=), comme la recherche.
   const filtres = useSyncExternalStore(
     abonnerFiltres,
     lireFiltres,
@@ -112,7 +117,8 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
     filtres,
   );
   const groupes = grouperParAnnee(versions, tri);
-  const lien = (v: VersionAffichee) => `/jeux/${consoleSlug}/${v.jeu.slug}`;
+  const lien = (v: VersionAffichee) =>
+    `/jeux/${v.jeu.console.slug}/${v.jeu.slug}`;
 
   return (
     <section
@@ -189,7 +195,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
           aria-expanded={panneauOuvert}
           aria-controls="panneau-filtres"
           onClick={() => setPanneauOuvert(!panneauOuvert)}
-          className={`h-9 rounded-[10px] border px-3 text-[13px] font-medium ${
+          className={`h-9 rounded-[10px] border px-3 text-[13px] font-medium whitespace-nowrap ${
             actifs
               ? "border-accent bg-accent-doux text-accent-fonce"
               : "border-champ bg-carte"
@@ -217,11 +223,12 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
       {panneauOuvert && (
         <PanneauFiltres
           filtres={filtres}
+          consoles={consolesProposees(duMarche, consoles)}
           annees={anneesProposees(duMarche)}
           genres={genresProposes(duMarche)}
         />
       )}
-      <FiltresActifs filtres={filtres} />
+      <FiltresActifs filtres={filtres} consoles={consoles} />
       <p className="text-[13px] text-texte-discret">
         {versions.length} jeu{versions.length > 1 ? "x" : ""} affiché
         {versions.length > 1 ? "s" : ""} sur {jeux.length}
@@ -280,7 +287,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
                     <Jaquette
                       sortie={v.sortie}
                       titre={v.sortie.titre!}
-                      console={consoleNom}
+                      console={v.jeu.console.nom}
                       sizes="(max-width: 640px) 50vw, 200px"
                     />
                     <div className="flex flex-col gap-[3px]">
@@ -288,7 +295,8 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
                         {v.sortie.titre}
                       </span>
                       <span className="text-xs text-texte-discret">
-                        {formaterDate(v.sortie.date, v.sortie.precision)}
+                        {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
+                        {v.jeu.console.nom}
                       </span>
                       <Disponibilite jeu={v.jeu} />
                     </div>
@@ -311,7 +319,7 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
                       <Jaquette
                         sortie={v.sortie}
                         titre={v.sortie.titre!}
-                        console={consoleNom}
+                        console={v.jeu.console.nom}
                         sizes="54px"
                         petite
                       />
@@ -321,7 +329,8 @@ export function Catalogue({ jeux, consoleSlug, consoleNom }: Props) {
                         {v.sortie.titre}
                       </span>
                       <span className="text-xs text-texte-discret">
-                        {formaterDate(v.sortie.date, v.sortie.precision)}
+                        {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
+                        {v.jeu.console.nom}
                       </span>
                       <Disponibilite jeu={v.jeu} />
                     </div>

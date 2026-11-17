@@ -1,6 +1,7 @@
 import * as cheerio from "cheerio";
 import type { PrecisionDate, Region } from "@/lib/catalogue/types";
 import { normaliser } from "@/lib/recherche/normaliser";
+import { SOURCES_CONSOLES, type SourceConsole } from "./consoles";
 
 /** Un disque en boîte d'une région (type `WiiU` de GameTDB ; l'eShop et les boîtes à code sont écartés). */
 export type DisqueGameTdb = {
@@ -70,10 +71,14 @@ function traduireGenres(
 }
 
 /**
- * Disques en boîte de la base GameTDB. Écartés : l'eShop et la Console virtuelle (type autre que `WiiU`), les
- * boîtes qui ne contiennent qu'un code de téléchargement, les régions non suivies (Corée, Russie…).
+ * Disques en boîte de la base GameTDB d'une console (Wii U par défaut). Écartés : ce que `estDisque` refuse (Wii U :
+ * eShop, Console virtuelle, boîtes ne contenant qu'un code de téléchargement ; Wii : disques système, démos), les
+ * régions non suivies (Corée, Russie…).
  */
-export function lireGameTdb(xml: string): DisqueGameTdb[] {
+export function lireGameTdb(
+  xml: string,
+  estDisque: SourceConsole["estDisque"] = SOURCES_CONSOLES["wii-u"]!.estDisque,
+): DisqueGameTdb[] {
   const $ = cheerio.load(xml, { xml: true });
   const traductions = lireTraductionsGenres($);
   const disques: DisqueGameTdb[] = [];
@@ -82,8 +87,8 @@ export function lireGameTdb(xml: string): DisqueGameTdb[] {
     const champ = (nom: string) => jeu.children(nom).first().text().trim();
     const region = REGIONS_GAMETDB[champ("region")];
     const titre = jeu.find("locale[lang=EN] > title").first().text().trim();
-    if (champ("type") !== "WiiU" || !region || !titre) return;
-    if (/\(download code\)/i.test(titre)) return;
+    if (!region || !titre) return;
+    if (!estDisque(champ("type"), champ("id"), champ("region"), titre)) return;
     const date = jeu.children("date").first();
     disques.push({
       id: champ("id"),
@@ -175,9 +180,12 @@ export function jeuxSansWikipedia(
   );
 }
 
-/** Code produit imprimé sur la boîte : `WUP-P-` + les 4 premiers caractères de l'identifiant (ALZP01 → WUP-P-ALZP). */
-export function codeProduit(id: string): string {
-  return `WUP-P-${id.slice(0, 4)}`;
+/**
+ * Code produit imprimé sur la boîte : préfixe de la console + les 4 premiers caractères de l'identifiant
+ * (Wii U : ALZP01 → WUP-P-ALZP ; Wii : RMCP01 → RVL-RMCP, sans le suffixe de pays que GameTDB ne donne pas).
+ */
+export function codeProduit(id: string, prefixe = "WUP-P-"): string {
+  return `${prefixe}${id.slice(0, 4)}`;
 }
 
 /**
@@ -185,11 +193,13 @@ export function codeProduit(id: string): string {
  * (scripts/relais-gametdb.mjs) dépose la base et les scans dans ce bucket privé de Supabase, où l'import les lit.
  */
 export const BUCKET_GAMETDB = "gametdb";
-export const CHEMIN_BASE_GAMETDB = "wiiutdb.xml";
 
-/** Chemin du scan de boîte d'un disque dans le bucket du relais (langue déjà choisie par le relais). */
-export function cheminScan(id: string): string {
+/**
+ * Chemin du scan de boîte d'un disque dans le bucket du relais (langue déjà choisie par le relais) ; Wii : face
+ * avant déjà découpée, dans `wii/scans`.
+ */
+export function cheminScan(id: string, dossier = "scans"): string {
   if (!/^[A-Z0-9]{6}$/.test(id))
     throw new Error(`Identifiant GameTDB invalide : « ${id} »`);
-  return `scans/${id}.jpg`;
+  return `${dossier}/${id}.jpg`;
 }

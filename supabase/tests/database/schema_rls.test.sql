@@ -16,7 +16,7 @@ select ok(
   'RLS active sur les 4 tables'
 );
 select results_eq(
-  $$select slug, nom, type::text, annee::int, igdb_platform_id from public.consoles$$,
+  $$select slug, nom, type::text, annee::int, igdb_platform_id from public.consoles where slug = 'wii-u'$$,
   $$values ('wii-u', 'Wii U', 'salon', 2012, 41)$$,
   'la console Wii U est pré-remplie'
 );
@@ -48,11 +48,11 @@ select throws_ok(
   '23514', null, 'une sortie publiée a toujours un titre'
 );
 select throws_ok(
-  $$insert into public.games (console_id, slug) select id, 'jeu-de-test' from public.consoles$$,
+  $$insert into public.games (console_id, slug) select id, 'jeu-de-test' from public.consoles where slug = 'wii-u'$$,
   '23505', null, 'deux jeux d''une console ne partagent pas une adresse'
 );
 select throws_ok(
-  $$insert into public.games (console_id, slug) select id, 'Mario Kart' from public.consoles$$,
+  $$insert into public.games (console_id, slug) select id, 'Mario Kart' from public.consoles where slug = 'wii-u'$$,
   '23514', null, 'l''adresse d''un jeu est en minuscules, chiffres et tirets'
 );
 
@@ -66,7 +66,7 @@ select lives_ok(
   'le propriétaire modifie un jeu'
 );
 select lives_ok(
-  $$insert into public.import_runs (console_id, resume) select id, '{"ajoutes": 1}' from public.consoles$$,
+  $$insert into public.import_runs (console_id, resume) select id, '{"ajoutes": 1}' from public.consoles where slug = 'wii-u'$$,
   'le propriétaire enregistre un import'
 );
 
@@ -75,11 +75,11 @@ reset role;
 set local role anon;
 set local request.jwt.claims = '{"role": "anon"}';
 
-select is((select count(*)::int from public.consoles), 1, 'un visiteur voit les consoles');
+select is((select count(*)::int from public.consoles), 2, 'un visiteur voit les consoles (Wii, Wii U)');
 select is((select count(*)::int from public.releases where game_id = '20000000-0000-0000-0000-000000000001'), 3, 'un visiteur voit les sorties');
 select is_empty('select * from public.import_runs', 'un visiteur ne voit pas l''historique des imports');
 select throws_ok(
-  $$insert into public.games (console_id, slug) select id, 'intrus' from public.consoles$$,
+  $$insert into public.games (console_id, slug) select id, 'intrus' from public.consoles where slug = 'wii-u'$$,
   '42501', null, 'un visiteur ne peut pas ajouter de jeu'
 );
 select is_empty(

@@ -34,7 +34,7 @@ const SOURCES = [
     nom: "GameTDB",
     lien: "https://www.gametdb.com/",
     apport:
-      "Scans des boîtes par région, codes produit, titres japonais, genres, et la liste des jeux réellement sortis en boîte.",
+      "Scans des boîtes par région, codes produit, titres japonais, genres, et la liste des jeux réellement sortis en boîte. Pour la Wii, toutes les données viennent de GameTDB.",
     licence:
       "Base mise à disposition pour tout projet lié aux jeux (FAQ de GameTDB). Les images des boîtes restent la propriété de leurs éditeurs.",
     licenceLien: "https://www.gametdb.com/Main/FAQ",
@@ -56,8 +56,8 @@ export default function APropos() {
           <p className="text-sm leading-relaxed text-texte-doux">
             Nintendo DB recense les jeux édités par Nintendo et sortis en boîte,
             version par version : jaquette, titre, date et code produit au
-            Japon, en Amérique du Nord et en Europe. Première console couverte :
-            la Wii U.
+            Japon, en Amérique du Nord et en Europe. Consoles couvertes : Wii U,
+            puis Wii ; les autres suivront.
           </p>
         </section>
 

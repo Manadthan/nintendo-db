@@ -31,7 +31,7 @@ test("le propriétaire corrige un code produit ; le champ est alors verrouillé 
 
 test("une version sortie sans titre est refusée", async ({ page }) => {
   await seConnecter(page);
-  await page.goto("/admin/jeux/splatoon");
+  await page.goto("/admin/jeux/wii-u/splatoon");
   await page.locator('input[name="US.titre"]').fill("");
   await page.getByRole("button", { name: "Enregistrer la fiche" }).click();
   await expect(
@@ -49,7 +49,7 @@ test("le propriétaire ajoute un jeu manquant, puis le supprime après confirmat
   await page.getByLabel("PAL").check();
   await page.getByRole("button", { name: "Ajouter le jeu" }).click();
 
-  await expect(page).toHaveURL("/admin/jeux/jeu-de-test-e2e?nouveau=1");
+  await expect(page).toHaveURL("/admin/jeux/wii-u/jeu-de-test-e2e?nouveau=1");
   await expect(page.getByRole("status")).toContainText("Jeu ajouté");
   await expect(page.locator('input[name="PAL.titre"]')).toHaveValue(
     "Jeu de test e2e",
@@ -57,9 +57,24 @@ test("le propriétaire ajoute un jeu manquant, puis le supprime après confirmat
 
   page.once("dialog", (d) => d.accept());
   await page.getByRole("button", { name: "Supprimer ce jeu" }).click();
-  await expect(page).toHaveURL(/\/admin\/jeux\?supprime=/);
+  await expect(page).toHaveURL(/\/admin\/jeux\?supprime=.*console=wii-u/);
   await expect(page.getByRole("status")).toContainText("a été supprimé");
   await expect(page.getByRole("link", { name: /Jeu de test e2e/ })).toHaveCount(
     0,
   );
+});
+
+test("la liste des jeux se choisit par console (étape 8)", async ({ page }) => {
+  await seConnecter(page);
+  await page.goto("/admin/jeux");
+  const consoles = page.getByRole("navigation", { name: "Console" });
+  await expect(
+    consoles.getByRole("link", { name: "Wii U", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+  await consoles.getByRole("link", { name: "Wii", exact: true }).click();
+  await expect(page).toHaveURL("/admin/jeux?console=wii");
+  // Base de test : la Wii existe (migration 0007) mais n'a pas encore de jeux.
+  await expect(page.getByText("0 jeux Wii.")).toBeVisible();
+  await page.getByText("+ Ajouter un jeu").click();
+  await expect(page.getByText("Console : Wii", { exact: true })).toBeVisible();
 });

@@ -4,6 +4,7 @@ import {
   SANS_FILTRE,
   anneesProposees,
   avecFiltres,
+  consolesProposees,
   filtrer,
   filtresDepuisParametres,
   genresProposes,
@@ -27,6 +28,7 @@ const jeu = (
 ): JeuCatalogue => ({
   id: slug,
   slug,
+  console: { slug: "wii-u", nom: "Wii U" },
   developpeur: null,
   editeur: "Nintendo",
   genres,
@@ -101,6 +103,7 @@ describe("filtrer (US-06)", () => {
     expect(
       slugs(
         filtrer(tous, {
+          console: null,
           disponibilite: "JAP",
           annee: "2012",
           genre: "Musique",
@@ -108,8 +111,53 @@ describe("filtrer (US-06)", () => {
       ),
     ).toEqual(["wii-karaoke-u"]);
     expect(
-      filtrer(tous, { disponibilite: "TOUTES", annee: null, genre: "Musique" }),
+      filtrer(tous, {
+        ...SANS_FILTRE,
+        disponibilite: "TOUTES",
+        genre: "Musique",
+      }),
     ).toEqual([]);
+  });
+});
+
+describe("filtre Console (étape 8)", () => {
+  const WII = {
+    ...jeu(
+      "mario-kart-wii",
+      ["2008-04-10", "2008-04-27", "2008-04-11"],
+      ["Course"],
+    ),
+    console: { slug: "wii", nom: "Wii" },
+  };
+  const avecWii = trier([MK8, WII, KIRBY], "anciens", "TOUS");
+
+  it("ne garde que les jeux de la console choisie", () => {
+    expect(slugs(filtrer(avecWii, { ...SANS_FILTRE, console: "wii" }))).toEqual(
+      ["mario-kart-wii"],
+    );
+    expect(
+      slugs(filtrer(avecWii, { ...SANS_FILTRE, console: "wii-u" })),
+    ).toEqual(["mario-kart-8", "kirby"]);
+  });
+
+  it("propose les consoles qui ont des jeux, dans l'ordre chronologique, avec leur nombre", () => {
+    const ordre = [
+      { slug: "wii", nom: "Wii" },
+      { slug: "wii-u", nom: "Wii U" },
+      { slug: "switch", nom: "Switch" },
+    ];
+    expect(consolesProposees(avecWii, ordre)).toEqual([
+      { slug: "wii", nom: "Wii", nombre: 1 },
+      { slug: "wii-u", nom: "Wii U", nombre: 2 },
+    ]);
+  });
+
+  it("se garde dans l'adresse (?console=wii) et ignore une valeur douteuse", () => {
+    expect(avecFiltres("", { ...SANS_FILTRE, console: "wii" })).toBe(
+      "?console=wii",
+    );
+    expect(filtresDepuisParametres("?console=wii").console).toBe("wii");
+    expect(filtresDepuisParametres("?console=../x").console).toBeNull();
   });
 });
 
@@ -142,6 +190,7 @@ describe("filtres dans l'adresse (vue filtrée partageable)", () => {
   it("écrit les filtres en gardant la recherche et le marché", () => {
     expect(
       avecFiltres("?q=mario&marche=jap", {
+        console: null,
         disponibilite: "JAP",
         annee: "2014",
         genre: "Plates-formes 3D",
@@ -160,6 +209,7 @@ describe("filtres dans l'adresse (vue filtrée partageable)", () => {
         "?dispo=toutes&annee=2014&genre=Plates-formes+3D",
       ),
     ).toEqual({
+      console: null,
       disponibilite: "TOUTES",
       annee: "2014",
       genre: "Plates-formes 3D",

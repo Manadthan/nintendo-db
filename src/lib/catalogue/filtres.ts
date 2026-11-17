@@ -5,12 +5,15 @@ export type FiltreDisponibilite = "TOUTES" | Region;
 
 /** Filtres du catalogue (US-06) : null = pas de filtre sur ce critère. */
 export type Filtres = {
+  /** Adresse de la console (étape 8, US-01). */
+  console: string | null;
   disponibilite: FiltreDisponibilite | null;
   annee: string | null;
   genre: string | null;
 };
 
 export const SANS_FILTRE: Filtres = {
+  console: null,
   disponibilite: null,
   annee: null,
   genre: null,
@@ -29,6 +32,7 @@ export const DISPONIBILITES: readonly {
 
 /** Paramètres de l'adresse de chaque filtre (comme `?q=` et `?marche=` : une vue filtrée se partage). */
 const PARAMETRES = {
+  console: "console",
   disponibilite: "dispo",
   annee: "annee",
   genre: "genre",
@@ -51,10 +55,24 @@ export function filtrer(
 ): VersionAffichee[] {
   return versions.filter(
     (v) =>
+      (!filtres.console || v.jeu.console.slug === filtres.console) &&
       (!filtres.disponibilite || disponible(v, filtres.disponibilite)) &&
       (!filtres.annee || annee(v) === filtres.annee) &&
       (!filtres.genre || v.jeu.genres.includes(filtres.genre)),
   );
+}
+
+/** Consoles proposées : celles qui ont des jeux affichés, dans l'ordre donné (chronologique), avec leur nombre. */
+export function consolesProposees(
+  versions: VersionAffichee[],
+  ordre: { slug: string; nom: string }[],
+): { slug: string; nom: string; nombre: number }[] {
+  return ordre
+    .map((c) => ({
+      ...c,
+      nombre: versions.filter((v) => v.jeu.console.slug === c.slug).length,
+    }))
+    .filter((c) => c.nombre > 0);
 }
 
 /** Années proposées : celles des versions affichées, de la plus ancienne à la plus récente. */
@@ -78,7 +96,10 @@ export function filtresDepuisParametres(recherche: string): Filtres {
   const params = new URLSearchParams(recherche);
   const dispo = params.get(PARAMETRES.disponibilite)?.toUpperCase();
   const an = params.get(PARAMETRES.annee);
+  const console_ = params.get(PARAMETRES.console);
   return {
+    console:
+      console_ && /^[a-z0-9]+(-[a-z0-9]+)*$/.test(console_) ? console_ : null,
     disponibilite:
       DISPONIBILITES.find((d) => d.valeur === dispo)?.valeur ?? null,
     annee: an && /^\d{4}$/.test(an) ? an : null,

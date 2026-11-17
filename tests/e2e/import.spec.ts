@@ -24,3 +24,18 @@ test("depuis l'administration, le propriétaire ouvre l'aperçu de l'import", as
     page.getByRole("button", { name: "Analyser la Wii U" }),
   ).toBeEnabled();
 });
+
+test("l'import Wii s'ouvre depuis l'administration, avec GameTDB pour seule source", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.getByRole("link", { name: /Import Wii \(GameTDB\)/ }).click();
+  await expect(page).toHaveURL("/admin/import?console=wii");
+  await expect(
+    page.getByRole("heading", { name: "Import Wii", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("base GameTDB seule")).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Analyser la Wii", exact: true }),
+  ).toBeEnabled();
+});

@@ -31,6 +31,7 @@ const jeu = (
 ): JeuCatalogue => ({
   id: slug,
   slug,
+  console: { slug: "wii-u", nom: "Wii U" },
   developpeur: null,
   editeur: "Nintendo",
   genres: [],

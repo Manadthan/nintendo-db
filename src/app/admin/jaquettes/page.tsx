@@ -5,6 +5,8 @@ import {
   type Filtre,
   type LigneJeuJaquettes,
 } from "@/lib/admin/jaquettes";
+import { SelecteurConsole } from "@/components/SelecteurConsole";
+import { consoleChoisie } from "@/lib/admin/consoles";
 import { SOURCES_JAQUETTE } from "@/lib/fiche/fiche";
 import { supabaseEnv } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -14,8 +16,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const CONSOLE = "wii-u";
-
 /**
  * Page « Jaquettes » (US-12) : toutes les jaquettes côte à côte, pour repérer d'un coup d'œil celles qui ne sont
  * pas des scans de boîte, et un lien « Remplacer » sur chacune. Réservée au propriétaire (proxy /admin).
@@ -23,18 +23,27 @@ const CONSOLE = "wii-u";
 export default async function PageJaquettes({
   searchParams,
 }: {
-  searchParams: Promise<{ filtre?: string; remplacee?: string }>;
+  searchParams: Promise<{
+    filtre?: string;
+    remplacee?: string;
+    console?: string;
+  }>;
 }) {
-  const { filtre: brut, remplacee } = await searchParams;
+  const { filtre: brut, remplacee, console: demandee } = await searchParams;
   const filtre: Filtre = brut === "toutes" ? "toutes" : "a-remplacer";
-  const { data, error } = await (
-    await createSupabaseServerClient()
-  )
+  const supabase = await createSupabaseServerClient();
+  const { data: consoles } = await supabase
+    .from("consoles")
+    .select("slug, nom")
+    .order("ordre");
+  const laConsole = consoleChoisie(consoles ?? [], demandee);
+  if (!laConsole) throw new Error("Aucune console en base");
+  const { data, error } = await supabase
     .from("games")
     .select(
       "slug, consoles!inner(slug), releases(region, sortie, titre, jaquette_path, jaquette_source)",
     )
-    .eq("consoles.slug", CONSOLE);
+    .eq("consoles.slug", laConsole.slug);
   if (error) throw new Error(`Jaquettes illisibles : ${error.message}`);
   const vignettes = vignettesJaquettes(
     data as unknown as LigneJeuJaquettes[],
@@ -70,6 +79,12 @@ export default async function PageJaquettes({
         </p>
       )}
 
+      <SelecteurConsole
+        consoles={consoles ?? []}
+        active={laConsole.slug}
+        adresse={(slug) => `/admin/jaquettes?console=${slug}&filtre=${filtre}`}
+      />
+
       <nav
         aria-label="Filtre"
         className="grid grid-cols-2 gap-1 rounded-xl bg-segment p-1 text-sm"
@@ -82,7 +97,7 @@ export default async function PageJaquettes({
         ).map(([valeur, libelle]) => (
           <Link
             key={valeur}
-            href={`/admin/jaquettes?filtre=${valeur}`}
+            href={`/admin/jaquettes?console=${laConsole.slug}&filtre=${valeur}`}
             aria-current={filtre === valeur ? "page" : undefined}
             className={`flex h-10 items-center justify-center rounded-lg ${
               filtre === valeur
@@ -125,7 +140,7 @@ export default async function PageJaquettes({
               {v.region} · {v.source ? SOURCES_JAQUETTE[v.source] : "aucune"}
             </span>
             <Link
-              href={`/admin/jaquettes/${v.slug}/${v.region.toLowerCase()}`}
+              href={`/admin/jaquettes/${laConsole.slug}/${v.slug}/${v.region.toLowerCase()}`}
               className="flex h-11 items-center justify-center rounded-lg border border-champ bg-carte text-xs font-semibold"
             >
               Remplacer
