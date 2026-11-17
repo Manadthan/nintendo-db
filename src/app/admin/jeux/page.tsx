@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FormulaireAjout } from "@/components/FormulaireAjout";
+import { SelecteurConsole } from "@/components/SelecteurConsole";
+import { consoleChoisie } from "@/lib/admin/consoles";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -8,19 +10,24 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** Liste des jeux à corriger (US-11), triée par titre ; ajout d'un jeu manquant. Réservée au propriétaire. */
+/** Jeux d'une console à corriger (US-11 ; console au choix, étape 8), triés par titre ; ajout d'un jeu manquant. */
 export default async function PageJeux({
   searchParams,
 }: {
-  searchParams: Promise<{ supprime?: string }>;
+  searchParams: Promise<{ supprime?: string; console?: string }>;
 }) {
-  const { supprime } = await searchParams;
-  const { data, error } = await (
-    await createSupabaseServerClient()
-  )
+  const { supprime, console: demandee } = await searchParams;
+  const supabase = await createSupabaseServerClient();
+  const { data: consoles } = await supabase
+    .from("consoles")
+    .select("slug, nom")
+    .order("ordre");
+  const laConsole = consoleChoisie(consoles ?? [], demandee);
+  if (!laConsole) throw new Error("Aucune console en base");
+  const { data, error } = await supabase
     .from("games")
     .select("slug, consoles!inner(slug), releases(region, titre)")
-    .eq("consoles.slug", "wii-u");
+    .eq("consoles.slug", laConsole.slug);
   if (error) throw new Error(`Jeux illisibles : ${error.message}`);
   const jeux = (data ?? [])
     .map((j) => ({
@@ -46,8 +53,8 @@ export default async function PageJeux({
           Jeux
         </h1>
         <p className="text-sm text-texte-doux">
-          {jeux.length} jeux. Un champ corrigé ici n&apos;est plus remplacé par
-          l&apos;import.
+          {jeux.length} jeux {laConsole.nom}. Un champ corrigé ici n&apos;est
+          plus remplacé par l&apos;import.
         </p>
       </section>
       {supprime && (
@@ -58,7 +65,12 @@ export default async function PageJeux({
           « {supprime} » a été supprimé.
         </p>
       )}
-      <FormulaireAjout />
+      <SelecteurConsole
+        consoles={consoles ?? []}
+        active={laConsole.slug}
+        adresse={(slug) => `/admin/jeux?console=${slug}`}
+      />
+      <FormulaireAjout console={laConsole} />
       <ul
         aria-label="Jeux"
         className="flex flex-col overflow-hidden rounded-xl border border-bordure bg-carte"
@@ -69,7 +81,7 @@ export default async function PageJeux({
             className="border-t border-separateur first:border-t-0"
           >
             <Link
-              href={`/admin/jeux/${j.slug}`}
+              href={`/admin/jeux/${laConsole.slug}/${j.slug}`}
               className="flex min-h-11 items-center justify-between gap-2 px-3 py-2.5 text-sm font-semibold"
             >
               {j.titre}

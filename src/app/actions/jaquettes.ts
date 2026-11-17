@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
+import { SLUG_CONSOLE } from "@/lib/admin/consoles";
 import { regionDepuisAdresse } from "@/lib/admin/jaquettes";
 import { enregistrerJaquette } from "@/lib/jaquettes/enregistrer";
 import { telechargerImageExterne } from "@/lib/jaquettes/telecharger";
@@ -10,6 +11,14 @@ import { telechargerImageExterne } from "@/lib/jaquettes/telecharger";
 export type EtatRemplacement = { erreur?: string; adresse?: string };
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/** Retour à la liste des jaquettes de la console du jeu (étape 8), avec le message de remplacement. */
+function retourJaquettes(formData: FormData, remplacee: string): string {
+  const console_ = String(formData.get("console") ?? "");
+  const params = new URLSearchParams({ remplacee });
+  if (SLUG_CONSOLE.test(console_)) params.set("console", console_);
+  return `/admin/jaquettes?${params}`;
+}
 
 /**
  * Remplace la jaquette d'une sortie par l'image d'une adresse (US-12) : téléchargée côté serveur avec protection
@@ -56,9 +65,7 @@ export async function remplacerJaquetteParAdresse(
     };
   }
   revalidatePath("/", "layout");
-  redirect(
-    `/admin/jaquettes?remplacee=${encodeURIComponent(`${slug} ${region}`)}`,
-  );
+  redirect(retourJaquettes(formData, `${slug} ${region}`));
 }
 
 /** Poids maximal d'une photo reçue (elle arrive réduite par le navigateur, bien en dessous). */
@@ -109,7 +116,5 @@ export async function remplacerJaquetteParPhoto(
     };
   }
   revalidatePath("/", "layout");
-  redirect(
-    `/admin/jaquettes?remplacee=${encodeURIComponent(`${slug} ${region}`)}`,
-  );
+  redirect(retourJaquettes(formData, `${slug} ${region}`));
 }

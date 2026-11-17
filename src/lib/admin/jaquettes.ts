@@ -70,7 +70,7 @@ export function vignettesJaquettes(
     );
 }
 
-/** Région lue dans l'adresse (`/admin/jaquettes/{jeu}/pal`) ; null si inconnue. */
+/** Région lue dans l'adresse (`/admin/jaquettes/{console}/{jeu}/pal`) ; null si inconnue. */
 export function regionDepuisAdresse(texte: string): Region | null {
   const r = texte.toUpperCase();
   return REGIONS.includes(r as Region) ? (r as Region) : null;
