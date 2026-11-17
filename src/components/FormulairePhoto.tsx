@@ -14,10 +14,13 @@ import { reduirePhoto } from "@/lib/images/reduire";
  */
 export function FormulairePhoto({
   gameId,
+  consoleSlug,
   slug,
   region,
 }: {
   gameId: string;
+  /** Console du jeu : le retour à la liste des jaquettes la garde (étape 8). */
+  consoleSlug: string;
   slug: string;
   region: Region;
 }) {
@@ -40,6 +43,7 @@ export function FormulairePhoto({
     try {
       const donnees = new FormData();
       donnees.set("jeu", gameId);
+      donnees.set("console", consoleSlug);
       donnees.set("slug", slug);
       donnees.set("region", region);
       donnees.set("photo", await reduirePhoto(fichier), "photo.jpg");

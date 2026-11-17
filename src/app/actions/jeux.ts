@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { SLUG_CONSOLE } from "@/lib/admin/consoles";
 import { lireNouveauJeu, VERROU_MANUEL } from "@/lib/admin/nouveau";
 import { supprimerJeuEtJaquettes } from "@/lib/jaquettes/supprimer";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
@@ -105,13 +106,16 @@ export async function ajouterJeu(
   formData: FormData,
 ): Promise<EtatAjout> {
   const titre = String(formData.get("titre") ?? "");
+  const consoleSlug = String(formData.get("console") ?? "");
+  if (!SLUG_CONSOLE.test(consoleSlug))
+    return { erreur: "Console inconnue.", titre };
   let slug: string;
   try {
     const supabase = await exigerProprietaire();
     const { data: laConsole, error } = await supabase
       .from("consoles")
       .select("id, games(slug)")
-      .eq("slug", "wii-u")
+      .eq("slug", consoleSlug)
       .single();
     if (error || !laConsole)
       throw new Error(error?.message ?? "Console introuvable.");
@@ -152,7 +156,7 @@ export async function ajouterJeu(
     };
   }
   revalidatePath("/", "layout");
-  redirect(`/admin/jeux/${slug}?nouveau=1`);
+  redirect(`/admin/jeux/${consoleSlug}/${slug}?nouveau=1`);
 }
 
 /** Supprime un jeu (US-11), après confirmation dans la page : ses jaquettes, puis le jeu et ses versions. */
@@ -163,5 +167,8 @@ export async function supprimerJeu(formData: FormData): Promise<void> {
   const supabase = await exigerProprietaire();
   await supprimerJeuEtJaquettes(supabase, gameId, nom);
   revalidatePath("/", "layout");
-  redirect(`/admin/jeux?supprime=${encodeURIComponent(nom)}`);
+  const consoleSlug = String(formData.get("console") ?? "");
+  const params = new URLSearchParams({ supprime: nom });
+  if (SLUG_CONSOLE.test(consoleSlug)) params.set("console", consoleSlug);
+  redirect(`/admin/jeux?${params}`);
 }

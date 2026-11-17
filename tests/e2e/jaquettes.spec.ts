@@ -39,7 +39,7 @@ test("le propriétaire remplace une jaquette par une photo (US-12)", async ({
 }) => {
   await seConnecter(page);
   // Une sortie que les tests publics ne lisent pas (ils tournent en parallèle sur la même base).
-  await page.goto("/admin/jaquettes/mario-kart-8/jap");
+  await page.goto("/admin/jaquettes/wii-u/mario-kart-8/jap");
 
   // Une « photo » de 600 × 800 fabriquée pour le test.
   const sharp = (await import("sharp")).default;

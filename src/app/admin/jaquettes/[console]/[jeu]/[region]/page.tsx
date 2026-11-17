@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { FormulaireJaquette } from "@/components/FormulaireJaquette";
 import { FormulairePhoto } from "@/components/FormulairePhoto";
 import { Jaquette } from "@/components/Jaquette";
+import { SLUG_CONSOLE } from "@/lib/admin/consoles";
 import { regionDepuisAdresse } from "@/lib/admin/jaquettes";
 import { SOURCES_JAQUETTE } from "@/lib/fiche/fiche";
 import { chargerJeu } from "@/lib/fiche/charger";
@@ -20,18 +21,21 @@ export const maxDuration = 30;
 export default async function PageRemplacerJaquette({
   params,
 }: {
-  params: Promise<{ jeu: string; region: string }>;
+  params: Promise<{ console: string; jeu: string; region: string }>;
 }) {
-  const { jeu: slug, region: brut } = await params;
+  const { console: consoleSlug, jeu: slug, region: brut } = await params;
   const region = regionDepuisAdresse(brut);
-  const jeu = region ? await chargerJeu("wii-u", slug) : null;
+  const jeu =
+    region && SLUG_CONSOLE.test(consoleSlug)
+      ? await chargerJeu(consoleSlug, slug)
+      : null;
   if (!jeu || !region || !jeu.sorties[region].sortie) notFound();
   const sortie = jeu.sorties[region];
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-5 px-4 py-6">
       <Link
-        href="/admin/jaquettes"
+        href={`/admin/jaquettes?console=${consoleSlug}`}
         className="flex h-11 items-center gap-1 text-sm font-medium"
       >
         <span aria-hidden="true">‹</span> Jaquettes
@@ -55,11 +59,21 @@ export default async function PageRemplacerJaquette({
           sizes="180px"
         />
       </div>
-      <FormulaireJaquette gameId={jeu.id} slug={slug} region={region} />
+      <FormulaireJaquette
+        gameId={jeu.id}
+        consoleSlug={consoleSlug}
+        slug={slug}
+        region={region}
+      />
       <p className="text-center text-xs font-semibold tracking-wide text-texte-discret uppercase">
         ou
       </p>
-      <FormulairePhoto gameId={jeu.id} slug={slug} region={region} />
+      <FormulairePhoto
+        gameId={jeu.id}
+        consoleSlug={consoleSlug}
+        slug={slug}
+        region={region}
+      />
     </main>
   );
 }

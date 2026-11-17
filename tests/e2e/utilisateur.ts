@@ -7,7 +7,9 @@ export const PROPRIETAIRE_TEST = {
 } as const;
 
 /** Les tests de connexion ont besoin d'une base Supabase locale (toujours présente en CI). */
-export const BASE_LOCALE_DISPONIBLE = Boolean(process.env.E2E_SUPABASE_SECRET_KEY);
+export const BASE_LOCALE_DISPONIBLE = Boolean(
+  process.env.E2E_SUPABASE_SECRET_KEY,
+);
 
 export async function seConnecter(page: Page) {
   await page.goto("/admin/connexion");

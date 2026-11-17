@@ -2,10 +2,15 @@
 
 import { useActionState } from "react";
 import { ajouterJeu, type EtatAjout } from "@/app/actions/jeux";
+import type { ConsoleAdmin } from "@/lib/admin/consoles";
 import { REGIONS } from "@/lib/catalogue/types";
 
-/** Ajouter un jeu manquant à la main (US-11) : un titre et les régions où il est sorti en boîte. */
-export function FormulaireAjout() {
+/** Ajouter un jeu manquant à la main (US-11) à la console affichée : un titre et les régions sorties en boîte. */
+export function FormulaireAjout({
+  console: laConsole,
+}: {
+  console: ConsoleAdmin;
+}) {
   const [etat, action, enCours] = useActionState<EtatAjout, FormData>(
     ajouterJeu,
     {},
@@ -19,6 +24,10 @@ export function FormulaireAjout() {
         + Ajouter un jeu
       </summary>
       <form action={action} className="mt-2 flex flex-col gap-3" noValidate>
+        <input type="hidden" name="console" value={laConsole.slug} />
+        <p className="text-sm text-texte-doux">
+          Console : <strong className="text-texte">{laConsole.nom}</strong>
+        </p>
         {etat.erreur && (
           <div
             role="alert"

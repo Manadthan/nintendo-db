@@ -13,10 +13,13 @@ const champ =
 /** Remplacer une jaquette par l'adresse d'une image (US-12). */
 export function FormulaireJaquette({
   gameId,
+  consoleSlug,
   slug,
   region,
 }: {
   gameId: string;
+  /** Console du jeu : le retour à la liste des jaquettes la garde (étape 8). */
+  consoleSlug: string;
   slug: string;
   region: Region;
 }) {
@@ -27,6 +30,7 @@ export function FormulaireJaquette({
   return (
     <form action={action} className="flex flex-col gap-3" noValidate>
       <input type="hidden" name="jeu" value={gameId} />
+      <input type="hidden" name="console" value={consoleSlug} />
       <input type="hidden" name="slug" value={slug} />
       <input type="hidden" name="region" value={region} />
       {etat.erreur && (
