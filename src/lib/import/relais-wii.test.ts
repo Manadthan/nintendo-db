@@ -171,6 +171,56 @@ describe("decouperFaceAvant", () => {
     expect(data[0]).toBeLessThan(100);
   });
 
+  // Boîte dépliée avec une tranche colorée qui finit en x = fin(y) (penchée si fin varie), face bleue ensuite.
+  const scanAvecTranche = async (
+    couleur: [number, number, number],
+    fin: (y: number) => number,
+  ) => {
+    const largeur = 1024;
+    const hauteur = 680;
+    const pixels = Buffer.alloc(largeur * hauteur * 3, 255);
+    for (let y = 0; y < hauteur; y++)
+      for (let x = 480; x < largeur; x++) {
+        const [r, g, b] = x < fin(y) ? couleur : [32, 80, 192];
+        const i = (y * largeur + x) * 3;
+        pixels[i] = r;
+        pixels[i + 1] = g;
+        pixels[i + 2] = b;
+      }
+    return sharp(pixels, {
+      raw: { width: largeur, height: hauteur, channels: 3 },
+    })
+      .png()
+      .toBuffer();
+  };
+  const premiereColonne = async (face: Buffer) =>
+    (
+      await sharp(face)
+        .extract({ left: 0, top: 0, width: 1, height: 680 })
+        .raw()
+        .toBuffer()
+    ).filter((_, i) => i % 3 === 0); // canal rouge de chaque ligne
+
+  it("retire une tranche colorée qui déborde sur la face (pas seulement blanche)", async () => {
+    const face = await decouperFaceAvant(
+      await scanAvecTranche([20, 20, 20], () => 543),
+    );
+    expect((await sharp(face).metadata()).width).toBe(1024 - 543);
+    // Aucune ligne ne commence par la tranche noire : la face (bleue) a un rouge ≈ 32.
+    expect(Math.min(...(await premiereColonne(face)))).toBeGreaterThan(25);
+  });
+
+  it("retire une tranche penchée par le scan (limite de x = 539 en haut à 545 en bas)", async () => {
+    const face = await decouperFaceAvant(
+      await scanAvecTranche(
+        [200, 30, 30],
+        (y) => 539 + Math.round((6 * y) / 679),
+      ),
+    );
+    // Aucune ligne ne commence par la tranche rouge (rouge 200) : toutes commencent par la face.
+    expect(Math.max(...(await premiereColonne(face)))).toBeLessThan(100);
+  });
+
   it("refuse une image qui n'est pas une boîte dépliée", async () => {
     const portrait = await sharp({
       create: { width: 400, height: 600, channels: 3, background: "#fff" },
