@@ -38,8 +38,8 @@ test("le propriétaire remplace une jaquette par une photo (US-12)", async ({
   page,
 }) => {
   await seConnecter(page);
-  await page.goto("/admin/jaquettes");
-  await page.getByRole("link", { name: "Remplacer", exact: true }).first().click();
+  // Une sortie que les tests publics ne lisent pas (ils tournent en parallèle sur la même base).
+  await page.goto("/admin/jaquettes/mario-kart-8/jap");
 
   // Une « photo » de 600 × 800 fabriquée pour le test.
   const sharp = (await import("sharp")).default;
@@ -48,13 +48,11 @@ test("le propriétaire remplace une jaquette par une photo (US-12)", async ({
   })
     .jpeg()
     .toBuffer();
-  await page
-    .getByLabel("Photo de la boîte")
-    .setInputFiles({
-      name: "boite.jpg",
-      mimeType: "image/jpeg",
-      buffer: photo,
-    });
+  await page.getByLabel("Photo de la boîte").setInputFiles({
+    name: "boite.jpg",
+    mimeType: "image/jpeg",
+    buffer: photo,
+  });
   await page.getByRole("button", { name: "Utiliser cette photo" }).click();
 
   await expect(page).toHaveURL(/\/admin\/jaquettes\?remplacee=/);

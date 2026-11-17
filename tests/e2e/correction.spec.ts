@@ -9,16 +9,19 @@ test("le propriétaire corrige un code produit ; le champ est alors verrouillé 
 }) => {
   await seConnecter(page);
   await page.getByRole("link", { name: /Jeux/ }).click();
-  await page.getByRole("link", { name: /Splatoon/ }).click();
-  await expect(page.getByRole("heading", { name: "Splatoon" })).toBeVisible();
+  // Mario Kart 8 : les tests publics (parallèles, même base) ne lisent pas son code produit.
+  await page.getByRole("link", { name: /Mario Kart 8/ }).click();
+  await expect(
+    page.getByRole("heading", { name: "Mario Kart 8" }),
+  ).toBeVisible();
 
   const code = page.locator('input[name="PAL.code_produit"]');
-  await code.fill("WUP-P-AGMP-TEST");
+  await code.fill("WUP-P-AMKP-TEST");
   await page.getByRole("button", { name: "Enregistrer la fiche" }).click();
   await expect(page.getByRole("status")).toContainText("Fiche enregistrée");
 
   await page.reload();
-  await expect(code).toHaveValue("WUP-P-AGMP-TEST");
+  await expect(code).toHaveValue("WUP-P-AMKP-TEST");
   await expect(
     page
       .locator("fieldset", { hasText: "Europe" })
