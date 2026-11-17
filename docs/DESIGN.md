@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 0.8 — 17/11/2026 — statut : **validée**
+> Version 0.9 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.9 | 17/11/2026 | Routes de correction sous `/admin` (protégées par le proxy) : `/admin/jeux`, `/admin/jaquettes` (#42 à #45) |
 > | 0.8 | 17/11/2026 | **IGDB retiré** (#58) : GameTDB donne aussi les titres japonais ; plus de rapprochement ni de secrets Twitch |
 > | 0.7 | 17/11/2026 | **Relais GameTDB** (#53) : GameTDB refuse les serveurs de Vercel ; une tâche GitHub dépose base et scans dans un bucket privé |
 > | 0.6 | 17/11/2026 | Jaquettes en 3 tailles (300/600/**768**) ; **GameTDB** : scans de boîtes par région (prioritaires sur IGDB) et codes produit (étude du 17/11) ; R6 et R8 traités |
@@ -136,7 +137,8 @@ import_runs(id, console_id, lance_le, resume jsonb)
 | `/jeux/[console]/[jeu]` | Grande jaquette et sélecteur JAP/US/PAL dessous, informations, disponibilité, sources | US-04 |
 | `/a-propos` | Non-affiliation, sources (Wikipédia, GameTDB) et licences | US-07 |
 | `/admin/connexion`, `/admin/import` | Connexion ; import avec aperçu et lots | US-09, 10 |
-| `/jeux/[console]/[jeu]/modifier` | Correction, jaquettes par région | US-11, 12 |
+| `/admin/jeux`, `/admin/jeux/[jeu]` | Liste des jeux ; correction d'une fiche (champs verrouillés contre l'import) — sous `/admin` pour la protection du proxy (v0.9) | US-11 |
+| `/admin/jaquettes`, `/admin/jaquettes/[jeu]/[region]` | Toutes les jaquettes, filtre « à remplacer » ; remplacement par adresse ou photo | US-12 |
 
 Pas de sélecteur de région global : le marché se choisit dans le catalogue, la région sur la fiche. Les jaquettes sont l'élément visuel
 principal (priorité du propriétaire) : grille à bords fins, proportions de boîte respectées, pas de recadrage.

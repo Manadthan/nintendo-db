@@ -60,6 +60,13 @@ export default async function PageAdmin() {
         Jaquettes (repérer et remplacer)
         <span aria-hidden="true">›</span>
       </Link>
+      <Link
+        href="/admin/jeux"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Jeux (corriger une fiche)
+        <span aria-hidden="true">›</span>
+      </Link>
     </main>
   );
 }
