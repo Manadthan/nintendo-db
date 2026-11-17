@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FormulaireJaquette } from "@/components/FormulaireJaquette";
+import { FormulairePhoto } from "@/components/FormulairePhoto";
 import { Jaquette } from "@/components/Jaquette";
 import { regionDepuisAdresse } from "@/lib/admin/jaquettes";
 import { SOURCES_JAQUETTE } from "@/lib/fiche/fiche";
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 // Téléchargement et conversion de l'image : quelques secondes (Vercel).
 export const maxDuration = 30;
 
-/** Remplacer la jaquette d'une sortie (US-12) : par l'adresse d'une image. */
+/** Remplacer la jaquette d'une sortie (US-12) : par l'adresse d'une image, ou par une photo. */
 export default async function PageRemplacerJaquette({
   params,
 }: {
@@ -55,6 +56,10 @@ export default async function PageRemplacerJaquette({
         />
       </div>
       <FormulaireJaquette gameId={jeu.id} slug={slug} region={region} />
+      <p className="text-center text-xs font-semibold tracking-wide text-texte-discret uppercase">
+        ou
+      </p>
+      <FormulairePhoto gameId={jeu.id} slug={slug} region={region} />
     </main>
   );
 }
