@@ -108,3 +108,6 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
 
 - **Clone superficiel** (`git clone --depth 1`) : il ne suit que `main`, et l'alerte « branche non poussée » revient
   après chaque `git push -u`. Une fois par clone : `git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'`.
+- **Sélecteurs e2e ambigus** (2 fois : « Remplacer » trouvait « À remplacer » ; `getByRole("alert")` trouvait aussi
+  l'annonceur de navigation de Next.js) : `getByRole(…, { name, exact: true })`, et toujours filtrer un rôle
+  générique par son texte (`getByRole("alert").filter({ hasText })`).
