@@ -33,6 +33,8 @@ export function preparerApercu(
     ecartes: JeuEcarte[];
   },
   slugsEnBase: Set<string>,
+  /** Jeux ajoutés à la main (US-11) : absents des sources, jamais supprimés par l'import. */
+  manuels: Set<string> = new Set(),
 ): Apercu {
   const retenus = new Set(liste.jeux.map((j) => j.slug));
   return {
@@ -51,7 +53,9 @@ export function preparerApercu(
       telechargeables: liste.telechargeables,
     },
     ecartes: liste.ecartes,
-    aSupprimer: [...slugsEnBase].filter((s) => !retenus.has(s)).sort(),
+    aSupprimer: [...slugsEnBase]
+      .filter((s) => !retenus.has(s) && !manuels.has(s))
+      .sort(),
   };
 }
 

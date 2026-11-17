@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { capturer, type Resultat } from "@/lib/import/resultat";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
+import { VERROU_MANUEL } from "@/lib/admin/nouveau";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
 import {
   preparerApercu,
@@ -26,7 +27,7 @@ import {
 import { enregistrerJaquette } from "@/lib/jaquettes/enregistrer";
 import { appliquerGameTdb, type JeuAImporter } from "@/lib/import/physique";
 import { lireListeWikipediaDetaillee, urlRendu } from "@/lib/import/wikipedia";
-import { BUCKET_JAQUETTES } from "@/lib/jaquettes/stockage";
+import { supprimerJeuEtJaquettes } from "@/lib/jaquettes/supprimer";
 
 // Identification demandée par Wikimedia aux programmes qui lisent ses pages (aucune donnée personnelle).
 const USER_AGENT = "nintendo-db/1.0 (https://nintendo-db.vercel.app)";
@@ -35,7 +36,7 @@ async function chargerConsole(consoleSlug: string) {
   const supabase = await exigerProprietaire();
   const { data, error } = await supabase
     .from("consoles")
-    .select("id, wikipedia_liste, games(slug)")
+    .select("id, wikipedia_liste, games(slug, verrous)")
     .eq("slug", consoleSlug)
     .single();
   if (error || !data) throw new Error(`Console « ${consoleSlug} » introuvable`);
@@ -94,6 +95,11 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
   return preparerApercu(
     { ...liste, ...physique },
     new Set(fiche.games.map((g) => g.slug)),
+    new Set(
+      fiche.games
+        .filter((g) => g.verrous.includes(VERROU_MANUEL))
+        .map((g) => g.slug),
+    ),
   );
 }
 
@@ -285,22 +291,7 @@ async function supprimerJeuxInterne(
 
   const supprimes: string[] = [];
   for (const jeu of data ?? []) {
-    // Toutes les jaquettes du jeu, quelle que soit leur version (#60) : le contenu de son dossier.
-    const { data: fichiers, error: e0 } = await supabase.storage
-      .from(BUCKET_JAQUETTES)
-      .list(jeu.id, { limit: 1000 });
-    if (e0) throw new Error(`Jaquettes de « ${jeu.slug} » : ${e0.message}`);
-    const { error: e1 } = fichiers?.length
-      ? await supabase.storage
-          .from(BUCKET_JAQUETTES)
-          .remove(fichiers.map((f) => `${jeu.id}/${f.name}`))
-      : { error: null };
-    if (e1) throw new Error(`Jaquettes de « ${jeu.slug} » : ${e1.message}`);
-    const { error: e2 } = await supabase
-      .from("games")
-      .delete()
-      .eq("id", jeu.id);
-    if (e2) throw new Error(`Suppression de « ${jeu.slug} » : ${e2.message}`);
+    await supprimerJeuEtJaquettes(supabase, jeu.id, jeu.slug);
     supprimes.push(
       jeu.releases.find((r) => r.region === "PAL")?.titre ??
         jeu.releases.find((r) => r.titre)?.titre ??

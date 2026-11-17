@@ -89,6 +89,7 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
 3. **Aperçu** (n'écrit rien) : jeux retenus, ajoutés / modifiés / ignorés avec la raison. Puis enregistrement **par lots de 10** piloté par le
    navigateur, jaquettes comprises (même principe que l'ADR-03 de `mon-site-sdlc`, évite les délais Vercel).
 4. **Verrous** : tout champ modifié à la main est verrouillé ; l'import ne le remplace jamais et signale l'écart.
+   Un jeu ajouté à la main porte le verrou `manuel` : absent des sources, il n'est jamais supprimé par l'import.
 5. *(Identifiants IGDB : supprimés avec IGDB, v0.8.)*
 
 **ADR-04 — Jaquettes copiées chez nous, en WebP haute définition.** Source par ordre de priorité : **scan GameTDB**

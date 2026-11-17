@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FormulaireAjout } from "@/components/FormulaireAjout";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -7,8 +8,13 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** Liste des jeux à corriger (US-11), triée par titre. Réservée au propriétaire (proxy /admin). */
-export default async function PageJeux() {
+/** Liste des jeux à corriger (US-11), triée par titre ; ajout d'un jeu manquant. Réservée au propriétaire. */
+export default async function PageJeux({
+  searchParams,
+}: {
+  searchParams: Promise<{ supprime?: string }>;
+}) {
+  const { supprime } = await searchParams;
   const { data, error } = await (
     await createSupabaseServerClient()
   )
@@ -44,6 +50,15 @@ export default async function PageJeux() {
           l&apos;import.
         </p>
       </section>
+      {supprime && (
+        <p
+          role="status"
+          className="rounded-xl border border-bordure bg-accent-doux p-3 text-sm"
+        >
+          « {supprime} » a été supprimé.
+        </p>
+      )}
+      <FormulaireAjout />
       <ul
         aria-label="Jeux"
         className="flex flex-col overflow-hidden rounded-xl border border-bordure bg-carte"

@@ -7,7 +7,10 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 export type EtatConnexion = { erreur?: string; email?: string };
 
 /** Connexion du propriétaire par e-mail et mot de passe (US-09). */
-export async function seConnecter(_precedent: EtatConnexion, formData: FormData): Promise<EtatConnexion> {
+export async function seConnecter(
+  _precedent: EtatConnexion,
+  formData: FormData,
+): Promise<EtatConnexion> {
   const email = String(formData.get("email") ?? "").trim();
   const motDePasse = String(formData.get("password") ?? "");
 
@@ -16,7 +19,10 @@ export async function seConnecter(_precedent: EtatConnexion, formData: FormData)
   }
 
   const supabase = await createSupabaseServerClient();
-  const { error } = await supabase.auth.signInWithPassword({ email, password: motDePasse });
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password: motDePasse,
+  });
 
   if (error) {
     // Message volontairement vague : ne pas révéler lequel des deux champs est faux.

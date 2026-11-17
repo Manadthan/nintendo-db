@@ -35,3 +35,28 @@ test("une version sortie sans titre est refusée", async ({ page }) => {
     "le titre est obligatoire",
   );
 });
+
+test("le propriétaire ajoute un jeu manquant, puis le supprime après confirmation", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.goto("/admin/jeux");
+  await page.getByText("+ Ajouter un jeu").click();
+  await page.getByLabel("Titre").fill("Jeu de test e2e");
+  await page.getByLabel("PAL").check();
+  await page.getByRole("button", { name: "Ajouter le jeu" }).click();
+
+  await expect(page).toHaveURL("/admin/jeux/jeu-de-test-e2e?nouveau=1");
+  await expect(page.getByRole("status")).toContainText("Jeu ajouté");
+  await expect(page.locator('input[name="PAL.titre"]')).toHaveValue(
+    "Jeu de test e2e",
+  );
+
+  page.once("dialog", (d) => d.accept());
+  await page.getByRole("button", { name: "Supprimer ce jeu" }).click();
+  await expect(page).toHaveURL(/\/admin\/jeux\?supprime=/);
+  await expect(page.getByRole("status")).toContainText("a été supprimé");
+  await expect(page.getByRole("link", { name: /Jeu de test e2e/ })).toHaveCount(
+    0,
+  );
+});

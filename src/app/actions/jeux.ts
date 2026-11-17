@@ -1,6 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { lireNouveauJeu, VERROU_MANUEL } from "@/lib/admin/nouveau";
+import { supprimerJeuEtJaquettes } from "@/lib/jaquettes/supprimer";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import {
   lireSaisie,
@@ -89,4 +92,76 @@ export async function corrigerJeu(
   }
   revalidatePath("/", "layout");
   return { enregistre: true };
+}
+
+export type EtatAjout = { erreur?: string; titre?: string };
+
+/**
+ * Ajoute un jeu manquant à la main (US-11) : adresse tirée du titre, sans doublon ; ses 3 versions créées (sorties
+ * cochées avec ce titre). Marqué « manuel » : l'import ne le supprime jamais. Ouvre ensuite sa correction.
+ */
+export async function ajouterJeu(
+  _precedent: EtatAjout,
+  formData: FormData,
+): Promise<EtatAjout> {
+  const titre = String(formData.get("titre") ?? "");
+  let slug: string;
+  try {
+    const supabase = await exigerProprietaire();
+    const { data: laConsole, error } = await supabase
+      .from("consoles")
+      .select("id, games(slug)")
+      .eq("slug", "wii-u")
+      .single();
+    if (error || !laConsole)
+      throw new Error(error?.message ?? "Console introuvable.");
+    const lu = lireNouveauJeu(
+      formData,
+      new Set(laConsole.games.map((g) => g.slug)),
+    );
+    if (!lu.ok) return { erreur: lu.erreur, titre };
+    slug = lu.jeu.slug;
+
+    const { data: jeu, error: e1 } = await supabase
+      .from("games")
+      .insert({
+        console_id: laConsole.id,
+        slug,
+        physique: true,
+        verrous: [VERROU_MANUEL],
+      })
+      .select("id")
+      .single();
+    if (e1 || !jeu) throw new Error(e1?.message ?? "Jeu non créé.");
+    const { error: e2 } = await supabase.from("releases").insert(
+      REGIONS.map((r) => {
+        const sorti = lu.jeu.regions.includes(r);
+        return {
+          game_id: jeu.id,
+          region: r,
+          sortie: sorti,
+          titre: sorti ? lu.jeu.titre : null,
+        };
+      }),
+    );
+    if (e2) throw new Error(e2.message);
+  } catch (e) {
+    return {
+      erreur: e instanceof Error ? e.message : "Ajout impossible.",
+      titre,
+    };
+  }
+  revalidatePath("/", "layout");
+  redirect(`/admin/jeux/${slug}?nouveau=1`);
+}
+
+/** Supprime un jeu (US-11), après confirmation dans la page : ses jaquettes, puis le jeu et ses versions. */
+export async function supprimerJeu(formData: FormData): Promise<void> {
+  const gameId = String(formData.get("jeu") ?? "");
+  const nom = String(formData.get("nom") ?? "");
+  if (!UUID.test(gameId)) throw new Error("Jeu inconnu.");
+  const supabase = await exigerProprietaire();
+  await supprimerJeuEtJaquettes(supabase, gameId, nom);
+  revalidatePath("/", "layout");
+  redirect(`/admin/jeux?supprime=${encodeURIComponent(nom)}`);
 }

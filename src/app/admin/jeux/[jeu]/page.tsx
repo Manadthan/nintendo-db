@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BoutonSupprimerJeu } from "@/components/BoutonSupprimerJeu";
 import { FormulaireCorrection } from "@/components/FormulaireCorrection";
 import { REGIONS } from "@/lib/catalogue/types";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -13,10 +14,13 @@ export const metadata: Metadata = {
 /** Corriger la fiche d'un jeu (US-11) : champs du jeu et de ses 3 sorties. */
 export default async function PageCorrection({
   params,
+  searchParams,
 }: {
   params: Promise<{ jeu: string }>;
+  searchParams: Promise<{ nouveau?: string }>;
 }) {
   const { jeu: slug } = await params;
+  const { nouveau } = await searchParams;
   const { data } = await (
     await createSupabaseServerClient()
   )
@@ -64,12 +68,22 @@ export default async function PageCorrection({
           Voir la fiche publique
         </Link>
       </section>
+      {nouveau && (
+        <p
+          role="status"
+          className="rounded-xl border border-bordure bg-accent-doux p-3 text-sm"
+        >
+          Jeu ajouté. Complète sa fiche, puis ajoute ses jaquettes depuis la
+          page « Jaquettes ».
+        </p>
+      )}
       <FormulaireCorrection
         gameId={data.id}
         developpeur={data.developpeur ?? ""}
         verrousJeu={data.verrous}
         sorties={sorties}
       />
+      <BoutonSupprimerJeu gameId={data.id} nom={titre} />
     </main>
   );
 }
