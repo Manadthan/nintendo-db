@@ -13,6 +13,7 @@ export type LigneJeu = {
   slug: string;
   developpeur: string | null;
   genre: string | null;
+  consoles: { slug: string; nom: string };
   releases: {
     region: Region;
     sortie: boolean;
@@ -64,6 +65,7 @@ export function versJeuCatalogue(
   return {
     id: ligne.id,
     slug: ligne.slug,
+    console: { slug: ligne.consoles.slug, nom: ligne.consoles.nom },
     developpeur: ligne.developpeur,
     editeur: ligne.releases.find((r) => r.editeur)?.editeur ?? null,
     // Écrits par l'import séparés par « , » (DESIGN ADR-03).

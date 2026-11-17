@@ -7,6 +7,7 @@ const BASE = "https://exemple.supabase.co";
 const ligne: LigneJeu = {
   id: ID,
   slug: "wii-karaoke-u",
+  consoles: { slug: "wii-u", nom: "Wii U" },
   developpeur: "Xing",
   genre: "Musique, Karaoké, Démo",
   releases: [
