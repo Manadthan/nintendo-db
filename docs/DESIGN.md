@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.2 — 17/11/2026 — statut : **validée**
+> Version 1.3 — 18/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.3 | 18/11/2026 | **DS + 3DS** (étape 9) : étude (§1 ter), proportions des jaquettes par console, plan §8 |
 > | 1.2 | 17/11/2026 | **Wii** (étape 8) : étude GameTDB (§1 bis), import GameTDB seul, relais étendu (face avant découpée), catalogue toutes consoles (ADR-06), plan §8 |
 > | 1.1 | 17/11/2026 | **Référencement** (étape 7) : `src/lib/referencement/`, `sitemap.ts`, `robots.ts`, `metadataBase` = adresse de production |
 > | 1.0 | 17/11/2026 | **Genres** lus dans GameTDB (48 jeux sur 48), traduits en français, gardés dans `games.genre` (US-06) |
@@ -48,6 +49,25 @@ Base `wiitdb.zip` du 17/11 : disques du commerce (identifiant en **R** ou **S** 
 Jeux édités par Nintendo dans une seule région : 14 (Just Dance 2, GoldenEye 007, Epic Mickey au Japon ; Trauma
 Center en Europe…), gardés selon la règle Wii U (décision du propriétaire). Le Wii Startup Disc (genre « software »)
 n'est pas un jeu : écarté à l'import (#90), soit **87 jeux**.
+
+## 1 ter. Étude GameTDB pour la DS et la 3DS (17/11/2026)
+
+Bases `dstdb.zip` et `3dstdb.zip` du 17/11 ; jeu retenu si au moins une carte a l'éditeur « Nintendo » (champ
+`publisher` : l'identifiant de 4 caractères ne porte pas de code d'éditeur).
+
+| Mesure | DS | 3DS |
+|---|---|---|
+| Types gardés | `DS`, `DSi` (pas `DSiWare`) | `3DS`, `New3DS` (pas `3DSWare`, `VC-*`) |
+| Écartés | identifiants en **Y** (démos, téléchargements), genre `software`/`demo`/`sampler`, titres « (Demo) », « Download », « Kiosk », « Taikenban » | identifiants autres que **A, B, C, E** (U = Super Nintendo, J = eShop, V = codes, H = logiciel), mêmes genres et titres |
+| Jeux Nintendo / cartes | **116** / 358 | **118** / 295 |
+| Dates au jour près | 324 / 358 | 276 / 295 |
+| Titres japonais (locale JA) | 99 / 106 cartes JAP | 81 / 85 |
+| Scans `coverHQ` 768 × 680 (face seule) | 236 / 358 (les JAP surtout manquent) | 277 / 295 |
+| + repli `coverM` 400 × 352 | **352 / 358** | **293 / 295** |
+
+Pièges : une carte PAL allemande donne son titre allemand en locale EN (« Professor Layton und… ») → préférer la
+carte dont la 4ᵉ lettre est P (puis U, X, Y, Z) ; langue du scan d'après cette lettre (D → DE, F → FR…). Boîtes
+DS/3DS presque carrées (768 × 680), Wii/Wii U en hauteur (27 × 38) : **proportions par console**.
 
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
 Vercel avec un cache d'un an). C'est le modèle retenu (ADR-04).
@@ -205,6 +225,13 @@ test n'appelle les sites en direct.
       réels). L'import Wii se lance depuis l'admin après le merge (une fois).
    3. **Catalogue toutes consoles** : accueil = tous les jeux, console sur chaque vignette, filtre **Console** dans
       le panneau, sitemap et « À propos » à jour.
+
+9. **DS + 3DS** (v1.3) — PR toutes basées sur `main`, mergeables dans n'importe quel ordre (pas d'empilement, leçon
+   de l'étape 8) :
+   1. **Proportions des jaquettes par console** : `Jaquette` reçoit la console ; DS/3DS 768 × 680, Wii/Wii U 27 × 38.
+   2. **Relais + import DS/3DS** : bases réduites `ds/`, `3ds/` et scans (`coverHQ`, sinon `coverM`) ; migration 0008
+      (consoles DS 2004, 3DS 2011, ordre chronologique) ; règles ci-dessus, titre PAL anglais, codes
+      `NTR-`/`CTR-P-`/`KTR-P-` ; pages d'import ; fixtures réduites.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
