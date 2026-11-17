@@ -23,15 +23,10 @@ import {
   lireGameTdb,
   regrouperGameTdb,
 } from "@/lib/import/gametdb";
-import { convertirEnWebp } from "@/lib/import/jaquettes";
+import { enregistrerJaquette } from "@/lib/jaquettes/enregistrer";
 import { appliquerGameTdb, type JeuAImporter } from "@/lib/import/physique";
 import { lireListeWikipediaDetaillee, urlRendu } from "@/lib/import/wikipedia";
-import {
-  BUCKET_JAQUETTES,
-  TAILLES_JAQUETTE,
-  baseJaquette,
-  cheminJaquette,
-} from "@/lib/jaquettes/stockage";
+import { BUCKET_JAQUETTES } from "@/lib/jaquettes/stockage";
 
 // Identification demandée par Wikimedia aux programmes qui lisent ses pages (aucune donnée personnelle).
 const USER_AGENT = "nintendo-db/1.0 (https://nintendo-db.vercel.app)";
@@ -251,38 +246,22 @@ async function copierJaquettes(
   for (const region of REGIONS) {
     const chemin = choix[region];
     if (!chemin) continue;
-    let tailles: Awaited<ReturnType<typeof convertirEnWebp>>;
+    let scan: Buffer;
     try {
-      const scan = Buffer.from(await (await lireRelais(chemin)).arrayBuffer());
-      tailles = await convertirEnWebp(scan);
+      scan = Buffer.from(await (await lireRelais(chemin)).arrayBuffer());
     } catch {
-      continue; // Scan absent du relais (GameTDB n'en a pas) ou illisible.
+      continue; // Scan absent du relais (GameTDB n'en a pas).
     }
-    const base = baseJaquette(gameId, region, version);
-    for (const taille of TAILLES_JAQUETTE) {
-      const { error } = await supabase.storage
-        .from(BUCKET_JAQUETTES)
-        .upload(cheminJaquette(base, taille), tailles[taille], {
-          contentType: "image/webp",
-          cacheControl: "31536000",
-          upsert: true,
-        });
-      if (error) throw new Error(`Jaquette ${region} : ${error.message}`);
-    }
-    const { error } = await supabase
-      .from("releases")
-      .update({ jaquette_path: base, jaquette_source: "gametdb" })
-      .eq("game_id", gameId)
-      .eq("region", region);
-    if (error) throw new Error(`Jaquette ${region} : ${error.message}`);
+    await enregistrerJaquette(
+      supabase,
+      gameId,
+      region,
+      scan,
+      "gametdb",
+      anciennes?.[region]?.path ?? null,
+      version,
+    );
     copiees[region] = "gametdb";
-
-    // L'ancienne jaquette n'est plus référencée : ses fichiers sont supprimés (sans bloquer l'import).
-    const ancienne = anciennes?.[region]?.path;
-    if (ancienne && ancienne !== base)
-      await supabase.storage
-        .from(BUCKET_JAQUETTES)
-        .remove(TAILLES_JAQUETTE.map((t) => cheminJaquette(ancienne, t)));
   }
   return copiees;
 }

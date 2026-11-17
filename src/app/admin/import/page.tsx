@@ -27,8 +27,8 @@ export default function PageImport() {
         <p className="text-sm text-texte-doux">
           Lit la liste Wikipédia, garde les jeux sortis en boîte d&apos;après
           GameTDB (titres japonais, scans de boîtes, codes produit).
-          L&apos;analyse <strong>n&apos;enregistre rien</strong> : elle
-          montre ce que l&apos;import ferait.
+          L&apos;analyse <strong>n&apos;enregistre rien</strong> : elle montre
+          ce que l&apos;import ferait.
         </p>
       </section>
       <AnalyseImport consoleSlug="wii-u" consoleNom="Wii U" />
