@@ -1,15 +1,17 @@
 // Relais GameTDB (#53) : GameTDB refuse les serveurs de Vercel. Lancé par la tâche GitHub « Relais GameTDB »,
-// ce script dépose dans le bucket privé « gametdb » de Supabase :
-//   - wiiutdb.xml : la base Wii U du jour ;
-//   - scans/{identifiant}.jpg : le scan de boîte de chaque disque des jeux édités par Nintendo (code 01),
-//     dans la première langue disponible (PAL : EN, puis FR, DE). Un scan déjà déposé n'est pas retéléchargé.
+// ce script dépose dans le bucket privé « gametdb » de Supabase, pour chaque console :
+//   - Wii U : wiiutdb.xml (la base du jour) et scans/{identifiant}.jpg (scan `coverHQ` de la face de la boîte) ;
+//   - Wii (étape 8) : wii/wiitdb.xml (base RÉDUITE aux jeux Nintendo du commerce : 10 Mo → 300 Ko) et
+//     wii/scans/{identifiant}.jpg (face avant DÉCOUPÉE dans le scan `coverfullHQ` de la boîte dépliée).
+// Seulement les disques des jeux dont au moins une boîte est éditée par Nintendo, dans la première langue
+// disponible (PAL : EN, puis FR, DE). Un scan déjà déposé n'est pas retéléchargé.
 // Variables : SUPABASE_URL, SUPABASE_SECRET_KEY (secrets du dépôt ; jamais affichées).
+// Node 24 lit directement le TypeScript de src/lib/import/relais-wii.ts (testé par Vitest).
 import { createClient } from "@supabase/supabase-js";
 import * as cheerio from "cheerio";
 import { strFromU8, unzipSync } from "fflate";
+import { decouperFaceAvant, LANGUES_SCAN_WII, reduireBaseWii } from "../src/lib/import/relais-wii.ts";
 
-const URL_BASE = "https://www.gametdb.com/wiiutdb.zip?LANG=EN";
-const LANGUES = { "NTSC-J": ["JA"], "NTSC-U": ["US"], PAL: ["EN", "FR", "DE"] };
 const AGENT = { "User-Agent": "nintendo-db/1.0 (https://nintendo-db.vercel.app)" };
 
 const { SUPABASE_URL, SUPABASE_SECRET_KEY } = process.env;
@@ -27,55 +29,91 @@ async function deposer(chemin, contenu, type) {
   if (error) throw new Error(`${chemin} : ${error.message}`);
 }
 
-// 1. La base.
-const zip = await telecharger(URL_BASE);
-if (!zip) throw new Error("Base GameTDB introuvable");
-const fichiers = unzipSync(zip, { filter: (f) => f.name.endsWith(".xml") });
-const xml = Object.values(fichiers)[0];
-if (!xml) throw new Error("Aucun fichier XML dans l'archive");
-await deposer("wiiutdb.xml", xml, "application/xml");
-console.log(`Base déposée (${Math.round(xml.length / 1024)} Ko)`);
+async function base(url) {
+  const zip = await telecharger(url);
+  if (!zip) throw new Error(`Base GameTDB introuvable : ${url}`);
+  const xml = Object.values(unzipSync(zip, { filter: (f) => f.name.endsWith(".xml") }))[0];
+  if (!xml) throw new Error("Aucun fichier XML dans l'archive");
+  return xml;
+}
 
-// 2. Les disques en boîte des jeux dont au moins une boîte est éditée par Nintendo.
-const $ = cheerio.load(strFromU8(xml), { xml: true });
-const parBase = new Map();
-$("game").each((_, el) => {
-  const jeu = $(el);
-  const id = jeu.children("id").text().trim();
-  const region = jeu.children("region").text().trim();
-  const titre = jeu.find("locale[lang=EN] > title").first().text();
-  if (jeu.children("type").text() !== "WiiU" || !LANGUES[region] || /\(download code\)/i.test(titre)) return;
-  const nintendo = id.slice(4, 6) === "01" || /nintendo/i.test(jeu.children("publisher").text());
-  const base = parBase.get(id.slice(0, 3)) ?? { nintendo: false, disques: [] };
-  base.nintendo ||= nintendo;
-  base.disques.push({ id, region });
-  parBase.set(id.slice(0, 3), base);
-});
-const disques = [...parBase.values()].filter((b) => b.nintendo).flatMap((b) => b.disques);
+/** Disques Wii U en boîte des jeux dont au moins une boîte est éditée par Nintendo. */
+function disquesWiiU(xml, langues) {
+  const $ = cheerio.load(strFromU8(xml), { xml: true });
+  const parBase = new Map();
+  $("game").each((_, el) => {
+    const jeu = $(el);
+    const id = jeu.children("id").text().trim();
+    const region = jeu.children("region").text().trim();
+    const titre = jeu.find("locale[lang=EN] > title").first().text();
+    if (jeu.children("type").text() !== "WiiU" || !langues[region] || /\(download code\)/i.test(titre)) return;
+    const nintendo = id.slice(4, 6) === "01" || /nintendo/i.test(jeu.children("publisher").text());
+    const groupe = parBase.get(id.slice(0, 3)) ?? { nintendo: false, disques: [] };
+    groupe.nintendo ||= nintendo;
+    groupe.disques.push({ id, region });
+    parBase.set(id.slice(0, 3), groupe);
+  });
+  return [...parBase.values()].filter((b) => b.nintendo).flatMap((b) => b.disques);
+}
 
-// 3. Les scans manquants, 6 à la fois.
-const { data: deja, error } = await stockage.list("scans", { limit: 2000 });
-if (error) throw new Error(`Liste des scans : ${error.message}`);
-const presents = new Set(deja.map((f) => f.name));
-const aFaire = disques.filter((d) => !presents.has(`${d.id}.jpg`));
-let deposes = 0;
-const absents = [];
-for (let i = 0; i < aFaire.length; i += 6) {
-  await Promise.all(
-    aFaire.slice(i, i + 6).map(async ({ id, region }) => {
-      for (const langue of LANGUES[region]) {
-        const scan = await telecharger(`https://art.gametdb.com/wiiu/coverHQ/${langue}/${id}.jpg`);
-        if (scan) {
-          await deposer(`scans/${id}.jpg`, scan, "image/jpeg");
-          deposes++;
-          return;
+const CONSOLES = [
+  {
+    nom: "Wii U",
+    dossier: "",
+    langues: { "NTSC-J": ["JA"], "NTSC-U": ["US"], PAL: ["EN", "FR", "DE"] },
+    async preparer() {
+      const xml = await base("https://www.gametdb.com/wiiutdb.zip?LANG=EN");
+      return { fichier: "wiiutdb.xml", xml, disques: disquesWiiU(xml, this.langues) };
+    },
+    async scan(id, langue) {
+      return telecharger(`https://art.gametdb.com/wiiu/coverHQ/${langue}/${id}.jpg`);
+    },
+  },
+  {
+    nom: "Wii",
+    dossier: "wii/",
+    langues: LANGUES_SCAN_WII,
+    async preparer() {
+      const { xml, disques } = reduireBaseWii(strFromU8(await base("https://www.gametdb.com/wiitdb.zip?LANG=EN")));
+      return { fichier: "wiitdb.xml", xml: new TextEncoder().encode(xml), disques };
+    },
+    async scan(id, langue) {
+      const boite = await telecharger(`https://art.gametdb.com/wii/coverfullHQ/${langue}/${id}.png`);
+      return boite && decouperFaceAvant(boite);
+    },
+  },
+];
+
+for (const console_ of CONSOLES) {
+  // 1. La base.
+  const { fichier, xml, disques } = await console_.preparer();
+  await deposer(`${console_.dossier}${fichier}`, xml, "application/xml");
+  console.log(`${console_.nom} : base déposée (${Math.round(xml.length / 1024)} Ko)`);
+
+  // 2. Les scans manquants, 6 à la fois.
+  const { data: deja, error } = await stockage.list(`${console_.dossier}scans`, { limit: 2000 });
+  if (error) throw new Error(`Liste des scans : ${error.message}`);
+  const presents = new Set(deja.map((f) => f.name));
+  const aFaire = disques.filter((d) => !presents.has(`${d.id}.jpg`));
+  let deposes = 0;
+  const absents = [];
+  for (let i = 0; i < aFaire.length; i += 6) {
+    await Promise.all(
+      aFaire.slice(i, i + 6).map(async ({ id, region }) => {
+        for (const langue of console_.langues[region]) {
+          const scan = await console_.scan(id, langue);
+          if (scan) {
+            await deposer(`${console_.dossier}scans/${id}.jpg`, scan, "image/jpeg");
+            deposes++;
+            return;
+          }
         }
-      }
-      absents.push(id);
-    }),
+        absents.push(id);
+      }),
+    );
+  }
+  console.log(
+    `${console_.nom} : ${disques.length} disques Nintendo ; ${presents.size} scans déjà là, ${deposes} déposés, ` +
+      `${absents.length} sans scan sur GameTDB${absents.length ? ` : ${absents.sort().join(", ")}` : ""}`,
   );
 }
-console.log(
-  `${disques.length} disques Nintendo ; ${presents.size} scans déjà là, ${deposes} déposés, ` +
-    `${absents.length} sans scan sur GameTDB${absents.length ? ` : ${absents.sort().join(", ")}` : ""}`,
-);

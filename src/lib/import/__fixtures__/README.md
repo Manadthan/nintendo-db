@@ -35,3 +35,17 @@ node scripts/fixture-gametdb.mjs <wiiutdb.zip> > src/lib/import/__fixtures__/wii
 
 Résultats attendus : 46 jeux de la liste Wikipédia rapprochés ; 3 boîtes Nintendo absentes de Wikipédia
 (NES Remix Pack, New Super Mario Bros. U + New Super Luigi U, Mario vs. Donkey Kong: Minna de Mini Land).
+
+## `wiitdb.xml` (étape 8)
+
+| | |
+|---|---|
+| Source | https://www.gametdb.com/wiitdb.zip?LANG=EN (base du 17/11/2026, version 20261117154122) |
+| Conditions | Comme la base Wii U ci-dessus |
+| Contenu | Base **réduite comme le dépose le relais** (`reduireBaseWii`) : 234 disques du commerce (identifiant en R ou S) des 88 jeux dont au moins une boîte est éditée par Nintendo ; champs lus par l'import ; genres en français |
+
+Fabriquée par :
+
+```
+node scripts/fixture-gametdb-wii.mjs <wiitdb.zip> > src/lib/import/__fixtures__/wiitdb.xml
+```
