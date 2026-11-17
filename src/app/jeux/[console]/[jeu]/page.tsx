@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EnTete } from "@/components/EnTete";
 import { FicheJeu } from "@/components/FicheJeu";
+import { PiedDePage } from "@/components/PiedDePage";
 import { versionAffichee } from "@/lib/catalogue/catalogue";
 import { chargerJeu, listerFiches } from "@/lib/fiche/charger";
 
@@ -40,6 +41,7 @@ export default async function PageJeu({ params }: { params: Promise<Params> }) {
     <>
       <EnTete />
       <FicheJeu jeu={jeu} />
+      <PiedDePage />
     </>
   );
 }

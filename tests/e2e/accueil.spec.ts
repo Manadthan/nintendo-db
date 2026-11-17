@@ -14,8 +14,23 @@ test.describe("accueil", () => {
     );
   });
 
-  test("tient dans la largeur de l'iPhone (pas de défilement horizontal)", async ({ page }) => {
-    const largeur = await page.evaluate(() => document.documentElement.scrollWidth);
+  test("tient dans la largeur de l'iPhone (pas de défilement horizontal)", async ({
+    page,
+  }) => {
+    const largeur = await page.evaluate(
+      () => document.documentElement.scrollWidth,
+    );
     expect(largeur).toBeLessThanOrEqual(375);
   });
+});
+
+test("un lien discret « Administration » en pied de page mène à la connexion (US-09)", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("contentinfo")
+    .getByRole("link", { name: "Administration" })
+    .click();
+  await expect(page).toHaveURL(/\/admin/);
 });
