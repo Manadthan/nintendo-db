@@ -75,8 +75,8 @@ src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; 
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
 src/components/          EnTete, Catalogue (client : recherche, marché, tri, grille/liste), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
-src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games »), igdb.ts (rapprochement, titres et jaquettes par région, client), apercu.ts (aperçu, lots de 10, résumés), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (téléchargement IGDB seulement, WebP 300/600 via sharp), env.ts (identifiants IGDB) + tests ; __fixtures__/ (copies datées, README)
-scripts/                 fixture-wikipedia.mjs ; capture-igdb.mjs (workflow manuel « Capturer les fixtures IGDB », secrets IGDB_* du dépôt)
+src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games »), igdb.ts (rapprochement, titres et jaquettes par région, client), apercu.ts (aperçu, lots de 10, résumés), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (téléchargement IGDB seulement, WebP 300/600 via sharp), gametdb.ts (boîtes par région, compilations, codes produit, scans), env.ts (identifiants IGDB) + tests ; __fixtures__/ (copies datées, README)
+scripts/                 fixture-wikipedia.mjs, fixture-gametdb.mjs ; capture-igdb.mjs (workflow manuel « Capturer les fixtures IGDB », secrets IGDB_* du dépôt)
 src/lib/jaquettes/       chemins et URL des jaquettes ({game_id}/{région}-{300|600}.webp, ADR-04) + tests
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
@@ -98,7 +98,8 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind : `fond`, `ca
   - [x] Étape 1 — Socle : #4 à #9
   - [x] Étape 2 — Base : #16 à #19
   - [x] Étape 3 — Consultation : #24 à #27
-  - [ ] Étape 4 — Import : #32 ✅, #33 ✅, #34 ✅, #35 enregistrement + jaquettes (US-10, cette PR)
+  - [x] Étape 4 — Import : #32 à #35, #40
+  - [ ] Étape 5 — Correction (milestone n° 5) : #46 GameTDB (lecture : cette PR), #48 jaquette HD, #49 sombre + logo, #42 à #45
 - [ ] Phase finale — Bilan
 
 ## Erreurs récurrentes

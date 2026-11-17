@@ -1,0 +1,3700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datafile xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="wiiutdb.xsd">
+	<WiiUTDB version="20261117040958" filter="EN" games="2860"/>
+	<!--
+ GameTDB: WiiU, Database started in 2012 (https://www.gametdb.com)
+ Never modify this file manually, it will get overwritten when you update. You can add games and fixes on the website.
+	-->
+	<game name="Bayonetta (Europe) (EN,FR,DE,ES,IT)">
+		<id>AAFD01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Bayonetta</title>
+		</locale>
+		<locale lang="DE">
+			<title>Bayonetta</title>
+		</locale>
+		<locale lang="ES">
+			<title>Bayonetta</title>
+		</locale>
+		<locale lang="NL">
+			<title>Bayonetta</title>
+		</locale>
+		<developer>Platinum Games Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="10" day="24"/>
+	</game>
+	<game name="Bayonetta (USA) (EN)">
+		<id>AAFE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Bayonetta</title>
+		</locale>
+		<developer>Platinum Games Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="10" day="24"/>
+	</game>
+	<game name="Bayonetta (Japan) (JA)">
+		<id>AAFJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Bayonetta</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d9;&#x30e8;&#x30cd;&#x30c3;&#x30bf;</title>
+		</locale>
+		<developer>Platinum Games Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="9" day="20"/>
+	</game>
+	<game name="Animal Crossing: Amiibo Festival (USA) (EN)">
+		<id>AALE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Animal Crossing: Amiibo Festival</title>
+		</locale>
+		<locale lang="FR">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="DE">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="ES">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="IT">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="NL">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="PT">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<developer>Nd Cube</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="11" day="13"/>
+	</game>
+	<game name="Doubutsu no Mori: Amiibo Festival (Japan) (JA)">
+		<id>AALJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Doubutsu no Mori: Amiibo Festival</title>
+		</locale>
+		<locale lang="FR">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="DE">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="ES">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="IT">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="NL">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="PT">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3069;&#x3046;&#x3076;&#x3064;&#x306e;&#x68ee;amiibo&#x30d5;&#x30a7;&#x30b9;&#x30c6;&#x30a3;&#x30d0;&#x30eb;</title>
+		</locale>
+		<developer>Nd Cube</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="11" day="21"/>
+	</game>
+	<game name="Animal Crossing: Amiibo Festival (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>AALP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Animal Crossing: Amiibo Festival</title>
+		</locale>
+		<locale lang="FR">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="DE">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="ES">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="IT">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="NL">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<locale lang="PT">
+			<title>Animal Crossing: amiibo Festival</title>
+		</locale>
+		<developer>Nd Cube</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="11" day="20"/>
+	</game>
+	<game name="Mario Party 10 (USA) (EN)">
+		<id>ABAE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario Party 10</title>
+		</locale>
+		<developer>Nintendo, Nd Cube</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="3" day="20"/>
+	</game>
+	<game name="Mario Party 10 (Japan) (JA)">
+		<id>ABAJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30d1;&#x30fc;&#x30c6;&#x30a3;10</title>
+		</locale>
+		<developer>Nintendo, Nd Cube</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="3" day="12"/>
+	</game>
+	<game name="Mario Party 10 (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>ABAP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario Party 10</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario Party 10</title>
+		</locale>
+		<developer>Nintendo, Nd Cube</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="3" day="20"/>
+	</game>
+	<game name="Mario &amp; Sonic at the Rio 2016 Olympic Games (USA) (EN)">
+		<id>ABJE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario &amp; Sonic at the Rio 2016 Olympic Games</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario &amp; Sonic aux Jeux Olympiques de Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario &amp; Sonic bei den Olympischen Spielen: Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario &amp; Sonic en los Juegos Ol&#xed;mpicos: Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario &amp; Sonic ai Giochi Olimpici di Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario &amp; Sonic op de Olympische Spelen Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario &amp; Sonic at the Rio 2016 Olympic Games&#x2122;</title>
+		</locale>
+		<developer>SEGA</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="6" day="24"/>
+	</game>
+	<game name="Mario &amp; Sonic at Rio Olympic (Japan) (JA)">
+		<id>ABJJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario &amp; Sonic at Rio Olympic</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario &amp; Sonic aux Jeux Olympiques de Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario &amp; Sonic bei den Olympischen Spielen: Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario &amp; Sonic en los Juegos Ol&#xed;mpicos: Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario &amp; Sonic ai Giochi Olimpici di Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario &amp; Sonic op de Olympische Spelen Rio 2016&#x2122;</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario &amp; Sonic at the Rio 2016 Olympic Games&#x2122;</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#xff06;&#x30bd;&#x30cb;&#x30c3;&#x30af; AT &#x30ea;&#x30aa;&#x30aa;&#x30ea;&#x30f3;&#x30d4;&#x30c3;&#x30af;</title>
+		</locale>
+		<developer>SEGA</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="6" day="23"/>
+	</game>
+	<game name="Mario &amp; Sonic at the Rio 2016 Olympic Games (Europe) (EN,FR,DE,ES,IT,NL)">
+		<id>ABJP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario &amp; Sonic at the Rio 2016 Olympic Games</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario &amp; Sonic aux Jeux Olympiques de Rio 2016</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario &amp; Sonic bei den Olympischen Spielen Rio 2016</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario &amp; Sonic En Las Olimpiadas De R&#xed;o 2016</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario &amp; Sonic ai Giochi Olimpici di Rio 2016</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario &amp; Sonic op de Olympische Spelen Rio 2016</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario &amp; Sonic at the Rio 2016 Olympic Games&#x2122;</title>
+		</locale>
+		<developer>SEGA</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="6" day="24"/>
+	</game>
+	<game name="Pikmin 3 (USA) (EN)">
+		<id>AC3E01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pikmin 3</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="8" day="4"/>
+	</game>
+	<game name="Pikmin 3 (Japan) (EN,JA)">
+		<id>AC3J01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d4;&#x30af;&#x30df;&#x30f3;3</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="7" day="13"/>
+	</game>
+	<game name="Pikmin 3 (Europe) (EN,FR,DE,ES,IT)">
+		<id>AC3P01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pikmin 3</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pikmin 3</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="7" day="26"/>
+	</game>
+	<game name="The Wonderful 101 (USA) (EN)">
+		<id>ACME01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Wonderful 101</title>
+		</locale>
+		<developer>PlatinumGames</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="9" day="15"/>
+	</game>
+	<game name="The Wonderful 101 (Japan) (EN,JA)">
+		<id>ACMJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b6;&#x30fb;&#x30ef;&#x30f3;&#x30c0;&#x30d5;&#x30eb;&#x30fb;&#x30ef;&#x30f3;&#x30fb;&#x30aa;&#x30fc;&#x30fb;&#x30ef;&#x30f3;</title>
+		</locale>
+		<developer>Platinum Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="8" day="24"/>
+	</game>
+	<game name="The Wonderful 101 (Europe) (EN,FR,DE,ES,IT)">
+		<id>ACMP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Wonderful 101</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Wonderful 101</title>
+		</locale>
+		<developer>PlatinumGames</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="8" day="23"/>
+	</game>
+	<game name="Devil&apos;s Third (USA) (EN)">
+		<id>ADNE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="FR">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="DE">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="ES">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="IT">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="NL">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="PT">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<developer>Valhalla Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="12" day="11"/>
+	</game>
+	<game name="Devil&apos;s Third (Japan) (JA)">
+		<id>ADNJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="FR">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="DE">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="ES">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="IT">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="NL">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="PT">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="JA">
+			<title>Devil&apos;s Third(&#x30c7;&#x30d3;&#x30eb;&#x30ba; &#x30b5;&#x30fc;&#x30c9;)</title>
+		</locale>
+		<developer>Valhalla Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="8" day="4"/>
+	</game>
+	<game name="Devil&apos;s Third (Europe) (EN,FR,DE,ES)">
+		<id>ADNP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="FR">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="DE">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="ES">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="IT">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="NL">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<locale lang="PT">
+			<title>Devil&apos;s Third</title>
+		</locale>
+		<developer>Valhalla Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="8" day="28"/>
+	</game>
+	<game name="NES Remix Pack (USA) (EN)">
+		<id>AFDE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>NES Remix Pack</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="12" day="5"/>
+	</game>
+	<game name="Famicom Remix 1 + 2 (Japan) (JA)">
+		<id>AFDJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Famicom Remix 1 + 2</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30df;&#x30b3;&#x30f3;&#x30ea;&#x30df;&#x30c3;&#x30af;&#x30b9;1+2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="4" day="24"/>
+	</game>
+	<game name="Star Fox Zero (USA) (EN)">
+		<id>AFXE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="FR">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="DE">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="ES">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="IT">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="NL">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="PT">
+			<title>Star Fox Zero</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="4" day="22"/>
+	</game>
+	<game name="Star Fox Zero (Japan) (JA)">
+		<id>AFXJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="FR">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="DE">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="ES">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="IT">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="NL">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="PT">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30bf;&#x30fc;&#x30d5;&#x30a9;&#x30c3;&#x30af;&#x30b9;&#x3000;&#x30bc;&#x30ed;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="4" day="21"/>
+	</game>
+	<game name="Star Fox Zero (Europe) (EN,FR,DE,ES,IT)">
+		<id>AFXP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="FR">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="DE">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="ES">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="IT">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="NL">
+			<title>Star Fox Zero</title>
+		</locale>
+		<locale lang="PT">
+			<title>Star Fox Zero</title>
+		</locale>
+		<developer>Platinum Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="4" day="22"/>
+	</game>
+	<game name="Splatoon (USA) (EN,FR,ES)">
+		<id>AGME01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="FR">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="DE">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="ES">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="IT">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="NL">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="PT">
+			<title>Splatoon</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="5" day="29"/>
+	</game>
+	<game name="Splatoon (Japan) (JA)">
+		<id>AGMJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="FR">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="DE">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="ES">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="IT">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="NL">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="PT">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30d7;&#x30e9;&#x30c8;&#x30a5;&#x30fc;&#x30f3;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="5" day="28"/>
+	</game>
+	<game name="Splatoon (Europe) (EN,FR,DE,ES,IT)">
+		<id>AGMP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="FR">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="DE">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="ES">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="IT">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="NL">
+			<title>Splatoon</title>
+		</locale>
+		<locale lang="PT">
+			<title>Splatoon</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="5" day="29"/>
+	</game>
+	<game name="Just Dance Wii U (Japan) (JA)">
+		<id>AJ5J01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Just Dance Wii U</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b8;&#x30e3;&#x30b9;&#x30c8;&#x30c0;&#x30f3;&#x30b9; Wii U</title>
+		</locale>
+		<developer>Ubisoft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="4" day="3"/>
+	</game>
+	<game name="Captain Toad: Treasure Tracker (USA) (EN)">
+		<id>AKBE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="FR">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="DE">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="ES">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="IT">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="NL">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="PT">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="12" day="5"/>
+	</game>
+	<game name="Susume! Kinopio Taichou (Japan) (JA)">
+		<id>AKBJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Susume! Kinopio Taichou</title>
+		</locale>
+		<locale lang="FR">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="DE">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="ES">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="IT">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="NL">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="PT">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x9032;&#x3081;&#xff01;&#x30ad;&#x30ce;&#x30d4;&#x30aa;&#x968a;&#x9577;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="11" day="13"/>
+	</game>
+	<game name="Captain Toad: Treasure Tracker (Europe) (EN,FR,DE,ES,IT)">
+		<id>AKBP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="FR">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="DE">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="ES">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="IT">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="NL">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="PT">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="1" day="2"/>
+	</game>
+	<game name="Zero: Nuregarasu no Miko (Japan) (JA)">
+		<id>AL5J01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Zero: Nuregarasu no Miko</title>
+		</locale>
+		<locale lang="FR">
+			<title>Project Zero : La Pr&#xea;tresse des Eaux Noires</title>
+		</locale>
+		<locale lang="DE">
+			<title>Project Zero: Priesterin des schwarzen Wassers</title>
+		</locale>
+		<locale lang="ES">
+			<title>Project Zero: Maiden of Black Water</title>
+		</locale>
+		<locale lang="IT">
+			<title>Project Zero: Maiden of Black Water</title>
+		</locale>
+		<locale lang="NL">
+			<title>Project Zero: Maiden of Black Water</title>
+		</locale>
+		<locale lang="PT">
+			<title>Project Zero: Maiden of Black Water</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x96f6; ~&#x6fe1;&#x9d09;&#x30ce;&#x5deb;&#x5973;~</title>
+		</locale>
+		<developer>Koei Tecmo Holdings, Nintendo Software Planning and Development</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="9" day="27"/>
+	</game>
+	<game name="Project Zero: Maiden of Black Water (Europe) (EN,FR,DE)">
+		<id>AL5P01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Project Zero: Maiden of Black Water</title>
+		</locale>
+		<locale lang="FR">
+			<title>Project Zero: La pr&#xea;tresse des eaux noires</title>
+		</locale>
+		<locale lang="DE">
+			<title>Project Zero: Priesterin des schwarzen Wassers</title>
+		</locale>
+		<locale lang="ES">
+			<title>Project Zero: Maiden of Black Water</title>
+		</locale>
+		<locale lang="IT">
+			<title>Project Zero: Maiden of Black Water</title>
+		</locale>
+		<locale lang="NL">
+			<title>Project Zero: Maiden of Black Water</title>
+		</locale>
+		<locale lang="PT">
+			<title>Project Zero: Maiden of Black Water</title>
+		</locale>
+		<developer>Koei Tecmo Holdings, Nintendo Software Planning and Development</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="10" day="30"/>
+	</game>
+	<game name="Nintendo Land (USA) (EN)">
+		<id>ALCE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="FR">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="DE">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="ES">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="IT">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="NL">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="PT">
+			<title>Nintendo Land</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="11" day="18"/>
+	</game>
+	<game name="Nintendo Land (Japan) (JA)">
+		<id>ALCJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="FR">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="DE">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="ES">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="IT">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="NL">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="PT">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="JA">
+			<title>Nintendo Land</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="12" day="8"/>
+	</game>
+	<game name="Nintendo Land (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>ALCP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="FR">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="DE">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="ES">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="IT">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="NL">
+			<title>Nintendo Land</title>
+		</locale>
+		<locale lang="PT">
+			<title>Nintendo Land</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="11" day="30"/>
+	</game>
+	<game name="The Legend of Zelda: Breath of the Wild (USA) (EN)">
+		<id>ALZE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="3" day="3"/>
+	</game>
+	<game name="Zelda no Densetsu: Breath of the Wild (Japan) (JA)">
+		<id>ALZJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Zelda no Densetsu: Breath of the Wild</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x30d6;&#x30ec;&#x30b9; &#x30aa;&#x30d6; &#x30b6; &#x30ef;&#x30a4;&#x30eb;&#x30c9;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="3" day="3"/>
+	</game>
+	<game name="The Legend of Zelda: Breath of the Wild (Europe) (EN,FR,DE,ES,IT,NL,RU)">
+		<id>ALZP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="3" day="3"/>
+	</game>
+	<game name="Super Mario Maker (USA) (EN)">
+		<id>AMAE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="FR">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="IT">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="NL">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="PT">
+			<title>Super Mario Maker</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="9" day="11"/>
+	</game>
+	<game name="Super Mario Maker (Japan) (JA)">
+		<id>AMAJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="FR">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="IT">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="NL">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="PT">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;&#x30e1;&#x30fc;&#x30ab;&#x30fc;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="9" day="10"/>
+	</game>
+	<game name="Super Mario Maker (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>AMAP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="FR">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="IT">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="NL">
+			<title>Super Mario Maker</title>
+		</locale>
+		<locale lang="PT">
+			<title>Super Mario Maker</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="9" day="11"/>
+	</game>
+	<game name="Mario Kart 8 (USA) (EN)">
+		<id>AMKE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario Kart 8</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="5" day="30"/>
+	</game>
+	<game name="Mario Kart 8 (Japan) (JA)">
+		<id>AMKJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30ab;&#x30fc;&#x30c8;8</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="5" day="29"/>
+	</game>
+	<game name="Mario Kart 8 (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>AMKP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario Kart 8</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario Kart 8</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="5" day="30"/>
+	</game>
+	<game name="Ninja Gaiden 3: Razor&apos;s Edge (USA) (EN,JA)">
+		<id>ANGE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Ninja Gaiden 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="FR">
+			<title>NINJA GAIDEN 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="ES">
+			<title>Ninja Gaiden 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="IT">
+			<title>NINJA GAIDEN 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="NL">
+			<title>NINJA GAIDEN 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="PT">
+			<title>NINJA GAIDEN 3: Razor&apos;s Edge</title>
+		</locale>
+		<developer>TEAM NINJA / KOEI TECMO</developer>
+		<publisher>Koei</publisher>
+		<date year="2012" month="12" day="10"/>
+	</game>
+	<game name="Ninja Gaiden 3: Razor&apos;s Edge (Europe) (EN,JA)">
+		<id>ANGP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Ninja Gaiden 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="FR">
+			<title>NINJA GAIDEN 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="ES">
+			<title>Ninja Gaiden 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="IT">
+			<title>NINJA GAIDEN 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="NL">
+			<title>Ninja Gaiden 3: Razor&apos;s Edge</title>
+		</locale>
+		<locale lang="PT">
+			<title>NINJA GAIDEN 3: Razor&apos;s Edge</title>
+		</locale>
+		<developer>TEAM NINJA / KOEI TECMO</developer>
+		<publisher>Koei</publisher>
+		<date year="2012" month="12" day="10"/>
+	</game>
+	<game name="Wii Party U (USA) (EN,FR,ES)">
+		<id>ANXE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="FR">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="DE">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="ES">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="IT">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="NL">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="PT">
+			<title>Wii Party U</title>
+		</locale>
+		<developer>Nd Cube, Nintendo SPD Group No.4</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="10" day="25"/>
+	</game>
+	<game name="Wii Party U (Japan) (EN,JA)">
+		<id>ANXJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="FR">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="DE">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="ES">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="IT">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="NL">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="PT">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="JA">
+			<title>Wii&#x30d1;&#x30fc;&#x30c6;&#x30a3;&#x30fb;U</title>
+		</locale>
+		<developer>Nd Cube, Nintendo SPD Group No.4</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="10" day="31"/>
+	</game>
+	<game name="Wii Party U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>ANXP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="FR">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="DE">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="ES">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="IT">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="NL">
+			<title>Wii Party U</title>
+		</locale>
+		<locale lang="PT">
+			<title>Wii Party U</title>
+		</locale>
+		<developer>Nd Cube, Nintendo SPD Group No.4</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="10" day="25"/>
+	</game>
+	<game name="Pokken Tournament (USA) (EN)">
+		<id>APKE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pokken Tournament</title>
+		</locale>
+		<developer>The Pok&#xe9;mon Company / Bandai Namco Entertainment</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="3" day="18"/>
+	</game>
+	<game name="Pokken: Pokken Tournament (Japan) (JA)">
+		<id>APKJ2P</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pokken: Pokken Tournament</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30c3;&#x62f3; POKK&#xc9;N TOURNAMENT</title>
+		</locale>
+		<developer>The Pok&#xe9;mon Company / Bandai Namco Entertainment</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="3" day="18"/>
+	</game>
+	<game name="Pokken Tournament (Europe) (EN,FR,DE,ES,IT)">
+		<id>APKP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pokken Tournament</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Tekken</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pokk&#xe9;n Tournament</title>
+		</locale>
+		<developer>The Pok&#xe9;mon Company / Bandai Namco Entertainment</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="3" day="18"/>
+	</game>
+	<game name="LEGO City Undercover (USA) (EN)">
+		<id>APLE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="FR">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="DE">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="ES">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="IT">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="NL">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="PT">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<developer>TT Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="3" day="18"/>
+	</game>
+	<game name="LEGO City Undercover (Japan) (JA)">
+		<id>APLJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="FR">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="DE">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="ES">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="IT">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="NL">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="PT">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30ec;&#x30b4;&#x30b7;&#x30c6;&#x30a3; &#x30a2;&#x30f3;&#x30c0;&#x30fc;&#x30ab;&#x30d0;&#x30fc;</title>
+		</locale>
+		<developer>TT Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="7" day="25"/>
+	</game>
+	<game name="LEGO City Undercover (Europe) (EN,FR,DE,ES,IT,NL,PT,DK,RU)">
+		<id>APLP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="FR">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="DE">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="ES">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="IT">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="NL">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<locale lang="PT">
+			<title>LEGO City Undercover</title>
+		</locale>
+		<developer>TT Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="1" day="1"/>
+	</game>
+	<game name="Bayonetta 2 (USA) (EN)">
+		<id>AQUE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="FR">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="DE">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="ES">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="IT">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="NL">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="PT">
+			<title>Bayonetta 2</title>
+		</locale>
+		<developer>Platinum Games Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="10" day="24"/>
+	</game>
+	<game name="Bayonetta 2 (Japan) (JA)">
+		<id>AQUJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="FR">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="DE">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="ES">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="IT">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="NL">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="PT">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d9;&#x30e8;&#x30cd;&#x30c3;&#x30bf;2</title>
+		</locale>
+		<developer>Platinum Games Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="9" day="20"/>
+	</game>
+	<game name="Bayonetta 2 (Europe) (EN,FR,DE,ES,IT)">
+		<id>AQUP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="FR">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="DE">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="ES">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="IT">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="NL">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="PT">
+			<title>Bayonetta 2</title>
+		</locale>
+		<developer>Platinum Games Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="10" day="24"/>
+	</game>
+	<game name="Super Mario 3D World (USA) (EN)">
+		<id>ARDE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Super Mario 3D World</title>
+		</locale>
+		<locale lang="FR">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="DE">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="ES">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="IT">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="NL">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="PT">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<developer>Nintendo EAD Tokyo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="11" day="22"/>
+	</game>
+	<game name="Super Mario 3D World (Japan) (EN,JA)">
+		<id>ARDJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Super Mario 3D World</title>
+		</locale>
+		<locale lang="FR">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="DE">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="ES">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="IT">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="NL">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="PT">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;3D&#x30ef;&#x30fc;&#x30eb;&#x30c9;</title>
+		</locale>
+		<developer>Nintendo EAD Tokyo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="11" day="21"/>
+	</game>
+	<game name="Super Mario 3D World (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>ARDP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Super Mario 3D World</title>
+		</locale>
+		<locale lang="FR">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Mario 3D World</title>
+		</locale>
+		<locale lang="ES">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="IT">
+			<title>Super Mario 3D World</title>
+		</locale>
+		<locale lang="NL">
+			<title>Super Mario 3D World</title>
+		</locale>
+		<locale lang="PT">
+			<title>SUPER MARIO 3D WORLD</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;3D&#x30ef;&#x30fc;&#x30eb;&#x30c9;</title>
+		</locale>
+		<developer>Nintendo EAD Tokyo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="11" day="29"/>
+	</game>
+	<game name="Donkey Kong Country: Tropical Freeze (USA) (EN)">
+		<id>ARKE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="FR">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="DE">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="ES">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="IT">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="NL">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="PT">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<developer>Retro Studios / Monster Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="2" day="21"/>
+	</game>
+	<game name="Donkey Kong: Tropical Freeze (Japan) (JA)">
+		<id>ARKJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Donkey Kong: Tropical Freeze</title>
+		</locale>
+		<locale lang="FR">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="DE">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="ES">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="IT">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="NL">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="PT">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c9;&#x30f3;&#x30ad;&#x30fc;&#x30b3;&#x30f3;&#x30b0;&#x30c8;&#x30ed;&#x30d4;&#x30ab;&#x30eb;&#x30d5;&#x30ea;&#x30fc;&#x30ba;</title>
+		</locale>
+		<developer>Retro Studios / Monster Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="2" day="13"/>
+	</game>
+	<game name="Donkey Kong Country: Tropical Freeze (Europe) (EN,FR,DE,ES,IT)">
+		<id>ARKP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="FR">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="DE">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="ES">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="IT">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="NL">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="PT">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<developer>Retro Studios / Monster Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="2" day="21"/>
+	</game>
+	<game name="Rayman Legends (Japan) (EN,FR,DE,ES,IT,NL,JA)">
+		<id>ARMJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Rayman Legends</title>
+		</locale>
+		<locale lang="FR">
+			<title>Rayman Legends</title>
+		</locale>
+		<locale lang="DE">
+			<title>Rayman Legends</title>
+		</locale>
+		<locale lang="ES">
+			<title>Rayman Legends</title>
+		</locale>
+		<locale lang="IT">
+			<title>Rayman Legends</title>
+		</locale>
+		<locale lang="NL">
+			<title>Rayman Legends</title>
+		</locale>
+		<locale lang="PT">
+			<title>Rayman Legends</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30ec;&#x30a4;&#x30de;&#x30f3; &#x30ec;&#x30b8;&#x30a7;&#x30f3;&#x30c9;</title>
+		</locale>
+		<developer>Ubisoft Montpellier</developer>
+		<publisher>Ubi Soft Entertainment</publisher>
+		<date year="2013" month="10" day="17"/>
+	</game>
+	<game name="New Super Mario Bros. U (USA) (EN)">
+		<id>ARPE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>New Super Mario Bros. U</title>
+		</locale>
+		<locale lang="ES">
+			<title>New Super Mario Bros. U</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="11" day="18"/>
+	</game>
+	<game name="New Super Mario Bros. U (Japan) (EN,JA)">
+		<id>ARPJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>New Super Mario Bros. U</title>
+		</locale>
+		<locale lang="ES">
+			<title>New Super Mario Bros. U</title>
+		</locale>
+		<locale lang="JA">
+			<title>New &#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;&#x30d6;&#x30e9;&#x30b6;&#x30fc;&#x30ba; U</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="12" day="8"/>
+	</game>
+	<game name="New Super Mario Bros. U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>ARPP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>New Super Mario Bros. U</title>
+		</locale>
+		<locale lang="FR">
+			<title>New Super Mario Bros. U</title>
+		</locale>
+		<locale lang="ES">
+			<title>New Super Mario Bros. U</title>
+		</locale>
+		<locale lang="NL">
+			<title>New Super Mario Bros. U</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="11" day="30"/>
+	</game>
+	<game name="New Super Luigi U (USA) (EN)">
+		<id>ARSE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="FR">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="DE">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="ES">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="IT">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="NL">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="PT">
+			<title>New Super Luigi U</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="6" day="20"/>
+	</game>
+	<game name="New Super Luigi U (Japan) (EN,JA)">
+		<id>ARSJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="FR">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="DE">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="ES">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="IT">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="NL">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="PT">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="JA">
+			<title>New &#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30eb;&#x30a4;&#x30fc;&#x30b8; U</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="7" day="13"/>
+	</game>
+	<game name="New Super Luigi U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>ARSP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="FR">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="DE">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="ES">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="IT">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="NL">
+			<title>New Super Luigi U</title>
+		</locale>
+		<locale lang="PT">
+			<title>New Super Luigi U</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="6" day="20"/>
+	</game>
+	<game name="Game &amp; Wario (USA) (EN)">
+		<id>ASAE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="FR">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="DE">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="ES">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="IT">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="NL">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="PT">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<developer>Nintendo/Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="6" day="23"/>
+	</game>
+	<game name="Game &amp; Wario (Japan) (EN,JA)">
+		<id>ASAJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="FR">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="DE">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="ES">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="IT">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="NL">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="PT">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b2;&#x30fc;&#x30e0;&amp;&#x30ef;&#x30ea;&#x30aa;</title>
+		</locale>
+		<developer>Nintendo/Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="3" day="28"/>
+	</game>
+	<game name="Game &amp; Wario (Europe) (EN,FR,DE,ES,IT)">
+		<id>ASAP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="FR">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="DE">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="ES">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="IT">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="NL">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<locale lang="PT">
+			<title>Game &amp; Wario</title>
+		</locale>
+		<developer>Nintendo / INTELLIGENT SYSTEMS</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="6" day="28"/>
+	</game>
+	<game name="Scribblenauts Unlimited (Europe) (EN,FR,DE,ES,IT,NL)">
+		<id>ASCP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Scribblenauts Unlimited</title>
+		</locale>
+		<locale lang="FR">
+			<title>Scribblenauts Unlimited</title>
+		</locale>
+		<locale lang="DE">
+			<title>Scribblenauts Unlimited</title>
+		</locale>
+		<locale lang="ES">
+			<title>Scribblenauts Unlimited</title>
+		</locale>
+		<locale lang="IT">
+			<title>Scribblenauts Unlimited</title>
+		</locale>
+		<locale lang="NL">
+			<title>Scribblenauts Unlimited</title>
+		</locale>
+		<locale lang="PT">
+			<title>Scribblenauts Unlimited</title>
+		</locale>
+		<developer>5TH Cell</developer>
+		<publisher>Warner Bros. Interactive Entertainment Inc.</publisher>
+		<date year="2013" month="12" day="6"/>
+	</game>
+	<game name="Tokyo Mirage Sessions FE (USA) (EN)">
+		<id>ASEE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Tokyo Mirage Sessions FE</title>
+		</locale>
+		<locale lang="FR">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="DE">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="ES">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="IT">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="NL">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="PT">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<developer>Atlus</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="6" day="24"/>
+	</game>
+	<game name="Gen&apos;ei Ibunroku FE (Japan) (JA)">
+		<id>ASEJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Gen&apos;ei Ibunroku FE</title>
+		</locale>
+		<locale lang="FR">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="DE">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="ES">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="IT">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="NL">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="PT">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x5e7b;&#x5f71;&#x7570;&#x805e;&#x9332;&#x30b7;&#x30e3;&#x30fc;&#x30d7;&#x30a8;&#x30d5;&#x30a4;&#x30fc;</title>
+		</locale>
+		<developer>Intelligent Systems, Atlus</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="12" day="26"/>
+	</game>
+	<game name="Tokyo Mirage Sessions FE (Europe) (EN)">
+		<id>ASEP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Tokyo Mirage Sessions FE</title>
+		</locale>
+		<locale lang="FR">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="DE">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="ES">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="IT">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="NL">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<locale lang="PT">
+			<title>Tokyo Mirage Sessions #FE</title>
+		</locale>
+		<developer>Atlus</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="6" day="24"/>
+	</game>
+	<game name="Wii Fit U (USA) (EN,FR,ES,JA)">
+		<id>ASTE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="FR">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="DE">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="ES">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="IT">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="NL">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="PT">
+			<title>Wii Fit U</title>
+		</locale>
+		<developer>Nintendo Japan</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="12" day="13"/>
+	</game>
+	<game name="Wii Fit U (Japan) (JA)">
+		<id>ASTJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="FR">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="DE">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="ES">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="IT">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="NL">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="PT">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="JA">
+			<title>Wii&#x30d5;&#x30a3;&#x30c3;&#x30c8;U</title>
+		</locale>
+		<developer>Nintendo Japan</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="2" day="1"/>
+	</game>
+	<game name="Wii Fit U (Europe) (EN,FR,DE,ES,IT,JA)">
+		<id>ASTP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="FR">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="DE">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="ES">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="IT">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="NL">
+			<title>Wii Fit U</title>
+		</locale>
+		<locale lang="PT">
+			<title>Wii Fit U</title>
+		</locale>
+		<developer>Nintendo Japan</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="12" day="13"/>
+	</game>
+	<game name="Sing Party (USA) (EN)">
+		<id>ASWE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Sing Party</title>
+		</locale>
+		<locale lang="FR">
+			<title>SiNG PARTY</title>
+		</locale>
+		<locale lang="DE">
+			<title>SiNG PARTY</title>
+		</locale>
+		<locale lang="ES">
+			<title>SiNG Party</title>
+		</locale>
+		<locale lang="IT">
+			<title>SiNG PARTY</title>
+		</locale>
+		<locale lang="NL">
+			<title>SiNG PARTY</title>
+		</locale>
+		<locale lang="PT">
+			<title>SiNG PARTY</title>
+		</locale>
+		<developer>FreeStyleGames</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="12" day="10"/>
+	</game>
+	<game name="Sing Party (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>ASWP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Sing Party</title>
+		</locale>
+		<locale lang="FR">
+			<title>SiNG PARTY</title>
+		</locale>
+		<locale lang="DE">
+			<title>SiNG Party</title>
+		</locale>
+		<locale lang="ES">
+			<title>SiNG Party</title>
+		</locale>
+		<locale lang="IT">
+			<title>SiNG PARTY</title>
+		</locale>
+		<locale lang="NL">
+			<title>SiNG Party</title>
+		</locale>
+		<locale lang="PT">
+			<title>SiNG PARTY</title>
+		</locale>
+		<developer>FreeStyleGames</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="1" day="18"/>
+	</game>
+	<game name="New Super Mario Bros. U + New Super Luigi U (USA) (EN)">
+		<id>ATWE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="FR">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="DE">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="ES">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="IT">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="NL">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="PT">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="10" day="16"/>
+	</game>
+	<game name="New Super Mario Bros. U + New Super Luigi U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>ATWP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="FR">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="DE">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="ES">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="IT">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="NL">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<locale lang="PT">
+			<title>New Super Mario Bros. U + New Super Luigi U</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="1" day="1"/>
+	</game>
+	<game name="Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games (USA) (EN,JA)">
+		<id>AURE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario &amp; Sonic aux Jeux Olympiques d&apos;hiver de Sotchi 2014</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario &amp; Sonic bei den Olympischen Winterspielen: Sotschi 2014</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario &amp; Sonic en los Juegos Ol&#xed;mpicos de Invierno - Sochi 2014</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario &amp; Sonic ai Giochi Olimpici Invernali di Sochi 2014</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario &amp; Sonic op de Olympische Winterspelen: Sotsji 2014</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games</title>
+		</locale>
+		<developer>Nintendo / SEGA</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="12" day="15"/>
+	</game>
+	<game name="Mario &amp; Sonic at the Sochi Olympic (Japan) (JA)">
+		<id>AURJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario &amp; Sonic at the Sochi Olympic</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario &amp; Sonic aux Jeux Olympiques d&apos;hiver de Sotchi 2014</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario &amp; Sonic bei den Olympischen Winterspielen: Sotschi 2014</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario &amp; Sonic en los Juegos Ol&#xed;mpicos de Invierno - Sochi 2014</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario &amp; Sonic ai Giochi Olimpici Invernali di Sochi 2014</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario &amp; Sonic op de Olympische Winterspelen: Sotsji 2014</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&amp;&#x30bd;&#x30cb;&#x30c3;&#x30af; AT &#x30bd;&#x30c1;&#x30aa;&#x30ea;&#x30f3;&#x30d4;&#x30c3;&#x30af;</title>
+		</locale>
+		<developer>Nintendo / SEGA</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="12" day="5"/>
+	</game>
+	<game name="Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games (Europe) (EN,FR,DE,ES,IT,NL,JA,RU)">
+		<id>AURP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario et Sonic aux Jeux Olympiques d&apos;hiver de Sotchi 2014</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario &amp; Sonic bei den Olympischen Winterspielen: Sotschi 2014</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario &amp; Sonic en los Juegos Ol&#xed;mpicos de Invierno - Sochi 2014</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario E Sonic Ai Giochi Olimpichi Invernali 2014</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario &amp; Sonic op de Olympische Winterspelen: Sotsji 2014</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games</title>
+		</locale>
+		<locale lang="RU">
+			<title>&#x41c;&#x430;&#x440;&#x438;&#x43e; &#x438; &#x421;&#x43e;&#x43d;&#x438;&#x43a; &#x43d;&#x430; &#x41e;&#x43b;&#x438;&#x43c;&#x43f;&#x438;&#x439;&#x441;&#x43a;&#x438;&#x445; &#x437;&#x438;&#x43c;&#x43d;&#x438;&#x445; &#x438;&#x433;&#x440;&#x430;&#x445; 2014 &#x432; &#x421;&#x43e;&#x447;&#x438;</title>
+		</locale>
+		<developer>Nintendo / SEGA</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="11" day="8"/>
+	</game>
+	<game name="Mario Tennis: Ultra Smash (USA) (EN)">
+		<id>AVXE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<developer>Camelot Software Planning</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="11" day="20"/>
+	</game>
+	<game name="Mario Tennis: Ultra Smash (Japan) (JA)">
+		<id>AVXJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30c6;&#x30cb;&#x30b9; &#x30a6;&#x30eb;&#x30c8;&#x30e9;&#x30b9;&#x30de;&#x30c3;&#x30b7;&#x30e5;</title>
+		</locale>
+		<developer>Camelot Software Planning</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="1" day="28"/>
+	</game>
+	<game name="Mario Tennis: Ultra Smash (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>AVXP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<locale lang="PT">
+			<title>Mario Tennis: Ultra Smash</title>
+		</locale>
+		<developer>Camelot Software Planning</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="11" day="20"/>
+	</game>
+	<game name="Wii Sports Club (USA) (EN)">
+		<id>AWSE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Wii Sports Club</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="7" day="25"/>
+	</game>
+	<game name="Wii Sports Club (Japan) (JA)">
+		<id>AWSJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Wii Sports Club</title>
+		</locale>
+		<locale lang="JA">
+			<title>Wii&#x30b9;&#x30dd;&#x30fc;&#x30c4; &#x30af;&#x30e9;&#x30d6;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="7" day="17"/>
+	</game>
+	<game name="Wii Sports Club (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>AWSP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Wii Sports Club</title>
+		</locale>
+		<locale lang="DE">
+			<title>Wii Sports Club</title>
+		</locale>
+		<locale lang="ES">
+			<title>Wii Sports Club</title>
+		</locale>
+		<locale lang="NL">
+			<title>Wii Sports Club</title>
+		</locale>
+		<developer>Nintendo, Bandai Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="7" day="11"/>
+	</game>
+	<game name="Xenoblade Chronicles X (Europe) (EN,FR,DE,ES,IT)">
+		<id>AX5D01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="FR">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="DE">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="ES">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="IT">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="NL">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="PT">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<developer>Monolith Software</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="12" day="4"/>
+	</game>
+	<game name="Xenoblade Chronicles X (USA) (EN)">
+		<id>AX5E01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="FR">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="DE">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="ES">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="IT">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="NL">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="PT">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<developer>Monolith Software</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="12" day="4"/>
+	</game>
+	<game name="XenobladeX (Japan) (JA)">
+		<id>AX5J01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>XenobladeX</title>
+		</locale>
+		<locale lang="FR">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="DE">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="ES">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="IT">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="NL">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="PT">
+			<title>Xenoblade Chronicles X</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30ce;&#x30d6;&#x30ec;&#x30a4;&#x30c9;&#x30af;&#x30ed;&#x30b9;</title>
+		</locale>
+		<developer>Monolith Software</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="4" day="29"/>
+	</game>
+	<game name="Super Smash Bros. for Wii U (USA) (EN,FR,ES)">
+		<id>AXFE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="FR">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="IT">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="NL">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="PT">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<developer>Sora Ltd. / Bandai Namco Studios Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="11" day="21"/>
+	</game>
+	<game name="Dairantou Smash Brothers for Wii U (Japan) (JA)">
+		<id>AXFJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Dairantou Smash Brothers for Wii U</title>
+		</locale>
+		<locale lang="FR">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="IT">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="NL">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="PT">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x5927;&#x4e71;&#x95d8;&#x30b9;&#x30de;&#x30c3;&#x30b7;&#x30e5;&#x30d6;&#x30e9;&#x30b6;&#x30fc;&#x30ba; for Wii U</title>
+		</locale>
+		<developer>Sora Ltd. / Bandai Namco Studios Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="12" day="6"/>
+	</game>
+	<game name="Super Smash Bros. for Wii U (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>AXFP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="FR">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="IT">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="NL">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<locale lang="PT">
+			<title>Super Smash Bros. for Wii U</title>
+		</locale>
+		<developer>Sora Ltd. / Bandai Namco Studios Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="11" day="28"/>
+	</game>
+	<game name="Kirby and the Rainbow Curse (USA) (EN)">
+		<id>AXYE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Kirby and the Rainbow Curse</title>
+		</locale>
+		<locale lang="FR">
+			<title>Kirby et le pinceau arc-en-ciel</title>
+		</locale>
+		<locale lang="DE">
+			<title>Kirby und der Regenbogen-Pinsel</title>
+		</locale>
+		<locale lang="ES">
+			<title>Kirby y el Pincel Arco&#xed;ris</title>
+		</locale>
+		<locale lang="IT">
+			<title>Kirby e il pennello arcobaleno</title>
+		</locale>
+		<locale lang="NL">
+			<title>Kirby and the Rainbow Paintbrush</title>
+		</locale>
+		<locale lang="PT">
+			<title>Kirby and the Rainbow Paintbrush</title>
+		</locale>
+		<developer>Nintendo / HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="2" day="13"/>
+	</game>
+	<game name="Touch! Kirby Super Rainbow (Japan) (JA)">
+		<id>AXYJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Touch! Kirby Super Rainbow</title>
+		</locale>
+		<locale lang="FR">
+			<title>Kirby et le pinceau arc-en-ciel</title>
+		</locale>
+		<locale lang="DE">
+			<title>Kirby und der Regenbogen-Pinsel</title>
+		</locale>
+		<locale lang="ES">
+			<title>Kirby y el Pincel Arco&#xed;ris</title>
+		</locale>
+		<locale lang="IT">
+			<title>Kirby e il pennello arcobaleno</title>
+		</locale>
+		<locale lang="NL">
+			<title>Kirby and the Rainbow Paintbrush</title>
+		</locale>
+		<locale lang="PT">
+			<title>Kirby and the Rainbow Paintbrush</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bf;&#x30c3;&#x30c1;! &#x30ab;&#x30fc;&#x30d3;&#x30a3; &#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30ec;&#x30a4;&#x30f3;&#x30dc;&#x30fc;</title>
+		</locale>
+		<developer>Nintendo / HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="1" day="22"/>
+	</game>
+	<game name="Kirby and the Rainbow Paintbrush (Europe) (EN,FR,DE,ES,IT)">
+		<id>AXYP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Kirby and the Rainbow Paintbrush</title>
+		</locale>
+		<locale lang="FR">
+			<title>Kirby Et Le Pinceau Arc-en-ciel</title>
+		</locale>
+		<locale lang="DE">
+			<title>Kirby und der Regenbogen-Pinsel</title>
+		</locale>
+		<locale lang="ES">
+			<title>Kirby y el Pincel Arcoiris</title>
+		</locale>
+		<locale lang="IT">
+			<title>Kirby e il Pennello Arcobaleno</title>
+		</locale>
+		<locale lang="NL">
+			<title>Kirby and the Rainbow Paintbrush</title>
+		</locale>
+		<locale lang="PT">
+			<title>Kirby and the Rainbow Paintbrush</title>
+		</locale>
+		<developer>Nintendo / HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="5" day="8"/>
+	</game>
+	<game name="Yoshi&apos;s Woolly World (USA) (EN)">
+		<id>AYCE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="FR">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="DE">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="ES">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="IT">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="NL">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="PT">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<developer>Good-Feel</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="10" day="16"/>
+	</game>
+	<game name="Yoshi Wool World (Japan) (JA)">
+		<id>AYCJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Yoshi Wool World</title>
+		</locale>
+		<locale lang="FR">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="DE">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="ES">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="IT">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="NL">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="PT">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30e8;&#x30c3;&#x30b7;&#x30fc; &#x30a6;&#x30fc;&#x30eb;&#x30ef;&#x30fc;&#x30eb;&#x30c9;</title>
+		</locale>
+		<developer>Good-Feel</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="7" day="16"/>
+	</game>
+	<game name="Yoshi&apos;s Woolly World (Europe) (EN,FR,DE,ES,IT,NL)">
+		<id>AYCP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="FR">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="DE">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="ES">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="IT">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="NL">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<locale lang="PT">
+			<title>Yoshi&apos;s Woolly World</title>
+		</locale>
+		<developer>Good-Feel</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="6" day="26"/>
+	</game>
+	<game name="The Legend of Zelda: Twilight Princess HD (USA) (EN)">
+		<id>AZAE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="1" day="4"/>
+	</game>
+	<game name="Zelda no Densetsu: Twilight Princess HD (Japan) (JA)">
+		<id>AZAJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Zelda no Densetsu: Twilight Princess HD</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x30c8;&#x30ef;&#x30a4;&#x30e9;&#x30a4;&#x30c8;&#x30d7;&#x30ea;&#x30f3;&#x30bb;&#x30b9; HD</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="3" day="10"/>
+	</game>
+	<game name="The Legend of Zelda: Twilight Princess HD (Europe) (EN,FR,DE,ES,IT)">
+		<id>AZAP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Legend of Zelda: Twilight Princess HD</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="3" day="4"/>
+	</game>
+	<game name="The Legend of Zelda: The Wind Waker HD (USA) (EN)">
+		<id>BCZE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="10" day="4"/>
+	</game>
+	<game name="Zelda no Densetsu: Kaze no Takt HD (Japan) (EN,JA)">
+		<id>BCZJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Zelda no Densetsu: Kaze no Takt HD</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x98a8;&#x306e;&#x30bf;&#x30af;&#x30c8;HD</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="9" day="26"/>
+	</game>
+	<game name="The Legend of Zelda: The Wind Waker HD (Europe) (EN,FR,DE,ES,IT)">
+		<id>BCZP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<locale lang="PT">
+			<title>The Legend of Zelda: The Wind Waker HD</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="10" day="4"/>
+	</game>
+	<game name="Star Fox Guard (USA) (EN)">
+		<id>BWFE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Star Fox Guard</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="4" day="22"/>
+	</game>
+	<game name="Star Fox Guard (Japan) (JA)">
+		<id>BWFJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Star Fox Guard</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30bf;&#x30fc;&#x30d5;&#x30a9;&#x30c3;&#x30af;&#x30b9;&#x3000;&#x30ac;&#x30fc;&#x30c9;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="4" day="21"/>
+	</game>
+	<game name="Star Fox Guard (Europe) (EN,FR,DE,ES,IT)">
+		<id>BWFP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Star Fox Guard</title>
+		</locale>
+		<locale lang="FR">
+			<title>Star Fox Guard</title>
+		</locale>
+		<locale lang="DE">
+			<title>Star Fox Guard</title>
+		</locale>
+		<locale lang="NL">
+			<title>Star Fox Guard</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="4" day="22"/>
+	</game>
+	<game name="Hyrule Warriors (USA) (EN,FR,ES)">
+		<id>BWPE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="FR">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="DE">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="ES">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="IT">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="NL">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="PT">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<developer>Team Ninja, Tecmo Koei, Omega Force </developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="9" day="26"/>
+	</game>
+	<game name="Zelda Musou (Japan) (JA)">
+		<id>BWPJC8</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Zelda Musou</title>
+		</locale>
+		<locale lang="FR">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="DE">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="ES">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="IT">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="NL">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="PT">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x7121;&#x53cc;</title>
+		</locale>
+		<developer>Team Ninja, Tecmo Koei, Omega Force</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="8" day="14"/>
+	</game>
+	<game name="Hyrule Warriors (Europe) (EN,FR,DE,ES,IT)">
+		<id>BWPP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="FR">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="DE">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="ES">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="IT">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="NL">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<locale lang="PT">
+			<title>Hyrule Warriors</title>
+		</locale>
+		<developer>Team Ninja, Tecmo Koei, Omega Force </developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="9" day="19"/>
+	</game>
+	<game name="Jikkuri Egokoro Kyoushitsu (Japan) (JA)">
+		<id>BXAJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Jikkuri Egokoro Kyoushitsu</title>
+		</locale>
+		<locale lang="FR">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="DE">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="ES">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="IT">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="NL">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="PT">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3058;&#x3063;&#x304f;&#x308a;&#x7d75;&#x5fc3;&#x6559;&#x5ba4;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="11" day="12"/>
+	</game>
+	<game name="Art Academy: Atelier (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>BXAP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="FR">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="DE">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="ES">
+			<title>Arte Academy: Atelier</title>
+		</locale>
+		<locale lang="IT">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="NL">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<locale lang="PT">
+			<title>Art Academy: Atelier</title>
+		</locale>
+		<developer>Headstrong Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="6" day="26"/>
+	</game>
+	<game name="Paper Mario: Color Splash (USA) (EN,FR,ES)">
+		<id>CNFE01</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="FR">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="DE">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="ES">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="IT">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="NL">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="PT">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<developer>Nintendo / Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="10" day="7"/>
+	</game>
+	<game name="Paper Mario: Color Splash (Japan) (JA)">
+		<id>CNFJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="FR">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="DE">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="ES">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="IT">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="NL">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="PT">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30da;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;&#x3000;&#x30ab;&#x30e9;&#x30fc;&#x30b9;&#x30d7;&#x30e9;&#x30c3;&#x30b7;&#x30e5;</title>
+		</locale>
+		<developer>Nintendo / Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="10" day="13"/>
+	</game>
+	<game name="Paper Mario: Color Splash (Europe) (EN,FR,DE,ES,IT,NL,PT,RU)">
+		<id>CNFP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="FR">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="DE">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="ES">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="IT">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="NL">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<locale lang="PT">
+			<title>Paper Mario: Color Splash</title>
+		</locale>
+		<developer>Nintendo / Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2016" month="10" day="7"/>
+	</game>
+	<game name="Mario vs. Donkey Kong: Minna de Mini Land (Japan) (JA)">
+		<id>WAFJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario vs. Donkey Kong: Minna de Mini Land</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa; vs. &#x30c9;&#x30f3;&#x30ad;&#x30fc;&#x30b3;&#x30f3;&#x30b0;&#x3000;&#x307f;&#x3093;&#x306a;&#x3067;&#x30df;&#x30cb;&#x30e9;&#x30f3;&#x30c9;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="3" day="19"/>
+	</game>
+	<game name="Mario vs. Donkey Kong: Tipping Stars (Download Code) (Europe) (EN)">
+		<id>WAFP01</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario vs. Donkey Kong: Tipping Stars (Download Code)</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mario vs. Donkey Kong: Tipping Stars (Download Code)</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="3" day="20"/>
+	</game>
+	<game name="Wii Karaoke U (Japan) (JA)">
+		<id>WAHJ01</id>
+		<type>WiiU</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Wii Karaoke U</title>
+		</locale>
+		<locale lang="JA">
+			<title>Wii&#x30ab;&#x30e9;&#x30aa;&#x30b1;U &#x30c8;&#x30e9;&#x30a4;&#x30a2;&#x30eb;&#x30c7;&#x30a3;&#x30b9;&#x30af;</title>
+		</locale>
+		<developer>TOSE</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="12" day="8"/>
+	</game>
+	<game name="Shovel Knight (USA) (EN)">
+		<id>WKNEAY</id>
+		<type>WiiU</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Shovel Knight</title>
+		</locale>
+		<developer>Yacht Club Games</developer>
+		<publisher>Yacht Club Games</publisher>
+		<date year="2015" month="11" day="3"/>
+	</game>
+	<game name="Shovel Knight (Europe) (EN,FR,DE,ES,IT)">
+		<id>WKNPAY</id>
+		<type>WiiU</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Shovel Knight</title>
+		</locale>
+		<locale lang="DE">
+			<title>Shovel Knight</title>
+		</locale>
+		<locale lang="NL">
+			<title>Shovel Knight</title>
+		</locale>
+		<developer>Yacht Club Games</developer>
+		<publisher>Yacht Club Games</publisher>
+		<date year="2015" month="10" day="30"/>
+	</game>
+	<game name="NES Remix 2 (USA) (EN)">
+		<id>WF2E</id>
+		<type>eShop</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>NES Remix 2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="1" day="1"/>
+	</game>
+	<game name="Famicom Remix 2 (Japan) (JA)">
+		<id>WF2J</id>
+		<type>eShop</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Famicom Remix 2</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30df;&#x30b3;&#x30f3;&#x30ea;&#x30df;&#x30c3;&#x30af;&#x30b9;2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="4" day="24"/>
+	</game>
+	<game name="NES Remix 2 (Europe) (EN,FR,DE,ES,IT)">
+		<id>WF2P</id>
+		<type>eShop</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>NES Remix 2</title>
+		</locale>
+		<locale lang="NL">
+			<title>NES Remix 2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="4" day="25"/>
+	</game>
+	<game name="Shovel Knight (USA) (EN)">
+		<id>WKNE</id>
+		<type>eShop</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Shovel Knight</title>
+		</locale>
+		<developer>Yacht Club Games</developer>
+		<publisher>Yacht Club Games</publisher>
+		<date year="2014" month="6" day="26"/>
+	</game>
+	<game name="Shovel Knight (Japan) (JA)">
+		<id>WKNJ</id>
+		<type>eShop</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Shovel Knight</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b7;&#x30e7;&#x30d9;&#x30eb;&#x30ca;&#x30a4;&#x30c8;</title>
+		</locale>
+		<developer>Yacht Club Games</developer>
+		<publisher>Yacht Club Games</publisher>
+		<date year="2016" month="6" day="30"/>
+	</game>
+	<game name="Shovel Knight (Europe) (EN,FR,DE,ES,IT)">
+		<id>WKNP</id>
+		<type>eShop</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Shovel Knight</title>
+		</locale>
+		<locale lang="NL">
+			<title>Shovel Knight</title>
+		</locale>
+		<developer>Yacht Club Games</developer>
+		<publisher>Yacht Club Games</publisher>
+		<date year="2014" month="11" day="6"/>
+	</game>
+	<game name="NES Remix (USA) (EN)">
+		<id>WMGE</id>
+		<type>eShop</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>NES Remix</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2014" month="12" day="18"/>
+	</game>
+	<game name="Famicom Remix (Japan) (JA)">
+		<id>WMGJ</id>
+		<type>eShop</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Famicom Remix</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30df;&#x30b3;&#x30f3;&#x30ea;&#x30df;&#x30c3;&#x30af;&#x30b9;</title>
+		</locale>
+		<developer>Indies Zero</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="12" day="19"/>
+	</game>
+	<game name="NES Remix (Europe) (EN)">
+		<id>WMGP</id>
+		<type>eShop</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>NES Remix</title>
+		</locale>
+		<locale lang="NL">
+			<title>NES Remix</title>
+		</locale>
+		<developer>Indies Zero</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2013" month="12" day="18"/>
+	</game>
+</datafile>
+

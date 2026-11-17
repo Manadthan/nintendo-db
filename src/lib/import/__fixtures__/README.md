@@ -34,3 +34,20 @@ titre seulement proche (« Wii Karaoke U by Joysound »).
 
 Pour recapturer : onglet Actions → « Capturer les fixtures IGDB » → Run workflow, sur une branche (jamais `main`) ;
 les fichiers sont enregistrés par un commit dans cette branche.
+
+## `wiiutdb.xml`
+
+| | |
+|---|---|
+| Source | https://www.gametdb.com/wiiutdb.zip?LANG=EN (base du 17/11/2026, version 20261117040958) |
+| Conditions | Base GameTDB « pour que chacun l'utilise dans tout projet lié aux jeux » (FAQ) ; pas de licence formelle |
+| Contenu | 140 entrées sur 2 860 : disques en boîte de Nintendo (code éditeur 01), plus Shovel Knight et NES Remix (cas de test) ; sans résumés ni empreintes de disque |
+
+Fabriquée par :
+
+```
+node scripts/fixture-gametdb.mjs <wiiutdb.zip> > src/lib/import/__fixtures__/wiiutdb.xml
+```
+
+Résultats attendus : 46 jeux de la liste Wikipédia rapprochés ; 3 boîtes Nintendo absentes de Wikipédia
+(NES Remix Pack, New Super Mario Bros. U + New Super Luigi U, Mario vs. Donkey Kong: Minna de Mini Land).
