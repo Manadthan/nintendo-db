@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 0.4 — 16/11/2026 — statut : **validée**
+> Version 0.5 — 16/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.5 | 16/11/2026 | R6 : jaquettes IGDB qui ne sont pas des scans de boîte (#40) |
 > | 0.4 | 16/11/2026 | §5 aligné sur la migration 0001 (#17) : plus de `titre_normalise` (recherche dans le navigateur, ADR-05) ; valeurs fixes en types énumérés Postgres |
 > | 0.3 | 16/11/2026 | ADR-02 : plus de région globale (marché dans le catalogue, région sur la fiche) ; ADR-05 : recherche dans le navigateur en v1 ; routes |
 > | 0.2 | 16/11/2026 | v1 Wii U ; sources Wikipédia + IGDB (Wikidata, MobyGames écartés) ; jaquettes copiées chez nous |
@@ -158,6 +159,7 @@ faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 | R3 | Droits des jaquettes | Mention de la source ; « non affilié » (US-07) ; retrait sur demande |
 | R4 | Attributions (CC BY-SA Wikipédia, IGDB) | Lien source sur chaque fiche + page À propos |
 | R5 | Prévisualisation Vercel partageant la base de production | Prévenir dans la PR ; piste : branches Supabase |
+| R6 | Image IGDB = illustration sans bandeau Wii U, pas un scan de boîte (non détectable automatiquement) | Remplacement à la main par un scan (US-12, étape 5) ; aucun bandeau imité par le site |
 | R6 | Forme du tableau Wikipédia qui change | Lecture par en-têtes de colonnes, test sur fixture ; échec explicite plutôt que données fausses |
 | R7 | Limites IGDB (4 requêtes/s) | Lots de 10, requêtes groupées ; ≈ 50 jeux en v1 |
 | R8 | Codes produit absents des deux sources | Saisie manuelle (décision 3 de la spec) ; piste Redump plus tard |
