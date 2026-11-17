@@ -6,10 +6,12 @@
 export type Resultat<T> =
   { ok: true; valeur: T } | { ok: false; erreur: string };
 
+/** Message de l'erreur, suivi de ses causes en chaîne (« GameTDB injoignable (fetch failed (ETIMEDOUT)) »). */
 function message(e: unknown): string {
   if (!(e instanceof Error)) return "Erreur inconnue";
-  const cause = e.cause instanceof Error ? e.cause.message : null;
-  return cause ? `${e.message} (${cause})` : e.message;
+  return e.cause instanceof Error
+    ? `${e.message} (${message(e.cause)})`
+    : e.message;
 }
 
 /** Côté serveur : exécute l'action et rend sa valeur, ou le message de son erreur. */
