@@ -1,0 +1,31 @@
+name: Relais GameTDB
+
+# GameTDB refuse les serveurs de Vercel (#53) ; GitHub y accède. Cette tâche dépose la base Wii U et les scans de
+# boîtes dans le bucket privé « gametdb » de Supabase, où l'import (admin) les lit.
+# Lancée à la main (onglet Actions → Relais GameTDB → Run workflow) et chaque lundi. Seulement sur main.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  relais:
+    name: Déposer la base et les scans GameTDB
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Relayer GameTDB vers Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+        run: node scripts/relais-gametdb.mjs

@@ -4,7 +4,7 @@ import {
   type Region,
 } from "@/lib/catalogue/types";
 import type { Database } from "@/types/database";
-import { codeProduit, urlsScan } from "./gametdb";
+import { cheminScan, codeProduit } from "./gametdb";
 import type { InfosIgdb } from "./igdb";
 import type { JeuAImporter } from "./physique";
 
@@ -177,7 +177,7 @@ export function fusionner(
 
 /** Une image à essayer pour une région : scan de boîte GameTDB, ou image IGDB (de la région, ou principale). */
 export type CandidatJaquette =
-  | { source: "gametdb"; url: string }
+  | { source: "gametdb"; chemin: string }
   | { source: "igdb"; imageId: string; secours: boolean };
 
 /** Jaquette déjà en base pour une région. */
@@ -187,8 +187,8 @@ export type JaquetteEnBase = {
 };
 
 /**
- * Images à essayer, dans l'ordre, pour chaque région sortie (ADR-04) : le scan GameTDB de la boîte (langues PAL
- * EN, FR, DE), puis l'image IGDB de la région, puis la principale en secours (R2). Rien à faire (null) pour une
+ * Images à essayer, dans l'ordre, pour chaque région sortie (ADR-04) : le scan GameTDB de la boîte (déposé par le
+ * relais, #53), puis l'image IGDB de la région, puis la principale en secours (R2). Rien à faire (null) pour une
  * région non sortie, une jaquette ajoutée à la main ou déjà scannée ; une image IGDB déjà copiée n'est remplacée
  * que par un scan. `recopier` : tout recopier sauf les ajouts à la main (nouvelle taille d'image, #48).
  */
@@ -208,10 +208,7 @@ export function choisirJaquettes(
       if (!jeu.releases[r].sortie || garder) return [r, null];
       const id = disques[r];
       const candidats: CandidatJaquette[] = id
-        ? urlsScan({ id, region: r }).map((url) => ({
-            source: "gametdb" as const,
-            url,
-          }))
+        ? [{ source: "gametdb", chemin: cheminScan(id) }]
         : [];
       if ((!deja?.path || recopier) && igdb) {
         const propre = igdb.jaquettes[r];

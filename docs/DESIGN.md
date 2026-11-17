@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 0.6 — 17/11/2026 — statut : **validée**
+> Version 0.7 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.7 | 17/11/2026 | **Relais GameTDB** (#53) : GameTDB refuse les serveurs de Vercel ; une tâche GitHub dépose base et scans dans un bucket privé |
 > | 0.6 | 17/11/2026 | Jaquettes en 3 tailles (300/600/**768**) ; **GameTDB** : scans de boîtes par région (prioritaires sur IGDB) et codes produit (étude du 17/11) ; R6 et R8 traités |
 > | 0.5 | 16/11/2026 | R6 : jaquettes IGDB qui ne sont pas des scans de boîte (#40) |
 > | 0.4 | 16/11/2026 | §5 aligné sur la migration 0001 (#17) : plus de `titre_normalise` (recherche dans le navigateur, ADR-05) ; valeurs fixes en types énumérés Postgres |
@@ -75,7 +76,10 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
 2 bis. **GameTDB** : la base `wiiutdb.zip` donne les identifiants de disque (ex. `ALZP01`). Rapprochement par
    titre US ou PAL ; les 3 premiers caractères sont communs aux 3 régions (`ALZE01`, `ALZJ01`, `ALZP01`), ce qui
    donne la sortie JAP même quand son titre diffère. Code produit = `WUP-P-` + 4 premiers caractères
-   (`WUP-P-ALZP`). Base lue à chaque import (pas de copie dans le dépôt, sauf la fixture des tests).
+   (`WUP-P-ALZP`). **Relais** (#53) : GameTDB refuse les connexions des serveurs de Vercel (délai dépassé), pas
+   celles de GitHub. La tâche GitHub « Relais GameTDB » (`scripts/relais-gametdb.mjs`, à la main et chaque lundi)
+   dépose la base `wiiutdb.xml` et les scans `scans/{id}.jpg` dans le bucket **privé** `gametdb` de Supabase
+   (clé secrète en secret GitHub) ; l'import les lit avec la session du propriétaire.
    GameTDB **tranche le physique** (Wikipédia mélange boîte et téléchargement) : type `WiiU` = disque en boîte,
    `eShop` = téléchargement, titre « (Download Code) » = boîte à code, écartée. Jeu retenu si au moins une boîte
    a l'éditeur Nintendo (code `01`) ; sortie d'une région = une boîte existe dans cette région (champ `region`,
@@ -174,7 +178,7 @@ faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 | R4 | Attributions (CC BY-SA Wikipédia, IGDB) | Lien source sur chaque fiche + page À propos |
 | R5 | Prévisualisation Vercel partageant la base de production | Prévenir dans la PR ; piste : branches Supabase |
 | R6 | Image IGDB = illustration sans bandeau Wii U, pas un scan de boîte | Scans GameTDB en priorité ; restes remplacés à la main (US-12) ; aucun bandeau imité par le site |
-| R9 | GameTDB indisponible ou scan retiré | Jaquette déjà copiée chez nous conservée ; IGDB en secours ; mention de la source, retrait sur demande |
+| R9 | GameTDB indisponible, bloqué ou scan retiré | Relais par GitHub (#53) ; jaquette déjà copiée conservée ; IGDB en secours ; mention de la source, retrait sur demande |
 | R6 | Forme du tableau Wikipédia qui change | Lecture par en-têtes de colonnes, test sur fixture ; échec explicite plutôt que données fausses |
 | R7 | Limites IGDB (4 requêtes/s) | Lots de 10, requêtes groupées ; ≈ 50 jeux en v1 |
 | R8 | Codes produit absents | Déduits de l'identifiant GameTDB ; sinon saisie manuelle (US-11) |

@@ -161,11 +161,10 @@ describe("fusionner — corrections manuelles (US-10, ADR-03 point 4)", () => {
 });
 
 describe("choisirJaquettes (ADR-04, R2, R6)", () => {
-  const scans = (id: string, langues: string[]) =>
-    langues.map((l) => ({
-      source: "gametdb",
-      url: `https://art.gametdb.com/wiiu/coverHQ/${l}/${id}.jpg`,
-    }));
+  // Le relais (#53) a déjà choisi la langue : un seul scan par disque.
+  const scans = (id: string) => [
+    { source: "gametdb", chemin: `scans/${id}.jpg` },
+  ];
 
   it("essaie d'abord le scan de la boîte, puis l'image IGDB de la région, ou la principale en secours", () => {
     const infos = igdb(
@@ -175,15 +174,15 @@ describe("choisirJaquettes (ADR-04, R2, R6)", () => {
     const jeu = construireJeu(KIRBY, infos);
     expect(choisirJaquettes(jeu, KIRBY.disques, infos, null)).toEqual({
       JAP: [
-        ...scans(KIRBY.disques.JAP!, ["JA"]),
+        ...scans(KIRBY.disques.JAP!),
         { source: "igdb", imageId: "co1wcc", secours: true },
       ],
       US: [
-        ...scans(KIRBY.disques.US!, ["US"]),
+        ...scans(KIRBY.disques.US!),
         { source: "igdb", imageId: "co1wcc", secours: false },
       ],
       PAL: [
-        ...scans(KIRBY.disques.PAL!, ["EN", "FR", "DE"]),
+        ...scans(KIRBY.disques.PAL!),
         { source: "igdb", imageId: "cob8mp", secours: false },
       ],
     });
@@ -233,7 +232,7 @@ describe("choisirJaquettes (ADR-04, R2, R6)", () => {
       true,
     );
     expect(choix.JAP).toBeNull();
-    expect(choix.US?.[0]).toEqual(scans(KIRBY.disques.US!, ["US"])[0]);
+    expect(choix.US?.[0]).toEqual(scans(KIRBY.disques.US!)[0]);
     expect(choix.PAL?.at(-1)).toEqual({
       source: "igdb",
       imageId: "cob8mp",
@@ -250,6 +249,6 @@ describe("choisirJaquettes (ADR-04, R2, R6)", () => {
     const choix = choisirJaquettes(jeu, KIRBY.disques, infos, {
       PAL: { path: "x/pal", source: "igdb" },
     });
-    expect(choix.PAL).toEqual(scans(KIRBY.disques.PAL!, ["EN", "FR", "DE"]));
+    expect(choix.PAL).toEqual(scans(KIRBY.disques.PAL!));
   });
 });
