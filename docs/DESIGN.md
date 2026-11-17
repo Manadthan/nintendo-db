@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 0.5 — 16/11/2026 — statut : **validée**
+> Version 0.6 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.6 | 17/11/2026 | **GameTDB** : scans de boîtes par région (prioritaires sur IGDB) et codes produit (étude du 17/11) ; R6 et R8 traités |
 > | 0.5 | 16/11/2026 | R6 : jaquettes IGDB qui ne sont pas des scans de boîte (#40) |
 > | 0.4 | 16/11/2026 | §5 aligné sur la migration 0001 (#17) : plus de `titre_normalise` (recherche dans le navigateur, ADR-05) ; valeurs fixes en types énumérés Postgres |
 > | 0.3 | 16/11/2026 | ADR-02 : plus de région globale (marché dans le catalogue, région sur la fiche) ; ADR-05 : recherche dans le navigateur en v1 ; routes |
@@ -20,6 +21,7 @@
 | **IGDB** (Twitch) | **Jaquettes par région** (`game_localizations`), haute définition ; titres régionaux ; dates par région | Gratuit, y compris commercial ; **stockage encouragé** ; mention visible d'IGDB ; compte développeur Twitch | **Retenue** : jaquettes et titres japonais |
 | Wikidata | Liste et titre japonais corrects ; dates PAL 15–23 % ; aucun code produit ; pas de jaquettes ; pas de distinction boîte / dématérialisé | CC0 | Écartée (redondante avec les deux autres) |
 | MobyGames | Données riches | Page « Just a moment… » anti-robots : conditions illisibles par un programme ; API devenue payante (à confirmer) | Écartée |
+| **GameTDB** (étude du 17/11/2026) | **Scans de vraies boîtes** par région (bandeau Wii U, PEGI/ESRB/CERO), 768 × 1080 = proportions d'une boîte ; base XML téléchargeable (identifiants de disque → **codes produit**, dates, éditeur) | Pas de licence formelle ; base « pour que chacun l'utilise dans tout projet lié aux jeux » ; images propriété des éditeurs (comme IGDB) | **Retenue** : jaquettes (127 sorties sur 143, 89 %) et codes produit |
 | Redump / No-Intro | Codes produit des disques | Redump injoignable depuis l'environnement | À revoir pour les codes produit (piste) |
 
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
@@ -45,7 +47,7 @@ Visiteur (iPhone) ──HTTPS──▶ Vercel / Next.js ── pages publiques p
                                    │                └─ jaquettes WebP ◀── Supabase Storage (public)
 Propriétaire (connecté) ──────────▶├──▶ Supabase (Postgres + Auth + Storage)
                                    │
-                                   └──▶ en.wikipedia.org, api.igdb.com, images.igdb.com  (import, côté serveur)
+                                   └──▶ en.wikipedia.org, api.igdb.com, images.igdb.com, www.gametdb.com, art.gametdb.com  (import, côté serveur)
 ```
 
 ## 4. Décisions (ADR)
@@ -70,6 +72,10 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
 2. **IGDB** : pour chaque jeu, recherche par titre sur la plateforme Wii U → identifiant IGDB ; puis
    `game_localizations` (titre et jaquette par région) et la jaquette principale en secours. Le titre japonais
    vient de la localisation Japon ; sa forme romanisée est le titre IGDB principal ou saisie à la main.
+2 bis. **GameTDB** : la base `wiiutdb.zip` donne les identifiants de disque (ex. `ALZP01`). Rapprochement par
+   titre US ou PAL ; les 3 premiers caractères sont communs aux 3 régions (`ALZE01`, `ALZJ01`, `ALZP01`), ce qui
+   donne la sortie JAP même quand son titre diffère. Code produit = `WUP-P-` + 4 premiers caractères
+   (`WUP-P-ALZP`). Base lue à chaque import (pas de copie dans le dépôt, sauf la fixture des tests).
 3. **Aperçu** (n'écrit rien) : jeux, rapprochement IGDB proposé (corrigeable à la main si le titre est ambigu),
    ajoutés / modifiés / ignorés avec la raison. Puis enregistrement **par lots de 10** piloté par le
    navigateur, jaquettes comprises (même principe que l'ADR-03 de `mon-site-sdlc`, évite les délais Vercel).
@@ -77,11 +83,13 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
 5. **Identifiants IGDB** (Client ID et secret Twitch) : variables d'environnement côté serveur sur Vercel, jamais
    dans le dépôt ni dans le navigateur ; jeton d'accès demandé à la volée et gardé en mémoire.
 
-**ADR-04 — Jaquettes copiées chez nous, en WebP haute définition.** Source IGDB en `t_cover_big_2x`
-(528 × 748) ou plus grand, convertie avec sharp en **deux tailles WebP** : 300 px et 600 px de large
+**ADR-04 — Jaquettes copiées chez nous, en WebP haute définition.** Source par ordre de priorité : **scan GameTDB**
+de la région (`coverHQ`, 768 × 1080 ; PAL : langue EN, sinon FR, DE), puis IGDB en `t_cover_big_2x`
+(528 × 748) ou plus grand, puis jaquette principale IGDB en secours. Une jaquette `photo` ou `url` n'est jamais
+remplacée par l'import. Image convertie avec sharp en **deux tailles WebP** : 300 px et 600 px de large
 (la grande pour l'écran Retina), servies avec `srcset`. Chemin : `{game_id}/{region}-{taille}.webp` dans un
 bucket public ; écriture réservée au propriétaire. Toute image est **ré-encodée** (jamais servie telle quelle).
-Mention « Jaquette : IGDB » (ou « Photo ») sous la jaquette. *Pourquoi* : rendu net et rapide comme gamecartdb,
+Mention « Jaquette : GameTDB » (ou IGDB, « Photo ») sous la jaquette. *Pourquoi* : rendu net et rapide comme gamecartdb,
 pas d'image cassée si la source change, et IGDB préfère qu'on stocke ses images. Remplace l'ADR-04 de la v0.1.
 
 **ADR-05 — Recherche dans le navigateur en v1.** Le catalogue Wii U (≈ 50 jeux) est déjà chargé : la recherche
@@ -100,7 +108,7 @@ games(id, console_id → consoles, slug, igdb_id, wikipedia_url, developpeur, fr
       physique bool, verrous text[], created_at, updated_at)
 releases(id, game_id → games, region 'JAP'|'US'|'PAL', sortie bool, titre, titre_romanise (JAP),
          date_sortie date, precision_date 'jour'|'mois'|'annee', code_produit, editeur,
-         jaquette_path, jaquette_source 'igdb'|'photo'|'url', verrous text[], updated_at)
+         jaquette_path, jaquette_source 'gametdb'|'igdb'|'photo'|'url', verrous text[], updated_at)
          unique (game_id, region)
 import_runs(id, console_id, lance_le, resume jsonb)
 ```
@@ -143,7 +151,7 @@ test n'appelle les sites en direct.
 2. **Base** : Supabase, migrations (schéma, RLS, bucket), console Wii U, connexion US-09.
 3. **Consultation** : US-02, US-03, US-04, US-05 avec 3–4 jeux Wii U saisis en données de départ → *site visible tôt*.
 4. **Import Wii U** : US-10 (Wikipédia + IGDB + jaquettes).
-5. **Correction** : US-11, US-12.
+5. **Correction** : import GameTDB (scans de boîtes, codes produit), US-12 (page « Jaquettes »), US-11.
 6. **Filtres** : US-06.
 7. **Finitions** : US-07, US-08, référencement. Puis console suivante.
 
@@ -159,10 +167,11 @@ faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 | R3 | Droits des jaquettes | Mention de la source ; « non affilié » (US-07) ; retrait sur demande |
 | R4 | Attributions (CC BY-SA Wikipédia, IGDB) | Lien source sur chaque fiche + page À propos |
 | R5 | Prévisualisation Vercel partageant la base de production | Prévenir dans la PR ; piste : branches Supabase |
-| R6 | Image IGDB = illustration sans bandeau Wii U, pas un scan de boîte (non détectable automatiquement) | Remplacement à la main par un scan (US-12, étape 5) ; aucun bandeau imité par le site |
+| R6 | Image IGDB = illustration sans bandeau Wii U, pas un scan de boîte | Scans GameTDB en priorité ; restes remplacés à la main (US-12) ; aucun bandeau imité par le site |
+| R9 | GameTDB indisponible ou scan retiré | Jaquette déjà copiée chez nous conservée ; IGDB en secours ; mention de la source, retrait sur demande |
 | R6 | Forme du tableau Wikipédia qui change | Lecture par en-têtes de colonnes, test sur fixture ; échec explicite plutôt que données fausses |
 | R7 | Limites IGDB (4 requêtes/s) | Lots de 10, requêtes groupées ; ≈ 50 jeux en v1 |
-| R8 | Codes produit absents des deux sources | Saisie manuelle (décision 3 de la spec) ; piste Redump plus tard |
+| R8 | Codes produit absents | Déduits de l'identifiant GameTDB ; sinon saisie manuelle (US-11) |
 
 ## 10. Commandes (dès l'étape 1)
 
