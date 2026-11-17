@@ -15,7 +15,7 @@ export default async function Accueil() {
 
   return (
     <>
-      <EnTete surCatalogue />
+      <EnTete page="catalogue" />
 
       <main>
         <section className="flex flex-col gap-1.5 border-b border-bordure bg-carte px-4 pt-[22px] pb-5">
