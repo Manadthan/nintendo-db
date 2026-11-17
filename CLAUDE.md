@@ -116,3 +116,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
 - **Sélecteurs e2e ambigus** (2 fois : « Remplacer » trouvait « À remplacer » ; `getByRole("alert")` trouvait aussi
   l'annonceur de navigation de Next.js) : `getByRole(…, { name, exact: true })`, et toujours filtrer un rôle
   générique par son texte (`getByRole("alert").filter({ hasText })`).
+- **Tests e2e qui se gênent sur la base partagée** (2 fois : code produit de Splatoon modifié pendant qu'un test
+  public le lisait ; « Jeu de test e2e » ajouté pendant que le catalogue comptait ses jeux) : les tests connectés
+  qui écrivent tournent dans les projets `*-admin` de `playwright.config.ts`, après tous les tests publics ; un
+  nouveau fichier de tests d'administration s'ajoute à `ADMINISTRATION`.
