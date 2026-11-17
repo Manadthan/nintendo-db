@@ -26,6 +26,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.6 validée |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v0.9 validée |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
+| `docs/BILAN.md` | Rétrospective des étapes 1 à 5 : chiffres, réussites, difficultés, leçons | v1.0 |
 
 ## Règles de travail
 
@@ -102,8 +103,9 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 2 — Base : #16 à #19
   - [x] Étape 3 — Consultation : #24 à #27
   - [x] Étape 4 — Import : #32 à #35, #40
-  - [ ] Étape 5 — Correction (milestone n° 5) : #46 GameTDB (lecture ✅, import ✅), #48 jaquette HD ✅, #53 relais GameTDB ✅, #56 lien Administration ✅, #58 retrait d'IGDB ✅, #60 cache des jaquettes ✅, #49 sombre + logo ✅, #42 page Jaquettes, #43 photo, #44 correction, #45 ajout et suppression (cette PR)
-- [ ] Phase finale — Bilan
+  - [x] Étape 5 — Correction : GameTDB (#46, relais #53), jaquette HD #48, sombre + logo #49, Jaquettes #42 #43, fiches #44 #45, et #56, #58, #60
+  - [ ] Étape 6 — Filtres (US-06) · Étape 7 — Finitions (US-07, référencement)
+- [x] Bilan des étapes 1 à 5 : `docs/BILAN.md` (le bilan final suivra l'étape 7)
 
 ## Erreurs récurrentes
 
