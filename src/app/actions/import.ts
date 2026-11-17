@@ -143,6 +143,7 @@ const COLONNES_EXISTANT =
 export async function enregistrerLot(
   consoleSlug: string,
   jeux: JeuAEnregistrer[],
+  recopierJaquettes = false,
 ): Promise<ResultatEnregistrement[]> {
   if (jeux.length > 10) throw new Error("Lot trop grand (10 jeux au plus)");
   const fiche = await chargerConsole(consoleSlug);
@@ -225,7 +226,13 @@ export async function enregistrerLot(
             ]),
           )
         : null;
-      const choix = choisirJaquettes(jeu, wikipedia.disques, infos, existantes);
+      const choix = choisirJaquettes(
+        jeu,
+        wikipedia.disques,
+        infos,
+        existantes,
+        recopierJaquettes,
+      );
       const copiees = await copierJaquettes(supabase, gameId!, choix);
 
       // Régions sorties dont la jaquette finale n'est pas un scan ni un ajout manuel : à remplacer (R6).

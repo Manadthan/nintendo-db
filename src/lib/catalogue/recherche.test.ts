@@ -17,7 +17,10 @@ const KIRBY: JeuCatalogue = {
   developpeur: "HAL Laboratory, Nintendo SPD",
   editeur: "Nintendo",
   sorties: {
-    JAP: { ...sortie("タッチ! カービィ スーパーレインボー"), titreRomanise: "Touch! Kirby Super Rainbow" },
+    JAP: {
+      ...sortie("タッチ! カービィ スーパーレインボー"),
+      titreRomanise: "Touch! Kirby Super Rainbow",
+    },
     US: sortie("Kirby and the Rainbow Curse"),
     PAL: sortie("Kirby and the Rainbow Paintbrush"),
   },
@@ -28,7 +31,11 @@ const POKKEN: JeuCatalogue = {
   id: "2",
   slug: "pokken",
   developpeur: "Bandai Namco Studios",
-  sorties: { JAP: sortie("ポッ拳"), US: sortie("Pokkén Tournament"), PAL: sortie("Pokkén Tournament") },
+  sorties: {
+    JAP: sortie("ポッ拳"),
+    US: sortie("Pokkén Tournament"),
+    PAL: sortie("Pokkén Tournament"),
+  },
 };
 
 describe("correspond (US-05)", () => {
@@ -63,7 +70,9 @@ describe("correspond (US-05)", () => {
 
 describe("avecRecherche", () => {
   it("met la recherche dans l'adresse, en gardant le marché", () => {
-    expect(avecRecherche("?marche=us", "mario kart")).toBe("?marche=us&q=mario+kart");
+    expect(avecRecherche("?marche=us", "mario kart")).toBe(
+      "?marche=us&q=mario+kart",
+    );
     expect(avecRecherche("?marche=us&q=mario", "")).toBe("?marche=us");
     expect(avecRecherche("", "  ")).toBe("");
   });

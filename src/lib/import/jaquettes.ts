@@ -36,7 +36,7 @@ export async function telechargerImage(
 }
 
 /**
- * Ré-encode une jaquette en WebP 300 et 600 px de large (ADR-04) : jamais servie telle quelle, jamais agrandie,
+ * Ré-encode une jaquette en WebP 300, 600 et 768 px de large (ADR-04) : jamais servie telle quelle, jamais agrandie,
  * proportions gardées (pas de recadrage). Échoue si le fichier n'est pas une image.
  */
 export async function convertirEnWebp(

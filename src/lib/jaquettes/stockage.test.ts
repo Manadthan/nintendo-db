@@ -34,7 +34,8 @@ describe("srcsetJaquette", () => {
   it("propose les deux tailles, la grande pour l'écran Retina", () => {
     expect(srcsetJaquette(JEU, "PAL", BASE)).toBe(
       `${BASE}/storage/v1/object/public/jaquettes/${JEU}/pal-300.webp 300w, ` +
-        `${BASE}/storage/v1/object/public/jaquettes/${JEU}/pal-600.webp 600w`,
+        `${BASE}/storage/v1/object/public/jaquettes/${JEU}/pal-600.webp 600w, ` +
+        `${BASE}/storage/v1/object/public/jaquettes/${JEU}/pal-768.webp 768w`,
     );
   });
 });
