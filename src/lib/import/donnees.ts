@@ -38,7 +38,11 @@ export type JeuImporte = {
  * Assemble un jeu : Wikipédia (titres NA/PAL, dates, éditeurs, développeur ; régions déjà réduites aux boîtes par
  * GameTDB) + GameTDB (titre japonais et sa romanisation, code produit imprimé sur la boîte, genres).
  */
-export function construireJeu(wiki: JeuAImporter): JeuImporte {
+export function construireJeu(
+  wiki: JeuAImporter,
+  /** Préfixe des codes produit de la console (Wii U par défaut). */
+  prefixeCode = "WUP-P-",
+): JeuImporte {
   const titreAnglais = wiki.titres.PAL || wiki.titres.US;
   const releases = Object.fromEntries(
     REGIONS.map((region) => {
@@ -67,7 +71,7 @@ export function construireJeu(wiki: JeuAImporter): JeuImporte {
         precision_date: s.precision,
         editeur: s.editeur,
         code_produit: wiki.disques[region]
-          ? codeProduit(wiki.disques[region])
+          ? codeProduit(wiki.disques[region], prefixeCode)
           : null,
       };
       return [region, sortie];
@@ -183,6 +187,8 @@ export function choisirJaquettes(
   disques: JeuAImporter["disques"],
   existantes: Partial<Record<Region, JaquetteEnBase>> | null,
   recopier = false,
+  /** Dossier des scans de la console dans le relais (Wii U par défaut). */
+  dossierScans = "scans",
 ): Record<Region, string | null> {
   return Object.fromEntries(
     REGIONS.map((r) => {
@@ -192,7 +198,7 @@ export function choisirJaquettes(
       const id = disques[r];
       if (!jeu.releases[r].sortie || !id || manuelle || (scanne && !recopier))
         return [r, null];
-      return [r, cheminScan(id)];
+      return [r, cheminScan(id, dossierScans)];
     }),
   ) as Record<Region, string | null>;
 }

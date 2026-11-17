@@ -67,7 +67,7 @@ npm run db:types   # régénérer src/types/database.ts après une migration
 
 ```
 src/app/                 pages (App Router) — layout.tsx, page.tsx, globals.css (couleurs des maquettes)
-src/app/admin/           administration (US-09) : connexion/, accueil, import/ (US-10), jaquettes/ (liste et remplacement, US-12), jeux/ (correction, US-11) ; actions/auth.ts, import.ts, jaquettes.ts, jeux.ts
+src/app/admin/           administration (US-09) : connexion/, accueil, import/ (US-10, ?console=wii), jaquettes/ (liste et remplacement, US-12), jeux/ (correction, US-11) ; actions/auth.ts, import.ts, jaquettes.ts, jeux.ts
 src/lib/auth/proprietaire.ts  exigerProprietaire() : en tête de CHAQUE action d'administration
 src/proxy.ts             contrôle de connexion, sur /admin SEULEMENT (les pages publiques restent statiques)
 src/lib/auth/routes.ts   règles de redirection de l'administration + tests
@@ -78,7 +78,7 @@ src/components/          EnTete (Logo, BoutonTheme), PiedDePage (lien Administra
 src/lib/referencement/   adresse du site, sitemap, robots, métadonnées et données structurées des fiches (étape 7) + tests ; src/app/sitemap.ts, robots.ts
 src/lib/theme/           choix du thème : auto/clair/sombre, script anti-éclair (US-08) + tests
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
-src/lib/import/          import (ADR-03) : wikipedia.ts (tableau « List of Wii U games »), apercu.ts (aperçu, lots de 10, résumés), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (WebP 300/600/768 via sharp), gametdb.ts (boîtes par région, titres japonais, compilations, codes produit ; lu depuis le relais), resultat.ts (erreurs des actions rendues lisibles), physique.ts (règle : boîte Nintendo exigée, sorties par région), relais-wii.ts (base Wii réduite, face avant découpée : lu aussi par le relais) + tests ; __fixtures__/ (copies datées, README)
+src/lib/import/          import (ADR-03) : consoles.ts (sources par console : Wii U = Wikipédia + GameTDB, Wii = GameTDB seul ; chemins du relais, codes WUP-P-/RVL-), wikipedia.ts (tableau « List of Wii U games »), apercu.ts (aperçu, lots de 10, résumés), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (WebP 300/600/768 via sharp), gametdb.ts (boîtes par région, titres japonais, compilations, codes produit ; lu depuis le relais), resultat.ts (erreurs des actions rendues lisibles), physique.ts (règle : boîte Nintendo exigée, sorties par région), relais-wii.ts (base Wii réduite, face avant découpée : lu aussi par le relais) + tests ; __fixtures__/ (copies datées, README)
 scripts/                 icones.mjs (apple-icon.png), fixture-wikipedia.mjs, fixture-gametdb.mjs, fixture-gametdb-wii.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : bases Wii U et Wii (réduite) + scans → bucket privé gametdb, Wii dans wii/ ; secrets SUPABASE_URL / SUPABASE_SECRET_KEY ; importe src/lib/import/relais-wii.ts : sans alias « @/ »)
 src/lib/jaquettes/       supprimer.ts (jeu + toutes ses jaquettes), chemins et URL des jaquettes ({game_id}/{région}-{version}-{300|600|768}.webp, ADR-04, version : #60), enregistrer.ts (WebP → stockage → sortie), telecharger.ts (image par adresse, SSRF) + tests
 src/lib/admin/           page « Jaquettes » (vignettes, filtre « à remplacer »), correction d'une fiche (champs modifiés → verrous), nouveau jeu (verrou « manuel ») + tests
@@ -86,7 +86,7 @@ src/lib/images/          réduction d'une photo dans le navigateur avant envoi (
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
 tests/e2e/               tests Playwright ; connexion.spec.ts ignoré sans base locale (tourne en CI)
-supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais), tests/database/ (pgTAP)
+supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais, 0007 console Wii), tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
 ```

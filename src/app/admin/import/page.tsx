@@ -10,8 +10,35 @@ export const metadata: Metadata = {
 // Un lot de 10 jeux (scans à convertir) prend quelques secondes : marge sur la durée des actions de cette page (Vercel).
 export const maxDuration = 60;
 
-// Aperçu de l'import Wii U (US-10, #34). Page réservée au propriétaire (proxy /admin, US-09).
-export default function PageImport() {
+/** Consoles importables (étape 8) : leurs sources, telles que la page les présente. */
+const CONSOLES = {
+  "wii-u": {
+    nom: "Wii U",
+    sources: "la liste Wikipédia et la base GameTDB",
+    description:
+      "Lit la liste Wikipédia, garde les jeux sortis en boîte d'après GameTDB (titres japonais, scans de boîtes, codes produit).",
+  },
+  wii: {
+    nom: "Wii",
+    sources: "la base GameTDB",
+    description:
+      "Lit la base GameTDB seule (SPEC v1.9) : jeux du commerce dont au moins une boîte est éditée par Nintendo, titres par région, dates, genres, faces avant des boîtes.",
+  },
+} as const;
+
+type Slug = keyof typeof CONSOLES;
+
+// Aperçu de l'import d'une console (US-10, #34 ; Wii : étape 8). Page réservée au propriétaire (proxy /admin, US-09).
+export default async function PageImport({
+  searchParams,
+}: {
+  searchParams: Promise<{ console?: string }>;
+}) {
+  const demandee = (await searchParams).console;
+  const slug: Slug =
+    demandee && demandee in CONSOLES ? (demandee as Slug) : "wii-u";
+  const laConsole = CONSOLES[slug];
+
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-5 px-4 py-6">
       <Link
@@ -22,16 +49,21 @@ export default function PageImport() {
       </Link>
       <section className="flex flex-col gap-1.5">
         <h1 className="font-titre text-[26px] font-bold tracking-tight">
-          Import Wii U
+          Import {laConsole.nom}
         </h1>
         <p className="text-sm text-texte-doux">
-          Lit la liste Wikipédia, garde les jeux sortis en boîte d&apos;après
-          GameTDB (titres japonais, scans de boîtes, codes produit).
-          L&apos;analyse <strong>n&apos;enregistre rien</strong> : elle montre
-          ce que l&apos;import ferait.
+          {laConsole.description} L&apos;analyse{" "}
+          <strong>n&apos;enregistre rien</strong> : elle montre ce que
+          l&apos;import ferait.
         </p>
       </section>
-      <AnalyseImport consoleSlug="wii-u" consoleNom="Wii U" />
+      {/* key : changer de console repart d'un aperçu vide. */}
+      <AnalyseImport
+        key={slug}
+        consoleSlug={slug}
+        consoleNom={laConsole.nom}
+        sources={laConsole.sources}
+      />
     </main>
   );
 }

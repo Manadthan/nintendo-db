@@ -33,9 +33,12 @@ type Etat =
 export function AnalyseImport({
   consoleSlug,
   consoleNom,
+  sources = "la liste Wikipédia et la base GameTDB",
 }: {
   consoleSlug: string;
   consoleNom: string;
+  /** Sources lues par l'analyse, pour le message d'attente (Wii : GameTDB seul). */
+  sources?: string;
 }) {
   const [etat, setEtat] = useState<Etat>({ etape: "attente" });
   const [apercu, setApercu] = useState<Apercu | null>(null);
@@ -115,8 +118,7 @@ export function AnalyseImport({
       </button>
 
       <p role="status" className="text-sm text-texte-doux">
-        {etat.etape === "wikipedia" &&
-          "Lecture de la liste Wikipédia et de la base GameTDB…"}
+        {etat.etape === "wikipedia" && `Lecture de ${sources}…`}
         {etat.etape === "fini" &&
           "Analyse terminée. Rien n'a encore été enregistré."}
         {etat.etape === "enregistrement" &&
