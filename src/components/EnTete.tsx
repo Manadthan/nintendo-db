@@ -3,7 +3,7 @@ import { BoutonTheme } from "./BoutonTheme";
 import { Logo } from "./Logo";
 
 /** En-tête des pages publiques (maquettes 1 et 2) : logo et nom du site, Catalogue, À propos, thème (US-08). */
-export function EnTete({ surCatalogue = false }: { surCatalogue?: boolean }) {
+export function EnTete({ page }: { page?: "catalogue" | "a-propos" }) {
   return (
     <header className="flex h-14 items-center justify-between gap-1 border-b border-bordure bg-carte pr-1 pl-4">
       <Link
@@ -19,15 +19,23 @@ export function EnTete({ surCatalogue = false }: { surCatalogue?: boolean }) {
       >
         <Link
           href="/"
-          aria-current={surCatalogue ? "page" : undefined}
-          className="flex h-11 items-center px-2 font-semibold"
+          aria-current={page === "catalogue" ? "page" : undefined}
+          className={`flex h-11 items-center px-2 ${
+            // Fiches et 404 : « Catalogue » reste en gras, comme dans la maquette de la fiche.
+            page === "a-propos" ? "text-texte-doux" : "font-semibold"
+          }`}
         >
           Catalogue
         </Link>
-        {/* La page À propos arrive avec US-07 (étape 7). */}
-        <span className="flex h-11 items-center px-2 text-texte-doux">
+        <Link
+          href="/a-propos"
+          aria-current={page === "a-propos" ? "page" : undefined}
+          className={`flex h-11 items-center px-2 ${
+            page === "a-propos" ? "font-semibold" : "text-texte-doux"
+          }`}
+        >
           À propos
-        </span>
+        </Link>
         <BoutonTheme />
       </nav>
     </header>
