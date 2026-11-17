@@ -1,9 +1,10 @@
 # Maquettes
 
-> Version 0.4 — 16/11/2026 — statut : **validée** (#40, retour après l'import réel)
+> Version 0.5 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.5 | 17/11/2026 | Fiche : grande jaquette **presque pleine largeur** (≈ 340 px sur iPhone 12 mini), en HD, comme gamecartdb |
 > | 0.4 | 16/11/2026 | Jaquette = **scan de la vraie boîte**, bandeau Wii U compris ; aucun bandeau dessiné par le site (#40) |
 > | 0.3 | 16/11/2026 | *(abandonnée)* Cadre de boîte Wii U : bandeau bleu « Wii U » au-dessus de chaque jaquette, réelle ou neutre (#40) |
 > | 0.2 | 16/11/2026 | Retour du propriétaire (PR #3) : trame de gamecartdb, recherche dans le catalogue, région choisie sur la fiche ; écran de recherche séparé supprimé |
@@ -38,7 +39,7 @@ emplacements, remplacés par les jaquettes IGDB de chaque région à l'import.
 
 - Polices **Inter** (texte) et **Space Grotesk** (titres) ; fond gris clair `#F4F5F7`, cartes blanches.
 - Un seul accent : bleu `#2541B2`.
-- **Les jaquettes priment** : proportions de boîte Wii U (27 × 38), jamais recadrées, ombre douce sur la fiche.
+- **Les jaquettes priment** : proportions de boîte Wii U (27 × 38), jamais recadrées, ombre douce sur la fiche ; sur la fiche, jaquette **presque pleine largeur** (marges de 16 px) et nette sur écran ×3 (v0.5).
 - **Jaquette = scan de la vraie boîte** (v0.4) : bandeau Wii U, logo, PEGI/ESRB/CERO compris, tels qu'imprimés.
   Le site **ne dessine aucun bandeau** (essai v0.3 abandonné : un bandeau imité ne ressemble pas au vrai). Une image
   IGDB qui n'est qu'une illustration (sans bandeau) est **à remplacer** par un scan, photo ou adresse (US-12).

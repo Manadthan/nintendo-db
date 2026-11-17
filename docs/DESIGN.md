@@ -6,7 +6,7 @@
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 0.6 | 17/11/2026 | **GameTDB** : scans de boîtes par région (prioritaires sur IGDB) et codes produit (étude du 17/11) ; R6 et R8 traités |
+> | 0.6 | 17/11/2026 | Jaquettes en 3 tailles (300/600/**768**) ; **GameTDB** : scans de boîtes par région (prioritaires sur IGDB) et codes produit (étude du 17/11) ; R6 et R8 traités |
 > | 0.5 | 16/11/2026 | R6 : jaquettes IGDB qui ne sont pas des scans de boîte (#40) |
 > | 0.4 | 16/11/2026 | §5 aligné sur la migration 0001 (#17) : plus de `titre_normalise` (recherche dans le navigateur, ADR-05) ; valeurs fixes en types énumérés Postgres |
 > | 0.3 | 16/11/2026 | ADR-02 : plus de région globale (marché dans le catalogue, région sur la fiche) ; ADR-05 : recherche dans le navigateur en v1 ; routes |
@@ -91,8 +91,9 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
 **ADR-04 — Jaquettes copiées chez nous, en WebP haute définition.** Source par ordre de priorité : **scan GameTDB**
 de la région (`coverHQ`, 768 × 1080 ; PAL : langue EN, sinon FR, DE), puis IGDB en `t_cover_big_2x`
 (528 × 748) ou plus grand, puis jaquette principale IGDB en secours. Une jaquette `photo` ou `url` n'est jamais
-remplacée par l'import. Image convertie avec sharp en **deux tailles WebP** : 300 px et 600 px de large
-(la grande pour l'écran Retina), servies avec `srcset`. Chemin : `{game_id}/{region}-{taille}.webp` dans un
+remplacée par l'import. Image convertie avec sharp en **trois tailles WebP** : 300, 600 et **768 px** de large
+(768 = largeur d'un scan GameTDB, pour la grande jaquette de la fiche sur écran ×3 ; jamais d'agrandissement),
+servies avec `srcset` : le catalogue charge les petites, la fiche la HD. Chemin : `{game_id}/{region}-{taille}.webp` dans un
 bucket public ; écriture réservée au propriétaire. Toute image est **ré-encodée** (jamais servie telle quelle).
 Mention « Jaquette : GameTDB » (ou IGDB, « Photo ») sous la jaquette. *Pourquoi* : rendu net et rapide comme gamecartdb,
 pas d'image cassée si la source change, et IGDB préfère qu'on stocke ses images. Remplace l'ADR-04 de la v0.1.
