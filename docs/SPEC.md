@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.8 — 17/11/2026 — statut : **validée**
+> Version 1.9 — 17/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.9 | 17/11/2026 | **Wii** (étape 8) : US-01 = un seul catalogue toutes consoles, filtre **Console** (US-06) ; US-10 : import Wii depuis **GameTDB seul**, jaquettes = face avant du scan complet |
 > | 1.8 | 17/11/2026 | Référencement précisé (étape 7) : plan du site, robots sans l'administration, adresses canoniques, aperçu de partage avec la jaquette, données structurées |
 > | 1.7 | 17/11/2026 | US-06 : filtre « sorti dans la région affichée » retiré (doublon du marché) ; genres = ceux de GameTDB, **tous traduits** en français |
 > | 1.6 | 17/11/2026 | US-10 : **IGDB retiré** (#58), GameTDB donne aussi les titres japonais ; sans scan → vignette neutre |
@@ -48,12 +49,13 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 ### Consultation (visiteurs)
 
-#### US-01 — Voir les consoles (S — dès la 2ᵉ console)
-*En tant que visiteur, je vois toutes les consoles Nintendo pour choisir celle qui m'intéresse.*
-- [ ] Tant qu'une seule console est disponible (v1 : Wii U), l'accueil **est** son catalogue (US-02).
-- [ ] L'accueil liste les consoles par **ordre chronologique**, avec nom, année de sortie et nombre de jeux.
-- [ ] Les consoles sont regroupées en **salon** et **portables** (Game & Watch, e-Reader, etc. classés en annexe/portables).
-- [ ] Un tap ouvre le catalogue de la console.
+#### US-01 — Toutes les consoles dans un seul catalogue (S — dès la 2ᵉ console, SPEC v1.9)
+*En tant que visiteur, je parcours les jeux de toutes les consoles au même endroit, et je n'en garde qu'une si je veux.*
+- [ ] L'accueil **est** le catalogue de **toutes les consoles** (US-02) ; « Tous les jeux » compte les jeux de toutes.
+- [ ] Chaque vignette (grille et liste) indique sa **console**.
+- [ ] Le panneau Filtres (US-06) propose **Console** : « Toutes » (par défaut) puis les consoles par ordre
+      chronologique, avec leur nombre de jeux ; le choix est gardé dans l'adresse (`?console=wii`).
+- [ ] La fiche d'un jeu garde son adresse `/jeux/{console}/{jeu}` ; « Retour au catalogue » ramène à l'accueil.
 
 #### US-02 — Parcourir le catalogue d'une console (M)
 *En tant que visiteur, je parcours les jeux Nintendo d'une console, présentés comme sur gamecartdb.*
@@ -92,8 +94,8 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Aucun résultat → message clair et bouton pour effacer la recherche.
 
 #### US-06 — Filtrer le catalogue (S)
-- [ ] Filtres combinables : disponibilité (sorti dans les 3 régions / exclusif à une région : JAP, US ou PAL),
-      année, genre. Le marché (US-03) filtre déjà sur « sorti dans cette région ».
+- [ ] Filtres combinables : **console** (US-01), disponibilité (sorti dans les 3 régions / exclusif à une région :
+      JAP, US ou PAL), année, genre. Le marché (US-03) filtre déjà sur « sorti dans cette région ».
 - [ ] Les genres sont ceux de GameTDB, **tous traduits** en français ; un jeu peut en avoir plusieurs.
 - [ ] Les filtres actifs sont visibles et effaçables en un tap.
 
@@ -119,7 +121,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       même en appelant directement le serveur.
 - [ ] Un bouton permet de se déconnecter.
 
-#### US-10 — Importer les jeux d'une console depuis Wikipédia et GameTDB (M)
+#### US-10 — Importer les jeux d'une console depuis Wikipédia et GameTDB (M ; Wii : GameTDB seul)
 *En tant que propriétaire, je remplis le catalogue d'une console sans tout saisir à la main.*
 - [ ] Je choisis une console et lance l'import ; un **aperçu** montre les jeux trouvés avant d'enregistrer.
 - [ ] Ne sont retenus que les jeux ayant **au moins une boîte éditée par Nintendo** (disque en boîte ; une boîte
@@ -135,6 +137,13 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Les **jaquettes de chaque région** sont récupérées et copiées chez nous : en priorité le **scan de la vraie
       boîte** (GameTDB) ; une région sans scan garde une vignette neutre, signalée dans le résumé.
 - [ ] Le **code produit** de chaque région est importé quand la source le connaît (ex. `WUP-P-ALZP`).
+- [ ] **Wii** (SPEC v1.9) : liste, titres par région, dates, développeurs, genres et titres japonais viennent de
+      **GameTDB seul** (disques du commerce, identifiant en R ou S) ; la fiche cite GameTDB comme source. Même règle
+      qu'en Wii U : au moins une boîte éditée par Nintendo, toutes les régions sorties en boîte listées.
+- [ ] Wii : code produit `RVL-` + 4 caractères (ex. `RVL-RMCP`) ; le suffixe de pays imprimé sur la boîte (`-UKV`,
+      `-USA`…) n'est pas connu de la source, il se complète à la main.
+- [ ] Wii : la jaquette est la **face avant** découpée dans le scan complet de la boîte (≈ 485 px de large, aucune
+      source ouverte ne fait mieux) ; une photo (US-12) peut la remplacer.
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
@@ -163,7 +172,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 ## 6. Consoles couvertes
 
-**v1 : Wii U.** Puis, une à une :
+**v1 : Wii U.** Puis **Wii** (étape 8), puis les autres, une à une :
 **Salon** : Color TV-Game, NES / Famicom (+ Famicom Disk System), Super Nintendo / Super Famicom (+ Satellaview),
 Nintendo 64 (+ 64DD), GameCube, Wii, Wii U, Switch, Switch 2.
 **Portables** : Game & Watch, Game Boy, Game Boy Color, Virtual Boy, Game Boy Advance (+ e-Reader), Pokémon Mini,
@@ -186,6 +195,7 @@ DS, 3DS.
 | 3 | Code produit | **Importé de GameTDB** (v1.4) ; sinon « — », complété à la main |
 | 4 | Images | Jaquettes par région **copiées chez nous** : scans de boîtes GameTDB (v1.4) ; IGDB retiré (v1.6) |
 | 5 | Périmètre v1 | **Wii U seule** ; l'architecture reste multi-consoles |
+| 6 | Consoles suivantes (v1.9) | **Wii** ; un seul catalogue filtré par console ; règle « boîte Nintendo » inchangée (les 14 jeux Wii édités par Nintendo dans une seule région restent, toutes régions listées) |
 
 ## 9. Prochaine étape
 

@@ -1,7 +1,7 @@
 # Intention — Nintendo DB
 
 > Étape 1 du playbook : **quoi et pourquoi**, pas encore comment.
-> Version 1.1 — 16/11/2026 — statut : **validée** (1.1 : v1 limitée à la Wii U, sources et images revues)
+> Version 1.2 — 17/11/2026 — statut : **validée** (1.1 : v1 limitée à la Wii U, sources et images revues ; 1.2 : Wii, catalogue toutes consoles)
 
 ## Problème
 
@@ -54,10 +54,10 @@ Nintendo éditeur seulement, en français, région JAP incluse.
 | # | Question | Décision |
 |---|---|---|
 | 1 | Quels jeux | Sorties **physiques** dont Nintendo est **éditeur** dans au moins une région ; pas de dématérialisé en v1 |
-| 2 | Consoles | **Toutes** à terme, y compris Satellaview, e-Reader et Pokémon Mini ; **v1 limitée à la Wii U** (hypothèse simplificatrice du propriétaire) |
-| 3 | Source des données | **Wikipédia** (liste, dates par région, jeux en boîte) + **GameTDB** (boîtes, scans, titres japonais, codes produit ; remplace IGDB, voir DESIGN v0.8), puis corrections à la main ; Wikidata et MobyGames écartés (voir DESIGN §1) |
+| 2 | Consoles | **Toutes** à terme, y compris Satellaview, e-Reader et Pokémon Mini ; **v1 limitée à la Wii U** (hypothèse simplificatrice du propriétaire) ; **Wii** ensuite (étape 8, v1.2) ; un **seul catalogue** pour toutes les consoles, filtré par plateforme |
+| 3 | Source des données | **Wikipédia** (liste, dates par région, jeux en boîte) + **GameTDB** (boîtes, scans, titres japonais, codes produit ; remplace IGDB, voir DESIGN v0.8), puis corrections à la main ; Wikidata et MobyGames écartés (voir DESIGN §1). **Wii : GameTDB seul** (étude du 17/11, DESIGN §1 bis) |
 | 4 | Accès | **Public en lecture**, modification réservée au propriétaire |
-| 5 | Suivi de collection | **Plus tard** : la v1 est une base de consultation |
+| 5 | Suivi de collection | **Plus tard** : la v1 est une base de consultation. Idées du propriétaire (17/11) à étudier ensuite : comptes et jeux possédés, tableau de complétion par console, note Metacritic, valeur estimée |
 | 6 | Variantes | **Plus tard** : rééditions et variantes de pays PAL hors v1 |
 | 7 | Stack | **Même stack** que `mon-site-sdlc` : Next.js, Tailwind, Supabase, Vercel — rendu dans l'esprit de gamecartdb (gamecartdb utilise lui-même Next.js) |
 

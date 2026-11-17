@@ -22,11 +22,11 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | Fichier | Contenu | Statut |
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
-| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.1 validée |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.8 validée |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.1 validée |
+| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.2 validée |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.9 validée |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.2 validée |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
-| `docs/BILAN.md` | Rétrospective des étapes 1 à 5 : chiffres, réussites, difficultés, leçons | v1.0 |
+| `docs/BILAN.md` | Rétrospective de la v1 (étapes 1 à 7) : chiffres, réussites, difficultés, leçons | v1.1 |
 
 ## Règles de travail
 
@@ -99,15 +99,16 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
 - [x] Phase 1 — Intention : `intent/intent.md` validée
 - [x] Phase 2 — Spec, design, maquettes validés
 - [x] Phase 3 — Issues de l'étape 1 (#4 à #9), milestone « Étape 1 — Socle » (n° 1)
-- [ ] Phase 4+ — Développement par étapes (DESIGN.md §8)
+- [x] Phase 4+ — Développement par étapes (DESIGN.md §8) : v1 Wii U terminée
   - [x] Étape 1 — Socle : #4 à #9
   - [x] Étape 2 — Base : #16 à #19
   - [x] Étape 3 — Consultation : #24 à #27
   - [x] Étape 4 — Import : #32 à #35, #40
   - [x] Étape 5 — Correction : GameTDB (#46, relais #53), jaquette HD #48, sombre + logo #49, Jaquettes #42 #43, fiches #44 #45, et #56, #58, #60
   - [x] Étape 6 — Filtres : genres #68, panneau #69
-  - [ ] Étape 7 — Finitions : À propos (US-07) #72, référencement #73
-- [x] Bilan des étapes 1 à 5 : `docs/BILAN.md` (le bilan final suivra l'étape 7)
+  - [x] Étape 7 — Finitions : À propos (US-07) #72, référencement #73
+  - [ ] Étape 8 — Wii : étude GameTDB de la Wii d'abord (bilan, leçon 1)
+- [x] Bilan final de la v1 : `docs/BILAN.md` v1.1
 
 ## Erreurs récurrentes
 

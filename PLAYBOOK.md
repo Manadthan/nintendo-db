@@ -87,6 +87,9 @@
 6. Prévoir une base de prévisualisation séparée si des migrations doivent être testées avant le merge.
 7. **Tester les sources de données d'abord** (bilan Nintendo DB) : prototyper l'import réel, depuis l'hébergeur
    de production et avec les vraies images, avant d'écrire la spec.
+8. **Chaque PR dit quoi tester et ce qui n'a pas été vérifié** (bilan final Nintendo DB) : c'est ce qui permet de
+   relire depuis un téléphone. Toute donnée importée nouvelle arrive avec sa mise à jour en production, sans
+   réimport manuel.
 
 ## 5. Liste de contrôle
 
