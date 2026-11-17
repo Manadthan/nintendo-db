@@ -1,10 +1,6 @@
 import * as cheerio from "cheerio";
-import { strFromU8, unzipSync } from "fflate";
 import type { PrecisionDate, Region } from "@/lib/catalogue/types";
 import { normaliser } from "@/lib/recherche/normaliser";
-
-/** Base GameTDB de la Wii U (DESIGN ADR-03 2 bis) : archive téléchargée à chaque import. */
-export const URL_BASE_GAMETDB = "https://www.gametdb.com/wiiutdb.zip?LANG=EN";
 
 /** Un disque en boîte d'une région (type `WiiU` de GameTDB ; l'eShop et les boîtes à code sont écartés). */
 export type DisqueGameTdb = {
@@ -22,14 +18,6 @@ const REGIONS_GAMETDB: Record<string, Region> = {
   "NTSC-U": "US",
   PAL: "PAL",
 };
-
-/** Extrait le fichier XML de l'archive `wiiutdb.zip`. */
-export function lireArchiveGameTdb(zip: Uint8Array): string {
-  const fichiers = unzipSync(zip, { filter: (f) => f.name.endsWith(".xml") });
-  const xml = Object.values(fichiers)[0];
-  if (!xml) throw new Error("Base GameTDB : aucun fichier XML dans l'archive");
-  return strFromU8(xml);
-}
 
 function lireDate(
   annee: string,
@@ -151,19 +139,16 @@ export function codeProduit(id: string): string {
   return `WUP-P-${id.slice(0, 4)}`;
 }
 
-/** Langues de scan essayées dans l'ordre (ADR-04) : les scans PAL sont rangés par langue. */
-const LANGUES_SCAN: Record<Region, string[]> = {
-  JAP: ["JA"],
-  US: ["US"],
-  PAL: ["EN", "FR", "DE"],
-};
+/**
+ * Relais (#53) : GameTDB refuse les serveurs de Vercel. La tâche GitHub « Relais GameTDB »
+ * (scripts/relais-gametdb.mjs) dépose la base et les scans dans ce bucket privé de Supabase, où l'import les lit.
+ */
+export const BUCKET_GAMETDB = "gametdb";
+export const CHEMIN_BASE_GAMETDB = "wiiutdb.xml";
 
-/** Adresses du scan de la boîte (768 × 1080), à essayer dans l'ordre jusqu'à en trouver une. */
-export function urlsScan(
-  disque: Pick<DisqueGameTdb, "id" | "region">,
-): string[] {
-  return LANGUES_SCAN[disque.region].map(
-    (langue) =>
-      `https://art.gametdb.com/wiiu/coverHQ/${langue}/${disque.id}.jpg`,
-  );
+/** Chemin du scan de boîte d'un disque dans le bucket du relais (langue déjà choisie par le relais). */
+export function cheminScan(id: string): string {
+  if (!/^[A-Z0-9]{6}$/.test(id))
+    throw new Error(`Identifiant GameTDB invalide : « ${id} »`);
+  return `scans/${id}.jpg`;
 }

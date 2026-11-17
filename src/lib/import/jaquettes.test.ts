@@ -45,14 +45,15 @@ describe("convertirEnWebp (ADR-04)", () => {
 });
 
 describe("telechargerImage", () => {
-  it("télécharge un scan d'art.gametdb.com ou une image d'images.igdb.com", async () => {
+  it("télécharge une image d'images.igdb.com", async () => {
     const image = await png(10, 10);
     const fetch = async () => reponse(image);
-    for (const url of [
-      "https://art.gametdb.com/wiiu/coverHQ/EN/ALZP01.jpg",
-      "https://images.igdb.com/igdb/image/upload/t_1080p/co213q.jpg",
-    ])
-      expect(await telechargerImage(url, fetch)).toEqual(image);
+    expect(
+      await telechargerImage(
+        "https://images.igdb.com/igdb/image/upload/t_1080p/co213q.jpg",
+        fetch,
+      ),
+    ).toEqual(image);
   });
 
   it("refuse toute autre adresse (pas de requête vers un site arbitraire)", async () => {
@@ -64,7 +65,10 @@ describe("telechargerImage", () => {
       telechargerImage("http://images.igdb.com/x.jpg", fetch),
     ).rejects.toThrow(/Adresse refusée/);
     await expect(
-      telechargerImage("https://art.gametdb.com.exemple.com/x.jpg", fetch),
+      telechargerImage(
+        "https://art.gametdb.com/wiiu/coverHQ/EN/ALZP01.jpg",
+        fetch,
+      ),
     ).rejects.toThrow(/Adresse refusée/);
   });
 

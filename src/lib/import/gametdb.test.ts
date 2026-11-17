@@ -1,16 +1,14 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { strToU8, zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
 import {
+  cheminScan,
   codeProduit,
   indexerTitres,
   jeuxSansWikipedia,
-  lireArchiveGameTdb,
   lireGameTdb,
   rapprocherGameTdb,
   regrouperGameTdb,
-  urlsScan,
 } from "./gametdb";
 import { lireListeWikipedia } from "./wikipedia";
 
@@ -109,28 +107,14 @@ describe("jeuxSansWikipedia", () => {
   });
 });
 
-describe("codeProduit, urlsScan, lireArchiveGameTdb", () => {
+describe("codeProduit, cheminScan", () => {
   it("déduit le code imprimé sur la boîte", () => {
     expect(codeProduit("ALZP01")).toBe("WUP-P-ALZP");
     expect(codeProduit("WKNPAY")).toBe("WUP-P-WKNP");
   });
 
-  it("donne les scans à essayer, langues PAL dans l'ordre", () => {
-    expect(urlsScan(jeux.get("ALZ")!.disques.PAL!)).toEqual([
-      "https://art.gametdb.com/wiiu/coverHQ/EN/ALZP01.jpg",
-      "https://art.gametdb.com/wiiu/coverHQ/FR/ALZP01.jpg",
-      "https://art.gametdb.com/wiiu/coverHQ/DE/ALZP01.jpg",
-    ]);
-    expect(urlsScan(jeux.get("ALZ")!.disques.JAP!)).toEqual([
-      "https://art.gametdb.com/wiiu/coverHQ/JA/ALZJ01.jpg",
-    ]);
-  });
-
-  it("extrait le XML de l'archive, et échoue clairement sans XML", () => {
-    const zip = zipSync({ "wiiutdb.xml": strToU8("<datafile/>") });
-    expect(lireArchiveGameTdb(zip)).toBe("<datafile/>");
-    expect(() =>
-      lireArchiveGameTdb(zipSync({ "lisezmoi.txt": strToU8("x") })),
-    ).toThrow("aucun fichier XML");
+  it("donne le chemin du scan déposé par le relais, et refuse un identifiant douteux", () => {
+    expect(cheminScan("ALZP01")).toBe("scans/ALZP01.jpg");
+    expect(() => cheminScan("../x01")).toThrow("invalide");
   });
 });

@@ -19,8 +19,8 @@ import {
   type SourceJaquette,
 } from "@/lib/import/donnees";
 import {
-  URL_BASE_GAMETDB,
-  lireArchiveGameTdb,
+  BUCKET_GAMETDB,
+  CHEMIN_BASE_GAMETDB,
   lireGameTdb,
   regrouperGameTdb,
 } from "@/lib/import/gametdb";
@@ -74,9 +74,23 @@ async function telecharger(url: string, source: string): Promise<Response> {
   return reponse;
 }
 
+/** Fichier déposé par le relais GameTDB (#53) dans le bucket privé, lu avec la session du propriétaire. */
+async function lireRelais(chemin: string): Promise<Blob> {
+  const supabase = await exigerProprietaire();
+  const { data, error } = await supabase.storage
+    .from(BUCKET_GAMETDB)
+    .download(chemin);
+  if (error || !data)
+    throw new Error(
+      `Relais GameTDB : « ${chemin} » absent (lancer la tâche GitHub « Relais GameTDB »)`,
+      { cause: error ?? undefined },
+    );
+  return data;
+}
+
 /**
- * Étape 1 de l'aperçu (US-10) : liste Wikipédia et base GameTDB du jour, puis règle du physique (SPEC v1.4) :
- * régions et jeux réduits aux boîtes, compilations ajoutées. N'écrit rien.
+ * Étape 1 de l'aperçu (US-10) : liste Wikipédia du jour et base GameTDB déposée par le relais (#53), puis règle
+ * du physique (SPEC v1.4) : régions et jeux réduits aux boîtes, compilations ajoutées. N'écrit rien.
  */
 async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
   const fiche = await chargerConsole(consoleSlug);
@@ -84,12 +98,12 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
     telecharger(urlRendu(fiche.wikipedia_liste!), "Wikipédia").then((r) =>
       r.text(),
     ),
-    telecharger(URL_BASE_GAMETDB, "GameTDB").then((r) => r.arrayBuffer()),
+    lireRelais(CHEMIN_BASE_GAMETDB).then((b) => b.text()),
   ]);
   const liste = lireListeWikipediaDetaillee(wikipedia);
   const physique = appliquerGameTdb(
     liste.jeux,
-    regrouperGameTdb(lireGameTdb(lireArchiveGameTdb(new Uint8Array(gametdb)))),
+    regrouperGameTdb(lireGameTdb(gametdb)),
   );
   return preparerApercu(
     { ...liste, ...physique },
@@ -290,18 +304,19 @@ async function copierJaquettes(
       tailles: Awaited<ReturnType<typeof convertirEnWebp>>;
     } | null = null;
     for (const c of choix[region] ?? []) {
-      const url =
-        c.source === "gametdb" ? c.url : urlImageIgdb(c.imageId, "t_1080p");
+      const cle = c.source === "gametdb" ? c.chemin : c.imageId;
       try {
-        if (!converties.has(url))
-          converties.set(
-            url,
-            await convertirEnWebp(await telechargerImage(url)),
-          );
-        trouvee = { source: c.source, tailles: converties.get(url)! };
+        if (!converties.has(cle)) {
+          const image =
+            c.source === "gametdb"
+              ? Buffer.from(await (await lireRelais(c.chemin)).arrayBuffer())
+              : await telechargerImage(urlImageIgdb(c.imageId, "t_1080p"));
+          converties.set(cle, await convertirEnWebp(image));
+        }
+        trouvee = { source: c.source, tailles: converties.get(cle)! };
         break;
       } catch {
-        // Scan absent dans cette langue (404) ou image illisible : candidat suivant.
+        // Scan absent du relais, image IGDB introuvable ou illisible : candidat suivant.
       }
     }
     if (!trouvee) continue;

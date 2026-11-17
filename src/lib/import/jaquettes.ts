@@ -6,12 +6,11 @@ import {
 
 const POIDS_MAX = 5 * 1024 * 1024;
 
-/** Seuls hôtes d'où l'import copie des images (scans GameTDB, images IGDB). */
-const HOTES_IMAGES = new Set(["images.igdb.com", "art.gametdb.com"]);
+/** Seul hôte d'où l'import télécharge des images (les scans GameTDB passent par le relais, #53). */
+const HOTES_IMAGES = new Set(["images.igdb.com"]);
 
 /**
- * Télécharge une jaquette. Seules les adresses https://art.gametdb.com et https://images.igdb.com sont
- * acceptées : le serveur ne va jamais chercher une image sur un site arbitraire (protection SSRF). 5 Mo au plus.
+ * Télécharge une image IGDB. Seule l'adresse https://images.igdb.com est acceptée : le serveur ne va jamais chercher une image sur un site arbitraire (protection SSRF). 5 Mo au plus.
  */
 export async function telechargerImage(
   url: string,
@@ -20,7 +19,7 @@ export async function telechargerImage(
   const adresse = new URL(url);
   if (adresse.protocol !== "https:" || !HOTES_IMAGES.has(adresse.hostname)) {
     throw new Error(
-      `Adresse refusée : seules les images de GameTDB et d'IGDB sont copiées (${url})`,
+      `Adresse refusée : seules les images d'IGDB sont copiées (${url})`,
     );
   }
   const reponse = await fetch(url);
