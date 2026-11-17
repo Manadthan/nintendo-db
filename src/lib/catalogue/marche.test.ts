@@ -18,7 +18,9 @@ describe("marcheDepuisTexte (US-03)", () => {
 
 describe("versParametre", () => {
   it("écrit le marché en minuscules dans l'adresse, et retire le paramètre pour « Tous »", () => {
-    expect(versParametre("?marche=jap&q=zelda", "US")).toBe("?marche=us&q=zelda");
+    expect(versParametre("?marche=jap&q=zelda", "US")).toBe(
+      "?marche=us&q=zelda",
+    );
     expect(versParametre("", "PAL")).toBe("?marche=pal");
     expect(versParametre("?marche=us&q=zelda", "TOUS")).toBe("?q=zelda");
     expect(versParametre("?marche=us", "TOUS")).toBe("");
@@ -27,6 +29,11 @@ describe("versParametre", () => {
 
 describe("MARCHES", () => {
   it("propose Tous, Europe, Amérique du Nord, Japon, dans cet ordre", () => {
-    expect(MARCHES.map((m) => m.libelle)).toEqual(["Tous", "Europe", "Amérique du Nord", "Japon"]);
+    expect(MARCHES.map((m) => m.libelle)).toEqual([
+      "Tous",
+      "Europe",
+      "Amérique du Nord",
+      "Japon",
+    ]);
   });
 });

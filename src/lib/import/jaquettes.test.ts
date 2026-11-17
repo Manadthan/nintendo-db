@@ -21,13 +21,14 @@ const reponse = (corps: Buffer, type = "image/jpeg", ok = true) =>
   });
 
 describe("convertirEnWebp (ADR-04)", () => {
-  it("produit deux WebP de 300 et 600 px de large, proportions gardées", async () => {
-    const tailles = await convertirEnWebp(await png(762, 1080));
+  it("produit trois WebP de 300, 600 et 768 px de large, proportions gardées", async () => {
+    const tailles = await convertirEnWebp(await png(1080, 1520));
+    expect(Object.keys(tailles)).toEqual(["300", "600", "768"]);
     for (const [largeur, image] of Object.entries(tailles)) {
       const meta = await sharp(image).metadata();
       expect(meta.format).toBe("webp");
       expect(meta.width).toBe(Number(largeur));
-      expect(meta.height).toBe(Math.round((Number(largeur) * 1080) / 762));
+      expect(meta.height).toBe(Math.round((Number(largeur) * 1520) / 1080));
     }
   });
 
@@ -75,9 +76,7 @@ describe("telechargerImage", () => {
       ),
     ).rejects.toThrow(/image/);
     await expect(
-      telechargerImage(url, async () =>
-        reponse(Buffer.alloc(6 * 1024 * 1024)),
-      ),
+      telechargerImage(url, async () => reponse(Buffer.alloc(6 * 1024 * 1024))),
     ).rejects.toThrow(/lourde/);
     await expect(
       telechargerImage(url, async () =>

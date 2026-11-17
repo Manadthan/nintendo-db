@@ -97,3 +97,14 @@ test("la fiche tient dans la largeur de l'iPhone", async ({ page }) => {
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(375);
 });
+
+test("la grande jaquette de la fiche prend presque toute la largeur de l'iPhone (#48)", async ({
+  page,
+}) => {
+  await page.goto(KIRBY);
+  const jaquette = page.getByRole("main").getByRole("img").first();
+  const largeur = (await jaquette.boundingBox())!.width;
+  // 375 px d'écran − 2 × 16 px de marge.
+  expect(largeur).toBeGreaterThanOrEqual(340);
+  expect(largeur).toBeLessThanOrEqual(345);
+});

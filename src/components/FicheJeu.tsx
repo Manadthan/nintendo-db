@@ -63,12 +63,13 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
       </Link>
 
       <div className="flex flex-col items-center gap-3">
-        <div className="w-[230px] drop-shadow-[0_10px_14px_rgba(22,24,29,0.16)]">
+        {/* Presque pleine largeur sur iPhone (MAQUETTES v0.5) ; 768 px chargés sur écran ×3 (ADR-04). */}
+        <div className="w-full max-w-[400px] drop-shadow-[0_10px_14px_rgba(22,24,29,0.16)]">
           <Jaquette
             sortie={sortie}
             titre={titre}
             console={jeu.console.nom}
-            sizes="230px"
+            sizes="(max-width: 432px) calc(100vw - 32px), 400px"
           />
         </div>
         <div

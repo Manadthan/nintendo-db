@@ -190,18 +190,21 @@ export type JaquetteEnBase = {
  * Images à essayer, dans l'ordre, pour chaque région sortie (ADR-04) : le scan GameTDB de la boîte (langues PAL
  * EN, FR, DE), puis l'image IGDB de la région, puis la principale en secours (R2). Rien à faire (null) pour une
  * région non sortie, une jaquette ajoutée à la main ou déjà scannée ; une image IGDB déjà copiée n'est remplacée
- * que par un scan.
+ * que par un scan. `recopier` : tout recopier sauf les ajouts à la main (nouvelle taille d'image, #48).
  */
 export function choisirJaquettes(
   jeu: JeuImporte,
   disques: JeuAImporter["disques"],
   igdb: InfosIgdb | null,
   existantes: Partial<Record<Region, JaquetteEnBase>> | null,
+  recopier = false,
 ): Record<Region, CandidatJaquette[] | null> {
   return Object.fromEntries(
     REGIONS.map((r) => {
       const deja = existantes?.[r];
-      const garder = deja?.path && deja.source !== "igdb";
+      const manuelle = deja?.source === "photo" || deja?.source === "url";
+      const garder =
+        deja?.path && (manuelle || (!recopier && deja.source !== "igdb"));
       if (!jeu.releases[r].sortie || garder) return [r, null];
       const id = disques[r];
       const candidats: CandidatJaquette[] = id
@@ -210,7 +213,7 @@ export function choisirJaquettes(
             url,
           }))
         : [];
-      if (!deja?.path && igdb) {
+      if ((!deja?.path || recopier) && igdb) {
         const propre = igdb.jaquettes[r];
         const imageId = propre ?? igdb.jaquettes.US;
         if (imageId)

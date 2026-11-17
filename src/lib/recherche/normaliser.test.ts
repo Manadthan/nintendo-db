@@ -8,8 +8,12 @@ describe("normaliser", () => {
   });
 
   it("retire la ponctuation et réduit les espaces", () => {
-    expect(normaliser("Captain Toad: Treasure Tracker")).toBe("captain toad treasure tracker");
-    expect(normaliser("Mario & Sonic  at the   Rio 2016")).toBe("mario sonic at the rio 2016");
+    expect(normaliser("Captain Toad: Treasure Tracker")).toBe(
+      "captain toad treasure tracker",
+    );
+    expect(normaliser("Mario & Sonic  at the   Rio 2016")).toBe(
+      "mario sonic at the rio 2016",
+    );
     expect(normaliser("  Splatoon  ")).toBe("splatoon");
   });
 

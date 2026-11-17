@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { PAGE_ADMIN, PAGE_CONNEXION, redirectionAdmin } from "@/lib/auth/routes";
+import {
+  PAGE_ADMIN,
+  PAGE_CONNEXION,
+  redirectionAdmin,
+} from "@/lib/auth/routes";
 
 describe("redirectionAdmin (US-09)", () => {
   it("envoie un visiteur non connecté vers la connexion pour toute page d'administration", () => {
@@ -12,7 +16,9 @@ describe("redirectionAdmin (US-09)", () => {
   });
 
   it("ne confond pas la connexion avec une page qui commence pareil", () => {
-    expect(redirectionAdmin("/admin/connexion-bis", false)).toBe(PAGE_CONNEXION);
+    expect(redirectionAdmin("/admin/connexion-bis", false)).toBe(
+      PAGE_CONNEXION,
+    );
   });
 
   it("laisse passer le propriétaire connecté", () => {
@@ -25,7 +31,12 @@ describe("redirectionAdmin (US-09)", () => {
   });
 
   it("ne touche jamais aux pages publiques", () => {
-    for (const chemin of ["/", "/consoles/wii-u", "/jeux/wii-u/mario-kart-8", "/administrateur"]) {
+    for (const chemin of [
+      "/",
+      "/consoles/wii-u",
+      "/jeux/wii-u/mario-kart-8",
+      "/administrateur",
+    ]) {
       expect(redirectionAdmin(chemin, false)).toBeNull();
       expect(redirectionAdmin(chemin, true)).toBeNull();
     }

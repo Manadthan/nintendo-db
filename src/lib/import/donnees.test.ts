@@ -215,6 +215,32 @@ describe("choisirJaquettes (ADR-04, R2, R6)", () => {
     ).toMatchObject({ US: null, PAL: null });
   });
 
+  it("sur demande, recopie tout (nouvelle taille d'image) sauf les ajouts à la main", () => {
+    const infos = igdb(
+      "kirby-and-the-rainbow-paintbrush",
+      "Kirby and the Rainbow Curse",
+    );
+    const jeu = construireJeu(KIRBY, infos);
+    const choix = choisirJaquettes(
+      jeu,
+      KIRBY.disques,
+      infos,
+      {
+        JAP: { path: "x/jap", source: "photo" },
+        US: { path: "x/us", source: "gametdb" },
+        PAL: { path: "x/pal", source: "igdb" },
+      },
+      true,
+    );
+    expect(choix.JAP).toBeNull();
+    expect(choix.US?.[0]).toEqual(scans(KIRBY.disques.US!, ["US"])[0]);
+    expect(choix.PAL?.at(-1)).toEqual({
+      source: "igdb",
+      imageId: "cob8mp",
+      secours: false,
+    });
+  });
+
   it("remplace une image IGDB déjà copiée par le scan, jamais par une autre image IGDB", () => {
     const infos = igdb(
       "kirby-and-the-rainbow-paintbrush",

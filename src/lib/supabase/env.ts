@@ -8,7 +8,9 @@ export type SupabaseEnv = {
  * Vérifie les variables et renvoie un message clair si l'une manque,
  * plutôt qu'une erreur obscure de Supabase au premier appel.
  */
-export function readSupabaseEnv(env: Record<string, string | undefined>): SupabaseEnv {
+export function readSupabaseEnv(
+  env: Record<string, string | undefined>,
+): SupabaseEnv {
   const url = env.NEXT_PUBLIC_SUPABASE_URL?.trim();
   const publishableKey = env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim();
 
@@ -24,7 +26,9 @@ export function readSupabaseEnv(env: Record<string, string | undefined>): Supaba
   }
 
   if (!URL.canParse(url!) || !/^https?:$/.test(new URL(url!).protocol)) {
-    throw new Error(`NEXT_PUBLIC_SUPABASE_URL n'est pas une adresse valide : « ${url} ».`);
+    throw new Error(
+      `NEXT_PUBLIC_SUPABASE_URL n'est pas une adresse valide : « ${url} ».`,
+    );
   }
 
   return { url: url!, publishableKey: publishableKey! };
@@ -37,6 +41,7 @@ export function readSupabaseEnv(env: Record<string, string | undefined>): Supaba
 export function supabaseEnv(): SupabaseEnv {
   return readSupabaseEnv({
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
   });
 }

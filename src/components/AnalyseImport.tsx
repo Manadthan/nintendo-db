@@ -56,6 +56,8 @@ export function AnalyseImport({
   const [igdb, setIgdb] = useState<Record<string, RapprochementLeger>>({});
   // Choix fait à la main pour un rapprochement incertain (R1) ; repris par l'enregistrement (#35).
   const [choix, setChoix] = useState<Record<string, number | null>>({});
+  // Recopier les jaquettes déjà en place (sauf ajouts à la main), après un changement de taille d'image (#48).
+  const [recopier, setRecopier] = useState(false);
 
   async function analyser() {
     setApercu(null);
@@ -116,6 +118,7 @@ export function AnalyseImport({
                   ? choix[l.slug]!
                   : (igdb[l.slug]?.jeu?.id ?? null),
             })),
+            recopier,
           )),
         );
       }
@@ -170,6 +173,19 @@ export function AnalyseImport({
         >
           {etat.message}
         </div>
+      )}
+
+      {etat.etape === "fini" && apercu && (
+        <label className="flex min-h-11 items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={recopier}
+            onChange={(e) => setRecopier(e.target.checked)}
+            className="size-5 accent-accent"
+          />
+          Recopier toutes les jaquettes (sauf photos et images ajoutées à la
+          main)
+        </label>
       )}
 
       {etat.etape === "fini" && apercu && (
