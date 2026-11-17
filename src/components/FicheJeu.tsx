@@ -69,6 +69,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             sortie={sortie}
             titre={titre}
             console={jeu.console.nom}
+            consoleSlug={jeu.console.slug}
             sizes="(max-width: 432px) calc(100vw - 32px), 400px"
           />
         </div>

@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.9 — 17/11/2026 — statut : **validée**
+> Version 1.10 — 18/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.10 | 18/11/2026 | **DS et 3DS** (étape 9) : US-10 (règles des cartes, titres PAL anglais, scans de repli) ; jaquettes aux **proportions de chaque console** (US-02, US-04) |
 > | 1.9 | 17/11/2026 | **Wii** (étape 8) : US-01 = un seul catalogue toutes consoles, filtre **Console** (US-06) ; US-10 : import Wii depuis **GameTDB seul**, jaquettes = face avant du scan complet |
 > | 1.8 | 17/11/2026 | Référencement précisé (étape 7) : plan du site, robots sans l'administration, adresses canoniques, aperçu de partage avec la jaquette, données structurées |
 > | 1.7 | 17/11/2026 | US-06 : filtre « sorti dans la région affichée » retiré (doublon du marché) ; genres = ceux de GameTDB, **tous traduits** en français |
@@ -145,6 +146,14 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       `-USA`…) n'est pas connu de la source, il se complète à la main.
 - [ ] Wii : la jaquette est la **face avant** découpée dans le scan complet de la boîte (≈ 485 px de large, aucune
       source ouverte ne fait mieux) ; une photo (US-12) peut la remplacer.
+- [ ] **DS et 3DS** (SPEC v1.10) : GameTDB seul, comme la Wii. Cartes du commerce seulement : ni démos, bornes ou
+      téléchargements (DS : identifiants en Y, titres « (Demo) », « Download », « Kiosk »), ni logiciels (genre
+      « software »), ni jeux Super Nintendo ou eShop de la 3DS (seuls les identifiants en A, B, C, E sont gardés).
+- [ ] DS et 3DS : en Europe, le titre est celui de la carte anglaise quand il y en a plusieurs (pas « Professor Layton
+      und… ») ; codes produit `NTR-` (DS), `CTR-P-` (3DS), `KTR-P-` (New 3DS).
+- [ ] DS et 3DS : jaquette = scan de la face (haute définition, sinon scan moyen de 400 px si c'est tout ce qui existe).
+- [ ] Les jaquettes gardent les **proportions de la boîte de leur console** : presque carrées pour DS et 3DS, en
+      hauteur pour Wii et Wii U (vignettes, fiche, page « Jaquettes »).
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
@@ -173,7 +182,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 ## 6. Consoles couvertes
 
-**v1 : Wii U.** Puis **Wii** (étape 8), puis les autres, une à une :
+**v1 : Wii U.** Puis **Wii** (étape 8), **DS + 3DS** (étape 9), **Switch** (étape 10), puis les autres :
 **Salon** : Color TV-Game, NES / Famicom (+ Famicom Disk System), Super Nintendo / Super Famicom (+ Satellaview),
 Nintendo 64 (+ 64DD), GameCube, Wii, Wii U, Switch, Switch 2.
 **Portables** : Game & Watch, Game Boy, Game Boy Color, Virtual Boy, Game Boy Advance (+ e-Reader), Pokémon Mini,
@@ -196,6 +205,7 @@ DS, 3DS.
 | 3 | Code produit | **Importé de GameTDB** (v1.4) ; sinon « — », complété à la main |
 | 4 | Images | Jaquettes par région **copiées chez nous** : scans de boîtes GameTDB (v1.4) ; IGDB retiré (v1.6) |
 | 5 | Périmètre v1 | **Wii U seule** ; l'architecture reste multi-consoles |
+| 7 | DS et 3DS (v1.10) | Ensemble à l'étape 9, GameTDB seul ; Switch à l'étape 10 (régions, import automatique) |
 | 6 | Consoles suivantes (v1.9) | **Wii** ; un seul catalogue filtré par console ; règle « boîte Nintendo » inchangée (les 14 jeux Wii édités par Nintendo dans une seule région restent, toutes régions listées) |
 
 ## 9. Prochaine étape

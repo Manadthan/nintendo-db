@@ -288,6 +288,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                       sortie={v.sortie}
                       titre={v.sortie.titre!}
                       console={v.jeu.console.nom}
+                      consoleSlug={v.jeu.console.slug}
                       sizes="(max-width: 640px) 50vw, 200px"
                     />
                     <div className="flex flex-col gap-[3px]">
@@ -320,6 +321,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                         sortie={v.sortie}
                         titre={v.sortie.titre!}
                         console={v.jeu.console.nom}
+                        consoleSlug={v.jeu.console.slug}
                         sizes="54px"
                         petite
                       />
