@@ -43,6 +43,39 @@ export type Database = {
         };
         Relationships: [];
       };
+      exclusions: {
+        Row: {
+          console_id: string;
+          cree_le: string;
+          raison: string;
+          slug: string;
+          titre: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          console_id: string;
+          cree_le?: string;
+          raison?: string;
+          slug: string;
+          titre: string;
+        };
+        Update: {
+          console_id?: string;
+          cree_le?: string;
+          raison?: string;
+          slug?: string;
+          titre?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "exclusions_console_id_fkey";
+            columns: ["console_id"];
+            isOneToOne: false;
+            referencedRelation: "consoles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       games: {
         Row: {
           console_id: string;

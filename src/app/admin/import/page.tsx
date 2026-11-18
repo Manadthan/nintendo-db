@@ -42,6 +42,13 @@ const CONSOLES = {
     description:
       "Lit la base GameTDB seule (SPEC v1.11) : cartouches du commerce dont au moins une est éditée par Nintendo ; une cartouche mondiale vaut pour les 3 régions (même date, même code), avec la boîte de chaque région.",
   },
+  "switch-2": {
+    nom: "Switch 2",
+    sources: "la liste Wikipédia",
+    description:
+      "Lit la liste Wikipédia seule (SPEC v1.11, GameTDB n'a pas de base Switch 2) : jeux édités par Nintendo, datés au jour près, une date pour les 3 régions. Décoche « en boîte » les jeux vendus seulement en téléchargement ; ajoute les jaquettes à la main (page Jaquettes).",
+    caseEnBoite: true,
+  },
 } as const;
 
 type Slug = keyof typeof CONSOLES;
@@ -81,6 +88,7 @@ export default async function PageImport({
         consoleSlug={slug}
         consoleNom={laConsole.nom}
         sources={laConsole.sources}
+        caseEnBoite={"caseEnBoite" in laConsole && laConsole.caseEnBoite}
       />
     </main>
   );

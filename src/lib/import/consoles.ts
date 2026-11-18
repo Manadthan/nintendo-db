@@ -2,6 +2,7 @@ import type { Region } from "@/lib/catalogue/types";
 import { estCarteDuCommerce } from "./relais-portables";
 import { estCartoucheSwitchDuCommerce } from "./relais-switch";
 import { estDisqueWiiDuCommerce } from "./relais-wii";
+import { lireListeSwitch2, type ListeSwitch2 } from "./wikipedia-switch-2";
 
 /**
  * Sources de l'import pour une console (étape 8, DESIGN v1.2 §8) : où le relais GameTDB a déposé la base et les
@@ -34,6 +35,11 @@ export type SourceConsole = {
     titre: string,
     genre: string,
   ) => boolean;
+  /**
+   * Console lue sur Wikipédia seul, sans GameTDB (Switch 2, étape 10) : lecteur de sa liste. L'aperçu propose alors
+   * une case « en boîte » pour chaque nouveau jeu (la liste ne distingue pas boîte et téléchargement).
+   */
+  wikipediaSeul?: (html: string) => ListeSwitch2;
 };
 
 export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
@@ -86,6 +92,16 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
     longueurBase: 4,
     prefixeCode: "HAC-P-",
     estDisque: estCartoucheSwitchDuCommerce,
+  },
+  // Étape 10 (DESIGN v1.4 §1 quater) : GameTDB n'a pas de base Switch 2 ; liste Wikipédia, jaquettes à la main.
+  "switch-2": {
+    slug: "switch-2",
+    wikipedia: true,
+    base: "",
+    scans: "",
+    prefixeCode: "",
+    estDisque: () => false,
+    wikipediaSeul: lireListeSwitch2,
   },
 };
 

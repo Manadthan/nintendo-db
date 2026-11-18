@@ -78,3 +78,17 @@ Fabriquée par :
 ```
 node scripts/fixture-gametdb-switch.mjs <switchtdb.zip> > src/lib/import/__fixtures__/switchtdb.xml
 ```
+
+## `switch-2-wikipedia.html` (étape 10)
+
+| | |
+|---|---|
+| Source | https://en.wikipedia.org/w/index.php?title=List_of_Nintendo_Switch_2_games&action=render, téléchargée le 18/11/2026 |
+| Conditions | CC BY-SA 4.0, comme la liste Wii U ci-dessus |
+| Contenu | Premier tableau « wikitable », nettoyé comme la liste Wii U : 1 033 jeux, dont 34 édités par Nintendo (30 datés au jour près) |
+
+Fabriquée par :
+
+```
+node scripts/fixture-wikipedia.mjs <page.html> > src/lib/import/__fixtures__/switch-2-wikipedia.html
+```

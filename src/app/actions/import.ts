@@ -8,6 +8,8 @@ import { REGIONS, type Region } from "@/lib/catalogue/types";
 import {
   appliquerComparaisons,
   preparerApercu,
+  retirerExclus,
+  type Exclusion,
   type Apercu,
   type ResultatEnregistrement,
   type ResumeEnregistrement,
@@ -114,6 +116,22 @@ async function lireExistants(
 async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
   const fiche = await chargerConsole(consoleSlug);
   const { source } = fiche;
+  // Switch 2 : liste Wikipédia seule, sans GameTDB (étape 10).
+  const wikipediaSeul = source.wikipediaSeul;
+  if (wikipediaSeul) {
+    const html = await (
+      await telecharger(urlRendu(fiche.wikipedia_liste!), "Wikipédia")
+    ).text();
+    const { jeux, ecartes, autresEditeurs } = wikipediaSeul(html);
+    return comparerEtExclure(
+      fiche,
+      preparerApercu(
+        { jeux, ecartes, autresEditeurs, telechargeables: [] },
+        new Set(fiche.games.map((g) => g.slug)),
+        manuels(fiche.games),
+      ),
+    );
+  }
   const [liste, gametdb] = await Promise.all([
     source.wikipedia
       ? telecharger(urlRendu(fiche.wikipedia_liste!), "Wikipédia").then(
@@ -129,24 +147,79 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
       source.longueurBase,
     ),
   );
-  const apercu = preparerApercu(
-    { ...liste, ...physique },
-    new Set(fiche.games.map((g) => g.slug)),
-    new Set(
-      fiche.games
-        .filter((g) => g.verrous.includes(VERROU_MANUEL))
-        .map((g) => g.slug),
+  return comparerEtExclure(
+    fiche,
+    preparerApercu(
+      { ...liste, ...physique },
+      new Set(fiche.games.map((g) => g.slug)),
+      manuels(fiche.games),
     ),
   );
-  // Import des nouveautés (ADR-03 point 6) : nouveau, modifié ou inchangé par rapport à la base.
-  const existants = await lireExistants(fiche.id);
-  return appliquerComparaisons(apercu, (l) =>
-    comparer(
-      existants.get(l.slug) ?? null,
-      construireJeu(l.wikipedia, source.prefixeCode),
-      l.wikipedia.disques,
-    ),
+}
+
+/** Jeux ajoutés à la main (US-11) : absents des sources, jamais supprimés par l'import. */
+const manuels = (games: { slug: string; verrous: string[] }[]) =>
+  new Set(
+    games.filter((g) => g.verrous.includes(VERROU_MANUEL)).map((g) => g.slug),
   );
+
+/**
+ * Import des nouveautés (ADR-03 point 6) : nouveau, modifié ou inchangé par rapport à la base ; puis jeux exclus
+ * par le propriétaire (point 7) retirés de l'aperçu.
+ */
+async function comparerEtExclure(
+  fiche: Awaited<ReturnType<typeof chargerConsole>>,
+  apercu: Apercu,
+): Promise<Apercu> {
+  const supabase = await exigerProprietaire();
+  const [existants, { data: exclus, error }] = await Promise.all([
+    lireExistants(fiche.id),
+    supabase
+      .from("exclusions")
+      .select("slug, titre")
+      .eq("console_id", fiche.id)
+      .order("titre"),
+  ]);
+  if (error) throw new Error(`Lecture des exclusions : ${error.message}`);
+  return retirerExclus(
+    appliquerComparaisons(apercu, (l) =>
+      comparer(
+        existants.get(l.slug) ?? null,
+        construireJeu(l.wikipedia, fiche.source.prefixeCode),
+        l.wikipedia.disques,
+      ),
+    ),
+    exclus ?? [],
+  );
+}
+
+/** Note des jeux décochés « en boîte » (téléchargement seul) : l'import ne les propose plus (ADR-03 point 7). */
+async function exclureJeuxInterne(
+  consoleSlug: string,
+  jeux: Exclusion[],
+): Promise<void> {
+  const fiche = await chargerConsole(consoleSlug);
+  const supabase = await exigerProprietaire();
+  const { error } = await supabase.from("exclusions").upsert(
+    jeux.map((j) => ({ console_id: fiche.id, slug: j.slug, titre: j.titre })),
+    { onConflict: "console_id,slug" },
+  );
+  if (error) throw new Error(`Exclusion impossible : ${error.message}`);
+}
+
+/** Réactive un jeu exclu : il sera de nouveau proposé à la prochaine analyse. */
+async function reactiverJeuInterne(
+  consoleSlug: string,
+  slug: string,
+): Promise<void> {
+  const fiche = await chargerConsole(consoleSlug);
+  const supabase = await exigerProprietaire();
+  const { error } = await supabase
+    .from("exclusions")
+    .delete()
+    .eq("console_id", fiche.id)
+    .eq("slug", slug);
+  if (error) throw new Error(`Réactivation impossible : ${error.message}`);
 }
 
 /** Un jeu à enregistrer : ses données, telles que l'aperçu les a préparées. */
@@ -364,6 +437,18 @@ export async function supprimerJeux(
   slugs: string[],
 ): Promise<Resultat<string[]>> {
   return capturer(() => supprimerJeuxInterne(consoleSlug, slugs));
+}
+export async function exclureJeux(
+  consoleSlug: string,
+  jeux: Exclusion[],
+): Promise<Resultat<void>> {
+  return capturer(() => exclureJeuxInterne(consoleSlug, jeux));
+}
+export async function reactiverJeu(
+  consoleSlug: string,
+  slug: string,
+): Promise<Resultat<void>> {
+  return capturer(() => reactiverJeuInterne(consoleSlug, slug));
 }
 export async function terminerImport(
   consoleSlug: string,

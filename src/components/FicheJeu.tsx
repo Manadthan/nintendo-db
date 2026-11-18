@@ -48,6 +48,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
         .map((s) => SOURCES_JAQUETTE[s]),
     ),
   ];
+  // Wii U : Wikipédia + GameTDB ; Switch 2 : Wikipédia seul (étape 10) ; les autres : GameTDB seul.
+  const parWikipedia = ["wii-u", "switch-2"].includes(jeu.console.slug);
   const region = choix ?? regionParDefaut(jeu, marche);
   const sortie = jeu.sorties[region];
   const titre =
@@ -185,8 +187,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
 
       <p className="text-xs leading-relaxed text-texte-discret">
         Sources :{" "}
-        {/* Seule la Wii U est importée de Wikipédia et GameTDB ; les autres consoles, de GameTDB seul (SPEC v1.9, v1.10). */}
-        {jeu.console.slug !== "wii-u" ? (
+        {/* Wii U et Switch 2 : Wikipédia ; les autres consoles, GameTDB seul (SPEC v1.9 à v1.11). */}
+        {!parWikipedia ? (
           "GameTDB"
         ) : jeu.wikipediaUrl ? (
           <a
@@ -198,7 +200,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
         ) : (
           "Wikipédia"
         )}
-        {jeu.console.slug === "wii-u" && " (CC BY-SA)"}
+        {parWikipedia && " (CC BY-SA)"}
         {sourcesExternes.length > 0 &&
           ` · jaquettes ${sourcesExternes.join(", ")}`}
         . Site de fan non affilié à Nintendo.

@@ -4,12 +4,13 @@
  */
 const PRESQUE_CARREE = "aspect-[768/680]"; // DS, 3DS : scans GameTDB 768 × 680
 const EN_HAUTEUR = "aspect-[27/38]"; // Wii U, Wii (boîtier DVD)
-const SWITCH = "aspect-[1166/1888]"; // Switch : scans GameTDB 1166 × 1888 (et 352 × 570), boîtier plus étroit
+const SWITCH = "aspect-[1166/1888]"; // Switch, Switch 2 : boîtier plus étroit (scans GameTDB 1166 × 1888)
 
 const PAR_CONSOLE: Record<string, string> = {
   ds: PRESQUE_CARREE,
   "3ds": PRESQUE_CARREE,
   switch: SWITCH,
+  "switch-2": SWITCH,
 };
 
 /** Classe Tailwind des proportions de la boîte d'une console ; en hauteur par défaut. */
