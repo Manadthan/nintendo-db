@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.4 — 18/11/2026 — statut : **à valider**
+> Version 1.5 — 18/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.5 | 18/11/2026 | **GameCube** (étape 11) : étude (§1 quinquies), plan §8 |
 > | 1.4 | 18/11/2026 | **Switch + Switch 2** (étape 10) : étude (§1 quater), import des nouveautés (ADR-03 point 6), exclusions mémorisées, plan §8 |
 > | 1.3 | 18/11/2026 | **DS + 3DS** (étape 9) : étude (§1 ter), proportions des jaquettes par console, plan §8 |
 > | 1.2 | 17/11/2026 | **Wii** (étape 8) : étude GameTDB (§1 bis), import GameTDB seul, relais étendu (face avant découpée), catalogue toutes consoles (ADR-06), plan §8 |
@@ -90,6 +91,24 @@ DS/3DS presque carrées (768 × 680), Wii/Wii U en hauteur (27 × 38) : **propor
 distingue ni boîte et téléchargement (Welcome Tour, Drag x Drive : téléchargement seul) ni jeux annoncés (« 2027 »).
 IGDB : couvertures = illustrations sans garantie de boîte (règles de contribution IGDB) → écarté ; gamecartdb :
 images hébergées chez lui, sans source citée → non réutilisables.
+
+## 1 quinquies. Étude GameCube (18/11/2026)
+
+GameTDB range la GameCube dans la base Wii, mais `wiitdb.zip?LANG=EN` ne la contient pas : il faut
+`wiitdb.zip?LANG=EN&GAMECUBE=1` (2,4 Mo). Type `GameCube`, 1 708 disques.
+
+| Mesure | Résultat |
+|---|---|
+| Disques des jeux Nintendo (code `01` ou éditeur Nintendo) | 286, dont **96 démos ou disques spéciaux** en D, E, P, U (« Gekkan Nintendo Tentou Demo », « Interactive Multi-Game Demo », disques bonus, Game Boy Player Start-Up Disc) |
+| Disques du commerce (identifiant en G, sans démo) | **151 disques, 56 jeux** (45 dans les 3 régions) ; + Zelda Collector's Edition et Pac-Man Vs. (identifiants en P) |
+| Dates au jour près, titres japonais, développeur | 247 / 286, 117 / 117, 222 / 286 |
+| Scans `coverfullHQ` (boîte dépliée 1024 × 680, comme la Wii) | **120 / 151** ; les 31 manquants sont japonais (sauf 1) |
+| Repli : `cover` (face seule, 160 × 224) | présent pour les disques japonais sans scan |
+| Découpe de la face avant (`decouperFaceAvant`, #87) | correcte sur 10 boîtes de 3 régions, montrées au propriétaire avant la spec (BILAN, leçon 9) |
+
+Pièges : Pokémon Channel est classé « software » (le Wii Startup Disc aussi, #90) ; la règle « logiciel » ne
+s'applique pas à la GameCube, dont les vrais logiciels (Game Boy Player Start-Up Disc, U) sont déjà écartés par leur
+identifiant.
 
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
 Vercel avec un cache d'un an). C'est le modèle retenu (ADR-04).
@@ -273,6 +292,10 @@ test n'appelle les sites en direct.
       variantes écartées, codes `HAC-P-` ; proportions 1166 × 1888 ; fixture réduite.
    3. **Switch 2** : migration 0010 (console `switch-2`, 2025 ; table `exclusions` + RLS + pgTAP) ; lecteur de la
       liste Wikipédia Switch 2 (fixture) ; case « en boîte » et exclusions dans l'aperçu ; jaquettes à la main.
+
+11. **GameCube** (v1.5) — 1 PR de code basée sur `main` (après #110 seulement pour la ligne de version de la SPEC) :
+   relais (base réduite `gamecube/gctdb.xml`, faces découpées `gamecube/faces`, repli sur la petite image) ;
+   migration 0011 (console `gamecube`, salon, 2001, avant la DS) ; règles ci-dessus, codes `DOL-` ; fixture réduite.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
