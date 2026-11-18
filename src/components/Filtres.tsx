@@ -19,6 +19,8 @@ type PropsPanneau = {
   consoles: ConsoleProposee[];
   annees: string[];
   genres: string[];
+  /** Studios des jeux affichés, avec leur nombre de jeux (#89). */
+  developpeurs: { nom: string; nombre: number }[];
 };
 
 /** Panneau des filtres (US-06) : listes natives, confortables sur iPhone ; chaque choix s'applique aussitôt. */
@@ -27,6 +29,7 @@ export function PanneauFiltres({
   consoles,
   annees,
   genres,
+  developpeurs,
 }: PropsPanneau) {
   const changer = (patch: Partial<Filtres>) =>
     enregistrerFiltres({ ...filtres, ...patch });
@@ -109,6 +112,25 @@ export function PanneauFiltres({
           </select>
         </label>
       </div>
+      <label className="flex flex-col gap-1 text-[13px] text-texte-doux">
+        Développeur
+        <select
+          value={filtres.developpeur ?? ""}
+          onChange={(e) => changer({ developpeur: e.target.value || null })}
+          className={CHAMP}
+        >
+          <option value="">Tous</option>
+          {developpeurs.map((d) => (
+            <option key={d.nom} value={d.nom}>
+              {d.nom} ({d.nombre})
+            </option>
+          ))}
+          {filtres.developpeur &&
+            !developpeurs.some((d) => d.nom === filtres.developpeur) && (
+              <option value={filtres.developpeur}>{filtres.developpeur}</option>
+            )}
+        </select>
+      </label>
     </div>
   );
 }
@@ -136,6 +158,10 @@ export function FiltresActifs({
     },
     filtres.annee && { libelle: filtres.annee, retirer: { annee: null } },
     filtres.genre && { libelle: filtres.genre, retirer: { genre: null } },
+    filtres.developpeur && {
+      libelle: filtres.developpeur,
+      retirer: { developpeur: null },
+    },
   ].filter((p) => !!p);
   if (pastilles.length === 0) return null;
 
