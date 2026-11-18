@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.1 — 17/11/2026 — statut : **validé**
+> Version 1.2 — 18/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.2 | 18/11/2026 | **Étapes 8 à 10** : Wii, DS, 3DS, Switch, Switch 2, import des nouveautés (§8) |
 > | 1.1 | 17/11/2026 | **Bilan final de la v1** : étapes 6 (filtres) et 7 (finitions) ajoutées (§7), chiffres mis à jour, pistes |
 > | 1.0 | 17/11/2026 | Bilan des étapes 1 à 5 |
 
@@ -109,3 +110,38 @@ Leçons ajoutées :
 8. **Une donnée importée nouvelle ne doit pas exiger de geste manuel** : prévoir, dès la PR, comment la production
    est mise à jour (import relancé automatiquement, ou rattrapage par migration).
 
+
+## 8. Étapes 8 à 10 : Wii, DS, 3DS, Switch et Switch 2
+
+| | |
+|---|---|
+| Durée | 2 jours (17 → 18/11/2026) |
+| Livré | 6 consoles au lieu d'une : Wii (87 jeux), DS (114), 3DS (118), Switch (112), Switch 2 (Wikipédia, photos à la main), dans un seul catalogue filtrable par console ; jaquettes aux proportions de chaque boîte ; **import des nouveautés** (seuls les jeux nouveaux ou modifiés sont enregistrés) ; exclusions mémorisées (« en boîte » décoché) |
+| Pull requests | 15 mergées (#77 à #107), CI verte à chaque fois |
+| Tests | 241 unitaires (+ 68), 60 de bout en bout, 47 sur la base ; 10 migrations |
+| Code applicatif | ≈ 7 800 lignes (hors tests) |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| **Le relais GameTDB** (retour du propriétaire : *ce qui a le plus ralenti*) | Envoi Supabase en erreur sans message (#92), puis GameTDB qui **bloque GitHub** (18/11) : l'import Switch attendait des scans qui ne venaient pas | Réessais des envois (#93) et des téléchargements (#107) ; relais lancé **depuis la session Claude**, clé Supabase injectée par le réseau sans jamais apparaître (méthode dans `CLAUDE.md`) |
+| Qualité des jaquettes Wii | Bande blanche à gauche, tranches noires ou inclinées : la découpe au milieu du scan ne suffisait pas | Détection du bord de la face, testée d'abord sur des scans qui échouaient (#87) |
+| Règles des données découvertes au fil de l'eau | Wii Startup Disc, démos et bornes DS, rééditions, packs et éditions spéciales Switch, jeux Switch 2 en téléchargement seul | Une règle par cas, avec un test sur fixture ; exclusion mémorisée quand la source ne sait pas trancher |
+| PR empilées (étape 8) puis dépendantes (étape 10) | 2 PR mergées dans leur branche au lieu de `main` ; conflits à résoudre après chaque merge | PR basées sur `main` ; ordre de merge annoncé dans chaque PR quand il est imposé (migrations) |
+
+| Question | Réponse du propriétaire |
+|---|---|
+| Ce qui a le plus aidé | **L'étude avant la spec** : les mesures chiffrées de GameTDB avant chaque console (leçon 1 appliquée). |
+| Ce qui a ralenti | **Le relais GameTDB.** |
+| À faire différemment | **Voir les jaquettes avant** : montrer quelques jaquettes réelles dès l'étude, avant d'écrire le code. |
+
+Leçons ajoutées :
+
+9. **Montrer les images réelles dès l'étude** : quelques jaquettes de la future console (bonnes et mauvaises), vues
+   par le propriétaire avant la spec. La bande blanche des boîtes Wii aurait été vue avant le code.
+10. **Ne pas dépendre d'un seul chemin réseau** : une source peut bloquer un hébergeur du jour au lendemain (Vercel,
+    puis GitHub). Garder un chemin de secours documenté et testé (relais depuis la session).
+11. **Une source qui ne sait pas trancher → une décision mémorisée** : quand la donnée manque (boîte ou
+    téléchargement), demander une fois au propriétaire et s'en souvenir, plutôt qu'une liste figée dans le code.
+
+Pistes : **filtre par développeur** (#89), **GameCube** (étape 11), déblocage de GitHub par GameTDB à surveiller,
+jaquettes Switch 2 et japonaises Switch à compléter à la main.

@@ -26,7 +26,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.11 validée |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.4 validée |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
-| `docs/BILAN.md` | Rétrospective de la v1 (étapes 1 à 7) : chiffres, réussites, difficultés, leçons | v1.1 |
+| `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), puis étapes 8 à 10 (§8) : chiffres, réussites, difficultés, leçons | v1.2 à valider |
 
 ## Règles de travail
 
