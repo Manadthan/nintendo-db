@@ -25,7 +25,7 @@ const SOURCES = [
     nom: "Wikipédia",
     lien: "https://en.wikipedia.org/wiki/List_of_Wii_U_games",
     apport:
-      "Liste des jeux Wii U, titres en Amérique du Nord et en Europe, dates de sortie, éditeurs et développeurs (article « List of Wii U games », en anglais).",
+      "Listes des jeux Wii U et Switch 2, titres en Amérique du Nord et en Europe, dates de sortie, éditeurs et développeurs (articles « List of Wii U games » et « List of Nintendo Switch 2 games », en anglais). Les jaquettes Switch 2 sont des photos ajoutées à la main.",
     licence:
       "Texte sous licence Creative Commons Attribution – Partage dans les mêmes conditions (CC BY-SA 4.0).",
     licenceLien: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
@@ -34,7 +34,7 @@ const SOURCES = [
     nom: "GameTDB",
     lien: "https://www.gametdb.com/",
     apport:
-      "Scans des boîtes par région, codes produit, titres japonais, genres, et la liste des jeux réellement sortis en boîte. Pour la Wii, toutes les données viennent de GameTDB.",
+      "Scans des boîtes par région, codes produit, titres japonais, genres, et la liste des jeux réellement sortis en boîte. Pour la Wii, la DS, la 3DS et la Switch, toutes les données viennent de GameTDB.",
     licence:
       "Base mise à disposition pour tout projet lié aux jeux (FAQ de GameTDB). Les images des boîtes restent la propriété de leurs éditeurs.",
     licenceLien: "https://www.gametdb.com/Main/FAQ",
@@ -57,7 +57,7 @@ export default function APropos() {
             Nintendo DB recense les jeux édités par Nintendo et sortis en boîte,
             version par version : jaquette, titre, date et code produit au
             Japon, en Amérique du Nord et en Europe. Consoles couvertes : Wii U,
-            puis Wii ; les autres suivront.
+            Wii, DS, 3DS, Switch et Switch 2 ; les autres suivront.
           </p>
         </section>
 

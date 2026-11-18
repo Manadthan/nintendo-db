@@ -18,6 +18,9 @@ export type LigneApercu = {
   wikipedia: JeuAImporter;
 };
 
+/** Jeu exclu de l'import par le propriétaire (téléchargement seul, ADR-03 point 7). */
+export type Exclusion = { slug: string; titre: string };
+
 export type Apercu = {
   lignes: LigneApercu[];
   ignores: Omit<ListeWikipedia, "jeux">;
@@ -25,6 +28,8 @@ export type Apercu = {
   ecartes: JeuEcarte[];
   /** Jeux pas encore sortis (toutes leurs dates connues sont futures) : ignorés, importés quand ils sortiront. */
   aVenir: string[];
+  /** Jeux décochés « en boîte » lors d'un import précédent (Switch 2) : plus proposés, réactivables. */
+  exclus: Exclusion[];
   /** Jeux en base qui ne sont plus retenus : supprimés à l'enregistrement, après confirmation. */
   aSupprimer: string[];
 };
@@ -68,6 +73,7 @@ export function preparerApercu(
     aVenir: liste.jeux
       .filter((j) => estAVenir(j, aujourdhui))
       .map((j) => j.titres.PAL || j.titres.US),
+    exclus: [],
     aSupprimer: [...slugsEnBase]
       .filter((s) => !retenus.has(s) && !manuels.has(s))
       .sort(),
@@ -83,6 +89,17 @@ export function estAVenir(jeu: JeuAImporter, aujourdhui: string): boolean {
     (d): d is string => !!d,
   );
   return dates.length > 0 && dates.every((d) => d > aujourdhui);
+}
+
+/** Retire de l'aperçu les jeux exclus par le propriétaire (Switch 2 : téléchargement seul), gardés à part. */
+export function retirerExclus(apercu: Apercu, exclus: Exclusion[]): Apercu {
+  const slugs = new Set(exclus.map((e) => e.slug));
+  return {
+    ...apercu,
+    lignes: apercu.lignes.filter((l) => !slugs.has(l.slug)),
+    exclus,
+    aSupprimer: apercu.aSupprimer.filter((s) => !slugs.has(s)),
+  };
 }
 
 /** Précise l'état de chaque ligne par la comparaison avec la base (ADR-03 point 6). */

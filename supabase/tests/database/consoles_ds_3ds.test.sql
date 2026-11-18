@@ -9,7 +9,7 @@ select results_eq(
   'la DS (2004) et la 3DS (2011) sont des portables'
 );
 select results_eq(
-  $$select slug from public.consoles order by ordre$$,
+  $$select slug from public.consoles where slug in ('ds', 'wii', '3ds', 'wii-u') order by ordre$$,
   $$values ('ds'), ('wii'), ('3ds'), ('wii-u')$$,
   'les consoles sont rangées par ordre chronologique'
 );

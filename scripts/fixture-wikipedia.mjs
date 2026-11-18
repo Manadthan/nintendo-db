@@ -1,5 +1,6 @@
 // Fabrique la fixture du tableau « List of Wii U games » (tests de l'import, #32).
 // Usage : node scripts/fixture-wikipedia.mjs <page.html> > src/lib/import/__fixtures__/wii-u-wikipedia.html
+// (Switch 2, étape 10 : même script, page List_of_Nintendo_Switch_2_games → switch-2-wikipedia.html)
 // <page.html> : https://en.wikipedia.org/w/index.php?title=List_of_Wii_U_games&action=render
 // On ne garde que le premier tableau « wikitable », sans les annotations techniques de Wikipédia
 // (data-mw, id, about…) ni les renvois aux références : le contenu affiché reste identique.

@@ -94,11 +94,14 @@ const ETIQUETTES: Record<string, Region[]> = {
   AU: [],
 };
 
-const texte = ($: CheerioAPI, el: Cheerio<AnyNode>) =>
+export const texte = ($: CheerioAPI, el: Cheerio<AnyNode>) =>
   el.text().replace(/\s+/g, " ").trim();
 
 /** Liste « a, b » d'une cellule (listes à puces de Wikipédia ou texte simple). */
-function joindreListe($: CheerioAPI, cellule: Cheerio<AnyNode>): string | null {
+export function joindreListe(
+  $: CheerioAPI,
+  cellule: Cheerio<AnyNode>,
+): string | null {
   const items = cellule
     .find("li")
     .toArray()

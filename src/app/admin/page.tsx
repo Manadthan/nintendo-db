@@ -75,6 +75,13 @@ export default async function PageAdmin() {
         <span aria-hidden="true">›</span>
       </Link>
       <Link
+        href="/admin/import?console=switch-2"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Import Switch 2 (Wikipédia)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
         href="/admin/jaquettes"
         className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
       >

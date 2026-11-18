@@ -7,6 +7,11 @@ describe("classeProportions (étape 9)", () => {
     expect(classeProportions("3ds")).toBe("aspect-[768/680]");
   });
 
+  it("Switch et Switch 2 : boîtier plus étroit (étape 10)", () => {
+    expect(classeProportions("switch")).toBe("aspect-[1166/1888]");
+    expect(classeProportions("switch-2")).toBe("aspect-[1166/1888]");
+  });
+
   it("Wii U, Wii et console inconnue : boîte en hauteur", () => {
     expect(classeProportions("wii-u")).toBe("aspect-[27/38]");
     expect(classeProportions("wii")).toBe("aspect-[27/38]");
