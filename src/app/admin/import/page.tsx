@@ -12,6 +12,12 @@ export const maxDuration = 60;
 
 /** Consoles importables (étape 8) : leurs sources, telles que la page les présente. */
 const CONSOLES = {
+  gamecube: {
+    nom: "GameCube",
+    sources: "la base GameTDB",
+    description:
+      "Lit la base GameTDB seule (SPEC v1.13) : disques du commerce dont au moins une boîte est éditée par Nintendo, avec Zelda Collector's Edition et Pac-Man Vs., sans démos ni disques bonus ; faces avant des boîtes (petite image quand GameTDB n'a pas mieux).",
+  },
   "wii-u": {
     nom: "Wii U",
     sources: "la liste Wikipédia et la base GameTDB",

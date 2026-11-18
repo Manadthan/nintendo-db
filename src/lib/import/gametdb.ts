@@ -81,6 +81,8 @@ function traduireGenres(
 export function lireGameTdb(
   xml: string,
   estDisque: SourceConsole["estDisque"] = SOURCES_CONSOLES["wii-u"]!.estDisque,
+  /** GameCube : Pokémon Channel est classé « software » ; ses vrais logiciels sont écartés par leur identifiant. */
+  garderLogiciels = false,
 ): DisqueGameTdb[] {
   const $ = cheerio.load(xml, { xml: true });
   const traductions = lireTraductionsGenres($);
@@ -102,7 +104,7 @@ export function lireGameTdb(
       )
     )
       return;
-    if (pasUnJeu(champ("genre"))) return;
+    if (!garderLogiciels && pasUnJeu(champ("genre"))) return;
     const date = jeu.children("date").first();
     for (const region of regions)
       disques.push({

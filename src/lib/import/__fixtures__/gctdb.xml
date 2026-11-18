@@ -1,0 +1,3543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datafile xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="wiitdb.xsd">
+	<WiiTDB version="20261118185002" filter="EN_gamecube" games="6732/10173"/>
+	<!--
+ GameTDB: Wii, Database started by Lustar in 2009 (https://www.gametdb.com)
+ Never modify this file manually, it will get overwritten when you update. You can add games and fixes on the website.
+This is meant as a collaborative database of Nintendo Wii games for anyone to contribute and anyone to use in any Wii-related project.
+Do not use without permission if you wish to use this file on a website.
+• Naming scheme for languages (locale lang):
+  ISO 639 two-letter language codes (except ZH), the order follows the one used by No-Intro.
+  EN, JA, FR, DE, ES, IT, NL, PT, ZHTW, ZHCN, KO
+  This was conceived by NGEfreak, based on how often a language is generally used in games.
+• Naming scheme for accessories (input, control type):
+  wiimote, nunchuk, motionplus, gamecube, nintendods, classiccontroller, wheel, zapper,
+  balanceboard, wiispeak, microphone, guitar, drums, dancepad, keyboard, udraw
+• Naming scheme for online features (wi-fi, feature):
+  online, download, score, nintendods
+• ESRB Rating:
+  EC (Early Childhood), E (Everyone), E10+ (Everyone 10+),
+  T (Teen), M (Mature), AO (Adults Only)
+• ESRB Content:
+  alcohol reference, animated blood, blood, blood and gore, cartoon violence,
+  comic mischief, crude humor, drug reference, edutainment, fantasy violence,
+  informational, intense violence, language, lyrics, mature humor, nudity,
+  partial nudity, real gambling, sexual content, sexual themes, sexual violence,
+  simulated gambling, some adult assistance may be needed, strong language,
+  strong lyrics, strong sexual content, suggestive themes, tobacco reference,
+  use of drugs, use of alcohol, use of tobacco, violence, violent references,
+  references to violent acts
+• CERO Rating:
+  A (Everyone), B (12+), C (15+), D (17+), Z (18+)
+• CERO Content:
+  language, alcohol/tobacco, drugs, love, sex, horror, violence, crime, gambling
+• PEGI Rating:
+  3+ (4+ for Portugal), 7+ (6+ for Portugal), 12+, 16+ (15+ for Finland), 18+
+• PEGI Content:
+  language, discrimination, drugs, fear, sex, violence, gambling
+• GRB (Korea) Rating:
+  ALL, 12, 15, 18
+• List of companies:
+  Based on v2.1 of the Company Numbers List for MGB/CGB/AGB/NES/FC/SNES/SFC/DOL/NDS by FluBBa, with some updates.
+  It can be used to guess the publisher name using the last two characters of the game ID.
+• WiiWare/Virtual Console types:
+  WiiWare, Homebrew,
+  VC-NES, VC-SNES, VC-N64, VC-SMS (Master System), VC-MD (Megadrive/Genesis),
+  VC-PCE (PC-Engine/Turbografx-16), VC-C64, VC-NEOGEO, VC-Arcade.
+	-->
+	<genres>
+		<maingenre name="theme">
+			<loc lang="FR">th&#xe8;me</loc>
+			<subgenre name="fantasy">
+				<loc lang="FR">fantasy</loc>
+			</subgenre>
+			<subgenre name="historic">
+				<loc lang="FR">historique</loc>
+			</subgenre>
+			<subgenre name="horror">
+				<loc lang="FR">horreur</loc>
+			</subgenre>
+			<subgenre name="modern day">
+				<loc lang="FR">contemporain</loc>
+			</subgenre>
+			<subgenre name="sci-fi">
+				<loc lang="FR">science-fiction</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="general">
+			<loc lang="FR">g&#xe9;n&#xe9;ral</loc>
+			<subgenre name="arcade">
+				<loc lang="FR">arcade</loc>
+			</subgenre>
+			<subgenre name="party">
+				<loc lang="FR">party</loc>
+			</subgenre>
+			<subgenre name="puzzle">
+				<loc lang="FR">r&#xe9;flexion</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="action">
+			<loc lang="FR">action</loc>
+			<subgenre name="platformer">
+				<loc lang="FR">plates-formes</loc>
+			</subgenre>
+			<subgenre name="2D platformer">
+				<loc lang="FR">plates-formes 2D</loc>
+			</subgenre>
+			<subgenre name="3D platformer">
+				<loc lang="FR">plates-formes 3D</loc>
+			</subgenre>
+			<subgenre name="shooter">
+				<loc lang="FR">tir</loc>
+			</subgenre>
+			<subgenre name="first-person shooter">
+				<loc lang="FR">tir &#xe0; la premi&#xe8;re personne</loc>
+			</subgenre>
+			<subgenre name="third-person shooter">
+				<loc lang="FR">tir &#xe0; la troisi&#xe8;me personne</loc>
+			</subgenre>
+			<subgenre name="rail shooter">
+				<loc lang="FR">tir sur rails</loc>
+			</subgenre>
+			<subgenre name="run and gun">
+				<loc lang="FR">run and gun</loc>
+			</subgenre>
+			<subgenre name="shoot &apos;em up">
+				<loc lang="FR">shoot &apos;em up</loc>
+			</subgenre>
+			<subgenre name="stealth action">
+				<loc lang="FR">infiltration</loc>
+			</subgenre>
+			<subgenre name="survival horror">
+				<loc lang="FR">survival horror</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="sports">
+			<loc lang="FR">sport</loc>
+			<subgenre name="baseball">
+				<loc lang="FR">baseball</loc>
+			</subgenre>
+			<subgenre name="basketball">
+				<loc lang="FR">basketball</loc>
+			</subgenre>
+			<subgenre name="billiards">
+				<loc lang="FR">billard</loc>
+			</subgenre>
+			<subgenre name="bowling">
+				<loc lang="FR">bowling</loc>
+			</subgenre>
+			<subgenre name="boxing">
+				<loc lang="FR">boxe</loc>
+			</subgenre>
+			<subgenre name="cricket">
+				<loc lang="FR">cricket</loc>
+			</subgenre>
+			<subgenre name="soccer">
+				<loc lang="FR">football</loc>
+			</subgenre>
+			<subgenre name="football">
+				<loc lang="FR">football am&#xe9;ricain</loc>
+			</subgenre>
+			<subgenre name="rugby">
+				<loc lang="FR">rugby</loc>
+			</subgenre>
+			<subgenre name="golf">
+				<loc lang="FR">golf</loc>
+			</subgenre>
+			<subgenre name="hockey">
+				<loc lang="FR">hockey</loc>
+			</subgenre>
+			<subgenre name="martial arts">
+				<loc lang="FR">arts martiaux</loc>
+			</subgenre>
+			<subgenre name="p&#xe9;tanque">
+				<loc lang="FR">p&#xe9;tanque</loc>
+			</subgenre>
+			<subgenre name="skateboarding">
+				<loc lang="FR">skate</loc>
+			</subgenre>
+			<subgenre name="ski">
+				<loc lang="FR">ski</loc>
+			</subgenre>
+			<subgenre name="snowboarding">
+				<loc lang="FR">snowboard</loc>
+			</subgenre>
+			<subgenre name="surfing">
+				<loc lang="FR">surf</loc>
+			</subgenre>
+			<subgenre name="table tennis">
+				<loc lang="FR">tennis de table</loc>
+			</subgenre>
+			<subgenre name="tennis">
+				<loc lang="FR">tennis</loc>
+			</subgenre>
+			<subgenre name="volleyball">
+				<loc lang="FR">volleyball</loc>
+			</subgenre>
+			<subgenre name="wrestling">
+				<loc lang="FR">catch</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="adventure">
+			<loc lang="FR">aventure</loc>
+			<subgenre name="hidden object">
+				<loc lang="FR">objet cach&#xe9;</loc>
+			</subgenre>
+			<subgenre name="interactive fiction">
+				<loc lang="FR">fiction interactive</loc>
+			</subgenre>
+			<subgenre name="interactive movie">
+				<loc lang="FR">film interactif</loc>
+			</subgenre>
+			<subgenre name="point-and-click">
+				<loc lang="FR">point-and-click</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="music">
+			<loc lang="FR">musique</loc>
+			<subgenre name="dance">
+				<loc lang="FR">danse</loc>
+			</subgenre>
+			<subgenre name="karaoke">
+				<loc lang="FR">karaok&#xe9;</loc>
+			</subgenre>
+			<subgenre name="rhythm">
+				<loc lang="FR">rythme</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="racing">
+			<loc lang="FR">course</loc>
+			<subgenre name="bike racing">
+				<loc lang="FR">course de v&#xe9;los</loc>
+			</subgenre>
+			<subgenre name="futuristic racing">
+				<loc lang="FR">course futuriste</loc>
+			</subgenre>
+			<subgenre name="kart racing">
+				<loc lang="FR">karting</loc>
+			</subgenre>
+			<subgenre name="motorcycle racing">
+				<loc lang="FR">course de motos</loc>
+			</subgenre>
+			<subgenre name="off-road racing">
+				<loc lang="FR">rally</loc>
+			</subgenre>
+			<subgenre name="sim racing">
+				<loc lang="FR">simulation de conduite</loc>
+			</subgenre>
+			<subgenre name="truck racing">
+				<loc lang="FR">course de camions</loc>
+			</subgenre>
+			<subgenre name="watercraft racing">
+				<loc lang="FR">course aquatique</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="fighting">
+			<loc lang="FR">combat</loc>
+			<subgenre name="2D fighting">
+				<loc lang="FR">combat 2D</loc>
+			</subgenre>
+			<subgenre name="3D fighting">
+				<loc lang="FR">combat 3D</loc>
+			</subgenre>
+			<subgenre name="beat &apos;em up">
+				<loc lang="FR">beat &apos;em up</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="simulation">
+			<loc lang="FR">simulation</loc>
+			<subgenre name="cooking">
+				<loc lang="FR">cuisine</loc>
+			</subgenre>
+			<subgenre name="fishing">
+				<loc lang="FR">p&#xea;che</loc>
+			</subgenre>
+			<subgenre name="hunting">
+				<loc lang="FR">chasse</loc>
+			</subgenre>
+			<subgenre name="business simulation">
+				<loc lang="FR">simulation d&apos;entreprise</loc>
+			</subgenre>
+			<subgenre name="construction simulation">
+				<loc lang="FR">simulation de construction</loc>
+			</subgenre>
+			<subgenre name="flight simulation">
+				<loc lang="FR">simulation de vol</loc>
+			</subgenre>
+			<subgenre name="life simulation">
+				<loc lang="FR">simulation de vie</loc>
+			</subgenre>
+			<subgenre name="management simulation">
+				<loc lang="FR">simulation de gestion</loc>
+			</subgenre>
+			<subgenre name="train simulation">
+				<loc lang="FR">simulation ferroviaire</loc>
+			</subgenre>
+			<subgenre name="virtual pet">
+				<loc lang="FR">animal virtuel</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="role-playing">
+			<loc lang="FR">jeu de r&#xf4;le</loc>
+			<subgenre name="action RPG">
+				<loc lang="FR">action RPG</loc>
+			</subgenre>
+			<subgenre name="strategy RPG">
+				<loc lang="FR">strategy RPG</loc>
+			</subgenre>
+			<subgenre name="tactical RPG">
+				<loc lang="FR">tactical RPG</loc>
+			</subgenre>
+			<subgenre name="MMORPG">
+				<loc lang="FR">MMORPG</loc>
+			</subgenre>
+			<subgenre name="roguelike">
+				<loc lang="FR">roguelike</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="strategy">
+			<loc lang="FR">strat&#xe9;gie</loc>
+			<subgenre name="4X">
+				<loc lang="FR">4X</loc>
+			</subgenre>
+			<subgenre name="real-time strategy">
+				<loc lang="FR">strat&#xe9;gie temps r&#xe9;el</loc>
+			</subgenre>
+			<subgenre name="turn-based strategy">
+				<loc lang="FR">strat&#xe9;gie tour par tour</loc>
+			</subgenre>
+			<subgenre name="tower defense">
+				<loc lang="FR">tower defense</loc>
+			</subgenre>
+			<subgenre name="wargame">
+				<loc lang="FR">wargame</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="traditional">
+			<loc lang="FR">traditionnel</loc>
+			<subgenre name="board game">
+				<loc lang="FR">jeu de soci&#xe9;t&#xe9;</loc>
+			</subgenre>
+			<subgenre name="cards">
+				<loc lang="FR">cartes</loc>
+			</subgenre>
+			<subgenre name="chess">
+				<loc lang="FR">&#xe9;checs</loc>
+			</subgenre>
+			<subgenre name="darts">
+				<loc lang="FR">fl&#xe9;chettes</loc>
+			</subgenre>
+			<subgenre name="pinball">
+				<loc lang="FR">flipper</loc>
+			</subgenre>
+			<subgenre name="poker">
+				<loc lang="FR">poker</loc>
+			</subgenre>
+			<subgenre name="trivia">
+				<loc lang="FR">quizz</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="health">
+			<loc lang="FR">sant&#xe9;</loc>
+			<subgenre name="coaching">
+				<loc lang="FR">coaching</loc>
+			</subgenre>
+			<subgenre name="exercise">
+				<loc lang="FR">exercice</loc>
+			</subgenre>
+			<subgenre name="fitness">
+				<loc lang="FR">gymnastique</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="others">
+			<loc lang="FR">autres</loc>
+			<subgenre name="educational">
+				<loc lang="FR">&#xe9;ducatif</loc>
+			</subgenre>
+			<subgenre name="drawing">
+				<loc lang="FR">dessin</loc>
+			</subgenre>
+			<subgenre name="compilation">
+				<loc lang="FR">compilation</loc>
+			</subgenre>
+			<subgenre name="demo">
+				<loc lang="FR">d&#xe9;mo</loc>
+			</subgenre>
+			<subgenre name="sampler">
+				<loc lang="FR">d&#xe9;mos</loc>
+			</subgenre>
+			<subgenre name="multimedia">
+				<loc lang="FR">multim&#xe9;dia</loc>
+			</subgenre>
+			<subgenre name="emulator">
+				<loc lang="FR">&#xe9;mulateur</loc>
+			</subgenre>
+			<subgenre name="software">
+				<loc lang="FR">logiciel</loc>
+			</subgenre>
+		</maingenre>
+	</genres>
+	<game name="Metroid Prime 2: Echoes (USA) (EN)">
+		<id>G2ME01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Metroid Prime 2: Echoes</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xba54;&#xd2b8;&#xb85c;&#xc774;&#xb4dc; &#xd504;&#xb77c;&#xc784; 2: &#xba54;&#xc544;&#xb9ac;</title>
+		</locale>
+		<developer>Retro Studios, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="11" day="15"/>
+		<genre>action,role-playing,shooter,first-person shooter</genre>
+	</game>
+	<game name="Metroid Prime 2: Dark Echoes (Japan) (JA)">
+		<id>G2MJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Metroid Prime 2: Dark Echoes</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30e1;&#x30c8;&#x30ed;&#x30a4;&#x30c9;&#x30d7;&#x30e9;&#x30a4;&#x30e0;2 &#x30c0;&#x30fc;&#x30af;&#x30a8;&#x30b3;&#x30fc;&#x30ba;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xba54;&#xd2b8;&#xb85c;&#xc774;&#xb4dc; &#xd504;&#xb77c;&#xc784; 2: &#xc5b4;&#xb460;&#xc758; &#xba54;&#xc544;&#xb9ac;</title>
+		</locale>
+		<developer>Retro Studios</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="5" day="26"/>
+		<genre>action,adventure,shooter,first-person shooter</genre>
+	</game>
+	<game name="Metroid Prime 2: Echoes (Europe) (EN,FR,DE,ES,IT)">
+		<id>G2MP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Metroid Prime 2: Echoes</title>
+		</locale>
+		<locale lang="FR">
+			<title>Metroid Prime 2: Echoes</title>
+		</locale>
+		<locale lang="DE">
+			<title>Metroid Prime 2: Echoes</title>
+		</locale>
+		<locale lang="ES">
+			<title>Metroid Prime 2: Echoes</title>
+		</locale>
+		<locale lang="IT">
+			<title>Metroid Prime 2: Echoes</title>
+		</locale>
+		<locale lang="FI">
+			<title>Metroid Prime 2: Echoes</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xba54;&#xd2b8;&#xb85c;&#xc774;&#xb4dc; &#xd504;&#xb77c;&#xc784; 2: &#xba54;&#xc544;&#xb9ac;</title>
+		</locale>
+		<developer>Retro Studio</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="11" day="26"/>
+		<genre>action,shooter,first-person shooter</genre>
+	</game>
+	<game name="Super Mario Strikers (USA) (EN)">
+		<id>G4QE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Super Mario Strikers</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; &#xc2a4;&#xd2b8;&#xb77c;&#xc774;&#xcee4;&#xc988;</title>
+		</locale>
+		<developer>Next Level Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="12" day="5"/>
+		<genre>sports,soccer</genre>
+	</game>
+	<game name="Super Mario Strikers (Japan) (JA)">
+		<id>G4QJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Super Mario Strikers</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;&#x30b9;&#x30c8;&#x30e9;&#x30a4;&#x30ab;&#x30fc;&#x30ba;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; &#xc2a4;&#xd2b8;&#xb77c;&#xc774;&#xcee4;&#xc988;</title>
+		</locale>
+		<developer>Next Level Games </developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="1" day="19"/>
+		<genre>sports,football</genre>
+	</game>
+	<game name="Mario Smash Football (Europe) (EN,FR,DE,ES,IT)">
+		<id>G4QP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Smash Football</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Smash Football</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Smash Football</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Smash Football</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Smash Football</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xc2a4;&#xb9e4;&#xc2dc; &#xcd95;&#xad6c;</title>
+		</locale>
+		<developer>Next Level Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="11" day="18"/>
+		<genre>sports,football</genre>
+	</game>
+	<game name="The Legend of Zelda: Four Swords Adventures (USA) (EN)">
+		<id>G4SE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Four Swords Adventures</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: 4&#xac1c;&#xc758; &#xac80;</title>
+		</locale>
+		<developer>Nintendo / Capcom Production Studio 2</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="6" day="7"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Zelda no Densetsu: 4-tsu no Tsurugi+ (Japan) (EN,JA)">
+		<id>G4SJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Zelda no Densetsu: 4-tsu no Tsurugi+</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; 4&#x3064;&#x306e;&#x5263;+</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: 4&#xac1c;&#xc758; &#xac80;+</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x585e;&#x5c14;&#x8fbe;&#x4f20;&#x8bf4; &#x56db;&#x652f;&#x5251;(&#x65e5;&#x6216;&#x4e2d;)</title>
+		</locale>
+		<developer>Nintendo / Capcom Production Studio 2</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="3" day="18"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="The Legend of Zelda: Four Swords Adventures (Europe) (EN,FR,DE,ES,IT)">
+		<id>G4SP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Four Swords Adventures</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Four Swords Adventures</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Four Swords Adventures</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: Four Swords Adventures</title>
+		</locale>
+		<locale lang="FI">
+			<title>The Legend of Zelda: Four Swords Adventures</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: 4&#xac1c;&#xc758; &#xac80;</title>
+		</locale>
+		<developer>Nintendo / Capcom Production Studio 2</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="1" day="7"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Paper Mario: The Thousand-Year Door (USA) (EN)">
+		<id>G8ME01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Paper Mario: The Thousand-Year Door</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd398;&#xc774;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; 1000&#xb144;&#xc758; &#xbb38;</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="10" day="11"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Paper Mario RPG (Japan) (JA)">
+		<id>G8MJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Paper Mario RPG</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30da;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;RPG</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd398;&#xc774;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; 1000&#xb144;&#xc758; &#xbb38;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x7eb8;&#x7247;&#x9a6c;&#x91cc;&#x5965; &#x5343;&#x5e74;&#x4e4b;&#x95e8;(&#x65e5;&#x6216;&#x4e2d;)</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="7" day="22"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Paper Mario: The Thousand-Year Door (Europe) (EN,FR,DE,ES,IT)">
+		<id>G8MP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Paper Mario: The Thousand-Year Door</title>
+		</locale>
+		<locale lang="FR">
+			<title>Paper Mario: La Porte Mill&#xe9;naire</title>
+		</locale>
+		<locale lang="DE">
+			<title>Paper Mario: Die Legende vom &#xc4;onentor</title>
+		</locale>
+		<locale lang="ES">
+			<title>Paper Mario: La Puerta Milenaria</title>
+		</locale>
+		<locale lang="IT">
+			<title>Paper Mario: Il Portale Millenario</title>
+		</locale>
+		<locale lang="FI">
+			<title>Paper Mario: The Thousand-Year Door</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd398;&#xc774;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; 1000&#xb144;&#xc758; &#xbb38;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>Paper Mario: The Thousand-year Door</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="11" day="12"/>
+		<genre>action,role-playing,platformer</genre>
+	</game>
+	<game name="Battalion Wars (USA) (EN)">
+		<id>G8WE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Battalion Wars</title>
+		</locale>
+		<locale lang="FR">
+			<title>Battalion Wars</title>
+		</locale>
+		<locale lang="PT">
+			<title>Battalion Wars</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbc30;&#xd0e4;&#xb9ac;&#xc5b8; &#xc6cc;&#xc988;</title>
+		</locale>
+		<developer>Kuju Entertainment</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="8" day="20"/>
+		<genre>action,strategy,shooter,third-person shooter,real-time strategy</genre>
+	</game>
+	<game name="Totsugeki!! Famicom Wars (Japan) (JA)">
+		<id>G8WJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Totsugeki!! Famicom Wars</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x7a81;&#x6483;!!&#x30d5;&#x30a1;&#x30df;&#x30b3;&#x30f3;&#x30a6;&#x30a9;&#x30fc;&#x30ba;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3cc;&#xaca9;!! &#xd328;&#xbbf8;&#xcef4; &#xc6cc;&#xc988;</title>
+		</locale>
+		<developer>Kuju Entertainment</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="10" day="27"/>
+		<genre>action,strategy,shooter,third-person shooter</genre>
+	</game>
+	<game name="Battalion Wars (Europe) (EN,FR,DE,ES,IT)">
+		<id>G8WP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Battalion Wars</title>
+		</locale>
+		<locale lang="DE">
+			<title>Battalion Wars</title>
+		</locale>
+		<locale lang="PT">
+			<title>Battalion Wars</title>
+		</locale>
+		<locale lang="FI">
+			<title>Battalion Wars</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbc30;&#xd0e4;&#xb9ac;&#xc5b8; &#xc6cc;&#xc988;</title>
+		</locale>
+		<developer>Kuju Entertainment</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="12" day="9"/>
+		<genre>action,strategy,shooter,third-person shooter</genre>
+	</game>
+	<game name="Doubutsu no Mori e+ (Japan) (JA)">
+		<id>GAEJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Doubutsu no Mori e+</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3069;&#x3046;&#x3076;&#x3064;&#x306e;&#x68ee; e+</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xbb3c;&#xc758; &#xc232; e+</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="6" day="27"/>
+		<genre>simulation,life simulation</genre>
+	</game>
+	<game name="Animal Crossing (USA) (EN)">
+		<id>GAFE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Animal Crossing</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xbb3c;&#xc758; &#xc232;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="9" day="16"/>
+		<genre>simulation,role-playing,life simulation</genre>
+	</game>
+	<game name="Doubutsu no Mori + (Japan) (JA)">
+		<id>GAFJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Doubutsu no Mori +</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3069;&#x3046;&#x3076;&#x3064;&#x306e;&#x68ee;+</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xbb3c;&#xc758; &#xc232; +</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2001" month="12" day="14"/>
+		<genre>simulation</genre>
+	</game>
+	<game name="Animal Crossing (Europe) (EN,FR,DE,ES,IT)">
+		<id>GAFP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Animal Crossing</title>
+		</locale>
+		<locale lang="DE">
+			<title>Animal Crossing</title>
+		</locale>
+		<locale lang="ES">
+			<title>Animal Crossing</title>
+		</locale>
+		<locale lang="PT">
+			<title>Animal Crossing</title>
+		</locale>
+		<locale lang="FI">
+			<title>Animal Crossing</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xbb3c;&#xc758; &#xc232;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="9" day="24"/>
+		<genre>simulation</genre>
+	</game>
+	<game name="Animal Crossing (Europe) (EN)">
+		<id>GAFU01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Animal Crossing</title>
+		</locale>
+		<locale lang="PT">
+			<title>Animal Crossing</title>
+		</locale>
+		<locale lang="FI">
+			<title>Animal Crossing</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xbb3c;&#xc758; &#xc232;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="10" day="17"/>
+		<genre>simulation</genre>
+	</game>
+	<game name="Super Smash Bros. Melee (USA) (EN)">
+		<id>GALE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Super Smash Bros. Melee</title>
+		</locale>
+		<locale lang="PT">
+			<title>Super Smash Bros. Melee</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb300;&#xb09c;&#xd22c; &#xc2a4;&#xb9e4;&#xc2dc; &#xbe0c;&#xb77c;&#xb354;&#xc2a4; DX</title>
+		</locale>
+		<developer>HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2001" month="12" day="2"/>
+		<genre>fighting</genre>
+	</game>
+	<game name="Dairantou Smash Brothers DX (Japan) (EN,JA)">
+		<id>GALJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Dairantou Smash Brothers DX</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x5927;&#x4e71;&#x95d8;&#x30b9;&#x30de;&#x30c3;&#x30b7;&#x30e5;&#x30d6;&#x30e9;&#x30b6;&#x30fc;&#x30ba;DX</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb300;&#xb09c;&#xd22c; &#xc2a4;&#xb9e4;&#xc2dc; &#xbe0c;&#xb77c;&#xb354;&#xc2a4; DX</title>
+		</locale>
+		<developer>HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2001" month="11" day="21"/>
+		<genre>fighting</genre>
+	</game>
+	<game name="Super Smash Bros. Melee (Europe) (EN,FR,DE,ES,IT)">
+		<id>GALP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Super Smash Bros. Melee</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Smash Bros. Melee</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Smash Bros. Melee</title>
+		</locale>
+		<locale lang="PT">
+			<title>Super Smash Bros. Melee</title>
+		</locale>
+		<locale lang="SE">
+			<title>Super Smash Bros. Melee</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Smash Bros. Melee</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb300;&#xb09c;&#xd22c; &#xc2a4;&#xb9e4;&#xc2dc; &#xbe0c;&#xb77c;&#xb354;&#xc2a4; DX</title>
+		</locale>
+		<developer>HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="5" day="24"/>
+		<genre>action,fighting</genre>
+	</game>
+	<game name="Pokemon Colosseum (USA) (EN)">
+		<id>GC6E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pokemon Colosseum</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; &#xcf5c;&#xb85c;&#xc138;&#xc6c0;</title>
+		</locale>
+		<developer>Genius Sonority Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="3" day="22"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Pokemon Colosseum (Japan) (JA)">
+		<id>GC6J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pokemon Colosseum</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30b1;&#x30e2;&#x30f3;&#x30b3;&#x30ed;&#x30b7;&#x30a2;&#x30e0;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; &#xcf5c;&#xb85c;&#xc138;&#xc6c0;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x5b9d;&#x53ef;&#x68a6;&#x5706;&#x5f62;&#x7ade;&#x6280;&#x573a;(&#x65e5;&#x6216;&#x4e2d;)</title>
+		</locale>
+		<developer>Genius Sonority Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="21"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Pokemon Colosseum (Europe) (EN,FR,DE,ES,IT)">
+		<id>GC6P01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pokemon Colosseum</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Colosseum</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Colosseum</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; &#xcf5c;&#xb85c;&#xc138;&#xc6c0;</title>
+		</locale>
+		<developer>Genius Sonority</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="5" day="14"/>
+		<genre>fighting,role-playing</genre>
+	</game>
+	<game name="Final Fantasy Crystal Chronicles (USA) (EN)">
+		<id>GCCE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Final Fantasy Crystal Chronicles</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd30c;&#xc774;&#xb110; &#xd310;&#xd0c0;&#xc9c0; &#xd06c;&#xb9ac;&#xc2a4;&#xd0c8; &#xd06c;&#xb85c;&#xb2c8;&#xd074;</title>
+		</locale>
+		<developer>Game Designer&apos;s Studio / Square Enix</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="2" day="9"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Final Fantasy Crystal Chronicles (Japan) (JA)">
+		<id>GCCJGC</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Final Fantasy Crystal Chronicles</title>
+		</locale>
+		<locale lang="JA">
+			<title>FINAL FANTASY CRYSTAL CHRONICLES</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd30c;&#xc774;&#xb110; &#xd310;&#xd0c0;&#xc9c0; &#xd06c;&#xb9ac;&#xc2a4;&#xd0c8; &#xd06c;&#xb85c;&#xb2c8;&#xd074;</title>
+		</locale>
+		<developer>Game Designer&apos;s Studio / Square Enix</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="8" day="8"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Final Fantasy Crystal Chronicles (Europe) (EN,FR,DE,ES,IT)">
+		<id>GCCP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Final Fantasy Crystal Chronicles</title>
+		</locale>
+		<locale lang="FI">
+			<title>Final Fantasy: Crystal Chronicles</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd30c;&#xc774;&#xb110; &#xd310;&#xd0c0;&#xc9c0; &#xd06c;&#xb9ac;&#xc2a4;&#xd0c8; &#xd06c;&#xb85c;&#xb2c8;&#xd074;</title>
+		</locale>
+		<developer>Game Designer&apos;s Studio / Square Enix</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="3" day="11"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Doubutsu Banchou (Japan) (JA)">
+		<id>GDBJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Doubutsu Banchou</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x52d5;&#x7269;&#x756a;&#x9577;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xbb3c;&#xbc29;&#xc7a5;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="2" day="21"/>
+	</game>
+	<game name="Disney&apos;s Magical Mirror Starring Mickey Mouse (USA) (EN)">
+		<id>GDME01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Disney&apos;s Magical Mirror Starring Mickey Mouse</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb514;&#xc988;&#xb2c8; &#xbbf8;&#xd0a4; &#xb9c8;&#xc6b0;&#xc2a4; &#xb9c8;&#xbc95;&#xc758; &#xac70;&#xc6b8;</title>
+		</locale>
+		<developer>Capcom Production Studio 3</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="10" day="13"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Disney&apos;s Mickey Mouse no Fushigi na Kagami (Japan) (JA)">
+		<id>GDMJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Disney&apos;s Mickey Mouse no Fushigi na Kagami</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c7;&#x30a3;&#x30ba;&#x30cb;&#x30fc;&#x306e;&#x30df;&#x30c3;&#x30ad;&#x30fc;&#x30de;&#x30a6;&#x30b9;&#x306e;&#x4e0d;&#x601d;&#x8b70;&#x306a;&#x93e1;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb514;&#xc988;&#xb2c8; &#xbbf8;&#xd0a4; &#xb9c8;&#xc6b0;&#xc2a4;&#xc758; &#xc774;&#xc0c1;&#xd55c; &#xac70;&#xc6b8;</title>
+		</locale>
+		<developer>Capcom Production Studio 3</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="8" day="9"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Disney&apos;s Magical Mirror starring Mickey Mouse (Europe) (EN,FR,DE,ES,IT)">
+		<id>GDMP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Disney&apos;s Magical Mirror starring Mickey Mouse</title>
+		</locale>
+		<locale lang="SE">
+			<title>Disney&apos;s Magical Mirror starring Mickey Mouse</title>
+		</locale>
+		<locale lang="FI">
+			<title>Disney&apos;s Magical Mirror starring Mickey Mouse</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb514;&#xc988;&#xb2c8; &#xbbf8;&#xd0a4; &#xb9c8;&#xc6b0;&#xc2a4; &#xb9c8;&#xbc95;&#xc758; &#xac70;&#xc6b8;</title>
+		</locale>
+		<developer>Capcom Production Studio 3 / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="10" day="13"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Eternal Darkness: Sanity&apos;s Requiem (USA) (EN)">
+		<id>GEDE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="PT">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc774;&#xd130;&#xb110; &#xb2e4;&#xd06c;&#xb2c8;&#xc2a4;: &#xc138;&#xc778;&#xd2f0;&#xc758; &#xb808;&#xd034;&#xc5e0;</title>
+		</locale>
+		<developer>Silicon Knights</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="6" day="24"/>
+		<genre>adventure</genre>
+	</game>
+	<game name="Eternal Darkness: Manekareta 13-nin (Japan) (JA)">
+		<id>GEDJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Eternal Darkness: Manekareta 13-nin</title>
+		</locale>
+		<locale lang="PT">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30a8;&#x30bf;&#x30fc;&#x30ca;&#x30eb;&#x30c0;&#x30fc;&#x30af;&#x30cd;&#x30b9; &#xff0d;&#x62db;&#x304b;&#x308c;&#x305f;13&#x4eba;&#xff0d;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc774;&#xd130;&#xb110; &#xb2e4;&#xd06c;&#xb2c8;&#xc2a4;: &#xcd08;&#xb300;&#xbc1b;&#xc740; 13&#xc778;</title>
+		</locale>
+		<developer>Silicon Knights</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="10" day="25"/>
+		<genre>adventure</genre>
+	</game>
+	<game name="Eternal Darkness: Sanity&apos;s Requiem (Europe) (EN,FR,DE,ES,IT)">
+		<id>GEDP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="FR">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="DE">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="ES">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="IT">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="PT">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="FI">
+			<title>Eternal Darkness: Sanity&apos;s Requiem</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc774;&#xd130;&#xb110; &#xb2e4;&#xd06c;&#xb2c8;&#xc2a4;: &#xc138;&#xc778;&#xd2f0;&#xc758; &#xb808;&#xd034;&#xc5e0;</title>
+		</locale>
+		<developer>Silicon Knights</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="10" day="31"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Star Fox: Assault (USA) (EN)">
+		<id>GF7E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Star Fox: Assault</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc2a4;&#xd0c0;&#xd3ed;&#xc2a4; &#xc5b4;&#xc124;&#xd2b8;</title>
+		</locale>
+		<developer>Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="2" day="14"/>
+		<genre>action,shooter</genre>
+	</game>
+	<game name="Star Fox: Assault (Japan) (JA)">
+		<id>GF7J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Star Fox: Assault</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30bf;&#x30fc;&#x30d5;&#x30a9;&#x30c3;&#x30af;&#x30b9;&#x30a2;&#x30b5;&#x30eb;&#x30c8;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc2a4;&#xd0c0;&#xd3ed;&#xc2a4; &#xc5b4;&#xc124;&#xd2b8;</title>
+		</locale>
+		<developer>Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="2" day="24"/>
+		<genre>action,shooter</genre>
+	</game>
+	<game name="Star Fox: Assault (Europe) (EN,FR,DE,ES)">
+		<id>GF7P01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Star Fox: Assault</title>
+		</locale>
+		<locale lang="FR">
+			<title>Star Fox: Assault</title>
+		</locale>
+		<locale lang="DE">
+			<title>Star Fox: Assault</title>
+		</locale>
+		<locale lang="ES">
+			<title>Star Fox: Assault</title>
+		</locale>
+		<locale lang="FI">
+			<title>Star Fox: Assault</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc2a4;&#xd0c0;&#xd3ed;&#xc2a4; &#xc5b4;&#xc124;&#xd2b8;</title>
+		</locale>
+		<developer>Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="4" day="29"/>
+		<genre>action,shooter</genre>
+	</game>
+	<game name="Fire Emblem: Path of Radiance (USA) (EN)">
+		<id>GFEE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="PT">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd30c;&#xc774;&#xc5b4; &#xc5e0;&#xbe14;&#xb818;: &#xcc3d;&#xc5fc;&#xc758; &#xada4;&#xc801;</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="10" day="17"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Fire Emblem: Souen no Kiseki (Japan) (JA)">
+		<id>GFEJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Fire Emblem: Souen no Kiseki</title>
+		</locale>
+		<locale lang="PT">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30a4;&#x30a2;&#x30fc;&#x30a8;&#x30e0;&#x30d6;&#x30ec;&#x30e0; &#x84bc;&#x708e;&#x306e;&#x8ecc;&#x8de1;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd30c;&#xc774;&#xc5b4; &#xc5e0;&#xbe14;&#xb818;: &#xcc3d;&#xc5fc;&#xc758; &#xada4;&#xc801;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x706b;&#x7130;&#x4e4b;&#x7eb9;&#x7ae0; &#x82cd;&#x708e;&#x4e4b;&#x8f68;&#x8ff9;(&#x65e5;&#x6216;&#x4e2d;)</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="4" day="20"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Fire Emblem: Path of Radiance (Europe) (EN,FR,DE,ES,IT)">
+		<id>GFEP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="FR">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="DE">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="ES">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="IT">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="PT">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="FI">
+			<title>Fire Emblem: Path of Radiance</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd30c;&#xc774;&#xc5b4; &#xc5e0;&#xbe14;&#xb818;: &#xcc3d;&#xc5fc;&#xc758; &#xada4;&#xc801;</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="11" day="4"/>
+		<genre>role-playing,tactical rpg</genre>
+	</game>
+	<game name="Mario Golf: Toadstool Tour (USA) (EN)">
+		<id>GFTE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Golf: Toadstool Tour</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xace8;&#xd504;: &#xd1a0;&#xb4dc;&#xc2a4;&#xd234; &#xd22c;&#xc5b4;</title>
+		</locale>
+		<developer>Camelot Software Planning</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="7" day="28"/>
+		<genre>action,sports,golf</genre>
+	</game>
+	<game name="Mario Golf: Family Tour (Japan) (JA)">
+		<id>GFTJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Golf: Family Tour</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30b4;&#x30eb;&#x30d5; &#x30d5;&#x30a1;&#x30df;&#x30ea;&#x30fc;&#x30c4;&#x30a2;&#x30fc;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xace8;&#xd504;: &#xd328;&#xbc00;&#xb9ac; &#xd22c;&#xc5b4;</title>
+		</locale>
+		<developer>Camelot Software Planning </developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="9" day="5"/>
+		<genre>action,sports,golf</genre>
+	</game>
+	<game name="Mario Golf: Toadstool Tour (Europe) (EN,FR,DE,ES,IT)">
+		<id>GFTP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Golf: Toadstool Tour</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Golf: Toadstool Tour</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Golf: Toadstool Tour</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Golf: Toadstool Tour</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Golf: Toadstool Tour</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Golf: Toadstool Tour</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xace8;&#xd504;: &#xd1a0;&#xb4dc;&#xc2a4;&#xd234; &#xd22c;&#xc5b4;</title>
+		</locale>
+		<developer>Camelot Software Planning</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="6" day="18"/>
+		<genre>action,sports,golf</genre>
+	</game>
+	<game name="F-Zero GX (USA) (EN)">
+		<id>GFZE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="PT">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="KO">
+			<title>F-&#xc81c;&#xb85c; GX</title>
+		</locale>
+		<developer>Amusement Vision</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="8" day="25"/>
+		<genre>racing,futuristic racing</genre>
+	</game>
+	<game name="F-Zero GX (Japan) (JA)">
+		<id>GFZJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="PT">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="JA">
+			<title>F-ZERO GX</title>
+		</locale>
+		<locale lang="KO">
+			<title>F-&#xc81c;&#xb85c; GX</title>
+		</locale>
+		<developer>Amusement Vision</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="7" day="25"/>
+		<genre>racing</genre>
+	</game>
+	<game name="F-Zero GX (Europe) (EN,FR,DE,ES,IT)">
+		<id>GFZP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="FR">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="DE">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="ES">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="IT">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="PT">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="SE">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="FI">
+			<title>F-Zero GX</title>
+		</locale>
+		<locale lang="KO">
+			<title>F-&#xc81c;&#xb85c; GX</title>
+		</locale>
+		<developer>Amusement Vision</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="10" day="31"/>
+		<genre>racing</genre>
+	</game>
+	<game name="Giftpia (Japan) (JA)">
+		<id>GGFJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Giftpia</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30ae;&#x30d5;&#x30c8;&#x30d4;&#x30a2;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xae30;&#xd504;&#xd2b8;&#xd53c;&#xc544;</title>
+		</locale>
+		<developer>Skip Ltd.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="4" day="25"/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Chibi-Robo! (USA) (EN)">
+		<id>GGTE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Chibi-Robo!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xaf2c;&#xb9c8; &#xb85c;&#xbd07;!</title>
+		</locale>
+		<developer>Skip Ltd.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="2" day="7"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Chibi-Robo! (Japan) (JA)">
+		<id>GGTJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Chibi-Robo!</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3061;&#x3073;&#x30ed;&#x30dc;&#xff01;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xaf2c;&#xb9c8; &#xb85c;&#xbd07;!</title>
+		</locale>
+		<developer>Skip Ltd.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="6" day="23"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Chibi-Robo! (Europe) (EN,FR,DE,ES,IT)">
+		<id>GGTP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Chibi-Robo!</title>
+		</locale>
+		<locale lang="DE">
+			<title>Chibi-Robo!</title>
+		</locale>
+		<locale lang="FI">
+			<title>Chibi-Robo!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xaf2c;&#xb9c8; &#xb85c;&#xbd07;!</title>
+		</locale>
+		<developer>Skip Ltd. </developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="5" day="26"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Geist (USA) (EN)">
+		<id>GITE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Geist</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xac00;&#xc774;&#xc2a4;&#xd2b8;</title>
+		</locale>
+		<developer>N-Space</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="10" day="15"/>
+		<genre>action,shooter</genre>
+	</game>
+	<game name="Geist (Europe) (EN,FR,DE,ES,IT)">
+		<id>GITP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Geist</title>
+		</locale>
+		<locale lang="DE">
+			<title>Geist</title>
+		</locale>
+		<locale lang="FI">
+			<title>Geist</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xac00;&#xc774;&#xc2a4;&#xd2b8;</title>
+		</locale>
+		<developer>N-Space</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="10" day="7"/>
+		<genre>action,shooter</genre>
+	</game>
+	<game name="Baten Kaitos Origins (USA) (EN)">
+		<id>GK4E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Baten Kaitos Origins</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbc14;&#xd150; &#xce74;&#xc774;&#xd1a0;&#xc2a4; &#xc624;&#xb9ac;&#xc9c4;&#xc988;</title>
+		</locale>
+		<developer>Monolith Software / tri-Crescendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="9" day="25"/>
+		<genre>role-playing,cards</genre>
+	</game>
+	<game name="Baten Kaitos II: Hajimari no Tsubasa to Kamigami no Shishi (Japan) (EN,JA)">
+		<id>GK4J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Baten Kaitos II: Hajimari no Tsubasa to Kamigami no Shishi</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d0;&#x30c6;&#x30f3;&#x30fb;&#x30ab;&#x30a4;&#x30c8;&#x30b9;&#x2161; &#x59cb;&#x307e;&#x308a;&#x306e;&#x7ffc;&#x3068;&#x795e;&#x3005;&#x306e;&#x55e3;&#x5b50;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbc14;&#xd150; &#xce74;&#xc774;&#xd1a0;&#xc2a4; II: &#xc2dc;&#xc791;&#xc758; &#xb0a0;&#xac1c;&#xc640; &#xc2e0;&#xb4e4;&#xc758; &#xc0ac;&#xc790;</title>
+		</locale>
+		<developer>Monolith Software (JP)</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="2" day="23"/>
+		<genre>role-playing,cards</genre>
+	</game>
+	<game name="Kyojin no Doshin (Japan) (EN,FR,DE,ES,IT,JA)">
+		<id>GKDJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Kyojin no Doshin</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x5de8;&#x4eba;&#x306e;&#x30c9;&#x30b7;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xac70;&#xc778; &#xb3c4;&#xc2e0;</title>
+		</locale>
+		<developer>Param  / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="3" day="14"/>
+		<genre>simulation,strategy</genre>
+	</game>
+	<game name="Doshin the Giant (Europe) (EN,FR,DE,ES,IT)">
+		<id>GKDP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Doshin the Giant</title>
+		</locale>
+		<locale lang="DE">
+			<title>Doshin the Giant</title>
+		</locale>
+		<locale lang="SE">
+			<title>Doshin the Giant</title>
+		</locale>
+		<locale lang="FI">
+			<title>Doshin the Giant</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xac70;&#xc778; &#xb3c4;&#xc2e0;</title>
+		</locale>
+		<developer>Param  / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="9" day="20"/>
+		<genre>simulation,strategy</genre>
+	</game>
+	<game name="Donkey Konga (USA) (EN)">
+		<id>GKGE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Donkey Konga</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69;&#xac00;</title>
+		</locale>
+		<developer>Namco / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="9" day="27"/>
+		<genre>music,rhythm</genre>
+	</game>
+	<game name="Donkey Konga (Japan) (JA)">
+		<id>GKGJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Donkey Konga</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c9;&#x30f3;&#x30ad;&#x30fc;&#x30b3;&#x30f3;&#x30ac;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69;&#xac00;</title>
+		</locale>
+		<developer>Namco / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="12" day="12"/>
+		<genre>music,rhythm</genre>
+	</game>
+	<game name="Donkey Konga (Europe) (EN,FR,DE,ES,IT)">
+		<id>GKGP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Donkey Konga</title>
+		</locale>
+		<locale lang="FI">
+			<title>Donkey Konga</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69;&#xac00;</title>
+		</locale>
+		<developer>Namco / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="10" day="15"/>
+		<genre>music,rhythm</genre>
+	</game>
+	<game name="Kururin Squash! (Japan) (JA)">
+		<id>GKQJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Kururin Squash!</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x304f;&#x308b;&#x308a;&#x3093;&#x30b9;&#x30ab;&#x30c3;&#x30b7;&#x30e5;&#xff01;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xcfe0;&#xb8e8;&#xb9c1; &#xc2a4;&#xcffc;&#xc2a4;!</title>
+		</locale>
+		<developer>Eighting</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="10" day="14"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Kirby Air Ride (USA) (EN)">
+		<id>GKYE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Kirby Air Ride</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30ab;&#x30fc;&#x30d3;&#x30a3;&#x306e;&#x30a8;&#x30a2;&#x30e9;&#x30a4;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xcee4;&#xbe44;&#xc758; &#xc5d0;&#xc5b4;&#xb77c;&#xc774;&#xb4dc;</title>
+		</locale>
+		<developer>HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="10" day="13"/>
+		<genre>action,racing</genre>
+	</game>
+	<game name="Kirby&apos;s Airride (Japan) (JA)">
+		<id>GKYJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Kirby&apos;s Airride</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30ab;&#x30fc;&#x30d3;&#x30a3;&#x306e;&#x30a8;&#x30a2;&#x30e9;&#x30a4;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xcee4;&#xbe44;&#xc758; &#xc5d0;&#xc5b4;&#xb77c;&#xc774;&#xb4dc;</title>
+		</locale>
+		<developer>HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="7" day="11"/>
+		<genre>action,racing</genre>
+	</game>
+	<game name="Kirby Air Ride (Europe) (EN,FR,DE,ES,IT)">
+		<id>GKYP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Kirby Air Ride</title>
+		</locale>
+		<locale lang="FR">
+			<title>Kirby Air Ride</title>
+		</locale>
+		<locale lang="DE">
+			<title>Kirby Air Ride</title>
+		</locale>
+		<locale lang="ES">
+			<title>Kirby Air Ride</title>
+		</locale>
+		<locale lang="IT">
+			<title>Kirby Air Ride</title>
+		</locale>
+		<locale lang="FI">
+			<title>Kirby Air Ride</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30ab;&#x30fc;&#x30d3;&#x30a3;&#x306e;&#x30a8;&#x30a2;&#x30e9;&#x30a4;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xcee4;&#xbe44;&#xc758; &#xc5d0;&#xc5b4;&#xb77c;&#xc774;&#xb4dc;</title>
+		</locale>
+		<developer>HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="2" day="26"/>
+		<genre>action,racing</genre>
+	</game>
+	<game name="Luigi&apos;s Mansion (USA) (EN)">
+		<id>GLME01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Luigi&apos;s Mansion</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb8e8;&#xc774;&#xc9c0; &#xb9e8;&#xc158;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2001" month="11" day="17"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Luigi Mansion (Japan) (JA)">
+		<id>GLMJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Luigi Mansion</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30eb;&#x30a4;&#x30fc;&#x30b8;&#x30de;&#x30f3;&#x30b7;&#x30e7;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb8e8;&#xc774;&#xc9c0; &#xb9e8;&#xc158;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2001" month="9" day="14"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Luigi&apos;s Mansion (Europe) (EN,FR,DE,ES,IT)">
+		<id>GLMP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Luigi&apos;s Mansion</title>
+		</locale>
+		<locale lang="FR">
+			<title>Luigi&apos;s Mansion</title>
+		</locale>
+		<locale lang="DE">
+			<title>Luigi&apos;s Mansion</title>
+		</locale>
+		<locale lang="ES">
+			<title>Luigi&apos;s Mansion</title>
+		</locale>
+		<locale lang="IT">
+			<title>Luigi&apos;s Mansion</title>
+		</locale>
+		<locale lang="SE">
+			<title>Luigi&apos;s Mansion</title>
+		</locale>
+		<locale lang="FI">
+			<title>Luigi&apos;s Mansion</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb8e8;&#xc774;&#xc9c0; &#xb9e8;&#xc158;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="5" day="3"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Mario Kart: Double Dash!! (USA) (EN)">
+		<id>GM4E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Kart: Double Dash!!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xce74;&#xd2b8;: &#xb354;&#xbe14; &#xb300;&#xc2dc;!!</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="17"/>
+		<genre>action,racing,kart racing</genre>
+	</game>
+	<game name="Mario Kart: Double Dash!! (Japan) (JA)">
+		<id>GM4J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Kart: Double Dash!!</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30ab;&#x30fc;&#x30c8; &#x30c0;&#x30d6;&#x30eb;&#x30c0;&#x30c3;&#x30b7;&#x30e5;!!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xce74;&#xd2b8;: &#xb354;&#xbe14; &#xb300;&#xc26c;!!</title>
+		</locale>
+		<developer>Nintendo EAD </developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="7"/>
+		<genre>racing,kart racing</genre>
+	</game>
+	<game name="Mario Kart: Double Dash!! (Europe) (EN,FR,DE,ES,IT)">
+		<id>GM4P01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Kart: Double Dash!!</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Kart: Double Dash!!</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Kart: Double Dash!!</title>
+		</locale>
+		<locale lang="SE">
+			<title>Mario Kart: Double Dash!!</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Kart: Double Dash!!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xce74;&#xd2b8;: &#xb354;&#xbe14; &#xb300;&#xc26c;!!</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="14"/>
+		<genre>action,racing,party,kart racing</genre>
+	</game>
+	<game name="Metroid Prime (USA) (EN)">
+		<id>GM8E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="PT">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xba54;&#xd2b8;&#xb85c;&#xc774;&#xb4dc; &#xd504;&#xb77c;&#xc784;</title>
+		</locale>
+		<developer>Retro Studios, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="11" day="19"/>
+		<genre>action,shooter,first-person shooter</genre>
+	</game>
+	<game name="Metroid Prime (Japan) (JA)">
+		<id>GM8J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30e1;&#x30c8;&#x30ed;&#x30a4;&#x30c9;&#x30d7;&#x30e9;&#x30a4;&#x30e0;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xba54;&#xd2b8;&#xb85c;&#xc774;&#xb4dc; &#xd504;&#xb77c;&#xc784;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x94f6;&#x6cb3;&#x6218;&#x58eb;(&#x65e5;&#x6216;&#x4e2d;)</title>
+		</locale>
+		<developer>Retro Studios</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="2" day="28"/>
+		<genre>action,shooter,first-person shooter</genre>
+	</game>
+	<game name="Metroid Prime (Europe) (EN,FR,DE,ES,IT)">
+		<id>GM8P01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="FR">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="DE">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="ES">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="IT">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="SE">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="FI">
+			<title>Metroid Prime</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xba54;&#xd2b8;&#xb85c;&#xc774;&#xb4dc; &#xd504;&#xb77c;&#xc784;</title>
+		</locale>
+		<developer>Retro Studio</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="3" day="21"/>
+		<genre>action,shooter,first-person shooter</genre>
+	</game>
+	<game name="Mario Party 4 (USA) (EN)">
+		<id>GMPE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Party 4</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 4</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="10" day="21"/>
+		<genre>action,party</genre>
+	</game>
+	<game name="Mario Party 4 (Japan) (JA)">
+		<id>GMPJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Party 4</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30d1;&#x30fc;&#x30c6;&#x30a3; 4</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 4</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="11" day="8"/>
+		<genre>party</genre>
+	</game>
+	<game name="Mario Party 4 (Europe) (EN,FR,DE,ES,IT)">
+		<id>GMPP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Party 4</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Party 4</title>
+		</locale>
+		<locale lang="SE">
+			<title>Mario Party 4</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Party 4</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 4</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="11" day="29"/>
+		<genre>party</genre>
+	</game>
+	<game name="Super Mario Sunshine (USA) (EN)">
+		<id>GMSE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Super Mario Sunshine</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; &#xc120;&#xc0e4;&#xc778;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="8" day="27"/>
+		<genre>action,adventure,3d platformer</genre>
+	</game>
+	<game name="Super Mario Sunshine (Japan) (JA)">
+		<id>GMSJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Super Mario Sunshine</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;&#x30b5;&#x30f3;&#x30b7;&#x30e3;&#x30a4;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; &#xc120;&#xc0e4;&#xc778;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x8d85;&#x7ea7;&#x9a6c;&#x91cc;&#x5965;&#x9633;&#x5149;(&#x65e5;&#x6216;&#x4e2d;)</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="7" day="19"/>
+		<genre>action,adventure,platformer,3d platformer</genre>
+	</game>
+	<game name="Super Mario Sunshine (Europe) (EN,FR,DE,ES,IT)">
+		<id>GMSP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Super Mario Sunshine</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Mario Sunshine</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Mario Sunshine</title>
+		</locale>
+		<locale lang="SE">
+			<title>Super Mario Sunshine</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Mario Sunshine</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; &#xc120;&#xc0e4;&#xc778;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="10" day="4"/>
+		<genre>action,adventure,platformer,3d platformer</genre>
+	</game>
+	<game name="NBA Courtside 2002 (USA) (EN)">
+		<id>GNBE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>NBA Courtside 2002</title>
+		</locale>
+		<locale lang="KO">
+			<title>NBA &#xcf54;&#xd2b8;&#xc0ac;&#xc774;&#xb4dc; 2002</title>
+		</locale>
+		<developer>Left Field Productions, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="1" day="14"/>
+		<genre>sports,basketball</genre>
+	</game>
+	<game name="NBA Courtside 2002 (Japan) (JA)">
+		<id>GNBJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>NBA Courtside 2002</title>
+		</locale>
+		<locale lang="JA">
+			<title>NBA&#x30b3;&#x30fc;&#x30c8;&#x30b5;&#x30a4;&#x30c9;2002</title>
+		</locale>
+		<locale lang="KO">
+			<title>NBA &#xcf54;&#xd2b8;&#xc0ac;&#xc774;&#xb4dc; 2002</title>
+		</locale>
+		<developer>Left Field Productions, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="3" day="29"/>
+		<genre>sports,basketball</genre>
+	</game>
+	<game name="NBA Courtside 2002 (Europe) (EN)">
+		<id>GNBP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>NBA Courtside 2002</title>
+		</locale>
+		<locale lang="SE">
+			<title>NBA Courtside 2002</title>
+		</locale>
+		<locale lang="FI">
+			<title>NBA Courtside 2002</title>
+		</locale>
+		<locale lang="KO">
+			<title>NBA &#xcf54;&#xd2b8;&#xc0ac;&#xc774;&#xb4dc; 2002</title>
+		</locale>
+		<developer>Left Field Productions, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="5" day="24"/>
+		<genre>sports,basketball</genre>
+	</game>
+	<game name="Mario Power Tennis (USA) (EN)">
+		<id>GOME01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Power Tennis</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xc6cc; &#xd14c;&#xb2c8;&#xc2a4;</title>
+		</locale>
+		<developer>Camelot Software Planning</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="11" day="8"/>
+		<genre>action,sports,tennis</genre>
+	</game>
+	<game name="Mario Tennis GC (Japan) (JA)">
+		<id>GOMJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Tennis GC</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30c6;&#x30cb;&#x30b9;GC</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd14c;&#xb2c8;&#xc2a4; GC</title>
+		</locale>
+		<developer>Camelot Software Planning </developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="10" day="28"/>
+		<genre>action,sports,tennis</genre>
+	</game>
+	<game name="Mario Power Tennis (Europe) (EN,FR,DE,ES,IT)">
+		<id>GOMP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Power Tennis</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Power Tennis</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Power Tennis</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Power Tennis</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mario Power Tennis</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Power Tennis</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xc6cc; &#xd14c;&#xb2c8;&#xc2a4;</title>
+		</locale>
+		<developer>Camelot Software Planning</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="2" day="25"/>
+		<genre>action,sports,tennis</genre>
+	</game>
+	<game name="Odama (USA) (EN)">
+		<id>GOOE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Odama</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc624;&#xb2e4;&#xb9c8;</title>
+		</locale>
+		<developer>Vivarium</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="4" day="10"/>
+		<genre>pinball</genre>
+	</game>
+	<game name="Odama (Japan) (JA)">
+		<id>GOOJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Odama</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x5927;&#x7389;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb300;&#xc625;</title>
+		</locale>
+		<developer>Vivarium</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="4" day="13"/>
+		<genre>pinball</genre>
+	</game>
+	<game name="Odama (Europe) (EN,FR,DE,ES,IT)">
+		<id>GOOP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Odama</title>
+		</locale>
+		<locale lang="FR">
+			<title>Odama</title>
+		</locale>
+		<locale lang="DE">
+			<title>Odama</title>
+		</locale>
+		<locale lang="ES">
+			<title>Odama</title>
+		</locale>
+		<locale lang="FI">
+			<title>Odama</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc624;&#xb2e4;&#xb9c8;</title>
+		</locale>
+		<developer>Vivarium</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="3" day="31"/>
+		<genre>pinball</genre>
+	</game>
+	<game name="Mario Party 5 (USA) (EN)">
+		<id>GP5E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Party 5</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 5</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="10"/>
+		<genre>action,party</genre>
+	</game>
+	<game name="Mario Party 5 (Japan) (JA)">
+		<id>GP5J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Party 5</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30d1;&#x30fc;&#x30c6;&#x30a3; 5</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 5</title>
+		</locale>
+		<developer>Hudson Soft </developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="28"/>
+		<genre>party</genre>
+	</game>
+	<game name="Mario Party 5 (Europe) (EN,FR,DE,ES,IT)">
+		<id>GP5P01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Party 5</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Party 5</title>
+		</locale>
+		<locale lang="SE">
+			<title>Mario Party 5</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Party 5</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 5</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="12" day="5"/>
+		<genre>action,party</genre>
+	</game>
+	<game name="Mario Party 6 (USA) (EN)">
+		<id>GP6E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Party 6</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 6</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="12" day="6"/>
+		<genre>action,party</genre>
+	</game>
+	<game name="Mario Party 6 (Japan) (JA)">
+		<id>GP6J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Party 6</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30d1;&#x30fc;&#x30c6;&#x30a3; 6</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 6</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="11" day="18"/>
+		<genre>party</genre>
+	</game>
+	<game name="Mario Party 6 (Europe) (EN,FR,DE,ES,IT)">
+		<id>GP6P01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Party 6</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Party 6</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Party 6</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Party 6</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 6</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="3" day="18"/>
+		<genre>action,party,board game</genre>
+	</game>
+	<game name="Mario Party 7 (USA) (EN)">
+		<id>GP7E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Party 7</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 7</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="11" day="7"/>
+		<genre>action,party</genre>
+	</game>
+	<game name="Mario Party 7 (Japan) (JA)">
+		<id>GP7J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Mario Party 7</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30d1;&#x30fc;&#x30c6;&#x30a3; 7</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 7</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="11" day="10"/>
+		<genre>party</genre>
+	</game>
+	<game name="Mario Party 7 (Europe) (EN,FR,DE,ES,IT)">
+		<id>GP7P01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Party 7</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Party 7</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Party 7</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Party 7</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; 7</title>
+		</locale>
+		<developer>Hudson Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="1" day="27"/>
+		<genre>action,party,board game</genre>
+	</game>
+	<game name="Pok&#xe9;mon Channel (USA) (EN)">
+		<id>GPAE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Channel</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; &#xcc44;&#xb110;</title>
+		</locale>
+		<developer>Ambrella</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="12" day="1"/>
+		<genre>software</genre>
+	</game>
+	<game name="Pok&#xe9;mon Channel: Pikachu to Issho! (Japan) (JA)">
+		<id>GPAJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Channel: Pikachu to Issho!</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30b1;&#x30e2;&#x30f3;&#x30c1;&#x30e3;&#x30f3;&#x30cd;&#x30eb; &#xff5e;&#x30d4;&#x30ab;&#x30c1;&#x30e5;&#x30a6;&#x3068;&#x3044;&#x3063;&#x3057;&#x3087;&#xff01;&#xff5e;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; &#xcc44;&#xb110;: &#xd53c;&#xce74;&#xce04;&#xc640; &#xd568;&#xaed8;!</title>
+		</locale>
+		<developer>Ambrella</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="7" day="18"/>
+		<genre>software</genre>
+	</game>
+	<game name="Pok&#xe9;mon Channel (Europe) (EN,FR,DE,ES,IT)">
+		<id>GPAP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Channel</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Channel</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Channel</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Channel</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Channel</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon Channel</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Channel</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; &#xcc44;&#xb110;</title>
+		</locale>
+		<developer>Ambrella</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="4" day="1"/>
+		<genre>software</genre>
+	</game>
+	<game name="Pok&#xe9;mon Channel (Europe) (EN)">
+		<id>GPAU01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Channel</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; &#xcc44;&#xb110;</title>
+		</locale>
+		<developer>Ambrella</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="4" day="1"/>
+		<genre>software</genre>
+	</game>
+	<game name="Pikmin (USA) (EN)">
+		<id>GPIE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pikmin</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd53c;&#xd06c;&#xbbfc;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x76ae;&#x514b;&#x654f;&#x661f;&#x7403;&#x63a2;&#x9669;(&#x7f8e;)</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2001" month="12" day="2"/>
+		<genre>strategy</genre>
+	</game>
+	<game name="Pikmin (Japan) (JA)">
+		<id>GPIJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pikmin</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d4;&#x30af;&#x30df;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd53c;&#xd06c;&#xbbfc;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2001" month="10" day="26"/>
+		<genre>strategy</genre>
+	</game>
+	<game name="Pikmin (Europe) (EN,FR,DE,ES,IT)">
+		<id>GPIP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pikmin</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pikmin</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pikmin</title>
+		</locale>
+		<locale lang="SE">
+			<title>Pikmin</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pikmin</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd53c;&#xd06c;&#xbbfc;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="6" day="13"/>
+		<genre>strategy</genre>
+	</game>
+	<game name="Pikmin 2 (USA) (EN)">
+		<id>GPVE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pikmin 2</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd53c;&#xd06c;&#xbbfc; 2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="8" day="30"/>
+		<genre>strategy</genre>
+	</game>
+	<game name="Pikmin 2 (Japan) (JA)">
+		<id>GPVJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pikmin 2</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d4;&#x30af;&#x30df;&#x30f3; 2</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd53c;&#xd06c;&#xbbfc; 2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="4" day="29"/>
+		<genre>strategy</genre>
+	</game>
+	<game name="Pikmin 2 (Europe) (EN,FR,DE,ES,IT)">
+		<id>GPVP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pikmin 2</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pikmin 2</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pikmin 2</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd53c;&#xd06c;&#xbbfc; 2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="8" day="30"/>
+		<genre>strategy</genre>
+	</game>
+	<game name="Pokemon Box: Ruby &amp; Sapphire (USA) (EN)">
+		<id>GPXE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pokemon Box: Ruby &amp; Sapphire</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbaa8;&#xcf13;&#xbaac; &#xbc15;&#xc2a4;: &#xb8e8;&#xbe44; &amp; &#xc0ac;&#xd30c;&#xc774;&#xc5b4;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="7" day="12"/>
+		<genre>simulation</genre>
+	</game>
+	<game name="Pokemon Box: Ruby &amp; Sapphire (Japan) (EN,JA)">
+		<id>GPXJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pokemon Box: Ruby &amp; Sapphire</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30b1;&#x30e2;&#x30f3;&#x30dc;&#x30c3;&#x30af;&#x30b9; &#x30eb;&#x30d3;&#x30fc;&#xff06;&#x30b5;&#x30d5;&#x30a1;&#x30a4;&#x30a2;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbaa8;&#xcf13;&#xbaac; &#xbc15;&#xc2a4;: &#xb8e8;&#xbe44; &amp; &#xc0ac;&#xd30c;&#xc774;&#xc5b4;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="5" day="30"/>
+		<genre>simulation</genre>
+	</game>
+	<game name="Pokemon Box: Ruby &amp; Sapphire (Europe) (EN,FR,DE,ES,IT)">
+		<id>GPXP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pokemon Box: Ruby &amp; Sapphire</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Box : Rubis &amp; Saphir</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Box: Rubin &amp; Saphir</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Box: Rub&#xed; y Zafiro</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Box: Rubino e Zaffiro</title>
+		</locale>
+		<locale lang="SE">
+			<title>Pokemon Box: Ruby &amp; Sapphire</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbaa8;&#xcf13;&#xbaac; &#xbc15;&#xc2a4;: &#xb8e8;&#xbe44; &amp; &#xc0ac;&#xd30c;&#xc774;&#xc5b4;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="5" day="14"/>
+		<genre>simulation</genre>
+	</game>
+	<game name="Nintendo Puzzle Collection (Japan) (JA)">
+		<id>GPZJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Nintendo Puzzle Collection</title>
+		</locale>
+		<locale lang="JA">
+			<title>NINTENDO &#x30d1;&#x30ba;&#x30eb;&#x30b3;&#x30ec;&#x30af;&#x30b7;&#x30e7;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb2cc;&#xd150;&#xb3c4; &#xd37c;&#xc990; &#xceec;&#xb809;&#xc158;</title>
+		</locale>
+		<developer>Nintendo R&amp;D1, Nintendo Software Technology Corporation, Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="2" day="7"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Densetsu no Quiz-ou Kettei-sen (Japan) (JA)">
+		<id>GQZJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Densetsu no Quiz-ou Kettei-sen</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x4f1d;&#x8aac;&#x306e;&#x30af;&#x30a4;&#x30ba;&#x738b;&#x6c7a;&#x5b9a;&#x6226;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc804;&#xc124;&#xc758; &#xd034;&#xc988;&#xc655; &#xacb0;&#xc815;&#xc804;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="12" day="8"/>
+		<genre>board game</genre>
+	</game>
+	<game name="Star Fox Adventures (USA) (EN)">
+		<id>GSAE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Star Fox Adventures</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc2a4;&#xd0c0; &#xd3ed;&#xc2a4; &#xc5b4;&#xb4dc;&#xbca4;&#xcc98;&#xc988;</title>
+		</locale>
+		<developer>Rareware</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="9" day="23"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Star Fox Adventures (Japan) (JA)">
+		<id>GSAJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Star Fox Adventures</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30bf;&#x30fc;&#x30d5;&#x30a9;&#x30c3;&#x30af;&#x30b9;&#x30a2;&#x30c9;&#x30d9;&#x30f3;&#x30c1;&#x30e3;&#x30fc;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc2a4;&#xd0c0; &#xd3ed;&#xc2a4; &#xc5b4;&#xb4dc;&#xbca4;&#xcc98;&#xc988;</title>
+		</locale>
+		<developer>Rareware</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="9" day="27"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Star Fox Adventures (Europe) (EN,FR,DE,ES,IT)">
+		<id>GSAP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Star Fox Adventures</title>
+		</locale>
+		<locale lang="FR">
+			<title>Star Fox: Adventures</title>
+		</locale>
+		<locale lang="DE">
+			<title>Star Fox: Adventures</title>
+		</locale>
+		<locale lang="FI">
+			<title>Star Fox: Adventures</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc2a4;&#xd0c0; &#xd3ed;&#xc2a4; &#xc5b4;&#xb4dc;&#xbca4;&#xcc98;&#xc988;</title>
+		</locale>
+		<developer>Rareware</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="11" day="22"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="1080 Avalanche (USA) (EN)">
+		<id>GTEE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>1080 Avalanche</title>
+		</locale>
+		<locale lang="PT">
+			<title>1080&#xb0; Avalanche</title>
+		</locale>
+		<locale lang="KO">
+			<title>1080&#xb0; &#xc560;&#xbc8c;&#xb79c;&#xce20;</title>
+		</locale>
+		<developer>NST</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="12" day="1"/>
+		<genre>sports,snowboarding</genre>
+	</game>
+	<game name="1080 Silver Storm (Japan) (JA)">
+		<id>GTEJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>1080 Silver Storm</title>
+		</locale>
+		<locale lang="JA">
+			<title>1080&#xb0; SILVER STORM</title>
+		</locale>
+		<locale lang="KO">
+			<title>1080&#xb0; &#xc740;&#xbe5b; &#xd3ed;&#xd48d;</title>
+		</locale>
+		<developer>NST</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="1" day="22"/>
+		<genre>sports,snowboarding</genre>
+	</game>
+	<game name="1080 Avalanche (Europe) (EN,FR,DE,ES,IT)">
+		<id>GTEP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>1080 Avalanche</title>
+		</locale>
+		<locale lang="DE">
+			<title>1080&#xb0; Avalanche</title>
+		</locale>
+		<locale lang="PT">
+			<title>1080&#xb0; Avalanche</title>
+		</locale>
+		<locale lang="FI">
+			<title>1080&#xb0; Avalanche</title>
+		</locale>
+		<locale lang="KO">
+			<title>1080&#xb0; &#xc560;&#xbc8c;&#xb79c;&#xce20;</title>
+		</locale>
+		<developer>NST</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="28"/>
+		<genre>sports,surfing</genre>
+	</game>
+	<game name="Wave Race: Blue Storm (USA) (EN)">
+		<id>GWRE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Wave Race: Blue Storm</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc6e8;&#xc774;&#xbe0c; &#xb808;&#xc774;&#xc2a4;: &#xd478;&#xb978; &#xd3ed;&#xd48d;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2001" month="11" day="18"/>
+		<genre>racing,watercraft racing</genre>
+	</game>
+	<game name="Wave Race: Blue Storm (Japan) (JA)">
+		<id>GWRJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Wave Race: Blue Storm</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30a6;&#x30a7;&#x30fc;&#x30d6;&#x30ec;&#x30fc;&#x30b9; &#x30d6;&#x30eb;&#x30fc;&#x30b9;&#x30c8;&#x30fc;&#x30e0;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc6e8;&#xc774;&#xbe0c; &#xb808;&#xc774;&#xc2a4;: &#xd478;&#xb978; &#xd3ed;&#xd48d;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2001" month="9" day="14"/>
+		<genre>racing,watercraft racing</genre>
+	</game>
+	<game name="Wave Race: Blue Storm (Europe) (EN,FR,DE,ES,IT)">
+		<id>GWRP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Wave Race: Blue Storm</title>
+		</locale>
+		<locale lang="FR">
+			<title>Wave Race: Blue Storm</title>
+		</locale>
+		<locale lang="DE">
+			<title>Wave Race: Blue Storm</title>
+		</locale>
+		<locale lang="ES">
+			<title>Wave Race: Blue Storm</title>
+		</locale>
+		<locale lang="IT">
+			<title>Wave Race: Blue Storm</title>
+		</locale>
+		<locale lang="SE">
+			<title>Wave Race: Blue Storm</title>
+		</locale>
+		<locale lang="FI">
+			<title>Wave Race: Blue Storm</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc6e8;&#xc774;&#xbe0c; &#xb808;&#xc774;&#xc2a4;: &#xd478;&#xb978; &#xd3ed;&#xd48d;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="5" day="3"/>
+		<genre>racing,watercraft racing</genre>
+	</game>
+	<game name="Wario World (USA) (EN)">
+		<id>GWWE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Wario World</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc640;&#xb9ac;&#xc624; &#xc6d4;&#xb4dc;</title>
+		</locale>
+		<developer>Treasure</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="6" day="23"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Wario World (Japan) (JA)">
+		<id>GWWJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Wario World</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30ef;&#x30ea;&#x30aa;&#x30ef;&#x30fc;&#x30eb;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc640;&#xb9ac;&#xc624; &#xc6d4;&#xb4dc;</title>
+		</locale>
+		<developer>Treasure</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="5" day="27"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Wario World (Europe) (EN,FR,DE,ES,IT)">
+		<id>GWWP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Wario World</title>
+		</locale>
+		<locale lang="DE">
+			<title>Wario World</title>
+		</locale>
+		<locale lang="SE">
+			<title>Wario World</title>
+		</locale>
+		<locale lang="FI">
+			<title>Wario World</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc640;&#xb9ac;&#xc624; &#xc6d4;&#xb4dc;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="6" day="20"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Dance Dance Revolution: Mario Mix (USA) (EN)">
+		<id>GWZE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Dance Dance Revolution: Mario Mix</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb304;&#xc2a4; &#xb304;&#xc2a4; &#xb808;&#xbcfc;&#xb8e8;&#xc158;: &#xb9c8;&#xb9ac;&#xc624; &#xbbf9;&#xc2a4;</title>
+		</locale>
+		<developer>Konami Studios</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="10" day="24"/>
+		<genre>music,dance</genre>
+	</game>
+	<game name="Dance Dance Revolution with Mario (Japan) (JA)">
+		<id>GWZJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Dance Dance Revolution with Mario</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c0;&#x30f3;&#x30b9;&#x30c0;&#x30f3;&#x30b9;&#x30ec;&#x30dc;&#x30ea;&#x30e5;&#x30fc;&#x30b7;&#x30e7;&#x30f3; &#x30a6;&#x30a3;&#x30ba; &#x30de;&#x30ea;&#x30aa;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624;&#xc640; &#xd568;&#xaed8;&#xd558;&#xb294; &#xb304;&#xc2a4; &#xb304;&#xc2a4; &#xb808;&#xbcfc;&#xb8e8;&#xc158;</title>
+		</locale>
+		<developer>Konami Studios</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="7" day="14"/>
+		<genre>music,dance</genre>
+	</game>
+	<game name="Dancing Stage Mario Mix (Europe) (EN,FR,DE,ES,IT)">
+		<id>GWZP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Dancing Stage Mario Mix</title>
+		</locale>
+		<locale lang="ES">
+			<title>Dancing Stage: Mario Mix</title>
+		</locale>
+		<locale lang="FI">
+			<title>Dancing Stage: Mario Mix</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb304;&#xc2f1; &#xc2a4;&#xd14c;&#xc774;&#xc9c0; &#xb9c8;&#xb9ac;&#xc624; &#xbbf9;&#xc2a4;</title>
+		</locale>
+		<developer>Konami Studios</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="10" day="28"/>
+		<genre>music,dance</genre>
+	</game>
+	<game name="Custom Robo (USA) (EN)">
+		<id>GXCE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Custom Robo</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xcee4;&#xc2a4;&#xd140; &#xb85c;&#xbcf4;</title>
+		</locale>
+		<developer>Noise (Marigul) / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="5" day="10"/>
+		<genre>action</genre>
+	</game>
+	<game name="Custom Robo: Battle Revolution (Japan) (JA)">
+		<id>GXCJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Custom Robo: Battle Revolution</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30ab;&#x30b9;&#x30bf;&#x30e0;&#x30ed;&#x30dc; &#x30d0;&#x30c8;&#x30eb;&#x30ec;&#x30dc;&#x30ea;&#x30e5;&#x30fc;&#x30b7;&#x30e7;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xcee4;&#xc2a4;&#xd140; &#xb85c;&#xbcf4;: &#xbc30;&#xd2c0; &#xb808;&#xbcfc;&#xb8e8;&#xc158;</title>
+		</locale>
+		<developer>Noise (Marigul) / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="3" day="4"/>
+		<genre>action</genre>
+	</game>
+	<game name="Pokemon XD: Gale of Darkness (USA) (EN)">
+		<id>GXXE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pokemon XD: Gale of Darkness</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; XD: &#xc5b4;&#xb460;&#xc758; &#xc120;&#xd48d; &#xb2e4;&#xd06c; &#xb8e8;&#xae30;&#xc544;</title>
+		</locale>
+		<developer>Genius Sonority Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="9" day="28"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Pokemon XD: Yami no Kaze Dark Lugia (Japan) (JA)">
+		<id>GXXJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pokemon XD: Yami no Kaze Dark Lugia</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30b1;&#x30e2;&#x30f3;XD &#x95c7;&#x306e;&#x65cb;&#x98a8;&#x30c0;&#x30fc;&#x30af;&#x30fb;&#x30eb;&#x30ae;&#x30a2;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; XD: &#xc5b4;&#xb460;&#xc758; &#xc120;&#xd48d; &#xb2e4;&#xd06c; &#xb8e8;&#xae30;&#xc544;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x5b9d;&#x53ef;&#x68a6;XD &#x6697;&#x4e4b;&#x65cb;&#x98ce;&#x9ed1;&#x6697;&#x6d1b;&#x5947;&#x4e9a;(&#x65e5;&#x6216;&#x4e2d;)</title>
+		</locale>
+		<developer>Genius Sonority</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="8" day="4"/>
+		<genre>role-playing,fantasy</genre>
+	</game>
+	<game name="Pokemon XD: Gale of Darkness (Europe) (EN,FR,DE,ES,IT)">
+		<id>GXXP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pokemon XD: Gale of Darkness</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon XD : Le Souffle Des T&#xe9;n&#xe8;bres</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon XD: Der Dunkle Sturm</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon XD: Tempestad Oscura</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon XD: Tempesta Oscura</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon XD: Gale of Darkness</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac; XD: &#xc5b4;&#xb460;&#xc758; &#xc120;&#xd48d; &#xb2e4;&#xd06c; &#xb8e8;&#xae30;&#xc544;</title>
+		</locale>
+		<developer>Genius Sonority Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="11" day="18"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Donkey Konga 2 (USA) (EN)">
+		<id>GY2E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Donkey Konga 2</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69;&#xac00; 2</title>
+		</locale>
+		<developer>Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="5" day="9"/>
+		<genre>music,rhythm</genre>
+	</game>
+	<game name="Donkey Konga 2: Hit Song Parade (Japan) (JA)">
+		<id>GY2J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Donkey Konga 2: Hit Song Parade</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c9;&#x30f3;&#x30ad;&#x30fc;&#x30b3;&#x30f3;&#x30ac; 2 &#x30d2;&#x30c3;&#x30c8;&#x30bd;&#x30f3;&#x30b0;&#x30d1;&#x30ec;&#x30fc;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69;&#xac00; 2 &#xd788;&#xd2b8; &#xc1a1; &#xd37c;&#xb808;&#xc774;&#xb4dc;</title>
+		</locale>
+		<developer>Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="7" day="1"/>
+		<genre>music,rhythm</genre>
+	</game>
+	<game name="Donkey Konga 2 (Europe) (EN,FR,DE,ES,IT)">
+		<id>GY2P01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Donkey Konga 2</title>
+		</locale>
+		<locale lang="FI">
+			<title>Donkey Konga 2</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69;&#xac00; 2</title>
+		</locale>
+		<developer>Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="6" day="3"/>
+		<genre>music,rhythm</genre>
+	</game>
+	<game name="Donkey Konga 3: Tabehoudai! Haru Mogitate 50-kyoku (Japan) (JA)">
+		<id>GY3J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Donkey Konga 3: Tabehoudai! Haru Mogitate 50-kyoku</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c9;&#x30f3;&#x30ad;&#x30fc;&#x30b3;&#x30f3;&#x30ac; 3 &#x98df;&#x3079;&#x653e;&#x984c;&#xff01;&#x6625;&#x3082;&#x304e;&#x305f;&#x3066;50&#x66f2;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69;&#xac00; 3 &#xbdd4;&#xd398;! &#xbd04;&#xb9de;&#xc774; 50&#xace1;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="3" day="17"/>
+		<genre>music,rhythm</genre>
+	</game>
+	<game name="Donkey Kong Jungle Beat (USA) (EN)">
+		<id>GYBE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Donkey Kong Jungle Beat</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69;: &#xc815;&#xae00; &#xbe44;&#xd2b8;</title>
+		</locale>
+		<developer>Nintendo EAD Tokyo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="3" day="14"/>
+		<genre>action,music</genre>
+	</game>
+	<game name="Donkey Kong Jungle Beat (Japan) (JA)">
+		<id>GYBJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Donkey Kong Jungle Beat</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c9;&#x30f3;&#x30ad;&#x30fc;&#x30b3;&#x30f3;&#x30b0; &#x30b8;&#x30e3;&#x30f3;&#x30b0;&#x30eb;&#x30d3;&#x30fc;&#x30c8;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69; &#xc815;&#xae00; &#xbe44;&#xd2b8;</title>
+		</locale>
+		<developer>Nintendo EAD Tokyo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="12" day="16"/>
+		<genre>action,music</genre>
+	</game>
+	<game name="Donkey Kong Jungle Beat (Europe) (EN,FR,DE,ES,IT)">
+		<id>GYBP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Donkey Kong Jungle Beat</title>
+		</locale>
+		<locale lang="FI">
+			<title>Donkey Kong: Jungle Beat</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4; &#xcf69;: &#xc815;&#xae00; &#xbe44;&#xd2b8;</title>
+		</locale>
+		<developer>Nintendo EAD Tokyo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="2" day="4"/>
+		<genre>action,music</genre>
+	</game>
+	<game name="Mario Superstar Baseball (USA) (EN)">
+		<id>GYQE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mario Superstar Baseball</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;&#x30b9;&#x30bf;&#x30b8;&#x30a2;&#x30e0; &#x30df;&#x30e9;&#x30af;&#x30eb;&#x30d9;&#x30fc;&#x30b9;&#x30dc;&#x30fc;&#x30eb;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xc288;&#xd37c;&#xc2a4;&#xd0c0; &#xbca0;&#xc774;&#xc2a4;&#xbcfc;</title>
+		</locale>
+		<developer>Namco / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="10" day="29"/>
+		<genre>action,sports,baseball</genre>
+	</game>
+	<game name="Super Mario Stadium: Miracle Baseball (Japan) (JA)">
+		<id>GYQJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Super Mario Stadium: Miracle Baseball</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;&#x30b9;&#x30bf;&#x30b8;&#x30a2;&#x30e0; &#x30df;&#x30e9;&#x30af;&#x30eb;&#x30d9;&#x30fc;&#x30b9;&#x30dc;&#x30fc;&#x30eb;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; &#xc2a4;&#xd0c0;&#xb514;&#xc6c0; &#xae30;&#xc801;&#xc758; &#xc57c;&#xad6c;</title>
+		</locale>
+		<developer>Namco / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="7" day="21"/>
+		<genre>sports,baseball</genre>
+	</game>
+	<game name="Mario Superstar Baseball (Europe) (EN)">
+		<id>GYQP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mario Superstar Baseball</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mario Superstar Baseball</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Superstar Baseball</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;&#x30b9;&#x30bf;&#x30b8;&#x30a2;&#x30e0; &#x30df;&#x30e9;&#x30af;&#x30eb;&#x30d9;&#x30fc;&#x30b9;&#x30dc;&#x30fc;&#x30eb;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xc288;&#xd37c;&#xc2a4;&#xd0c0; &#xbca0;&#xc774;&#xc2a4;&#xbcfc;</title>
+		</locale>
+		<developer>Namco / Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2005" month="11" day="11"/>
+		<genre>action,sports,baseball</genre>
+	</game>
+	<game name="The Legend of Zelda: Twilight Princess (USA) (EN)">
+		<id>GZ2E01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Twilight Princess</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Twilight Princess</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: &#xd669;&#xd63c;&#xc758; &#xacf5;&#xc8fc;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="12" day="11"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Zelda no Densetsu: Twilight Princess (Japan) (JA)">
+		<id>GZ2J01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Zelda no Densetsu: Twilight Princess</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x30c8;&#x30ef;&#x30a4;&#x30e9;&#x30a4;&#x30c8;&#x30d7;&#x30ea;&#x30f3;&#x30bb;&#x30b9; [GC]</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: &#xd669;&#xd63c;&#xc758; &#xacf5;&#xc8fc;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x585e;&#x5c14;&#x8fbe;&#x4f20;&#x8bf4; &#x9ec4;&#x660f;&#x516c;&#x4e3b;(&#x65e5;&#x6216;&#x4e2d;)</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="12" day="2"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="The Legend of Zelda: Twilight Princess (Europe) (EN,FR,DE,ES,IT,NL)">
+		<id>GZ2P01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Twilight Princess</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Twilight Princess</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Twilight Princess</title>
+		</locale>
+		<locale lang="NL">
+			<title>The Legend of Zelda: Twilight Princess</title>
+		</locale>
+		<locale lang="FI">
+			<title>The Legend of Zelda: Twilight Princess</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: &#xd669;&#xd63c;&#xc758; &#xacf5;&#xc8fc;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2006" month="12" day="15"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="The Legend of Zelda: The Wind Waker (USA) (EN)">
+		<id>GZLE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: The Wind Waker</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: &#xbc14;&#xb78c;&#xc758; &#xd0dd;&#xd2b8;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="3" day="24"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Zelda no Densetsu: Kaze no Takt (Japan) (JA)">
+		<id>GZLJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Zelda no Densetsu: Kaze no Takt</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x98a8;&#x306e;&#x30bf;&#x30af;&#x30c8;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: &#xbc14;&#xb78c;&#xc758; &#xc9c0;&#xd718;&#xbd09;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x585e;&#x5c14;&#x8fbe;&#x4f20;&#x8bf4; &#x98ce;&#x4e4b;&#x6756;(&#x65e5;&#x6216;&#x4e2d;)</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2002" month="12" day="13"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="The Legend of Zelda: The Wind Waker (Europe) (EN,FR,DE,ES,IT)">
+		<id>GZLP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: The Wind Waker</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: The Wind Waker</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: The Wind Waker</title>
+		</locale>
+		<locale lang="IT">
+			<title>The Legend of Zelda: The Wind Waker</title>
+		</locale>
+		<locale lang="SE">
+			<title>The Legend of Zelda: The Wind Waker</title>
+		</locale>
+		<locale lang="NO">
+			<title>The Legend of Zelda: The Wind Waker</title>
+		</locale>
+		<locale lang="FI">
+			<title>The Legend of Zelda: The Wind Waker</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: &#xbc14;&#xb78c;&#xc758; &#xd0dd;&#xd2b8;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="5" day="3"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="WarioWare, Inc.: Mega Party Game&#x24;! (USA) (EN)">
+		<id>GZWE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>WarioWare, Inc.: Mega Party Game&#x24;!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc640;&#xb9ac;&#xc624; &#xc6e8;&#xc5b4; Inc.: &#xba54;&#xac00; &#xd30c;&#xd2f0; &#xac8c;&#xc784;&#x24;!</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="4" day="5"/>
+		<genre>party</genre>
+	</game>
+	<game name="Atsumare!! Made in Wario (Japan) (JA)">
+		<id>GZWJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Atsumare!! Made in Wario</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3042;&#x3064;&#x307e;&#x308c;!! &#x30e1;&#x30a4;&#x30c9;&#x30a4;&#x30f3;&#x30ef;&#x30ea;&#x30aa;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbaa8;&#xc5ec;&#xb77c;!! &#xba54;&#xc774;&#xb4dc; &#xc778; &#xc640;&#xb9ac;&#xc624;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="10" day="17"/>
+		<genre>action,party</genre>
+	</game>
+	<game name="WarioWare, Inc.: Mega Party Game&#x24;! (Europe) (EN,FR,DE,ES,IT)">
+		<id>GZWP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>WarioWare, Inc.: Mega Party Game&#x24;!</title>
+		</locale>
+		<locale lang="FR">
+			<title>WarioWare, Inc.: Mega Party Game&#x24;!</title>
+		</locale>
+		<locale lang="DE">
+			<title>WarioWare, Inc.: Mega Party Game&#x24;!</title>
+		</locale>
+		<locale lang="ES">
+			<title>WarioWare, Inc.: Mega Party Game&#x24;!</title>
+		</locale>
+		<locale lang="FI">
+			<title>WarioWare, Inc.: Mega Party Game&#x24;!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc640;&#xb9ac;&#xc624; &#xc6e8;&#xc5b4; Inc.: &#xba54;&#xac00; &#xd30c;&#xd2f0; &#xac8c;&#xc784;&#x24;!</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="9" day="3"/>
+		<genre>party</genre>
+	</game>
+	<game name="Pac-Man Vs. (USA) (EN)">
+		<id>PRJE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pac-Man Vs.</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd329;&#xb9e8; vs.</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Namco</publisher>
+		<date year="2003" month="12" day="2"/>
+		<genre>arcade,puzzle</genre>
+	</game>
+	<game name="Pac-Man Vs. (Japan) (JA)">
+		<id>PRJJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pac-Man Vs.</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d1;&#x30c3;&#x30af;&#x30de;&#x30f3; vs.</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd329;&#xb9e8; vs.</title>
+		</locale>
+		<developer>Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="12" day="2"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Pac-Man Vs. (Europe) (EN,FR,DE,ES,IT)">
+		<id>PRJP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pac-Man Vs.</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pac-Man vs.</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd329;&#xb9e8; vs.</title>
+		</locale>
+		<developer>Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="3" day="26"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="The Legend of Zelda: Collector&apos;s Edition (USA) (EN)">
+		<id>PZLE01</id>
+		<type>GameCube</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Collector&apos;s Edition</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: &#xceec;&#xb809;&#xd130;&#xc988; &#xc5d0;&#xb514;&#xc158;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="24"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Zelda Collection (Japan) (JA)">
+		<id>PZLJ01</id>
+		<type>GameCube</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Zelda Collection</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x30b3;&#x30ec;&#x30af;&#x30b7;&#x30e7;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4; &#xceec;&#xb809;&#xc158;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="14"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="The Legend of Zelda: Collector&apos;s Edition (Europe) (EN,FR,DE,ES,IT)">
+		<id>PZLP01</id>
+		<type>GameCube</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Collector&apos;s Edition</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Collector&apos;s Edition</title>
+		</locale>
+		<locale lang="ES">
+			<title>The Legend of Zelda: Collector&apos;s Edition</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124;: &#xceec;&#xb809;&#xd130;&#xc988; &#xc5d0;&#xb514;&#xc158;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2003" month="11" day="14"/>
+		<genre>action,adventure,compilation,demo</genre>
+	</game>
+</datafile>
+
