@@ -157,8 +157,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       hauteur pour Wii et Wii U (vignettes, fiche, page « Jaquettes »).
 - [ ] **Switch** (SPEC v1.11) : GameTDB seul. Une cartouche « ALL » (mondiale) vaut sortie dans les 3 régions, avec
       la **même date et le même code produit** (`HAC-P-` + identifiant, ex. `HAC-P-AAAAA`) ; une cartouche propre à une
-      région la remplace dans cette région. Cartouches seulement chinoises ou coréennes ignorées ; packs, éditions
-      spéciales et extensions (« [Starter Pack] », « + … Expansion ») écartés comme variantes, avec la raison.
+      région la remplace dans cette région. Cartouches seulement chinoises ou coréennes ignorées ; packs et éditions
+      spéciales (identifiant terminé par un chiffre) écartés ; une réédition avec extension (« + … Expansion ») cède
+      la place à la cartouche d'origine.
 - [ ] Switch : jaquette **propre à chaque région** : US (scan US), PAL (scan EN, sinon FR), JAP (scan japonais,
       352 × 570 px, le plus grand qui existe) ; proportions de la boîte Switch (en hauteur, ≈ 0,62).
 - [ ] **Switch 2** (SPEC v1.11) : GameTDB n'a pas de base. Liste Wikipédia « List of Nintendo Switch 2 games » :
@@ -166,8 +167,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       produit ni de jaquette (vignette neutre, **photo ajoutée à la main**, US-12).
 - [ ] Switch 2 : chaque nouveau jeu a une case **« en boîte »** dans l'aperçu ; un jeu décoché (téléchargement
       seul, ex. Welcome Tour) est **mémorisé** et n'est plus reproposé aux imports suivants (réactivable).
-- [ ] Toutes consoles : un jeu **pas encore sorti** (date future, ou seulement une année ou « 2027 ») n'est pas
-      importé ; il est ignoré avec la raison « à venir » et arrivera avec un import suivant.
+- [ ] Toutes consoles : un jeu **pas encore sorti** (toutes ses dates connues sont futures) n'est pas importé ; il est
+      ignoré avec la raison « à venir » et arrivera avec un import suivant. Switch 2 : un jeu sans date au jour près
+      (« 2027 », « Q2 2027 », « TBA ») est aussi « à venir ».
 - [ ] **Import des nouveautés** (SPEC v1.11) : l'aperçu classe chaque jeu en **nouveau**, **modifié** (avec les champs
       qui changent) ou **inchangé** par rapport à la base ; par défaut seuls les nouveaux et modifiés sont enregistrés,
       et seules les jaquettes **manquantes** sont copiées. « Tout réenregistrer » reste possible.

@@ -264,7 +264,8 @@ test n'appelle les sites en direct.
       (consoles DS 2004, 3DS 2011, ordre chronologique) ; règles ci-dessus, titre PAL anglais, codes
       `NTR-`/`CTR-P-`/`KTR-P-` ; pages d'import ; fixtures réduites.
 
-10. **Switch + Switch 2** (v1.4) — 3 PR basées sur `main`, mergeables dans n'importe quel ordre :
+10. **Switch + Switch 2** (v1.4) — 3 PR visant `main`, à merger **dans l'ordre** (#101, #103, #105) : la Switch 2
+   réutilise les jeux « à venir » de la PR 1, et sa migration 0010 doit passer après la 0009 de la Switch :
    1. **Import des nouveautés** (toutes consoles) : comparaison base / import dans l'aperçu (nouveau, modifié,
       inchangé), case « Afficher les inchangés », enregistrement des seuls changements ; jeux « à venir » ignorés.
    2. **Switch** : relais (base réduite `switch/switchtdb.xml`, scans `switch/scans` : `coverHQ` US, EN, FR, sinon
