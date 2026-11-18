@@ -39,3 +39,44 @@ export function decrireErreurStockage(erreur: ErreurStockage): string {
     erreur.status ?? erreur.statusCode ?? erreur.originalError?.status;
   return statut === undefined ? message : `${message} (HTTP ${statut})`;
 }
+
+/**
+ * Téléchargement du relais (18/11/2026 : GameTDB a dépassé le délai de 30 s et tout le relais s'est arrêté). Un
+ * délai dépassé, une coupure ou une erreur serveur (5xx) sont réessayés ; un fichier absent (404, scan inexistant)
+ * rend null tout de suite. Après tous les essais, l'erreur nomme l'adresse.
+ */
+export async function telechargerAvecReessais(
+  url: string,
+  {
+    lire = (u: string) =>
+      fetch(u, {
+        headers: {
+          "User-Agent": "nintendo-db/1.0 (https://nintendo-db.vercel.app)",
+        },
+        signal: AbortSignal.timeout(60_000),
+      }),
+    essais = 3,
+    attente = 5000,
+  }: {
+    lire?: (url: string) => Promise<Response>;
+    essais?: number;
+    attente?: number;
+  } = {},
+): Promise<Uint8Array | null> {
+  return avecReessais(
+    async () => {
+      let reponse: Response;
+      try {
+        reponse = await lire(url);
+      } catch (e) {
+        const raison = e instanceof Error ? e.message : String(e);
+        throw new Error(`${url} : ${raison}`, { cause: e });
+      }
+      if (reponse.status >= 500)
+        throw new Error(`${url} : HTTP ${reponse.status}`);
+      if (!reponse.ok) return null;
+      return new Uint8Array(await reponse.arrayBuffer());
+    },
+    { essais, attente },
+  );
+}

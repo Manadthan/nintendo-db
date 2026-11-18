@@ -17,18 +17,23 @@ import { strFromU8, unzipSync } from "fflate";
 import { decouperFaceAvant, LANGUES_SCAN_WII, reduireBaseWii } from "../src/lib/import/relais-wii.ts";
 import { languesScan, reduireBasePortable } from "../src/lib/import/relais-portables.ts";
 import { reduireBaseSwitch, SCANS_SWITCH } from "../src/lib/import/relais-switch.ts";
-import { avecReessais, decrireErreurStockage } from "../src/lib/import/reessais.ts";
-
-const AGENT = { "User-Agent": "nintendo-db/1.0 (https://nintendo-db.vercel.app)" };
+import { avecReessais, decrireErreurStockage, telechargerAvecReessais } from "../src/lib/import/reessais.ts";
 
 const { SUPABASE_URL, SUPABASE_SECRET_KEY } = process.env;
 if (!SUPABASE_URL || !SUPABASE_SECRET_KEY) throw new Error("SUPABASE_URL et SUPABASE_SECRET_KEY requis");
 const stockage = createClient(SUPABASE_URL, SUPABASE_SECRET_KEY).storage.from("gametdb");
 
+// GameTDB peut être lent (délai de 30 s dépassé le 18/11/2026) : 3 essais de 60 s ; un scan qui ne vient toujours
+// pas est compté « sans scan » au lieu d'arrêter le relais.
+const lents = [];
 async function telecharger(url) {
-  const reponse = await fetch(url, { headers: AGENT, signal: AbortSignal.timeout(30_000) });
-  if (!reponse.ok) return null;
-  return new Uint8Array(await reponse.arrayBuffer());
+  try {
+    return await telechargerAvecReessais(url);
+  } catch (e) {
+    lents.push(url);
+    console.warn(`Ignoré : ${e.message}`);
+    return null;
+  }
 }
 
 // Un envoi peut échouer de façon passagère (erreur sans message, 17/11/2026) : 3 essais, code HTTP dans le message (#92).
@@ -40,7 +45,8 @@ async function deposer(chemin, contenu, type) {
 }
 
 async function base(url) {
-  const zip = await telecharger(url);
+  // La base est indispensable : son échec (après les réessais) arrête le relais, avec l'adresse.
+  const zip = await telechargerAvecReessais(url);
   if (!zip) throw new Error(`Base GameTDB introuvable : ${url}`);
   const xml = Object.values(unzipSync(zip, { filter: (f) => f.name.endsWith(".xml") }))[0];
   if (!xml) throw new Error("Aucun fichier XML dans l'archive");
@@ -175,3 +181,4 @@ for (const console_ of CONSOLES) {
       `${absents.length} sans scan sur GameTDB${absents.length ? ` : ${absents.sort().join(", ")}` : ""}`,
   );
 }
+if (lents.length) console.log(`${lents.length} scans sans réponse de GameTDB (réessayés au prochain relais).`);
