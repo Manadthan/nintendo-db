@@ -187,8 +187,8 @@ export function choisirJaquettes(
   disques: JeuAImporter["disques"],
   existantes: Partial<Record<Region, JaquetteEnBase>> | null,
   recopier = false,
-  /** Dossier des scans de la console dans le relais (Wii U par défaut). */
-  dossierScans = "scans",
+  /** Dossier des scans de la console dans le relais (Wii U par défaut), ou par région (Switch). */
+  dossierScans: string | ((region: Region) => string) = "scans",
 ): Record<Region, string | null> {
   return Object.fromEntries(
     REGIONS.map((r) => {
@@ -198,7 +198,9 @@ export function choisirJaquettes(
       const id = disques[r];
       if (!jeu.releases[r].sortie || !id || manuelle || (scanne && !recopier))
         return [r, null];
-      return [r, cheminScan(id, dossierScans)];
+      const dossier =
+        typeof dossierScans === "function" ? dossierScans(r) : dossierScans;
+      return [r, cheminScan(id, dossier)];
     }),
   ) as Record<Region, string | null>;
 }

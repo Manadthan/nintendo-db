@@ -3,6 +3,7 @@ import type { PrecisionDate, Region } from "@/lib/catalogue/types";
 import { normaliser } from "@/lib/recherche/normaliser";
 import { SOURCES_CONSOLES, type SourceConsole } from "./consoles";
 import { EDITEUR_NINTENDO, rangCartePal } from "./relais-portables";
+import { rangCartouche, regionsGameTdb } from "./relais-switch";
 
 /** Un disque en boîte d'une région (type `WiiU` de GameTDB ; l'eShop et les boîtes à code sont écartés). */
 export type DisqueGameTdb = {
@@ -18,12 +19,6 @@ export type DisqueGameTdb = {
   date: { date: string; precision: PrecisionDate } | null;
   /** Genres du disque, traduits en français (US-06). */
   genres: string[];
-};
-
-const REGIONS_GAMETDB: Record<string, Region> = {
-  "NTSC-J": "JAP",
-  "NTSC-U": "US",
-  PAL: "PAL",
 };
 
 function lireDate(
@@ -93,9 +88,10 @@ export function lireGameTdb(
   $("game").each((_, el) => {
     const jeu = $(el);
     const champ = (nom: string) => jeu.children(nom).first().text().trim();
-    const region = REGIONS_GAMETDB[champ("region")];
+    // Une cartouche Switch « ALL » vaut dans les 3 régions (étape 10) : un disque par région couverte.
+    const regions = regionsGameTdb(champ("region"));
     const titre = jeu.find("locale[lang=EN] > title").first().text().trim();
-    if (!region || !titre) return;
+    if (!regions.length || !titre) return;
     if (
       !estDisque(
         champ("type"),
@@ -108,28 +104,29 @@ export function lireGameTdb(
       return;
     if (pasUnJeu(champ("genre"))) return;
     const date = jeu.children("date").first();
-    disques.push({
-      id: champ("id"),
-      region,
-      titre,
-      titreJaponais:
-        region === "JAP"
-          ? jeu.find("locale[lang=JA] > title").first().text().trim() || null
-          : null,
-      editeur: champ("publisher"),
-      developpeur: champ("developer") || null,
-      date: lireDate(
-        date.attr("year") ?? "",
-        date.attr("month") ?? "",
-        date.attr("day") ?? "",
-      ),
-      genres: traduireGenres(champ("genre"), traductions),
-    });
+    for (const region of regions)
+      disques.push({
+        id: champ("id"),
+        region,
+        titre,
+        titreJaponais:
+          region === "JAP"
+            ? jeu.find("locale[lang=JA] > title").first().text().trim() || null
+            : null,
+        editeur: champ("publisher"),
+        developpeur: champ("developer") || null,
+        date: lireDate(
+          date.attr("year") ?? "",
+          date.attr("month") ?? "",
+          date.attr("day") ?? "",
+        ),
+        genres: traduireGenres(champ("genre"), traductions),
+      });
   });
   return disques;
 }
 
-/** Un jeu GameTDB : ses disques en boîte, au plus un par région, regroupés par les 3 premiers caractères. */
+/** Un jeu GameTDB : ses disques en boîte, au plus un par région, regroupés par le début de l'identifiant. */
 export type JeuGameTdb = {
   base: string;
   disques: Partial<Record<Region, DisqueGameTdb>>;
@@ -147,10 +144,12 @@ const estNintendo = (d: DisqueGameTdb) =>
  */
 export function regrouperGameTdb(
   disques: DisqueGameTdb[],
+  /** Caractères communs aux disques d'un jeu : 3 (Wii U, Wii, DS, 3DS), 4 (Switch : `AAB6A`, `AAB6C`). */
+  longueurBase = 3,
 ): Map<string, JeuGameTdb> {
   const jeux = new Map<string, JeuGameTdb>();
   for (const d of disques) {
-    const base = d.id.slice(0, 3);
+    const base = d.id.slice(0, longueurBase);
     const jeu = jeux.get(base) ?? { base, disques: {}, nintendo: false };
     const deja = jeu.disques[d.region];
     // Préférence : une carte de Nintendo ; à égalité, en Europe, la carte anglaise (titre anglais, #95).
@@ -159,7 +158,11 @@ export function regrouperGameTdb(
       (!estNintendo(deja) && estNintendo(d)) ||
       (estNintendo(deja) === estNintendo(d) &&
         d.region === "PAL" &&
-        rangCartePal(d.id) < rangCartePal(deja.id));
+        d.id.length !== 5 && // Switch : la 4ᵉ lettre ne dit pas la langue
+        rangCartePal(d.id) < rangCartePal(deja.id)) ||
+      // Switch : la cartouche d'origine (lettre finale la plus basse) plutôt qu'une réédition avec extension.
+      (estNintendo(deja) === estNintendo(d) &&
+        rangCartouche(d.id) < rangCartouche(deja.id));
     if (meilleure) jeu.disques[d.region] = d;
     jeu.nintendo ||= estNintendo(d);
     jeux.set(base, jeu);
@@ -213,7 +216,8 @@ export function codeProduit(
   prefixe: string | ((id: string) => string) = "WUP-P-",
 ): string {
   const debut = typeof prefixe === "function" ? prefixe(id) : prefixe;
-  return `${debut}${id.slice(0, 4)}`;
+  // Switch : l'identifiant entier de 5 caractères (HAC-P-AAAAA).
+  return `${debut}${id.length === 5 ? id : id.slice(0, 4)}`;
 }
 
 /**
@@ -227,8 +231,8 @@ export const BUCKET_GAMETDB = "gametdb";
  * avant déjà découpée, dans `wii/faces` (#87).
  */
 export function cheminScan(id: string, dossier = "scans"): string {
-  // 6 caractères (Wii, Wii U) ou 4 (DS, 3DS).
-  if (!/^[A-Z0-9]{4}([A-Z0-9]{2})?$/.test(id))
+  // 6 caractères (Wii, Wii U), 5 (Switch) ou 4 (DS, 3DS).
+  if (!/^[A-Z0-9]{4}([A-Z0-9]{1,2})?$/.test(id))
     throw new Error(`Identifiant GameTDB invalide : « ${id} »`);
   return `${dossier}/${id}.jpg`;
 }

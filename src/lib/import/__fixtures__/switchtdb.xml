@@ -1,0 +1,3139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datafile xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="switchtdb.xsd">
+	<SwitchTDB version="20261118053903" filter="EN" games="24294"/>
+	<!--
+ GameTDB: Switch, Database started in 2017 (https://www.gametdb.com)
+ Never modify this file manually, it will get overwritten when you update. You can add games and fixes on the website.
+	-->
+	<genres>
+		<maingenre name="theme">
+			<loc lang="FR">th&#xe8;me</loc>
+			<subgenre name="fantasy">
+				<loc lang="FR">fantasy</loc>
+			</subgenre>
+			<subgenre name="historic">
+				<loc lang="FR">historique</loc>
+			</subgenre>
+			<subgenre name="horror">
+				<loc lang="FR">horreur</loc>
+			</subgenre>
+			<subgenre name="modern day">
+				<loc lang="FR">contemporain</loc>
+			</subgenre>
+			<subgenre name="sci-fi">
+				<loc lang="FR">science-fiction</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="general">
+			<loc lang="FR">g&#xe9;n&#xe9;ral</loc>
+			<subgenre name="arcade">
+				<loc lang="FR">arcade</loc>
+			</subgenre>
+			<subgenre name="party">
+				<loc lang="FR">party</loc>
+			</subgenre>
+			<subgenre name="puzzle">
+				<loc lang="FR">r&#xe9;flexion</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="action">
+			<loc lang="FR">action</loc>
+			<subgenre name="platformer">
+				<loc lang="FR">plates-formes</loc>
+			</subgenre>
+			<subgenre name="2D platformer">
+				<loc lang="FR">plates-formes 2D</loc>
+			</subgenre>
+			<subgenre name="3D platformer">
+				<loc lang="FR">plates-formes 3D</loc>
+			</subgenre>
+			<subgenre name="shooter">
+				<loc lang="FR">tir</loc>
+			</subgenre>
+			<subgenre name="first-person shooter">
+				<loc lang="FR">tir &#xe0; la premi&#xe8;re personne</loc>
+			</subgenre>
+			<subgenre name="third-person shooter">
+				<loc lang="FR">tir &#xe0; la troisi&#xe8;me personne</loc>
+			</subgenre>
+			<subgenre name="rail shooter">
+				<loc lang="FR">tir sur rails</loc>
+			</subgenre>
+			<subgenre name="run and gun">
+				<loc lang="FR">run and gun</loc>
+			</subgenre>
+			<subgenre name="shoot &apos;em up">
+				<loc lang="FR">shoot &apos;em up</loc>
+			</subgenre>
+			<subgenre name="stealth action">
+				<loc lang="FR">infiltration</loc>
+			</subgenre>
+			<subgenre name="survival horror">
+				<loc lang="FR">survival horror</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="sports">
+			<loc lang="FR">sport</loc>
+			<subgenre name="baseball">
+				<loc lang="FR">baseball</loc>
+			</subgenre>
+			<subgenre name="basketball">
+				<loc lang="FR">basketball</loc>
+			</subgenre>
+			<subgenre name="billiards">
+				<loc lang="FR">billard</loc>
+			</subgenre>
+			<subgenre name="bowling">
+				<loc lang="FR">bowling</loc>
+			</subgenre>
+			<subgenre name="boxing">
+				<loc lang="FR">boxe</loc>
+			</subgenre>
+			<subgenre name="cricket">
+				<loc lang="FR">cricket</loc>
+			</subgenre>
+			<subgenre name="soccer">
+				<loc lang="FR">football</loc>
+			</subgenre>
+			<subgenre name="football">
+				<loc lang="FR">football am&#xe9;ricain</loc>
+			</subgenre>
+			<subgenre name="rugby">
+				<loc lang="FR">rugby</loc>
+			</subgenre>
+			<subgenre name="golf">
+				<loc lang="FR">golf</loc>
+			</subgenre>
+			<subgenre name="hockey">
+				<loc lang="FR">hockey</loc>
+			</subgenre>
+			<subgenre name="martial arts">
+				<loc lang="FR">arts martiaux</loc>
+			</subgenre>
+			<subgenre name="p&#xe9;tanque">
+				<loc lang="FR">p&#xe9;tanque</loc>
+			</subgenre>
+			<subgenre name="skateboarding">
+				<loc lang="FR">skate</loc>
+			</subgenre>
+			<subgenre name="ski">
+				<loc lang="FR">ski</loc>
+			</subgenre>
+			<subgenre name="snowboarding">
+				<loc lang="FR">snowboard</loc>
+			</subgenre>
+			<subgenre name="surfing">
+				<loc lang="FR">surf</loc>
+			</subgenre>
+			<subgenre name="table tennis">
+				<loc lang="FR">tennis de table</loc>
+			</subgenre>
+			<subgenre name="tennis">
+				<loc lang="FR">tennis</loc>
+			</subgenre>
+			<subgenre name="volleyball">
+				<loc lang="FR">volleyball</loc>
+			</subgenre>
+			<subgenre name="wrestling">
+				<loc lang="FR">catch</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="adventure">
+			<loc lang="FR">aventure</loc>
+			<subgenre name="hidden object">
+				<loc lang="FR">objet cach&#xe9;</loc>
+			</subgenre>
+			<subgenre name="interactive fiction">
+				<loc lang="FR">fiction interactive</loc>
+			</subgenre>
+			<subgenre name="interactive movie">
+				<loc lang="FR">film interactif</loc>
+			</subgenre>
+			<subgenre name="point-and-click">
+				<loc lang="FR">point-and-click</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="music">
+			<loc lang="FR">musique</loc>
+			<subgenre name="dance">
+				<loc lang="FR">danse</loc>
+			</subgenre>
+			<subgenre name="karaoke">
+				<loc lang="FR">karaok&#xe9;</loc>
+			</subgenre>
+			<subgenre name="rhythm">
+				<loc lang="FR">rythme</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="racing">
+			<loc lang="FR">course</loc>
+			<subgenre name="bike racing">
+				<loc lang="FR">course de v&#xe9;los</loc>
+			</subgenre>
+			<subgenre name="futuristic racing">
+				<loc lang="FR">course futuriste</loc>
+			</subgenre>
+			<subgenre name="kart racing">
+				<loc lang="FR">karting</loc>
+			</subgenre>
+			<subgenre name="motorcycle racing">
+				<loc lang="FR">course de motos</loc>
+			</subgenre>
+			<subgenre name="off-road racing">
+				<loc lang="FR">rally</loc>
+			</subgenre>
+			<subgenre name="sim racing">
+				<loc lang="FR">simulation de conduite</loc>
+			</subgenre>
+			<subgenre name="truck racing">
+				<loc lang="FR">course de camions</loc>
+			</subgenre>
+			<subgenre name="watercraft racing">
+				<loc lang="FR">course aquatique</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="fighting">
+			<loc lang="FR">combat</loc>
+			<subgenre name="2D fighting">
+				<loc lang="FR">combat 2D</loc>
+			</subgenre>
+			<subgenre name="3D fighting">
+				<loc lang="FR">combat 3D</loc>
+			</subgenre>
+			<subgenre name="beat &apos;em up">
+				<loc lang="FR">beat &apos;em up</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="simulation">
+			<loc lang="FR">simulation</loc>
+			<subgenre name="cooking">
+				<loc lang="FR">cuisine</loc>
+			</subgenre>
+			<subgenre name="fishing">
+				<loc lang="FR">p&#xea;che</loc>
+			</subgenre>
+			<subgenre name="hunting">
+				<loc lang="FR">chasse</loc>
+			</subgenre>
+			<subgenre name="business simulation">
+				<loc lang="FR">simulation d&apos;entreprise</loc>
+			</subgenre>
+			<subgenre name="construction simulation">
+				<loc lang="FR">simulation de construction</loc>
+			</subgenre>
+			<subgenre name="flight simulation">
+				<loc lang="FR">simulation de vol</loc>
+			</subgenre>
+			<subgenre name="life simulation">
+				<loc lang="FR">simulation de vie</loc>
+			</subgenre>
+			<subgenre name="management simulation">
+				<loc lang="FR">simulation de gestion</loc>
+			</subgenre>
+			<subgenre name="train simulation">
+				<loc lang="FR">simulation ferroviaire</loc>
+			</subgenre>
+			<subgenre name="virtual pet">
+				<loc lang="FR">animal virtuel</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="role-playing">
+			<loc lang="FR">jeu de r&#xf4;le</loc>
+			<subgenre name="action RPG">
+				<loc lang="FR">action RPG</loc>
+			</subgenre>
+			<subgenre name="strategy RPG">
+				<loc lang="FR">strategy RPG</loc>
+			</subgenre>
+			<subgenre name="tactical RPG">
+				<loc lang="FR">tactical RPG</loc>
+			</subgenre>
+			<subgenre name="MMORPG">
+				<loc lang="FR">MMORPG</loc>
+			</subgenre>
+			<subgenre name="roguelike">
+				<loc lang="FR">roguelike</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="strategy">
+			<loc lang="FR">strat&#xe9;gie</loc>
+			<subgenre name="4X">
+				<loc lang="FR">4X</loc>
+			</subgenre>
+			<subgenre name="real-time strategy">
+				<loc lang="FR">strat&#xe9;gie temps r&#xe9;el</loc>
+			</subgenre>
+			<subgenre name="turn-based strategy">
+				<loc lang="FR">strat&#xe9;gie tour par tour</loc>
+			</subgenre>
+			<subgenre name="tower defense">
+				<loc lang="FR">tower defense</loc>
+			</subgenre>
+			<subgenre name="wargame">
+				<loc lang="FR">wargame</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="traditional">
+			<loc lang="FR">traditionnel</loc>
+			<subgenre name="board game">
+				<loc lang="FR">jeu de soci&#xe9;t&#xe9;</loc>
+			</subgenre>
+			<subgenre name="cards">
+				<loc lang="FR">cartes</loc>
+			</subgenre>
+			<subgenre name="chess">
+				<loc lang="FR">&#xe9;checs</loc>
+			</subgenre>
+			<subgenre name="darts">
+				<loc lang="FR">fl&#xe9;chettes</loc>
+			</subgenre>
+			<subgenre name="pinball">
+				<loc lang="FR">flipper</loc>
+			</subgenre>
+			<subgenre name="poker">
+				<loc lang="FR">poker</loc>
+			</subgenre>
+			<subgenre name="trivia">
+				<loc lang="FR">quizz</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="health">
+			<loc lang="FR">sant&#xe9;</loc>
+			<subgenre name="coaching">
+				<loc lang="FR">coaching</loc>
+			</subgenre>
+			<subgenre name="exercise">
+				<loc lang="FR">exercice</loc>
+			</subgenre>
+			<subgenre name="fitness">
+				<loc lang="FR">gymnastique</loc>
+			</subgenre>
+		</maingenre>
+		<maingenre name="others">
+			<loc lang="FR">autres</loc>
+			<subgenre name="educational">
+				<loc lang="FR">&#xe9;ducatif</loc>
+			</subgenre>
+			<subgenre name="drawing">
+				<loc lang="FR">dessin</loc>
+			</subgenre>
+			<subgenre name="compilation">
+				<loc lang="FR">compilation</loc>
+			</subgenre>
+			<subgenre name="demo">
+				<loc lang="FR">d&#xe9;mo</loc>
+			</subgenre>
+			<subgenre name="sampler">
+				<loc lang="FR">d&#xe9;mos</loc>
+			</subgenre>
+			<subgenre name="multimedia">
+				<loc lang="FR">multim&#xe9;dia</loc>
+			</subgenre>
+			<subgenre name="emulator">
+				<loc lang="FR">&#xe9;mulateur</loc>
+			</subgenre>
+			<subgenre name="software">
+				<loc lang="FR">logiciel</loc>
+			</subgenre>
+		</maingenre>
+	</genres>
+	<game name="Kirby&apos;s Return to Dream Land Deluxe (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW,ZHCN)">
+		<id>A2JYA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Kirby&apos;s Return to Dream Land Deluxe</title>
+		</locale>
+		<locale lang="NO">
+			<title>Kirby&apos;s Return to Dream Land Deluxe</title>
+		</locale>
+		<locale lang="FI">
+			<title>Kirby&apos;s Return to Dream Land Deluxe</title>
+		</locale>
+		<developer>HAL Laboratory, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="2" day="24"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Bakumatsu Renka SHINSENGUMI (EN,JA,ZHCN)">
+		<id>A2MEA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Bakumatsu Renka SHINSENGUMI</title>
+		</locale>
+		<publisher>Nintendo Switch</publisher>
+		<date year="2021" month="6" day="17"/>
+		<genre>adventure,simulation</genre>
+	</game>
+	<game name="TRIANGLE STRATEGY (EN,JA)">
+		<id>A3AWA</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>TRIANGLE STRATEGY</title>
+		</locale>
+		<publisher/>
+		<date year="" month="" day=""/>
+		<genre>adventure,role-playing,strategy</genre>
+	</game>
+	<game name="TRIANGLE STRATEGY (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>A3AWB</id>
+		<type>Switch</type>
+		<region>USA,EUR</region>
+		<locale lang="EN">
+			<title>TRIANGLE STRATEGY</title>
+		</locale>
+		<locale lang="FI">
+			<title>Triangle Strategy</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>adventure,role-playing,strategy</genre>
+	</game>
+	<game name="Fire Emblem Warriors: Three Hopes (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>A3JMA</id>
+		<type>Switch</type>
+		<region>JPN,KOR</region>
+		<locale lang="EN">
+			<title>Fire Emblem Warriors: Three Hopes</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30a4;&#x30a2;&#x30fc;&#x30a8;&#x30e0;&#x30d6;&#x30ec;&#x30e0;&#x7121;&#x53cc; &#x98a8;&#x82b1;&#x96ea;&#x6708;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd30c;&#xc774;&#xc5b4; &#xc5e0;&#xbe14;&#xb818; &#xbb34;&#xc30d; &#xd48d;&#xd654;&#xc124;&#xc6d4;</title>
+		</locale>
+		<developer>KOEI TECMO GAMES</developer>
+		<publisher>KOEI TECMO GAMES</publisher>
+		<date year="" month="" day=""/>
+		<genre>action,strategy</genre>
+	</game>
+	<game name="Fire Emblem Warriors: Three Hopes (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>A3JMB</id>
+		<type>Switch</type>
+		<region>USA,EUR</region>
+		<locale lang="EN">
+			<title>Fire Emblem Warriors: Three Hopes</title>
+		</locale>
+		<locale lang="FI">
+			<title>Fire Emblem Warriors: Three Hopes</title>
+		</locale>
+		<developer>KOEI TECMO GAMES</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2022" month="6" day="24"/>
+		<genre>action,strategy</genre>
+	</game>
+	<game name="Metroid Prime Remastered (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN)">
+		<id>A3SDA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Metroid Prime Remastered</title>
+		</locale>
+		<locale lang="NO">
+			<title>Metroid Prime Remastered</title>
+		</locale>
+		<locale lang="FI">
+			<title>Metroid Prime Remastered</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30e1;&#x30c8;&#x30ed;&#x30a4;&#x30c9;&#x30d7;&#x30e9;&#x30a4;&#x30e0; &#x30ea;&#x30de;&#x30b9;&#x30bf;&#x30fc;&#x30c9;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="2" day="8"/>
+		<genre>action,adventure,platformer,first-person shooter</genre>
+	</game>
+	<game name="LIVE A LIVE (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>A7CBA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>LIVE A LIVE</title>
+		</locale>
+		<locale lang="FI">
+			<title>Live A Live</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30e9;&#x30a4;&#x30d6;&#x30a2;&#x30e9;&#x30a4;&#x30d6;</title>
+		</locale>
+		<publisher>SQUARE ENIX</publisher>
+		<date year="2022" month="7" day="22"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="LIVE A LIVE (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>A7CBB</id>
+		<type>Switch</type>
+		<region>USA,EUR</region>
+		<locale lang="EN">
+			<title>LIVE A LIVE</title>
+		</locale>
+		<locale lang="FI">
+			<title>Live A Live</title>
+		</locale>
+		<developer>SQUARE ENIX</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Super Mario Party Jamboree (EN,FR,DE,ES,IT,NL,PT,GR,JA,KO,ZHTW,ZHCN,RU)">
+		<id>A7HLA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Mario Party Jamboree</title>
+		</locale>
+		<locale lang="NO">
+			<title>Super Mario Party Jamboree</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Mario Party Jamboree</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc; &#x30de;&#x30ea;&#x30aa;&#x30d1;&#x30fc;&#x30c6;&#x30a3; &#x30b8;&#x30e3;&#x30f3;&#x30dc;&#x30ea;&#x30fc;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0; &#xc7bc;&#xbc84;&#xb9ac;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x8d85;&#x7d1a;&#x746a;&#x5229;&#x6b50;&#x6d3e;&#x5c0d; &#x7a7a;&#x524d;&#x76db;&#x6703;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="10" day="17"/>
+		<genre>music,party,dance,rhythm,board game</genre>
+	</game>
+	<game name="Endless Ocean Luminous (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN)">
+		<id>A7LKA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Endless Ocean Luminous</title>
+		</locale>
+		<locale lang="FI">
+			<title>Endless Ocean Luminous</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a9;&#x30fc;&#x30a8;&#x30d0;&#x30fc;&#x30d6;&#x30eb;&#x30fc; &#x30eb;&#x30df;&#x30ca;&#x30b9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xc5d0;&#xbc84; &#xbe14;&#xb8e8; &#xb8e8;&#xbbf8;&#xb108;&#xc2a4;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x6c38;&#x6046;&#x851a;&#x85cd; &#x6d41;&#x5149;</title>
+		</locale>
+		<developer>Arika</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="5" day="2"/>
+		<genre>adventure,simulation</genre>
+	</game>
+	<game name="Emio - The Smiling Man: Famicom Detective Club (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>A7LQA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Emio - The Smiling Man: Famicom Detective Club</title>
+		</locale>
+		<locale lang="FR">
+			<title>Emio - L&apos;Homme au sourire : Famicom Detective Club</title>
+		</locale>
+		<locale lang="DE">
+			<title>Emio - Der l&#xe4;chelnde Mann: Famicom Detective Club</title>
+		</locale>
+		<locale lang="ES">
+			<title>Emio - El Sonriente: Famicom Detective Club</title>
+		</locale>
+		<locale lang="IT">
+			<title>Emio - L&apos;uomo che sorride: Famicom Detective Club</title>
+		</locale>
+		<locale lang="FI">
+			<title>Emio - The Smiling Man: Famicom Detective Club</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30df;&#x30b3;&#x30f3;&#x63a2;&#x5075;&#x5036;&#x697d;&#x90e8; &#x7b11;&#x307f;&#x7537;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd328;&#xbbf8;&#xcef4; &#xd0d0;&#xc815; &#xd06c;&#xb8e8; &#xc5d0;&#xbbf8;&#xc624; -&#xc6c3;&#xb294; &#xb0a8;&#xc790;-</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>Famicom&#x5075;&#x63a2;&#x4ff1;&#x6a02;&#x90e8;&#x7b11;&#x81c9;&#x7537;Emio</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="8" day="29"/>
+		<genre>adventure,simulation</genre>
+	</game>
+	<game name="Nintendo World Championships: NES Edition (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW,ZHCN)">
+		<id>A82CA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Nintendo World Championships: NES Edition</title>
+		</locale>
+		<locale lang="NO">
+			<title>Nintendo World Championships: NES Edition</title>
+		</locale>
+		<locale lang="JA">
+			<title>Nintendo World Championships: Famicom</title>
+		</locale>
+		<locale lang="KO">
+			<title>Nintendo World Championships &#x30d5;&#x30a1;&#x30df;&#x30b3;&#x30f3;&#x4e16;&#x754c;&#x5927;&#x4f1a;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="7" day="18"/>
+		<genre>action,racing,party</genre>
+	</game>
+	<game name="Mario &amp; Luigi: Brothership (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN)">
+		<id>A8E6A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Mario &amp; Luigi: Brothership</title>
+		</locale>
+		<locale lang="NO">
+			<title>Mario &amp; Luigi: Brothership</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario &amp; Luigi: Brothership</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#xff06;&#x30eb;&#x30a4;&#x30fc;&#x30b8;RPG&#x3000;&#x30d6;&#x30e9;&#x30b6;&#x30fc;&#x30b7;&#x30c3;&#x30d7;&#xff01;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624;&amp;&#xb8e8;&#xc774;&#xc9c0; RPG &#xbe0c;&#xb77c;&#xb354;&#xc2ed;!</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x746a;&#x5229;&#x6b50;&#xff06;&#x8def;&#x6613;&#x5409;RPG &#x5144;&#x5f1f;&#x9f4a;&#x822a;&#xff01;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="11" day="7"/>
+		<genre>action rpg</genre>
+	</game>
+	<game name="Super Mario RPG (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN)">
+		<id>A8LUA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Mario RPG</title>
+		</locale>
+		<locale lang="NO">
+			<title>Super Mario RPG</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Mario RPG</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="11" day="17"/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Mario vs. Donkey Kong (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN)">
+		<id>A97PA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Mario vs. Donkey Kong</title>
+		</locale>
+		<locale lang="NO">
+			<title>Mario vs. Donkey Kong</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario vs. Donkey Kong</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;vs.&#x30c9;&#x30f3;&#x30ad;&#x30fc;&#x30b3;&#x30f3;&#x30b0;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; vs. &#xb3d9;&#xd0a4;&#xcf69;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x746a;&#x5229;&#x6b50;vs.&#x549a;&#x5947;&#x525b;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="2" day="16"/>
+		<genre>action,puzzle</genre>
+	</game>
+	<game name="Paper Mario: The Thousand-Year Door (EN,FR,DE,ES,IT,DK,JA,KO,ZHTW,ZHCN)">
+		<id>A9QDA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Paper Mario: The Thousand-Year Door</title>
+		</locale>
+		<locale lang="FR">
+			<title>Paper Mario : La Porte Mill&#xe9;naire</title>
+		</locale>
+		<locale lang="DE">
+			<title>Paper Mario: Die Legende vom &#xc4;onentor</title>
+		</locale>
+		<locale lang="ES">
+			<title>Paper Mario: La puerta milenaria</title>
+		</locale>
+		<locale lang="IT">
+			<title>Paper Mario: Il Portale Millenario</title>
+		</locale>
+		<locale lang="NO">
+			<title>Paper Mario: The Thousand-Year Door</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30da;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;RPG</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd398;&#xc774;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; 1000&#xb144;&#xc758; &#xbb38;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x7eb8;&#x7247;&#x9a6c;&#x529b;&#x6b27;RPG</title>
+		</locale>
+		<developer>Nintendo / Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="5" day="23"/>
+		<genre>action,adventure,role-playing</genre>
+	</game>
+	<game name="Another Code: Recollection (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>A9RWA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Another Code: Recollection</title>
+		</locale>
+		<locale lang="FI">
+			<title>Another Code: Recollection</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30a2;&#x30ca;&#x30b6;&#x30fc;&#x30b3;&#x30fc;&#x30c9; &#x30ea;&#x30b3;&#x30ec;&#x30af;&#x30b7;&#x30e7;&#x30f3;&#xff1a;&#xff12;&#x3064;&#x306e;&#x8a18;&#x61b6; / &#x8a18;&#x61b6;&#x306e;&#x6249;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc5b4;&#xb098;&#xb354; &#xcf54;&#xb4dc; &#xb9ac;&#xceec;&#xb809;&#xc158;: 2&#xac1c;&#xc758; &#xae30;&#xc5b5;/&#xae30;&#xc5b5;&#xc758; &#xbb38;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>Another Code&#x56de;&#x61b6;&#x9304;&#xff1a; &#x5169;&#x7a2e;&#x8a18;&#x61b6; / &#x8a18;&#x61b6;&#x4e4b;&#x9580;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="1" day="19"/>
+		<genre>adventure,puzzle</genre>
+	</game>
+	<game name="The Legend of Zelda: Breath of the Wild (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN,RU)">
+		<id>AAAAA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="NO">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="FI">
+			<title>The Legend of Zelda: Breath of the Wild</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x30d6;&#x30ec;&#x30b9; &#x30aa;&#x30d6; &#x30b6; &#x30ef;&#x30a4;&#x30eb;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124; &#xbe0c;&#xb808;&#xc2a4; &#xc624;&#xbe0c; &#xb354; &#xc640;&#xc77c;&#xb4dc; &#xc608;&#xc57d;&#xd310;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="3" day="3"/>
+		<genre>action,adventure,role-playing</genre>
+	</game>
+	<game name="The Legend of Zelda: Breath of the Wild + Expansion Pass (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN,RU)">
+		<id>AAAAG</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Breath of the Wild + Expansion Pass</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x30d6;&#x30ec;&#x30b9; &#x30aa;&#x30d6; &#x30b6; &#x30ef;&#x30a4;&#x30eb;&#x30c9; &#xff0b; &#x30a8;&#x30ad;&#x30b9;&#x30d1;&#x30f3;&#x30b7;&#x30e7;&#x30f3;&#x30fb;&#x30d1;&#x30b9;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>action,adventure,role-playing</genre>
+	</game>
+	<game name="Super Smash Bros. Ultimate (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AAABA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Smash Bros. Ultimate</title>
+		</locale>
+		<locale lang="FR">
+			<title>Super Smash Bros. Ultimate</title>
+		</locale>
+		<locale lang="NO">
+			<title>Super Smash Bros. Ultimate</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Smash Bros. Ultimate</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x5927;&#x4e71;&#x95d8;&#x30b9;&#x30de;&#x30c3;&#x30b7;&#x30e5;&#x30d6;&#x30e9;&#x30b6;&#x30fc;&#x30ba; SPECIAL</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x4efb;&#x5929;&#x5802;&#x660e;&#x661f;&#x5927;&#x4e82;&#x9b25; &#x7279;&#x5225;&#x7248;</title>
+		</locale>
+		<developer>Nintendo / Sora Ltd. / BANDAI NAMCO Studios Inc</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="12" day="7"/>
+		<genre>action,fighting</genre>
+	</game>
+	<game name="Super Mario Odyssey (EN,FR,DE,ES,IT,NL,JA,RU)">
+		<id>AAACA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Mario Odyssey</title>
+		</locale>
+		<locale lang="FR">
+			<title>Super Mario Odyssey</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Mario Odyssey</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Mario Odyssey</title>
+		</locale>
+		<locale lang="NO">
+			<title>Super Mario Odyssey</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Mario Odyssey</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa; &#x30aa;&#x30c7;&#x30c3;&#x30bb;&#x30a4;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="11" day="28"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Splatoon 2 (JA)">
+		<id>AAB6A</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Splatoon 2</title>
+		</locale>
+		<locale lang="FR">
+			<title>Splatoon 2</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30d7;&#x30e9;&#x30c8;&#x30a5;&#x30fc;&#x30f3;2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="7" day="21"/>
+		<genre>action,first-person shooter</genre>
+	</game>
+	<game name="Splatoon 2 (EN,FR,ES)">
+		<id>AAB6B</id>
+		<type>Switch</type>
+		<region>USA,KOR</region>
+		<locale lang="EN">
+			<title>Splatoon 2</title>
+		</locale>
+		<locale lang="FR">
+			<title>Splatoon 2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="7" day="21"/>
+		<genre>action,first-person shooter</genre>
+	</game>
+	<game name="Splatoon 2 (EN,FR,DE,ES,IT,NL,RU)">
+		<id>AAB6C</id>
+		<type>Switch</type>
+		<region>EUR</region>
+		<locale lang="EN">
+			<title>Splatoon 2</title>
+		</locale>
+		<locale lang="FR">
+			<title>Splatoon 2</title>
+		</locale>
+		<locale lang="DE">
+			<title>Splatoon 2</title>
+		</locale>
+		<locale lang="FI">
+			<title>Splatoon 2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="7" day="21"/>
+		<genre>action,shooter,third-person shooter</genre>
+	</game>
+	<game name="Splatoon 2 + Octo Expansion (JA,ZHTW)">
+		<id>AAB6H</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Splatoon 2 + Octo Expansion</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30d7;&#x30e9;&#x30c8;&#x30a5;&#x30fc;&#x30f3;2 &#xff0b; &#x30aa;&#x30af;&#x30c8;&#x30fb;&#x30a8;&#x30ad;&#x30b9;&#x30d1;&#x30f3;&#x30b7;&#x30e7;&#x30f3;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>action,first-person shooter</genre>
+	</game>
+	<game name="Mario Kart 8 Deluxe (EN,FR,DE,ES,IT,NL,PT,JA,RU)">
+		<id>AABPA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Mario Kart 8 Deluxe</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Kart 8 Deluxe</title>
+		</locale>
+		<locale lang="NO">
+			<title>Mario Kart 8 Deluxe</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Kart 8 Deluxe</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30ab;&#x30fc;&#x30c8;8 &#x30c7;&#x30e9;&#x30c3;&#x30af;&#x30b9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xce74;&#xd2b8; 8 &#xb514;&#xb7ed;&#xc2a4;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="4" day="28"/>
+		<genre>racing,party</genre>
+	</game>
+	<game name="Mario Kart 8 Deluxe Bundle (Game + Booster Course Pass) (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AABPK</id>
+		<type>Switch</type>
+		<region>JPN,TWN</region>
+		<locale lang="EN">
+			<title>Mario Kart 8 Deluxe Bundle (Game + Booster Course Pass)</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30ab;&#x30fc;&#x30c8;&#xff18; &#x30c7;&#x30e9;&#x30c3;&#x30af;&#x30b9; &#xff0b; &#x30b3;&#x30fc;&#x30b9;&#x8ffd;&#x52a0;&#x30d1;&#x30b9;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>racing</genre>
+	</game>
+	<game name="ARMS (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN,RU)">
+		<id>AABQA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>ARMS</title>
+		</locale>
+		<locale lang="FR">
+			<title>ARMS</title>
+		</locale>
+		<locale lang="DE">
+			<title>ARMS</title>
+		</locale>
+		<locale lang="FI">
+			<title>ARMS</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="6" day="16"/>
+		<genre>action,fighting</genre>
+	</game>
+	<game name="1-2-Switch (EN,FR,DE,ES,IT,NL,JA,RU)">
+		<id>AACCA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>1-2-Switch</title>
+		</locale>
+		<locale lang="FR">
+			<title>1-2-Switch</title>
+		</locale>
+		<locale lang="FI">
+			<title>1-2-Switch</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="3" day="3"/>
+		<genre>action,party</genre>
+	</game>
+	<game name="Astral Chain (EN,FR,DE,ES,IT,JA,KO,ZHTW,RU)">
+		<id>AB48A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Astral Chain</title>
+		</locale>
+		<locale lang="FR">
+			<title>Astral Chain</title>
+		</locale>
+		<locale lang="FI">
+			<title>Astral Chain</title>
+		</locale>
+		<developer>PlatinumGames</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="8" day="30"/>
+	</game>
+	<game name="Mario + Rabbids: Kingdom Battle (EN,JA,KO)">
+		<id>AC2GA</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Mario + Rabbids: Kingdom Battle</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="" day=""/>
+	</game>
+	<game name="Animal Crossing: New Horizons (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,RU)">
+		<id>ACBAA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Animal Crossing: New Horizons</title>
+		</locale>
+		<locale lang="NO">
+			<title>Animal Crossing: New Horizons</title>
+		</locale>
+		<locale lang="FI">
+			<title>Animal Crossing: New Horizons</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3042;&#x3064;&#x307e;&#x308c; &#x3069;&#x3046;&#x3076;&#x3064;&#x306e;&#x68ee;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbaa8;&#xc5ec;&#xbd10;&#xc694; &#xb3d9;&#xbb3c;&#xc758; &#xc232;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x96c6;&#x5408;&#x5566;&#xff01;&#x52d5;&#x7269;&#x68ee;&#x53cb;&#x6703;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2020" month="3" day="20"/>
+		<genre>simulation,life simulation</genre>
+	</game>
+	<game name="New Super Mario Bros. U Deluxe (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHCN,RU)">
+		<id>ADALA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>New Super Mario Bros. U Deluxe</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="" day=""/>
+	</game>
+	<game name="Xenoblade 2 (JA,ZHTW,ZHCN)">
+		<id>ADENA</id>
+		<type>Switch</type>
+		<region>JPN,TWN,CHN</region>
+		<locale lang="EN">
+			<title>Xenoblade 2</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30ce;&#x30d6;&#x30ec;&#x30a4;&#x30c9;2</title>
+		</locale>
+		<developer>Monolith Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="12" day="1"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Xenoblade Chronicles 2 (EN,FR,DE,ES,IT,KO)">
+		<id>ADENB</id>
+		<type>Switch</type>
+		<region>USA,EUR,KOR</region>
+		<locale lang="EN">
+			<title>Xenoblade Chronicles 2</title>
+		</locale>
+		<locale lang="FI">
+			<title>Xenoblade Chronicles 2</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc81c;&#xb178;&#xbe14;&#xb808;&#xc774;&#xb4dc; &#xd06c;&#xb85c;&#xb2c8;&#xd074;&#xc2a4; 2</title>
+		</locale>
+		<developer>Monolith Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="12" day="1"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Super Mario Party (EN,FR,DE,ES,IT,NL,PT,JA,KO,RU)">
+		<id>ADFJA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Mario Party</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Mario Party</title>
+		</locale>
+		<locale lang="NO">
+			<title>Super Mario Party</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Mario Party</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc; &#x30de;&#x30ea;&#x30aa;&#x30d1;&#x30fc;&#x30c6;&#x30a3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; &#xd30c;&#xd2f0;</title>
+		</locale>
+		<developer>NDcube</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="10" day="5"/>
+		<genre>party,board game</genre>
+	</game>
+	<game name="Nintendo Labo - Toy-Con 01: Variety Kit (EN,FR,DE,ES,IT,JA)">
+		<id>ADFUA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Nintendo Labo - Toy-Con 01: Variety Kit</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Nintendo Labo - Toy-Con 02: Robot Kit (EN,FR,DE,ES,IT,NL,JA)">
+		<id>ADFVA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Nintendo Labo - Toy-Con 02: Robot Kit</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Nintendo Labo - Toy-Con 03: Vehicle Kit (EN,FR,DE,ES,IT,NL,JA)">
+		<id>ADFWA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Nintendo Labo - Toy-Con 03: Vehicle Kit</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Nintendo Labo - Toy-Con 04: VR Kit (EN,FR,DE,ES,IT,JA)">
+		<id>ADFXA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Nintendo Labo - Toy-Con 04: VR Kit</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="4" day="12"/>
+		<genre>action</genre>
+	</game>
+	<game name="Pok&#xe9;mon: Let&apos;s Go, Pikachu! (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>ADW2A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon: Let&apos;s Go, Pikachu!</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon : Let&apos;s Go, Pikachu!</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon: Let&apos;s Go, Pikachu!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac;&#xc2a4;&#xd130; &#xb808;&#xce20;&#xace0; &#xd53c;&#xce74;&#xce04;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x7cbe;&#x9748;&#x5bf6;&#x53ef;&#x5922; Let&apos;s Go &#x76ae;&#x5361;&#x4e18;</title>
+		</locale>
+		<developer>GAME FREAK Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="11" day="16"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Pok&#xe9;mon: Let&apos;s Go, Eevee! (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>ADW3A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon: Let&apos;s Go, Eevee!</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon : Let&apos;s Go, &#xc9;voli</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon: Let&apos;s Go, Evoli!</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pok&#xe9;mon: Let&apos;s Go, Eevee!</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon: Let&apos;s Go, Eevee!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac;&#xc2a4;&#xd130; &#xb808;&#xce20;&#xace0;! &#xc774;&#xbe0c;&#xc774;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x7cbe;&#x9748;&#x5bf6;&#x53ef;&#x5922; Let&apos;s Go &#x4f0a;&#x5e03;</title>
+		</locale>
+		<developer>GAME FREAK Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="11" day="16"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Fire Emblem Warriors (EN,JA)">
+		<id>ADXHA</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Fire Emblem Warriors</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30a4;&#x30a2;&#x30fc;&#x30a8;&#x30e0;&#x30d6;&#x30ec;&#x30e0;&#x7121;&#x53cc;</title>
+		</locale>
+		<developer>KOEI TECMO GAMES CO., LTD.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="9" day="28"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Fire Emblem Warriors (EN,FR,DE,ES,IT)">
+		<id>ADXHB</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Fire Emblem Warriors</title>
+		</locale>
+		<locale lang="FI">
+			<title>Fire Emblem Warriors</title>
+		</locale>
+		<developer>KOEI TECMO GAMES CO., LTD.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="10" day="20"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Bayonetta 2 (EN,FR,DE,ES,IT,JA)">
+		<id>AE98A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="FR">
+			<title>Bayonetta 2</title>
+		</locale>
+		<locale lang="FI">
+			<title>Bayonetta 2</title>
+		</locale>
+		<developer>PlatinumGames Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="" day=""/>
+		<genre>action</genre>
+	</game>
+	<game name="Bayonetta (EN,FR,DE,ES,IT,JA)">
+		<id>AE99A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Bayonetta</title>
+		</locale>
+		<developer>PlatinumGames</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="" day=""/>
+		<genre>action</genre>
+	</game>
+	<game name="Yoshi&apos;s Crafted World (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN,RU)">
+		<id>AEA2A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Yoshi&apos;s Crafted World</title>
+		</locale>
+		<locale lang="NO">
+			<title>Yoshi&apos;s Crafted World</title>
+		</locale>
+		<locale lang="FI">
+			<title>Yoshi&apos;s Crafted World</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc694;&#xc2dc; &#xd06c;&#xb798;&#xd504;&#xd2b8; &#xc6d4;&#xb4dc;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x8000;&#x897f;&#x7684;&#x624b;&#x5de5;&#x4e16;&#x754c;</title>
+		</locale>
+		<developer>Good-Feel</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="3" day="28"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Snipperclips Plus: Cut It Out, Together! (EN,FR,DE,ES,IT,NL,JA)">
+		<id>AEXYA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Snipperclips Plus: Cut It Out, Together!</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3044;&#x3063;&#x3057;&#x3087;&#x306b;&#x30c1;&#x30e7;&#x30ad;&#x30c3;&#x3068; &#x30b9;&#x30cb;&#x30c3;&#x30d1;&#x30fc;&#x30ba; &#x30d7;&#x30e9;&#x30b9;</title>
+		</locale>
+		<developer>SFB Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="11" day="10"/>
+		<genre>action,puzzle</genre>
+	</game>
+	<game name="GO VACATION (EN,FR,DE,ES,IT,NL,JA)">
+		<id>AF2GB</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>GO VACATION</title>
+		</locale>
+		<locale lang="FR">
+			<title>GO VACATION</title>
+		</locale>
+		<locale lang="FI">
+			<title>Go Vacation</title>
+		</locale>
+		<developer>Bandai Namco</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="7" day="27"/>
+		<genre>sports,arcade,party</genre>
+	</game>
+	<game name="Go Vacation (EN,FR,DE,ES,IT,NL,JA)">
+		<id>AF2GC</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Go Vacation</title>
+		</locale>
+		<locale lang="FR">
+			<title>Go Vacation</title>
+		</locale>
+		<developer>Bandai Namco</developer>
+		<publisher>BANDAI NAMCO Entertainment</publisher>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Daemon x Machina (EN,JA,ZHTW,ZHCN)">
+		<id>AF6GA</id>
+		<type>Switch</type>
+		<region>JPN,TWN,CHN</region>
+		<locale lang="EN">
+			<title>Daemon x Machina</title>
+		</locale>
+		<locale lang="JA">
+			<title>DAEMON X MACHINA&#xff08;&#x30c7;&#x30e2;&#x30f3;&#x30a8;&#x30af;&#x30b9;&#x30de;&#x30ad;&#x30ca;&#xff09;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>DAEMON X MACHINA&#xff08;&#x6a5f;&#x7532;&#x6230;&#x9b54;&#xff09;</title>
+		</locale>
+		<publisher/>
+		<date year="" month="" day=""/>
+		<genre>action</genre>
+	</game>
+	<game name="Daemon x Machina (EN,FR,DE,ES,IT,KO)">
+		<id>AF6GB</id>
+		<type>Switch</type>
+		<region>USA,EUR,KOR</region>
+		<locale lang="EN">
+			<title>Daemon x Machina</title>
+		</locale>
+		<locale lang="FI">
+			<title>Daemon x Machina</title>
+		</locale>
+		<developer>Marvelous</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>action</genre>
+	</game>
+	<game name="Donkey Kong Country: Tropical Freeze (EN,FR,DE,ES,IT,JA)">
+		<id>AFWTA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="FI">
+			<title>Donkey Kong Country: Tropical Freeze</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c9;&#x30f3;&#x30ad;&#x30fc;&#x30b3;&#x30f3;&#x30b0;&#x3000;&#x30c8;&#x30ed;&#x30d4;&#x30ab;&#x30eb;&#x30d5;&#x30ea;&#x30fc;&#x30ba;</title>
+		</locale>
+		<developer>Retro Studios</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="" day=""/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Luigi&apos;s Mansion 3 (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW)">
+		<id>AG3JA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Luigi&apos;s Mansion 3</title>
+		</locale>
+		<locale lang="NO">
+			<title>Luigi&apos;s Mansion 3</title>
+		</locale>
+		<locale lang="FI">
+			<title>Luigi&apos;s Mansion 3</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30eb;&#x30a4;&#x30fc;&#x30b8;&#x30de;&#x30f3;&#x30b7;&#x30e7;&#x30f3;3</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb8e8;&#xc774;&#xc9c0;&#xb9e8;&#xc158;3</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x8def;&#x6613;&#x5409;&#x6d0b;&#x6a13;3</title>
+		</locale>
+		<developer>Next Level Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="10" day="31"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Octopath Traveler (JA)">
+		<id>AGY7A</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Octopath Traveler</title>
+		</locale>
+		<publisher>Square Enix</publisher>
+		<date year="" month="" day=""/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Octopath Traveler (EN,FR,DE,ES,IT,JA)">
+		<id>AGY7B</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Octopath Traveler</title>
+		</locale>
+		<locale lang="FI">
+			<title>Octopath Traveler</title>
+		</locale>
+		<developer>Square Enix</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="7" day="13"/>
+		<genre>adventure,role-playing,fantasy</genre>
+	</game>
+	<game name="Kirby Star Allies (EN,FR,DE,ES,IT,NL,JA)">
+		<id>AH26A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Kirby Star Allies</title>
+		</locale>
+		<locale lang="NO">
+			<title>Kirby Star Allies</title>
+		</locale>
+		<locale lang="FI">
+			<title>Kirby Star Allies</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x661f;&#x306e;&#x30ab;&#x30fc;&#x30d3;&#x30a3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbcc4;&#xc758; &#xcee4;&#xbe44; &#xc2a4;&#xd0c0; &#xc5bc;&#xb77c;&#xc774;&#xc988;</title>
+		</locale>
+		<developer>HAL Laboratory, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="3" day="16"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Captain Toad: Treasure Tracker (EN,FR,DE,ES,IT,NL,JA)">
+		<id>AJH9A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="NO">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="FI">
+			<title>Captain Toad: Treasure Tracker</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x9032;&#x3081;!&#x30ad;&#x30ce;&#x30d4;&#x30aa;&#x968a;&#x9577;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="7" day="13"/>
+		<genre>strategy,puzzle</genre>
+	</game>
+	<game name="Ring Fit Adventure (EN,FR,DE,ES,IT,GR,JA,KO,ZHTW)">
+		<id>AL3PA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Ring Fit Adventure</title>
+		</locale>
+		<locale lang="NO">
+			<title>Ring Fit Adventure</title>
+		</locale>
+		<locale lang="FI">
+			<title>Ring Fit Adventure</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="10" day="18"/>
+		<genre>adventure,health,coaching,exercise,fitness</genre>
+	</game>
+	<game name="Choukaiten Sushi Striker - The Way of Sushido (JA)">
+		<id>ALA2A</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Choukaiten Sushi Striker - The Way of Sushido</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="" day=""/>
+	</game>
+	<game name="Sushi Striker - The Way of Sushido (EN,FR,DE,ES,IT,NL)">
+		<id>ALA2B</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Sushi Striker - The Way of Sushido</title>
+		</locale>
+		<locale lang="FI">
+			<title>Sushi Striker: The Way of Sushido</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="6" day="8"/>
+		<genre>action,puzzle</genre>
+	</game>
+	<game name="Dragon Quest XI S Sugisarishi Toki o Motomete (JA)">
+		<id>ALC7A</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Dragon Quest XI S Sugisarishi Toki o Motomete</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c9;&#x30e9;&#x30b4;&#x30f3;&#x30af;&#x30a8;&#x30b9;&#x30c8;XI &#x904e;&#x304e;&#x53bb;&#x308a;&#x3057;&#x6642;&#x3092;&#x6c42;&#x3081;&#x3066; S</title>
+		</locale>
+		<publisher/>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition (EN,FR,DE,ES,IT,KO,ZHTW)">
+		<id>ALC7C</id>
+		<type>Switch</type>
+		<region>USA,EUR</region>
+		<locale lang="EN">
+			<title>Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition</title>
+		</locale>
+		<locale lang="FI">
+			<title>Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition</title>
+		</locale>
+		<developer>Square Enix</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition [New Price Version] (JA)">
+		<id>ALC7H</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition [New Price Version]</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c9;&#x30e9;&#x30b4;&#x30f3;&#x30af;&#x30a8;&#x30b9;&#x30c8;&#xff38;&#xff29;&#x3000;&#x904e;&#x304e;&#x53bb;&#x308a;&#x3057;&#x6642;&#x3092;&#x6c42;&#x3081;&#x3066;&#x3000;&#xff33;&#xff08;&#x65b0;&#x4fa1;&#x683c;&#x7248;&#xff09;</title>
+		</locale>
+		<developer>Square Enix</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>action,adventure,role-playing</genre>
+	</game>
+	<game name="Mario Tennis Aces (EN,FR,DE,ES,IT,NL,JA,RU)">
+		<id>ALERA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Mario Tennis Aces</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Tennis Aces</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30c6;&#x30cb;&#x30b9; &#x30a8;&#x30fc;&#x30b9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xd14c;&#xb2c8;&#xc2a4; &#xc5d0;&#xc774;&#xc2a4;</title>
+		</locale>
+		<developer>Camelot Software Planning</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="6" day="22"/>
+		<genre>sports</genre>
+	</game>
+	<game name="Fit Boxing (EN,JA)">
+		<id>ALMAA</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Fit Boxing</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="" day=""/>
+		<genre>sports</genre>
+	</game>
+	<game name="Fitness Boxing (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>ALMAB</id>
+		<type>Switch</type>
+		<region>USA,EUR</region>
+		<locale lang="EN">
+			<title>Fitness Boxing</title>
+		</locale>
+		<locale lang="FI">
+			<title>Fitness Boxing</title>
+		</locale>
+		<publisher/>
+		<date year="2019" month="" day=""/>
+		<genre>sports</genre>
+	</game>
+	<game name="Pok&#xe9;mon Sword (EN)">
+		<id>ALZAA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Sword</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon &#xc9;p&#xe9;e</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Schwert</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Espada</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Spada</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pok&#xe9;mon Sword</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Sword</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30b1;&#x30c3;&#x30c8;&#x30e2;&#x30f3;&#x30b9;&#x30bf;&#x30fc;&#x30bd;&#x30fc;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac;&#xc2a4;&#xd130; &#xc18c;&#xb4dc;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x5bf6;&#x53ef;&#x5922; &#x528d;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x5b9d;&#x53ef;&#x68a6; &#x5251;</title>
+		</locale>
+		<developer>Game Freak Ltd.</developer>
+		<publisher>Nintendo/The Pok&#xe9;mon Company</publisher>
+		<date year="2019" month="11" day="15"/>
+		<genre>role-playing,action rpg</genre>
+	</game>
+	<game name="Pok&#xe9;mon Sword + Pok&#xe9;mon Sword Expansion Pass (FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>ALZAD</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Sword + Pok&#xe9;mon Sword Expansion Pass</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x7cbe;&#x9748;&#x5bf6;&#x53ef;&#x5922; &#x528d; + &#x64f4;&#x5145;&#x7968;</title>
+		</locale>
+		<publisher/>
+		<date year="2021" month="" day=""/>
+	</game>
+	<game name="Pok&#xe9;mon Shield (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>ALZBA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Shield</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Bouclier</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Schild</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Escudo</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Scudo</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Shield</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30b1;&#x30c3;&#x30c8;&#x30e2;&#x30f3;&#x30b9;&#x30bf;&#x30fc;&#x30b7;&#x30fc;&#x30eb;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd3ec;&#xcf13;&#xbaac;&#xc2a4;&#xd130; &#xc2e4;&#xb4dc;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x5bf6;&#x53ef;&#x5922; &#x76fe;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x5b9d;&#x53ef;&#x68a6; &#x76fe;</title>
+		</locale>
+		<developer>Game Freak Ltd.</developer>
+		<publisher>Nintendo/The Pok&#xe9;mon Company</publisher>
+		<date year="2019" month="11" day="15"/>
+		<genre>role-playing,action rpg</genre>
+	</game>
+	<game name="Pok&#xe9;mon Shield + Pok&#xe9;mon Shield Expansion Pass (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>ALZBC</id>
+		<type>Switch</type>
+		<region>USA,TWN</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Shield + Pok&#xe9;mon Shield Expansion Pass</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x7cbe;&#x9748;&#x5bf6;&#x53ef;&#x5922; &#x76fe; + &#x64f4;&#x5145;&#x7968;</title>
+		</locale>
+		<publisher/>
+		<date year="2021" month="" day=""/>
+	</game>
+	<game name="Pok&#xe9;mon Legends Z-A (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>ALZLA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Legends Z-A</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pok&#xe9;mon Legends Z-A</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2025" month="10" day="16"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Pok&#xe9;mon Scarlet (EN,FR,DE,ES,IT,JA,ZHTW,ZHCN)">
+		<id>ALZXA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Scarlet</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pok&#xe9;mon Scarlet</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Scarlet</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2022" month="11" day="18"/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Pokemon Scarlet + The Hidden Treasure of Area Zero (EN)">
+		<id>ALZXG</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pokemon Scarlet + The Hidden Treasure of Area Zero</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="10" day="3"/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Pok&#xe9;mon Violet (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>ALZYA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Violet</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pok&#xe9;mon Violet</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Violet</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2022" month="11" day="18"/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Pokemon Violet + The Hidden Treasure of Area Zero (EN)">
+		<id>ALZYG</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pokemon Violet + The Hidden Treasure of Area Zero</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="10" day="3"/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Subarashiki Kono Sekai Final Remix (JA)">
+		<id>AM78A</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Subarashiki Kono Sekai Final Remix</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3059;&#x3070;&#x3089;&#x3057;&#x304d;&#x3053;&#x306e;&#x305b;&#x304b;&#x3044; -Final Remix-</title>
+		</locale>
+		<publisher>Square Enix</publisher>
+		<date year="" month="" day=""/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="The World Ends With You -Final Remix- (EN,FR,DE,ES,IT)">
+		<id>AM78B</id>
+		<type>Switch</type>
+		<region>USA,EUR</region>
+		<locale lang="EN">
+			<title>The World Ends With You -Final Remix-</title>
+		</locale>
+		<locale lang="FI">
+			<title>The World Ends with You -Final Remix-</title>
+		</locale>
+		<developer>Square-Enix</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>role-playing,action rpg</genre>
+	</game>
+	<game name="Shin Megami Tensei V (JA)">
+		<id>AM7NA</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Shin Megami Tensei V</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x771f;&#x30fb;&#x5973;&#x795e;&#x8ee2;&#x751f;&#x2164;</title>
+		</locale>
+		<developer>Atlus</developer>
+		<publisher>Atlus</publisher>
+		<date year="" month="" day=""/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Shin Megami Tensei V (EN,FR,DE,ES,IT)">
+		<id>AM7NB</id>
+		<type>Switch</type>
+		<region>EUR</region>
+		<locale lang="EN">
+			<title>Shin Megami Tensei V</title>
+		</locale>
+		<locale lang="FI">
+			<title>Shin Megami Tensei V</title>
+		</locale>
+		<developer>Atlus</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Shin Megami Tensei V">
+		<id>AM7NC</id>
+		<type>Switch</type>
+		<region>USA</region>
+		<locale lang="EN">
+			<title>Shin Megami Tensei V</title>
+		</locale>
+		<developer>Atlus</developer>
+		<publisher>Sega</publisher>
+		<date year="" month="" day=""/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Princess Peach Showtime! (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AMJJA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Princess Peach Showtime!</title>
+		</locale>
+		<locale lang="ES">
+			<title>Princess Peach Showtime!</title>
+		</locale>
+		<locale lang="FI">
+			<title>Princess Peach Showtime!</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d7;&#x30ea;&#x30f3;&#x30bb;&#x30b9;&#x30d4;&#x30fc;&#x30c1; Showtime!</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd504;&#xb9b0;&#xc138;&#xc2a4; &#xd53c;&#xce58; Showtime!</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x78a7;&#x59ec;&#x516c;&#x4e3b; &#x8868;&#x6f14;&#x6642;&#x523b;&#xff01;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="3" day="22"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Pikmin 3 Deluxe (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>AMPNA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pikmin 3 Deluxe</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pikmin 3 Deluxe</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d4;&#x30af;&#x30df;&#x30f3;3 &#x30c7;&#x30e9;&#x30c3;&#x30af;&#x30b9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd53c;&#xd06c;&#xbbfc; 3 &#xb514;&#xb7ed;&#xc2a4;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x76ae;&#x514b;&#x654f;3 &#x8c6a;&#x83ef;&#x7248;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2020" month="10" day="30"/>
+		<genre>adventure,strategy</genre>
+	</game>
+	<game name="The Stretchers (EN,FR,DE,ES,IT,NL,JA,ZHCN)">
+		<id>AN5EA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>The Stretchers</title>
+		</locale>
+		<developer>Tarsier Studios</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="11" day="8"/>
+		<genre>puzzle,action</genre>
+	</game>
+	<game name="Xenoblade Chronicles 2: Torna - The Golden Country (EN,FR,DE,ES,IT,JA)">
+		<id>ANVZA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Xenoblade Chronicles 2: Torna - The Golden Country</title>
+		</locale>
+		<locale lang="DE">
+			<title>Xenoblade Chronicles 2: Torna - The Golden Country</title>
+		</locale>
+		<locale lang="FI">
+			<title>Xenoblade Chronicles 2: Torna - The Golden Country</title>
+		</locale>
+		<developer>Monolith Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2018" month="9" day="21"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Marvel Ultimate Alliance 3: The Black Order (EN,FR,DE,IT,PT,GR,JA,KO)">
+		<id>APY2A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Marvel Ultimate Alliance 3: The Black Order</title>
+		</locale>
+		<locale lang="FI">
+			<title>Marvel Ultimate Alliance 3: The Black Order</title>
+		</locale>
+		<developer>KOEI TECMO GAMES CO., LTD., Team NINJA</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="7" day="19"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="Pok&#xe9;mon Mystery Dungeon: Rescue Team DX (EN,FR,DE,ES,IT,JA)">
+		<id>AQ42A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Mystery Dungeon: Rescue Team DX</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Donjon Myst&#xe8;re : &#xc9;quipe de Secours DX</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pok&#xe9;mon Mystery Dungeon: Rescue Team DX</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Mystery Dungeon: Rescue Team DX</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30b1;&#x30e2;&#x30f3;&#x4e0d;&#x601d;&#x8b70;&#x306e;&#x30c0;&#x30f3;&#x30b8;&#x30e7;&#x30f3; &#x6551;&#x52a9;&#x968a;DX</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x30dd;&#x30b1;&#x30e2;&#x30f3;&#x4e0d;&#x601d;&#x8b70;&#x306e;&#x30c0;&#x30f3;&#x30b8;&#x30e7;&#x30f3; &#x6551;&#x52a9;&#x968a;DX</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Super Mario Bros. Wonder (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AQMXA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Mario Bros. Wonder</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Mario Bros. Wonder</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa;&#x30d6;&#x30e9;&#x30b6;&#x30fc;&#x30ba; &#x30ef;&#x30f3;&#x30c0;&#x30fc;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="10" day="20"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="The Legend of Zelda: Link&apos;s Awakening (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,RU)">
+		<id>AR3NA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Link&apos;s Awakening</title>
+		</locale>
+		<locale lang="FR">
+			<title>The Legend of Zelda: Link&apos;s Awakening</title>
+		</locale>
+		<locale lang="DE">
+			<title>The Legend of Zelda: Link&apos;s Awakening</title>
+		</locale>
+		<locale lang="FI">
+			<title>The Legend of Zelda: Link&apos;s Awakening</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x5922;&#x3092;&#x307f;&#x308b;&#x5cf6;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758;&#xc804;&#xc124; &#xafc8;&#xafb8;&#xb294; &#xc12c;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x85a9;&#x723e;&#x9054;&#x50b3;&#x8aaa; &#x7e54;&#x5922;&#x5cf6;</title>
+		</locale>
+		<developer>Nintendo EPD, Grezzo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="9" day="20"/>
+		<genre>action,action rpg</genre>
+	</game>
+	<game name="Bravely Default II (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>AR5SA</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Bravely Default II</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d6;&#x30ec;&#x30a4;&#x30d6;&#x30ea;&#x30fc;&#x30c7;&#x30d5;&#x30a9;&#x30eb;&#x30c8;II</title>
+		</locale>
+		<publisher>Square Enix</publisher>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Bravely Default II (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>AR5SB</id>
+		<type>Switch</type>
+		<region>USA,EUR</region>
+		<locale lang="EN">
+			<title>Bravely Default II</title>
+		</locale>
+		<locale lang="FI">
+			<title>Bravely Default II</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>action,adventure,role-playing</genre>
+	</game>
+	<game name="Everybody 1-2-Switch! (EN,FR,DE,ES,IT,NL,KO,ZHTW,ZHCN,RU)">
+		<id>ARGTA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Everybody 1-2-Switch!</title>
+		</locale>
+		<locale lang="NO">
+			<title>Everybody 1-2-Switch!</title>
+		</locale>
+		<locale lang="FI">
+			<title>Everybody 1-2-Switch!</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30a8;&#x30d6;&#x30ea;&#x30d0;&#x30c7;&#x30a3; 1-2-Switch!</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="6" day="30"/>
+		<genre>party</genre>
+	</game>
+	<game name="Paper Mario: The Origami King (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW)">
+		<id>ARUUA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Paper Mario: The Origami King</title>
+		</locale>
+		<locale lang="NO">
+			<title>Paper Mario: The Origami King</title>
+		</locale>
+		<locale lang="FI">
+			<title>Paper Mario: The Origami King</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30da;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa; &#x30aa;&#x30ea;&#x30ac;&#x30df;&#x30ad;&#x30f3;&#x30b0;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd398;&#xc774;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; &#xc885;&#xc774;&#xc811;&#xae30; &#xd0b9;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x7d19;&#x7247;&#x746a;&#x5229;&#x6b50;&#xff1a;&#x647a;&#x7d19;&#x570b;&#x738b;</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2020" month="7" day="17"/>
+		<genre>action,role-playing</genre>
+	</game>
+	<game name="DC Super Hero Girls: Teen Power (EN,FR,DE,ES,IT,JA)">
+		<id>ARXAA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>DC Super Hero Girls: Teen Power</title>
+		</locale>
+		<locale lang="FI">
+			<title>DC Super Hero Girls: Teen Power</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="6" day="4"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Kirby and the Forgotten Land (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN)">
+		<id>ARZGA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Kirby and the Forgotten Land</title>
+		</locale>
+		<locale lang="FR">
+			<title>Kirby et le monde oubli&#xe9;</title>
+		</locale>
+		<locale lang="DE">
+			<title>Kirby und das vergessene Land</title>
+		</locale>
+		<locale lang="ES">
+			<title>Kirby y la tierra olvidada</title>
+		</locale>
+		<locale lang="IT">
+			<title>Kirby e la terra perduta</title>
+		</locale>
+		<locale lang="NL">
+			<title>Kirby en de Vergeten Wereld</title>
+		</locale>
+		<locale lang="NO">
+			<title>Kirby and the Forgotten Land</title>
+		</locale>
+		<locale lang="FI">
+			<title>Kirby and the Forgotten Land</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x661f;&#x306e;&#x30ab;&#x30fc;&#x30d3;&#x30a3;&#x3000;&#x30c7;&#x30a3;&#x30b9;&#x30ab;&#x30d0;&#x30ea;&#x30fc;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbcc4;&#xc758; &#xcee4;&#xbe44; &#xb514;&#xc2a4;&#xcee4;&#xbc84;&#xb9ac;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x661f;&#x4e4b;&#x5361;&#x6bd4; &#x63a2;&#x7d22;&#x767c;&#x73fe;</title>
+		</locale>
+		<developer>HAL Laboratory</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Tetris 99 (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN,RU)">
+		<id>ARZNB</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Tetris 99</title>
+		</locale>
+		<locale lang="NO">
+			<title>Tetris 99</title>
+		</locale>
+		<locale lang="FI">
+			<title>Tetris 99</title>
+		</locale>
+		<developer>ARIKA</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="2" day="12"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Dr Kawashima&apos;s Brain Training for Nintendo Switch (EN,FR,DE,ES,IT,NL,JA)">
+		<id>AS3MA</id>
+		<type>Switch</type>
+		<region>EUR,JPN</region>
+		<locale lang="EN">
+			<title>Dr Kawashima&apos;s Brain Training for Nintendo Switch</title>
+		</locale>
+		<locale lang="FI">
+			<title>Dr Kawashima&apos;s Brain Training for Nintendo Switch</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x8133;&#x3092;&#x935b;&#x3048;&#x308b;&#x5927;&#x4eba;&#x306e;Nintendo Switch&#x30c8;&#x30ec;&#x30fc;&#x30cb;&#x30f3;&#x30b0;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Nintendo Switch Sports (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AS8SA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Nintendo Switch Sports</title>
+		</locale>
+		<locale lang="NO">
+			<title>Nintendo Switch Sports</title>
+		</locale>
+		<locale lang="FI">
+			<title>Nintendo Switch Sports</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2022" month="4" day="29"/>
+		<genre>sports,party</genre>
+	</game>
+	<game name="Cadence of Hyrule - Crypt of the NecroDancer Featuring The Legend of Zelda (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>ASWBC</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Cadence of Hyrule - Crypt of the NecroDancer Featuring The Legend of Zelda</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b1;&#x30a4;&#x30c7;&#x30f3;&#x30b9;&#x30fb;&#x30aa;&#x30d6;&#x30fb;&#x30cf;&#x30a4;&#x30e9;&#x30eb;:&#x2002;&#x30af;&#x30ea;&#x30d7;&#x30c8;&#x30fb;&#x30aa;&#x30d6;&#x30fb;&#x30cd;&#x30af;&#x30ed;&#x30c0;&#x30f3;&#x30b5;&#x30fc; feat. &#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac;</title>
+		</locale>
+		<publisher>Spike Chunsoft</publisher>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Cadence of Hyrule: Crypt of the NecroDancer featuring The Legend of Zelda (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>ASWBD</id>
+		<type>Switch</type>
+		<region>USA,EUR,TWN</region>
+		<locale lang="EN">
+			<title>Cadence of Hyrule: Crypt of the NecroDancer featuring The Legend of Zelda</title>
+		</locale>
+		<locale lang="FI">
+			<title>Cadence of Hyrule: Crypt of the NecroDancer featuring The Legend of Zelda</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x51f1;&#x767b;&#x7d72;&#x52c7;&#x95d6;&#x6d77;&#x62c9;&#x9b6f;: &#x6b7b;&#x9748;&#x821e;&#x5e2b;&#x5730;&#x7262; feat. &#x85a9;&#x723e;&#x9054;&#x50b3;&#x8aaa;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x51ef;&#x767b;&#x4e1d;&#x52c7;&#x95ef;&#x6d77;&#x62c9;&#x9c81;: &#x6b7b;&#x7075;&#x821e;&#x5e08;&#x5730;&#x7262; feat. &#x8428;&#x5c14;&#x8fbe;&#x4f20;&#x8bf4;</title>
+		</locale>
+		<developer>Brace Yourself Games</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2020" month="" day=""/>
+	</game>
+	<game name="Mario Golf: Super Rush (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AT9HA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Mario Golf: Super Rush</title>
+		</locale>
+		<locale lang="NO">
+			<title>Mario Golf: Super Rush</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Golf: Super Rush</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30b4;&#x30eb;&#x30d5; &#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30e9;&#x30c3;&#x30b7;&#x30e5;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xace8;&#xd504; &#xc288;&#xd37c; &#xb7ec;&#xc2dc;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x746a;&#x5229;&#x6b50;&#x9ad8;&#x723e;&#x592b; &#x8d85;&#x7d1a;&#x885d;&#x885d;&#x885d;</title>
+		</locale>
+		<developer>Camelot Software Planning</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="6" day="25"/>
+		<genre>sports,adventure,party,golf</genre>
+	</game>
+	<game name="Xenoblade Chronicles: Definitive Edition (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>AUBQA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Xenoblade Chronicles: Definitive Edition</title>
+		</locale>
+		<locale lang="DE">
+			<title>Xenoblade Chronicles: Definitive Edition</title>
+		</locale>
+		<locale lang="FI">
+			<title>Xenoblade Chronicles: Definitive Edition</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30ce;&#x30d6;&#x30ec;&#x30a4;&#x30c9; &#x30c7;&#x30a3;&#x30d5;&#x30a3;&#x30cb;&#x30c6;&#x30a3;&#x30d6;&#x30fb;&#x30a8;&#x30c7;&#x30a3;&#x30b7;&#x30e7;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc81c;&#xb178;&#xbe14;&#xb808;&#xc774;&#xb4dc; &#xd06c;&#xb85c;&#xb2c8;&#xd074;&#xc2a4; &#xb514;&#xd53c;&#xb2c8;&#xd2f0;&#xbe0c; &#xc5d0;&#xb514;&#xc158;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x7570;&#x5ea6;&#x795e;&#x528d; &#x7d42;&#x6975;&#x7248;</title>
+		</locale>
+		<developer>Monolith Soft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2020" month="5" day="29"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Super Mario 3D World + Bowser&apos;s Fury (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHCN,RU)">
+		<id>AUZPA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Mario 3D World + Bowser&apos;s Fury</title>
+		</locale>
+		<locale lang="NO">
+			<title>Super Mario 3D World + Bowser&apos;s Fury</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Mario 3D World + Bowser&apos;s Fury</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa; 3D&#x30ef;&#x30fc;&#x30eb;&#x30c9; + &#x30d5;&#x30e5;&#x30fc;&#x30ea;&#x30fc;&#x30ef;&#x30fc;&#x30eb;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; 3D &#xc6d4;&#xb4dc; + &#xd4e8;&#xb9ac; &#xc6d4;&#xb4dc;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x8d85;&#x7d1a;&#x746a;&#x5229;&#x6b50; &#xff13;&#xff24;&#x4e16;&#x754c; &#xff0b; &#x72c2;&#x6012;&#x4e16;&#x754c;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="2" day="12"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Splatoon 3 (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AV5JA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Splatoon 3</title>
+		</locale>
+		<locale lang="ES">
+			<title>Splatoon 3</title>
+		</locale>
+		<locale lang="NO">
+			<title>Splatoon 3</title>
+		</locale>
+		<locale lang="FI">
+			<title>Splatoon 3</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30d7;&#x30e9;&#x30c8;&#x30a5;&#x30fc;&#x30f3;3</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2022" month="9" day="9"/>
+		<genre>action,shooter,shoot &apos;em up</genre>
+	</game>
+	<game name="Detective Pikachu Returns (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>AVHMA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Detective Pikachu Returns</title>
+		</locale>
+		<locale lang="ES">
+			<title>Detective Pikachu: El Regreso</title>
+		</locale>
+		<locale lang="IT">
+			<title>Detective Pikachu: Il Ritorno</title>
+		</locale>
+		<locale lang="FI">
+			<title>Detective Pikachu Returns</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x5e30;&#x3063;&#x3066;&#x304d;&#x305f; &#x540d;&#x63a2;&#x5075;&#x30d4;&#x30ab;&#x30c1;&#x30e5;&#x30a6;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3cc;&#xc544;&#xc628; &#xba85;&#xd0d0;&#xc815; &#xd53c;&#xce74;&#xce04;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x540d;&#x5075;&#x63a2;&#x76ae;&#x5361;&#x4e18;&#x9583;&#x96fb;&#x56de;&#x6b78;</title>
+		</locale>
+		<developer>Creatures Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="10" day="6"/>
+		<genre>adventure</genre>
+	</game>
+	<game name="Super Mario 3D All-Stars (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>AVP3A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Mario 3D All-Stars</title>
+		</locale>
+		<locale lang="FR">
+			<title>Super Mario 3D All-Stars</title>
+		</locale>
+		<locale lang="DE">
+			<title>Super Mario 3D All-Stars</title>
+		</locale>
+		<locale lang="NO">
+			<title>Super Mario 3D All-Stars</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Mario 3D All-Stars</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30b9;&#x30fc;&#x30d1;&#x30fc;&#x30de;&#x30ea;&#x30aa; 3D&#x30b3;&#x30ec;&#x30af;&#x30b7;&#x30e7;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc288;&#xd37c; &#xb9c8;&#xb9ac;&#xc624; 3D &#xceec;&#xb809;&#xc158;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x8d85;&#x7d1a;&#x746a;&#x5229;&#x6b50; 3D &#x6536;&#x85cf;&#x8f2f;</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2020" month="9" day="18"/>
+		<genre>action,platformer,3d platformer</genre>
+	</game>
+	<game name="Famicom Tantei Club: Kieta Kokeisha &amp; Ushiro ni Tatsu Shojo (JA,ZHTW,ZHCN)">
+		<id>AW3CA</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Famicom Tantei Club: Kieta Kokeisha &amp; Ushiro ni Tatsu Shojo</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30df;&#x30b3;&#x30f3;&#x63a2;&#x5075;&#x5036;&#x697d;&#x90e8; &#x6d88;&#x3048;&#x305f;&#x5f8c;&#x7d99;&#x8005;&#x30fb;&#x3046;&#x3057;&#x308d;&#x306b;&#x7acb;&#x3064;&#x5c11;&#x5973;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Pok&#xe9;mon Legends: Arceus (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>AW7KA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Legends: Arceus</title>
+		</locale>
+		<locale lang="FR">
+			<title>L&#xe9;gendes Pok&#xe9;mon : Arceus</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon-Legenden: Arceus</title>
+		</locale>
+		<locale lang="ES">
+			<title>Leyendas Pok&#xe9;mon: Arceus</title>
+		</locale>
+		<locale lang="IT">
+			<title>Leggende Pok&#xe9;mon: Arceus</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pok&#xe9;mon Legends: Arceus</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Legends: Arceus</title>
+		</locale>
+		<locale lang="JA">
+			<title>Pok&#xe9;mon LEGENDS &#x30a2;&#x30eb;&#x30bb;&#x30a6;&#x30b9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>Pok&#xe9;mon LEGENDS &#xc544;&#xb974;&#xc138;&#xc6b0;&#xc2a4;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x5bf6;&#x53ef;&#x5922;&#x50b3;&#x8aaa; &#x963f;&#x723e;&#x5b99;&#x65af;</title>
+		</locale>
+		<developer>Game Freak</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2022" month="1" day="28"/>
+		<genre>action,adventure,role-playing</genre>
+	</game>
+	<game name="WarioWare: Get It Together! (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN,RU)">
+		<id>AW7NA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>WarioWare: Get It Together!</title>
+		</locale>
+		<locale lang="FI">
+			<title>WarioWare: Get It Together!</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x304a;&#x3059;&#x305d;&#x308f;&#x3051;&#x308b;&#x3000;&#x30e1;&#x30a4;&#x30c9; &#x30a4;&#x30f3; &#x30ef;&#x30ea;&#x30aa;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc990;&#xac70;&#xc6c0;&#xc744; &#xb098;&#xb220;&#xb77c; &#xba54;&#xc774;&#xb4dc; &#xc778; &#xc640;&#xb9ac;&#xc624;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x5206;&#x4eab;&#x540c;&#x6a02;&#xff01;&#x74e6;&#x5229;&#x6b50;&#x88fd;&#x9020;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="9" day="10"/>
+		<genre>action,party</genre>
+	</game>
+	<game name="Miitopia (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN)">
+		<id>AW8SA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Miitopia</title>
+		</locale>
+		<locale lang="ES">
+			<title>Miitopia</title>
+		</locale>
+		<locale lang="FI">
+			<title>Miitopia</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30df;&#x30fc;&#x30c8;&#x30d4;&#x30a2; Miitopia</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xbbf8;&#xd1a0;&#xd53c;&#xc544; Miitopia</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x8ff7;&#x6258;&#x90a6; Miitopia</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="5" day="21"/>
+		<genre>adventure,simulation</genre>
+	</game>
+	<game name="Kirby Fighters 2 (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHCN)">
+		<id>AWMFA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Kirby Fighters 2</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30ab;&#x30fc;&#x30d3;&#x30a3;&#x30d5;&#x30a1;&#x30a4;&#x30bf;&#x30fc;&#x30ba;2</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xcee4;&#xbe44; &#xd30c;&#xc774;&#xd130;&#xc988;2</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2020" month="9" day="23"/>
+		<genre>fighting</genre>
+	</game>
+	<game name="Mario Strikers: Battle League (EN,FR,DE,IT,NL,PT,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AWN6A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Mario Strikers: Battle League</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mario Strikers: Battle League</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mario Strikers: Battle League</title>
+		</locale>
+		<locale lang="NO">
+			<title>Mario Strikers: Battle League</title>
+		</locale>
+		<locale lang="FI">
+			<title>Mario Strikers: Battle League Football</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30de;&#x30ea;&#x30aa;&#x30b9;&#x30c8;&#x30e9;&#x30a4;&#x30ab;&#x30fc;&#x30ba;: &#x30d0;&#x30c8;&#x30eb;&#x30ea;&#x30fc;&#x30b0;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9c8;&#xb9ac;&#xc624; &#xc2a4;&#xd2b8;&#xb77c;&#xc774;&#xcee4;&#xc988; &#xbc30;&#xd2c0; &#xb9ac;&#xadf8;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x746a;&#x5229;&#x6b50;&#x6fc0;&#x6230;&#x524d;&#x92d2; &#x6230;&#x9b25;&#x806f;&#x8cfd;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2022" month="6" day="10"/>
+		<genre>action,sports,soccer,football</genre>
+	</game>
+	<game name="Pok&#xe9;mon Brilliant Diamond (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>AX7QA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Brilliant Diamond</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pok&#xe9;mon Brilliant Diamond</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Brilliant Diamond</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="11" day="19"/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Pok&#xe9;mon Shining Pearl (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>AX7RA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Shining Pearl</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pok&#xe9;mon Shining Pearl</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Shining Pearl</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="11" day="19"/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Bayonetta 3 (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AXB7A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Bayonetta 3</title>
+		</locale>
+		<locale lang="FI">
+			<title>Bayonetta 3</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d9;&#x30e8;&#x30cd;&#x30c3;&#x30bf;3</title>
+		</locale>
+		<developer>Platinum Games / Sega</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2022" month="10" day="28"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Bayonetta Origins: Cereza and the Lost Demon (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AXB8A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Bayonetta Origins: Cereza and the Lost Demon</title>
+		</locale>
+		<locale lang="FI">
+			<title>Bayonetta Origins: Cereza and the Lost Demon</title>
+		</locale>
+		<developer>Platinum Games Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="3" day="17"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Hyrule Warriors: Age of Calamity (JA)">
+		<id>AXEAA</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Hyrule Warriors: Age of Calamity</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x7121;&#x53cc; &#x5384;&#x707d;&#x306e;&#x9ed9;&#x793a;&#x9332;</title>
+		</locale>
+		<developer>KOEI TECMO GAMES</developer>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>action,adventure,fighting</genre>
+	</game>
+	<game name="Hyrule Warriors: Age of Calamity (EN,FR,DE,ES,IT,NL,KO,ZHTW)">
+		<id>AXEAB</id>
+		<type>Switch</type>
+		<region>USA,EUR,KOR,TWN,CHN</region>
+		<locale lang="EN">
+			<title>Hyrule Warriors: Age of Calamity</title>
+		</locale>
+		<locale lang="FR">
+			<title>Hyrule Warriors : L&apos;&#xc8;re du Fl&#xe9;au</title>
+		</locale>
+		<locale lang="DE">
+			<title>Hyrule Warriors: Zeit der Verheerung</title>
+		</locale>
+		<locale lang="ES">
+			<title>Hyrule Warriors: La Era del Cataclismo</title>
+		</locale>
+		<locale lang="IT">
+			<title>Hyrule Warriors: L&apos;era Della calamit&#xe0;</title>
+		</locale>
+		<locale lang="NO">
+			<title>Hyrule Warriors: Age of Calamity</title>
+		</locale>
+		<locale lang="FI">
+			<title>Hyrule Warriors: Age of Calamity</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xbb34;&#xc30d; &#xb300;&#xc7ac;&#xc559;&#xc758; &#xc2dc;&#xb300;</title>
+		</locale>
+		<developer>KOEI TECMO GAMES</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2020" month="11" day="20"/>
+		<genre>action,adventure,fighting</genre>
+	</game>
+	<game name="Fitness Boxing 2: Rhythm &amp; Exercise (EN,JA,KO,ZHCN)">
+		<id>AXF5A</id>
+		<type>Switch</type>
+		<region>JPN,KOR,TWN</region>
+		<locale lang="EN">
+			<title>Fitness Boxing 2: Rhythm &amp; Exercise</title>
+		</locale>
+		<locale lang="JA">
+			<title>Fit Boxing 2 -&#x30ea;&#x30ba;&#x30e0;&#xff06;&#x30a8;&#x30af;&#x30b5;&#x30b5;&#x30a4;&#x30ba;-</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc2a4;&#xc704;&#xce58; &#xd53c;&#xd2b8;&#xb2c8;&#xc2a4; &#xbcf5;&#xc2f1;2</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>sports,music</genre>
+	</game>
+	<game name="Fitness Boxing 2: Rhythm &amp; Exercise (EN,FR,DE,ES,IT,JA,KO,ZHCN)">
+		<id>AXF5B</id>
+		<type>Switch</type>
+		<region>USA,EUR</region>
+		<locale lang="EN">
+			<title>Fitness Boxing 2: Rhythm &amp; Exercise</title>
+		</locale>
+		<locale lang="FI">
+			<title>Fitness Boxing 2: Rhythm &amp; Exercise</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>sports,music</genre>
+	</game>
+	<game name="The Legend of Zelda: Tears of the Kingdom (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AXN7A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Tears of the Kingdom</title>
+		</locale>
+		<locale lang="NO">
+			<title>The Legend of Zelda: Tears of the Kingdom</title>
+		</locale>
+		<locale lang="FI">
+			<title>The Legend of Zelda: Tears of the Kingdom</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac;&#x3000;&#x30c6;&#x30a3;&#x30a2;&#x30fc;&#x30ba; &#x30aa;&#x30d6; &#x30b6; &#x30ad;&#x30f3;&#x30b0;&#x30c0;&#x30e0;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124; &#xd2f0;&#xc5b4;&#xc2a4; &#xc624;&#xbe0c; &#xb354; &#xd0b9;&#xb364;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x85a9;&#x723e;&#x9054;&#x50b3;&#x8aaa;&#x738b;&#x570b;&#x4e4b;&#x6dda;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="5" day="23"/>
+		<genre>action,adventure,role-playing</genre>
+	</game>
+	<game name="Fire Emblem Engage (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>AYFNA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Fire Emblem Engage</title>
+		</locale>
+		<locale lang="FI">
+			<title>Fire Emblem Engage</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30a4;&#x30a2;&#x30fc;&#x30a8;&#x30e0;&#x30d6;&#x30ec;&#x30e0; &#x30a8;&#x30f3;&#x30b2;&#x30fc;&#x30b8;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xd30c;&#xc774;&#xc5b4; &#xc5e0;&#xbe14;&#xb818; Engage</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="1" day="20"/>
+		<genre>role-playing,strategy</genre>
+	</game>
+	<game name="Metroid Dread (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN,RU)">
+		<id>AYL8A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Metroid Dread</title>
+		</locale>
+		<locale lang="NO">
+			<title>Metroid Dread</title>
+		</locale>
+		<locale lang="FI">
+			<title>Metroid Dread</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="10" day="8"/>
+		<genre>action,adventure,platformer</genre>
+	</game>
+	<game name="Xenoblade Chronicles 3 (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>AZ3HA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Xenoblade Chronicles 3</title>
+		</locale>
+		<locale lang="NO">
+			<title>Xenoblade Chronicles 3</title>
+		</locale>
+		<locale lang="FI">
+			<title>Xenoblade Chronicles 3</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30ce;&#x30d6;&#x30ec;&#x30a4;&#x30c9;3</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc81c;&#xb178;&#xbe14;&#xb808;&#xc774;&#xb4dc; &#xd06c;&#xb85c;&#xb2c8;&#xd074;&#xc2a4; 3</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x7570;&#x5ea6;&#x795e;&#x528d;3</title>
+		</locale>
+		<developer>MONOLITHSOFT</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2022" month="7" day="29"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Mario Party Superstars (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHCN,RU)">
+		<id>AZ82A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Mario Party Superstars</title>
+		</locale>
+		<locale lang="NO">
+			<title>Mario Party Superstars</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="10" day="29"/>
+		<genre>party</genre>
+	</game>
+	<game name="The Legend of Zelda: Skyward Sword HD (EN,FR,DE,ES,IT,NL,JA,KO,ZHCN,RU)">
+		<id>AZ89A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Skyward Sword HD</title>
+		</locale>
+		<locale lang="NO">
+			<title>The Legend of Zelda: Skyward Sword HD</title>
+		</locale>
+		<locale lang="FI">
+			<title>The Legend of Zelda: Skyward Sword HD</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x30b9;&#x30ab;&#x30a4;&#x30a6;&#x30a9;&#x30fc;&#x30c9;&#x30bd;&#x30fc;&#x30c9; HD</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc824;&#xb2e4;&#xc758; &#xc804;&#xc124; &#xc2a4;&#xce74;&#xc774;&#xc6cc;&#xb4dc; &#xc18c;&#xb4dc; HD</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x85a9;&#x723e;&#x9054;&#x50b3;&#x8aaa; &#x79a6;&#x5929;&#x4e4b;&#x528d; HD</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="7" day="16"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Big Brain Academy: Brain vs. Brain (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN,RU)">
+		<id>AZLSA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Big Brain Academy: Brain vs. Brain</title>
+		</locale>
+		<locale lang="FR">
+			<title>C&#xe9;r&#xe9;brale Acad&#xe9;mie : Bataille de m&#xe9;ninges</title>
+		</locale>
+		<locale lang="DE">
+			<title>Big Brain Academy: Kopf an Kopf</title>
+		</locale>
+		<locale lang="ES">
+			<title>Big Brain Academy: Batalla de ingenio</title>
+		</locale>
+		<locale lang="IT">
+			<title>Big Brain Academy: Sfida tra menti</title>
+		</locale>
+		<locale lang="NL">
+			<title>Big Brain Academy: Knappe koppen</title>
+		</locale>
+		<locale lang="FI">
+			<title>Big Brain Academy: Brain vs. Brain</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3084;&#x308f;&#x3089;&#x304b;&#x3042;&#x305f;&#x307e;&#x587e; &#x3044;&#x3063;&#x3057;&#x3087;&#x306b;&#x3042;&#x305f;&#x307e;&#x306e;&#x30b9;&#x30c8;&#x30ec;&#x30c3;&#x30c1;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb9d0;&#xb791;&#xb9d0;&#xb791; &#xb450;&#xb1cc;&#xd559;&#xc6d0;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x9748;&#x6d3b;&#x8166;&#x5b78;&#x6821; &#x4e00;&#x8d77;&#x4f38;&#x5c55;&#x5927;&#x8166;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2021" month="12" day="3"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Advance Wars 1+2: Re-Boot Camp (EN,FR,DE,ES,IT,NL)">
+		<id>AZRMA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Advance Wars 1+2: Re-Boot Camp</title>
+		</locale>
+		<locale lang="FI">
+			<title>Advance Wars 1+2: Re-Boot Camp</title>
+		</locale>
+		<developer>WayForward</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="4" day="21"/>
+		<genre>strategy</genre>
+	</game>
+	<game name="Super Mario Maker 2 (EN,FR,DE,ES,IT,JA,KO,ZHCN,RU)">
+		<id>BAAQA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Mario Maker 2</title>
+		</locale>
+		<locale lang="NO">
+			<title>Super Mario Maker 2</title>
+		</locale>
+		<locale lang="FI">
+			<title>Super Mario Maker 2</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2019" month="6" day="28"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Pokk&#xe9;n Tournament DX (EN,FR,DE,ES,IT,JA)">
+		<id>BAAYA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pokk&#xe9;n Tournament DX</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pokk&#xe9;n Tournament DX</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Tekken DX</title>
+		</locale>
+		<locale lang="NO">
+			<title>Pokk&#xe9;n Tournament DX</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pokk&#xe9;n Tournament DX</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30c3;&#x62f3; POKK&#xc9;N TOURNAMENT DX</title>
+		</locale>
+		<developer>BANDAI NAMCO Entertainment, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2017" month="9" day="22"/>
+		<genre>action,fighting</genre>
+	</game>
+	<game name="Pikmin 1+2 (EN,FR,DE,ES,IT,JA)">
+		<id>BAMEA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Pikmin 1+2</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pikmin 1 + 2</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="9" day="22"/>
+		<genre>action,adventure,strategy</genre>
+	</game>
+	<game name="Luigi&apos;s Mansion 2 HD (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW,ZHCN,RU)">
+		<id>BANRA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Luigi&apos;s Mansion 2 HD</title>
+		</locale>
+		<locale lang="NO">
+			<title>Luigi&apos;s Mansion 2 HD</title>
+		</locale>
+		<locale lang="FI">
+			<title>Luigi&apos;s Mansion 2 HD</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb8e8;&#xc774;&#xc9c0; &#xb9e8;&#xc158; 2 HD</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="6" day="27"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Xenoblade Chronicles X: Definitive Edition (EN,FR,DE,ES,IT,JA,KO,ZHTW,ZHCN)">
+		<id>BAS6A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Xenoblade Chronicles X: Definitive Edition</title>
+		</locale>
+		<locale lang="NO">
+			<title>Xenoblade Chronicles X: Definitive Edition</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30ce;&#x30d6;&#x30ec;&#x30a4;&#x30c9;&#x30af;&#x30ed;&#x30b9; &#x30c7;&#x30a3;&#x30d5;&#x30a3;&#x30cb;&#x30c6;&#x30a3;&#x30d6;&#x30a8;&#x30c7;&#x30a3;&#x30b7;&#x30e7;&#x30f3;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xc81c;&#xb178;&#xbe14;&#xb808;&#xc774;&#xb4dc; &#xd06c;&#xb85c;&#xb2c8;&#xd074;&#xc2a4; &#xd06c;&#xb85c;&#xc2a4; &#xb514;&#xd53c;&#xb2c8;&#xd2f0;&#xbe0c; &#xc5d0;&#xb514;&#xc158;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x7570;&#x5ea6;&#x795e;&#x528d;X &#x7d42;&#x6975;&#x7248;</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2025" month="3" day="20"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="The Legend of Zelda: Echoes of Wisdom (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW,ZHCN,RU)">
+		<id>BDGEA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>The Legend of Zelda: Echoes of Wisdom</title>
+		</locale>
+		<locale lang="NO">
+			<title>The Legend of Zelda: Echoes of Wisdom</title>
+		</locale>
+		<locale lang="FI">
+			<title>The Legend of Zelda: Echoes of Wisdom</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30bc;&#x30eb;&#x30c0;&#x306e;&#x4f1d;&#x8aac; &#x77e5;&#x6075;&#x306e;&#x304b;&#x308a;&#x3082;&#x306e;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2024" month="9" day="26"/>
+		<genre>action,adventure</genre>
+	</game>
+	<game name="Donkey Kong Country Returns HD (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN)">
+		<id>BDLWA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Donkey Kong Country Returns HD</title>
+		</locale>
+		<locale lang="NO">
+			<title>Donkey Kong Country Returns HD</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c9;&#x30f3;&#x30ad;&#x30fc;&#x30b3;&#x30f3;&#x30b0; &#x30ea;&#x30bf;&#x30fc;&#x30f3;&#x30ba; HD</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xb3d9;&#xd0a4;&#xcf69; &#xb9ac;&#xd134;&#xc988; HD</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="2025" month="1" day="16"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Fitness Boxing 3: Your Personal Trainer (EN,FR,DE,ES,IT,PT,JA,KO,ZHTW,ZHCN)">
+		<id>BDWKA</id>
+		<type>Switch</type>
+		<region>JPN</region>
+		<locale lang="EN">
+			<title>Fitness Boxing 3: Your Personal Trainer</title>
+		</locale>
+		<locale lang="JA">
+			<title>Fit Boxing 3 -Your &#x30d1;&#x30fc;&#x30bd;&#x30ca;&#x30eb;&#x30c8;&#x30ec;&#x30fc;&#x30ca;&#x30fc;-</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>sports,music</genre>
+	</game>
+	<game name="Fitness Boxing 3: Your Personal Trainer (EN,FR,DE,ES,IT,PT,JA,KO,ZHTW,ZHCN)">
+		<id>BDWKB</id>
+		<type>Switch</type>
+		<region>USA,EUR</region>
+		<locale lang="EN">
+			<title>Fitness Boxing 3: Your Personal Trainer</title>
+		</locale>
+		<locale lang="NO">
+			<title>Fitness Boxing 3: Your Personal Trainer</title>
+		</locale>
+		<locale lang="FI">
+			<title>Fitness Boxing 3: Your Personal Trainer</title>
+		</locale>
+		<publisher>Nintendo</publisher>
+		<date year="" month="" day=""/>
+		<genre>sports,music</genre>
+	</game>
+	<game name="Metroid Prime 4: Beyond (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW,ZHCN)">
+		<id>BGW5A</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Metroid Prime 4: Beyond</title>
+		</locale>
+		<locale lang="ES">
+			<title>Metroid Prime 4: Beyond</title>
+		</locale>
+		<locale lang="NO">
+			<title>Metroid Prime 4: Beyond</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30e1;&#x30c8;&#x30ed;&#x30a4;&#x30c9;&#x30d7;&#x30e9;&#x30a4;&#x30e0;4 &#x30d3;&#x30e8;&#x30f3;&#x30c9;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xba54;&#xd2b8;&#xb85c;&#xc774;&#xb4dc; &#xd504;&#xb77c;&#xc784; 4 &#xbe44;&#xc698;&#xb4dc;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x5bc6;&#x7279;&#x7f85;&#x5fb7; &#x7a76;&#x6975;4 &#x7a7f;&#x8d8a;&#x672a;&#x77e5;</title>
+		</locale>
+		<developer>Retro Studios</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2025" month="12" day="4"/>
+		<genre>action,shooter,first-person shooter</genre>
+	</game>
+	<game name="Tomodachi Life: Living the Dream (EN,FR,DE,ES,IT,NL,JA,KO,ZHTW,ZHCN)">
+		<id>BLFGA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Tomodachi Life: Living the Dream</title>
+		</locale>
+		<locale lang="FR">
+			<title>Tomodachi Life : Une vie de r&#xea;ve</title>
+		</locale>
+		<locale lang="DE">
+			<title>Tomodachi Life: Wo Tr&#xe4;ume wahr werden</title>
+		</locale>
+		<locale lang="ES">
+			<title>Tomodachi Life: Una vida de ensue&#xf1;o</title>
+		</locale>
+		<locale lang="IT">
+			<title>Tomodachi Life: Una vita da sogno</title>
+		</locale>
+		<locale lang="NL">
+			<title>Tomodachi Life: Waar dromen uitkomen</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30c8;&#x30e2;&#x30c0;&#x30c1;&#x30b3;&#x30ec;&#x30af;&#x30b7;&#x30e7;&#x30f3; &#x308f;&#x304f;&#x308f;&#x304f;&#x751f;&#x6d3b;</title>
+		</locale>
+		<locale lang="KO">
+			<title>&#xce5c;&#xad6c;&#xbaa8;&#xc544; &#xc544;&#xc77c;&#xb79c;&#xb4dc; &#xb450;&#xadfc;&#xb450;&#xadfc; &#xb77c;&#xc774;&#xd504;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>Tomodachi Life &#x670b;&#x53cb;&#x6536;&#x96c6; &#x5922;&#x60f3;&#x751f;&#x6d3b;</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2026" month="4" day="16"/>
+		<genre>simulation,health,life simulation</genre>
+	</game>
+	<game name="Super Mario Galaxy + Super Mario Galaxy 2 (EN,FR,DE,ES,IT,NL,PT,JA,KO,ZHTW)">
+		<id>BPDPA</id>
+		<type>Switch</type>
+		<region>ALL</region>
+		<locale lang="EN">
+			<title>Super Mario Galaxy + Super Mario Galaxy 2</title>
+		</locale>
+		<locale lang="ES">
+			<title>Super Mario Galaxy + Super Mario Galaxy 2</title>
+		</locale>
+		<locale lang="NO">
+			<title>Super Mario Galaxy + Super Mario Galaxy 2</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2025" month="10" day="2"/>
+		<genre>action,adventure,platformer,3d platformer,compilation</genre>
+	</game>
+</datafile>
+
