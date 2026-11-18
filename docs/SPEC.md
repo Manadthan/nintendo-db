@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.10 — 18/11/2026 — statut : **validée**
+> Version 1.11 — 18/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.11 | 18/11/2026 | **Switch et Switch 2** (étape 10) : US-10 (cartouche mondiale, Switch 2 depuis Wikipédia, case « en boîte », jeux à venir cachés) ; **import des nouveautés** (US-10) |
 > | 1.10 | 18/11/2026 | **DS et 3DS** (étape 9) : US-10 (règles des cartes, titres PAL anglais, scans de repli) ; jaquettes aux **proportions de chaque console** (US-02, US-04) |
 > | 1.9 | 17/11/2026 | **Wii** (étape 8) : US-01 = un seul catalogue toutes consoles, filtre **Console** (US-06) ; US-10 : import Wii depuis **GameTDB seul**, jaquettes = face avant du scan complet |
 > | 1.8 | 17/11/2026 | Référencement précisé (étape 7) : plan du site, robots sans l'administration, adresses canoniques, aperçu de partage avec la jaquette, données structurées |
@@ -154,6 +155,22 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] DS et 3DS : jaquette = scan de la face (haute définition, sinon scan moyen de 400 px si c'est tout ce qui existe).
 - [ ] Les jaquettes gardent les **proportions de la boîte de leur console** : presque carrées pour DS et 3DS, en
       hauteur pour Wii et Wii U (vignettes, fiche, page « Jaquettes »).
+- [ ] **Switch** (SPEC v1.11) : GameTDB seul. Une cartouche « ALL » (mondiale) vaut sortie dans les 3 régions, avec
+      la **même date et le même code produit** (`HAC-P-` + identifiant, ex. `HAC-P-AAAAA`) ; une cartouche propre à une
+      région la remplace dans cette région. Cartouches seulement chinoises ou coréennes ignorées ; packs, éditions
+      spéciales et extensions (« [Starter Pack] », « + … Expansion ») écartés comme variantes, avec la raison.
+- [ ] Switch : jaquette **propre à chaque région** : US (scan US), PAL (scan EN, sinon FR), JAP (scan japonais,
+      352 × 570 px, le plus grand qui existe) ; proportions de la boîte Switch (en hauteur, ≈ 0,62).
+- [ ] **Switch 2** (SPEC v1.11) : GameTDB n'a pas de base. Liste Wikipédia « List of Nintendo Switch 2 games » :
+      jeux dont l'éditeur contient Nintendo ; titre, développeur et **une date commune aux 3 régions** ; pas de code
+      produit ni de jaquette (vignette neutre, **photo ajoutée à la main**, US-12).
+- [ ] Switch 2 : chaque nouveau jeu a une case **« en boîte »** dans l'aperçu ; un jeu décoché (téléchargement
+      seul, ex. Welcome Tour) est **mémorisé** et n'est plus reproposé aux imports suivants (réactivable).
+- [ ] Toutes consoles : un jeu **pas encore sorti** (date future, ou seulement une année ou « 2027 ») n'est pas
+      importé ; il est ignoré avec la raison « à venir » et arrivera avec un import suivant.
+- [ ] **Import des nouveautés** (SPEC v1.11) : l'aperçu classe chaque jeu en **nouveau**, **modifié** (avec les champs
+      qui changent) ou **inchangé** par rapport à la base ; par défaut seuls les nouveaux et modifiés sont enregistrés,
+      et seules les jaquettes **manquantes** sont copiées. « Tout réenregistrer » reste possible.
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
@@ -182,7 +199,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 ## 6. Consoles couvertes
 
-**v1 : Wii U.** Puis **Wii** (étape 8), **DS + 3DS** (étape 9), **Switch** (étape 10), puis les autres :
+**v1 : Wii U.** Puis **Wii** (étape 8), **DS + 3DS** (étape 9), **Switch + Switch 2** (étape 10), puis les autres :
 **Salon** : Color TV-Game, NES / Famicom (+ Famicom Disk System), Super Nintendo / Super Famicom (+ Satellaview),
 Nintendo 64 (+ 64DD), GameCube, Wii, Wii U, Switch, Switch 2.
 **Portables** : Game & Watch, Game Boy, Game Boy Color, Virtual Boy, Game Boy Advance (+ e-Reader), Pokémon Mini,
@@ -206,6 +223,7 @@ DS, 3DS.
 | 4 | Images | Jaquettes par région **copiées chez nous** : scans de boîtes GameTDB (v1.4) ; IGDB retiré (v1.6) |
 | 5 | Périmètre v1 | **Wii U seule** ; l'architecture reste multi-consoles |
 | 7 | DS et 3DS (v1.10) | Ensemble à l'étape 9, GameTDB seul ; Switch à l'étape 10 (régions, import automatique) |
+| 8 | Switch, Switch 2, nouveautés (v1.11) | Switch : GameTDB, cartouche mondiale = mêmes date et code dans les 3 régions, jaquette par région ; Switch 2 : Wikipédia + photos à la main (IGDB écarté : illustrations, pas des boîtes ; gamecartdb : images sans source citée) ; case « en boîte » mémorisée ; jeux à venir cachés ; nouveautés par **bouton manuel** (pas d'import automatique) |
 | 6 | Consoles suivantes (v1.9) | **Wii** ; un seul catalogue filtré par console ; règle « boîte Nintendo » inchangée (les 14 jeux Wii édités par Nintendo dans une seule région restent, toutes régions listées) |
 
 ## 9. Prochaine étape

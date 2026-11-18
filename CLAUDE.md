@@ -22,9 +22,9 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | Fichier | Contenu | Statut |
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
-| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.2 validée |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.10 validée |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.3 validée |
+| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.3 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.11 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.4 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
 | `docs/BILAN.md` | Rétrospective de la v1 (étapes 1 à 7) : chiffres, réussites, difficultés, leçons | v1.1 |
 
@@ -109,7 +109,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 7 — Finitions : À propos (US-07) #72, référencement #73
   - [x] Étape 8 — Wii : étude (DESIGN §1 bis, #77), relais #78, import #79, admin #83, catalogue #80, découpe #87, Startup Disc #90, réessais #92
   - [ ] Étape 9 — DS + 3DS : étude (DESIGN §1 ter), proportions des jaquettes #94, relais + import #95
-  - [ ] Étape 10 — Switch (régions, import automatique ; servira à la Switch 2)
+  - [ ] Étape 10 — Switch + Switch 2 : étude (DESIGN §1 quater), import des nouveautés, Switch, Switch 2
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1
 
 ## Erreurs récurrentes
