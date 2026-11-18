@@ -2,7 +2,10 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+  appliquerComparaisons,
   decouperEnLots,
+  estAVenir,
+  lignesAEnregistrer,
   preparerApercu,
   resumer,
   resumerEnregistrement,
@@ -83,6 +86,7 @@ describe("resumer", () => {
     expect(resumer(apercu)).toEqual({
       ajoutes: 44,
       misAJour: 4,
+      inchanges: 0,
       ignores:
         apercu.ignores.autresEditeurs +
         apercu.ignores.telechargeables.length +
@@ -145,5 +149,72 @@ describe("resumerEnregistrement (US-10)", () => {
       ecarts: ["Pikmin 3 — PAL titre : « X » gardé (import : « Y »)"],
       supprimes: ["Shovel Knight"],
     });
+  });
+});
+
+describe("import des nouveautés (SPEC v1.11)", () => {
+  const apercu = appliquerComparaisons(
+    preparerApercu(liste, new Set(EN_BASE)),
+    (l) =>
+      l.slug === "splatoon"
+        ? { etat: "modifie", changements: ["PAL date_sortie"] }
+        : l.action === "ajouter"
+          ? { etat: "nouveau", changements: [] }
+          : { etat: "inchange", changements: [] },
+  );
+
+  it("n'enregistre que les nouveaux et les modifiés, sauf « Tout réenregistrer »", () => {
+    const choisis = lignesAEnregistrer(apercu, false);
+    expect(choisis).toHaveLength(45);
+    expect(choisis.map((l) => l.slug)).toContain("splatoon");
+    expect(choisis.map((l) => l.slug)).not.toContain("mario-kart-8");
+    expect(lignesAEnregistrer(apercu, true)).toHaveLength(48);
+  });
+
+  it("compte les inchangés à part", () => {
+    expect(resumer(apercu)).toMatchObject({
+      ajoutes: 44,
+      misAJour: 1,
+      inchanges: 3,
+    });
+  });
+});
+
+describe("jeux à venir (SPEC v1.11)", () => {
+  const jeu = liste.jeux.find((j) => j.slug === "splatoon")!;
+  const avecDates = (dates: (string | null)[]) =>
+    ({
+      ...jeu,
+      sorties: {
+        JAP: { date: dates[0], precision: "jour", editeur: null },
+        US: { date: dates[1], precision: "jour", editeur: null },
+        PAL:
+          dates[2] === undefined
+            ? null
+            : { date: dates[2], precision: "annee", editeur: null },
+      },
+    }) as unknown as typeof jeu;
+
+  it("toutes les dates connues sont futures : à venir", () => {
+    expect(
+      estAVenir(avecDates(["2027-01-01", null, "2027-01-01"]), "2026-11-18"),
+    ).toBe(true);
+  });
+
+  it("une date passée suffit, et un jeu sans date est gardé", () => {
+    expect(
+      estAVenir(avecDates(["2026-11-01", "2027-03-01", null]), "2026-11-18"),
+    ).toBe(false);
+    expect(estAVenir(avecDates([null, null, null]), "2026-11-18")).toBe(false);
+  });
+
+  it("le jeu à venir est ignoré avec son titre, pas proposé à l'import", () => {
+    const futur = {
+      ...liste,
+      jeux: [avecDates(["2027-01-01", null, "2027-01-01"])],
+    };
+    const a = preparerApercu(futur, new Set(), new Set(), "2026-11-18");
+    expect(a.lignes).toEqual([]);
+    expect(a.aVenir).toEqual([jeu.titres.PAL || jeu.titres.US]);
   });
 });
