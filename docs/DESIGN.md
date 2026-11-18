@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.3 — 18/11/2026 — statut : **validée**
+> Version 1.4 — 18/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.4 | 18/11/2026 | **Switch + Switch 2** (étape 10) : étude (§1 quater), import des nouveautés (ADR-03 point 6), exclusions mémorisées, plan §8 |
 > | 1.3 | 18/11/2026 | **DS + 3DS** (étape 9) : étude (§1 ter), proportions des jaquettes par console, plan §8 |
 > | 1.2 | 17/11/2026 | **Wii** (étape 8) : étude GameTDB (§1 bis), import GameTDB seul, relais étendu (face avant découpée), catalogue toutes consoles (ADR-06), plan §8 |
 > | 1.1 | 17/11/2026 | **Référencement** (étape 7) : `src/lib/referencement/`, `sitemap.ts`, `robots.ts`, `metadataBase` = adresse de production |
@@ -68,6 +69,27 @@ Bases `dstdb.zip` et `3dstdb.zip` du 17/11 ; jeu retenu si au moins une carte a 
 Pièges : une carte PAL allemande donne son titre allemand en locale EN (« Professor Layton und… ») → préférer la
 carte dont la 4ᵉ lettre est P (puis U, X, Y, Z) ; langue du scan d'après cette lettre (D → DE, F → FR…). Boîtes
 DS/3DS presque carrées (768 × 680), Wii/Wii U en hauteur (27 × 38) : **proportions par console**.
+
+## 1 quater. Étude Switch et Switch 2 (18/11/2026)
+
+**Switch — GameTDB** (`switchtdb.zip`, 25 Mo) : types `Switch` (4 879 cartouches) et `eShop`. Identifiant de
+5 caractères (`AAAAA`), les 4 premiers communs aux variantes d'un jeu.
+
+| Mesure | Résultat |
+|---|---|
+| Cartouches éditées par Nintendo (hors démos, outils) | **140**, **113 jeux** (4 premiers caractères) |
+| Région | **97 « ALL »** (une cartouche mondiale), sinon `JPN`, `USA`, `EUR`, `USA,EUR`… ; 7 seulement CHN/KOR |
+| Variantes d'un même jeu | 19 jeux : cartouches par région (Splatoon 2 : JPN, USA, EUR), packs (« [Starter Pack] »), éditions spéciales, extensions (« + Octo Expansion ») |
+| Dates au jour près | 97 / 140 |
+| Titres japonais (locale JA) | 66 / 140 ; développeur 98 / 140 |
+| Scans `coverHQ` 1166 × 1888 | US ≈ 85 %, EN ≈ 55 %, FR rare, **JA ≈ 10 %** |
+| Scan japonais `coverM` 352 × 570 | **97 / 110** cartouches vendues au Japon |
+
+**Switch 2** : GameTDB n'a **pas de base** (`switch2tdb.zip` absent). Wikipédia « List of Nintendo Switch 2 games » :
+**34 jeux** dont l'éditeur contient Nintendo ; colonnes Titre, Développeur, Éditeur, **une seule date** ; ne
+distingue ni boîte et téléchargement (Welcome Tour, Drag x Drive : téléchargement seul) ni jeux annoncés (« 2027 »).
+IGDB : couvertures = illustrations sans garantie de boîte (règles de contribution IGDB) → écarté ; gamecartdb :
+images hébergées chez lui, sans source citée → non réutilisables.
 
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
 Vercel avec un cache d'un an). C'est le modèle retenu (ADR-04).
@@ -135,6 +157,15 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
    navigateur, jaquettes comprises (même principe que l'ADR-03 de `mon-site-sdlc`, évite les délais Vercel).
 4. **Verrous** : tout champ modifié à la main est verrouillé ; l'import ne le remplace jamais et signale l'écart.
    Un jeu ajouté à la main porte le verrou `manuel` : absent des sources, il n'est jamais supprimé par l'import.
+6. **Nouveautés** (v1.4) : l'aperçu lit aussi les jeux en base de la console et compare, champ par champ, ce que
+   l'import écrirait (après les verrous, `fusionner`) avec ce qui est en base : **nouveau**, **modifié** (liste des
+   champs) ou **inchangé**. Seuls les nouveaux et modifiés partent en lots ; une jaquette n'est copiée que si la
+   région n'en a pas encore (ou « Recopier les jaquettes »). *Pourquoi* : un import de routine (après le relais du
+   lundi) devient quelques secondes au lieu de tout réécrire ; pas d'import automatique, qui demanderait une clé
+   serveur écrivant sans le propriétaire.
+7. **Exclusions** (v1.4) : table `exclusions(console_id, slug, raison, created_at)` ; un jeu décoché « en boîte »
+   dans l'aperçu (Switch 2) y est noté et n'est plus proposé ; la page d'import liste les exclusions, chacune
+   réactivable. Un jeu **à venir** (date future ou incomplète sans jour passé) est ignoré avec la raison « à venir ».
 5. *(Identifiants IGDB : supprimés avec IGDB, v0.8.)*
 
 **ADR-04 — Jaquettes copiées chez nous, en WebP haute définition.** Source par ordre de priorité : **scan GameTDB**
@@ -233,6 +264,16 @@ test n'appelle les sites en direct.
       (consoles DS 2004, 3DS 2011, ordre chronologique) ; règles ci-dessus, titre PAL anglais, codes
       `NTR-`/`CTR-P-`/`KTR-P-` ; pages d'import ; fixtures réduites.
 
+10. **Switch + Switch 2** (v1.4) — 3 PR visant `main`, à merger **dans l'ordre** (#101, #103, #105) : la Switch 2
+   réutilise les jeux « à venir » de la PR 1, et sa migration 0010 doit passer après la 0009 de la Switch :
+   1. **Import des nouveautés** (toutes consoles) : comparaison base / import dans l'aperçu (nouveau, modifié,
+      inchangé), case « Afficher les inchangés », enregistrement des seuls changements ; jeux « à venir » ignorés.
+   2. **Switch** : relais (base réduite `switch/switchtdb.xml`, scans `switch/scans` : `coverHQ` US, EN, FR, sinon
+      `coverM` ; JA en `coverM`) ; migration 0009 (console `switch`, salon, 2017) ; cartouche « ALL » = 3 régions,
+      variantes écartées, codes `HAC-P-` ; proportions 1166 × 1888 ; fixture réduite.
+   3. **Switch 2** : migration 0010 (console `switch-2`, 2025 ; table `exclusions` + RLS + pgTAP) ; lecteur de la
+      liste Wikipédia Switch 2 (fixture) ; case « en boîte » et exclusions dans l'aperçu ; jaquettes à la main.
+
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 
@@ -250,6 +291,8 @@ faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 | R9 | GameTDB indisponible, bloqué ou scan retiré | Relais par GitHub (#53) ; jaquette déjà copiée conservée ; mention de la source, retrait sur demande |
 | R6 | Forme du tableau Wikipédia qui change | Lecture par en-têtes de colonnes, test sur fixture ; échec explicite plutôt que données fausses |
 | R7 | *(Limites IGDB : sans objet depuis v0.8.)* | — |
+| R10 | Switch 2 : liste Wikipédia qui change de forme ; jaquettes toutes à la main | Lecture par en-têtes, test sur fixture ; vignette neutre en attendant ; GameTDB revérifié à chaque étape (une base Switch 2 remplacerait Wikipédia) |
+| R11 | Nouveautés : un champ changé non détecté | Comparaison testée sur fixtures (jeu inchangé, date corrigée, nouvelle région) ; « Tout réenregistrer » en secours |
 | R8 | Codes produit absents | Déduits de l'identifiant GameTDB ; sinon saisie manuelle (US-11) |
 
 ## 10. Commandes (dès l'étape 1)
