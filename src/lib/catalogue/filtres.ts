@@ -1,3 +1,10 @@
+import {
+  NINTENDO_FIRST_PARTY,
+  cleStudio,
+  estFirstParty,
+  regrouperStudios,
+  studios,
+} from "./developpeurs";
 import { REGIONS, type Region, type VersionAffichee } from "./types";
 
 /** Disponibilité (US-06) : sorti dans les 3 régions, ou exclusif à une région. */
@@ -10,6 +17,8 @@ export type Filtres = {
   disponibilite: FiltreDisponibilite | null;
   annee: string | null;
   genre: string | null;
+  /** Studio (nom nettoyé), ou « Nintendo (first party) » pour tous les studios internes (#89). */
+  developpeur: string | null;
 };
 
 export const SANS_FILTRE: Filtres = {
@@ -17,6 +26,7 @@ export const SANS_FILTRE: Filtres = {
   disponibilite: null,
   annee: null,
   genre: null,
+  developpeur: null,
 };
 
 /** Choix de disponibilité, dans l'ordre d'affichage. */
@@ -36,6 +46,7 @@ const PARAMETRES = {
   disponibilite: "dispo",
   annee: "annee",
   genre: "genre",
+  developpeur: "dev",
 } as const satisfies Record<keyof Filtres, string>;
 
 /** Année de la version affichée (celle du marché choisi, comme les groupes par année). */
@@ -48,6 +59,14 @@ function disponible(v: VersionAffichee, d: FiltreDisponibilite): boolean {
     : sorties.length === 1 && sorties[0] === d;
 }
 
+/** Le jeu a-t-il été développé par ce studio (ou par un studio interne de Nintendo) ? */
+function developpePar(v: VersionAffichee, developpeur: string): boolean {
+  const liste = studios(v.jeu.developpeur);
+  if (developpeur === NINTENDO_FIRST_PARTY) return liste.some(estFirstParty);
+  const cle = cleStudio(developpeur);
+  return liste.some((s) => cleStudio(s) === cle);
+}
+
 /** Versions qui passent tous les filtres actifs (US-06 : filtres combinables). */
 export function filtrer(
   versions: VersionAffichee[],
@@ -58,7 +77,8 @@ export function filtrer(
       (!filtres.console || v.jeu.console.slug === filtres.console) &&
       (!filtres.disponibilite || disponible(v, filtres.disponibilite)) &&
       (!filtres.annee || annee(v) === filtres.annee) &&
-      (!filtres.genre || v.jeu.genres.includes(filtres.genre)),
+      (!filtres.genre || v.jeu.genres.includes(filtres.genre)) &&
+      (!filtres.developpeur || developpePar(v, filtres.developpeur)),
   );
 }
 
@@ -87,6 +107,21 @@ export function genresProposes(versions: VersionAffichee[]): string[] {
   );
 }
 
+/**
+ * Développeurs proposés (#89) : « Nintendo (first party) » en tête, puis chaque studio des jeux affichés, du plus grand
+ * nombre de jeux au plus petit, avec ce nombre.
+ */
+export function developpeursProposes(
+  versions: VersionAffichee[],
+): { nom: string; nombre: number }[] {
+  const parJeu = versions.map((v) => studios(v.jeu.developpeur));
+  const firstParty = parJeu.filter((l) => l.some(estFirstParty)).length;
+  return [
+    ...(firstParty ? [{ nom: NINTENDO_FIRST_PARTY, nombre: firstParty }] : []),
+    ...regrouperStudios(parJeu),
+  ];
+}
+
 /** Nombre de filtres actifs (affiché sur le bouton « Filtres »). */
 export const nombreActifs = (f: Filtres) =>
   Object.values(f).filter((v) => v !== null).length;
@@ -104,6 +139,7 @@ export function filtresDepuisParametres(recherche: string): Filtres {
       DISPONIBILITES.find((d) => d.valeur === dispo)?.valeur ?? null,
     annee: an && /^\d{4}$/.test(an) ? an : null,
     genre: params.get(PARAMETRES.genre)?.trim() || null,
+    developpeur: params.get(PARAMETRES.developpeur)?.trim() || null,
   };
 }
 

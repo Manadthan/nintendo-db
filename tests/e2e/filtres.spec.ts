@@ -20,6 +20,7 @@ test("le panneau s'ouvre depuis le bouton « Filtres »", async ({ page }) => {
   await expect(liste(page, "Disponibilité")).toBeVisible();
   await expect(liste(page, "Année")).toBeVisible();
   await expect(liste(page, "Genre")).toBeVisible();
+  await expect(liste(page, "Développeur")).toBeVisible();
 });
 
 test("les filtres se combinent, se voient en pastilles et restent dans l'adresse", async ({
@@ -102,4 +103,31 @@ test("filtre Console : consoles qui ont des jeux, avec leur nombre ; console sur
       exact: true,
     }),
   ).toBeVisible();
+});
+
+test("filtre Développeur : studios avec leur nombre de jeux, et Nintendo first party (#89)", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await boutonFiltres(page).click();
+  const developpeurs = liste(page, "Développeur");
+  // Données de départ : Nintendo EAD (Mario Kart 8, Splatoon), Nintendo SPD (Kirby), HAL, Bandai Namco, Xing.
+  await expect(developpeurs.getByRole("option").nth(1)).toHaveText(
+    "Nintendo (first party) (3)",
+  );
+  await expect(
+    developpeurs.getByRole("option", { name: "Nintendo EAD (2)", exact: true }),
+  ).toBeAttached();
+  await developpeurs.selectOption({ label: "HAL Laboratory (1)" });
+  await expect(page).toHaveURL("/?dev=HAL+Laboratory");
+  await expect(page.getByText("1 jeu affiché sur 4")).toBeVisible();
+  await developpeurs.selectOption({ label: "Nintendo (first party) (3)" });
+  await expect(page.getByText("3 jeux affichés sur 4")).toBeVisible();
+  await actifs(page)
+    .getByRole("button", {
+      name: "Retirer le filtre Nintendo (first party)",
+      exact: true,
+    })
+    .click();
+  await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
 });

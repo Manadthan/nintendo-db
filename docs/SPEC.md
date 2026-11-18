@@ -8,6 +8,7 @@
 > | Version | Date | Changements |
 > |---|---|---|
 > | 1.13 | 18/11/2026 | **GameCube** (étape 11) : US-10 (disques du commerce, compilations Zelda Collector's Edition et Pac-Man Vs., petite image japonaise faute de scan) |
+> | 1.12 | 18/11/2026 | US-06 : filtre **Développeur** (#89), divisions de Nintendo distinctes et entrée « Nintendo (first party) » |
 > | 1.11 | 18/11/2026 | **Switch et Switch 2** (étape 10) : US-10 (cartouche mondiale, Switch 2 depuis Wikipédia, case « en boîte », jeux à venir cachés) ; **import des nouveautés** (US-10) |
 > | 1.10 | 18/11/2026 | **DS et 3DS** (étape 9) : US-10 (règles des cartes, titres PAL anglais, scans de repli) ; jaquettes aux **proportions de chaque console** (US-02, US-04) |
 > | 1.9 | 17/11/2026 | **Wii** (étape 8) : US-01 = un seul catalogue toutes consoles, filtre **Console** (US-06) ; US-10 : import Wii depuis **GameTDB seul**, jaquettes = face avant du scan complet |
@@ -101,6 +102,12 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       JAP, US ou PAL), année, genre. Le marché (US-03) filtre déjà sur « sorti dans cette région ».
 - [ ] Les genres sont ceux de GameTDB, **tous traduits** en français ; un jeu peut en avoir plusieurs.
 - [ ] Les filtres actifs sont visibles et effaçables en un tap.
+- [ ] **Développeur** (SPEC v1.12, #89) : liste comme Genre, studios triés par nombre de jeux, avec ce nombre. Noms
+      nettoyés à l'affichage, sans réimport (« LEVEL-5 », « Level 5 » → « Level-5 » ; « Inc. », « Ltd. » retirés) ;
+      un jeu à plusieurs studios apparaît sous chacun. Les divisions de Nintendo (EAD, EPD, SPD…) restent distinctes,
+      et une entrée **« Nintendo (first party) »** en tête regroupe les divisions et les filiales détenues par
+      Nintendo (Retro Studios, Monolith Soft, NST, NDcube, 1-Up Studio, Next Level Games) ; HAL Laboratory,
+      Intelligent Systems et Game Freak n'en font pas partie.
 
 #### US-07 — Mentions et sources (M)
 - [ ] Une page « À propos » indique que le site est un projet de fan **non affilié à Nintendo**, que les titres et
