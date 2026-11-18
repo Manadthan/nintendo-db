@@ -9,9 +9,11 @@ import {
 } from "@/app/actions/import";
 import {
   decouperEnLots,
+  lignesAEnregistrer,
   resumer,
   resumerEnregistrement,
   type Apercu,
+  type LigneApercu,
   type ResultatEnregistrement,
   type ResumeEnregistrement,
 } from "@/lib/import/apercu";
@@ -44,6 +46,8 @@ export function AnalyseImport({
   const [apercu, setApercu] = useState<Apercu | null>(null);
   // Recopier les jaquettes déjà en place (sauf ajouts à la main), après un changement de taille d'image (#48).
   const [recopier, setRecopier] = useState(false);
+  // Import des nouveautés (SPEC v1.11) : par défaut, seuls les jeux nouveaux ou modifiés sont enregistrés.
+  const [tout, setTout] = useState(false);
 
   async function analyser() {
     setApercu(null);
@@ -63,7 +67,8 @@ export function AnalyseImport({
 
   async function enregistrer() {
     if (!apercu) return;
-    const total = apercu.lignes.length;
+    const choisis = lignesAEnregistrer(apercu, tout || recopier);
+    const total = choisis.length;
     const aSupprimer = apercu.aSupprimer.length;
     if (
       !window.confirm(
@@ -77,7 +82,7 @@ export function AnalyseImport({
     }
     const resultats: ResultatEnregistrement[] = [];
     try {
-      for (const [i, lot] of decouperEnLots(apercu.lignes, 10).entries()) {
+      for (const [i, lot] of decouperEnLots(choisis, 10).entries()) {
         setEtat({ etape: "enregistrement", fait: i * 10, total });
         resultats.push(
           ...valeur(
@@ -105,6 +110,12 @@ export function AnalyseImport({
 
   const enCours = ["wikipedia", "enregistrement"].includes(etat.etape);
   const resume = apercu ? resumer(apercu) : null;
+  const aEnregistrer = apercu
+    ? lignesAEnregistrer(apercu, tout || recopier)
+    : [];
+  const inchanges = apercu
+    ? apercu.lignes.filter((l) => l.etat === "inchange")
+    : [];
 
   return (
     <div className="flex flex-col gap-4">
@@ -138,6 +149,18 @@ export function AnalyseImport({
         <label className="flex min-h-11 items-center gap-2 text-sm">
           <input
             type="checkbox"
+            checked={tout}
+            onChange={(e) => setTout(e.target.checked)}
+            className="size-5 accent-accent"
+          />
+          Tout réenregistrer, y compris les {inchanges.length} jeux inchangés
+        </label>
+      )}
+
+      {etat.etape === "fini" && apercu && (
+        <label className="flex min-h-11 items-center gap-2 text-sm">
+          <input
+            type="checkbox"
             checked={recopier}
             onChange={(e) => setRecopier(e.target.checked)}
             className="size-5 accent-accent"
@@ -151,9 +174,12 @@ export function AnalyseImport({
         <button
           type="button"
           onClick={enregistrer}
-          className="h-12 rounded-xl border-2 border-accent bg-carte text-base font-semibold text-accent"
+          disabled={!aEnregistrer.length && !apercu.aSupprimer.length}
+          className="h-12 rounded-xl border-2 border-accent bg-carte text-base font-semibold text-accent disabled:opacity-60"
         >
-          Enregistrer l&apos;import ({apercu.lignes.length} jeux)
+          {aEnregistrer.length || apercu.aSupprimer.length
+            ? `Enregistrer ${tout || recopier ? "tout" : "les nouveautés"} (${aEnregistrer.length} jeux)`
+            : "Rien de nouveau à enregistrer"}
         </button>
       )}
 
@@ -223,8 +249,9 @@ export function AnalyseImport({
         <>
           <dl aria-label="Résumé" className="grid grid-cols-2 gap-2">
             {[
-              ["À ajouter", resume.ajoutes],
-              ["À mettre à jour", resume.misAJour],
+              ["Nouveaux", resume.ajoutes],
+              ["Modifiés", resume.misAJour],
+              ["Inchangés", resume.inchanges],
               ["Ignorés", resume.ignores],
               ["À supprimer", resume.aSupprimer],
             ].map(([libelle, nombre]) => (
@@ -238,42 +265,24 @@ export function AnalyseImport({
             ))}
           </dl>
 
-          <ul
-            aria-label="Jeux analysés"
-            className="flex flex-col overflow-hidden rounded-xl border border-bordure bg-carte"
-          >
-            {apercu.lignes.map((ligne) => {
-              return (
-                <li
-                  key={ligne.slug}
-                  className="flex flex-col gap-1.5 border-t border-separateur px-3 py-2.5 first:border-t-0"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="text-sm font-semibold">{ligne.titre}</span>
-                    <span className="shrink-0 text-xs text-texte-discret">
-                      {ligne.action === "ajouter"
-                        ? "à ajouter"
-                        : "à mettre à jour"}
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
-                    {REGIONS.map((region) => (
-                      <span
-                        key={region}
-                        className={`rounded px-1.5 py-0.5 font-bold ${
-                          ligne.regions[region]
-                            ? "bg-accent-doux text-accent-fonce"
-                            : "bg-surface text-texte-discret"
-                        }`}
-                      >
-                        {region}
-                      </span>
-                    ))}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          {apercu.lignes.length > inchanges.length && (
+            <ListeJeux
+              libelle="Jeux nouveaux ou modifiés"
+              lignes={apercu.lignes.filter((l) => l.etat !== "inchange")}
+            />
+          )}
+
+          {inchanges.length > 0 && (
+            <details className="rounded-xl border border-bordure bg-carte p-3 text-sm">
+              <summary className="cursor-pointer font-semibold">
+                Jeux inchangés ({inchanges.length})
+              </summary>
+              <p className="mt-2 mb-2 text-texte-doux">
+                Déjà à jour dans la base : ils ne sont pas réenregistrés.
+              </p>
+              <ListeJeux libelle="Jeux inchangés" lignes={inchanges} />
+            </details>
+          )}
 
           {apercu.aSupprimer.length > 0 && (
             <p
@@ -300,6 +309,19 @@ export function AnalyseImport({
                 <li key={t}>{t}</li>
               ))}
             </ul>
+            {apercu.aVenir.length > 0 && (
+              <>
+                <p className="mt-2 text-texte-doux">
+                  {apercu.aVenir.length} jeux pas encore sortis (importés une
+                  fois sortis) :
+                </p>
+                <ul className="mt-1 list-disc pl-5 text-texte-doux">
+                  {apercu.aVenir.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
+              </>
+            )}
             <p className="mt-2 text-texte-doux">
               {apercu.ecartes.length} jeux de la liste sans boîte Nintendo
               (GameTDB) :
@@ -315,5 +337,60 @@ export function AnalyseImport({
         </>
       )}
     </div>
+  );
+}
+
+const ETATS: Record<LigneApercu["etat"], string> = {
+  nouveau: "nouveau",
+  modifie: "modifié",
+  inchange: "inchangé",
+};
+
+/** Jeux de l'aperçu : titre, état par rapport à la base, ce qui change, régions sorties. */
+function ListeJeux({
+  libelle,
+  lignes,
+}: {
+  libelle: string;
+  lignes: LigneApercu[];
+}) {
+  return (
+    <ul
+      aria-label={libelle}
+      className="flex flex-col overflow-hidden rounded-xl border border-bordure bg-carte"
+    >
+      {lignes.map((ligne) => (
+        <li
+          key={ligne.slug}
+          className="flex flex-col gap-1.5 border-t border-separateur px-3 py-2.5 first:border-t-0"
+        >
+          <div className="flex items-start justify-between gap-2">
+            <span className="text-sm font-semibold">{ligne.titre}</span>
+            <span className="shrink-0 text-xs text-texte-discret">
+              {ETATS[ligne.etat]}
+            </span>
+          </div>
+          {ligne.changements.length > 0 && (
+            <p className="text-xs text-texte-doux">
+              {ligne.changements.join(", ")}
+            </p>
+          )}
+          <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
+            {REGIONS.map((region) => (
+              <span
+                key={region}
+                className={`rounded px-1.5 py-0.5 font-bold ${
+                  ligne.regions[region]
+                    ? "bg-accent-doux text-accent-fonce"
+                    : "bg-surface text-texte-discret"
+                }`}
+              >
+                {region}
+              </span>
+            ))}
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }

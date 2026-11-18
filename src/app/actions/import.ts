@@ -6,6 +6,7 @@ import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import { VERROU_MANUEL } from "@/lib/admin/nouveau";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
 import {
+  appliquerComparaisons,
   preparerApercu,
   type Apercu,
   type ResultatEnregistrement,
@@ -13,6 +14,7 @@ import {
 } from "@/lib/import/apercu";
 import {
   choisirJaquettes,
+  comparer,
   construireJeu,
   fusionner,
   type JeuEnBase,
@@ -76,6 +78,34 @@ async function lireRelais(chemin: string): Promise<Blob> {
   return data;
 }
 
+const COLONNES_EXISTANT =
+  "id, slug, developpeur, genre, wikipedia_url, physique, verrous, releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, code_produit, verrous, jaquette_path, jaquette_source)";
+
+/** Jeux de la console déjà en base (tous, ou ceux des slugs donnés), avec sorties et verrous, par slug. */
+async function lireExistants(
+  consoleId: string,
+  slugs?: string[],
+): Promise<Map<string, JeuEnBase>> {
+  const supabase = await exigerProprietaire();
+  let requete = supabase
+    .from("games")
+    .select(COLONNES_EXISTANT)
+    .eq("console_id", consoleId);
+  if (slugs) requete = requete.in("slug", slugs);
+  const { data, error } = await requete;
+  if (error)
+    throw new Error(`Lecture des jeux existants impossible : ${error.message}`);
+  return new Map(
+    (data ?? []).map((l) => [
+      l.slug,
+      {
+        ...l,
+        releases: Object.fromEntries(l.releases.map((r) => [r.region, r])),
+      } as JeuEnBase,
+    ]),
+  );
+}
+
 /**
  * Étape 1 de l'aperçu (US-10) : liste Wikipédia du jour (Wii U ; la Wii n'en a pas, SPEC v1.9) et base GameTDB
  * déposée par le relais (#53), puis règle du physique (SPEC v1.4) : régions et jeux réduits aux boîtes,
@@ -96,7 +126,7 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
     liste.jeux,
     regrouperGameTdb(lireGameTdb(gametdb, source.estDisque)),
   );
-  return preparerApercu(
+  const apercu = preparerApercu(
     { ...liste, ...physique },
     new Set(fiche.games.map((g) => g.slug)),
     new Set(
@@ -105,13 +135,19 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
         .map((g) => g.slug),
     ),
   );
+  // Import des nouveautés (ADR-03 point 6) : nouveau, modifié ou inchangé par rapport à la base.
+  const existants = await lireExistants(fiche.id);
+  return appliquerComparaisons(apercu, (l) =>
+    comparer(
+      existants.get(l.slug) ?? null,
+      construireJeu(l.wikipedia, source.prefixeCode),
+      l.wikipedia.disques,
+    ),
+  );
 }
 
 /** Un jeu à enregistrer : ses données, telles que l'aperçu les a préparées. */
 export type JeuAEnregistrer = { wikipedia: JeuAImporter };
-
-const COLONNES_EXISTANT =
-  "id, slug, developpeur, genre, wikipedia_url, physique, verrous, releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, code_produit, verrous, jaquette_path, jaquette_source)";
 
 /**
  * Enregistre un lot de 10 jeux au plus (US-10, ADR-03), piloté par le navigateur : jeux et sorties (corrections
@@ -126,25 +162,9 @@ async function enregistrerLotInterne(
   if (jeux.length > 10) throw new Error("Lot trop grand (10 jeux au plus)");
   const fiche = await chargerConsole(consoleSlug);
   const supabase = await exigerProprietaire();
-
-  const { data: lignes, error } = await supabase
-    .from("games")
-    .select(COLONNES_EXISTANT)
-    .eq("console_id", fiche.id)
-    .in(
-      "slug",
-      jeux.map((j) => j.wikipedia.slug),
-    );
-  if (error)
-    throw new Error(`Lecture des jeux existants impossible : ${error.message}`);
-  const existants = new Map(
-    (lignes ?? []).map((l) => [
-      l.slug,
-      {
-        ...l,
-        releases: Object.fromEntries(l.releases.map((r) => [r.region, r])),
-      } as JeuEnBase,
-    ]),
+  const existants = await lireExistants(
+    fiche.id,
+    jeux.map((j) => j.wikipedia.slug),
   );
 
   const resultats: ResultatEnregistrement[] = [];
