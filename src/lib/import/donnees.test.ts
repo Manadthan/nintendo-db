@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   choisirJaquettes,
+  comparer,
   construireJeu,
   fusionner,
   type JeuEnBase,
@@ -202,5 +203,64 @@ describe("choisirJaquettes (ADR-04, R6)", () => {
       US: scan(KIRBY.disques.US!),
       PAL: scan(KIRBY.disques.PAL!),
     });
+  });
+});
+
+describe("comparer — import des nouveautés (ADR-03 point 6)", () => {
+  const nouveau = construireJeu(KIRBY);
+  // La base telle que le dernier import l'a laissée : mêmes champs, jaquettes copiées.
+  const enBase = (): JeuEnBase => ({
+    id: "id-kirby",
+    ...nouveau.game,
+    verrous: [],
+    releases: Object.fromEntries(
+      (["JAP", "US", "PAL"] as const).map((r) => [
+        r,
+        {
+          ...nouveau.releases[r],
+          verrous: [],
+          jaquette_path: nouveau.releases[r].sortie ? `x/${r}.webp` : null,
+          jaquette_source: nouveau.releases[r].sortie ? "gametdb" : null,
+        },
+      ]),
+    ),
+  });
+
+  it("jeu absent de la base : nouveau", () => {
+    expect(comparer(null, nouveau, KIRBY.disques)).toEqual({
+      etat: "nouveau",
+      changements: [],
+    });
+  });
+
+  it("jeu identique en base : inchangé, rien à réenregistrer", () => {
+    expect(comparer(enBase(), nouveau, KIRBY.disques)).toEqual({
+      etat: "inchange",
+      changements: [],
+    });
+  });
+
+  it("date corrigée par la source : modifié, avec le champ", () => {
+    const base = enBase();
+    base.releases.PAL!.date_sortie = "2015-01-01";
+    expect(comparer(base, nouveau, KIRBY.disques)).toEqual({
+      etat: "modifie",
+      changements: ["PAL date_sortie"],
+    });
+  });
+
+  it("champ verrouillé (correction manuelle) : pas un changement", () => {
+    const base = enBase();
+    base.releases.PAL!.titre = "Mon titre";
+    base.releases.PAL!.verrous = ["titre"];
+    expect(comparer(base, nouveau, KIRBY.disques).etat).toBe("inchange");
+  });
+
+  it("jaquette manquante d'une région sortie : modifié (copie à refaire)", () => {
+    const base = enBase();
+    base.releases.US!.jaquette_path = null;
+    expect(comparer(base, nouveau, KIRBY.disques).changements).toEqual([
+      "jaquette US",
+    ]);
   });
 });

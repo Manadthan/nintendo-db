@@ -202,3 +202,38 @@ export function choisirJaquettes(
     }),
   ) as Record<Region, string | null>;
 }
+
+/** État d'un jeu dans l'aperçu, comparé à la base (ADR-03 point 6, SPEC v1.11). */
+export type Comparaison = {
+  etat: "nouveau" | "modifie" | "inchange";
+  /** Ce qui changerait : « PAL date_sortie », « jaquette JAP »… */
+  changements: string[];
+};
+
+/**
+ * Compare ce que l'import écrirait (après les verrous, `fusionner`) avec la base : un champ non verrouillé qui
+ * diffère, ou une région sortie dont la jaquette manque alors que GameTDB a une boîte, rend le jeu « modifié ».
+ * Un jeu sans changement n'a pas besoin d'être réenregistré (import des nouveautés).
+ */
+export function comparer(
+  existant: JeuEnBase | null,
+  nouveau: JeuImporte,
+  disques: JeuAImporter["disques"],
+): Comparaison {
+  if (!existant) return { etat: "nouveau", changements: [] };
+  const fusion = fusionner(existant, nouveau);
+  const differe = (a: unknown, b: unknown) => (a ?? null) !== (b ?? null);
+  const changements: string[] = [];
+  for (const [champ, valeur] of Object.entries(fusion.game))
+    if (differe(valeur, existant[champ as keyof ChampsJeu]))
+      changements.push(champ);
+  for (const r of REGIONS) {
+    const enBase = existant.releases[r];
+    for (const [champ, valeur] of Object.entries(fusion.releases[r]))
+      if (differe(valeur, enBase?.[champ as keyof ChampsSortie]))
+        changements.push(`${r} ${champ}`);
+    if (nouveau.releases[r].sortie && disques[r] && !enBase?.jaquette_path)
+      changements.push(`jaquette ${r}`);
+  }
+  return { etat: changements.length ? "modifie" : "inchange", changements };
+}
