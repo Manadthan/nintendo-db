@@ -1,4 +1,6 @@
+import type { Region } from "@/lib/catalogue/types";
 import { estCarteDuCommerce } from "./relais-portables";
+import { estCartoucheSwitchDuCommerce } from "./relais-switch";
 import { estDisqueWiiDuCommerce } from "./relais-wii";
 import { lireListeSwitch2, type ListeSwitch2 } from "./wikipedia-switch-2";
 
@@ -13,8 +15,10 @@ export type SourceConsole = {
   wikipedia: boolean;
   /** Chemin de la base dans le bucket du relais. */
   base: string;
-  /** Dossier des scans dans le bucket du relais. */
-  scans: string;
+  /** Dossier des scans dans le bucket du relais ; Switch : un dossier par région (une cartouche « ALL » a 3 boîtes). */
+  scans: string | ((region: Region) => string);
+  /** Caractères de l'identifiant communs aux disques d'un jeu (3 par défaut ; Switch : 4). */
+  longueurBase?: number;
   /**
    * Code produit = préfixe + 4 premiers caractères de l'identifiant (`WUP-P-ALZP`, `RVL-RMCP`, `NTR-A2DP`) ; préfixe
    * selon l'identifiant quand la console en a plusieurs (3DS : `CTR-P-`, New 3DS : `KTR-P-`).
@@ -77,6 +81,17 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
     prefixeCode: (id) => (id.startsWith("C") ? "KTR-P-" : "CTR-P-"),
     estDisque: (type, id, region, titre, genre) =>
       estCarteDuCommerce("3ds", type, id, region, titre, genre),
+  },
+  // Étape 10 (DESIGN v1.4 §1 quater) : GameTDB seul ; une cartouche « ALL » vaut pour les 3 régions, avec une
+  // boîte (scan) propre à chaque région.
+  switch: {
+    slug: "switch",
+    wikipedia: false,
+    base: "switch/switchtdb.xml",
+    scans: (region) => `switch/scans/${region}`,
+    longueurBase: 4,
+    prefixeCode: "HAC-P-",
+    estDisque: estCartoucheSwitchDuCommerce,
   },
   // Étape 10 (DESIGN v1.4 §1 quater) : GameTDB n'a pas de base Switch 2 ; liste Wikipédia, jaquettes à la main.
   "switch-2": {

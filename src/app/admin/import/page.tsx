@@ -36,6 +36,12 @@ const CONSOLES = {
     description:
       "Lit la base GameTDB seule (SPEC v1.10) : cartes du commerce dont au moins une est éditée par Nintendo, sans jeux Super Nintendo ni eShop, titres par région, dates, genres, scans des boîtes.",
   },
+  switch: {
+    nom: "Switch",
+    sources: "la base GameTDB",
+    description:
+      "Lit la base GameTDB seule (SPEC v1.11) : cartouches du commerce dont au moins une est éditée par Nintendo ; une cartouche mondiale vaut pour les 3 régions (même date, même code), avec la boîte de chaque région.",
+  },
   "switch-2": {
     nom: "Switch 2",
     sources: "la liste Wikipédia",

@@ -22,9 +22,9 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | Fichier | Contenu | Statut |
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
-| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.2 validée |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.10 validée |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.3 validée |
+| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.3 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.11 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.4 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
 | `docs/BILAN.md` | Rétrospective de la v1 (étapes 1 à 7) : chiffres, réussites, difficultés, leçons | v1.1 |
 
@@ -78,15 +78,15 @@ src/components/          EnTete (Logo, BoutonTheme), PiedDePage (lien Administra
 src/lib/referencement/   adresse du site, sitemap, robots, métadonnées et données structurées des fiches (étape 7) + tests ; src/app/sitemap.ts, robots.ts
 src/lib/theme/           choix du thème : auto/clair/sombre, script anti-éclair (US-08) + tests
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
-src/lib/import/          import (ADR-03) : consoles.ts (sources par console : Wii U = Wikipédia + GameTDB, Wii, DS, 3DS = GameTDB seul ; chemins du relais, codes WUP-P-/RVL-/NTR-/CTR-P-/KTR-P-), wikipedia.ts (tableau « List of Wii U games »), wikipedia-switch-2.ts (liste Switch 2 : Wikipédia seul, date au jour près, étape 10), apercu.ts (aperçu, lots de 10, résumés, nouveautés : nouveau / modifié / inchangé, jeux à venir), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (WebP 300/600/768 via sharp), gametdb.ts (boîtes par région, titres japonais, compilations, codes produit ; lu depuis le relais), resultat.ts (erreurs des actions rendues lisibles), physique.ts (règle : boîte Nintendo exigée, sorties par région), relais-wii.ts (base Wii réduite, face avant découpée : lu aussi par le relais), relais-portables.ts (DS/3DS : cartes du commerce, langue du scan, carte PAL anglaise, base réduite), reessais.ts (réessais des envois du relais, #92) + tests ; __fixtures__/ (copies datées, README)
-scripts/                 icones.mjs (apple-icon.png), fixture-wikipedia.mjs, fixture-gametdb.mjs, fixture-gametdb-wii.mjs, fixture-gametdb-portable.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : bases Wii U et Wii (réduite) + scans → bucket privé gametdb, Wii dans wii/ (faces : wii/faces) ; secrets SUPABASE_URL / SUPABASE_SECRET_KEY ; importe src/lib/import/relais-wii.ts : sans alias « @/ »)
+src/lib/import/          import (ADR-03) : consoles.ts (sources par console : Wii U = Wikipédia + GameTDB, Wii, DS, 3DS = GameTDB seul ; chemins du relais, codes WUP-P-/RVL-/NTR-/CTR-P-/KTR-P-/HAC-P-), wikipedia.ts (tableau « List of Wii U games »), wikipedia-switch-2.ts (liste Switch 2 : Wikipédia seul, date au jour près, étape 10), apercu.ts (aperçu, lots de 10, résumés, nouveautés : nouveau / modifié / inchangé, jeux à venir), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (WebP 300/600/768 via sharp), gametdb.ts (boîtes par région, titres japonais, compilations, codes produit ; lu depuis le relais), resultat.ts (erreurs des actions rendues lisibles), physique.ts (règle : boîte Nintendo exigée, sorties par région), relais-wii.ts (base Wii réduite, face avant découpée : lu aussi par le relais), relais-portables.ts (DS/3DS : cartes du commerce, langue du scan, carte PAL anglaise, base réduite), relais-switch.ts (Switch : régions « ALL », cartouches du commerce, scans par région, base réduite), reessais.ts (réessais des envois du relais, #92) + tests ; __fixtures__/ (copies datées, README)
+scripts/                 icones.mjs (apple-icon.png), fixture-wikipedia.mjs, fixture-gametdb.mjs, fixture-gametdb-wii.mjs, fixture-gametdb-portable.mjs, fixture-gametdb-switch.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : bases Wii U et Wii (réduite) + scans → bucket privé gametdb, Wii dans wii/ (faces : wii/faces) ; secrets SUPABASE_URL / SUPABASE_SECRET_KEY ; importe src/lib/import/relais-wii.ts : sans alias « @/ »)
 src/lib/jaquettes/       supprimer.ts (jeu + toutes ses jaquettes), chemins et URL des jaquettes ({game_id}/{région}-{version}-{300|600|768}.webp, ADR-04, version : #60), enregistrer.ts (WebP → stockage → sortie), telecharger.ts (image par adresse, SSRF) + tests
 src/lib/admin/           console choisie (consoles.ts, étape 8), page « Jaquettes » (vignettes, filtre « à remplacer »), correction d'une fiche (champs modifiés → verrous), nouveau jeu (verrou « manuel ») + tests
 src/lib/images/          réduction d'une photo dans le navigateur avant envoi (1600 px) + tests
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
 tests/e2e/               tests Playwright ; connexion.spec.ts ignoré sans base locale (tourne en CI)
-supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais, 0007 console Wii, 0008 consoles DS et 3DS, 0010 Switch 2 + table exclusions : jeux décochés « en boîte »), tests/database/ (pgTAP)
+supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais, 0007 console Wii, 0008 consoles DS et 3DS, 0009 console Switch, 0010 Switch 2 + table exclusions : jeux décochés « en boîte »), tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
 ```
@@ -109,7 +109,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 7 — Finitions : À propos (US-07) #72, référencement #73
   - [x] Étape 8 — Wii : étude (DESIGN §1 bis, #77), relais #78, import #79, admin #83, catalogue #80, découpe #87, Startup Disc #90, réessais #92
   - [ ] Étape 9 — DS + 3DS : étude (DESIGN §1 ter), proportions des jaquettes #94, relais + import #95
-  - [ ] Étape 10 — Switch (régions, import automatique ; servira à la Switch 2)
+  - [ ] Étape 10 — Switch + Switch 2 : étude (DESIGN §1 quater), import des nouveautés, Switch, Switch 2
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1
 
 ## Erreurs récurrentes

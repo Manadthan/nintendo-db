@@ -2,6 +2,8 @@
 // ce script dépose dans le bucket privé « gametdb » de Supabase, pour chaque console :
 //   - Wii U : wiiutdb.xml (la base du jour) et scans/{identifiant}.jpg (scan `coverHQ` de la face de la boîte) ;
 //   - DS et 3DS (étape 9) : ds/dstdb.xml, 3ds/3dstdb.xml (bases réduites) et {ds,3ds}/scans/{identifiant}.jpg ;
+//   - Switch (étape 10) : switch/switchtdb.xml (base réduite) et switch/scans/{JAP,US,PAL}/{identifiant}.jpg : une
+//     cartouche mondiale (« ALL ») a une boîte par région ;
 //   - Wii (étape 8) : wii/wiitdb.xml (base RÉDUITE aux jeux Nintendo du commerce : 10 Mo → 300 Ko) et
 //     wii/faces/{identifiant}.jpg (face avant DÉCOUPÉE dans le scan `coverfullHQ` de la boîte dépliée, sans la
 //     tranche : #87 ; l'ancien dossier wii/scans n'est plus lu).
@@ -14,6 +16,7 @@ import * as cheerio from "cheerio";
 import { strFromU8, unzipSync } from "fflate";
 import { decouperFaceAvant, LANGUES_SCAN_WII, reduireBaseWii } from "../src/lib/import/relais-wii.ts";
 import { languesScan, reduireBasePortable } from "../src/lib/import/relais-portables.ts";
+import { reduireBaseSwitch, SCANS_SWITCH } from "../src/lib/import/relais-switch.ts";
 import { avecReessais, decrireErreurStockage } from "../src/lib/import/reessais.ts";
 
 const AGENT = { "User-Agent": "nintendo-db/1.0 (https://nintendo-db.vercel.app)" };
@@ -112,6 +115,23 @@ const CONSOLES = [
       );
     },
   })),
+  // Étape 10 : Switch, une boîte par région de la cartouche (haute définition, sinon scan moyen ; jamais la boîte
+  // d'une autre région).
+  {
+    nom: "Switch",
+    dossier: "switch/",
+    scans: "switch/scans",
+    dossiers: ["JAP", "US", "PAL"].map((r) => `switch/scans/${r}`),
+    chemin: ({ id, region }) => `switch/scans/${region}/${id}.jpg`,
+    languesDe: (_id, region) => SCANS_SWITCH[region],
+    async preparer() {
+      const { xml, disques } = reduireBaseSwitch(strFromU8(await base("https://www.gametdb.com/switchtdb.zip?LANG=EN")));
+      return { fichier: "switchtdb.xml", xml: new TextEncoder().encode(xml), disques };
+    },
+    async scan(id, chemin) {
+      return telecharger(`https://art.gametdb.com/switch/${chemin}/${id}.jpg`);
+    },
+  },
 ];
 
 for (const console_ of CONSOLES) {
@@ -121,27 +141,32 @@ for (const console_ of CONSOLES) {
   console.log(`${console_.nom} : base déposée (${Math.round(xml.length / 1024)} Ko)`);
 
   // 2. Les scans manquants, 6 à la fois.
-  const deja = await avecReessais(async () => {
-    const { data, error } = await stockage.list(console_.scans, { limit: 2000 });
-    if (error) throw new Error(`Liste des scans : ${decrireErreurStockage(error)}`);
-    return data;
-  });
-  const presents = new Set(deja.map((f) => f.name));
-  const aFaire = disques.filter((d) => !presents.has(`${d.id}.jpg`));
+  // Chemin d'un scan : {scans}/{id}.jpg, ou par région (Switch).
+  const chemin = console_.chemin ?? (({ id }) => `${console_.scans}/${id}.jpg`);
+  const presents = new Set();
+  for (const dossier of console_.dossiers ?? [console_.scans]) {
+    const deja = await avecReessais(async () => {
+      const { data, error } = await stockage.list(dossier, { limit: 2000 });
+      if (error) throw new Error(`Liste des scans : ${decrireErreurStockage(error)}`);
+      return data;
+    });
+    for (const f of deja) presents.add(`${dossier}/${f.name}`);
+  }
+  const aFaire = disques.filter((d) => !presents.has(chemin(d)));
   let deposes = 0;
   const absents = [];
   for (let i = 0; i < aFaire.length; i += 6) {
     await Promise.all(
       aFaire.slice(i, i + 6).map(async ({ id, region }) => {
-        for (const langue of console_.languesDe?.(id) ?? console_.langues[region]) {
+        for (const langue of console_.languesDe?.(id, region) ?? console_.langues[region]) {
           const scan = await console_.scan(id, langue);
           if (scan) {
-            await deposer(`${console_.scans}/${id}.jpg`, scan, "image/jpeg");
+            await deposer(chemin({ id, region }), scan, "image/jpeg");
             deposes++;
             return;
           }
         }
-        absents.push(id);
+        absents.push(console_.chemin ? `${id} (${region})` : id);
       }),
     );
   }
