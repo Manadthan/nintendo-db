@@ -22,11 +22,11 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | Fichier | Contenu | Statut |
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
-| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.3 à valider |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.11 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.4 à valider |
+| `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.3 validée |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.11 validée |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.4 validée |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
-| `docs/BILAN.md` | Rétrospective de la v1 (étapes 1 à 7) : chiffres, réussites, difficultés, leçons | v1.1 |
+| `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), puis étapes 8 à 10 (§8) : chiffres, réussites, difficultés, leçons | v1.2 à valider |
 
 ## Règles de travail
 
@@ -71,7 +71,7 @@ src/app/admin/           administration (US-09) : connexion/, accueil, import/ (
 src/lib/auth/proprietaire.ts  exigerProprietaire() : en tête de CHAQUE action d'administration
 src/proxy.ts             contrôle de connexion, sur /admin SEULEMENT (les pages publiques restent statiques)
 src/lib/auth/routes.ts   règles de redirection de l'administration + tests
-src/lib/catalogue/       toutes les consoles (charger.ts : jeux + consoles, étape 8), version affichée, dates en français, tri, groupes (catalogue.ts), marché : adresse ?marche= puis navigateur (marche.ts), recherche ?q= (recherche.ts), filtres ?console= ?dispo= ?annee= ?genre= (filtres.ts, US-06), lecture (charger.ts) + tests
+src/lib/catalogue/       toutes les consoles (charger.ts : jeux + consoles, étape 8), version affichée, dates en français, tri, groupes (catalogue.ts), marché : adresse ?marche= puis navigateur (marche.ts), recherche ?q= (recherche.ts), filtres ?console= ?dispo= ?annee= ?genre= ?dev= (filtres.ts, US-06), studios nettoyés et « Nintendo (first party) » (developpeurs.ts, #89), lecture (charger.ts) + tests
 src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; src/app/not-found.tsx : 404 en français
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
 src/components/          EnTete (Logo, BoutonTheme), PiedDePage (lien Administration), Catalogue (client : recherche, marché, tri, filtres, grille/liste), Filtres (panneau et pastilles, US-06), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite
@@ -79,7 +79,7 @@ src/lib/referencement/   adresse du site, sitemap, robots, métadonnées et donn
 src/lib/theme/           choix du thème : auto/clair/sombre, script anti-éclair (US-08) + tests
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
 src/lib/import/          import (ADR-03) : consoles.ts (sources par console : Wii U = Wikipédia + GameTDB, Wii, DS, 3DS = GameTDB seul ; chemins du relais, codes WUP-P-/RVL-/NTR-/CTR-P-/KTR-P-/HAC-P-/DOL-), wikipedia.ts (tableau « List of Wii U games »), wikipedia-switch-2.ts (liste Switch 2 : Wikipédia seul, date au jour près, étape 10), apercu.ts (aperçu, lots de 10, résumés, nouveautés : nouveau / modifié / inchangé, jeux à venir), donnees.ts (assemblage, fusion avec verrous, choix des jaquettes), jaquettes.ts (WebP 300/600/768 via sharp), gametdb.ts (boîtes par région, titres japonais, compilations, codes produit ; lu depuis le relais), resultat.ts (erreurs des actions rendues lisibles), physique.ts (règle : boîte Nintendo exigée, sorties par région), relais-wii.ts (base Wii réduite, face avant découpée, disques GameCube du commerce et petite image en JPEG : lu aussi par le relais), relais-portables.ts (DS/3DS : cartes du commerce, langue du scan, carte PAL anglaise, base réduite), relais-switch.ts (Switch : régions « ALL », cartouches du commerce, scans par région, base réduite), reessais.ts (réessais des envois du relais, #92) + tests ; __fixtures__/ (copies datées, README)
-scripts/                 icones.mjs (apple-icon.png), fixture-wikipedia.mjs, fixture-gametdb.mjs, fixture-gametdb-wii.mjs, fixture-gametdb-portable.mjs, fixture-gametdb-switch.mjs, fixture-gametdb-gamecube.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : bases Wii U et Wii (réduite) + scans → bucket privé gametdb, Wii dans wii/ (faces : wii/faces) ; secrets SUPABASE_URL / SUPABASE_SECRET_KEY ; importe src/lib/import/relais-wii.ts : sans alias « @/ »)
+scripts/                 icones.mjs (apple-icon.png), fixture-wikipedia.mjs, fixture-gametdb.mjs, fixture-gametdb-wii.mjs, fixture-gametdb-portable.mjs, fixture-gametdb-switch.mjs, fixture-gametdb-gamecube.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : bases Wii U, Wii, GameCube, DS, 3DS, Switch (réduites) + scans → bucket privé gametdb, Wii dans wii/faces, GameCube dans gamecube/faces, Switch dans switch/scans/{JAP,US,PAL} ; secrets SUPABASE_URL / SUPABASE_SECRET_KEY ; importe src/lib/import/relais-wii.ts : sans alias « @/ »)
 src/lib/jaquettes/       supprimer.ts (jeu + toutes ses jaquettes), chemins et URL des jaquettes ({game_id}/{région}-{version}-{300|600|768}.webp, ADR-04, version : #60), enregistrer.ts (WebP → stockage → sortie), telecharger.ts (image par adresse, SSRF) + tests
 src/lib/admin/           console choisie (consoles.ts, étape 8), page « Jaquettes » (vignettes, filtre « à remplacer »), correction d'une fiche (champs modifiés → verrous), nouveau jeu (verrou « manuel ») + tests
 src/lib/images/          réduction d'une photo dans le navigateur avant envoi (1600 px) + tests
@@ -108,11 +108,18 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 6 — Filtres : genres #68, panneau #69
   - [x] Étape 7 — Finitions : À propos (US-07) #72, référencement #73
   - [x] Étape 8 — Wii : étude (DESIGN §1 bis, #77), relais #78, import #79, admin #83, catalogue #80, découpe #87, Startup Disc #90, réessais #92
-  - [ ] Étape 9 — DS + 3DS : étude (DESIGN §1 ter), proportions des jaquettes #94, relais + import #95
-  - [ ] Étape 10 — Switch + Switch 2 : étude (DESIGN §1 quater), import des nouveautés, Switch, Switch 2
+  - [x] Étape 9 — DS + 3DS : étude (DESIGN §1 ter), proportions des jaquettes #94, relais + import #95
+  - [x] Étape 10 — Switch + Switch 2 : étude (DESIGN §1 quater, #99), import des nouveautés #100, Switch #102, Switch 2 #104, relais réessayé #106
+  - [ ] Étape 11 — GameCube : étude (DESIGN §1 quinquies, #111), relais + import #112
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1
 
 ## Erreurs récurrentes
+
+- **GameTDB bloque des hébergeurs** (Vercel dès #53, GitHub le 18/11/2026 : « Connect Timeout ») : le relais peut
+  tourner depuis la session Claude, qui atteint GameTDB. Clé Supabase en secret réseau de l'environnement (injectée
+  dans l'en-tête `apikey`, jamais vue), `SUPABASE_SECRET_KEY=sb_secret_proxy-injected`, `NODE_USE_ENV_PROXY=1`,
+  `NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt`, et un préchargement qui retire l'en-tête `Authorization` des
+  requêtes vers Supabase.
 
 - **Clone superficiel** (`git clone --depth 1`) : il ne suit que `main`, et l'alerte « branche non poussée » revient
   après chaque `git push -u`. Une fois par clone : `git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'`.

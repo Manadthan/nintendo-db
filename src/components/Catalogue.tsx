@@ -14,6 +14,7 @@ import {
   consolesProposees,
   enregistrerFiltres,
   filtrer,
+  developpeursProposes,
   genresProposes,
   lireFiltres,
   nombreActifs,
@@ -226,6 +227,7 @@ export function Catalogue({ jeux, consoles }: Props) {
           consoles={consolesProposees(duMarche, consoles)}
           annees={anneesProposees(duMarche)}
           genres={genresProposes(duMarche)}
+          developpeurs={developpeursProposes(duMarche)}
         />
       )}
       <FiltresActifs filtres={filtres} consoles={consoles} />

@@ -90,6 +90,8 @@
 8. **Chaque PR dit quoi tester et ce qui n'a pas été vérifié** (bilan final Nintendo DB) : c'est ce qui permet de
    relire depuis un téléphone. Toute donnée importée nouvelle arrive avec sa mise à jour en production, sans
    réimport manuel.
+9. **Montrer les images réelles dès l'étude** (bilan des étapes 8 à 10) : quelques exemples vus par le propriétaire
+   avant la spec ; et garder un chemin de secours documenté pour toute source qui peut bloquer un hébergeur.
 
 ## 5. Liste de contrôle
 

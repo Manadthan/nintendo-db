@@ -3,10 +3,12 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.11 — 18/11/2026 — statut : **à valider**
+> Version 1.13 — 18/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.13 | 18/11/2026 | **GameCube** (étape 11) : US-10 (disques du commerce, compilations Zelda Collector's Edition et Pac-Man Vs., petite image japonaise faute de scan) |
+> | 1.12 | 18/11/2026 | US-06 : filtre **Développeur** (#89), divisions de Nintendo distinctes et entrée « Nintendo (first party) » |
 > | 1.11 | 18/11/2026 | **Switch et Switch 2** (étape 10) : US-10 (cartouche mondiale, Switch 2 depuis Wikipédia, case « en boîte », jeux à venir cachés) ; **import des nouveautés** (US-10) |
 > | 1.10 | 18/11/2026 | **DS et 3DS** (étape 9) : US-10 (règles des cartes, titres PAL anglais, scans de repli) ; jaquettes aux **proportions de chaque console** (US-02, US-04) |
 > | 1.9 | 17/11/2026 | **Wii** (étape 8) : US-01 = un seul catalogue toutes consoles, filtre **Console** (US-06) ; US-10 : import Wii depuis **GameTDB seul**, jaquettes = face avant du scan complet |
@@ -100,6 +102,12 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       JAP, US ou PAL), année, genre. Le marché (US-03) filtre déjà sur « sorti dans cette région ».
 - [ ] Les genres sont ceux de GameTDB, **tous traduits** en français ; un jeu peut en avoir plusieurs.
 - [ ] Les filtres actifs sont visibles et effaçables en un tap.
+- [ ] **Développeur** (SPEC v1.12, #89) : liste comme Genre, studios triés par nombre de jeux, avec ce nombre. Noms
+      nettoyés à l'affichage, sans réimport (« LEVEL-5 », « Level 5 » → « Level-5 » ; « Inc. », « Ltd. » retirés) ;
+      un jeu à plusieurs studios apparaît sous chacun. Les divisions de Nintendo (EAD, EPD, SPD…) restent distinctes,
+      et une entrée **« Nintendo (first party) »** en tête regroupe les divisions et les filiales détenues par
+      Nintendo (Retro Studios, Monolith Soft, NST, NDcube, 1-Up Studio, Next Level Games) ; HAL Laboratory,
+      Intelligent Systems et Game Freak n'en font pas partie.
 
 #### US-07 — Mentions et sources (M)
 - [ ] Une page « À propos » indique que le site est un projet de fan **non affilié à Nintendo**, que les titres et
@@ -173,6 +181,13 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] **Import des nouveautés** (SPEC v1.11) : l'aperçu classe chaque jeu en **nouveau**, **modifié** (avec les champs
       qui changent) ou **inchangé** par rapport à la base ; par défaut seuls les nouveaux et modifiés sont enregistrés,
       et seules les jaquettes **manquantes** sont copiées. « Tout réenregistrer » reste possible.
+- [ ] **GameCube** (SPEC v1.13) : GameTDB seul (base Wii avec les jeux GameCube), même règle « boîte Nintendo ».
+      Disques du commerce (identifiant en G) ; écartés : démos (« Interactive Multi-Game Demo », « Gekkan Nintendo
+      Tentou Demo »), disques bonus, Game Boy Player Start-Up Disc ; **gardés** comme jeux à part : The Legend of
+      Zelda: Collector's Edition et Pac-Man Vs. (choix du propriétaire), et Pokémon Channel (que GameTDB classe à tort
+      « logiciel »). Codes produit `DOL-` + 4 caractères (ex. `DOL-GALE`).
+- [ ] GameCube : jaquette = face avant découpée dans le scan de la boîte dépliée, comme la Wii ; sans ce scan (surtout
+      au Japon), la **petite image** de GameTDB (160 × 224 px), floue en grand, remplaçable par une photo (US-12).
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
@@ -201,7 +216,8 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 ## 6. Consoles couvertes
 
-**v1 : Wii U.** Puis **Wii** (étape 8), **DS + 3DS** (étape 9), **Switch + Switch 2** (étape 10), puis les autres :
+**v1 : Wii U.** Puis **Wii** (étape 8), **DS + 3DS** (étape 9), **Switch + Switch 2** (étape 10), **GameCube** (étape 11),
+puis les autres :
 **Salon** : Color TV-Game, NES / Famicom (+ Famicom Disk System), Super Nintendo / Super Famicom (+ Satellaview),
 Nintendo 64 (+ 64DD), GameCube, Wii, Wii U, Switch, Switch 2.
 **Portables** : Game & Watch, Game Boy, Game Boy Color, Virtual Boy, Game Boy Advance (+ e-Reader), Pokémon Mini,

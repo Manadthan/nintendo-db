@@ -7,6 +7,7 @@ import {
   consolesProposees,
   filtrer,
   filtresDepuisParametres,
+  developpeursProposes,
   genresProposes,
   nombreActifs,
 } from "./filtres";
@@ -25,11 +26,12 @@ const jeu = (
   slug: string,
   dates: [string | null, string | null, string | null],
   genres: string[],
+  developpeur: string | null = null,
 ): JeuCatalogue => ({
   id: slug,
   slug,
   console: { slug: "wii-u", nom: "Wii U" },
-  developpeur: null,
+  developpeur,
   editeur: "Nintendo",
   genres,
   sorties: {
@@ -107,6 +109,7 @@ describe("filtrer (US-06)", () => {
           disponibilite: "JAP",
           annee: "2012",
           genre: "Musique",
+          developpeur: null,
         }),
       ),
     ).toEqual(["wii-karaoke-u"]);
@@ -194,8 +197,11 @@ describe("filtres dans l'adresse (vue filtrée partageable)", () => {
         disponibilite: "JAP",
         annee: "2014",
         genre: "Plates-formes 3D",
+        developpeur: "Nintendo EAD",
       }),
-    ).toBe("?q=mario&marche=jap&dispo=jap&annee=2014&genre=Plates-formes+3D");
+    ).toBe(
+      "?q=mario&marche=jap&dispo=jap&annee=2014&genre=Plates-formes+3D&dev=Nintendo+EAD",
+    );
   });
 
   it("retire un filtre effacé, et ne laisse pas de « ? » vide", () => {
@@ -206,16 +212,83 @@ describe("filtres dans l'adresse (vue filtrée partageable)", () => {
   it("relit les filtres, et ignore les valeurs inconnues", () => {
     expect(
       filtresDepuisParametres(
-        "?dispo=toutes&annee=2014&genre=Plates-formes+3D",
+        "?dispo=toutes&annee=2014&genre=Plates-formes+3D&dev=Retro+Studios",
       ),
     ).toEqual({
       console: null,
       disponibilite: "TOUTES",
       annee: "2014",
       genre: "Plates-formes 3D",
+      developpeur: "Retro Studios",
     });
     expect(filtresDepuisParametres("?dispo=mars&annee=hier&genre=")).toEqual(
       SANS_FILTRE,
     );
+  });
+});
+
+describe("filtre Développeur (#89)", () => {
+  const DKC = jeu(
+    "dkc",
+    ["2014-02-13", "2014-02-21", "2014-02-21"],
+    [],
+    "Retro Studios",
+  );
+  const SPLATOON = jeu(
+    "splatoon",
+    ["2015-05-28", "2015-05-29", "2015-05-29"],
+    [],
+    "Nintendo EAD",
+  );
+  const KIRBY2 = jeu(
+    "kirby-2",
+    ["2015-01-22", "2015-02-20", "2015-05-08"],
+    [],
+    "HAL Laboratory",
+  );
+  const POKKEN = jeu(
+    "pokken",
+    ["2016-03-18", "2016-03-18", "2016-03-18"],
+    [],
+    "Bandai Namco Studios, The Pokémon Company",
+  );
+  const versions = trier([DKC, SPLATOON, KIRBY2, POKKEN], "anciens", "TOUS");
+
+  it("un studio, quelle que soit sa graphie dans l'adresse", () => {
+    expect(
+      slugs(
+        filtrer(versions, { ...SANS_FILTRE, developpeur: "retro studios" }),
+      ),
+    ).toEqual(["dkc"]);
+    expect(
+      slugs(
+        filtrer(versions, {
+          ...SANS_FILTRE,
+          developpeur: "The Pokémon Company",
+        }),
+      ),
+    ).toEqual(["pokken"]);
+  });
+
+  it("Nintendo (first party) : divisions de Nintendo et filiales, pas HAL", () => {
+    expect(
+      slugs(
+        filtrer(versions, {
+          ...SANS_FILTRE,
+          developpeur: "Nintendo (first party)",
+        }),
+      ),
+    ).toEqual(["dkc", "splatoon"]);
+  });
+
+  it("liste proposée : first party en tête, puis les studios avec leur nombre de jeux", () => {
+    expect(developpeursProposes(versions)).toEqual([
+      { nom: "Nintendo (first party)", nombre: 2 },
+      { nom: "Bandai Namco Studios", nombre: 1 },
+      { nom: "HAL Laboratory", nombre: 1 },
+      { nom: "Nintendo EAD", nombre: 1 },
+      { nom: "Retro Studios", nombre: 1 },
+      { nom: "The Pokémon Company", nombre: 1 },
+    ]);
   });
 });
