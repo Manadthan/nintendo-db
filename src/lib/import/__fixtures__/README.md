@@ -64,3 +64,17 @@ Fabriquées par :
 node scripts/fixture-gametdb-portable.mjs ds <dstdb.zip> > src/lib/import/__fixtures__/dstdb.xml
 node scripts/fixture-gametdb-portable.mjs 3ds <3dstdb.zip> > src/lib/import/__fixtures__/3dstdb.xml
 ```
+
+## `switchtdb.xml` (étape 10)
+
+| | |
+|---|---|
+| Source | https://www.gametdb.com/switchtdb.zip?LANG=EN (version 20261118053903), téléchargée le 18/11/2026 |
+| Conditions | Comme la base Wii U ci-dessus |
+| Contenu | Base **réduite comme le dépose le relais** (`reduireBaseSwitch`) : cartouches du commerce (type `Switch`, identifiant terminé par une lettre, au moins une région JPN, USA, EUR ou ALL) des jeux dont au moins une cartouche est éditée par Nintendo : 141 cartouches, 112 jeux |
+
+Fabriquée par :
+
+```
+node scripts/fixture-gametdb-switch.mjs <switchtdb.zip> > src/lib/import/__fixtures__/switchtdb.xml
+```
