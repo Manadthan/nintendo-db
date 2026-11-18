@@ -2,7 +2,7 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.4 — 18/11/2026 — statut : **à valider**
+> Version 1.4 — 18/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
