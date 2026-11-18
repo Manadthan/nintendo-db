@@ -79,6 +79,20 @@ Fabriquée par :
 node scripts/fixture-gametdb-switch.mjs <switchtdb.zip> > src/lib/import/__fixtures__/switchtdb.xml
 ```
 
+## `gctdb.xml` (étape 11)
+
+| | |
+|---|---|
+| Source | https://www.gametdb.com/wiitdb.zip?LANG=EN&GAMECUBE=1 (version 20261118185002), téléchargée le 18/11/2026 |
+| Conditions | Comme la base Wii U ci-dessus |
+| Contenu | Base **réduite comme le dépose le relais** (`reduireBaseWii` avec `estDisqueGameCubeDuCommerce`) : disques GameCube du commerce (G, plus Zelda Collector's Edition et Pac-Man Vs.) des jeux dont au moins une boîte est éditée par Nintendo : 158 disques, 58 jeux |
+
+Fabriquée par :
+
+```
+node scripts/fixture-gametdb-gamecube.mjs <wiitdb-gc.zip> > src/lib/import/__fixtures__/gctdb.xml
+```
+
 ## `switch-2-wikipedia.html` (étape 10)
 
 | | |

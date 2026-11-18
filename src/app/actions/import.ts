@@ -143,7 +143,7 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
   const physique = appliquerGameTdb(
     liste.jeux,
     regrouperGameTdb(
-      lireGameTdb(gametdb, source.estDisque),
+      lireGameTdb(gametdb, source.estDisque, source.garderLogiciels),
       source.longueurBase,
     ),
   );

@@ -2,6 +2,8 @@
 // ce script dépose dans le bucket privé « gametdb » de Supabase, pour chaque console :
 //   - Wii U : wiiutdb.xml (la base du jour) et scans/{identifiant}.jpg (scan `coverHQ` de la face de la boîte) ;
 //   - DS et 3DS (étape 9) : ds/dstdb.xml, 3ds/3dstdb.xml (bases réduites) et {ds,3ds}/scans/{identifiant}.jpg ;
+//   - GameCube (étape 11) : gamecube/gctdb.xml (base Wii avec la GameCube, réduite) et gamecube/faces/{id}.jpg (face
+//     découpée comme la Wii ; sinon petite image 160 × 224 de GameTDB) ;
 //   - Switch (étape 10) : switch/switchtdb.xml (base réduite) et switch/scans/{JAP,US,PAL}/{identifiant}.jpg : une
 //     cartouche mondiale (« ALL ») a une boîte par région ;
 //   - Wii (étape 8) : wii/wiitdb.xml (base RÉDUITE aux jeux Nintendo du commerce : 10 Mo → 300 Ko) et
@@ -14,7 +16,13 @@
 import { createClient } from "@supabase/supabase-js";
 import * as cheerio from "cheerio";
 import { strFromU8, unzipSync } from "fflate";
-import { decouperFaceAvant, LANGUES_SCAN_WII, reduireBaseWii } from "../src/lib/import/relais-wii.ts";
+import {
+  decouperFaceAvant,
+  estDisqueGameCubeDuCommerce,
+  LANGUES_SCAN_WII,
+  reduireBaseWii,
+  versJpeg,
+} from "../src/lib/import/relais-wii.ts";
 import { languesScan, reduireBasePortable } from "../src/lib/import/relais-portables.ts";
 import { reduireBaseSwitch, SCANS_SWITCH } from "../src/lib/import/relais-switch.ts";
 import { avecReessais, decrireErreurStockage, telechargerAvecReessais } from "../src/lib/import/reessais.ts";
@@ -99,6 +107,30 @@ const CONSOLES = [
     async scan(id, langue) {
       const boite = await telecharger(`https://art.gametdb.com/wii/coverfullHQ/${langue}/${id}.png`);
       return boite && decouperFaceAvant(boite);
+    },
+  },
+  // Étape 11 : GameCube, même boîte dépliée que la Wii ; repli sur la petite image de la face (Japon surtout).
+  {
+    nom: "GameCube",
+    dossier: "gamecube/",
+    scans: "gamecube/faces",
+    // Boîte dépliée dans chaque langue d'abord, puis seulement la petite image (une petite anglaise ne passe pas avant
+    // une grande française).
+    languesDe: (_id, region) => [
+      ...LANGUES_SCAN_WII[region].map((l) => `coverfullHQ/${l}`),
+      ...LANGUES_SCAN_WII[region].map((l) => `cover/${l}`),
+    ],
+    async preparer() {
+      const { xml, disques } = reduireBaseWii(
+        strFromU8(await base("https://www.gametdb.com/wiitdb.zip?LANG=EN&GAMECUBE=1")),
+        estDisqueGameCubeDuCommerce,
+      );
+      return { fichier: "gctdb.xml", xml: new TextEncoder().encode(xml), disques };
+    },
+    async scan(id, chemin) {
+      const image = await telecharger(`https://art.gametdb.com/wii/${chemin}/${id}.png`);
+      if (!image) return null;
+      return chemin.startsWith("coverfullHQ/") ? decouperFaceAvant(image) : versJpeg(image);
     },
   },
   // Étape 9 : DS et 3DS, face seule ; scan haute définition (768 × 680), sinon moyen (400 × 352, cartes japonaises).

@@ -61,6 +61,13 @@ export default async function PageAdmin() {
         <span aria-hidden="true">›</span>
       </Link>
       <Link
+        href="/admin/import?console=gamecube"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Import GameCube (GameTDB)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
         href="/admin/import?console=ds"
         className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
       >

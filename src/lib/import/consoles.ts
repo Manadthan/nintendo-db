@@ -1,7 +1,10 @@
 import type { Region } from "@/lib/catalogue/types";
 import { estCarteDuCommerce } from "./relais-portables";
 import { estCartoucheSwitchDuCommerce } from "./relais-switch";
-import { estDisqueWiiDuCommerce } from "./relais-wii";
+import {
+  estDisqueGameCubeDuCommerce,
+  estDisqueWiiDuCommerce,
+} from "./relais-wii";
 import { lireListeSwitch2, type ListeSwitch2 } from "./wikipedia-switch-2";
 
 /**
@@ -17,6 +20,8 @@ export type SourceConsole = {
   base: string;
   /** Dossier des scans dans le bucket du relais ; Switch : un dossier par région (une cartouche « ALL » a 3 boîtes). */
   scans: string | ((region: Region) => string);
+  /** Garder les disques de genre « software » (GameCube : Pokémon Channel, étape 11). */
+  garderLogiciels?: boolean;
   /** Caractères de l'identifiant communs aux disques d'un jeu (3 par défaut ; Switch : 4). */
   longueurBase?: number;
   /**
@@ -81,6 +86,16 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
     prefixeCode: (id) => (id.startsWith("C") ? "KTR-P-" : "CTR-P-"),
     estDisque: (type, id, region, titre, genre) =>
       estCarteDuCommerce("3ds", type, id, region, titre, genre),
+  },
+  // Étape 11 (DESIGN v1.5 §1 quinquies) : GameTDB seul (base Wii avec la GameCube), faces découpées comme la Wii.
+  gamecube: {
+    slug: "gamecube",
+    wikipedia: false,
+    base: "gamecube/gctdb.xml",
+    scans: "gamecube/faces",
+    prefixeCode: "DOL-",
+    garderLogiciels: true,
+    estDisque: estDisqueGameCubeDuCommerce,
   },
   // Étape 10 (DESIGN v1.4 §1 quater) : GameTDB seul ; une cartouche « ALL » vaut pour les 3 régions, avec une
   // boîte (scan) propre à chaque région.

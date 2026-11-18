@@ -36,6 +36,33 @@ export function estDisqueWiiDuCommerce(
   );
 }
 
+/**
+ * Disque GameCube du commerce (étape 11, SPEC v1.13) : type `GameCube`, identifiant en G sans démo (« Interactive
+ * Multi-Game Demo », genre « sampler »/« demo ») ; et deux compilations gardées par le propriétaire, identifiants en
+ * P : The Legend of Zelda: Collector's Edition (PZL) et Pac-Man Vs. (PRJ). Démos en D et E, disques bonus en P,
+ * Game Boy Player Start-Up Disc (U) : écartés.
+ */
+export function estDisqueGameCubeDuCommerce(
+  type: string,
+  id: string,
+  region: string,
+  titre: string,
+  genre: string,
+): boolean {
+  if (type !== "GameCube" || !(region in LANGUES_SCAN_WII)) return false;
+  if (/^P(ZL|RJ)[A-Z0-9]{3}$/.test(id)) return true;
+  if (!/^G[A-Z0-9]{5}$/.test(id)) return false;
+  const genres = genre
+    .toLowerCase()
+    .split(",")
+    .map((g) => g.trim());
+  return (
+    !genres.includes("sampler") &&
+    !genres.includes("demo") &&
+    !/demo dis[ck]/i.test(titre)
+  );
+}
+
 /** Disque édité par Nintendo : code éditeur 01 (fin de l'identifiant), ou éditeur « Nintendo ». */
 export const estEditeNintendo = (id: string, editeur: string) =>
   id.slice(4, 6) === "01" || /nintendo/i.test(editeur);
@@ -47,7 +74,17 @@ export type DisqueRelais = { id: string; region: string };
  * dont au moins une boîte est éditée par Nintendo (tous leurs disques, même ceux d'un autre éditeur : SPEC v1.9),
  * sans résumés ni empreintes ; le bloc `<genres>` (traductions françaises) est gardé.
  */
-export function reduireBaseWii(xml: string): {
+export function reduireBaseWii(
+  xml: string,
+  /** Disque à garder (Wii par défaut ; GameCube : étape 11), d'après type, identifiant, région, titre, genre. */
+  estDisque: (
+    type: string,
+    id: string,
+    region: string,
+    titre: string,
+    genre: string,
+  ) => boolean = (type, id, region) => estDisqueWiiDuCommerce(type, id, region),
+): {
   xml: string;
   disques: DisqueRelais[];
 } {
@@ -61,7 +98,8 @@ export function reduireBaseWii(xml: string): {
     const champ = (nom: string) => jeu.children(nom).first().text().trim();
     const id = champ("id");
     const region = champ("region");
-    if (!estDisqueWiiDuCommerce(champ("type"), id, region)) return;
+    const titre = jeu.find("locale[lang=EN] > title").first().text().trim();
+    if (!estDisque(champ("type"), id, region, titre, champ("genre"))) return;
     const base = parBase.get(id.slice(0, 3)) ?? {
       nintendo: false,
       disques: [],
@@ -96,6 +134,17 @@ export function reduireBaseWii(xml: string): {
       .filter((b) => b.nintendo)
       .flatMap((b) => b.disques),
   };
+}
+
+/**
+ * Petite image de la face (GameTDB `cover`, 160 × 224 PNG), repli de la GameCube quand la boîte dépliée n'existe pas
+ * (surtout au Japon, SPEC v1.13) : convertie en JPEG comme les faces découpées.
+ */
+export async function versJpeg(image: Uint8Array): Promise<Buffer> {
+  return sharp(image)
+    .flatten({ background: "#ffffff" })
+    .jpeg({ quality: 90 })
+    .toBuffer();
 }
 
 /** Part des lignes `[y0, y1)` où la luminosité saute (écart > 25) entre les colonnes x − 1 et x. */
