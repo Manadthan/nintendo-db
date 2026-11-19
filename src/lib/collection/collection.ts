@@ -69,24 +69,3 @@ export function filtrerCollection(
     (v) => affichePossedee(possessions, v, marche) === (filtre === "possedes"),
   );
 }
-
-/** Compteur par console (« GameCube : 12 / 58 ») : jeux possédés et jeux affichés du marché, consoles qui en ont. */
-export function compteurs(
-  versions: VersionAffichee[],
-  consoles: { slug: string; nom: string }[],
-  possessions: ReadonlySet<string>,
-  marche: Marche,
-): { slug: string; nom: string; possedes: number; total: number }[] {
-  return consoles
-    .map((c) => {
-      const deLaConsole = versions.filter((v) => v.jeu.console.slug === c.slug);
-      return {
-        ...c,
-        possedes: deLaConsole.filter((v) =>
-          affichePossedee(possessions, v, marche),
-        ).length,
-        total: deLaConsole.length,
-      };
-    })
-    .filter((c) => c.total > 0);
-}

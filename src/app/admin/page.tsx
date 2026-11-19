@@ -47,6 +47,13 @@ export default async function PageAdmin() {
         </p>
       </section>
       <Link
+        href="/admin/statistiques"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Statistiques
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
         href="/admin/import"
         className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
       >

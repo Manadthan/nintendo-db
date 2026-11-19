@@ -5,7 +5,6 @@ import type { JeuCatalogue } from "@/lib/catalogue/types";
 import {
   avecVersion,
   cleVersion,
-  compteurs,
   ensemble,
   filtrerCollection,
   possede,
@@ -70,11 +69,6 @@ const JEUX = [
   jeu("splatoon", "wii-u"),
   jeu("melee", "gamecube"),
 ];
-const CONSOLES = [
-  { slug: "gamecube", nom: "GameCube" },
-  { slug: "wii-u", nom: "Wii U" },
-  { slug: "switch", nom: "Switch" },
-];
 // Possédés : Splatoon en version japonaise seulement, Melee en PAL.
 const POSSESSIONS = ensemble([
   { game_id: "splatoon", region: "JAP" },
@@ -102,14 +96,5 @@ describe("filtre Collection et compteurs (US-16)", () => {
     expect(
       slugs(filtrerCollection(versions, "possedes", POSSESSIONS, "PAL")),
     ).toEqual(["melee"]);
-  });
-
-  it("compteur par console, sans les consoles sans jeu affiché", () => {
-    expect(
-      compteurs(trier(JEUX, "anciens", "TOUS"), CONSOLES, POSSESSIONS, "TOUS"),
-    ).toEqual([
-      { slug: "gamecube", nom: "GameCube", possedes: 1, total: 1 },
-      { slug: "wii-u", nom: "Wii U", possedes: 1, total: 2 },
-    ]);
   });
 });
