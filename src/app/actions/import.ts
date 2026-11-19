@@ -34,6 +34,7 @@ import { lireListeWikipediaDetaillee, urlRendu } from "@/lib/import/wikipedia";
 import {
   adresseBoite,
   boitesDuJeu,
+  cibleDuLien,
   indexerBoites,
   lireIndexXml,
 } from "@/lib/import/libretro";
@@ -398,6 +399,19 @@ async function enregistrerLotInterne(
  * image téléchargée depuis le dépôt GitHub puis enregistrée en WebP (ADR-04). Jamais à la place d'une photo ou d'une
  * image ajoutée à la main ; une boîte déjà copiée ne l'est à nouveau qu'avec « Recopier les jaquettes ».
  */
+/** Fichier d'une boîte libretro-thumbnails, ou null s'il est absent ou injoignable. */
+async function telechargerBoite(
+  depot: string,
+  nom: string,
+): Promise<Uint8Array | null> {
+  const reponse = await fetch(adresseBoite(depot, nom), {
+    headers: { "User-Agent": USER_AGENT },
+    cache: "no-store",
+    signal: AbortSignal.timeout(20_000),
+  }).catch(() => null);
+  return reponse?.ok ? new Uint8Array(await reponse.arrayBuffer()) : null;
+}
+
 async function copierBoitesLibretro(
   supabase: Awaited<ReturnType<typeof exigerProprietaire>>,
   gameId: string,
@@ -417,17 +431,16 @@ async function copierBoitesLibretro(
     if (!nom || !jeu.releases[region].sortie) continue;
     if (deja?.source === "photo" || deja?.source === "url") continue;
     if (deja?.path && deja.source === "libretro" && !recopier) continue;
-    const reponse = await fetch(adresseBoite(depot, nom), {
-      headers: { "User-Agent": USER_AGENT },
-      cache: "no-store",
-      signal: AbortSignal.timeout(20_000),
-    }).catch(() => null);
-    if (!reponse?.ok) continue; // Boîte absente ou dépôt injoignable : vignette neutre, signalée « sans scan ».
+    let image = await telechargerBoite(depot, nom);
+    // Lien Git (#143) : on suit une fois vers la boîte visée.
+    const cible = image && cibleDuLien(image);
+    if (cible) image = await telechargerBoite(depot, cible);
+    if (!image || cibleDuLien(image)) continue; // Boîte absente, lien cassé ou dépôt injoignable : vignette neutre, « sans scan ».
     await enregistrerJaquette(
       supabase,
       gameId,
       region,
-      Buffer.from(await reponse.arrayBuffer()),
+      Buffer.from(image),
       "libretro",
       deja?.path ?? null,
       version,

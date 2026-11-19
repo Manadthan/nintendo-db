@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import {
   adresseBoite,
   boitesDuJeu,
+  cibleDuLien,
   cleTitre,
   indexerBoites,
   lireIndexXml,
@@ -100,5 +101,26 @@ describe("boîtes libretro-thumbnails (étape 14)", () => {
       );
       expect(avec.length).toBeGreaterThanOrEqual(minimum);
     }
+  });
+});
+
+describe("liens Git de libretro-thumbnails (Pokémon Crystal, #143)", () => {
+  // « Pokemon - Crystal Version (USA, Europe) (Rev 1).png » : un lien Git, servi comme le texte de sa cible.
+  const texte = (t: string) => new TextEncoder().encode(t);
+
+  it("un fichier qui n'est que le nom d'une autre boîte est un lien : on en lit la cible", () => {
+    expect(cibleDuLien(texte("Pokemon - Crystal Version (USA).png"))).toBe(
+      "Pokemon - Crystal Version (USA)",
+    );
+    expect(cibleDuLien(texte("../Named_Boxarts/Tetris DX (World).png"))).toBe(
+      "Tetris DX (World)",
+    );
+  });
+
+  it("une vraie image PNG n'est pas un lien", () => {
+    const png = new Uint8Array([
+      0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a,
+    ]);
+    expect(cibleDuLien(png)).toBeNull();
   });
 });
