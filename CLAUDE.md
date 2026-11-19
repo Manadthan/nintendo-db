@@ -23,9 +23,9 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.4 validée |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.19 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.9 à valider |
-| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.21 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.10 à valider |
+| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques : `docs/maquettes/`) | v0.7 validée |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9) : chiffres, réussites, difficultés, leçons | v1.3 validée |
 
 ## Règles de travail
@@ -115,7 +115,8 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 12 — Ma collection : US-16 (versions possédées, privée) #117 #118, en-tête #119, étiquettes vertes #120
   - [x] Étape 13 — Note Metacritic : US-17 (fiche + étiquette ; Wikipédia + saisie à la main) #121 #123 #124
   - [x] Étape 14 — Nintendo 64 + Game Boy Advance : étude (DESIGN §1 septies, #126), listes #127, jaquettes libretro #128, liens symboliques #130
-  - [ ] Étape 15 — N64 + GBA complétées : codes produit et boîtes japonaises par la série No-Intro (DESIGN ADR-10)
+  - [x] Étape 15 — N64 + GBA complétées : codes produit et boîtes japonaises par la série No-Intro (DESIGN ADR-10) #132 #133
+  - [ ] Étape 16 — Statistiques : US-18, page de l'administration (DESIGN ADR-11)
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3
 
 ## Erreurs récurrentes
@@ -126,9 +127,12 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   `NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt`, et un préchargement qui retire l'en-tête `Authorization` des
   requêtes vers Supabase.
 
-- **CI e2e arrêtée pendant l'installation des navigateurs** (2 fois, #109 et #120 : miroir Ubuntu lent, limite de
-  20 min atteinte avant le premier test) : ce n'est pas le code ; relancer la tâche. Corrigé dans `ci.yml` (cache des
-  navigateurs, 10 min par essai, second essai, limite 35 min).
+- **CI e2e arrêtée pendant l'installation des navigateurs** (#109, #120, puis toutes les PR du 19/11 : miroir Ubuntu
+  lent) : ce n'est pas le code. `ci.yml` : cache des navigateurs **et des paquets Ubuntu**, 10 min par essai, second
+  essai qui arrête d'abord l'apt-get du premier (verrou), limite 35 min.
+- **CI rouge non vue** (19/11 : test pgTAP d'une liste de sources figée, cassé par la migration 0014, rouge sur
+  `main` de #127 à #134) : avant de dire « CI verte », lire le résultat de **chaque** tâche de la PR ; une migration
+  qui ajoute une valeur d'énumération met à jour les tests qui listent ses valeurs.
 - **Clone superficiel** (`git clone --depth 1`) : il ne suit que `main`, et l'alerte « branche non poussée » revient
   après chaque `git push -u`. Une fois par clone : `git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'`.
 - **Sélecteurs e2e ambigus** (2 fois : « Remplacer » trouvait « À remplacer » ; `getByRole("alert")` trouvait aussi
