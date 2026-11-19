@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.23 — 19/11/2026 — statut : **à valider**
+> Version 1.24 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.24 | 19/11/2026 | **Virtual Boy** (étape 19) : US-10, 11 jeux, Japon et États-Unis seulement ; boîte « (Japan, USA) » réservée aux États-Unis |
 > | 1.23 | 19/11/2026 | **Game Boy** (étape 18) : US-10, même recette que la Game Boy Color ; 91 jeux, codes à la main |
 > | 1.22 | 19/11/2026 | **Game Boy Color** (étape 17) : US-10, même recette que N64 et GBA ; cartouches « Dual Mode » comprises ; codes DMG- / CGB- |
 > | 1.21 | 19/11/2026 | US-02 : **tri par note Metacritic**, groupes par tranche, jeux sans note à la fin (demande du propriétaire) |
@@ -251,6 +252,12 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       éditeurs que Nintendo distribuait en Europe : Mega Man II, Final Fantasy Adventure…). Code produit **`DMG-`** +
       série quand No-Intro la connaît (rare : les cartouches d'avant 1996 ne la portent pas) ; sinon « — », saisi à la
       main depuis la liste « sans code produit » (US-18). Boîtes carrées, japonaises presque carrées (forme réelle).
+- [ ] **Virtual Boy** (v1.24) : même recette (liste « List of Virtual Boy games »). 11 jeux édités par Nintendo, sortis
+      au **Japon et aux États-Unis seulement** (pas de version PAL). Une boîte libretro nommée « (Japan, USA) » est la
+      boîte américaine : elle ne sert **qu'aux États-Unis**, la version japonaise garde la vignette neutre en attendant une
+      photo (choix du propriétaire, règle valable pour toutes les consoles à cartouches). Code **`VUE-`** + série No-Intro
+      de la région : la série japonaise est connue pour presque tous les jeux, l'américaine pour 5 ; sinon « — », à la
+      main (US-11).
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
