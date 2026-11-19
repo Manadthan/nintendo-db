@@ -13,6 +13,18 @@ import {
 import { basculerVersion, useCollection } from "@/lib/collection/navigateur";
 import { possede } from "@/lib/collection/collection";
 import { Jaquette } from "./Jaquette";
+import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
+
+/** Note Metacritic de la fiche (US-17), aux couleurs de Metacritic : vert ≥ 75, jaune 50 à 74, rouge < 50. */
+function NoteColoree({ note }: { note: number }) {
+  return (
+    <span
+      className={`inline-flex h-6 min-w-7 items-center justify-center rounded-md px-1.5 text-sm font-bold tabular-nums ${CLASSES_NOTE[niveauNote(note)]}`}
+    >
+      {note}
+    </span>
+  );
+}
 
 const NOMS: Record<Region, string> = {
   JAP: "Japon",
@@ -152,12 +164,16 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             ) : jeu.metacriticUrl ? (
               <a
                 href={jeu.metacriticUrl}
-                className="text-accent underline-offset-2 hover:underline"
+                className="inline-flex items-center gap-1 text-accent underline-offset-2 hover:underline"
               >
-                {jeu.metacritic}/100
+                <NoteColoree note={jeu.metacritic} />
+                /100
               </a>
             ) : (
-              `${jeu.metacritic}/100`
+              <span className="inline-flex items-center gap-1">
+                <NoteColoree note={jeu.metacritic} />
+                /100
+              </span>
             )}
           </dd>
         </div>

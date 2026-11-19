@@ -1,8 +1,6 @@
-import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
-
 /**
- * Étiquette de la note Metacritic dans le catalogue (US-17) : le seul chiffre, aux couleurs de Metacritic, sur la
- * ligne des étiquettes JAP / US / PAL. Rien sans note.
+ * Étiquette de la note Metacritic dans le catalogue (US-17) : le seul chiffre, sur la ligne des étiquettes JAP / US /
+ * PAL et dans leur style (demande du propriétaire ; la fiche, elle, garde les couleurs de Metacritic). Rien sans note.
  */
 export function NoteMetacritic({ note }: { note: number | null }) {
   if (note === null) return null;
@@ -11,7 +9,7 @@ export function NoteMetacritic({ note }: { note: number | null }) {
       role="img"
       aria-label={`Metacritic : ${note} sur 100`}
       title="Note Metacritic"
-      className={`flex h-5 min-w-6 items-center justify-center rounded px-1 text-[11px] font-bold tabular-nums ${CLASSES_NOTE[niveauNote(note)]}`}
+      className="flex h-5 items-center rounded bg-accent-doux px-1.5 text-[10px] font-bold text-accent-fonce tabular-nums"
     >
       {note}
     </span>
