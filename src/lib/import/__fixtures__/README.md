@@ -134,3 +134,18 @@ Fabriquée par :
 ```
 node scripts/fixture-metacritic.mjs <réponse API.json> > src/lib/import/__fixtures__/metacritic-wikipedia.json
 ```
+
+## `n64-libretro.xml` et `gba-libretro.xml` (étape 14)
+
+| | |
+|---|---|
+| Source | Noms des fichiers du dossier `Named_Boxarts` des dépôts https://github.com/libretro-thumbnails/Nintendo_-_Nintendo_64 et …/Nintendo_-_Game_Boy_Advance, le 19/11/2026 |
+| Conditions | Noms de fichiers seulement (aucune image) |
+| Contenu | Index **identique à celui que dépose le relais** (`indexEnXml`) : N64 1 115 boîtes, GBA 5 961 |
+
+Fabriquées par :
+
+```
+git clone --depth 1 --filter=blob:none --no-checkout https://github.com/libretro-thumbnails/Nintendo_-_Nintendo_64.git
+node scripts/fixture-libretro.mjs Nintendo_-_Nintendo_64 > src/lib/import/__fixtures__/n64-libretro.xml
+```

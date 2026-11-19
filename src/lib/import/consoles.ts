@@ -5,6 +5,7 @@ import {
   estDisqueGameCubeDuCommerce,
   estDisqueWiiDuCommerce,
 } from "./relais-wii";
+import { DEPOTS_LIBRETRO } from "./libretro";
 import { lireListeCartouches } from "./wikipedia-cartouches";
 import { lireListeSwitch2, type ListeSwitch2 } from "./wikipedia-switch-2";
 
@@ -46,6 +47,8 @@ export type SourceConsole = {
    * une case « en boîte » pour chaque nouveau jeu (la liste ne distingue pas boîte et téléchargement).
    */
   wikipediaSeul?: (html: string) => ListeSwitch2;
+  /** Dépôt libretro-thumbnails des boîtes (N64, GBA : étape 14) ; index déposé par le relais dans `{slug}/libretro.xml`. */
+  libretro?: string;
 };
 
 export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
@@ -121,6 +124,7 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
         prefixeCode: "",
         estDisque: () => false,
         wikipediaSeul: lireListeCartouches,
+        libretro: DEPOTS_LIBRETRO[slug],
       } satisfies SourceConsole,
     ]),
   ),

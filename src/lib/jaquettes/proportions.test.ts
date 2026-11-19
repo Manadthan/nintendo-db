@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { classeProportions } from "./proportions";
+import { classeProportions, FORMES_REELLES } from "./proportions";
 
 describe("classeProportions (étape 9)", () => {
   it("DS et 3DS : boîte presque carrée", () => {
@@ -10,6 +10,13 @@ describe("classeProportions (étape 9)", () => {
   it("Switch et Switch 2 : boîtier plus étroit (étape 10)", () => {
     expect(classeProportions("switch")).toBe("aspect-[1166/1888]");
     expect(classeProportions("switch-2")).toBe("aspect-[1166/1888]");
+  });
+
+  it("N64 et GBA : cadre carré dans le catalogue, forme réelle sur la fiche (étape 14)", () => {
+    expect(classeProportions("n64")).toBe("aspect-square");
+    expect(classeProportions("gba")).toBe("aspect-square");
+    expect(FORMES_REELLES.has("n64")).toBe(true);
+    expect(FORMES_REELLES.has("wii")).toBe(false);
   });
 
   it("Wii U, Wii et console inconnue : boîte en hauteur", () => {

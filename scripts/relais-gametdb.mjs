@@ -4,6 +4,8 @@
 //   - DS et 3DS (étape 9) : ds/dstdb.xml, 3ds/3dstdb.xml (bases réduites) et {ds,3ds}/scans/{identifiant}.jpg ;
 //   - GameCube (étape 11) : gamecube/gctdb.xml (base Wii avec la GameCube, réduite) et gamecube/faces/{id}.jpg (face
 //     découpée comme la Wii ; sinon petite image 160 × 224 de GameTDB) ;
+//   - N64 et GBA (étape 14) : n64/libretro.xml, gba/libretro.xml, index des boîtes de libretro-thumbnails (noms des
+//     fichiers du dépôt GitHub, lus par un clone sans contenu) ; l'import y cherche les boîtes et les copie lui-même ;
 //   - Switch (étape 10) : switch/switchtdb.xml (base réduite) et switch/scans/{JAP,US,PAL}/{identifiant}.jpg : une
 //     cartouche mondiale (« ALL ») a une boîte par région ;
 //   - Wii (étape 8) : wii/wiitdb.xml (base RÉDUITE aux jeux Nintendo du commerce : 10 Mo → 300 Ko) et
@@ -13,6 +15,10 @@
 // disponible (PAL : EN, puis FR, DE). Un scan déjà déposé n'est pas retéléchargé.
 // Variables : SUPABASE_URL, SUPABASE_SECRET_KEY (secrets du dépôt ; jamais affichées).
 // Node 24 lit directement le TypeScript de src/lib/import/relais-wii.ts (testé par Vitest).
+import { execFileSync } from "node:child_process";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { createClient } from "@supabase/supabase-js";
 import * as cheerio from "cheerio";
 import { strFromU8, unzipSync } from "fflate";
@@ -25,6 +31,7 @@ import {
 } from "../src/lib/import/relais-wii.ts";
 import { languesScan, reduireBasePortable } from "../src/lib/import/relais-portables.ts";
 import { reduireBaseSwitch, SCANS_SWITCH } from "../src/lib/import/relais-switch.ts";
+import { DEPOTS_LIBRETRO, indexEnXml } from "../src/lib/import/libretro.ts";
 import { avecReessais, decrireErreurStockage, telechargerAvecReessais } from "../src/lib/import/reessais.ts";
 
 const { SUPABASE_URL, SUPABASE_SECRET_KEY } = process.env;
@@ -214,3 +221,23 @@ for (const console_ of CONSOLES) {
   );
 }
 if (lents.length) console.log(`${lents.length} scans sans réponse de GameTDB (réessayés au prochain relais).`);
+
+// Étape 14 : index des boîtes libretro-thumbnails (N64, GBA). Clone sans contenu : seulement la liste des fichiers.
+for (const [slug, depot] of Object.entries(DEPOTS_LIBRETRO)) {
+  const dossier = mkdtempSync(join(tmpdir(), "libretro-"));
+  try {
+    execFileSync("git", ["clone", "-q", "--depth", "1", "--filter=blob:none", "--no-checkout",
+      `https://github.com/libretro-thumbnails/${depot}.git`, dossier]);
+    const noms = execFileSync("git", ["-C", dossier, "ls-tree", "-r", "--name-only", "HEAD", "Named_Boxarts/"], {
+      encoding: "utf8",
+      maxBuffer: 50_000_000,
+    })
+      .split("\n")
+      .filter((n) => n.endsWith(".png"))
+      .map((n) => n.slice("Named_Boxarts/".length, -".png".length));
+    await deposer(`${slug}/libretro.xml`, new TextEncoder().encode(indexEnXml(noms)), "application/xml");
+    console.log(`${slug.toUpperCase()} : index libretro-thumbnails déposé (${noms.length} boîtes)`);
+  } finally {
+    rmSync(dossier, { recursive: true, force: true });
+  }
+}

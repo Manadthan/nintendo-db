@@ -19,6 +19,8 @@ export type JeuAImporter = JeuWikipedia & {
   japonais: { titre: string; romanise: string } | null;
   /** Genres du jeu (US-06) : réunion des genres de ses disques, déjà traduits. */
   genres: string[];
+  /** N64, GBA (étape 14) : boîte libretro-thumbnails de chaque région, par son nom No-Intro. */
+  boites?: Partial<Record<Region, string>>;
 };
 
 /** Les disques d'une région peuvent donner des genres différents (Kirby : « plates-formes » en PAL seulement). */

@@ -12,6 +12,7 @@ import {
 } from "@/lib/fiche/fiche";
 import { basculerVersion, useCollection } from "@/lib/collection/navigateur";
 import { possede } from "@/lib/collection/collection";
+import { FORMES_REELLES } from "@/lib/jaquettes/proportions";
 import { Jaquette } from "./Jaquette";
 import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
 
@@ -91,6 +92,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             titre={titre}
             console={jeu.console.nom}
             consoleSlug={jeu.console.slug}
+            formeReelle={FORMES_REELLES.has(jeu.console.slug)}
             sizes="(max-width: 432px) calc(100vw - 32px), 400px"
           />
         </div>

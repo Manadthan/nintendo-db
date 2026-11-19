@@ -31,6 +31,12 @@ import {
 import { enregistrerJaquette } from "@/lib/jaquettes/enregistrer";
 import { appliquerGameTdb, type JeuAImporter } from "@/lib/import/physique";
 import { lireListeWikipediaDetaillee, urlRendu } from "@/lib/import/wikipedia";
+import {
+  adresseBoite,
+  boitesDuJeu,
+  indexerBoites,
+  lireIndexXml,
+} from "@/lib/import/libretro";
 import { supprimerJeuEtJaquettes } from "@/lib/jaquettes/supprimer";
 
 // Identification demandée par Wikimedia aux programmes qui lisent ses pages (aucune donnée personnelle).
@@ -122,7 +128,25 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
     const html = await (
       await telecharger(urlRendu(fiche.wikipedia_liste!), "Wikipédia")
     ).text();
-    const { jeux, ecartes, autresEditeurs } = wikipediaSeul(html);
+    const lue = wikipediaSeul(html);
+    const { ecartes, autresEditeurs } = lue;
+    let jeux = lue.jeux;
+    // N64, GBA (étape 14) : boîte libretro-thumbnails de chaque région sortie, d'après l'index déposé par le relais.
+    if (source.libretro) {
+      const index = indexerBoites(
+        lireIndexXml(
+          await (await lireRelais(`${consoleSlug}/libretro.xml`)).text(),
+        ),
+      );
+      jeux = jeux.map((j) => ({
+        ...j,
+        boites: boitesDuJeu(index, j.titres, {
+          JAP: !!j.sorties.JAP,
+          US: !!j.sorties.US,
+          PAL: !!j.sorties.PAL,
+        }),
+      }));
+    }
     return comparerEtExclure(
       fiche,
       preparerApercu(
@@ -186,7 +210,8 @@ async function comparerEtExclure(
       comparer(
         existants.get(l.slug) ?? null,
         construireJeu(l.wikipedia, fiche.source.prefixeCode),
-        l.wikipedia.disques,
+        // Une boîte libretro connue compte comme un scan : une jaquette manquante rend le jeu « modifié ».
+        { ...l.wikipedia.boites, ...l.wikipedia.disques },
       ),
     ),
     exclus ?? [],
@@ -306,6 +331,19 @@ async function enregistrerLotInterne(
         choix,
         existantes,
       );
+      if (fiche.source.libretro)
+        Object.assign(
+          copiees,
+          await copierBoitesLibretro(
+            supabase,
+            gameId!,
+            fiche.source.libretro,
+            jeu,
+            wikipedia.boites ?? {},
+            existantes,
+            recopierJaquettes,
+          ),
+        );
 
       // Régions sorties dont la jaquette finale n'est pas un scan ni un ajout manuel : à remplacer (R6).
       const sansScan = REGIONS.filter((r) => {
@@ -334,6 +372,50 @@ async function enregistrerLotInterne(
     }
   }
   return resultats;
+}
+
+/**
+ * Boîtes libretro-thumbnails (N64, GBA : étape 14, ADR-09) : pour chaque région sortie dont la boîte est connue,
+ * image téléchargée depuis le dépôt GitHub puis enregistrée en WebP (ADR-04). Jamais à la place d'une photo ou d'une
+ * image ajoutée à la main ; une boîte déjà copiée ne l'est à nouveau qu'avec « Recopier les jaquettes ».
+ */
+async function copierBoitesLibretro(
+  supabase: Awaited<ReturnType<typeof exigerProprietaire>>,
+  gameId: string,
+  depot: string,
+  jeu: ReturnType<typeof construireJeu>,
+  boites: Partial<Record<Region, string>>,
+  anciennes: Partial<
+    Record<Region, { path: string | null; source: SourceJaquette | null }>
+  > | null,
+  recopier: boolean,
+): Promise<Partial<Record<Region, SourceJaquette>>> {
+  const copiees: Partial<Record<Region, SourceJaquette>> = {};
+  const version = Date.now().toString(36);
+  for (const region of REGIONS) {
+    const nom = boites[region];
+    const deja = anciennes?.[region];
+    if (!nom || !jeu.releases[region].sortie) continue;
+    if (deja?.source === "photo" || deja?.source === "url") continue;
+    if (deja?.path && deja.source === "libretro" && !recopier) continue;
+    const reponse = await fetch(adresseBoite(depot, nom), {
+      headers: { "User-Agent": USER_AGENT },
+      cache: "no-store",
+      signal: AbortSignal.timeout(20_000),
+    }).catch(() => null);
+    if (!reponse?.ok) continue; // Boîte absente ou dépôt injoignable : vignette neutre, signalée « sans scan ».
+    await enregistrerJaquette(
+      supabase,
+      gameId,
+      region,
+      Buffer.from(await reponse.arrayBuffer()),
+      "libretro",
+      deja?.path ?? null,
+      version,
+    );
+    copiees[region] = "libretro";
+  }
+  return copiees;
 }
 
 /**
