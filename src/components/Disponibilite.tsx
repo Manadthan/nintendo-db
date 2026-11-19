@@ -16,14 +16,14 @@ export function Disponibilite({
   possedees?: readonly Region[];
 }) {
   return (
-    <ul aria-label="Disponibilité" className="flex gap-1">
+    <ul aria-label="Disponibilité" className="flex shrink-0 gap-1">
       {disponibilite(jeu).map(({ region, sorti }) => {
         const possede = sorti && possedees.includes(region);
         return (
           <li
             key={region}
             aria-label={`${NOMS[region]} : ${sorti ? "sorti" : "non sorti"}${possede ? ", possédé" : ""}`}
-            className={`flex h-5 items-center rounded border px-1.5 text-[10px] font-bold ${
+            className={`flex h-5 shrink-0 items-center rounded border px-1 text-[10px] font-bold whitespace-nowrap ${
               possede
                 ? "border-possede bg-carte text-possede"
                 : sorti
@@ -32,7 +32,8 @@ export function Disponibilite({
             }`}
           >
             {region}
-            {sorti && " ✓"}
+            {/* Espace fine : les 3 étiquettes et la note tiennent sur une ligne de carte (≈ 165 px, iPhone 12 mini). */}
+            {sorti && "\u2009✓"}
           </li>
         );
       })}
