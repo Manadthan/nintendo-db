@@ -3,28 +3,8 @@ import { aRemplacer, type Source } from "@/lib/admin/jaquettes";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import { ensemble } from "@/lib/collection/collection";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
+import { toutesLesPages } from "@/lib/supabase/pages";
 import type { JeuStat } from "./statistiques";
-
-/** Lignes lues par page : Supabase n'en renvoie pas plus de 1 000 à la fois. */
-const PAGE = 1000;
-
-async function toutesLesPages<T>(
-  lire: (
-    de: number,
-    a: number,
-  ) => PromiseLike<{
-    data: T[] | null;
-    error: { message: string } | null;
-  }>,
-): Promise<T[]> {
-  const lignes: T[] = [];
-  for (let de = 0; ; de += PAGE) {
-    const { data, error } = await lire(de, de + PAGE - 1);
-    if (error) throw new Error(`Statistiques illisibles : ${error.message}`);
-    lignes.push(...(data ?? []));
-    if (!data || data.length < PAGE) return lignes;
-  }
-}
 
 type LigneJeu = {
   id: string;
@@ -54,24 +34,28 @@ const titre = (l: LigneJeu) =>
 export async function chargerStatistiques() {
   const supabase = await exigerProprietaire();
   const [lignes, consoles, possessions] = await Promise.all([
-    toutesLesPages<LigneJeu>((de, a) =>
-      supabase
-        .from("games")
-        .select(
-          "id, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre, code_produit, jaquette_path, jaquette_source)",
-        )
-        .order("id")
-        .range(de, a)
-        .overrideTypes<LigneJeu[], { merge: false }>(),
+    toutesLesPages<LigneJeu>(
+      (de, a) =>
+        supabase
+          .from("games")
+          .select(
+            "id, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre, code_produit, jaquette_path, jaquette_source)",
+          )
+          .order("id")
+          .range(de, a)
+          .overrideTypes<LigneJeu[], { merge: false }>(),
+      "Statistiques",
     ),
     supabase.from("consoles").select("slug, nom").order("ordre"),
-    toutesLesPages<{ game_id: string; region: Region }>((de, a) =>
-      supabase
-        .from("possessions")
-        .select("game_id, region")
-        .order("game_id")
-        .order("region")
-        .range(de, a),
+    toutesLesPages<{ game_id: string; region: Region }>(
+      (de, a) =>
+        supabase
+          .from("possessions")
+          .select("game_id, region")
+          .order("game_id")
+          .order("region")
+          .range(de, a),
+      "Statistiques",
     ),
   ]);
   if (consoles.error)
