@@ -12,6 +12,18 @@ export const maxDuration = 60;
 
 /** Consoles importables (étape 8) : leurs sources, telles que la page les présente. */
 const CONSOLES = {
+  n64: {
+    nom: "Nintendo 64",
+    sources: "la liste Wikipédia",
+    description:
+      "Lit la liste Wikipédia (SPEC v1.18, GameTDB ne couvre pas la N64) : jeux édités par Nintendo dans au moins une région, dates par région ; toutes les cartouches sont en boîte. Codes produit à compléter à la main.",
+  },
+  gba: {
+    nom: "Game Boy Advance",
+    sources: "la liste Wikipédia",
+    description:
+      "Lit la liste Wikipédia (SPEC v1.18, GameTDB ne couvre pas la GBA) : jeux édités par Nintendo dans au moins une région, dates et régions de sortie ; toutes les cartouches sont en boîte. Codes produit à compléter à la main.",
+  },
   gamecube: {
     nom: "GameCube",
     sources: "la base GameTDB",

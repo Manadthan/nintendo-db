@@ -48,12 +48,14 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
   const sourcesExternes = [
     ...new Set(
       REGIONS.map((r) => jeu.sorties[r].sourceJaquette)
-        .filter((s) => s === "gametdb" || s === "igdb")
+        .filter((s) => s === "gametdb" || s === "igdb" || s === "libretro")
         .map((s) => SOURCES_JAQUETTE[s]),
     ),
   ];
   // Wii U : Wikipédia + GameTDB ; Switch 2 : Wikipédia seul (étape 10) ; les autres : GameTDB seul.
-  const parWikipedia = ["wii-u", "switch-2"].includes(jeu.console.slug);
+  const parWikipedia = ["wii-u", "switch-2", "n64", "gba"].includes(
+    jeu.console.slug,
+  );
   const region = choix ?? regionParDefaut(jeu, marche);
   const sortie = jeu.sorties[region];
   const titre =
@@ -216,7 +218,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
 
       <p className="text-xs leading-relaxed text-texte-discret">
         Sources :{" "}
-        {/* Wii U et Switch 2 : Wikipédia ; les autres consoles, GameTDB seul (SPEC v1.9 à v1.11). */}
+        {/* Wii U, Switch 2, N64, GBA : Wikipédia ; les autres consoles, GameTDB seul (SPEC v1.9 à v1.18). */}
         {!parWikipedia ? (
           "GameTDB"
         ) : jeu.wikipediaUrl ? (
