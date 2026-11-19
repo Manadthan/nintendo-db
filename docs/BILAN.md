@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.3 — 19/11/2026 — statut : **validé**
+> Version 1.4 — 19/11/2026 — statut : **validé**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.4 | 19/11/2026 | **Étapes 15 à 17** : N64 et GBA complétées, statistiques, tri par note, Game Boy Color ; CI réparée (§10) |
 > | 1.3 | 19/11/2026 | **Étapes 11 à 14** : GameCube, filtre Développeur, ma collection, note Metacritic, Nintendo 64 et Game Boy Advance (§9) |
 > | 1.2 | 18/11/2026 | **Étapes 8 à 10** : Wii, DS, 3DS, Switch, Switch 2, import des nouveautés (§8) |
 > | 1.1 | 17/11/2026 | **Bilan final de la v1** : étapes 6 (filtres) et 7 (finitions) ajoutées (§7), chiffres mis à jour, pistes |
@@ -173,3 +174,32 @@ Leçons ajoutées :
 
 Pistes : boîtes japonaises N64 et GBA (nommées en japonais dans libretro), codes produit N64 et GBA, jaquettes
 Switch 2 à la main ; notes Metacritic manquantes (≈ 40 % des jeux) ; profils d'autres utilisateurs pour la collection.
+
+## 10. Étapes 15 à 17 : N64 et GBA complétées, statistiques, Game Boy Color
+
+| | |
+|---|---|
+| Durée | 1 jour (19/11/2026) |
+| Livré | **Codes produit et boîtes japonaises** N64 / GBA par la série No-Intro (boîtes JAP : N64 19 → 40, GBA 38 → 79) ; **page Statistiques** de l'administration (collection par console, régions, Metacritic, état du catalogue avec listes à compléter) ; **tri par note Metacritic** (« Mieux notés », groupes par tranche) ; **Game Boy Color** (45 jeux, codes DMG- / CGB-) ; éditeurs N64 / GBA corrigés |
+| Pull requests | 14 mergées (#131 à #144) |
+| Tests | 314 unitaires, 70 de bout en bout, 70 sur la base ; 15 migrations |
+| Code applicatif | ≈ 10 600 lignes (hors tests) |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| **CI rouge sans qu'on le voie** : un test pgTAP figé, cassé par la migration 0014 | Rouge sur `main` de #127 à #142 ; le propriétaire ne pouvait plus merger | #142 ; règle ajoutée : lire **chaque** tâche avant de dire « CI verte » |
+| Installation des navigateurs WebKit (miroir Ubuntu lent, verrou apt) | e2e arrêtée avant le premier test sur toutes les PR | Paquets Ubuntu en cache, second essai qui libère le verrou (#142) : e2e en ≈ 4 min |
+| Fichiers de libretro qui sont des **liens Git** | Majora's Mask puis Pokémon Crystal refusés à l'import | Liens suivis au téléchargement (#144), quel que soit leur nom |
+| Page en direct ≠ fixture nettoyée (`<br id>`) | Éditeurs collés (« Hudson SoftNintendo ») en production | Test sur un tableau tel que servi en direct (#140) |
+| Un libellé plus long (« Note Metacritic ») | Page plus large que l'iPhone de 1 px en WebKit | Libellé court « Mieux notés » ; le test de largeur l'a vu |
+
+Leçons ajoutées :
+
+14. **Une fixture nettoyée peut cacher un bug** : garder au moins un test sur un morceau de page tel que la source le
+    sert vraiment (attributs, liens, encodage).
+15. **Vérifier le contenu d'un fichier téléchargé, pas son nom** : un nom d'image peut désigner un lien ou une page
+    d'erreur ; on contrôle ce qu'on reçoit.
+16. **La CI ne fait foi que si on la lit en entier** : un check rouge accepté une fois devient le bruit de fond.
+
+Pistes : boîtes japonaises GBC (titres romanisés), codes produit GBC (No-Intro rare), Game Boy d'origine, Super
+Nintendo, NES ; notes Metacritic à compléter à la main depuis la page Statistiques.
