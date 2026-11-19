@@ -1,9 +1,10 @@
 # Maquettes
 
-> Version 0.6 — 17/11/2026 — statut : **validée**
+> Version 0.7 — 19/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.7 | 19/11/2026 | **Statistiques** (US-18) : page de l'administration en 4 blocs, validée sur maquette (`maquettes/statistiques.png`) |
 > | 0.6 | 17/11/2026 | **Thème sombre** (anthracite doux, accent éclairci) et **logo cartouche** dans l'en-tête, validés sur captures (#49) |
 > | 0.5 | 17/11/2026 | Fiche : grande jaquette **presque pleine largeur** (≈ 340 px sur iPhone 12 mini), en HD, comme gamecartdb |
 > | 0.4 | 16/11/2026 | Jaquette = **scan de la vraie boîte**, bandeau Wii U compris ; aucun bandeau dessiné par le site (#40) |
@@ -24,6 +25,7 @@ emplacements, remplacés par les scans de boîtes GameTDB de chaque région à l
 |---|---|---|---|
 | 1 | Catalogue Wii U, trame de gamecartdb : en-tête (Catalogue, À propos), présentation, « Tous les jeux N », recherche, marché (Tous / Europe / Amérique du Nord / Japon), tri, filtres, grille/liste, « N affichés sur M », groupes par année ; vignette = jaquette, titre, date, disponibilité JAP · US · PAL | `/` → `/consoles/wii-u` | US-02, US-03, US-05, US-06 |
 | 2 | Fiche : retour au catalogue, grande jaquette avec **JAP / US / PAL dessous**, titre et date de la version choisie, informations, disponibilité des 3 régions, sources | `/jeux/wii-u/[jeu]` | US-04, US-07 |
+| 3 | Statistiques (administration) : ma collection par console, par région, notes Metacritic, état du catalogue avec liens vers les listes ; image : [`maquettes/statistiques.png`](maquettes/statistiques.png) | `/admin/statistiques` | US-18 |
 
 ## Repris de gamecartdb (trame) et adapté
 

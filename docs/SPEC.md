@@ -8,6 +8,7 @@
 > | Version | Date | Changements |
 > |---|---|---|
 > | 1.22 | 19/11/2026 | **Game Boy Color** (étape 17) : US-10, même recette que N64 et GBA ; cartouches « Dual Mode » comprises ; codes DMG- / CGB- |
+> | 1.20 | 19/11/2026 | **Statistiques** (étape 16) : US-18, page de l'administration (collection, régions, Metacritic, état du catalogue) ; compteurs de collection retirés du panneau Filtres (US-16) |
 > | 1.19 | 19/11/2026 | **N64 et GBA complétées** (étape 15) : US-10, codes produit et boîtes japonaises retrouvés par le numéro de série No-Intro |
 > | 1.18 | 19/11/2026 | **Nintendo 64 et Game Boy Advance** (étape 14) : US-10 (listes Wikipédia, boîtes libretro-thumbnails à leur forme réelle par région, codes à la main) |
 > | 1.17 | 19/11/2026 | **Note Metacritic** (étape 13) : US-17, sur la fiche (note + lien) et en étiquette dans le catalogue ; Wikipédia + saisie à la main |
@@ -148,7 +149,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       pour chaque version possédée (v1.16, demande du propriétaire : rien sur la jaquette).
 - [ ] Filtre **Collection** dans le panneau : Tous / Possédés / Manquants, selon la version du marché affiché (marché
       « Tous » : au moins une version possédée).
-- [ ] Un **compteur par console** (« GameCube : 12 / 58 ») en tête du panneau Filtres.
+- [ ] ~~Un compteur par console en tête du panneau Filtres~~ : déplacé dans la page **Statistiques** (US-18, v1.20).
 - [ ] La collection est **privée** : un visiteur ne voit ni case, ni coche, ni filtre, ni compteur, et ne peut ni lire
       ni modifier la collection, même en appelant directement le serveur. Les pages publiques restent préparées à
       l'avance ; la collection s'ajoute dans le navigateur une fois connecté.
@@ -259,6 +260,24 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       bouton **Remplacer** sur chacune, pour repérer d'un coup d'œil celles qui ne sont pas des scans de boîte.
 - [ ] La source de la jaquette est mentionnée (ex. « Jaquette : GameTDB »).
 - [ ] Sans jaquette, une vignette neutre affiche le titre et la console.
+
+#### US-18 — Voir mes statistiques (M, SPEC v1.20)
+*En tant que propriétaire connecté, je vois où en est ma collection et ce qui manque au catalogue, hors du catalogue
+public (demande du propriétaire : rien dans le panneau Filtres).*
+- [ ] Une page **Statistiques** dans l'administration, ouverte depuis un bouton en tête de son accueil ; maquette :
+      `docs/maquettes/statistiques.png`. Privée comme toute l'administration.
+- [ ] **Ma collection** : jeux possédés / jeux du catalogue et pourcentage, au total puis par console (ordre
+      chronologique), avec une barre de progression verte. Un jeu compte comme possédé dès **une** version possédée.
+- [ ] **Par région** : nombre de versions possédées en JAP, US et PAL (un jeu possédé en JAP et PAL compte une fois
+      dans « Ma collection », deux fois ici).
+- [ ] **Notes Metacritic** : note moyenne des jeux possédés qui ont une note (aux couleurs Metacritic, US-17) ; les 3
+      jeux possédés les mieux notés ; les 3 jeux les mieux notés qui ne sont pas possédés. Sans note : bloc
+      « Aucune note ».
+- [ ] **État du catalogue** : nombre de jeux ; pour les versions **sorties** : jaquettes manquantes (vignette neutre ou
+      à remplacer), codes produit manquants ; jeux sans note Metacritic. Chaque ligne ouvre la **liste des jeux
+      concernés** : page Jaquettes filtrée « à remplacer », liste Jeux filtrée « sans code produit » (nouveau filtre),
+      page Notes Metacritic.
+- [ ] Les chiffres sont toujours à jour (calculés à l'ouverture de la page, jamais stockés).
 
 ## 5. Exigences non fonctionnelles
 

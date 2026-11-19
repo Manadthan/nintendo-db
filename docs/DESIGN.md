@@ -7,6 +7,7 @@
 > | Version | Date | Changements |
 > |---|---|---|
 > | 1.11 | 19/11/2026 | **Game Boy Color** (étape 17) : étude (§1 octies), ADR-12, plan §8 |
+> | 1.10 | 19/11/2026 | **Statistiques** (étape 16) : ADR-11, plan §8 |
 > | 1.9 | 19/11/2026 | **N64 + GBA complétées** (étape 15) : mesures No-Intro (§1 septies), ADR-10, plan §8 |
 > | 1.8 | 19/11/2026 | **N64 + GBA** (étape 14) : étude (§1 septies), ADR-09 libretro-thumbnails, plan §8 |
 > | 1.7 | 19/11/2026 | **Note Metacritic** (étape 13) : étude (§1 sexies), ADR-08, colonnes `metacritic_*`, plan §8 |
@@ -301,6 +302,14 @@ japonaise : si le titre ne la trouve pas, le nom No-Intro japonais de la même b
 codes passent par un champ `codes` distinct des `disques` GameTDB (aucun scan du relais à copier) ; verrous respectés
 (US-11) ; jeux concernés « modifiés » dans l'import des nouveautés.
 
+**ADR-11 — Statistiques calculées à la demande (étape 16, US-18).** Page serveur `/admin/statistiques`, protégée
+comme l'administration (`exigerProprietaire`). Elle lit en une fois les jeux (console, note Metacritic), leurs sorties
+(région, sortie, code produit, source de jaquette) et les possessions du compte, puis calcule tout dans des **fonctions
+pures** (`src/lib/statistiques/`), testées sur des jeux d'exemple. Rien n'est stocké (ni table ni vue) : pas de
+migration, chiffres toujours justes ; quelques milliers de lignes, lues en une requête. « Jaquette manquante » = sortie
+sans jaquette ou de source `igdb` (même règle que « à remplacer », US-12). Les compteurs du panneau Filtres sont
+retirés (le filtre « Ma collection » reste).
+
 **ADR-12 — Game Boy Color (étape 17).** Lecteur de cartouches de l'ADR-09 généralisé : en-tête sur une ou deux lignes,
 date « First released », colonnes de région seules. La colonne **Dual Mode** donne le préfixe du code produit de chaque
 jeu (`DMG-` si Oui, `CGB-` sinon), porté par le jeu à importer et prioritaire sur le préfixe de la console. Console
@@ -421,6 +430,12 @@ test n'appelle les sites en direct.
 15. **N64 + GBA complétées** (v1.9, ADR-10) — 1 PR, sans migration : lecteur No-Intro (fixtures réduites des deux
     fichiers), codes produit et boîtes japonaises par série, testés sur fixtures ; puis réimport des deux consoles par le
     propriétaire.
+
+16. **Statistiques** (v1.10, ADR-11, US-18) — 2 PR, sans migration, dans n'importe quel ordre :
+    1. **Ma collection, régions, Metacritic** : calculs purs + tests ; page `/admin/statistiques` et bouton sur
+       l'accueil de l'administration ; compteurs retirés du panneau Filtres ; test e2e (page privée, blocs affichés).
+    2. **État du catalogue** : décomptes + tests ; liens vers les listes ; filtre « sans code produit » de la liste
+       Jeux de l'administration.
 
 17. **Game Boy Color** (v1.11, ADR-12) — 1 PR, migration 0015 (console `gbc`) : lecteur généralisé et préfixe par jeu
     (fixtures GBC réduites : liste, index libretro, No-Intro) ; page d'import, forme des boîtes, À propos. Puis relais
