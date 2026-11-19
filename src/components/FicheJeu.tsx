@@ -144,6 +144,23 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
         <Info libelle="Genre" valeur={jeu.genre} />
         <Info libelle="Code produit" valeur={sortie.codeProduit} />
         <Info libelle="Console" valeur={jeu.console.nom} />
+        <div>
+          <dt className="text-xs text-texte-discret">Metacritic</dt>
+          <dd className="mt-0.5 text-sm font-medium">
+            {jeu.metacritic === null ? (
+              "—"
+            ) : jeu.metacriticUrl ? (
+              <a
+                href={jeu.metacriticUrl}
+                className="text-accent underline-offset-2 hover:underline"
+              >
+                {jeu.metacritic}/100
+              </a>
+            ) : (
+              `${jeu.metacritic}/100`
+            )}
+          </dd>
+        </div>
       </dl>
 
       <section
@@ -232,7 +249,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
         {parWikipedia && " (CC BY-SA)"}
         {sourcesExternes.length > 0 &&
           ` · jaquettes ${sourcesExternes.join(", ")}`}
-        . Site de fan non affilié à Nintendo.
+        {jeu.metacritic !== null && " · note Metacritic via Wikipédia"}. Site de
+        fan non affilié à Nintendo.
       </p>
     </main>
   );

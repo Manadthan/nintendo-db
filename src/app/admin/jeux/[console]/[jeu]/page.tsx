@@ -26,7 +26,7 @@ export default async function PageCorrection({
   )
     .from("games")
     .select(
-      "id, slug, developpeur, verrous, consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, code_produit, editeur, verrous)",
+      "id, slug, developpeur, metacritic_note, metacritic_url, verrous, consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, code_produit, editeur, verrous)",
     )
     .eq("consoles.slug", consoleSlug)
     .eq("slug", slug)
@@ -80,6 +80,8 @@ export default async function PageCorrection({
       <FormulaireCorrection
         gameId={data.id}
         developpeur={data.developpeur ?? ""}
+        metacriticNote={data.metacritic_note?.toString() ?? ""}
+        metacriticUrl={data.metacritic_url ?? ""}
         verrousJeu={data.verrous}
         sorties={sorties}
       />

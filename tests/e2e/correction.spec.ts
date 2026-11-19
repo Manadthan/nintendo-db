@@ -78,3 +78,35 @@ test("la liste des jeux se choisit par console (étape 8)", async ({ page }) => 
   await page.getByText("+ Ajouter un jeu").click();
   await expect(page.getByText("Console : Wii", { exact: true })).toBeVisible();
 });
+
+test("note Metacritic saisie à la main : sur la fiche (avec lien) et en étiquette dans le catalogue (US-17)", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.goto("/admin/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
+  await page.locator('input[name="metacritic_note"]').fill("73");
+  await page
+    .locator('input[name="metacritic_url"]')
+    .fill("https://www.metacritic.com/game/kirby-and-the-rainbow-curse/");
+  await page.getByRole("button", { name: "Enregistrer la fiche" }).click();
+  await expect(page.getByRole("status")).toContainText("Fiche enregistrée");
+
+  await page.goto("/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
+  await expect(
+    page.getByRole("link", { name: "73/100", exact: true }),
+  ).toHaveAttribute(
+    "href",
+    "https://www.metacritic.com/game/kirby-and-the-rainbow-curse/",
+  );
+  await page.goto("/");
+  await expect(
+    page.getByRole("img", { name: "Metacritic : 73 sur 100", exact: true }),
+  ).toBeVisible();
+
+  // Nettoyage : note effacée (le champ reste verrouillé, sans effet sur les autres tests).
+  await page.goto("/admin/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
+  await page.locator('input[name="metacritic_note"]').fill("");
+  await page.locator('input[name="metacritic_url"]').fill("");
+  await page.getByRole("button", { name: "Enregistrer la fiche" }).click();
+  await expect(page.getByRole("status")).toContainText("Fiche enregistrée");
+});

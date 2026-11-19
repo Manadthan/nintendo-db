@@ -20,9 +20,11 @@ export async function proxy(request: NextRequest) {
         return request.cookies.getAll();
       },
       setAll(cookiesToSet) {
-        for (const { name, value } of cookiesToSet) request.cookies.set(name, value);
+        for (const { name, value } of cookiesToSet)
+          request.cookies.set(name, value);
         response = NextResponse.next({ request });
-        for (const { name, value, options } of cookiesToSet) response.cookies.set(name, value, options);
+        for (const { name, value, options } of cookiesToSet)
+          response.cookies.set(name, value, options);
       },
     },
   });
@@ -36,7 +38,8 @@ export async function proxy(request: NextRequest) {
   if (destination) {
     const redirect = NextResponse.redirect(new URL(destination, request.url));
     // Conserve les cookies de session éventuellement rafraîchis.
-    for (const cookie of response.cookies.getAll()) redirect.cookies.set(cookie);
+    for (const cookie of response.cookies.getAll())
+      redirect.cookies.set(cookie);
     return redirect;
   }
   return response;

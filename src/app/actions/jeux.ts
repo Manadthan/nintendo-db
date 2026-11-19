@@ -33,7 +33,9 @@ export async function corrigerJeu(
     const supabase = await exigerProprietaire();
     const { data, error } = await supabase
       .from("games")
-      .select(`developpeur, verrous, releases(${COLONNES_SORTIE})`)
+      .select(
+        `developpeur, metacritic_note, metacritic_url, verrous, releases(${COLONNES_SORTIE})`,
+      )
       .eq("id", gameId)
       .single();
     if (error || !data) throw new Error(error?.message ?? "Jeu introuvable.");
@@ -43,6 +45,8 @@ export async function corrigerJeu(
     );
     const avant: JeuCorrigeable = {
       developpeur: data.developpeur,
+      metacritic_note: data.metacritic_note,
+      metacritic_url: data.metacritic_url,
       releases: Object.fromEntries(
         REGIONS.map((r) => {
           const s = parRegion[r];
@@ -70,7 +74,7 @@ export async function corrigerJeu(
     if (!resultat.ok) return { erreurs: resultat.erreurs };
 
     const { game, releases } = resultat.correction;
-    if ("developpeur" in game) {
+    if (Object.keys(game).some((c) => c !== "verrous")) {
       const { error: e } = await supabase
         .from("games")
         .update(game)

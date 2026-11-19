@@ -29,6 +29,8 @@ export type JeuFiche = JeuCatalogue & {
   franchise: string | null;
   genre: string | null;
   wikipediaUrl: string | null;
+  /** Page Metacritic du jeu (US-17), si connue. */
+  metacriticUrl: string | null;
   console: { slug: string; nom: string };
   sorties: Record<Region, SortieFiche>;
 };
@@ -38,6 +40,7 @@ export type LigneFiche = Omit<LigneJeu, "releases"> & {
   franchise: string | null;
   genre: string | null;
   wikipedia_url: string | null;
+  metacritic_url: string | null;
   consoles: { slug: string; nom: string };
   releases: (LigneJeu["releases"][number] & {
     code_produit: string | null;
@@ -66,6 +69,7 @@ export function versJeuFiche(ligne: LigneFiche, baseUrl: string): JeuFiche {
     franchise: ligne.franchise,
     genre: ligne.genre,
     wikipediaUrl: ligne.wikipedia_url,
+    metacriticUrl: ligne.metacritic_url,
     console: ligne.consoles,
     sorties,
   };

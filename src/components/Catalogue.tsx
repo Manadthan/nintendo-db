@@ -44,6 +44,7 @@ import {
 } from "@/lib/collection/collection";
 import { useCollection } from "@/lib/collection/navigateur";
 import { Disponibilite } from "./Disponibilite";
+import { NoteMetacritic } from "./NoteMetacritic";
 import { FiltresActifs, PanneauFiltres } from "./Filtres";
 import { Jaquette } from "./Jaquette";
 
@@ -328,7 +329,10 @@ export function Catalogue({ jeux, consoles }: Props) {
                         {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
                         {v.jeu.console.nom}
                       </span>
-                      <Disponibilite jeu={v.jeu} />
+                      <div className="flex items-center gap-1">
+                        <Disponibilite jeu={v.jeu} />
+                        <NoteMetacritic note={v.jeu.metacritic} />
+                      </div>
                     </div>
                   </Link>
                 </li>
@@ -364,7 +368,10 @@ export function Catalogue({ jeux, consoles }: Props) {
                         {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
                         {v.jeu.console.nom}
                       </span>
-                      <Disponibilite jeu={v.jeu} />
+                      <div className="flex items-center gap-1">
+                        <Disponibilite jeu={v.jeu} />
+                        <NoteMetacritic note={v.jeu.metacritic} />
+                      </div>
                     </div>
                   </Link>
                 </li>
