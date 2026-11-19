@@ -8,6 +8,7 @@
 > | Version | Date | Changements |
 > |---|---|---|
 > | 1.17 | 19/11/2026 | **Note Metacritic** (étape 13) : US-17, sur la fiche (note + lien) et en étiquette dans le catalogue ; Wikipédia + saisie à la main |
+> | 1.16 | 19/11/2026 | US-16 : versions possédées en **étiquettes vertes** JAP / US / PAL, plus de coche sur la jaquette (demande du propriétaire) |
 > | 1.15 | 19/11/2026 | US-09 : **icône de compte** en haut des pages publiques, à la place du lien « Administration » du pied de page ; Catalogue et À propos en icônes (demande du propriétaire) |
 > | 1.14 | 19/11/2026 | **Ma collection** (étape 12) : US-16, versions régionales possédées, privée, propriétaire seul |
 > | 1.13 | 18/11/2026 | **GameCube** (étape 11) : US-10 (disques du commerce, compilations Zelda Collector's Edition et Pac-Man Vs., petite image japonaise faute de scan) |
@@ -140,7 +141,8 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 *En tant que propriétaire connecté, je note les versions régionales de mes jeux pour savoir ce qui me manque.*
 - [ ] Sur la fiche d'un jeu, chaque région **sortie** (JAP, US, PAL) a une case « Je l'ai » ; un tap coche ou décoche,
       immédiatement enregistré. Une région non sortie n'a pas de case.
-- [ ] Sur le catalogue, une vignette dont la version affichée est possédée porte une **coche verte**.
+- [ ] Sur le catalogue, les étiquettes **JAP / US / PAL** sous la jaquette passent en **vert** (texte, coche et contour)
+      pour chaque version possédée (v1.16, demande du propriétaire : rien sur la jaquette).
 - [ ] Filtre **Collection** dans le panneau : Tous / Possédés / Manquants, selon la version du marché affiché (marché
       « Tous » : au moins une version possédée).
 - [ ] Un **compteur par console** (« GameCube : 12 / 58 ») en tête du panneau Filtres.
