@@ -110,6 +110,13 @@ export default async function PageAdmin() {
         <span aria-hidden="true">›</span>
       </Link>
       <Link
+        href="/admin/notes"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Notes Metacritic (Wikipédia)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
         href="/admin/jaquettes"
         className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
       >

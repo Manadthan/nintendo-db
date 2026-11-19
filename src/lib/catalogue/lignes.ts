@@ -13,6 +13,7 @@ export type LigneJeu = {
   slug: string;
   developpeur: string | null;
   genre: string | null;
+  metacritic_note: number | null;
   consoles: { slug: string; nom: string };
   releases: {
     region: Region;
@@ -73,6 +74,7 @@ export function versJeuCatalogue(
       .split(",")
       .map((g) => g.trim())
       .filter(Boolean),
+    metacritic: ligne.metacritic_note,
     sorties,
   };
 }

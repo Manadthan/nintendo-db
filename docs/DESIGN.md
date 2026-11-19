@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.7 — 19/11/2026 — statut : **à valider**
+> Version 1.8 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.8 | 19/11/2026 | **N64 + GBA** (étape 14) : étude (§1 septies), ADR-09 libretro-thumbnails, plan §8 |
 > | 1.7 | 19/11/2026 | **Note Metacritic** (étape 13) : étude (§1 sexies), ADR-08, colonnes `metacritic_*`, plan §8 |
 > | 1.6 | 19/11/2026 | **Ma collection** (étape 12) : ADR-07, table `possessions`, plan §8 |
 > | 1.5 | 18/11/2026 | **GameCube** (étape 11) : étude (§1 quinquies), plan §8 |
@@ -127,6 +128,22 @@ Pièges : un article couvre parfois plusieurs consoles (Metroid Prime et sa vers
 → la note doit porter le nom de la console du jeu, sinon elle est **ambiguë** et laissée vide ; Wikipédia limite le débit
 (erreurs 429 dès quelques dizaines d'appels rapprochés) → lots de 20 titres par appel, réessais espacés.
 
+## 1 septies. Étude Nintendo 64 et Game Boy Advance (19/11/2026)
+
+GameTDB ne couvre ni la N64 ni la GBA (seulement Wii, Wii U, GameCube, DS, 3DS, Switch, PS3).
+
+| Mesure | N64 | GBA |
+|---|---|---|
+| Liste Wikipédia : colonnes | Title, Developer(s), Publisher(s), First released, Release date (Japan, North America, PAL) | Title(s), Developer(s), Publisher(s), Release date(s) (JP, NA, EU/PAL, AU, KOR), Region(s) released ; dates précédées d'une clé de tri cachée |
+| Jeux édités par Nintendo (une région au moins) | **58** | **≈ 120** |
+| Boîtes **libretro-thumbnails** (dépôt GitHub, noms No-Intro « Titre (USA) ») | 1 115 fichiers ; boîte trouvée par le titre pour **52 / 58** jeux (US 50, Europe 41, Japon 18) | 5 961 fichiers ; **85 / 120** (US 61, Europe 35, Japon 39) |
+| Taille, forme | 512 px ; 512 × 357 (US, Europe), 366 × 512 (Japon) | 512 px ; 512 × 512 (US, Europe), 512 × 326 (Japon) |
+| Codes produit | aucune source simple (No-Intro à étudier plus tard) | idem |
+
+libretro-thumbnails : pas de licence formelle (comme GameTDB), images propriété des éditeurs ; planche d'exemples montrée
+au propriétaire avant la spec (BILAN, leçon 9). Les boîtes japonaises portent souvent le titre japonais romanisé (« Zelda
+no Densetsu ») : introuvables par le titre anglais, elles restent en vignette neutre.
+
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
 Vercel avec un cache d'un an). C'est le modèle retenu (ADR-04).
 
@@ -244,6 +261,15 @@ console). Champs **verrouillables** comme les autres (ADR-03 point 4) : une sais
 pages publiques lisent les colonnes ; aucun appel à Wikipédia ni à Metacritic depuis le navigateur. *Pourquoi* : une
 source libre, citée, sans clé ; mieux vaut une note manquante (saisissable) qu'une note d'une autre console.
 
+**ADR-09 — N64 et GBA : Wikipédia + libretro-thumbnails (étape 14).** Lecteur de liste Wikipédia commun, paramétré par
+console (noms des colonnes, « en boîte » : marque † pour la Wii U, toutes les cartouches pour N64 et GBA ; clés de tri
+cachées retirées). Jaquettes : l'**index** des boîtes (noms de fichiers du dépôt) est déposé par le relais dans le
+bucket `gametdb` (`n64/libretro.txt`, `gba/libretro.txt`) ; l'import y cherche, pour chaque région sortie, le titre
+normalisé (« The » déplacé, ponctuation ignorée) et la région No-Intro (`USA` → US, `Europe` → PAL, `Japan` → JAP,
+`World` → les trois ; ni « Beta », « Proto », « Demo », « Virtual Console »), puis copie l'image depuis
+`raw.githubusercontent.com` en WebP (ADR-04) avec la source `libretro`. Forme réelle : la fiche affiche la jaquette à ses
+proportions ; le catalogue la centre entière dans un cadre carré propre à ces consoles.
+
 ## 5. Modèle de données
 
 ```
@@ -348,6 +374,12 @@ test n'appelle les sites en direct.
       saisie et verrou dans la correction d'une fiche (US-11).
    2. **Mise à jour depuis Wikipédia** : lecteur de l'encadré (note par console, ambiguïtés) testé sur des **fixtures**
       (copies d'articles) ; page d'administration « Notes Metacritic » : aperçu, lots de 20, résumé.
+
+14. **N64 + GBA** (v1.8) — 2 PR à merger **dans l'ordre** :
+   1. **Liste et import** : lecteur Wikipédia paramétré (fixtures réduites des deux listes) ; migration 0014 (consoles
+      `n64` 1996 et `gba` 2001, ordre chronologique ; source de jaquette `libretro`) ; pages d'import ; sans jaquettes.
+   2. **Jaquettes** : index libretro déposé par le relais, rapprochement titre + région (testé sur fixtures), copie à
+      l'import, forme réelle sur la fiche et cadre carré dans le catalogue, mention de la source.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.

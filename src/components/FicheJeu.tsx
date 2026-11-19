@@ -13,6 +13,19 @@ import {
 import { basculerVersion, useCollection } from "@/lib/collection/navigateur";
 import { possede } from "@/lib/collection/collection";
 import { Jaquette } from "./Jaquette";
+import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
+
+/** Note Metacritic de la fiche (US-17), aux couleurs de Metacritic : vert ≥ 75, jaune 50 à 74, rouge < 50. */
+function NoteColoree({ note }: { note: number }) {
+  return (
+    <span
+      title={`${note} sur 100`}
+      className={`inline-flex h-6 min-w-7 items-center justify-center rounded-md px-1.5 text-sm font-bold tabular-nums ${CLASSES_NOTE[niveauNote(note)]}`}
+    >
+      {note}
+    </span>
+  );
+}
 
 const NOMS: Record<Region, string> = {
   JAP: "Japon",
@@ -146,6 +159,24 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
         <Info libelle="Genre" valeur={jeu.genre} />
         <Info libelle="Code produit" valeur={sortie.codeProduit} />
         <Info libelle="Console" valeur={jeu.console.nom} />
+        <div>
+          <dt className="text-xs text-texte-discret">Metacritic</dt>
+          <dd className="mt-0.5 text-sm font-medium">
+            {jeu.metacritic === null ? (
+              "—"
+            ) : jeu.metacriticUrl ? (
+              <a
+                href={jeu.metacriticUrl}
+                aria-label={`Metacritic : ${jeu.metacritic} sur 100 (page Metacritic)`}
+                className="inline-flex"
+              >
+                <NoteColoree note={jeu.metacritic} />
+              </a>
+            ) : (
+              <NoteColoree note={jeu.metacritic} />
+            )}
+          </dd>
+        </div>
       </dl>
 
       <section
@@ -234,7 +265,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
         {parWikipedia && " (CC BY-SA)"}
         {sourcesExternes.length > 0 &&
           ` · jaquettes ${sourcesExternes.join(", ")}`}
-        . Site de fan non affilié à Nintendo.
+        {jeu.metacritic !== null && " · note Metacritic via Wikipédia"}. Site de
+        fan non affilié à Nintendo.
       </p>
     </main>
   );

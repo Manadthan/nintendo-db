@@ -43,11 +43,15 @@ function Verrou({ actif }: { actif: boolean }) {
 export function FormulaireCorrection({
   gameId,
   developpeur,
+  metacriticNote,
+  metacriticUrl,
   verrousJeu,
   sorties,
 }: {
   gameId: string;
   developpeur: string;
+  metacriticNote: string;
+  metacriticUrl: string;
   verrousJeu: string[];
   sorties: Sortie[];
 }) {
@@ -90,6 +94,35 @@ export function FormulaireCorrection({
           className={champ}
         />
       </label>
+
+      <div className="grid grid-cols-[96px_1fr] gap-3">
+        <label className={etiquette}>
+          <span>
+            Metacritic
+            <Verrou actif={verrousJeu.includes("metacritic_note")} />
+          </span>
+          <input
+            name="metacritic_note"
+            inputMode="numeric"
+            placeholder="0–100"
+            defaultValue={metacriticNote}
+            className={champ}
+          />
+        </label>
+        <label className={etiquette}>
+          <span>
+            Page Metacritic
+            <Verrou actif={verrousJeu.includes("metacritic_url")} />
+          </span>
+          <input
+            name="metacritic_url"
+            type="url"
+            placeholder="https://www.metacritic.com/game/…"
+            defaultValue={metacriticUrl}
+            className={`${champ} min-w-0`}
+          />
+        </label>
+      </div>
 
       {sorties.map((s) => {
         const v = (c: string) => s.verrous.includes(c);

@@ -10,6 +10,7 @@ const ligne: LigneJeu = {
   consoles: { slug: "wii-u", nom: "Wii U" },
   developpeur: "Xing",
   genre: "Musique, Karaoké, Démo",
+  metacritic_note: 62,
   releases: [
     {
       region: "PAL",
@@ -82,5 +83,14 @@ describe("versJeuCatalogue", () => {
       `/jaquettes/${ID}/pal-600.webp 600w`,
     );
     expect(jeu.sorties.US.jaquetteSrcset).toBeNull();
+  });
+});
+
+describe("note Metacritic (US-17)", () => {
+  it("passe telle quelle au catalogue, ou null si inconnue", () => {
+    expect(versJeuCatalogue(ligne, BASE).metacritic).toBe(62);
+    expect(
+      versJeuCatalogue({ ...ligne, metacritic_note: null }, BASE).metacritic,
+    ).toBeNull();
   });
 });
