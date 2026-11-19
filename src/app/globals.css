@@ -27,6 +27,12 @@
   --color-erreur-bordure: #f1c4c4;
   /* Ma collection (US-16) : coche verte sur les vignettes des versions possédées (blanc dessus : 5,1:1). */
   --color-possede: #1e7a3c;
+  /* Note Metacritic (US-17) : couleurs de Metacritic ; texte blanc (vert, rouge : ≥ 4,5:1) ou foncé (jaune). */
+  --color-mc-bon: #1f7a33;
+  --color-mc-moyen: #f2c230;
+  --color-mc-faible: #c4271c;
+  --color-mc-texte: #ffffff;
+  --color-mc-texte-moyen: #16181d;
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-titre: var(--font-space-grotesk), var(--font-inter), sans-serif;
 }
@@ -60,6 +66,9 @@
     --color-erreur-fond: #3a2124;
     --color-erreur-bordure: #6a3537;
     --color-possede: #2f9e55;
+    --color-mc-bon: #2a8f40;
+    --color-mc-moyen: #e3b420;
+    --color-mc-faible: #d13a2f;
     color-scheme: dark;
   }
 }
@@ -89,6 +98,9 @@
   --color-erreur-fond: #3a2124;
   --color-erreur-bordure: #6a3537;
   --color-possede: #2f9e55;
+  --color-mc-bon: #2a8f40;
+  --color-mc-moyen: #e3b420;
+  --color-mc-faible: #d13a2f;
   color-scheme: dark;
 }
 

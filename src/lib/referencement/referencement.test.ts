@@ -39,6 +39,8 @@ const ligne: LigneFiche = {
   franchise: null,
   genre: "Musique, Karaoké",
   wikipedia_url: null,
+  metacritic_note: null,
+  metacritic_url: null,
   consoles: { slug: "wii-u", nom: "Wii U" },
   releases: [
     release("JAP", "Wii カラオケ U", "2012-12-08"),

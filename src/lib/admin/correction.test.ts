@@ -18,6 +18,8 @@ const sortie = (extra: Partial<SortieCorrigeable> = {}): SortieCorrigeable => ({
 });
 const avant: JeuCorrigeable = {
   developpeur: "Nintendo EAD",
+  metacritic_note: null,
+  metacritic_url: null,
   releases: {
     JAP: sortie({ titre: "スプラトゥーン" }),
     US: sortie(),
@@ -86,5 +88,44 @@ describe("preparerCorrection (US-11)", () => {
       code_produit: null,
     });
     expect(s.releases.US.sortie).toBe(false);
+  });
+
+  it("note Metacritic saisie à la main : écrite et verrouillée ; hors de 0 à 100 ou mauvaise adresse, refusée", () => {
+    const apres = structuredClone(avant);
+    apres.metacritic_note = 81;
+    apres.metacritic_url = "https://www.metacritic.com/game/splatoon/";
+    expect(preparerCorrection(avant, apres, sansVerrou)).toMatchObject({
+      ok: true,
+      correction: {
+        game: {
+          metacritic_note: 81,
+          metacritic_url: "https://www.metacritic.com/game/splatoon/",
+          verrous: ["metacritic_note", "metacritic_url"],
+        },
+      },
+    });
+    const faux = structuredClone(avant);
+    faux.metacritic_note = 120;
+    faux.metacritic_url = "https://exemple.fr/splatoon";
+    const r = preparerCorrection(avant, faux, sansVerrou);
+    expect(!r.ok && r.erreurs).toEqual([
+      "Note Metacritic : un nombre entier de 0 à 100.",
+      "Page Metacritic : une adresse commençant par https://www.metacritic.com/.",
+    ]);
+  });
+
+  it("lit la note saisie ; un texte non numérique est refusé", () => {
+    const f = new FormData();
+    f.set("metacritic_note", " 81 ");
+    expect(lireSaisie(f).metacritic_note).toBe(81);
+    f.set("metacritic_note", "bien");
+    const apres = lireSaisie(f);
+    expect(
+      preparerCorrection(
+        avant,
+        { ...avant, metacritic_note: apres.metacritic_note },
+        sansVerrou,
+      ).ok,
+    ).toBe(false);
   });
 });

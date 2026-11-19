@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.17 — 19/11/2026 — statut : **à valider**
+> Version 1.18 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.18 | 19/11/2026 | **Nintendo 64 et Game Boy Advance** (étape 14) : US-10 (listes Wikipédia, boîtes libretro-thumbnails à leur forme réelle par région, codes à la main) |
 > | 1.17 | 19/11/2026 | **Note Metacritic** (étape 13) : US-17, sur la fiche (note + lien) et en étiquette dans le catalogue ; Wikipédia + saisie à la main |
 > | 1.16 | 19/11/2026 | US-16 : versions possédées en **étiquettes vertes** JAP / US / PAL, plus de coche sur la jaquette (demande du propriétaire) |
 > | 1.15 | 19/11/2026 | US-09 : **icône de compte** en haut des pages publiques, à la place du lien « Administration » du pied de page ; Catalogue et À propos en icônes (demande du propriétaire) |
@@ -220,6 +221,15 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       « logiciel »). Codes produit `DOL-` + 4 caractères (ex. `DOL-GALE`).
 - [ ] GameCube : jaquette = face avant découpée dans le scan de la boîte dépliée, comme la Wii ; sans ce scan (surtout
       au Japon), la **petite image** de GameTDB (160 × 224 px), floue en grand, remplaçable par une photo (US-12).
+- [ ] **Nintendo 64 et Game Boy Advance** (SPEC v1.18) : GameTDB ne les couvre pas. Liste, éditeurs et dates par région
+      viennent des listes **Wikipédia** (« List of Nintendo 64 games », « List of Game Boy Advance games ») : jeux édités
+      par Nintendo dans au moins une région ; toutes les cartouches sont en boîte ; « Unreleased » = non sorti.
+- [ ] N64 et GBA : jaquettes de **libretro-thumbnails** (scans de boîtes par région, 512 px), retrouvées par le titre et
+      la région ; mention « Jaquette : libretro-thumbnails ». Chaque jaquette garde sa **forme réelle** (N64 en largeur
+      aux États-Unis et en Europe, en hauteur au Japon ; GBA carrée ou en largeur), entière dans le cadre du catalogue.
+      Boîte introuvable (souvent japonaise, nommée en japonais) : vignette neutre, photo à la main (US-12).
+- [ ] N64 et GBA : **pas de code produit** importé (« — », complété à la main, US-11) ; titre japonais = titre anglais
+      faute de source.
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
@@ -254,7 +264,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 ## 6. Consoles couvertes
 
 **v1 : Wii U.** Puis **Wii** (étape 8), **DS + 3DS** (étape 9), **Switch + Switch 2** (étape 10), **GameCube** (étape 11),
-puis les autres :
+**Nintendo 64 + Game Boy Advance** (étape 14), puis les autres :
 **Salon** : Color TV-Game, NES / Famicom (+ Famicom Disk System), Super Nintendo / Super Famicom (+ Satellaview),
 Nintendo 64 (+ 64DD), GameCube, Wii, Wii U, Switch, Switch 2.
 **Portables** : Game & Watch, Game Boy, Game Boy Color, Virtual Boy, Game Boy Advance (+ e-Reader), Pokémon Mini,

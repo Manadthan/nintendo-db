@@ -32,6 +32,7 @@ const jeu = (
   slug,
   console: { slug: "wii-u", nom: "Wii U" },
   developpeur,
+  metacritic: null,
   editeur: "Nintendo",
   genres,
   sorties: {
