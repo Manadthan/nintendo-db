@@ -4,7 +4,8 @@ create extension if not exists pgtap with schema extensions;
 select plan(2);
 
 select enum_has_labels(
-  'public', 'jaquette_source', array['gametdb', 'igdb', 'photo', 'url'],
+  -- « libretro » ajoutée par la migration 0014 (étape 14, N64 et GBA).
+  'public', 'jaquette_source', array['gametdb', 'igdb', 'libretro', 'photo', 'url'],
   'jaquette_source accepte gametdb, en tête des sources'
 );
 select lives_ok(
