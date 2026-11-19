@@ -76,7 +76,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       tri, grille / liste, filtres (US-06), et « N jeux affichés sur M ».
 - [ ] Les jeux s'affichent en **grille de jaquettes** (2 par ligne sur iPhone) ou en **liste** ; le dernier choix est retenu.
 - [ ] Chaque jeu montre jaquette, titre, date et sa **disponibilité par région** (JAP · US · PAL, cochées si sorti).
-- [ ] Tri : plus anciens d'abord (par défaut), plus récents d'abord, A → Z, **note Metacritic** (v1.21 : de la meilleure
+- [ ] Tri : plus anciens d'abord (par défaut), plus récents d'abord, A → Z, **mieux notés** (note Metacritic, v1.21 : de la meilleure
       à la moins bonne, à égalité par titre, jeux sans note à la fin) ; regroupement **par année** en tri par date, **par
       tranche** en tri par note (« 90 et plus », « 75 à 89 », « 50 à 74 », « Moins de 50 », « Sans note »).
 - [ ] La page reste fluide avec 300 jeux (images chargées au fil du défilement).

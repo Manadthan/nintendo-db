@@ -214,7 +214,7 @@ export function Catalogue({ jeux, consoles }: Props) {
           <option value="anciens">Plus anciens</option>
           <option value="recents">Plus récents</option>
           <option value="az">A → Z</option>
-          <option value="note">Note Metacritic</option>
+          <option value="note">Mieux notés</option>
         </select>
         <button
           type="button"
