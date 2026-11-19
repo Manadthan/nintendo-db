@@ -12,6 +12,12 @@ export const maxDuration = 60;
 
 /** Consoles importables (étape 8) : leurs sources, telles que la page les présente. */
 const CONSOLES = {
+  nes: {
+    nom: "NES",
+    sources: "la liste Wikipédia",
+    description:
+      "Lit la liste Wikipédia (SPEC v1.27, GameTDB ne couvre pas la NES) : jeux édités par Nintendo dans au moins une région, dates par région ; boîtes libretro-thumbnails (une boîte « World » ne sert jamais au Japon). Codes produit (HVC-, NES-) à compléter à la main.",
+  },
   snes: {
     nom: "Super Nintendo",
     sources: "la liste Wikipédia",

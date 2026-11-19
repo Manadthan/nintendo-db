@@ -10,6 +10,7 @@ export const DEPOTS_LIBRETRO: Record<string, string> = {
   gb: "Nintendo_-_Game_Boy",
   vb: "Nintendo_-_Virtual_Boy",
   snes: "Nintendo_-_Super_Nintendo_Entertainment_System",
+  nes: "Nintendo_-_Nintendo_Entertainment_System",
   gbc: "Nintendo_-_Game_Boy_Color",
   gba: "Nintendo_-_Game_Boy_Advance",
 };
@@ -68,9 +69,12 @@ export function cleTitre(titre: string): string {
   );
 }
 
-/** Boîtes à écarter : prototypes, démos, rééditions Virtual Console ou GameCube, versions non officielles. */
+/**
+ * Boîtes à écarter : prototypes, démos, rééditions (Virtual Console, GameCube, cartes e-Reader, jeux cachés dans
+ * Animal Crossing : étape 21), versions non officielles.
+ */
 const ECARTEES =
-  /\((?:[^)]*\b(?:Beta|Proto|Demo|Sample|Kiosk|Virtual Console|Debug|GameCube|Wii U|Switch Online|Pirate|Unl|Aftermarket|Competition|Hack)\b[^)]*)\)/i;
+  /\((?:[^)]*\b(?:Beta|Proto|Demo|Sample|Kiosk|Virtual Console|Debug|GameCube|Wii U|Switch Online|e-Reader|Animal Crossing|Pirate|Unl|Aftermarket|Competition|Hack)\b[^)]*)\)/i;
 
 /** Nom No-Intro écarté : prototype, démo, réédition, version non officielle, ou lien symbolique (#129). */
 export const estEcartee = (nom: string) =>
@@ -79,7 +83,8 @@ export const estEcartee = (nom: string) =>
 /** Régions No-Intro → régions du site ; priorité : la région exacte avant un pays de la même zone. */
 const REGIONS_NOINTRO: Record<string, { regions: RegionSite[]; rang: number }> =
   {
-    World: { regions: ["JAP", "US", "PAL"], rang: 1 },
+    // « World » : la boîte scannée est l'américaine ou l'européenne, jamais la japonaise (étape 21, SPEC v1.27).
+    World: { regions: ["US", "PAL"], rang: 1 },
     USA: { regions: ["US"], rang: 0 },
     Japan: { regions: ["JAP"], rang: 0 },
     Europe: { regions: ["PAL"], rang: 0 },

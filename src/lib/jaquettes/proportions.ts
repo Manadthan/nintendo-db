@@ -20,6 +20,7 @@ const PAR_CONSOLE: Record<string, string> = {
   gb: CARRE,
   vb: CARRE,
   snes: CARRE,
+  nes: CARRE,
 };
 
 /** Consoles dont la fiche montre la jaquette à sa forme réelle, différente selon la région (étape 14). */
@@ -30,6 +31,7 @@ export const FORMES_REELLES = new Set([
   "gb",
   "vb",
   "snes",
+  "nes",
 ]);
 
 /** Classe Tailwind des proportions de la boîte d'une console ; en hauteur par défaut. */

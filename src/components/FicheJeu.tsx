@@ -76,6 +76,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
   const parWikipedia = [
     "wii-u",
     "switch-2",
+    "nes",
     "gb",
     "snes",
     "vb",

@@ -58,6 +58,9 @@ export type SourceConsole = {
 export const prefixeSuperNintendo = (id: string) =>
   id.endsWith("J") ? "SHVC-" : id.endsWith("E") ? "SNS-" : "SNSP-";
 
+/** NES (étape 21) : HVC- au Japon (Famicom), NES- ailleurs, selon la lettre de la série. */
+export const prefixeNes = (id: string) => (id.endsWith("J") ? "HVC-" : "NES-");
+
 export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
   "wii-u": {
     slug: "wii-u",
@@ -134,6 +137,8 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
         ["vb", "VUE-"],
         // Étape 20 : Super Nintendo, préfixe selon la région de la série (rare : codes surtout à la main).
         ["snes", prefixeSuperNintendo],
+        // Étape 21 : NES, HVC- au Japon, NES- ailleurs (série rare : codes surtout à la main).
+        ["nes", prefixeNes],
       ] as const
     ).map(([slug, prefixeCode]) => [
       slug,
