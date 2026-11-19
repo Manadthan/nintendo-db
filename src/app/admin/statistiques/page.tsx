@@ -5,10 +5,12 @@ import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
 import { REGIONS } from "@/lib/catalogue/types";
 import { chargerStatistiques } from "@/lib/statistiques/charger";
 import {
+  etatCatalogue,
   maCollection,
   notesMetacritic,
   parRegion,
   type JeuNote,
+  type Manque,
 } from "@/lib/statistiques/statistiques";
 
 export const metadata: Metadata = {
@@ -83,6 +85,7 @@ export default async function PageStatistiques() {
   const collection = maCollection(jeux, consoles, possessions);
   const regions = parRegion(jeux, possessions);
   const notes = notesMetacritic(jeux, possessions);
+  const etat = etatCatalogue(jeux, consoles);
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-4 px-4 py-6">
@@ -170,6 +173,79 @@ export default async function PageStatistiques() {
           </>
         )}
       </Bloc>
+
+      <Bloc titre="État du catalogue">
+        <p className="flex justify-between text-sm">
+          <span>Jeux</span>
+          <b>{etat.jeux}</b>
+        </p>
+        <p className="text-[13px] text-texte-doux">
+          À compléter (versions sorties)
+        </p>
+        <ul aria-label="À compléter">
+          <LigneManque
+            libelle="Jaquettes manquantes"
+            manque={etat.jaquettes}
+            adresse={(c) => `/admin/jaquettes?console=${c}&filtre=a-remplacer`}
+          />
+          <LigneManque
+            libelle="Codes produit manquants"
+            manque={etat.codes}
+            adresse={(c) => `/admin/jeux?console=${c}&filtre=sans-code`}
+          />
+          <LigneManque
+            libelle="Notes Metacritic manquantes"
+            manque={etat.notes}
+            adresse={(c) => `/admin/notes?console=${c}`}
+          />
+        </ul>
+        <p className="text-xs text-texte-discret">
+          Chaque ligne ouvre la liste des jeux concernés, sur la première
+          console à compléter ; les autres consoles sont au-dessus de la liste.
+        </p>
+      </Bloc>
     </main>
+  );
+}
+
+/** Une ligne « à compléter » : le nombre, et le lien vers la liste quand il en manque. */
+function LigneManque({
+  libelle,
+  manque,
+  adresse,
+}: {
+  libelle: string;
+  manque: Manque;
+  adresse: (console: string) => string;
+}) {
+  const contenu = (
+    <>
+      <span>{libelle}</span>
+      <span
+        className={
+          manque.nombre ? "font-semibold text-erreur" : "text-texte-discret"
+        }
+      >
+        {manque.nombre}
+        {manque.console && <span aria-hidden="true"> →</span>}
+      </span>
+    </>
+  );
+  return (
+    <li className="border-t border-separateur">
+      {manque.console ? (
+        <Link
+          href={adresse(manque.console)}
+          aria-label={`${libelle} : ${manque.nombre}`}
+          className="flex min-h-11 items-center justify-between text-sm"
+        >
+          {contenu}
+        </Link>
+      ) : (
+        <span className="flex min-h-11 items-center justify-between text-sm">
+          {contenu}
+        </span>
+      )}
+    </li>
   );
 }

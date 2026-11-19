@@ -12,6 +12,10 @@ export type JeuStat = {
   metacritic: number | null;
   /** Régions où le jeu est sorti. */
   sorties: Region[];
+  /** Régions sorties dont la jaquette est à remplacer (vignette neutre ou image IGDB, US-12). */
+  sansJaquette: Region[];
+  /** Régions sorties sans code produit. */
+  sansCode: Region[];
 };
 
 export type Avancement = { possedes: number; total: number; pourcent: number };
@@ -108,5 +112,38 @@ export function notesMetacritic(
       .filter((x) => !x.possede)
       .slice(0, n)
       .map((x) => x.jeu),
+  };
+}
+
+export type Manque = {
+  /** Versions sorties (jaquettes, codes) ou jeux (notes) concernés. */
+  nombre: number;
+  /** Première console concernée, dans l'ordre donné : la liste s'ouvre sur elle ; null si rien ne manque. */
+  console: string | null;
+};
+
+/**
+ * État du catalogue (US-18 2/2) : nombre de jeux ; versions sorties sans jaquette (à remplacer) ou sans code produit ;
+ * jeux sans note Metacritic.
+ */
+export function etatCatalogue(
+  jeux: JeuStat[],
+  consoles: { slug: string }[],
+): { jeux: number; jaquettes: Manque; codes: Manque; notes: Manque } {
+  const manque = (combien: (j: JeuStat) => number): Manque => {
+    const nombre = jeux.reduce((s, j) => s + combien(j), 0);
+    return {
+      nombre,
+      console:
+        consoles.find((c) =>
+          jeux.some((j) => j.console.slug === c.slug && combien(j) > 0),
+        )?.slug ?? null,
+    };
+  };
+  return {
+    jeux: jeux.length,
+    jaquettes: manque((j) => j.sansJaquette.length),
+    codes: manque((j) => j.sansCode.length),
+    notes: manque((j) => (j.metacritic === null ? 1 : 0)),
   };
 }
