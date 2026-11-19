@@ -116,3 +116,23 @@ test("Statistiques : réservée au propriétaire (US-18)", async ({ page }) => {
   await page.goto("/admin/statistiques");
   await expect(page).toHaveURL(/\/admin\/connexion/);
 });
+
+test("Statistiques : état du catalogue et filtre « sans code produit » de la liste Jeux (US-18)", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.goto("/admin/statistiques");
+  const etat = page.getByRole("region", { name: "État du catalogue" });
+  await expect(etat.getByText("Jeux", { exact: true })).toBeVisible();
+  await expect(
+    etat.getByRole("list", { name: "À compléter" }).getByRole("listitem"),
+  ).toHaveCount(3);
+
+  await page.goto("/admin/jeux?console=wii-u&filtre=sans-code");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Filtre" })
+      .getByRole("link", { name: "Sans code produit", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+  await expect(page.getByText(/jeux Wii U sans code produit/)).toBeVisible();
+});

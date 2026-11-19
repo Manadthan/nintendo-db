@@ -4,6 +4,7 @@ import {
   maCollection,
   notesMetacritic,
   parRegion,
+  etatCatalogue,
   type JeuStat,
 } from "./statistiques";
 
@@ -16,18 +17,25 @@ const jeu = (
   titre: string,
   console: JeuStat["console"],
   metacritic: number | null,
+  manques: Partial<Pick<JeuStat, "sansJaquette" | "sansCode">> = {},
 ): JeuStat => ({
   id,
   titre,
   console,
   metacritic,
   sorties: ["JAP", "US", "PAL"],
+  sansJaquette: [],
+  sansCode: [],
+  ...manques,
 });
 const JEUX = [
   jeu("melee", "Super Smash Bros. Melee", GC, 92),
   jeu("prime", "Metroid Prime", GC, 97),
-  jeu("splatoon", "Splatoon", WIIU, 81),
-  jeu("mk8", "Mario Kart 8", WIIU, null),
+  jeu("splatoon", "Splatoon", WIIU, 81, { sansCode: ["JAP"] }),
+  jeu("mk8", "Mario Kart 8", WIIU, null, {
+    sansJaquette: ["JAP", "US"],
+    sansCode: ["US"],
+  }),
 ];
 // Melee en JAP et PAL, Splatoon en PAL : 2 jeux possédés, 3 versions.
 const POSSESSIONS = ensemble([
@@ -74,5 +82,22 @@ describe("statistiques (US-18)", () => {
 
   it("Metacritic sans jeu possédé noté : pas de moyenne", () => {
     expect(notesMetacritic(JEUX, ensemble([])).moyenne).toBeNull();
+  });
+
+  it("état du catalogue : versions sans jaquette ou sans code, jeux sans note, première console concernée", () => {
+    expect(etatCatalogue(JEUX, [N64, GC, WIIU])).toEqual({
+      jeux: 4,
+      jaquettes: { nombre: 2, console: "wii-u" },
+      codes: { nombre: 2, console: "wii-u" },
+      notes: { nombre: 1, console: "wii-u" },
+    });
+  });
+
+  it("état du catalogue complet : rien à ouvrir", () => {
+    const complet = JEUX.filter((j) => j.console.slug === "gamecube");
+    expect(etatCatalogue(complet, [GC]).codes).toEqual({
+      nombre: 0,
+      console: null,
+    });
   });
 });

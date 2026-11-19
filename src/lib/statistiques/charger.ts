@@ -1,4 +1,5 @@
 import "server-only";
+import { aRemplacer, type Source } from "@/lib/admin/jaquettes";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import { ensemble } from "@/lib/collection/collection";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
@@ -29,8 +30,19 @@ type LigneJeu = {
   id: string;
   metacritic_note: number | null;
   consoles: { slug: string; nom: string };
-  releases: { region: Region; sortie: boolean; titre: string | null }[];
+  releases: {
+    region: Region;
+    sortie: boolean;
+    titre: string | null;
+    code_produit: string | null;
+    jaquette_path: string | null;
+    jaquette_source: Source | null;
+  }[];
 };
+
+/** Versions sorties, dans l'ordre JAP, US, PAL. */
+const sorties = (l: LigneJeu) =>
+  REGIONS.flatMap((r) => l.releases.filter((s) => s.region === r && s.sortie));
 
 /** Titre affiché : celui de la première version sortie, dans l'ordre US, PAL, JAP. */
 const titre = (l: LigneJeu) =>
@@ -46,7 +58,7 @@ export async function chargerStatistiques() {
       supabase
         .from("games")
         .select(
-          "id, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre)",
+          "id, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre, code_produit, jaquette_path, jaquette_source)",
         )
         .order("id")
         .range(de, a)
@@ -69,9 +81,13 @@ export async function chargerStatistiques() {
     titre: titre(l),
     console: { slug: l.consoles.slug, nom: l.consoles.nom },
     metacritic: l.metacritic_note,
-    sorties: REGIONS.filter(
-      (r) => l.releases.find((s) => s.region === r)?.sortie,
-    ),
+    sorties: sorties(l).map((s) => s.region),
+    sansJaquette: sorties(l)
+      .filter((s) => aRemplacer(s.jaquette_path, s.jaquette_source))
+      .map((s) => s.region),
+    sansCode: sorties(l)
+      .filter((s) => !s.code_produit)
+      .map((s) => s.region),
   }));
   return {
     jeux,
