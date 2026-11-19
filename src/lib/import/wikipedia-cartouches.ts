@@ -86,7 +86,8 @@ function editeurs(
   };
   const morceaux = ($.html(cellule) ?? "")
     .replace(/^<t[dh][^>]*>|<\/t[dh]>$/g, "")
-    .split(/<br\s*\/?>/i)
+    // La page en direct écrit <br id="…"> : un attribut possible.
+    .split(/<br\b[^>]*>/i)
     .map((m) => {
       const bout = cheerio.load(`<div>${m}</div>`);
       const etiquettes = bout("sup")
@@ -101,6 +102,9 @@ function editeurs(
     const tous = morceaux.map((m) => m.nom).join(", ") || null;
     return { JAP: tous, US: tous, PAL: tous };
   }
+  // Du plus général au plus précis : sans étiquette (toutes les régions), puis « WW », puis la région exacte.
+  for (const m of morceaux)
+    if (!m.etiquettes.length) for (const r of REGIONS) parRegion[r] = m.nom;
   for (const precis of [false, true])
     for (const m of morceaux)
       for (const e of m.etiquettes)
