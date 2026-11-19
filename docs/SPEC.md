@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.24 — 19/11/2026 — statut : **à valider**
+> Version 1.25 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.25 | 19/11/2026 | **Super Nintendo** (étape 20) : US-10, 98 jeux ; boîtes japonaises par les titres japonais de Wikipédia ; codes à la main |
 > | 1.24 | 19/11/2026 | **Virtual Boy** (étape 19) : US-10, 11 jeux, Japon et États-Unis seulement ; boîte « (Japan, USA) » réservée aux États-Unis |
 > | 1.23 | 19/11/2026 | **Game Boy** (étape 18) : US-10, même recette que la Game Boy Color ; 91 jeux, codes à la main |
 > | 1.22 | 19/11/2026 | **Game Boy Color** (étape 17) : US-10, même recette que N64 et GBA ; cartouches « Dual Mode » comprises ; codes DMG- / CGB- |
@@ -258,6 +259,12 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       photo (choix du propriétaire, règle valable pour toutes les consoles à cartouches). Code **`VUE-`** + série No-Intro
       de la région : la série japonaise est connue pour presque tous les jeux, l'américaine pour 5 ; sinon « — », à la
       main (US-11).
+- [ ] **Super Nintendo** (v1.25) : même recette (liste « List of Super Nintendo Entertainment System games »). Les 98
+      jeux édités par Nintendo dans au moins une région, dont 19 en Europe seulement. « Cancelled » = non sorti. Boîte
+      japonaise (Super Famicom) cherchée aussi sous les **titres japonais** que Wikipédia cite dans la cellule du titre
+      (« Super Mario World • Super Mario Bros. 4 ») ; règle valable pour toutes les consoles à cartouches. Codes produit
+      (SHVC- au Japon, SNS- aux États-Unis, SNSP- en Europe) **à la main** : No-Intro ne les donne pas pour ces
+      cartouches. Boîtes en largeur aux États-Unis et en Europe, en hauteur au Japon (forme réelle).
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).

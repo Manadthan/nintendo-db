@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.13 — 19/11/2026 — statut : **à valider**
+> Version 1.14 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.14 | 19/11/2026 | **Super Nintendo** (étape 20) : étude (§1 undecies), plan §8 |
 > | 1.13 | 19/11/2026 | **Virtual Boy** (étape 19) : étude (§1 decies), plan §8 |
 > | 1.12 | 19/11/2026 | **Game Boy** (étape 18) : étude (§1 nonies), plan §8 |
 > | 1.11 | 19/11/2026 | **Game Boy Color** (étape 17) : étude (§1 octies), ADR-12, plan §8 |
@@ -199,6 +200,19 @@ Planche d'exemples montrée au propriétaire avant la spec (leçon 9).
 Écarts de lecture corrigés : « —N/a » = non sorti (sinon sortie sans date) ; étiquettes de région entre parenthèses
 dans la cellule Publisher ; « & » écrit « _ » dans les noms de fichiers libretro (« T_E Virtual Golf »). Planche
 montrée au propriétaire avant la spec (leçon 9).
+
+## 1 undecies. Étude Super Nintendo (19/11/2026)
+
+| Mesure | Super Nintendo |
+|---|---|
+| Liste Wikipédia | Comme la N64 (Japan, North America, PAL region) ; « Cancelled » pour une sortie annulée ; titres japonais cités après le titre principal dans la même cellule |
+| Jeux édités par Nintendo | **98** sur 1 749 : JAP 84, US 66, PAL 61 ; Nintendo en Europe seulement : 19 |
+| Boîtes libretro-thumbnails | 3 782 fichiers ; US 65 / 66, PAL 48 / 61 ; JAP 35 / 84 par le titre principal, **58 / 84** avec les titres japonais de la cellule |
+| Taille, forme | 512 × ≈ 360 (US, Europe, en largeur), 283 × 512 (Japon, en hauteur) |
+| Séries No-Intro | 3 746 entrées ; aucune série pour ces jeux (cartouches d'avant 1996) : codes à la main |
+
+Planche montrée au propriétaire avant la spec (leçon 9). « ō » romanisé « ou » chez libretro (« Chou Makaimura ») :
+confondus dans la clé de titre.
 
 ## 2. Stack
 
@@ -477,6 +491,10 @@ test n'appelle les sites en direct.
 
 19. **Virtual Boy** (v1.13) — 1 PR, migration 0017 (console `vb`, 1995, entre le Game Boy et la N64) : lectures
     corrigées ci-dessus ; boîte « (Japan, USA) » pour les États-Unis seulement ; préfixe `VUE-` ; fixtures Virtual Boy.
+
+20. **Super Nintendo** (v1.14) — 1 PR, migration 0018 (console `snes`, 1990, entre le Game Boy et le Virtual Boy) :
+    « Cancelled » ; titres japonais de la cellule du titre pour la boîte JAP ; « ō » = « ou » ; préfixe du code par la
+    lettre de région de la série (rare) ; fixtures Super Nintendo réduites.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
