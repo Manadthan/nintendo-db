@@ -23,9 +23,9 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.4 validée |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.19 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.9 à valider |
-| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.20 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.10 à valider |
+| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques : `docs/maquettes/`) | v0.7 validée |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9) : chiffres, réussites, difficultés, leçons | v1.3 validée |
 
 ## Règles de travail
@@ -115,7 +115,8 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 12 — Ma collection : US-16 (versions possédées, privée) #117 #118, en-tête #119, étiquettes vertes #120
   - [x] Étape 13 — Note Metacritic : US-17 (fiche + étiquette ; Wikipédia + saisie à la main) #121 #123 #124
   - [x] Étape 14 — Nintendo 64 + Game Boy Advance : étude (DESIGN §1 septies, #126), listes #127, jaquettes libretro #128, liens symboliques #130
-  - [ ] Étape 15 — N64 + GBA complétées : codes produit et boîtes japonaises par la série No-Intro (DESIGN ADR-10)
+  - [x] Étape 15 — N64 + GBA complétées : codes produit et boîtes japonaises par la série No-Intro (DESIGN ADR-10) #132 #133
+  - [ ] Étape 16 — Statistiques : US-18, page de l'administration (DESIGN ADR-11)
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3
 
 ## Erreurs récurrentes
