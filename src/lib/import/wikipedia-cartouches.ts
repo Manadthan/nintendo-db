@@ -226,8 +226,8 @@ export function lireListeCartouches(html: string): ListeCartouches {
         let sorti: boolean;
         if (col.dates[r] >= 0) {
           const t = texte($, cell(col.dates[r]));
-          // « —N/a » (Virtual Boy) : tiret suivi du texte caché aux lecteurs d'écran.
-          sorti = !!t && !/unreleased|^—?\s*n\/a$|^—$/i.test(t);
+          // « —N/a » (Virtual Boy) : tiret suivi du texte caché aux lecteurs d'écran ; « Cancelled » (Super Nintendo).
+          sorti = !!t && !/unreleased|cancell?ed|^—?\s*n\/a$|^—$/i.test(t);
           date = sorti ? premiereDate(t) : null;
         } else {
           const marque = ligne[col.sorties[r]]?.attribs["data-sort-value"];
@@ -257,6 +257,13 @@ export function lireListeCartouches(html: string): ListeCartouches {
     liste.jeux.push({
       slug,
       titres: { US: titre, PAL: titre },
+      // Super Nintendo (étape 20) : titres japonais cités après le titre principal, pour la boîte japonaise.
+      autresTitres: $(cTitre)
+        .find("i")
+        .slice(1)
+        .map((_, i) => texte($, $(i)))
+        .get()
+        .filter(Boolean),
       developpeur: texte($, cell(col.developpeur)) || null,
       wikipediaUrl: lien ? lien.replace(/#.*$/, "") : null,
       sorties,

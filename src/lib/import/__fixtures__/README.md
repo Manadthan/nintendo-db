@@ -193,3 +193,13 @@ Fabriquées par les mêmes scripts que la Game Boy Color.
 | Contenu | Liste entière (22 jeux, dont 11 Nintendo) ; index : 42 boîtes ; No-Intro : 64 entrées, réduites aux lignes lues |
 
 Fabriquées par les mêmes scripts que la Game Boy Color.
+
+## `snes-wikipedia.html`, `snes-libretro.xml`, `snes-nointro.dat` (étape 20)
+
+| | |
+|---|---|
+| Source | https://en.wikipedia.org/w/index.php?title=List_of_Super_Nintendo_Entertainment_System_games&action=render ; dépôt https://github.com/libretro-thumbnails/Nintendo_-_Super_Nintendo_Entertainment_System (noms de fichiers) ; libretro-database `metadat/no-intro/Nintendo - Super Nintendo Entertainment System.dat` ; le 19/11/2026 |
+| Conditions | Wikipédia : CC BY-SA 4.0 ; libretro : noms de fichiers et numéros de série seulement |
+| Contenu | Liste : 2 lignes d'en-tête, 98 jeux Nintendo et 15 autres ; index : 3 782 boîtes ; No-Intro : 3 746 entrées, réduites aux lignes lues |
+
+Fabriquées par les mêmes scripts que la Game Boy Color.

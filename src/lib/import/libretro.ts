@@ -9,6 +9,7 @@ export const DEPOTS_LIBRETRO: Record<string, string> = {
   n64: "Nintendo_-_Nintendo_64",
   gb: "Nintendo_-_Game_Boy",
   vb: "Nintendo_-_Virtual_Boy",
+  snes: "Nintendo_-_Super_Nintendo_Entertainment_System",
   gbc: "Nintendo_-_Game_Boy_Color",
   gba: "Nintendo_-_Game_Boy_Advance",
 };
@@ -53,6 +54,9 @@ export function cleTitre(titre: string): string {
       .normalize("NFD")
       .replace(/[̀-ͯ]/g, "")
       .toLowerCase()
+      // « ō » romanisé « ou » chez libretro (« Chou Makaimura » = « Chō Makaimura »).
+      .replace(/ou/g, "o")
+      .replace(/uu/g, "u")
       // libretro écrit « & » ou « / » sous la forme « _ » (« T_E Virtual Golf », « Asteroids _ Missile Command ») :
       // « & », « _ » et le mot « and » sont ignorés tous les trois.
       .replace(/[&_]/g, " ")
@@ -129,6 +133,8 @@ export function boitesDuJeu(
   titres: { US: string; PAL: string },
   sorties: Record<RegionSite, boolean>,
   japonaise: string | null = null,
+  /** Titres japonais cités par Wikipédia (Super Nintendo, étape 20). */
+  autresTitres: string[] = [],
 ): Partial<Record<RegionSite, string>> {
   const pour = (titre: string) => index.get(cleTitre(titre)) ?? {};
   const us = pour(titres.US);
@@ -139,6 +145,7 @@ export function boitesDuJeu(
   const jap =
     us.JAP ??
     pal.JAP ??
+    autresTitres.map((t) => pour(t).JAP).find(Boolean) ??
     (japonaise ? pour(japonaise.replace(/ \(.*$/, "")).JAP : undefined);
   if (sorties.JAP && jap) choix.JAP = jap.nom;
   return choix;

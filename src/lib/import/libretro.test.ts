@@ -151,3 +151,28 @@ describe("noms libretro (Virtual Boy, étape 19)", () => {
     ).toBe("Red Alarm (Japan)");
   });
 });
+
+describe("boîtes japonaises de la Super Nintendo (étape 20)", () => {
+  const index = indexerBoites([
+    "Super Mario World (USA)",
+    "Super Mario World - Super Mario Bros. 4 (Japan)",
+    "Chou Makaimura (Japan)",
+  ]);
+  const toutes = { JAP: true, US: true, PAL: false };
+
+  it("boîte japonaise trouvée sous un titre japonais de Wikipédia", () => {
+    expect(
+      boitesDuJeu(
+        index,
+        { US: "Super Mario World", PAL: "Super Mario World" },
+        toutes,
+        null,
+        ["Super Mario World: Super Mario Bros. 4"],
+      ).JAP,
+    ).toBe("Super Mario World - Super Mario Bros. 4 (Japan)");
+  });
+
+  it("« ō » romanisé « ou » chez libretro (« Chō Makaimura » = « Chou Makaimura »)", () => {
+    expect(cleTitre("Chō Makaimura")).toBe(cleTitre("Chou Makaimura"));
+  });
+});
