@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.18 — 19/11/2026 — statut : **à valider**
+> Version 1.19 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.19 | 19/11/2026 | **N64 et GBA complétées** (étape 15) : US-10, codes produit et boîtes japonaises retrouvés par le numéro de série No-Intro |
 > | 1.18 | 19/11/2026 | **Nintendo 64 et Game Boy Advance** (étape 14) : US-10 (listes Wikipédia, boîtes libretro-thumbnails à leur forme réelle par région, codes à la main) |
 > | 1.17 | 19/11/2026 | **Note Metacritic** (étape 13) : US-17, sur la fiche (note + lien) et en étiquette dans le catalogue ; Wikipédia + saisie à la main |
 > | 1.16 | 19/11/2026 | US-16 : versions possédées en **étiquettes vertes** JAP / US / PAL, plus de coche sur la jaquette (demande du propriétaire) |
@@ -227,9 +228,12 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] N64 et GBA : jaquettes de **libretro-thumbnails** (scans de boîtes par région, 512 px), retrouvées par le titre et
       la région ; mention « Jaquette : libretro-thumbnails ». Chaque jaquette garde sa **forme réelle** (N64 en largeur
       aux États-Unis et en Europe, en hauteur au Japon ; GBA carrée ou en largeur), entière dans le cadre du catalogue.
-      Boîte introuvable (souvent japonaise, nommée en japonais) : vignette neutre, photo à la main (US-12).
-- [ ] N64 et GBA : **pas de code produit** importé (« — », complété à la main, US-11) ; titre japonais = titre anglais
-      faute de source.
+      Boîte japonaise nommée en japonais (« Zelda no Densetsu ») : retrouvée par le **numéro de série** de la cartouche
+      (v1.19), qui relie les versions JAP, US et PAL d'un même jeu ; sinon vignette neutre, photo à la main (US-12).
+- [ ] N64 et GBA : **code produit** = préfixe de la console + numéro de série No-Intro de la région (`NUS-NZSE`,
+      `AGB-AMKJ`), sans suffixe de pays (v1.19) ; série inconnue : « — », complété à la main (US-11), et un code saisi
+      à la main n'est jamais remplacé. Titre japonais = titre anglais faute de source. Notes Metacritic manquantes :
+      saisie à la main seulement (choix du propriétaire).
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
