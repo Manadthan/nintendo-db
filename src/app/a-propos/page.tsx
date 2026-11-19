@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { EnTete } from "@/components/EnTete";
-import { PiedDePage } from "@/components/PiedDePage";
 
 const DESCRIPTION =
   "Nintendo DB est un site de fan non affilié à Nintendo : son but, ses sources de données et leurs licences.";
@@ -115,7 +114,6 @@ export default function APropos() {
           </p>
         </section>
       </main>
-      <PiedDePage />
     </>
   );
 }

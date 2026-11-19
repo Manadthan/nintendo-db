@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.14 — 19/11/2026 — statut : **à valider**
+> Version 1.15 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.15 | 19/11/2026 | US-09 : **icône de compte** en haut des pages publiques, à la place du lien « Administration » du pied de page ; Catalogue et À propos en icônes (demande du propriétaire) |
 > | 1.14 | 19/11/2026 | **Ma collection** (étape 12) : US-16, versions régionales possédées, privée, propriétaire seul |
 > | 1.13 | 18/11/2026 | **GameCube** (étape 11) : US-10 (disques du commerce, compilations Zelda Collector's Edition et Pac-Man Vs., petite image japonaise faute de scan) |
 > | 1.12 | 18/11/2026 | US-06 : filtre **Développeur** (#89), divisions de Nintendo distinctes et entrée « Nintendo (first party) » |
@@ -141,8 +142,11 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 ### Administration (propriétaire)
 
 #### US-09 — Se connecter (M)
-- [ ] Une page de connexion (e-mail + mot de passe), atteinte par un lien discret « Administration » en pied du
-      catalogue et des fiches (v1.5) ; une fois connecté, ce lien mène directement à l'administration.
+- [ ] Une page de connexion (e-mail + mot de passe), atteinte par l'**icône de compte** en haut de chaque page
+      publique (v1.15, remplace le lien « Administration » du pied de page, retiré) : non connecté, elle ouvre la
+      connexion ; connecté, elle est pleine et colorée et ouvre directement l'administration (le propriétaire est
+      le seul compte ; des profils utilisateurs viendront plus tard). Pour lui faire place sur 375 px, « Catalogue »
+      et « À propos » deviennent des **icônes** (nommées pour les lecteurs d'écran, page courante en couleur).
 - [ ] Les fonctions de modification n'apparaissent qu'une fois connecté ; un visiteur ne peut rien modifier,
       même en appelant directement le serveur.
 - [ ] Un bouton permet de se déconnecter.

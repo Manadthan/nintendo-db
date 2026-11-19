@@ -8,14 +8,29 @@ import {
 // US-09 — Se connecter (docs/SPEC.md)
 test.skip(!BASE_LOCALE_DISPONIBLE, "Base Supabase locale nécessaire (CI)");
 
-test("le site public n'a qu'un lien discret vers l'administration, en pied de page (SPEC v1.5)", async ({
+test("le site public n'a qu'un accès à l'administration : l'icône de compte de l'en-tête (SPEC v1.15)", async ({
   page,
 }) => {
   await page.goto("/");
   await expect(page.locator('a[href^="/admin"]')).toHaveCount(1);
   await expect(
-    page.getByRole("contentinfo").locator('a[href="/admin"]'),
-  ).toHaveText("Administration");
+    page
+      .getByRole("banner")
+      .getByRole("link", { name: "Se connecter", exact: true }),
+  ).toHaveAttribute("href", "/admin/connexion");
+});
+
+test("connecté, l'icône de compte est pleine et mène directement à l'administration", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.goto("/");
+  const compte = page
+    .getByRole("banner")
+    .getByRole("link", { name: "Administration (connecté)", exact: true });
+  await expect(compte).toHaveAttribute("href", "/admin");
+  await compte.click();
+  await expect(page).toHaveURL("/admin");
 });
 
 test("sans être connecté, l'administration renvoie vers la connexion", async ({

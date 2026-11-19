@@ -9,12 +9,19 @@ test.beforeEach(async ({ page }) => {
 test("l'accueil présente le site puis « Tous les jeux » avec le nombre total", async ({
   page,
 }) => {
+  const navigation = page.getByRole("navigation", {
+    name: "Navigation principale",
+  });
+  // Icônes nommées (SPEC v1.15) : Catalogue (page courante), À propos, compte.
   await expect(
-    page.getByRole("navigation", { name: "Navigation principale" }),
-  ).toContainText("Catalogue");
+    navigation.getByRole("link", { name: "Catalogue", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
   await expect(
-    page.getByRole("navigation", { name: "Navigation principale" }),
-  ).toContainText("À propos");
+    navigation.getByRole("link", { name: "À propos", exact: true }),
+  ).toBeVisible();
+  await expect(
+    navigation.getByRole("link", { name: "Se connecter", exact: true }),
+  ).toHaveAttribute("href", "/admin/connexion");
   await expect(
     page.getByRole("heading", { name: "Tous les jeux" }),
   ).toBeVisible();

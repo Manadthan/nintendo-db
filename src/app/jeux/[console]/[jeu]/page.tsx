@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EnTete } from "@/components/EnTete";
 import { FicheJeu } from "@/components/FicheJeu";
-import { PiedDePage } from "@/components/PiedDePage";
 import { chargerJeu, listerFiches } from "@/lib/fiche/charger";
 import {
   donneesStructurees,
@@ -48,7 +47,6 @@ export default async function PageJeu({ params }: { params: Promise<Params> }) {
         }}
       />
       <FicheJeu jeu={jeu} />
-      <PiedDePage />
     </>
   );
 }
