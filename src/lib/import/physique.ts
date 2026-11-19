@@ -23,6 +23,8 @@ export type JeuAImporter = JeuWikipedia & {
   boites?: Partial<Record<Region, string>>;
   /** N64, GBA (étape 15) : numéro de série No-Intro de chaque région, d'où le code produit (pas de scan GameTDB). */
   codes?: Partial<Record<Region, string>>;
+  /** Game Boy Color (étape 17) : préfixe du code propre au jeu (« DMG- » Dual Mode, « CGB- »), avant celui de la console. */
+  prefixeCode?: string;
 };
 
 /** Les disques d'une région peuvent donner des genres différents (Kirby : « plates-formes » en PAL seulement). */

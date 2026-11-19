@@ -16,10 +16,11 @@ const PAR_CONSOLE: Record<string, string> = {
   "switch-2": SWITCH,
   n64: CARRE,
   gba: CARRE,
+  gbc: CARRE,
 };
 
 /** Consoles dont la fiche montre la jaquette à sa forme réelle, différente selon la région (étape 14). */
-export const FORMES_REELLES = new Set(["n64", "gba"]);
+export const FORMES_REELLES = new Set(["n64", "gba", "gbc"]);
 
 /** Classe Tailwind des proportions de la boîte d'une console ; en hauteur par défaut. */
 export const classeProportions = (consoleSlug: string): string =>

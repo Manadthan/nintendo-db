@@ -75,6 +75,13 @@ export default async function PageAdmin() {
         <span aria-hidden="true">›</span>
       </Link>
       <Link
+        href="/admin/import?console=gbc"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Import Game Boy Color (Wikipédia)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
         href="/admin/import?console=gba"
         className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
       >

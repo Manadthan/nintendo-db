@@ -122,6 +122,8 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
       [
         ["n64", "NUS-"],
         ["gba", "AGB-"],
+        // Étape 17 (ADR-12) : « CGB- », ou « DMG- » pour une cartouche Dual Mode (préfixe porté par le jeu).
+        ["gbc", "CGB-"],
       ] as const
     ).map(([slug, prefixeCode]) => [
       slug,

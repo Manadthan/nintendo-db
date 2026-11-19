@@ -74,7 +74,7 @@ export function construireJeu(
           (wiki.disques[region] ?? wiki.codes?.[region])
             ? codeProduit(
                 (wiki.disques[region] ?? wiki.codes?.[region])!,
-                prefixeCode,
+                wiki.prefixeCode ?? prefixeCode,
               )
             : null,
       };

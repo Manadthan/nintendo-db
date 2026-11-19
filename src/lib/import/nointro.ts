@@ -6,6 +6,7 @@ import { cleTitre, estEcartee } from "./libretro";
 /** Fichiers No-Intro de libretro-database, par console. */
 export const FICHIERS_NOINTRO: Record<string, string> = {
   n64: "Nintendo - Nintendo 64",
+  gbc: "Nintendo - Game Boy Color",
   gba: "Nintendo - Game Boy Advance",
 };
 

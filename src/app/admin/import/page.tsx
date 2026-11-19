@@ -18,6 +18,12 @@ const CONSOLES = {
     description:
       "Lit la liste Wikipédia (SPEC v1.18, GameTDB ne couvre pas la N64) : jeux édités par Nintendo dans au moins une région, dates par région ; toutes les cartouches sont en boîte. Codes produit à compléter à la main.",
   },
+  gbc: {
+    nom: "Game Boy Color",
+    sources: "la liste Wikipédia",
+    description:
+      "Lit la liste Wikipédia (SPEC v1.22, GameTDB ne couvre pas la Game Boy Color) : jeux édités par Nintendo dans au moins une région, cartouches « Dual Mode » comprises ; dates et régions de sortie ; boîtes libretro-thumbnails. Codes produit DMG- ou CGB- quand No-Intro connaît la série, sinon à la main.",
+  },
   gba: {
     nom: "Game Boy Advance",
     sources: "la liste Wikipédia",
