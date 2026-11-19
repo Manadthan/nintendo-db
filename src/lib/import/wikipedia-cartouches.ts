@@ -139,9 +139,15 @@ export function lireListeCartouches(html: string): ListeCartouches {
     throw new Error("Tableau des jeux introuvable dans la page Wikipédia");
 
   const g = grille($, table);
-  const entete = (x: number) =>
-    [g[0]?.[x], g[1]?.[x]].map((c) => (c ? texte($, $(c)) : ""));
-  const largeur = Math.max(g[0]?.length ?? 0, g[1]?.length ?? 0);
+  // En-tête sur 2 lignes (N64, GBA : « Release date » puis « Japan ») ou sur 1 (Game Boy Color : « JP », « NA »).
+  const lignesEntete = g.findIndex((l) => l.some((c) => c.tagName === "td"));
+  const nbEntete = Math.max(1, Math.min(2, lignesEntete));
+  const entete = (x: number) => {
+    const h = g[0]?.[x];
+    const b = g[nbEntete - 1]?.[x];
+    return [h ? texte($, $(h)) : "", b ? texte($, $(b)) : ""];
+  };
+  const largeur = Math.max(g[0]?.length ?? 0, g[nbEntete - 1]?.length ?? 0);
   const colonne = (haut: RegExp, bas?: RegExp) => {
     for (let x = 0; x < largeur; x++) {
       const [h, b] = entete(x);
@@ -149,9 +155,14 @@ export function lireListeCartouches(html: string): ListeCartouches {
     }
     return -1;
   };
+  // Colonne de région « Oui / Non » : sous « Region(s) released » (GBA) ou seule (Game Boy Color).
+  const colonneRegion = (bas: RegExp) =>
+    nbEntete === 2 ? colonne(/^Region/, bas) : colonne(bas);
   const col = {
     titre: colonne(/^Title/),
     developpeur: colonne(/^Developer/),
+    // Game Boy Color (étape 17, ADR-12) : cartouche noire jouable aussi sur Game Boy → code « DMG- ».
+    dualMode: colonne(/^Dual Mode/),
     editeur: colonne(/^Publisher/),
     // N64 : une colonne de date par région ; GBA : une cellule de dates, et des colonnes « sorti » Oui / Non.
     dates: {
@@ -159,11 +170,14 @@ export function lireListeCartouches(html: string): ListeCartouches {
       US: colonne(/^Release date/, /^(North America|NA)$/),
       PAL: colonne(/^Release date/, /^(PAL|Europe|EU\/PAL)$/),
     } as Record<Region, number>,
-    dateUnique: colonne(/^Release date/, /^Release date/),
+    dateUnique: colonne(
+      /^(Release date|First released)/,
+      /^(Release date|First released)/,
+    ),
     sorties: {
-      JAP: colonne(/^Region/, /^JP$/),
-      US: colonne(/^Region/, /^NA$/),
-      PAL: colonne(/^Region/, /^(EU\/PAL|PAL|EU)$/),
+      JAP: colonneRegion(/^JP$/),
+      US: colonneRegion(/^NA$/),
+      PAL: colonneRegion(/^(EU\/PAL|PAL|EU)$/),
     } as Record<Region, number>,
   };
   if (col.titre < 0 || col.editeur < 0 || col.developpeur < 0)
@@ -174,7 +188,7 @@ export function lireListeCartouches(html: string): ListeCartouches {
   const liste: ListeCartouches = { jeux: [], autresEditeurs: 0, ecartes: [] };
   const slugs = new Set<string>();
   const vues = new Set<Element>();
-  for (const ligne of g.slice(2)) {
+  for (const ligne of g.slice(nbEntete)) {
     const cTitre = ligne[col.titre];
     // Une ligne dont le titre vient d'une cellule fusionnée au-dessus : même jeu, déjà lu.
     if (
@@ -237,6 +251,11 @@ export function lireListeCartouches(html: string): ListeCartouches {
       disques: {},
       japonais: null,
       genres: [],
+      ...(col.dualMode >= 0 && {
+        prefixeCode: /^Yes/i.test(texte($, cell(col.dualMode)))
+          ? "DMG-"
+          : "CGB-",
+      }),
     });
   }
   return liste;
