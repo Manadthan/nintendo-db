@@ -1,4 +1,9 @@
-import type { Region } from "@/lib/catalogue/types";
+import {
+  REGIONS,
+  type Marche,
+  type Region,
+  type VersionAffichee,
+} from "@/lib/catalogue/types";
 
 /**
  * Ma collection (US-16, DESIGN ADR-07) : versions régionales possédées, identifiées par `(jeu, région)`. Fonctions
@@ -34,4 +39,54 @@ export function avecVersion(
   if (avoir) suite.add(cleVersion(gameId, region));
   else suite.delete(cleVersion(gameId, region));
   return suite;
+}
+
+/**
+ * Version affichée possédée ? Sur un marché (JAP, US, PAL) : la version de ce marché. Marché « Tous » : au moins une
+ * des versions du jeu (SPEC v1.14).
+ */
+export function affichePossedee(
+  possessions: ReadonlySet<string>,
+  v: VersionAffichee,
+  marche: Marche,
+): boolean {
+  return marche === "TOUS"
+    ? REGIONS.some((r) => possede(possessions, v.jeu.id, r))
+    : possede(possessions, v.jeu.id, v.region);
+}
+
+/** Filtre « Collection » (US-16) : tous, possédés ou manquants. */
+export type FiltreCollection = "possedes" | "manquants";
+
+export function filtrerCollection(
+  versions: VersionAffichee[],
+  filtre: FiltreCollection | null,
+  possessions: ReadonlySet<string>,
+  marche: Marche,
+): VersionAffichee[] {
+  if (!filtre) return versions;
+  return versions.filter(
+    (v) => affichePossedee(possessions, v, marche) === (filtre === "possedes"),
+  );
+}
+
+/** Compteur par console (« GameCube : 12 / 58 ») : jeux possédés et jeux affichés du marché, consoles qui en ont. */
+export function compteurs(
+  versions: VersionAffichee[],
+  consoles: { slug: string; nom: string }[],
+  possessions: ReadonlySet<string>,
+  marche: Marche,
+): { slug: string; nom: string; possedes: number; total: number }[] {
+  return consoles
+    .map((c) => {
+      const deLaConsole = versions.filter((v) => v.jeu.console.slug === c.slug);
+      return {
+        ...c,
+        possedes: deLaConsole.filter((v) =>
+          affichePossedee(possessions, v, marche),
+        ).length,
+        total: deLaConsole.length,
+      };
+    })
+    .filter((c) => c.total > 0);
 }

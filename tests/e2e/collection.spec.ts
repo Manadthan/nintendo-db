@@ -42,3 +42,36 @@ test("une région non sortie n'a pas de case (Wii Karaoke U : pas sorti aux Éta
     }),
   ).toHaveCount(0);
 });
+
+test("connecté, le catalogue montre la coche, le filtre Collection et le compteur par console", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.goto("/jeux/wii-u/splatoon");
+  await caseEurope(page).check();
+
+  await page.goto("/");
+  const splatoon = page.getByRole("link", { name: /Splatoon/ }).first();
+  await expect(splatoon.getByRole("img", { name: "Possédé" })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Possédé" })).toHaveCount(1);
+
+  await page.getByRole("button", { name: /^Filtres/ }).click();
+  await expect(
+    page.getByRole("list", { name: "Ma collection par console" }),
+  ).toContainText("Wii U : 1 / 4");
+  const filtre = page.getByRole("combobox", {
+    name: "Collection",
+    exact: true,
+  });
+  await filtre.selectOption({ label: "Possédés" });
+  await expect(page).toHaveURL("/?collection=possedes");
+  await expect(page.getByText("1 jeu affiché sur 4")).toBeVisible();
+  await filtre.selectOption({ label: "Manquants" });
+  await expect(page.getByText("3 jeux affichés sur 4")).toBeVisible();
+
+  // Nettoyage.
+  await page.goto("/jeux/wii-u/splatoon");
+  await caseEurope(page).uncheck();
+  await page.reload();
+  await expect(caseEurope(page)).not.toBeChecked();
+});

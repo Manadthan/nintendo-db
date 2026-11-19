@@ -110,6 +110,7 @@ describe("filtrer (US-06)", () => {
           annee: "2012",
           genre: "Musique",
           developpeur: null,
+          collection: null,
         }),
       ),
     ).toEqual(["wii-karaoke-u"]);
@@ -198,9 +199,10 @@ describe("filtres dans l'adresse (vue filtrée partageable)", () => {
         annee: "2014",
         genre: "Plates-formes 3D",
         developpeur: "Nintendo EAD",
+        collection: "manquants",
       }),
     ).toBe(
-      "?q=mario&marche=jap&dispo=jap&annee=2014&genre=Plates-formes+3D&dev=Nintendo+EAD",
+      "?q=mario&marche=jap&dispo=jap&annee=2014&genre=Plates-formes+3D&dev=Nintendo+EAD&collection=manquants",
     );
   });
 
@@ -212,7 +214,7 @@ describe("filtres dans l'adresse (vue filtrée partageable)", () => {
   it("relit les filtres, et ignore les valeurs inconnues", () => {
     expect(
       filtresDepuisParametres(
-        "?dispo=toutes&annee=2014&genre=Plates-formes+3D&dev=Retro+Studios",
+        "?dispo=toutes&annee=2014&genre=Plates-formes+3D&dev=Retro+Studios&collection=possedes",
       ),
     ).toEqual({
       console: null,
@@ -220,10 +222,11 @@ describe("filtres dans l'adresse (vue filtrée partageable)", () => {
       annee: "2014",
       genre: "Plates-formes 3D",
       developpeur: "Retro Studios",
+      collection: "possedes",
     });
-    expect(filtresDepuisParametres("?dispo=mars&annee=hier&genre=")).toEqual(
-      SANS_FILTRE,
-    );
+    expect(
+      filtresDepuisParametres("?dispo=mars&annee=hier&genre=&collection=tout"),
+    ).toEqual(SANS_FILTRE);
   });
 });
 
