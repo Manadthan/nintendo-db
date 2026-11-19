@@ -58,6 +58,7 @@ const jeu = (id: string, console: string): JeuCatalogue => ({
   developpeur: null,
   editeur: "Nintendo",
   genres: [],
+  metacritic: null,
   sorties: {
     JAP: sortie("2014-01-01"),
     US: sortie("2014-01-02"),

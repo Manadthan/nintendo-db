@@ -10,7 +10,7 @@ export async function chargerCatalogue(): Promise<JeuCatalogue[]> {
   const { data, error } = await supabase
     .from("games")
     .select(
-      "id, slug, developpeur, genre, consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, jaquette_path)",
+      "id, slug, developpeur, genre, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, jaquette_path)",
     );
   if (error) throw new Error(`Catalogue illisible : ${error.message}`);
 

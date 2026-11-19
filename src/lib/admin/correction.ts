@@ -18,12 +18,17 @@ export type SortieCorrigeable = {
 /** Un jeu tel que le formulaire de correction le lit et l'écrit. */
 export type JeuCorrigeable = {
   developpeur: string | null;
+  /** Note Metacritic (US-17), 0 à 100, et adresse de sa page sur metacritic.com. */
+  metacritic_note: number | null;
+  metacritic_url: string | null;
   releases: Record<Region, SortieCorrigeable>;
 };
 
 export type Correction = {
   /** Champs du jeu à écrire, et ses verrous (anciens + champs modifiés). */
-  game: Partial<Pick<JeuCorrigeable, "developpeur">> & { verrous: string[] };
+  game: Partial<
+    Pick<JeuCorrigeable, "developpeur" | "metacritic_note" | "metacritic_url">
+  > & { verrous: string[] };
   releases: Partial<
     Record<Region, Partial<SortieCorrigeable> & { verrous: string[] }>
   >;
@@ -70,7 +75,14 @@ export function lireSaisie(formData: FormData): JeuCorrigeable {
       ];
     }),
   ) as Record<Region, SortieCorrigeable>;
-  return { developpeur: texte(formData.get("developpeur")), releases };
+  const note = texte(formData.get("metacritic_note"));
+  return {
+    developpeur: texte(formData.get("developpeur")),
+    // Une saisie qui n'est pas un nombre devient NaN, refusée par preparerCorrection.
+    metacritic_note: note === null ? null : Number(note),
+    metacritic_url: texte(formData.get("metacritic_url")),
+    releases,
+  };
 }
 
 function dateValide(date: string): boolean {
@@ -100,15 +112,31 @@ export function preparerCorrection(
         `${r} : précise si la date est au jour, au mois ou à l'année.`,
       );
   }
+  const note = apres.metacritic_note;
+  if (note !== null && !(Number.isInteger(note) && note >= 0 && note <= 100))
+    erreurs.push("Note Metacritic : un nombre entier de 0 à 100.");
+  if (
+    apres.metacritic_url &&
+    !apres.metacritic_url.startsWith("https://www.metacritic.com/")
+  )
+    erreurs.push(
+      "Page Metacritic : une adresse commençant par https://www.metacritic.com/.",
+    );
   if (erreurs.length) return { ok: false, erreurs };
 
   const ajouter = (liste: string[], champ: string) =>
     liste.includes(champ) ? liste : [...liste, champ];
 
   const game: Correction["game"] = { verrous: verrous.game };
-  if (apres.developpeur !== avant.developpeur) {
-    game.developpeur = apres.developpeur;
-    game.verrous = ajouter(game.verrous, "developpeur");
+  for (const champ of [
+    "developpeur",
+    "metacritic_note",
+    "metacritic_url",
+  ] as const) {
+    if (apres[champ] !== avant[champ]) {
+      (game as Record<string, unknown>)[champ] = apres[champ];
+      game.verrous = ajouter(game.verrous, champ);
+    }
   }
 
   const releases: Correction["releases"] = {};

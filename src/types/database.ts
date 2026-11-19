@@ -85,6 +85,8 @@ export type Database = {
           genre: string | null;
           id: string;
           igdb_id: number | null;
+          metacritic_note: number | null;
+          metacritic_url: string | null;
           physique: boolean;
           slug: string;
           updated_at: string;
@@ -100,6 +102,8 @@ export type Database = {
           genre?: string | null;
           id?: string;
           igdb_id?: number | null;
+          metacritic_note?: number | null;
+          metacritic_url?: string | null;
           physique?: boolean;
           slug: string;
           updated_at?: string;
@@ -114,6 +118,8 @@ export type Database = {
           genre?: string | null;
           id?: string;
           igdb_id?: number | null;
+          metacritic_note?: number | null;
+          metacritic_url?: string | null;
           physique?: boolean;
           slug?: string;
           updated_at?: string;

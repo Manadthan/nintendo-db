@@ -30,6 +30,8 @@ const KARAOKE: LigneFiche = {
   franchise: null,
   genre: null,
   wikipedia_url: "https://en.wikipedia.org/wiki/Wii_Karaoke_U",
+  metacritic_note: null,
+  metacritic_url: null,
   consoles: { slug: "wii-u", nom: "Wii U" },
   releases: [
     release("JAP", "Wii カラオケ U", "2012-12-08", {

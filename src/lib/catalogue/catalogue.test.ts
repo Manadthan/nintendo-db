@@ -35,6 +35,7 @@ const jeu = (
   developpeur: null,
   editeur: "Nintendo",
   genres: [],
+  metacritic: null,
   sorties: {
     JAP: sortie(`${titre} (JAP)`, jap),
     US: sortie(`${titre} (US)`, us),
