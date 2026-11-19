@@ -43,6 +43,7 @@ test("les sources sont listées avec leur licence", async ({ page }) => {
   await expect(sources.getByRole("heading", { level: 3 })).toHaveText([
     "Wikipédia",
     "libretro-thumbnails",
+    "gamecartdb",
     "GameTDB",
   ]);
   await expect(sources).toContainText("CC BY-SA 4.0");

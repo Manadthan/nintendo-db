@@ -62,7 +62,13 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
   const sourcesExternes = [
     ...new Set(
       REGIONS.map((r) => jeu.sorties[r].sourceJaquette)
-        .filter((s) => s === "gametdb" || s === "igdb" || s === "libretro")
+        .filter(
+          (s) =>
+            s === "gametdb" ||
+            s === "igdb" ||
+            s === "libretro" ||
+            s === "gamecartdb",
+        )
         .map((s) => SOURCES_JAQUETTE[s]),
     ),
   ];

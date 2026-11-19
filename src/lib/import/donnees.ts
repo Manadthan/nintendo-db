@@ -197,7 +197,11 @@ export function choisirJaquettes(
   return Object.fromEntries(
     REGIONS.map((r) => {
       const deja = existantes?.[r];
-      const manuelle = deja?.source === "photo" || deja?.source === "url";
+      // gamecartdb : choisie par le propriétaire (Switch 2), gardée comme un ajout à la main.
+      const manuelle =
+        deja?.source === "photo" ||
+        deja?.source === "url" ||
+        deja?.source === "gamecartdb";
       const scanne = deja?.path && deja.source === "gametdb";
       const id = disques[r];
       if (!jeu.releases[r].sortie || !id || manuelle || (scanne && !recopier))

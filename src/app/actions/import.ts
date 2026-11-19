@@ -435,7 +435,12 @@ async function copierBoitesLibretro(
     const nom = boites[region];
     const deja = anciennes?.[region];
     if (!nom || !jeu.releases[region].sortie) continue;
-    if (deja?.source === "photo" || deja?.source === "url") continue;
+    if (
+      deja?.source === "photo" ||
+      deja?.source === "url" ||
+      deja?.source === "gamecartdb"
+    )
+      continue;
     if (deja?.path && deja.source === "libretro" && !recopier) continue;
     let image = await telechargerBoite(depot, nom);
     // Lien Git (#143) : on suit une fois vers la boîte visée.
