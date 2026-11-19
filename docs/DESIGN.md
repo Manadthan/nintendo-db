@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.14 — 19/11/2026 — statut : **à valider**
+> Version 1.15 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.15 | 19/11/2026 | **NES** (étape 21) : étude (§1 duodecies), plan §8 |
 > | 1.14 | 19/11/2026 | **Super Nintendo** (étape 20) : étude (§1 undecies), plan §8 |
 > | 1.13 | 19/11/2026 | **Virtual Boy** (étape 19) : étude (§1 decies), plan §8 |
 > | 1.12 | 19/11/2026 | **Game Boy** (étape 18) : étude (§1 nonies), plan §8 |
@@ -213,6 +214,19 @@ montrée au propriétaire avant la spec (leçon 9).
 
 Planche montrée au propriétaire avant la spec (leçon 9). « ō » romanisé « ou » chez libretro (« Chou Makaimura ») :
 confondus dans la clé de titre.
+
+## 1 duodecies. Étude NES (19/11/2026)
+
+| Mesure | NES |
+|---|---|
+| Liste Wikipédia | « Release date » puis JP, NA, PAL ; titres japonais cités dans la cellule (« Family Trainer ») |
+| Jeux édités par Nintendo | **104** sur 1 370 : JAP 76, US 90, PAL 84 ; Nintendo en Europe seulement : 24 |
+| Boîtes libretro-thumbnails | 13 896 fichiers (dont des noms TOSEC, ignorés) ; US 86 / 90, PAL 78 / 84, JAP 55 / 76 **avant** la règle « World » |
+| Taille, forme | ≈ 355 × 512 (en hauteur) ; quelques boîtes européennes 512 × 712 |
+| Séries No-Intro | 13 296 entrées, 2 séries : codes à la main |
+
+Les boîtes « (World) » (92 fichiers) sont la boîte américaine noire (Super Mario Bros., Duck Hunt) : réservées aux
+États-Unis et à l'Europe. Planche montrée au propriétaire avant la spec (leçon 9).
 
 ## 2. Stack
 
@@ -495,6 +509,9 @@ test n'appelle les sites en direct.
 20. **Super Nintendo** (v1.14) — 1 PR, migration 0018 (console `snes`, 1990, entre le Game Boy et le Virtual Boy) :
     « Cancelled » ; titres japonais de la cellule du titre pour la boîte JAP ; « ō » = « ou » ; préfixe du code par la
     lettre de région de la série (rare) ; fixtures Super Nintendo réduites.
+
+21. **NES** (v1.15) — 1 PR, migration 0019 ou suivante (console `nes`, 1983, en tête de l'ordre) : règle « World » sans
+    le Japon ; préfixe du code selon la région de la série (rare) ; fixtures NES réduites.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
