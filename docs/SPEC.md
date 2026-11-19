@@ -7,7 +7,7 @@
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 1.15 | 19/11/2026 | US-09 : **icône de compte** en haut des pages publiques ; Catalogue et À propos en icônes (demande du propriétaire) |
+> | 1.15 | 19/11/2026 | US-09 : **icône de compte** en haut des pages publiques, à la place du lien « Administration » du pied de page ; Catalogue et À propos en icônes (demande du propriétaire) |
 > | 1.13 | 18/11/2026 | **GameCube** (étape 11) : US-10 (disques du commerce, compilations Zelda Collector's Edition et Pac-Man Vs., petite image japonaise faute de scan) |
 > | 1.12 | 18/11/2026 | US-06 : filtre **Développeur** (#89), divisions de Nintendo distinctes et entrée « Nintendo (first party) » |
 > | 1.11 | 18/11/2026 | **Switch et Switch 2** (étape 10) : US-10 (cartouche mondiale, Switch 2 depuis Wikipédia, case « en boîte », jeux à venir cachés) ; **import des nouveautés** (US-10) |
@@ -126,10 +126,10 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 ### Administration (propriétaire)
 
 #### US-09 — Se connecter (M)
-- [ ] Une page de connexion (e-mail + mot de passe), atteinte par un lien discret « Administration » en pied du
-      catalogue et des fiches (v1.5) ; une fois connecté, ce lien mène directement à l'administration.
-- [ ] **Icône de compte** en haut de chaque page publique (v1.15) : non connecté, elle ouvre la connexion ;
-      connecté, elle est pleine et colorée et ouvre l'administration. Pour lui faire place sur 375 px, « Catalogue »
+- [ ] Une page de connexion (e-mail + mot de passe), atteinte par l'**icône de compte** en haut de chaque page
+      publique (v1.15, remplace le lien « Administration » du pied de page, retiré) : non connecté, elle ouvre la
+      connexion ; connecté, elle est pleine et colorée et ouvre directement l'administration (le propriétaire est
+      le seul compte ; des profils utilisateurs viendront plus tard). Pour lui faire place sur 375 px, « Catalogue »
       et « À propos » deviennent des **icônes** (nommées pour les lecteurs d'écran, page courante en couleur).
 - [ ] Les fonctions de modification n'apparaissent qu'une fois connecté ; un visiteur ne peut rien modifier,
       même en appelant directement le serveur.

@@ -24,15 +24,15 @@ test.describe("accueil", () => {
   });
 });
 
-test("un lien discret « Administration » en pied de page mène à la connexion (US-09)", async ({
+test("l'icône de compte de l'en-tête mène à la connexion (US-09, SPEC v1.15)", async ({
   page,
 }) => {
   await page.goto("/");
   await page
-    .getByRole("contentinfo")
-    .getByRole("link", { name: "Administration" })
+    .getByRole("banner")
+    .getByRole("link", { name: "Se connecter", exact: true })
     .click();
-  await expect(page).toHaveURL(/\/admin/);
+  await expect(page).toHaveURL("/admin/connexion");
 });
 
 test.describe("thème sombre (US-08)", () => {

@@ -1,6 +1,5 @@
 import { Catalogue } from "@/components/Catalogue";
 import { EnTete } from "@/components/EnTete";
-import { PiedDePage } from "@/components/PiedDePage";
 import type { Metadata } from "next";
 import { chargerCatalogue, chargerConsoles } from "@/lib/catalogue/charger";
 
@@ -47,7 +46,6 @@ export default async function Accueil() {
 
         <Catalogue jeux={jeux} consoles={consoles} />
       </main>
-      <PiedDePage />
     </>
   );
 }
