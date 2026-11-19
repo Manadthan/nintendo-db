@@ -21,6 +21,8 @@ type PropsPanneau = {
   genres: string[];
   /** Studios des jeux affichés, avec leur nombre de jeux (#89). */
   developpeurs: { nom: string; nombre: number }[];
+  /** Ma collection (US-16) : compteurs par console, seulement pour le propriétaire connecté. */
+  collection?: { slug: string; nom: string; possedes: number; total: number }[];
 };
 
 /** Panneau des filtres (US-06) : listes natives, confortables sur iPhone ; chaque choix s'applique aussitôt. */
@@ -30,6 +32,7 @@ export function PanneauFiltres({
   annees,
   genres,
   developpeurs,
+  collection,
 }: PropsPanneau) {
   const changer = (patch: Partial<Filtres>) =>
     enregistrerFiltres({ ...filtres, ...patch });
@@ -42,6 +45,39 @@ export function PanneauFiltres({
       id="panneau-filtres"
       className="flex flex-col gap-3 rounded-xl border border-bordure bg-carte p-3"
     >
+      {collection && (
+        <div className="flex flex-col gap-2">
+          <ul
+            aria-label="Ma collection par console"
+            className="flex flex-wrap gap-x-3 gap-y-1 text-[13px]"
+          >
+            {collection.map((c) => (
+              <li key={c.slug}>
+                <span className="text-texte-doux">{c.nom} :</span>{" "}
+                <span className="font-semibold">
+                  {c.possedes} / {c.total}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <label className="flex flex-col gap-1 text-[13px] text-texte-doux">
+            Collection
+            <select
+              value={filtres.collection ?? ""}
+              onChange={(e) =>
+                changer({
+                  collection: (e.target.value || null) as Filtres["collection"],
+                })
+              }
+              className={CHAMP}
+            >
+              <option value="">Tous</option>
+              <option value="possedes">Possédés</option>
+              <option value="manquants">Manquants</option>
+            </select>
+          </label>
+        </div>
+      )}
       <label className="flex flex-col gap-1 text-[13px] text-texte-doux">
         Console
         <select
@@ -140,6 +176,7 @@ export function FiltresActifs({
   filtres,
   consoles,
 }: {
+  /** Le filtre « Collection » n'est montré (et compté) que si le propriétaire est connecté : sinon, il vaut null. */
   filtres: Filtres;
   /** Pour afficher le nom de la console choisie (« Wii » plutôt que « wii »). */
   consoles: { slug: string; nom: string }[];
@@ -161,6 +198,10 @@ export function FiltresActifs({
     filtres.developpeur && {
       libelle: filtres.developpeur,
       retirer: { developpeur: null },
+    },
+    filtres.collection && {
+      libelle: filtres.collection === "possedes" ? "Possédés" : "Manquants",
+      retirer: { collection: null },
     },
   ].filter((p) => !!p);
   if (pastilles.length === 0) return null;

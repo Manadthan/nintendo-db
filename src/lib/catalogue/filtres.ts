@@ -19,6 +19,8 @@ export type Filtres = {
   genre: string | null;
   /** Studio (nom nettoyé), ou « Nintendo (first party) » pour tous les studios internes (#89). */
   developpeur: string | null;
+  /** Ma collection (US-16) : appliqué par le catalogue, et seulement pour le propriétaire connecté. */
+  collection: "possedes" | "manquants" | null;
 };
 
 export const SANS_FILTRE: Filtres = {
@@ -27,6 +29,7 @@ export const SANS_FILTRE: Filtres = {
   annee: null,
   genre: null,
   developpeur: null,
+  collection: null,
 };
 
 /** Choix de disponibilité, dans l'ordre d'affichage. */
@@ -47,6 +50,7 @@ const PARAMETRES = {
   annee: "annee",
   genre: "genre",
   developpeur: "dev",
+  collection: "collection",
 } as const satisfies Record<keyof Filtres, string>;
 
 /** Année de la version affichée (celle du marché choisi, comme les groupes par année). */
@@ -140,6 +144,10 @@ export function filtresDepuisParametres(recherche: string): Filtres {
     annee: an && /^\d{4}$/.test(an) ? an : null,
     genre: params.get(PARAMETRES.genre)?.trim() || null,
     developpeur: params.get(PARAMETRES.developpeur)?.trim() || null,
+    collection:
+      (["possedes", "manquants"] as const).find(
+        (c) => c === params.get(PARAMETRES.collection),
+      ) ?? null,
   };
 }
 
