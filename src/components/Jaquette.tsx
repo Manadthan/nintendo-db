@@ -10,6 +10,8 @@ type Props = {
   /** Largeur affichée, pour que le navigateur choisisse la bonne taille d'image (ADR-04). */
   sizes: string;
   petite?: boolean;
+  /** Fiche N64 / GBA (étape 14) : la jaquette à sa forme réelle, sans cadre (elle change selon la région). */
+  formeReelle?: boolean;
 };
 
 /**
@@ -23,6 +25,7 @@ export function Jaquette({
   consoleSlug,
   sizes,
   petite = false,
+  formeReelle = false,
 }: Props) {
   if (sortie.jaquetteSrcset) {
     return (
@@ -33,7 +36,7 @@ export function Jaquette({
         alt={`Jaquette de ${titre}`}
         loading="lazy"
         decoding="async"
-        className={`${classeProportions(consoleSlug)} w-full rounded-md border border-vignette-bordure bg-vignette object-contain`}
+        className={`${formeReelle ? "h-auto" : classeProportions(consoleSlug)} w-full rounded-md border border-vignette-bordure bg-vignette object-contain`}
       />
     );
   }
