@@ -52,8 +52,17 @@ test("connecté, le catalogue montre la coche, le filtre Collection et le compte
 
   await page.goto("/");
   const splatoon = page.getByRole("link", { name: /Splatoon/ }).first();
-  await expect(splatoon.getByRole("img", { name: "Possédé" })).toBeVisible();
-  await expect(page.getByRole("img", { name: "Possédé" })).toHaveCount(1);
+  // Étiquette PAL en vert (SPEC v1.16) ; JAP et US restent bleues.
+  await expect(
+    splatoon.getByRole("listitem", {
+      name: "Europe : sorti, possédé",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(
+    splatoon.getByRole("listitem", { name: "Japon : sorti", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole("listitem", { name: /possédé/ })).toHaveCount(1);
 
   await page.getByRole("button", { name: /^Filtres/ }).click();
   await expect(
