@@ -37,6 +37,12 @@ import type {
   Tri,
   VersionAffichee,
 } from "@/lib/catalogue/types";
+import {
+  affichePossedee,
+  compteurs,
+  filtrerCollection,
+} from "@/lib/collection/collection";
+import { useCollection } from "@/lib/collection/navigateur";
 import { Disponibilite } from "./Disponibilite";
 import { FiltresActifs, PanneauFiltres } from "./Filtres";
 import { Jaquette } from "./Jaquette";
@@ -99,24 +105,37 @@ export function Catalogue({ jeux, consoles }: Props) {
   );
 
   // Filtres (US-06) : dans l'adresse (?console=, ?dispo=, ?annee=, ?genre=), comme la recherche.
-  const filtres = useSyncExternalStore(
+  const filtresAdresse = useSyncExternalStore(
     abonnerFiltres,
     lireFiltres,
     () => SANS_FILTRE,
   );
+  // Ma collection (US-16) : privée ; pour un visiteur, ni coche, ni filtre, ni compteur (un `?collection=` est ignoré).
+  const collection = useCollection();
+  const connecte = collection.connecte === true;
+  const filtres = connecte
+    ? filtresAdresse
+    : { ...filtresAdresse, collection: null };
   const [panneauOuvert, setPanneauOuvert] = useState(false);
   const actifs = nombreActifs(filtres);
 
   // Choix proposés : ceux du marché choisi, sans tenir compte de la recherche ni des autres filtres.
   const duMarche = trier(jeux, "anciens", marche);
-  const versions = filtrer(
-    trier(
-      jeux.filter((j) => correspond(j, recherche)),
-      tri,
-      marche,
+  const versions = filtrerCollection(
+    filtrer(
+      trier(
+        jeux.filter((j) => correspond(j, recherche)),
+        tri,
+        marche,
+      ),
+      filtres,
     ),
-    filtres,
+    filtres.collection,
+    collection.possessions,
+    marche,
   );
+  const possedee = (v: VersionAffichee) =>
+    connecte && affichePossedee(collection.possessions, v, marche);
   const groupes = grouperParAnnee(versions, tri);
   const lien = (v: VersionAffichee) =>
     `/jeux/${v.jeu.console.slug}/${v.jeu.slug}`;
@@ -228,6 +247,11 @@ export function Catalogue({ jeux, consoles }: Props) {
           annees={anneesProposees(duMarche)}
           genres={genresProposes(duMarche)}
           developpeurs={developpeursProposes(duMarche)}
+          collection={
+            connecte
+              ? compteurs(duMarche, consoles, collection.possessions, marche)
+              : undefined
+          }
         />
       )}
       <FiltresActifs filtres={filtres} consoles={consoles} />
@@ -286,13 +310,16 @@ export function Catalogue({ jeux, consoles }: Props) {
               {groupe.versions.map((v) => (
                 <li key={v.jeu.id}>
                   <Link href={lien(v)} className="flex flex-col gap-2">
-                    <Jaquette
-                      sortie={v.sortie}
-                      titre={v.sortie.titre!}
-                      console={v.jeu.console.nom}
-                      consoleSlug={v.jeu.console.slug}
-                      sizes="(max-width: 640px) 50vw, 200px"
-                    />
+                    <div className="relative">
+                      <Jaquette
+                        sortie={v.sortie}
+                        titre={v.sortie.titre!}
+                        console={v.jeu.console.nom}
+                        consoleSlug={v.jeu.console.slug}
+                        sizes="(max-width: 640px) 50vw, 200px"
+                      />
+                      {possedee(v) && <CochePossede />}
+                    </div>
                     <div className="flex flex-col gap-[3px]">
                       <span className="line-clamp-2 text-sm leading-tight font-semibold">
                         {v.sortie.titre}
@@ -318,7 +345,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                     href={lien(v)}
                     className="flex items-center gap-3 px-3 py-2.5"
                   >
-                    <div className="w-[54px] shrink-0">
+                    <div className="relative w-[54px] shrink-0">
                       <Jaquette
                         sortie={v.sortie}
                         titre={v.sortie.titre!}
@@ -327,6 +354,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                         sizes="54px"
                         petite
                       />
+                      {possedee(v) && <CochePossede petite />}
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col gap-1">
                       <span className="text-sm leading-tight font-semibold">
@@ -346,5 +374,32 @@ export function Catalogue({ jeux, consoles }: Props) {
         </div>
       ))}
     </section>
+  );
+}
+
+/** Coche verte en haut à droite de la jaquette d'une version possédée (US-16). */
+function CochePossede({ petite = false }: { petite?: boolean }) {
+  return (
+    <span
+      role="img"
+      aria-label="Possédé"
+      className={`absolute flex items-center justify-center rounded-full bg-possede text-inverse shadow ${
+        petite ? "-top-1 -right-1 size-5" : "top-1.5 right-1.5 size-7"
+      }`}
+    >
+      <svg
+        width={petite ? 12 : 16}
+        height={petite ? 12 : 16}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12.5l4.5 4.5L19 7.5" />
+      </svg>
+    </span>
   );
 }

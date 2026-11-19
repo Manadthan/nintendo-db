@@ -160,6 +160,36 @@ export type Database = {
           },
         ];
       };
+      possessions: {
+        Row: {
+          cree_le: string;
+          game_id: string;
+          region: Database["public"]["Enums"]["region"];
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          cree_le?: string;
+          game_id: string;
+          region: Database["public"]["Enums"]["region"];
+          user_id?: string;
+        };
+        Update: {
+          cree_le?: string;
+          game_id?: string;
+          region?: Database["public"]["Enums"]["region"];
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "possessions_game_id_fkey";
+            columns: ["game_id"];
+            isOneToOne: false;
+            referencedRelation: "games";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       releases: {
         Row: {
           code_produit: string | null;

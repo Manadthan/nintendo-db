@@ -108,3 +108,11 @@ test("la grande jaquette de la fiche prend presque toute la largeur de l'iPhone 
   expect(largeur).toBeGreaterThanOrEqual(340);
   expect(largeur).toBeLessThanOrEqual(345);
 });
+
+test("un visiteur ne voit aucune case de collection (US-16 : collection privée)", async ({
+  page,
+}) => {
+  await page.goto("/jeux/wii-u/splatoon");
+  await expect(page.getByRole("heading", { name: "Splatoon" })).toBeVisible();
+  await expect(page.getByRole("checkbox")).toHaveCount(0);
+});

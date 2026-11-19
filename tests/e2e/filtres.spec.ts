@@ -131,3 +131,17 @@ test("filtre Développeur : studios avec leur nombre de jeux, et Nintendo first 
     .click();
   await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
 });
+
+test("un visiteur n'a ni filtre Collection, ni compteur, ni coche ; un lien ?collection= est ignoré (US-16)", async ({
+  page,
+}) => {
+  await page.goto("/?collection=possedes");
+  await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
+  await boutonFiltres(page).click();
+  await expect(liste(page, "Console")).toBeVisible();
+  await expect(liste(page, "Collection")).toHaveCount(0);
+  await expect(
+    page.getByRole("list", { name: "Ma collection par console" }),
+  ).toHaveCount(0);
+  await expect(page.getByRole("img", { name: "Possédé" })).toHaveCount(0);
+});

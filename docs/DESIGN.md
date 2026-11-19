@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.5 — 18/11/2026 — statut : **validée**
+> Version 1.6 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.6 | 19/11/2026 | **Ma collection** (étape 12) : ADR-07, table `possessions`, plan §8 |
 > | 1.5 | 18/11/2026 | **GameCube** (étape 11) : étude (§1 quinquies), plan §8 |
 > | 1.4 | 18/11/2026 | **Switch + Switch 2** (étape 10) : étude (§1 quater), import des nouveautés (ADR-03 point 6), exclusions mémorisées, plan §8 |
 > | 1.3 | 18/11/2026 | **DS + 3DS** (étape 9) : étude (§1 ter), proportions des jaquettes par console, plan §8 |
@@ -207,6 +208,17 @@ PAL (sinon US, sinon romanisé), figé à la création. En v1, `/` affiche le ca
 (v1.2)** : `/` est le catalogue de **toutes les consoles**, filtrable par `?console=wii` (panneau Filtres) ; la
 console se lit sur chaque vignette ; les fiches gardent `/jeux/{console}/{jeu}`.
 
+**ADR-07 — Collection privée, chargée dans le navigateur (étape 12).** Une ligne par version possédée :
+`possessions(user_id, game_id, region)`. *Par compte* (`user_id` = `auth.uid()`) dès maintenant, même avec un seul
+compte : ouvrir plus tard d'autres comptes ne changera pas le schéma. **RLS** : chacun ne lit, n'ajoute et ne retire
+que ses propres lignes ; aucune lecture pour `anon`. Les pages publiques restent **statiques** (ADR-02) : un composant
+client lit la session ; connecté, il charge les possessions (une requête, quelques Ko) et ajoute cases, coches,
+filtre et compteurs ; sans session, rien ne change et aucun appel n'est fait. Cocher = écriture directe depuis le
+navigateur, protégée par la RLS (pas de server action : la page reste statique, et la base vérifie le propriétaire de
+chaque ligne). Clé `(game_id, region)` plutôt que l'identifiant de la sortie : le catalogue l'a déjà, la ligne survit à
+un réimport, et elle disparaît avec le jeu (`on delete cascade`). *Pourquoi* : premier pas utile tout de suite,
+sans rien exposer aux visiteurs ni ralentir les pages publiques.
+
 ## 5. Modèle de données
 
 ```
@@ -218,6 +230,7 @@ releases(id, game_id → games, region 'JAP'|'US'|'PAL', sortie bool, titre, tit
          jaquette_path, jaquette_source 'gametdb'|'igdb'|'photo'|'url', verrous text[], updated_at)
          unique (game_id, region)
 import_runs(id, console_id, lance_le, resume jsonb)
+possessions(user_id → auth.users, game_id → games (cascade), region, cree_le) primary key (user_id, game_id, region)
 ```
 
 - Un jeu = une œuvre sur une console ; ses 3 sorties sont toujours créées (`sortie = false` si absente).
@@ -296,6 +309,12 @@ test n'appelle les sites en direct.
 11. **GameCube** (v1.5) — 1 PR de code basée sur `main` (après #110 seulement pour la ligne de version de la SPEC) :
    relais (base réduite `gamecube/gctdb.xml`, faces découpées `gamecube/faces`, repli sur la petite image) ;
    migration 0011 (console `gamecube`, salon, 2001, avant la DS) ; règles ci-dessus, codes `DOL-` ; fixture réduite.
+
+12. **Ma collection** (v1.6, US-16) — 2 PR à merger **dans l'ordre** (la seconde lit ce que la première crée) :
+   1. **Base et fiche** : migration 0012 (`possessions` + RLS + pgTAP), lecture de la session et des possessions dans le
+      navigateur (`src/lib/collection/`), cases « Je l'ai » sur la fiche, e2e connecté (projet `*-admin`).
+   2. **Catalogue** : coche verte sur les vignettes, filtre « Collection » (Tous / Possédés / Manquants, `?collection=`),
+      compteur par console ; rien de tout cela pour un visiteur (e2e public).
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
