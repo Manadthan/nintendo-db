@@ -15,6 +15,17 @@ export const DEPOTS_LIBRETRO: Record<string, string> = {
 export const adresseBoite = (depot: string, nom: string) =>
   `https://raw.githubusercontent.com/libretro-thumbnails/${depot}/master/Named_Boxarts/${encodeURIComponent(`${nom}.png`)}`;
 
+/**
+ * Lien Git du dépôt (#129, #143) : raw.githubusercontent.com sert alors le chemin de la cible (« Pokemon - Crystal
+ * Version (USA).png »), pas une image. Rend le nom de la boîte visée (sans « .png »), ou null pour une vraie image.
+ */
+export function cibleDuLien(contenu: Uint8Array): string | null {
+  if (contenu.length > 512) return null;
+  const texte = new TextDecoder().decode(contenu).trim();
+  const m = texte.match(/^(?:[^\n]*\/)?([^/\n]+)\.png$/);
+  return m ? m[1]! : null;
+}
+
 /** Index des boîtes déposé par le relais : XML (seul format texte accepté par le bucket), un nom par élément. */
 export function indexEnXml(noms: string[]): string {
   const echapper = (t: string) =>
