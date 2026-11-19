@@ -9,7 +9,7 @@ export function NoteMetacritic({ note }: { note: number | null }) {
       role="img"
       aria-label={`Metacritic : ${note} sur 100`}
       title="Note Metacritic"
-      className="flex h-5 items-center rounded bg-accent-doux px-1.5 text-[10px] font-bold text-accent-fonce tabular-nums"
+      className="flex h-5 shrink-0 items-center rounded bg-accent-doux px-1 text-[10px] font-bold whitespace-nowrap text-accent-fonce tabular-nums"
     >
       {note}
     </span>

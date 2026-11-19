@@ -323,7 +323,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                         {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
                         {v.jeu.console.nom}
                       </span>
-                      <div className="flex items-center gap-1">
+                      <div className="flex flex-wrap items-center gap-1">
                         <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
                         <NoteMetacritic note={v.jeu.metacritic} />
                       </div>
@@ -361,7 +361,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                         {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
                         {v.jeu.console.nom}
                       </span>
-                      <div className="flex items-center gap-1">
+                      <div className="flex flex-wrap items-center gap-1">
                         <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
                         <NoteMetacritic note={v.jeu.metacritic} />
                       </div>
