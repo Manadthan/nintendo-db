@@ -24,7 +24,7 @@ const SOURCES = [
     nom: "Wikipédia",
     lien: "https://en.wikipedia.org/wiki/List_of_Wii_U_games",
     apport:
-      "Listes des jeux Game Boy, Nintendo 64, Game Boy Color, Game Boy Advance, Wii U et Switch 2, titres, dates de sortie, éditeurs et développeurs (articles « List of … games », en anglais). Les jaquettes Switch 2 sont des photos ajoutées à la main.",
+      "Listes des jeux Game Boy, Virtual Boy, Nintendo 64, Game Boy Color, Game Boy Advance, Wii U et Switch 2, titres, dates de sortie, éditeurs et développeurs (articles « List of … games », en anglais). Les jaquettes Switch 2 sont des photos ajoutées à la main.",
     licence:
       "Texte sous licence Creative Commons Attribution – Partage dans les mêmes conditions (CC BY-SA 4.0).",
     licenceLien: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
@@ -33,7 +33,7 @@ const SOURCES = [
     nom: "libretro-thumbnails",
     lien: "https://github.com/libretro-thumbnails",
     apport:
-      "Scans des boîtes par région pour le Game Boy, la Nintendo 64, la Game Boy Color et la Game Boy Advance, que GameTDB ne couvre pas ; leurs codes produit viennent des numéros de série No-Intro de libretro-database, qui relient aussi les versions japonaises, américaines et européennes d'un même jeu.",
+      "Scans des boîtes par région pour le Game Boy, le Virtual Boy, la Nintendo 64, la Game Boy Color et la Game Boy Advance, que GameTDB ne couvre pas ; leurs codes produit viennent des numéros de série No-Intro de libretro-database, qui relient aussi les versions japonaises, américaines et européennes d'un même jeu.",
     licence:
       "Collection libre, sans licence formelle. Les images des boîtes restent la propriété de leurs éditeurs ; retrait sur demande.",
     licenceLien: "https://github.com/libretro-thumbnails",
@@ -65,8 +65,9 @@ export default function APropos() {
             Nintendo DB recense les jeux édités par Nintendo et sortis en boîte,
             version par version : jaquette, titre, date et code produit au
             Japon, en Amérique du Nord et en Europe. Consoles couvertes : Game
-            Boy, Nintendo 64, Game Boy Color, Game Boy Advance, GameCube, Wii U,
-            Wii, DS, 3DS, Switch et Switch 2 ; les autres suivront.
+            Boy, Virtual Boy, Nintendo 64, Game Boy Color, Game Boy Advance,
+            GameCube, Wii U, Wii, DS, 3DS, Switch et Switch 2 ; les autres
+            suivront.
           </p>
         </section>
 

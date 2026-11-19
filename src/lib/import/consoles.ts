@@ -126,6 +126,8 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
         ["gbc", "CGB-"],
         // Étape 18 : Game Boy, « DMG- » ; série No-Intro rare (cartouches d'avant 1996), codes surtout à la main.
         ["gb", "DMG-"],
+        // Étape 19 : Virtual Boy, Japon et États-Unis seulement ; « VUE- ».
+        ["vb", "VUE-"],
       ] as const
     ).map(([slug, prefixeCode]) => [
       slug,

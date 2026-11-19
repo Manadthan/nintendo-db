@@ -124,3 +124,30 @@ describe("liens Git de libretro-thumbnails (Pokémon Crystal, #143)", () => {
     expect(cibleDuLien(png)).toBeNull();
   });
 });
+
+describe("noms libretro (Virtual Boy, étape 19)", () => {
+  it("« & » est écrit « _ » dans les noms de fichiers libretro", () => {
+    expect(cleTitre("T_E Virtual Golf")).toBe(cleTitre("T&E Virtual Golf"));
+  });
+
+  it("une boîte « (Japan, USA) » est la boîte américaine : pas pour le Japon", () => {
+    const index = indexerBoites([
+      "Mario's Tennis (Japan, USA)",
+      "Red Alarm (Japan)",
+      "Red Alarm (USA)",
+    ]);
+    const toutes = { JAP: true, US: true, PAL: false };
+    expect(
+      boitesDuJeu(
+        index,
+        { US: "Mario's Tennis", PAL: "Mario's Tennis" },
+        toutes,
+      ),
+    ).toEqual({
+      US: "Mario's Tennis (Japan, USA)",
+    });
+    expect(
+      boitesDuJeu(index, { US: "Red Alarm", PAL: "Red Alarm" }, toutes).JAP,
+    ).toBe("Red Alarm (Japan)");
+  });
+});

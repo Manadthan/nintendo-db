@@ -1,0 +1,291 @@
+	name "Nintendo - Virtual Boy"
+)
+game (
+	name "3-D BattleSnake (World)"
+	region "World"
+)
+game (
+	name "3-D Tetris (USA)"
+	region "USA"
+	serial "VPBE"
+)
+game (
+	name "3D Crosswords (World) (Emulator Version)"
+	region "World"
+)
+game (
+	name "3D Crosswords (World) (Hardware Version)"
+	region "World"
+)
+game (
+	name "BLOX (World) (v1.0)"
+	region "World"
+)
+game (
+	name "BLOX (World) (v1.1)"
+	region "World"
+)
+game (
+	name "BLOX 2 (World) (En,Fr,De,Es,It,Sv,Fi,Cs,Sl)"
+	region "World"
+)
+game (
+	name "Bound High (World) (Proto 2)"
+	region "World"
+	serial "VBHE"
+)
+game (
+	name "Capitan Sevilla 2 (World) (Es)"
+	region "World"
+)
+game (
+	name "Dragon Hopper (Japan, USA) (En,Ja) (Switch Online)"
+	region "Japan / USA"
+	serial "VDHE"
+)
+game (
+	name "Elevated Speed (World) (High Resolution Version)"
+	region "World"
+)
+game (
+	name "Elevated Speed (World) (Low Resolution Version)"
+	region "World"
+)
+game (
+	name "Fishbone (World)"
+	region "World"
+)
+game (
+	name "Fishbone (World) (Demo 1)"
+	region "World"
+)
+game (
+	name "Fishbone (World) (Demo 2)"
+	region "World"
+)
+game (
+	name "Fishbone (World) (Demo 3)"
+	region "World"
+)
+game (
+	name "Galactic Pinball (Japan, USA) (En)"
+	region "Japan / USA"
+	serial "VGPJ"
+)
+game (
+	name "Golf (USA)"
+	region "USA"
+	serial "VVGE"
+)
+game (
+	name "Hamburgers En Route to Switzerland (World)"
+	region "World"
+)
+game (
+	name "Hamburgers En Route to Switzerland (World) (Demo 1)"
+	region "World"
+)
+game (
+	name "Hamburgers En Route to Switzerland (World) (Demo 2)"
+	region "World"
+)
+game (
+	name "Hyper Fighting (World)"
+	region "World"
+	serial "VFDE"
+)
+game (
+	name "Innsmouth no Yakata (Japan)"
+	region "Japan"
+	serial "VIMJ"
+)
+game (
+	name "Insecticide (World)"
+	region "World"
+)
+game (
+	name "Jack Bros. (USA)"
+	region "USA"
+	serial "VJBE"
+)
+game (
+	name "Jack Bros. no Meiro de Hiihoo! (Japan)"
+	region "Japan"
+	serial "VJBJ"
+)
+game (
+	name "Mario Clash (Japan, USA) (En)"
+	region "Japan / USA"
+	serial "VMCJ"
+)
+game (
+	name "Mario Combat (World)"
+	region "World"
+)
+game (
+	name "Mario Kart - Virtual Cup (World)"
+	region "World"
+)
+game (
+	name "Mario VB (World)"
+	region "World"
+)
+game (
+	name "Mario's Tennis (Japan, USA) (En)"
+	region "Japan / USA"
+	serial "VMTJ"
+)
+game (
+	name "Nester's Funky Bowling (USA)"
+	region "USA"
+	serial "VNFE"
+)
+game (
+	name "Niko-chan Battle (Japan) (Proto)"
+	region "Japan"
+	serial "VTRJ"
+)
+game (
+	name "Panic Bomber (USA)"
+	region "USA"
+	serial "VH2E"
+)
+game (
+	name "Red Alarm (Japan)"
+	region "Japan"
+	serial "VREJ"
+)
+game (
+	name "Red Alarm (USA)"
+	region "USA"
+	serial "VREE"
+)
+game (
+	name "Red Square (World)"
+	region "World"
+)
+game (
+	name "SD Gundam - Dimension War (Japan)"
+	region "Japan"
+	serial "VSDJ"
+)
+game (
+	name "Snowball Wars (World) (Demo 1)"
+	region "World"
+)
+game (
+	name "Snowball Wars (World) (Demo 2)"
+	region "World"
+)
+game (
+	name "Snowball Wars (World) (Demo 3)"
+	region "World"
+)
+game (
+	name "Soviet Union 2010 (World) (v1.0)"
+	region "World"
+)
+game (
+	name "Soviet Union 2010 (World) (v1.2)"
+	region "World"
+)
+game (
+	name "Soviet Union 2011 (World) (v1.0)"
+	region "World"
+)
+game (
+	name "Soviet Union 2011 (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Soviet Union 2011 (World) (v1.2)"
+	region "World"
+)
+game (
+	name "Space Invaders - Virtual Collection (Japan)"
+	region "Japan"
+	serial "VSPJ"
+)
+game (
+	name "Space Pinball (Japan) (En) (Proto)"
+	region "Japan"
+)
+game (
+	name "Space Squash (Japan)"
+	region "Japan"
+	serial "VSSJ"
+)
+game (
+	name "T&E Virtual Golf (Japan)"
+	region "Japan"
+	serial "VVGJ"
+)
+game (
+	name "Teleroboxer (Japan, USA) (En)"
+	region "Japan / USA"
+	serial "VTBJ"
+)
+game (
+	name "Tobidase! Panibon (Japan)"
+	region "Japan"
+	serial "VH2J"
+)
+game (
+	name "V-Tetris (Japan) (En)"
+	region "Japan"
+	serial "VTRJ"
+)
+game (
+	name "Vertical Force (Japan)"
+	region "Japan"
+	serial "VH3J"
+)
+game (
+	name "Vertical Force (USA)"
+	region "USA"
+	serial "VH3E"
+)
+game (
+	name "Virtual Bowling (Japan) (En)"
+	region "Japan"
+	serial "VVBJ"
+)
+game (
+	name "Virtual Boy Wario Land (Japan, USA) (En)"
+	region "Japan / USA"
+	serial "VWCJ"
+)
+game (
+	name "Virtual Fishing (Japan)"
+	region "Japan"
+	serial "VVFJ"
+)
+game (
+	name "Virtual Lab (Japan)"
+	region "Japan"
+	serial "VJVJ"
+)
+game (
+	name "Virtual League Baseball (USA)"
+	region "USA"
+	serial "VVPE"
+)
+game (
+	name "Virtual League Baseball 2 (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Virtual Pro Yakyuu '95 (Japan)"
+	region "Japan"
+	serial "VVPJ"
+)
+game (
+	name "Waterworld (USA)"
+	region "USA"
+	serial "VWEE"
+)
+game (
+	name "Zero Racers (Japan, USA) (En) (Switch Online)"
+	region "Japan / USA"
+	serial "VZRE"
+)

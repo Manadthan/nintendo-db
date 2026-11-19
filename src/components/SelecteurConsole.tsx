@@ -1,7 +1,10 @@
 import Link from "next/link";
 import type { ConsoleAdmin } from "@/lib/admin/consoles";
 
-/** Choix de la console dans l'administration (étape 8) : un lien par console, la courante marquée. */
+/**
+ * Choix de la console dans l'administration (étape 8) : un lien par console, la courante marquée. Les liens passent à
+ * la ligne : treize consoles ne tiennent pas sur une seule ligne de 375 px (étape 19).
+ */
 export function SelecteurConsole({
   consoles,
   active,
@@ -16,14 +19,14 @@ export function SelecteurConsole({
   return (
     <nav
       aria-label="Console"
-      className="flex gap-1 rounded-xl bg-segment p-1 text-sm"
+      className="flex flex-wrap gap-1 rounded-xl bg-segment p-1 text-sm"
     >
       {consoles.map((c) => (
         <Link
           key={c.slug}
           href={adresse(c.slug)}
           aria-current={c.slug === active ? "page" : undefined}
-          className={`flex h-10 flex-1 items-center justify-center rounded-lg ${
+          className={`flex h-10 grow items-center justify-center rounded-lg px-3 whitespace-nowrap ${
             c.slug === active
               ? "bg-carte font-semibold shadow-sm"
               : "text-texte-doux"

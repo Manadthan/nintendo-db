@@ -8,6 +8,7 @@ type RegionSite = "JAP" | "US" | "PAL";
 export const DEPOTS_LIBRETRO: Record<string, string> = {
   n64: "Nintendo_-_Nintendo_64",
   gb: "Nintendo_-_Game_Boy",
+  vb: "Nintendo_-_Virtual_Boy",
   gbc: "Nintendo_-_Game_Boy_Color",
   gba: "Nintendo_-_Game_Boy_Advance",
 };
@@ -44,18 +45,23 @@ export function lireIndexXml(xml: string): string[] {
 
 /**
  * Clé de rapprochement d'un titre : minuscules, sans accents ni ponctuation, « The » de tête ou « , The » retirés,
- * « & » = « and » (« Legend of Zelda, The - Ocarina of Time » = « The Legend of Zelda: Ocarina of Time »).
+ * « & », « _ » et « and » ignorés (« Legend of Zelda, The - Ocarina of Time » = « The Legend of Zelda: Ocarina of Time »).
  */
 export function cleTitre(titre: string): string {
-  return titre
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/,\s*the\b/g, " ")
-    .replace(/^\s*the\s+/, "")
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim();
+  return (
+    titre
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toLowerCase()
+      // libretro écrit « & » ou « / » sous la forme « _ » (« T_E Virtual Golf », « Asteroids _ Missile Command ») :
+      // « & », « _ » et le mot « and » sont ignorés tous les trois.
+      .replace(/[&_]/g, " ")
+      .replace(/\band\b/g, " ")
+      .replace(/,\s*the\b/g, " ")
+      .replace(/^\s*the\s+/, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim()
+  );
 }
 
 /** Boîtes à écarter : prototypes, démos, rééditions Virtual Console ou GameCube, versions non officielles. */
@@ -98,6 +104,8 @@ export function indexerBoites(noms: string[]): IndexBoites {
     for (const zone of zones) {
       const z = REGIONS_NOINTRO[zone];
       if (!z) continue;
+      // « (Japan, USA) » : une cartouche commune, mais la boîte scannée est l'américaine (étape 19, SPEC v1.24).
+      if (zone === "Japan" && zones.length > 1) continue;
       // Une révision (« Rev 1 ») ou des langues en plus comptent peu : la région exacte d'abord, puis le nom le plus court.
       const rang = z.rang * 100 + (/\(Rev/.test(nom) ? 10 : 0) + etiquettes;
       const parRegion = index.get(cle) ?? {};

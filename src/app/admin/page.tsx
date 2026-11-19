@@ -75,6 +75,13 @@ export default async function PageAdmin() {
         <span aria-hidden="true">›</span>
       </Link>
       <Link
+        href="/admin/import?console=vb"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Import Virtual Boy (Wikipédia)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
         href="/admin/import?console=n64"
         className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
       >

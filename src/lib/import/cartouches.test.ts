@@ -92,3 +92,27 @@ describe("éditeurs tels que Wikipédia les sert en direct (#139)", () => {
     expect(sorties?.PAL?.editeur).toBe("Nintendo");
   });
 });
+
+describe("listes lues telles que Wikipédia les écrit (Virtual Boy, étape 19)", () => {
+  const tableau = (editeurs: string, japon: string) =>
+    lireListeCartouches(`<table class="wikitable">
+      <tr><th rowspan="2">Title</th><th rowspan="2">Developer(s)</th><th rowspan="2">Publisher(s)</th><th colspan="2">Release date</th></tr>
+      <tr><th>Japan</th><th>North America</th></tr>
+      <tr><td><i>Golf</i></td><td>T&amp;E Soft</td><td>${editeurs}</td><td>${japon}</td><td>November 1, 1995</td></tr>
+    </table>`).jeux[0]?.sorties;
+
+  it("« —N/a » : pas sorti dans cette région", () => {
+    const sorties = tableau("Nintendo", '—<span class="sr-only">N/a</span>');
+    expect(sorties?.JAP).toBeNull();
+    expect(sorties?.US?.date).toBe("1995-11-01");
+  });
+
+  it("étiquettes de région entre parenthèses : « T&E Soft (JP), Nintendo (NA) »", () => {
+    const sorties = tableau(
+      "T&amp;E Soft (JP), Nintendo (NA)",
+      "August 11, 1995",
+    );
+    expect(sorties?.JAP?.editeur).toBe("T&E Soft");
+    expect(sorties?.US?.editeur).toBe("Nintendo");
+  });
+});

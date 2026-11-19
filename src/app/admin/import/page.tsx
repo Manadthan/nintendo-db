@@ -12,6 +12,12 @@ export const maxDuration = 60;
 
 /** Consoles importables (étape 8) : leurs sources, telles que la page les présente. */
 const CONSOLES = {
+  vb: {
+    nom: "Virtual Boy",
+    sources: "la liste Wikipédia",
+    description:
+      "Lit la liste Wikipédia (SPEC v1.24, GameTDB ne couvre pas le Virtual Boy) : jeux édités par Nintendo, sortis au Japon et aux États-Unis seulement ; boîtes libretro-thumbnails (une boîte « Japan, USA » est l'américaine). Codes produit VUE- quand No-Intro connaît la série de la région, sinon à la main.",
+  },
   gb: {
     nom: "Game Boy",
     sources: "la liste Wikipédia",
