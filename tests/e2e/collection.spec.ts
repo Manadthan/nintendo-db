@@ -43,7 +43,7 @@ test("une région non sortie n'a pas de case (Wii Karaoke U : pas sorti aux Éta
   ).toHaveCount(0);
 });
 
-test("connecté, le catalogue montre la coche, le filtre Collection et le compteur par console", async ({
+test("connecté, le catalogue montre la coche et le filtre Collection ; le compteur est dans Statistiques (US-18)", async ({
   page,
 }) => {
   await seConnecter(page);
@@ -65,9 +65,8 @@ test("connecté, le catalogue montre la coche, le filtre Collection et le compte
   await expect(page.getByRole("listitem", { name: /possédé/ })).toHaveCount(1);
 
   await page.getByRole("button", { name: /^Filtres/ }).click();
-  await expect(
-    page.getByRole("list", { name: "Ma collection par console" }),
-  ).toContainText("Wii U : 1 / 4");
+  // Plus de compteur dans le panneau Filtres (SPEC v1.20) : il est dans la page Statistiques.
+  await expect(page.getByRole("list", { name: "Par console" })).toHaveCount(0);
   const filtre = page.getByRole("combobox", {
     name: "Collection",
     exact: true,
@@ -83,4 +82,57 @@ test("connecté, le catalogue montre la coche, le filtre Collection et le compte
   await caseEurope(page).uncheck();
   await page.reload();
   await expect(caseEurope(page)).not.toBeChecked();
+});
+
+test("Statistiques : ma collection par console, par région et notes (US-18)", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.goto("/jeux/wii-u/splatoon");
+  await caseEurope(page).check();
+
+  await page.goto("/admin");
+  await page.getByRole("link", { name: "Statistiques", exact: true }).click();
+  await expect(page).toHaveURL("/admin/statistiques");
+  const collection = page.getByRole("region", { name: "Ma collection" });
+  await expect(
+    collection.getByRole("listitem", { name: "Wii U : 1 / 4", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("region", { name: "Par région" })
+      .getByRole("listitem", { name: "PAL : 1 version", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Notes Metacritic" }),
+  ).toBeVisible();
+
+  // Remise en état : Splatoon décoché.
+  await page.goto("/jeux/wii-u/splatoon");
+  await caseEurope(page).uncheck();
+});
+
+test("Statistiques : réservée au propriétaire (US-18)", async ({ page }) => {
+  await page.goto("/admin/statistiques");
+  await expect(page).toHaveURL(/\/admin\/connexion/);
+});
+
+test("Statistiques : état du catalogue et filtre « sans code produit » de la liste Jeux (US-18)", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.goto("/admin/statistiques");
+  const etat = page.getByRole("region", { name: "État du catalogue" });
+  await expect(etat.getByText("Jeux", { exact: true })).toBeVisible();
+  await expect(
+    etat.getByRole("list", { name: "À compléter" }).getByRole("listitem"),
+  ).toHaveCount(3);
+
+  await page.goto("/admin/jeux?console=wii-u&filtre=sans-code");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Filtre" })
+      .getByRole("link", { name: "Sans code produit", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+  await expect(page.getByText(/jeux Wii U sans code produit/)).toBeVisible();
 });

@@ -2,7 +2,7 @@ import { REGIONS, type Region } from "@/lib/catalogue/types";
 import { srcsetJaquette } from "@/lib/jaquettes/stockage";
 import type { Database } from "@/types/database";
 
-type Source = Database["public"]["Enums"]["jaquette_source"];
+export type Source = Database["public"]["Enums"]["jaquette_source"];
 
 /** Une sortie telle que la page « Jaquettes » la lit (US-12). */
 export type LigneSortie = {

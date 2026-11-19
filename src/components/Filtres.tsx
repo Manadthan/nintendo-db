@@ -21,8 +21,8 @@ type PropsPanneau = {
   genres: string[];
   /** Studios des jeux affichés, avec leur nombre de jeux (#89). */
   developpeurs: { nom: string; nombre: number }[];
-  /** Ma collection (US-16) : compteurs par console, seulement pour le propriétaire connecté. */
-  collection?: { slug: string; nom: string; possedes: number; total: number }[];
+  /** Filtre « Collection » (US-16), seulement pour le propriétaire connecté ; les compteurs sont dans Statistiques (US-18). */
+  collection?: boolean;
 };
 
 /** Panneau des filtres (US-06) : listes natives, confortables sur iPhone ; chaque choix s'applique aussitôt. */
@@ -47,19 +47,6 @@ export function PanneauFiltres({
     >
       {collection && (
         <div className="flex flex-col gap-2">
-          <ul
-            aria-label="Ma collection par console"
-            className="flex flex-wrap gap-x-3 gap-y-1 text-[13px]"
-          >
-            {collection.map((c) => (
-              <li key={c.slug}>
-                <span className="text-texte-doux">{c.nom} :</span>{" "}
-                <span className="font-semibold">
-                  {c.possedes} / {c.total}
-                </span>
-              </li>
-            ))}
-          </ul>
           <label className="flex flex-col gap-1 text-[13px] text-texte-doux">
             Collection
             <select

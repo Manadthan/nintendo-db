@@ -8,6 +8,7 @@
 > | Version | Date | Changements |
 > |---|---|---|
 > | 1.22 | 19/11/2026 | **Game Boy Color** (étape 17) : US-10, même recette que N64 et GBA ; cartouches « Dual Mode » comprises ; codes DMG- / CGB- |
+> | 1.21 | 19/11/2026 | US-02 : **tri par note Metacritic**, groupes par tranche, jeux sans note à la fin (demande du propriétaire) |
 > | 1.20 | 19/11/2026 | **Statistiques** (étape 16) : US-18, page de l'administration (collection, régions, Metacritic, état du catalogue) ; compteurs de collection retirés du panneau Filtres (US-16) |
 > | 1.19 | 19/11/2026 | **N64 et GBA complétées** (étape 15) : US-10, codes produit et boîtes japonaises retrouvés par le numéro de série No-Intro |
 > | 1.18 | 19/11/2026 | **Nintendo 64 et Game Boy Advance** (étape 14) : US-10 (listes Wikipédia, boîtes libretro-thumbnails à leur forme réelle par région, codes à la main) |
@@ -76,7 +77,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       tri, grille / liste, filtres (US-06), et « N jeux affichés sur M ».
 - [ ] Les jeux s'affichent en **grille de jaquettes** (2 par ligne sur iPhone) ou en **liste** ; le dernier choix est retenu.
 - [ ] Chaque jeu montre jaquette, titre, date et sa **disponibilité par région** (JAP · US · PAL, cochées si sorti).
-- [ ] Tri : plus anciens d'abord (par défaut), plus récents d'abord, A → Z ; regroupement **par année** en tri par date.
+- [ ] Tri : plus anciens d'abord (par défaut), plus récents d'abord, A → Z, **mieux notés** (note Metacritic, v1.21 : de la meilleure
+      à la moins bonne, à égalité par titre, jeux sans note à la fin) ; regroupement **par année** en tri par date, **par
+      tranche** en tri par note (« 90 et plus », « 75 à 89 », « 50 à 74 », « Moins de 50 », « Sans note »).
 - [ ] La page reste fluide avec 300 jeux (images chargées au fil du défilement).
 
 #### US-03 — Filtrer le catalogue par marché (M)
