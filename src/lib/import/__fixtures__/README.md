@@ -106,3 +106,17 @@ Fabriquée par :
 ```
 node scripts/fixture-wikipedia.mjs <page.html> > src/lib/import/__fixtures__/switch-2-wikipedia.html
 ```
+
+## `metacritic-wikipedia.json` (étape 13)
+
+| | |
+|---|---|
+| Source | API de Wikipédia anglais (`action=query&prop=revisions`, redirections suivies), 16 articles de jeux, le 19/11/2026 |
+| Conditions | CC BY-SA 4.0, comme la liste Wii U ci-dessus |
+| Contenu | Pour chaque article, seulement l'encadré du jeu (« Infobox video game ») et celui des critiques (« Video game reviews »), là où se lit la note Metacritic ; les redirections de l'API (« Doubutsu Banchou » → « Cubivore ») |
+
+Fabriquée par :
+
+```
+node scripts/fixture-metacritic.mjs <réponse API.json> > src/lib/import/__fixtures__/metacritic-wikipedia.json
+```
