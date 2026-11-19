@@ -10,7 +10,8 @@ export const REGIONS: readonly Region[] = ["JAP", "US", "PAL"];
 export type Marche = Region | "TOUS";
 
 /** Tri du catalogue (US-02). */
-export type Tri = "anciens" | "recents" | "az";
+/** « note » : note Metacritic, de la meilleure à la moins bonne (US-17, SPEC v1.21). */
+export type Tri = "anciens" | "recents" | "az" | "note";
 
 /** Une sortie, telle que le catalogue l'affiche (données sérialisables, envoyées au navigateur). */
 export type SortieCatalogue = {

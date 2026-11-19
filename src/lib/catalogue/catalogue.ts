@@ -76,14 +76,18 @@ export function trier(
   const versions = jeux
     .map((j) => versionAffichee(j, marche))
     .filter((v): v is VersionAffichee => v !== null);
-  if (tri === "az") {
-    return versions.sort((a, b) =>
-      normaliser(a.sortie.titre!).localeCompare(
-        normaliser(b.sortie.titre!),
-        "fr",
-      ),
+  const parTitre = (a: VersionAffichee, b: VersionAffichee) =>
+    normaliser(a.sortie.titre!).localeCompare(
+      normaliser(b.sortie.titre!),
+      "fr",
     );
-  }
+  if (tri === "az") return versions.sort(parTitre);
+  // Note Metacritic : la meilleure d'abord ; à égalité, et pour les jeux sans note (en fin de liste), par titre.
+  if (tri === "note")
+    return versions.sort(
+      (a, b) =>
+        (b.jeu.metacritic ?? -1) - (a.jeu.metacritic ?? -1) || parTitre(a, b),
+    );
   const sens = tri === "recents" ? -1 : 1;
   // Une date inconnue va en fin de liste, quel que soit le sens.
   return versions.sort((a, b) => {
@@ -93,7 +97,19 @@ export function trier(
   });
 }
 
-/** Groupes par année en tri par date ; un seul groupe sans titre en tri alphabétique (US-02). */
+/** Tranche d'une note, aux seuils des couleurs Metacritic (US-17) et 90 pour les chefs-d'œuvre. */
+export function trancheNote(note: number | null): string {
+  if (note === null) return "Sans note";
+  if (note >= 90) return "90 et plus";
+  if (note >= 75) return "75 à 89";
+  if (note >= 50) return "50 à 74";
+  return "Moins de 50";
+}
+
+/**
+ * Groupes par année en tri par date ; par tranche de note en tri par note ; un seul groupe sans titre en tri
+ * alphabétique (US-02, US-17).
+ */
 export function grouperParAnnee(
   versions: VersionAffichee[],
   tri: Tri,
@@ -101,7 +117,10 @@ export function grouperParAnnee(
   if (tri === "az") return versions.length ? [{ titre: null, versions }] : [];
   const groupes: Groupe[] = [];
   for (const v of versions) {
-    const titre = v.sortie.date?.slice(0, 4) ?? "Date inconnue";
+    const titre =
+      tri === "note"
+        ? trancheNote(v.jeu.metacritic)
+        : (v.sortie.date?.slice(0, 4) ?? "Date inconnue");
     const dernier = groupes.at(-1);
     if (dernier?.titre === titre) dernier.versions.push(v);
     else groupes.push({ titre, versions: [v] });

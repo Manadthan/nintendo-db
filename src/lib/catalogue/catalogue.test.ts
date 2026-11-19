@@ -3,6 +3,7 @@ import {
   disponibilite,
   formaterDate,
   grouperParAnnee,
+  trancheNote,
   trier,
   versionAffichee,
 } from "./catalogue";
@@ -143,5 +144,54 @@ describe("trier et grouperParAnnee (US-02)", () => {
     expect(
       grouperParAnnee(trier(jeux, "az", "TOUS"), "az").map((g) => g.titre),
     ).toEqual([null]);
+  });
+});
+
+describe("tri par note Metacritic (US-17, SPEC v1.21)", () => {
+  const note = (slug: string, metacritic: number | null) => ({
+    ...jeu(slug, "2015-01-01", "2015-01-01", "2015-01-01"),
+    metacritic,
+  });
+  const jeux = [
+    note("sans-b", null),
+    note("moyen", 62),
+    note("sans-a", null),
+    note("chef", 96),
+    note("bon", 81),
+    note("zelda", 81),
+  ];
+
+  it("de la meilleure à la moins bonne ; à égalité par titre ; sans note à la fin, par titre", () => {
+    expect(trier(jeux, "note", "TOUS").map((v) => v.jeu.slug)).toEqual([
+      "chef",
+      "bon",
+      "zelda",
+      "moyen",
+      "sans-a",
+      "sans-b",
+    ]);
+  });
+
+  it("groupes par tranche, aux seuils des couleurs Metacritic", () => {
+    expect(
+      grouperParAnnee(trier(jeux, "note", "TOUS"), "note").map((g) => [
+        g.titre,
+        g.versions.length,
+      ]),
+    ).toEqual([
+      ["90 et plus", 1],
+      ["75 à 89", 2],
+      ["50 à 74", 1],
+      ["Sans note", 2],
+    ]);
+    expect([90, 89, 75, 74, 50, 49, 0].map(trancheNote)).toEqual([
+      "90 et plus",
+      "75 à 89",
+      "75 à 89",
+      "50 à 74",
+      "50 à 74",
+      "Moins de 50",
+      "Moins de 50",
+    ]);
   });
 });
