@@ -19,6 +19,7 @@ import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
 function NoteColoree({ note }: { note: number }) {
   return (
     <span
+      title={`${note} sur 100`}
       className={`inline-flex h-6 min-w-7 items-center justify-center rounded-md px-1.5 text-sm font-bold tabular-nums ${CLASSES_NOTE[niveauNote(note)]}`}
     >
       {note}
@@ -164,16 +165,13 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             ) : jeu.metacriticUrl ? (
               <a
                 href={jeu.metacriticUrl}
-                className="inline-flex items-center gap-1 text-accent underline-offset-2 hover:underline"
+                aria-label={`Metacritic : ${jeu.metacritic} sur 100 (page Metacritic)`}
+                className="inline-flex"
               >
                 <NoteColoree note={jeu.metacritic} />
-                /100
               </a>
             ) : (
-              <span className="inline-flex items-center gap-1">
-                <NoteColoree note={jeu.metacritic} />
-                /100
-              </span>
+              <NoteColoree note={jeu.metacritic} />
             )}
           </dd>
         </div>

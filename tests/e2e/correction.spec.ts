@@ -93,7 +93,10 @@ test("note Metacritic saisie à la main : sur la fiche (avec lien) et en étique
 
   await page.goto("/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
   await expect(
-    page.getByRole("link", { name: "73/100", exact: true }),
+    page.getByRole("link", {
+      name: "Metacritic : 73 sur 100 (page Metacritic)",
+      exact: true,
+    }),
   ).toHaveAttribute(
     "href",
     "https://www.metacritic.com/game/kirby-and-the-rainbow-curse/",
