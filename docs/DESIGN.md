@@ -342,8 +342,9 @@ test n'appelle les sites en direct.
       compteur par console ; rien de tout cela pour un visiteur (e2e public).
 
 13. **Note Metacritic** (v1.7, US-17) — 2 PR à merger **dans l'ordre** :
-   1. **Données et affichage** : migration 0013 (`metacritic_note`, `metacritic_url`, contrainte 0–100) ; fiche (note +
-      lien, source) ; étiquette colorée dans le catalogue (jetons `mc-bon`, `mc-moyen`, `mc-faible`, clair et sombre) ;
+   1. **Données et affichage** : migration 0013 (`metacritic_note`, `metacritic_url`, contrainte 0–100) ; fiche (note aux
+      couleurs Metacritic, jetons `mc-bon`, `mc-moyen`, `mc-faible`, clair et sombre ; lien ; source) ; étiquette du chiffre
+      dans le catalogue, au style des étiquettes JAP / US / PAL ;
       saisie et verrou dans la correction d'une fiche (US-11).
    2. **Mise à jour depuis Wikipédia** : lecteur de l'encadré (note par console, ambiguïtés) testé sur des **fixtures**
       (copies d'articles) ; page d'administration « Notes Metacritic » : aperçu, lots de 20, résumé.
