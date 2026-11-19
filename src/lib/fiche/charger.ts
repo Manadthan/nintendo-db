@@ -1,5 +1,6 @@
 import "server-only";
 import { supabaseEnv } from "@/lib/supabase/env";
+import { toutesLesPages } from "@/lib/supabase/pages";
 import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { versJeuFiche, type JeuFiche, type LigneFiche } from "./fiche";
 
@@ -30,12 +31,18 @@ export async function chargerJeu(
 export async function listerFiches(): Promise<
   { console: string; jeu: string }[]
 > {
-  const { data, error } = await createSupabasePublicClient()
-    .from("games")
-    .select("slug, consoles!inner(slug)");
-  if (error) throw new Error(`Liste des jeux illisible : ${error.message}`);
+  const supabase = createSupabasePublicClient();
+  const lignes = await toutesLesPages(
+    (de, a) =>
+      supabase
+        .from("games")
+        .select("slug, consoles!inner(slug)")
+        .order("id")
+        .range(de, a),
+    "Liste des jeux",
+  );
   return (
-    data as unknown as { slug: string; consoles: { slug: string } }[]
+    lignes as unknown as { slug: string; consoles: { slug: string } }[]
   ).map((j) => ({
     console: j.consoles.slug,
     jeu: j.slug,
