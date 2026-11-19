@@ -116,3 +116,34 @@ describe("listes lues telles que Wikipédia les écrit (Virtual Boy, étape 19)"
     expect(sorties?.US?.editeur).toBe("Nintendo");
   });
 });
+
+describe("Super Nintendo (étape 20) : liste lue telle que Wikipédia l'écrit", () => {
+  const liste = (titre: string, japon: string, us: string) =>
+    lireListeCartouches(`<table class="wikitable">
+      <tr><th rowspan="2">Title</th><th rowspan="2">Developer(s)</th><th rowspan="2">Publisher(s)</th><th colspan="3">Release date</th></tr>
+      <tr><th>Japan</th><th>North America</th><th>PAL region</th></tr>
+      <tr><td>${titre}</td><td>Game Freak</td><td>Nintendo</td><td>${japon}</td><td>${us}</td><td>Unreleased</td></tr>
+    </table>`).jeux[0];
+
+  it("« Cancelled » : pas sorti dans cette région (Mario & Wario)", () => {
+    const jeu = liste(
+      "<i>Mario &amp; Wario</i>",
+      "August 27, 1993",
+      "Cancelled",
+    );
+    expect(jeu?.sorties.US).toBeNull();
+    expect(jeu?.sorties.JAP?.date).toBe("1993-08-27");
+  });
+
+  it("titres japonais cités après le titre principal : gardés pour chercher la boîte japonaise", () => {
+    const jeu = liste(
+      "<i>Super Mario World</i><sup>[c]</sup>•<i>Super Mario World: Super Mario Bros. 4</i><sup>JP</sup>",
+      "November 21, 1990",
+      "August 23, 1991",
+    );
+    expect(jeu?.titres.US).toBe("Super Mario World");
+    expect(jeu?.autresTitres).toEqual([
+      "Super Mario World: Super Mario Bros. 4",
+    ]);
+  });
+});

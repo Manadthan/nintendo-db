@@ -54,6 +54,10 @@ export type SourceConsole = {
   noIntro?: string;
 };
 
+/** Super Nintendo (étape 20) : SHVC- au Japon, SNS- aux États-Unis, SNSP- en Europe, selon la lettre de la série. */
+export const prefixeSuperNintendo = (id: string) =>
+  id.endsWith("J") ? "SHVC-" : id.endsWith("E") ? "SNS-" : "SNSP-";
+
 export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
   "wii-u": {
     slug: "wii-u",
@@ -128,6 +132,8 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
         ["gb", "DMG-"],
         // Étape 19 : Virtual Boy, Japon et États-Unis seulement ; « VUE- ».
         ["vb", "VUE-"],
+        // Étape 20 : Super Nintendo, préfixe selon la région de la série (rare : codes surtout à la main).
+        ["snes", prefixeSuperNintendo],
       ] as const
     ).map(([slug, prefixeCode]) => [
       slug,

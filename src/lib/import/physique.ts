@@ -25,6 +25,8 @@ export type JeuAImporter = JeuWikipedia & {
   codes?: Partial<Record<Region, string>>;
   /** Game Boy Color (étape 17) : préfixe du code propre au jeu (« DMG- » Dual Mode, « CGB- »), avant celui de la console. */
   prefixeCode?: string;
+  /** Super Nintendo (étape 20) : autres titres de la cellule Wikipédia (titres japonais), pour la boîte japonaise. */
+  autresTitres?: string[];
 };
 
 /** Les disques d'une région peuvent donner des genres différents (Kirby : « plates-formes » en PAL seulement). */

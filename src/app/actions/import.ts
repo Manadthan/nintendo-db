@@ -163,7 +163,13 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
         return {
           ...j,
           codes: trouve.series,
-          boites: boitesDuJeu(indexBoites, j.titres, sorties, trouve.japonaise),
+          boites: boitesDuJeu(
+            indexBoites,
+            j.titres,
+            sorties,
+            trouve.japonaise,
+            j.autresTitres,
+          ),
         };
       });
     }
