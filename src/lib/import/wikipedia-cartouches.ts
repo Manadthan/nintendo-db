@@ -97,7 +97,18 @@ function editeurs(
       bout("sup").remove();
       return { nom: texte(bout, bout("div")), etiquettes };
     })
-    .filter((m) => m.nom);
+    .filter((m) => m.nom)
+    // Étiquettes entre parenthèses (Virtual Boy) : « T&E Soft (JP), Nintendo (NA) ».
+    .flatMap((m) =>
+      m.etiquettes.length || !/\([A-Z]{2,3}(?:[/, ]+[A-Z]{2,3})*\)/.test(m.nom)
+        ? [m]
+        : m.nom.split(/,\s*(?![^()]*\))/).map((bout) => {
+            const e = bout.match(/^(.*?)\s*\(([A-Z/, ]+)\)$/);
+            return e
+              ? { nom: e[1]!.trim(), etiquettes: e[2]!.split(/[,/\s]+/) }
+              : { nom: bout.trim(), etiquettes: [] as string[] };
+          }),
+    );
   if (!morceaux.some((m) => m.etiquettes.length)) {
     const tous = morceaux.map((m) => m.nom).join(", ") || null;
     return { JAP: tous, US: tous, PAL: tous };
@@ -215,7 +226,8 @@ export function lireListeCartouches(html: string): ListeCartouches {
         let sorti: boolean;
         if (col.dates[r] >= 0) {
           const t = texte($, cell(col.dates[r]));
-          sorti = !!t && !/unreleased|^n\/a$|^—$/i.test(t);
+          // « —N/a » (Virtual Boy) : tiret suivi du texte caché aux lecteurs d'écran.
+          sorti = !!t && !/unreleased|^—?\s*n\/a$|^—$/i.test(t);
           date = sorti ? premiereDate(t) : null;
         } else {
           const marque = ligne[col.sorties[r]]?.attribs["data-sort-value"];

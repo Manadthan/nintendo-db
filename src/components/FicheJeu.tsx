@@ -71,6 +71,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
     "wii-u",
     "switch-2",
     "gb",
+    "vb",
     "n64",
     "gbc",
     "gba",

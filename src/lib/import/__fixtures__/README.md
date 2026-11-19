@@ -183,3 +183,13 @@ Fabriquées par `scripts/fixture-wikipedia-cartouches.mjs`, `scripts/fixture-lib
 | Contenu | Liste : 2 lignes d'en-tête, 91 jeux Nintendo et 15 autres ; index : 1 647 boîtes ; No-Intro : 2 144 entrées, réduites aux lignes lues |
 
 Fabriquées par les mêmes scripts que la Game Boy Color.
+
+## `vb-wikipedia.html`, `vb-libretro.xml`, `vb-nointro.dat` (étape 19)
+
+| | |
+|---|---|
+| Source | https://en.wikipedia.org/w/index.php?title=List_of_Virtual_Boy_games&action=render ; dépôt https://github.com/libretro-thumbnails/Nintendo_-_Virtual_Boy (noms de fichiers) ; libretro-database `metadat/no-intro/Nintendo - Virtual Boy.dat` ; le 19/11/2026 |
+| Conditions | Wikipédia : CC BY-SA 4.0 ; libretro : noms de fichiers et numéros de série seulement |
+| Contenu | Liste entière (22 jeux, dont 11 Nintendo) ; index : 42 boîtes ; No-Intro : 64 entrées, réduites aux lignes lues |
+
+Fabriquées par les mêmes scripts que la Game Boy Color.
