@@ -50,6 +50,22 @@ describe("boîtes libretro-thumbnails (étape 14)", () => {
     ).toBe("Metroid Fusion (USA)");
   });
 
+  it("jamais un lien symbolique (« … - SymbolicLink » : un texte, pas une image ; Majora's Mask, #129)", () => {
+    const mm = boitesDuJeu(
+      N64,
+      {
+        US: "The Legend of Zelda: Majora's Mask",
+        PAL: "The Legend of Zelda: Majora's Mask",
+      },
+      toutes,
+    );
+    expect(mm.US).toBe("Legend of Zelda, The - Majora's Mask (USA)");
+    for (const jeu of [N64, GBA])
+      for (const boites of jeu.values())
+        for (const b of Object.values(boites))
+          expect(b.nom).not.toMatch(/SymbolicLink/);
+  });
+
   it("rien pour une région non sortie", () => {
     expect(
       boitesDuJeu(
