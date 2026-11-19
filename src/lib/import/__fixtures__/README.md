@@ -149,3 +149,17 @@ Fabriquées par :
 git clone --depth 1 --filter=blob:none --no-checkout https://github.com/libretro-thumbnails/Nintendo_-_Nintendo_64.git
 node scripts/fixture-libretro.mjs Nintendo_-_Nintendo_64 > src/lib/import/__fixtures__/n64-libretro.xml
 ```
+
+## `n64-nointro.dat` et `gba-nointro.dat` (étape 15)
+
+| | |
+|---|---|
+| Source | https://github.com/libretro/libretro-database, `metadat/no-intro/Nintendo - Nintendo 64.dat` et `… - Game Boy Advance.dat`, le 19/11/2026 |
+| Conditions | Noms et numéros de série des cartouches seulement (aucune image, aucun contenu de jeu) |
+| Contenu | Même format que l'original, réduit aux lignes lues (`name`, `region`, `serial`) : sans les lignes `rom` (sommes de contrôle). N64 2 263 entrées, GBA 3 509 |
+
+Fabriquées par :
+
+```
+node scripts/fixture-nointro.mjs "Nintendo - Nintendo 64.dat" > src/lib/import/__fixtures__/n64-nointro.dat
+```

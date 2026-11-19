@@ -49,6 +49,10 @@ export function cleTitre(titre: string): string {
 const ECARTEES =
   /\((?:[^)]*\b(?:Beta|Proto|Demo|Sample|Kiosk|Virtual Console|Debug|GameCube|Wii U|Switch Online|Pirate|Unl|Aftermarket|Competition|Hack)\b[^)]*)\)/i;
 
+/** Nom No-Intro écarté : prototype, démo, réédition, version non officielle, ou lien symbolique (#129). */
+export const estEcartee = (nom: string) =>
+  ECARTEES.test(nom) || /SymbolicLink/i.test(nom);
+
 /** Régions No-Intro → régions du site ; priorité : la région exacte avant un pays de la même zone. */
 const REGIONS_NOINTRO: Record<string, { regions: RegionSite[]; rang: number }> =
   {
@@ -72,7 +76,7 @@ export function indexerBoites(noms: string[]): IndexBoites {
   const index: IndexBoites = new Map();
   for (const nom of noms) {
     // « … - SymbolicLink » : lien Git vers une autre boîte, servi comme un texte (son chemin), pas une image.
-    if (ECARTEES.test(nom) || /SymbolicLink/i.test(nom)) continue;
+    if (estEcartee(nom)) continue;
     const m = nom.match(/^(.*?) \(([^)]+)\)(.*)$/);
     if (!m) continue;
     const zones = m[2]!.split(/,\s*/);
@@ -96,12 +100,14 @@ export function indexerBoites(noms: string[]): IndexBoites {
 
 /**
  * Boîtes d'un jeu, par région sortie : titre américain pour les États-Unis, européen pour l'Europe, l'un ou l'autre
- * pour le Japon (une boîte japonaise nommée en japonais n'est pas trouvée : vignette neutre, SPEC v1.18).
+ * pour le Japon ; sinon, pour le Japon, le nom No-Intro de la cartouche japonaise retrouvée par sa série (« Zelda no
+ * Densetsu - Mujura no Kamen (Japan) », étape 15, ADR-10).
  */
 export function boitesDuJeu(
   index: IndexBoites,
   titres: { US: string; PAL: string },
   sorties: Record<RegionSite, boolean>,
+  japonaise: string | null = null,
 ): Partial<Record<RegionSite, string>> {
   const pour = (titre: string) => index.get(cleTitre(titre)) ?? {};
   const us = pour(titres.US);
@@ -109,6 +115,10 @@ export function boitesDuJeu(
   const choix: Partial<Record<RegionSite, string>> = {};
   if (sorties.US && us.US) choix.US = us.US.nom;
   if (sorties.PAL && (pal.PAL ?? us.PAL)) choix.PAL = (pal.PAL ?? us.PAL)!.nom;
-  if (sorties.JAP && (us.JAP ?? pal.JAP)) choix.JAP = (us.JAP ?? pal.JAP)!.nom;
+  const jap =
+    us.JAP ??
+    pal.JAP ??
+    (japonaise ? pour(japonaise.replace(/ \(.*$/, "")).JAP : undefined);
+  if (sorties.JAP && jap) choix.JAP = jap.nom;
   return choix;
 }
