@@ -71,18 +71,43 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-      # Le miroir Ubuntu peut être très lent : 10 min au plus, puis un second essai (souvent sur un autre miroir).
+      # Paquets Ubuntu des navigateurs (WebKit en demande ≈ 150) gardés en cache : le miroir Ubuntu peut être très lent
+      # (5 fois du 18 au 19/11/2026, jusqu'à 100 s pour un paquet), le téléchargement n'a lieu qu'une fois.
+      - name: Cache des paquets Ubuntu des navigateurs
+        id: cache-apt
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/apt-archives
+          key: apt-playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - name: Paquets en cache remis à apt
+        if: steps.cache-apt.outputs.cache-hit == 'true'
+        run: sudo cp ~/apt-archives/*.deb /var/cache/apt/archives/
+      # 10 min au plus, puis un second essai (souvent sur un autre miroir).
       - name: Navigateurs et dépendances (1er essai)
         id: navigateurs
         continue-on-error: true
         timeout-minutes: 10
         run: npx playwright install --with-deps chromium webkit
+      # Le 1er essai arrêté laisse apt-get tourner et garder son verrou (« Could not get lock », #120, #135) : on
+      # l'arrête et on répare dpkg avant de relancer.
       - name: Navigateurs et dépendances (2e essai)
         if: steps.navigateurs.outcome != 'success'
         timeout-minutes: 12
         run: |
-          sudo apt-get clean
+          sudo pkill -9 -x apt-get || true
+          sudo pkill -9 -x dpkg || true
+          sudo rm -f /var/lib/dpkg/lock /var/lib/dpkg/lock-frontend /var/cache/apt/archives/lock /var/lib/apt/lists/lock
+          sudo dpkg --configure -a || true
           npx playwright install --with-deps chromium webkit
+      - name: Paquets Ubuntu mis en cache
+        if: steps.cache-apt.outputs.cache-hit != 'true'
+        run: mkdir -p ~/apt-archives && cp /var/cache/apt/archives/*.deb ~/apt-archives/
+      - name: Cache des paquets enregistré
+        if: steps.cache-apt.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/apt-archives
+          key: ${{ steps.cache-apt.outputs.cache-primary-key }}
       - run: npm run e2e
       - name: Rapport en cas d'échec
         if: failure()
