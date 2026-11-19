@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.8 — 19/11/2026 — statut : **validée**
+> Version 1.9 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.9 | 19/11/2026 | **N64 + GBA complétées** (étape 15) : mesures No-Intro (§1 septies), ADR-10, plan §8 |
 > | 1.8 | 19/11/2026 | **N64 + GBA** (étape 14) : étude (§1 septies), ADR-09 libretro-thumbnails, plan §8 |
 > | 1.7 | 19/11/2026 | **Note Metacritic** (étape 13) : étude (§1 sexies), ADR-08, colonnes `metacritic_*`, plan §8 |
 > | 1.6 | 19/11/2026 | **Ma collection** (étape 12) : ADR-07, table `possessions`, plan §8 |
@@ -139,10 +140,15 @@ GameTDB ne couvre ni la N64 ni la GBA (seulement Wii, Wii U, GameCube, DS, 3DS, 
 | Boîtes **libretro-thumbnails** (dépôt GitHub, noms No-Intro « Titre (USA) ») | 1 115 fichiers ; boîte trouvée par le titre pour **52 / 58** jeux (US 50, Europe 41, Japon 18) | 5 961 fichiers ; **85 / 120** (US 61, Europe 35, Japon 39) |
 | Taille, forme | 512 px ; 512 × 357 (US, Europe), 366 × 512 (Japon) | 512 px ; 512 × 512 (US, Europe), 512 × 326 (Japon) |
 | Codes produit | aucune source simple (No-Intro à étudier plus tard) | idem |
+| **No-Intro** (v1.9, `libretro-database`, `metadat/no-intro/*.dat`) : nom + numéro de série par cartouche | 2 263 entrées ; série trouvée pour **51 / 58** jeux ; codes JAP 36 / 43, US 49 / 51, PAL 44 / 46 | 3 509 entrées ; **82 / 120** ; codes JAP 77 / 119, US 55 / 69, PAL 55 / 69 |
+| Boîtes japonaises, titre **+ série** (v1.9) | **37 / 43** (18 par le titre seul) | **76 / 119** (39 par le titre seul) |
 
 libretro-thumbnails : pas de licence formelle (comme GameTDB), images propriété des éditeurs ; planche d'exemples montrée
 au propriétaire avant la spec (BILAN, leçon 9). Les boîtes japonaises portent souvent le titre japonais romanisé (« Zelda
-no Densetsu ») : introuvables par le titre anglais, elles restent en vignette neutre.
+no Densetsu ») : introuvables par le titre anglais, elles restent en vignette neutre. **v1.9** : le numéro de série
+No-Intro (`NZSE` US, `NZSJ` Japon, `NZSP` Europe : 3 caractères communs + lettre de région) relie ces noms ; planche de
+boîtes japonaises ainsi retrouvées montrée au propriétaire (Majora's Mask : boîte intérieure du pack, gardée). Jeux sans
+série : surtout des titres japonais seuls, romanisés autrement (« Dōbutsu no Mori » / « Doubutsu no Mori »).
 
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
 Vercel avec un cache d'un an). C'est le modèle retenu (ADR-04).
@@ -264,11 +270,20 @@ source libre, citée, sans clé ; mieux vaut une note manquante (saisissable) qu
 **ADR-09 — N64 et GBA : Wikipédia + libretro-thumbnails (étape 14).** Lecteur de liste Wikipédia commun, paramétré par
 console (noms des colonnes, « en boîte » : marque † pour la Wii U, toutes les cartouches pour N64 et GBA ; clés de tri
 cachées retirées). Jaquettes : l'**index** des boîtes (noms de fichiers du dépôt) est déposé par le relais dans le
-bucket `gametdb` (`n64/libretro.txt`, `gba/libretro.txt`) ; l'import y cherche, pour chaque région sortie, le titre
+bucket `gametdb` (`n64/libretro.xml`, `gba/libretro.xml`) ; l'import y cherche, pour chaque région sortie, le titre
 normalisé (« The » déplacé, ponctuation ignorée) et la région No-Intro (`USA` → US, `Europe` → PAL, `Japan` → JAP,
 `World` → les trois ; ni « Beta », « Proto », « Demo », « Virtual Console »), puis copie l'image depuis
 `raw.githubusercontent.com` en WebP (ADR-04) avec la source `libretro`. Forme réelle : la fiche affiche la jaquette à ses
 proportions ; le catalogue la centre entière dans un cadre carré propre à ces consoles.
+
+**ADR-10 — N64 et GBA : numéro de série No-Intro (étape 15).** L'import lit le fichier No-Intro de la console dans
+`libretro-database` (un seul fichier texte par console, < 1 Mo, lu directement sur `raw.githubusercontent.com` : pas de
+relais). Rapprochement : titre normalisé (même clé que les boîtes, ADR-09 ; « ou » / « ō » confondus) → numéros de série
+du jeu → **base** (3 premiers caractères). Code de chaque région sortie = préfixe (`NUS-`, `AGB-`) + série de la région
+(`J` Japon ; `E` US ; Europe : `P`, sinon une série d'un pays européen, sinon la série « USA, Europe »). Boîte
+japonaise : si le titre ne la trouve pas, le nom No-Intro japonais de la même base, s'il est dans l'index libretro. Les
+codes passent par un champ `codes` distinct des `disques` GameTDB (aucun scan du relais à copier) ; verrous respectés
+(US-11) ; jeux concernés « modifiés » dans l'import des nouveautés.
 
 ## 5. Modèle de données
 
@@ -380,6 +395,10 @@ test n'appelle les sites en direct.
       `n64` 1996 et `gba` 2001, ordre chronologique ; source de jaquette `libretro`) ; pages d'import ; sans jaquettes.
    2. **Jaquettes** : index libretro déposé par le relais, rapprochement titre + région (testé sur fixtures), copie à
       l'import, forme réelle sur la fiche et cadre carré dans le catalogue, mention de la source.
+
+15. **N64 + GBA complétées** (v1.9, ADR-10) — 1 PR, sans migration : lecteur No-Intro (fixtures réduites des deux
+    fichiers), codes produit et boîtes japonaises par série, testés sur fixtures ; puis réimport des deux consoles par le
+    propriétaire.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
