@@ -71,7 +71,8 @@ export type IndexBoites = Map<
 export function indexerBoites(noms: string[]): IndexBoites {
   const index: IndexBoites = new Map();
   for (const nom of noms) {
-    if (ECARTEES.test(nom)) continue;
+    // « … - SymbolicLink » : lien Git vers une autre boîte, servi comme un texte (son chemin), pas une image.
+    if (ECARTEES.test(nom) || /SymbolicLink/i.test(nom)) continue;
     const m = nom.match(/^(.*?) \(([^)]+)\)(.*)$/);
     if (!m) continue;
     const zones = m[2]!.split(/,\s*/);
