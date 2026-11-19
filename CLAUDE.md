@@ -127,9 +127,12 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   `NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt`, et un préchargement qui retire l'en-tête `Authorization` des
   requêtes vers Supabase.
 
-- **CI e2e arrêtée pendant l'installation des navigateurs** (2 fois, #109 et #120 : miroir Ubuntu lent, limite de
-  20 min atteinte avant le premier test) : ce n'est pas le code ; relancer la tâche. Corrigé dans `ci.yml` (cache des
-  navigateurs, 10 min par essai, second essai, limite 35 min).
+- **CI e2e arrêtée pendant l'installation des navigateurs** (#109, #120, puis toutes les PR du 19/11 : miroir Ubuntu
+  lent) : ce n'est pas le code. `ci.yml` : cache des navigateurs **et des paquets Ubuntu**, 10 min par essai, second
+  essai qui arrête d'abord l'apt-get du premier (verrou), limite 35 min.
+- **CI rouge non vue** (19/11 : test pgTAP d'une liste de sources figée, cassé par la migration 0014, rouge sur
+  `main` de #127 à #134) : avant de dire « CI verte », lire le résultat de **chaque** tâche de la PR ; une migration
+  qui ajoute une valeur d'énumération met à jour les tests qui listent ses valeurs.
 - **Clone superficiel** (`git clone --depth 1`) : il ne suit que `main`, et l'alerte « branche non poussée » revient
   après chaque `git push -u`. Une fois par clone : `git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'`.
 - **Sélecteurs e2e ambigus** (2 fois : « Remplacer » trouvait « À remplacer » ; `getByRole("alert")` trouvait aussi
