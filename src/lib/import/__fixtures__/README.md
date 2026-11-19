@@ -203,3 +203,13 @@ Fabriquées par les mêmes scripts que la Game Boy Color.
 | Contenu | Liste : 2 lignes d'en-tête, 98 jeux Nintendo et 15 autres ; index : 3 782 boîtes ; No-Intro : 3 746 entrées, réduites aux lignes lues |
 
 Fabriquées par les mêmes scripts que la Game Boy Color.
+
+## `nes-wikipedia.html`, `nes-libretro.xml`, `nes-nointro.dat` (étape 21)
+
+| | |
+|---|---|
+| Source | https://en.wikipedia.org/w/index.php?title=List_of_Nintendo_Entertainment_System_games&action=render ; dépôt https://github.com/libretro-thumbnails/Nintendo_-_Nintendo_Entertainment_System (noms de fichiers) ; libretro-database `metadat/no-intro/Nintendo - Nintendo Entertainment System.dat` ; le 19/11/2026 |
+| Conditions | Wikipédia : CC BY-SA 4.0 ; libretro : noms de fichiers et numéros de série seulement |
+| Contenu | Liste : 2 lignes d'en-tête, 104 jeux Nintendo et 15 autres ; index : 13 896 boîtes ; No-Intro : 13 296 entrées, réduites aux lignes lues (presque sans numéro de série : codes à la main) |
+
+Fabriquées par les mêmes scripts que la Game Boy Color.

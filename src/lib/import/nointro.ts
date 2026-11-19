@@ -9,6 +9,7 @@ export const FICHIERS_NOINTRO: Record<string, string> = {
   gb: "Nintendo - Game Boy",
   vb: "Nintendo - Virtual Boy",
   snes: "Nintendo - Super Nintendo Entertainment System",
+  nes: "Nintendo - Nintendo Entertainment System",
   gbc: "Nintendo - Game Boy Color",
   gba: "Nintendo - Game Boy Advance",
 };
