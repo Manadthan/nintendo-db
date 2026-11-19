@@ -95,7 +95,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 #### US-17 — Voir la note Metacritic d'un jeu (S, SPEC v1.17)
 *En tant que visiteur, je vois d'un coup d'œil comment un jeu a été reçu par la critique.*
-- [ ] Sur la fiche, dans le bloc d'informations : « Metacritic : 85/100 » aux **couleurs Metacritic** (vert ≥ 75, jaune
+- [ ] Sur la fiche, dans le bloc d'informations : « Metacritic » et la note seule (« 85 », sans « /100 ») aux **couleurs Metacritic** (vert ≥ 75, jaune
       50 à 74, rouge < 50), avec un **lien** vers la page Metacritic du jeu quand il est connu ; « — » sans note. La source
       est citée en pied de fiche (« note Metacritic via Wikipédia »).
 - [ ] Dans le catalogue, une étiquette **avec le seul chiffre** (« 85 ») sur la même ligne que JAP / US / PAL, **dans le
