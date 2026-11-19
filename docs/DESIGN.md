@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.12 — 19/11/2026 — statut : **à valider**
+> Version 1.13 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.13 | 19/11/2026 | **Virtual Boy** (étape 19) : étude (§1 decies), plan §8 |
 > | 1.12 | 19/11/2026 | **Game Boy** (étape 18) : étude (§1 nonies), plan §8 |
 > | 1.11 | 19/11/2026 | **Game Boy Color** (étape 17) : étude (§1 octies), ADR-12, plan §8 |
 > | 1.10 | 19/11/2026 | **Statistiques** (étape 16) : ADR-11, plan §8 |
@@ -184,6 +185,20 @@ Même recette que la Game Boy Color (ADR-09, ADR-10, ADR-12).
 | Séries No-Intro | 2 144 entrées ; série presque absente (codes US 1 / 78, PAL 3 / 83) : les cartouches d'avant 1996 ne la portent pas |
 
 Planche d'exemples montrée au propriétaire avant la spec (leçon 9).
+
+## 1 decies. Étude Virtual Boy (19/11/2026)
+
+| Mesure | Virtual Boy |
+|---|---|
+| Liste Wikipédia | Comme la N64 : « Release date » puis Japan, North America (pas de colonne européenne) ; « —N/a » pour une sortie absente ; éditeurs écrits « T&E Soft (JP), Nintendo (NA) » |
+| Jeux édités par Nintendo | **11** sur 22 ; JAP 11, US 11, PAL 0 |
+| Boîtes libretro-thumbnails | 42 fichiers ; US 10 / 11 ; JAP 8 / 11 en comptant les boîtes « (Japan, USA) », qui sont américaines |
+| Taille, forme | ≈ 512 × 506 (presque carrées) |
+| Séries No-Intro | 64 entrées ; JAP 9 / 11, US 5 / 11 (les autres jeux ont une cartouche commune « Japan, USA ») |
+
+Écarts de lecture corrigés : « —N/a » = non sorti (sinon sortie sans date) ; étiquettes de région entre parenthèses
+dans la cellule Publisher ; « & » écrit « _ » dans les noms de fichiers libretro (« T_E Virtual Golf »). Planche
+montrée au propriétaire avant la spec (leçon 9).
 
 ## 2. Stack
 
@@ -459,6 +474,9 @@ test n'appelle les sites en direct.
 18. **Game Boy** (v1.12) — 1 PR, migration 0016 (console `gb`, portable, 1989, avant la N64) : en-tête « PAL region »
     lu ; préfixe `DMG-` ; fixtures Game Boy réduites (liste, index libretro, No-Intro) ; page d'import, forme des boîtes,
     À propos. Puis relais (index libretro Game Boy) et import par le propriétaire.
+
+19. **Virtual Boy** (v1.13) — 1 PR, migration 0017 (console `vb`, 1995, entre le Game Boy et la N64) : lectures
+    corrigées ci-dessus ; boîte « (Japan, USA) » pour les États-Unis seulement ; préfixe `VUE-` ; fixtures Virtual Boy.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
