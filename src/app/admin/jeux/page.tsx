@@ -78,7 +78,9 @@ export default async function PageJeux({
       <SelecteurConsole
         consoles={consoles ?? []}
         active={laConsole.slug}
-        adresse={(slug) => `/admin/jeux?console=${slug}&filtre=${filtre}`}
+        adresse={(slug) =>
+          `/admin/jeux?console=${slug}${filtre === "sans-code" ? "&filtre=sans-code" : ""}`
+        }
       />
       <nav
         aria-label="Filtre"
@@ -92,7 +94,7 @@ export default async function PageJeux({
         ).map(([valeur, libelle]) => (
           <Link
             key={valeur}
-            href={`/admin/jeux?console=${laConsole.slug}&filtre=${valeur}`}
+            href={`/admin/jeux?console=${laConsole.slug}${valeur === "sans-code" ? "&filtre=sans-code" : ""}`}
             aria-current={filtre === valeur ? "page" : undefined}
             className={`flex h-10 items-center justify-center rounded-lg ${
               filtre === valeur
