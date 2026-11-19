@@ -7,6 +7,7 @@ type RegionSite = "JAP" | "US" | "PAL";
 /** Dépôts libretro-thumbnails par console. */
 export const DEPOTS_LIBRETRO: Record<string, string> = {
   n64: "Nintendo_-_Nintendo_64",
+  gbc: "Nintendo_-_Game_Boy_Color",
   gba: "Nintendo_-_Game_Boy_Advance",
 };
 
