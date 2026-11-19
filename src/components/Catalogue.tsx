@@ -38,11 +38,7 @@ import {
   type Tri,
   type VersionAffichee,
 } from "@/lib/catalogue/types";
-import {
-  compteurs,
-  filtrerCollection,
-  possede,
-} from "@/lib/collection/collection";
+import { filtrerCollection, possede } from "@/lib/collection/collection";
 import { useCollection } from "@/lib/collection/navigateur";
 import { Disponibilite } from "./Disponibilite";
 import { NoteMetacritic } from "./NoteMetacritic";
@@ -214,6 +210,7 @@ export function Catalogue({ jeux, consoles }: Props) {
           <option value="anciens">Plus anciens</option>
           <option value="recents">Plus récents</option>
           <option value="az">A → Z</option>
+          <option value="note">Mieux notés</option>
         </select>
         <button
           type="button"
@@ -252,11 +249,7 @@ export function Catalogue({ jeux, consoles }: Props) {
           annees={anneesProposees(duMarche)}
           genres={genresProposes(duMarche)}
           developpeurs={developpeursProposes(duMarche)}
-          collection={
-            connecte
-              ? compteurs(duMarche, consoles, collection.possessions, marche)
-              : undefined
-          }
+          collection={connecte}
         />
       )}
       <FiltresActifs filtres={filtres} consoles={consoles} />
