@@ -61,6 +61,20 @@ export default async function PageAdmin() {
         <span aria-hidden="true">›</span>
       </Link>
       <Link
+        href="/admin/import?console=n64"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Import Nintendo 64 (Wikipédia)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
+        href="/admin/import?console=gba"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Import Game Boy Advance (Wikipédia)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
         href="/admin/import?console=gamecube"
         className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
       >

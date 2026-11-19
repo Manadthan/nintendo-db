@@ -24,7 +24,7 @@ const SOURCES = [
     nom: "Wikipédia",
     lien: "https://en.wikipedia.org/wiki/List_of_Wii_U_games",
     apport:
-      "Listes des jeux Wii U et Switch 2, titres en Amérique du Nord et en Europe, dates de sortie, éditeurs et développeurs (articles « List of Wii U games » et « List of Nintendo Switch 2 games », en anglais). Les jaquettes Switch 2 sont des photos ajoutées à la main.",
+      "Listes des jeux Nintendo 64, Game Boy Advance, Wii U et Switch 2, titres, dates de sortie, éditeurs et développeurs (articles « List of … games », en anglais). Les jaquettes Switch 2 sont des photos ajoutées à la main.",
     licence:
       "Texte sous licence Creative Commons Attribution – Partage dans les mêmes conditions (CC BY-SA 4.0).",
     licenceLien: "https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
@@ -56,8 +56,8 @@ export default function APropos() {
             Nintendo DB recense les jeux édités par Nintendo et sortis en boîte,
             version par version : jaquette, titre, date et code produit au
             Japon, en Amérique du Nord et en Europe. Consoles couvertes :
-            GameCube, Wii U, Wii, DS, 3DS, Switch et Switch 2 ; les autres
-            suivront.
+            Nintendo 64, Game Boy Advance, GameCube, Wii U, Wii, DS, 3DS, Switch
+            et Switch 2 ; les autres suivront.
           </p>
         </section>
 

@@ -107,6 +107,20 @@ Fabriquée par :
 node scripts/fixture-wikipedia.mjs <page.html> > src/lib/import/__fixtures__/switch-2-wikipedia.html
 ```
 
+## `n64-wikipedia.html` et `gba-wikipedia.html` (étape 14)
+
+| | |
+|---|---|
+| Source | https://en.wikipedia.org/w/index.php?title=List_of_Nintendo_64_games&action=render et https://en.wikipedia.org/w/index.php?title=List_of_Game_Boy_Advance_games&action=render, téléchargées le 19/11/2026 |
+| Conditions | CC BY-SA 4.0, comme la liste Wii U ci-dessus |
+| Contenu | Tableau des jeux : ses 2 lignes d'en-tête, les jeux dont un éditeur est Nintendo (N64 : 58, GBA : 120) et 15 autres ; clés de tri cachées et annotations techniques retirées |
+
+Fabriquées par :
+
+```
+node scripts/fixture-wikipedia-cartouches.mjs <page.html> > src/lib/import/__fixtures__/n64-wikipedia.html
+```
+
 ## `metacritic-wikipedia.json` (étape 13)
 
 | | |

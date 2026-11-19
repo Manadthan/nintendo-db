@@ -12,6 +12,7 @@ import {
 export const SOURCES_JAQUETTE = {
   gametdb: "GameTDB",
   igdb: "IGDB",
+  libretro: "libretro-thumbnails",
   photo: "Photo",
   url: "Image ajoutée",
 } as const;

@@ -5,6 +5,7 @@ import {
   estDisqueGameCubeDuCommerce,
   estDisqueWiiDuCommerce,
 } from "./relais-wii";
+import { lireListeCartouches } from "./wikipedia-cartouches";
 import { lireListeSwitch2, type ListeSwitch2 } from "./wikipedia-switch-2";
 
 /**
@@ -108,6 +109,21 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
     prefixeCode: "HAC-P-",
     estDisque: estCartoucheSwitchDuCommerce,
   },
+  // Étape 14 (DESIGN v1.8 ADR-09) : GameTDB ne couvre ni la N64 ni la GBA ; listes Wikipédia, toutes en boîte.
+  ...Object.fromEntries(
+    ["n64", "gba"].map((slug) => [
+      slug,
+      {
+        slug,
+        wikipedia: true,
+        base: "",
+        scans: "",
+        prefixeCode: "",
+        estDisque: () => false,
+        wikipediaSeul: lireListeCartouches,
+      } satisfies SourceConsole,
+    ]),
+  ),
   // Étape 10 (DESIGN v1.4 §1 quater) : GameTDB n'a pas de base Switch 2 ; liste Wikipédia, jaquettes à la main.
   "switch-2": {
     slug: "switch-2",
