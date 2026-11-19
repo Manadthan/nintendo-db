@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.13 — 18/11/2026 — statut : **validée**
+> Version 1.14 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.14 | 19/11/2026 | **Ma collection** (étape 12) : US-16, versions régionales possédées, privée, propriétaire seul |
 > | 1.13 | 18/11/2026 | **GameCube** (étape 11) : US-10 (disques du commerce, compilations Zelda Collector's Edition et Pac-Man Vs., petite image japonaise faute de scan) |
 > | 1.12 | 18/11/2026 | US-06 : filtre **Développeur** (#89), divisions de Nintendo distinctes et entrée « Nintendo (first party) » |
 > | 1.11 | 18/11/2026 | **Switch et Switch 2** (étape 10) : US-10 (cartouche mondiale, Switch 2 depuis Wikipédia, case « en boîte », jeux à venir cachés) ; **import des nouveautés** (US-10) |
@@ -122,6 +123,21 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       lisible en clair comme en sombre.
 - [ ] Il sert d'icône d'onglet et d'icône d'écran d'accueil iPhone.
 
+### Collection (propriétaire connecté)
+
+#### US-16 — Cocher les versions que je possède (M, SPEC v1.14)
+*En tant que propriétaire connecté, je note les versions régionales de mes jeux pour savoir ce qui me manque.*
+- [ ] Sur la fiche d'un jeu, chaque région **sortie** (JAP, US, PAL) a une case « Je l'ai » ; un tap coche ou décoche,
+      immédiatement enregistré. Une région non sortie n'a pas de case.
+- [ ] Sur le catalogue, une vignette dont la version affichée est possédée porte une **coche verte**.
+- [ ] Filtre **Collection** dans le panneau : Tous / Possédés / Manquants, selon la version du marché affiché (marché
+      « Tous » : au moins une version possédée).
+- [ ] Un **compteur par console** (« GameCube : 12 / 58 ») en tête du panneau Filtres.
+- [ ] La collection est **privée** : un visiteur ne voit ni case, ni coche, ni filtre, ni compteur, et ne peut ni lire
+      ni modifier la collection, même en appelant directement le serveur. Les pages publiques restent préparées à
+      l'avance ; la collection s'ajoute dans le navigateur une fois connecté.
+- [ ] Supprimer un jeu (US-11) retire aussi ses versions de la collection.
+
 ### Administration (propriétaire)
 
 #### US-09 — Se connecter (M)
@@ -225,7 +241,8 @@ DS, 3DS.
 
 ## 7. Hors périmètre (v1)
 
-- Suivi de collection (jeux possédés, liste de souhaits) — étape ultérieure.
+- Suivi de collection au-delà de US-16 : comptes visiteurs, état des exemplaires (complet, sans notice…), liste de
+  souhaits, page publique de collection — étapes ultérieures.
 - Rééditions (Player's Choice, Nintendo Selects…) et variantes de pays au sein de PAL.
 - Jeux dématérialisés uniquement (eShop, WiiWare, DSiWare…).
 - Comptes visiteurs, commentaires, notes Metacritic, bandes-annonces.
