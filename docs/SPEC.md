@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.15 — 19/11/2026 — statut : **à valider**
+> Version 1.17 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.17 | 19/11/2026 | **Note Metacritic** (étape 13) : US-17, sur la fiche (note + lien) et en étiquette dans le catalogue ; Wikipédia + saisie à la main |
 > | 1.15 | 19/11/2026 | US-09 : **icône de compte** en haut des pages publiques, à la place du lien « Administration » du pied de page ; Catalogue et À propos en icônes (demande du propriétaire) |
 > | 1.14 | 19/11/2026 | **Ma collection** (étape 12) : US-16, versions régionales possédées, privée, propriétaire seul |
 > | 1.13 | 18/11/2026 | **GameCube** (étape 11) : US-10 (disques du commerce, compilations Zelda Collector's Edition et Pac-Man Vs., petite image japonaise faute de scan) |
@@ -91,6 +92,14 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] La **source** des données est citée (lien vers la fiche d'origine).
 - [ ] Une donnée inconnue s'affiche « — », jamais vide ni inventée (fréquent pour le code produit au début, complété via US-11).
 - [ ] La fiche a une adresse stable que l'on peut partager.
+
+#### US-17 — Voir la note Metacritic d'un jeu (S, SPEC v1.17)
+*En tant que visiteur, je vois d'un coup d'œil comment un jeu a été reçu par la critique.*
+- [ ] Sur la fiche, dans le bloc d'informations : « Metacritic : 85/100 », avec un **lien** vers la page Metacritic du
+      jeu quand il est connu ; « — » sans note. La source est citée en pied de fiche (« note Metacritic via Wikipédia »).
+- [ ] Dans le catalogue, une étiquette **avec le seul chiffre** (« 85 ») sur la même ligne que JAP / US / PAL, aux
+      **couleurs Metacritic** : vert ≥ 75, jaune 50 à 74, rouge < 50. Un jeu sans note n'a pas d'étiquette.
+- [ ] Une note par jeu (celle de sa console ; pas de note par région).
 
 #### US-05 — Rechercher un jeu (M)
 *En tant que visiteur, je trouve un jeu en tapant une partie de son titre, directement dans le catalogue.*
@@ -213,6 +222,11 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
 - [ ] J'ajoute un jeu manquant à la main, ou je supprime un jeu (avec confirmation).
 - [ ] Les champs obligatoires sont vérifiés (titre non vide, date valide).
+- [ ] Je saisis ou corrige la **note Metacritic** (0 à 100) et l'adresse de sa page ; une note saisie à la main est
+      verrouillée contre la mise à jour automatique (SPEC v1.17).
+- [ ] Une page d'administration met à jour les **notes Metacritic** d'une console depuis Wikipédia (aperçu puis
+      enregistrement, comme l'import) : notes trouvées, jeux sans article ou sans note, notes **ambiguës** (article couvrant
+      plusieurs consoles sans note propre à celle du jeu) laissées vides et signalées, à saisir à la main.
 
 #### US-12 — Ajouter une jaquette à une sortie (S)
 - [ ] Je remplace la jaquette d'une région par une **photo** ou l'**adresse d'une image** ; elle est copiée chez nous.
@@ -249,7 +263,7 @@ DS, 3DS.
   souhaits, page publique de collection — étapes ultérieures.
 - Rééditions (Player's Choice, Nintendo Selects…) et variantes de pays au sein de PAL.
 - Jeux dématérialisés uniquement (eShop, WiiWare, DSiWare…).
-- Comptes visiteurs, commentaires, notes Metacritic, bandes-annonces.
+- Comptes visiteurs, commentaires, bandes-annonces ; note par région ou autres sites de critiques (OpenCritic…).
 - Régions hors JAP / US / PAL (Corée, Chine…).
 
 ## 8. Décisions

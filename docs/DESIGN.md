@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.6 — 19/11/2026 — statut : **à valider**
+> Version 1.7 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.7 | 19/11/2026 | **Note Metacritic** (étape 13) : étude (§1 sexies), ADR-08, colonnes `metacritic_*`, plan §8 |
 > | 1.6 | 19/11/2026 | **Ma collection** (étape 12) : ADR-07, table `possessions`, plan §8 |
 > | 1.5 | 18/11/2026 | **GameCube** (étape 11) : étude (§1 quinquies), plan §8 |
 > | 1.4 | 18/11/2026 | **Switch + Switch 2** (étape 10) : étude (§1 quater), import des nouveautés (ADR-03 point 6), exclusions mémorisées, plan §8 |
@@ -110,6 +111,21 @@ GameTDB range la GameCube dans la base Wii, mais `wiitdb.zip?LANG=EN` ne la cont
 Pièges : Pokémon Channel est classé « software » (le Wii Startup Disc aussi, #90) ; la règle « logiciel » ne
 s'applique pas à la GameCube, dont les vrais logiciels (Game Boy Player Start-Up Disc, U) sont déjà écartés par leur
 identifiant.
+
+## 1 sexies. Étude de la note Metacritic (19/11/2026)
+
+Metacritic n'a **pas d'accès ouvert** et ses conditions interdisent la collecte automatique de ses pages : la note vient
+d'une source qui la cite.
+
+| Source | Mesure (jeux des fixtures) | Verdict |
+|---|---|---|
+| Wikidata (P444, « note par Metacritic ») | 1 à 15 jeux par console (< 10 %) | Écartée |
+| **Wikipédia anglais**, encadré « Video game reviews » (`MC = 85/100`) | Wii U 26/48, GameCube 41/58, Wii 54/87, DS 62/114 (29 articles non trouvés par le titre), Switch 78/112 : **≈ 60 %** | **Retenue**, CC BY-SA |
+| OpenCritic, IGDB | Clé d'accès ou note différente de Metacritic | Écartées |
+
+Pièges : un article couvre parfois plusieurs consoles (Metroid Prime et sa version Switch, Smash Bros. 3DS / Wii U)
+→ la note doit porter le nom de la console du jeu, sinon elle est **ambiguë** et laissée vide ; Wikipédia limite le débit
+(erreurs 429 dès quelques dizaines d'appels rapprochés) → lots de 20 titres par appel, réessais espacés.
 
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
 Vercel avec un cache d'un an). C'est le modèle retenu (ADR-04).
@@ -219,12 +235,21 @@ chaque ligne). Clé `(game_id, region)` plutôt que l'identifiant de la sortie :
 un réimport, et elle disparaît avec le jeu (`on delete cascade`). *Pourquoi* : premier pas utile tout de suite,
 sans rien exposer aux visiteurs ni ralentir les pages publiques.
 
+**ADR-08 — Note Metacritic citée par Wikipédia (étape 13).** Deux colonnes du jeu : `metacritic_note smallint
+(0–100)` et `metacritic_url`. Mise à jour par une action d'administration, console par console, **par lots de 20**
+pilotés par le navigateur (comme l'import, ADR-03) : article trouvé par l'adresse Wikipédia du jeu (Wii U, Switch 2)
+ou par son titre US (redirections suivies) ; note lue dans l'encadré « Video game reviews » ; **retenue seulement si
+elle est sans ambiguïté celle de la console du jeu** (article d'une seule console, ou note étiquetée avec cette
+console). Champs **verrouillables** comme les autres (ADR-03 point 4) : une saisie à la main n'est jamais écrasée. Les
+pages publiques lisent les colonnes ; aucun appel à Wikipédia ni à Metacritic depuis le navigateur. *Pourquoi* : une
+source libre, citée, sans clé ; mieux vaut une note manquante (saisissable) qu'une note d'une autre console.
+
 ## 5. Modèle de données
 
 ```
 consoles(id, slug, nom, type 'salon'|'portable', annee, ordre, wikipedia_liste, igdb_platform_id — inutilisé depuis v0.8)
 games(id, console_id → consoles, slug, igdb_id, wikipedia_url, developpeur, franchise, genre,
-      physique bool, verrous text[], created_at, updated_at)
+      physique bool, verrous text[], metacritic_note smallint 0–100, metacritic_url, created_at, updated_at)
 releases(id, game_id → games, region 'JAP'|'US'|'PAL', sortie bool, titre, titre_romanise (JAP),
          date_sortie date, precision_date 'jour'|'mois'|'annee', code_produit, editeur,
          jaquette_path, jaquette_source 'gametdb'|'igdb'|'photo'|'url', verrous text[], updated_at)
@@ -315,6 +340,13 @@ test n'appelle les sites en direct.
       navigateur (`src/lib/collection/`), cases « Je l'ai » sur la fiche, e2e connecté (projet `*-admin`).
    2. **Catalogue** : coche verte sur les vignettes, filtre « Collection » (Tous / Possédés / Manquants, `?collection=`),
       compteur par console ; rien de tout cela pour un visiteur (e2e public).
+
+13. **Note Metacritic** (v1.7, US-17) — 2 PR à merger **dans l'ordre** :
+   1. **Données et affichage** : migration 0013 (`metacritic_note`, `metacritic_url`, contrainte 0–100) ; fiche (note +
+      lien, source) ; étiquette colorée dans le catalogue (jetons `mc-bon`, `mc-moyen`, `mc-faible`, clair et sombre) ;
+      saisie et verrou dans la correction d'une fiche (US-11).
+   2. **Mise à jour depuis Wikipédia** : lecteur de l'encadré (note par console, ambiguïtés) testé sur des **fixtures**
+      (copies d'articles) ; page d'administration « Notes Metacritic » : aperçu, lots de 20, résumé.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
