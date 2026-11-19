@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.11 — 19/11/2026 — statut : **à valider**
+> Version 1.12 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.12 | 19/11/2026 | **Game Boy** (étape 18) : étude (§1 nonies), plan §8 |
 > | 1.11 | 19/11/2026 | **Game Boy Color** (étape 17) : étude (§1 octies), ADR-12, plan §8 |
 > | 1.10 | 19/11/2026 | **Statistiques** (étape 16) : ADR-11, plan §8 |
 > | 1.9 | 19/11/2026 | **N64 + GBA complétées** (étape 15) : mesures No-Intro (§1 septies), ADR-10, plan §8 |
@@ -169,6 +170,20 @@ Même recette que la N64 et la GBA (ADR-09, ADR-10) : GameTDB ne couvre pas le G
 
 Planche d'exemples montrée au propriétaire avant la spec (leçon 9). Éditeurs écrits en liste sans séparateur
 (« NintendoKemco ») : le lecteur sépare désormais aussi les éléments de liste.
+
+## 1 nonies. Étude Game Boy (19/11/2026)
+
+Même recette que la Game Boy Color (ADR-09, ADR-10, ADR-12).
+
+| Mesure | Game Boy |
+|---|---|
+| Liste Wikipédia | Comme la N64 : en-tête sur 2 lignes, « Release date » puis Japan, North America, **PAL region** (nouveau libellé, ajouté au lecteur) |
+| Jeux édités par Nintendo (une région au moins) | **91** sur 1 043 : partout 34, US + PAL 21, **PAL seul 25**, JAP seul 7, US seul 4 |
+| Boîtes libretro-thumbnails | 1 647 fichiers ; au moins une boîte pour **84 / 91** : US 73 / 78, PAL 74 / 83, JAP 31 / 72 |
+| Taille, forme | 512 × 512 (US, Europe), 441 × 512 (Japon) |
+| Séries No-Intro | 2 144 entrées ; série presque absente (codes US 1 / 78, PAL 3 / 83) : les cartouches d'avant 1996 ne la portent pas |
+
+Planche d'exemples montrée au propriétaire avant la spec (leçon 9).
 
 ## 2. Stack
 
@@ -440,6 +455,10 @@ test n'appelle les sites en direct.
 17. **Game Boy Color** (v1.11, ADR-12) — 1 PR, migration 0015 (console `gbc`) : lecteur généralisé et préfixe par jeu
     (fixtures GBC réduites : liste, index libretro, No-Intro) ; page d'import, forme des boîtes, À propos. Puis relais
     (index libretro GBC) et import par le propriétaire.
+
+18. **Game Boy** (v1.12) — 1 PR, migration 0016 (console `gb`, portable, 1989, avant la N64) : en-tête « PAL region »
+    lu ; préfixe `DMG-` ; fixtures Game Boy réduites (liste, index libretro, No-Intro) ; page d'import, forme des boîtes,
+    À propos. Puis relais (index libretro Game Boy) et import par le propriétaire.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.

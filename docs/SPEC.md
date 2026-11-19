@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.22 — 19/11/2026 — statut : **à valider**
+> Version 1.23 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.23 | 19/11/2026 | **Game Boy** (étape 18) : US-10, même recette que la Game Boy Color ; 91 jeux, codes à la main |
 > | 1.22 | 19/11/2026 | **Game Boy Color** (étape 17) : US-10, même recette que N64 et GBA ; cartouches « Dual Mode » comprises ; codes DMG- / CGB- |
 > | 1.21 | 19/11/2026 | US-02 : **tri par note Metacritic**, groupes par tranche, jeux sans note à la fin (demande du propriétaire) |
 > | 1.20 | 19/11/2026 | **Statistiques** (étape 16) : US-18, page de l'administration (collection, régions, Metacritic, état du catalogue) ; compteurs de collection retirés du panneau Filtres (US-16) |
@@ -245,6 +246,11 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       une cartouche Dual Mode, **`CGB-`** pour une cartouche Game Boy Color seulement, suivi de la série No-Intro quand
       elle est connue (peu de jeux) ; sinon « — », saisi à la main (US-11). Boîtes US et Europe carrées, japonaises en
       hauteur (forme réelle).
+- [ ] **Game Boy** (v1.23) : même recette (liste Wikipédia « List of Game Boy games », boîtes libretro-thumbnails, séries
+      No-Intro). Les 91 jeux édités par Nintendo dans au moins une région, **dont 25 en Europe seulement** (jeux d'autres
+      éditeurs que Nintendo distribuait en Europe : Mega Man II, Final Fantasy Adventure…). Code produit **`DMG-`** +
+      série quand No-Intro la connaît (rare : les cartouches d'avant 1996 ne la portent pas) ; sinon « — », saisi à la
+      main depuis la liste « sans code produit » (US-18). Boîtes carrées, japonaises presque carrées (forme réelle).
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).
