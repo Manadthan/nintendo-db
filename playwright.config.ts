@@ -33,7 +33,7 @@ const NAVIGATEURS = [
 ];
 
 // Tests connectés en propriétaire (ils écrivent dans la base).
-const ADMINISTRATION = /(connexion|correction|import|jaquettes)\.spec\.ts$/;
+const ADMINISTRATION = /(collection|connexion|correction|import|jaquettes)\.spec\.ts$/;
 
 export default defineConfig({
   testDir: "tests/e2e",

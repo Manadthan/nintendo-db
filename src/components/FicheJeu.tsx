@@ -10,6 +10,8 @@ import {
   regionParDefaut,
   type JeuFiche,
 } from "@/lib/fiche/fiche";
+import { basculerVersion, useCollection } from "@/lib/collection/navigateur";
+import { possede } from "@/lib/collection/collection";
 import { Jaquette } from "./Jaquette";
 
 const NOMS: Record<Region, string> = {
@@ -40,6 +42,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
     () => "TOUS",
   );
   const [choix, setChoix] = useState<Region | null>(null);
+  // Ma collection (US-16) : seulement pour le propriétaire connecté ; un visiteur ne voit rien de plus.
+  const collection = useCollection();
   // Sources à créditer en pied de fiche (attribution, R4) : les ajouts à la main n'en ont pas.
   const sourcesExternes = [
     ...new Set(
@@ -163,7 +167,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
                 >
                   {s.sortie ? "✓" : "–"}
                 </span>
-                <div className="flex min-w-0 flex-col gap-0.5">
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                   <span className="text-sm font-semibold">
                     {NOMS[r]}{" "}
                     <span className="font-normal text-texte-discret">
@@ -179,10 +183,35 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
                     </span>
                   )}
                 </div>
+                {collection.connecte && s.sortie && (
+                  <label className="-my-1 flex min-h-11 shrink-0 items-center gap-2 text-[13px] font-medium">
+                    <input
+                      type="checkbox"
+                      checked={possede(collection.possessions, jeu.id, r)}
+                      onChange={(e) =>
+                        void basculerVersion(
+                          { gameId: jeu.id, region: r },
+                          e.target.checked,
+                        )
+                      }
+                      aria-label={`Je l'ai : version ${NOMS[r]}`}
+                      className="size-5 accent-accent"
+                    />
+                    Je l&apos;ai
+                  </label>
+                )}
               </li>
             );
           })}
         </ul>
+        {collection.erreur && (
+          <p
+            role="alert"
+            className="rounded-[10px] border border-erreur-bordure bg-erreur-fond px-3 py-2 text-sm text-erreur"
+          >
+            {collection.erreur}
+          </p>
+        )}
       </section>
 
       <p className="text-xs leading-relaxed text-texte-discret">

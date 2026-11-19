@@ -82,11 +82,12 @@ src/lib/import/          import (ADR-03) : consoles.ts (sources par console : Wi
 scripts/                 icones.mjs (apple-icon.png), fixture-wikipedia.mjs, fixture-gametdb.mjs, fixture-gametdb-wii.mjs, fixture-gametdb-portable.mjs, fixture-gametdb-switch.mjs, fixture-gametdb-gamecube.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : bases Wii U, Wii, GameCube, DS, 3DS, Switch (réduites) + scans → bucket privé gametdb, Wii dans wii/faces, GameCube dans gamecube/faces, Switch dans switch/scans/{JAP,US,PAL} ; secrets SUPABASE_URL / SUPABASE_SECRET_KEY ; importe src/lib/import/relais-wii.ts : sans alias « @/ »)
 src/lib/jaquettes/       supprimer.ts (jeu + toutes ses jaquettes), chemins et URL des jaquettes ({game_id}/{région}-{version}-{300|600|768}.webp, ADR-04, version : #60), enregistrer.ts (WebP → stockage → sortie), telecharger.ts (image par adresse, SSRF) + tests
 src/lib/admin/           console choisie (consoles.ts, étape 8), page « Jaquettes » (vignettes, filtre « à remplacer »), correction d'une fiche (champs modifiés → verrous), nouveau jeu (verrou « manuel ») + tests
+src/lib/collection/      ma collection (US-16, ADR-07) : versions possédées (collection.ts, pur + tests), session et possessions chargées dans le navigateur, bascule d'une case (navigateur.ts)
 src/lib/images/          réduction d'une photo dans le navigateur avant envoi (1600 px) + tests
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
 tests/e2e/               tests Playwright ; connexion.spec.ts ignoré sans base locale (tourne en CI)
-supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais, 0007 console Wii, 0008 consoles DS et 3DS, 0009 console Switch, 0010 Switch 2 + table exclusions : jeux décochés « en boîte », 0011 console GameCube), tests/database/ (pgTAP)
+supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais, 0007 console Wii, 0008 consoles DS et 3DS, 0009 console Switch, 0010 Switch 2 + table exclusions : jeux décochés « en boîte », 0011 console GameCube, 0012 possessions : collection privée, RLS par compte), tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
 ```
