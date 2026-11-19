@@ -3,7 +3,7 @@
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.2 — 18/11/2026 — statut : **à valider**
+> Version 1.2 — 18/11/2026 — statut : **validé**
 >
 > | Version | Date | Changements |
 > |---|---|---|
