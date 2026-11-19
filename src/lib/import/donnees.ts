@@ -70,9 +70,13 @@ export function construireJeu(
         date_sortie: s.date,
         precision_date: s.precision,
         editeur: s.editeur,
-        code_produit: wiki.disques[region]
-          ? codeProduit(wiki.disques[region], prefixeCode)
-          : null,
+        code_produit:
+          (wiki.disques[region] ?? wiki.codes?.[region])
+            ? codeProduit(
+                (wiki.disques[region] ?? wiki.codes?.[region])!,
+                prefixeCode,
+              )
+            : null,
       };
       return [region, sortie];
     }),

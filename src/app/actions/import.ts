@@ -37,6 +37,12 @@ import {
   indexerBoites,
   lireIndexXml,
 } from "@/lib/import/libretro";
+import {
+  adresseNoIntro,
+  indexerSeries,
+  lireNoIntro,
+  seriesDuJeu,
+} from "@/lib/import/nointro";
 import { supprimerJeuEtJaquettes } from "@/lib/jaquettes/supprimer";
 
 // Identification demandée par Wikimedia aux programmes qui lisent ses pages (aucune donnée personnelle).
@@ -131,21 +137,34 @@ async function analyserListeInterne(consoleSlug: string): Promise<Apercu> {
     const lue = wikipediaSeul(html);
     const { ecartes, autresEditeurs } = lue;
     let jeux = lue.jeux;
-    // N64, GBA (étape 14) : boîte libretro-thumbnails de chaque région sortie, d'après l'index déposé par le relais.
+    // N64, GBA (étape 14) : boîte libretro-thumbnails de chaque région sortie, d'après l'index déposé par le relais ;
+    // étape 15 (ADR-10) : séries No-Intro → codes produit et boîte japonaise nommée en japonais.
     if (source.libretro) {
-      const index = indexerBoites(
-        lireIndexXml(
-          await (await lireRelais(`${consoleSlug}/libretro.xml`)).text(),
+      const [indexBoites, series] = await Promise.all([
+        lireRelais(`${consoleSlug}/libretro.xml`).then(async (b) =>
+          indexerBoites(lireIndexXml(await b.text())),
         ),
-      );
-      jeux = jeux.map((j) => ({
-        ...j,
-        boites: boitesDuJeu(index, j.titres, {
+        source.noIntro
+          ? telecharger(adresseNoIntro(source.noIntro), "No-Intro").then(
+              async (r) => indexerSeries(lireNoIntro(await r.text())),
+            )
+          : null,
+      ]);
+      jeux = jeux.map((j) => {
+        const sorties = {
           JAP: !!j.sorties.JAP,
           US: !!j.sorties.US,
           PAL: !!j.sorties.PAL,
-        }),
-      }));
+        };
+        const trouve = series
+          ? seriesDuJeu(series, j.titres, sorties)
+          : { series: {}, japonaise: null };
+        return {
+          ...j,
+          codes: trouve.series,
+          boites: boitesDuJeu(indexBoites, j.titres, sorties, trouve.japonaise),
+        };
+      });
     }
     return comparerEtExclure(
       fiche,

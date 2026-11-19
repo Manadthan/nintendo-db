@@ -33,7 +33,7 @@ const SOURCES = [
     nom: "libretro-thumbnails",
     lien: "https://github.com/libretro-thumbnails",
     apport:
-      "Scans des boîtes par région pour la Nintendo 64 et la Game Boy Advance, que GameTDB ne couvre pas.",
+      "Scans des boîtes par région pour la Nintendo 64 et la Game Boy Advance, que GameTDB ne couvre pas ; leurs codes produit viennent des numéros de série No-Intro de libretro-database, qui relient aussi les versions japonaises, américaines et européennes d'un même jeu.",
     licence:
       "Collection libre, sans licence formelle. Les images des boîtes restent la propriété de leurs éditeurs ; retrait sur demande.",
     licenceLien: "https://github.com/libretro-thumbnails",

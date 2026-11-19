@@ -6,6 +6,7 @@ import {
   estDisqueWiiDuCommerce,
 } from "./relais-wii";
 import { DEPOTS_LIBRETRO } from "./libretro";
+import { FICHIERS_NOINTRO } from "./nointro";
 import { lireListeCartouches } from "./wikipedia-cartouches";
 import { lireListeSwitch2, type ListeSwitch2 } from "./wikipedia-switch-2";
 
@@ -49,6 +50,8 @@ export type SourceConsole = {
   wikipediaSeul?: (html: string) => ListeSwitch2;
   /** Dépôt libretro-thumbnails des boîtes (N64, GBA : étape 14) ; index déposé par le relais dans `{slug}/libretro.xml`. */
   libretro?: string;
+  /** Fichier No-Intro de libretro-database (N64, GBA : étape 15, ADR-10) : séries → codes produit, boîtes japonaises. */
+  noIntro?: string;
 };
 
 export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
@@ -113,18 +116,25 @@ export const SOURCES_CONSOLES: Record<string, SourceConsole> = {
     estDisque: estCartoucheSwitchDuCommerce,
   },
   // Étape 14 (DESIGN v1.8 ADR-09) : GameTDB ne couvre ni la N64 ni la GBA ; listes Wikipédia, toutes en boîte.
+  // Étape 15 (ADR-10) : codes produit « NUS- » / « AGB- » + série No-Intro.
   ...Object.fromEntries(
-    ["n64", "gba"].map((slug) => [
+    (
+      [
+        ["n64", "NUS-"],
+        ["gba", "AGB-"],
+      ] as const
+    ).map(([slug, prefixeCode]) => [
       slug,
       {
         slug,
         wikipedia: true,
         base: "",
         scans: "",
-        prefixeCode: "",
+        prefixeCode,
         estDisque: () => false,
         wikipediaSeul: lireListeCartouches,
         libretro: DEPOTS_LIBRETRO[slug],
+        noIntro: FICHIERS_NOINTRO[slug],
       } satisfies SourceConsole,
     ]),
   ),

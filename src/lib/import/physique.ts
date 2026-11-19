@@ -21,6 +21,8 @@ export type JeuAImporter = JeuWikipedia & {
   genres: string[];
   /** N64, GBA (étape 14) : boîte libretro-thumbnails de chaque région, par son nom No-Intro. */
   boites?: Partial<Record<Region, string>>;
+  /** N64, GBA (étape 15) : numéro de série No-Intro de chaque région, d'où le code produit (pas de scan GameTDB). */
+  codes?: Partial<Record<Region, string>>;
 };
 
 /** Les disques d'une région peuvent donner des genres différents (Kirby : « plates-formes » en PAL seulement). */
