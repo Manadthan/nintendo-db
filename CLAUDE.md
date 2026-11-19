@@ -111,6 +111,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 9 — DS + 3DS : étude (DESIGN §1 ter), proportions des jaquettes #94, relais + import #95
   - [x] Étape 10 — Switch + Switch 2 : étude (DESIGN §1 quater, #99), import des nouveautés #100, Switch #102, Switch 2 #104, relais réessayé #106
   - [ ] Étape 11 — GameCube : étude (DESIGN §1 quinquies, #111), relais + import #112
+  - [ ] Étape 12 — Ma collection : US-16 (versions possédées, privée)
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1
 
 ## Erreurs récurrentes
