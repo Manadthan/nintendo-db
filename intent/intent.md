@@ -1,7 +1,7 @@
 # Intention — Nintendo DB
 
 > Étape 1 du playbook : **quoi et pourquoi**, pas encore comment.
-> Version 1.4 — 19/11/2026 — statut : **à valider** (1.1 : v1 limitée à la Wii U, sources et images revues ; 1.2 : Wii, catalogue toutes consoles ; 1.3 : Switch, Switch 2, nouveautés ; 1.4 : premier pas du suivi de collection)
+> Version 1.4 — 19/11/2026 — statut : **validée** (1.1 : v1 limitée à la Wii U, sources et images revues ; 1.2 : Wii, catalogue toutes consoles ; 1.3 : Switch, Switch 2, nouveautés ; 1.4 : premier pas du suivi de collection)
 
 ## Problème
 
