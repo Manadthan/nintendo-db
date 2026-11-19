@@ -23,7 +23,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.4 à valider |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.15 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.16 à valider |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.6 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1) | v0.6 validée |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), puis étapes 8 à 10 (§8) : chiffres, réussites, difficultés, leçons | v1.2 validée |
@@ -82,7 +82,7 @@ src/lib/import/          import (ADR-03) : consoles.ts (sources par console : Wi
 scripts/                 icones.mjs (apple-icon.png), fixture-wikipedia.mjs, fixture-gametdb.mjs, fixture-gametdb-wii.mjs, fixture-gametdb-portable.mjs, fixture-gametdb-switch.mjs, fixture-gametdb-gamecube.mjs ; relais-gametdb.mjs (tâche GitHub « Relais GameTDB » : bases Wii U, Wii, GameCube, DS, 3DS, Switch (réduites) + scans → bucket privé gametdb, Wii dans wii/faces, GameCube dans gamecube/faces, Switch dans switch/scans/{JAP,US,PAL} ; secrets SUPABASE_URL / SUPABASE_SECRET_KEY ; importe src/lib/import/relais-wii.ts : sans alias « @/ »)
 src/lib/jaquettes/       supprimer.ts (jeu + toutes ses jaquettes), chemins et URL des jaquettes ({game_id}/{région}-{version}-{300|600|768}.webp, ADR-04, version : #60), enregistrer.ts (WebP → stockage → sortie), telecharger.ts (image par adresse, SSRF) + tests
 src/lib/admin/           console choisie (consoles.ts, étape 8), page « Jaquettes » (vignettes, filtre « à remplacer »), correction d'une fiche (champs modifiés → verrous), nouveau jeu (verrou « manuel ») + tests
-src/lib/collection/      ma collection (US-16, ADR-07) : versions possédées (collection.ts, pur + tests), session et possessions chargées dans le navigateur, bascule d'une case (navigateur.ts) ; filtre ?collection= et compteurs par console (collection.ts), coche verte (jeton `possede`) sur les vignettes
+src/lib/collection/      ma collection (US-16, ADR-07) : versions possédées (collection.ts, pur + tests), session et possessions chargées dans le navigateur, bascule d'une case (navigateur.ts) ; filtre ?collection= et compteurs par console (collection.ts), étiquettes JAP / US / PAL vertes (jeton `possede`) pour les versions possédées
 src/lib/images/          réduction d'une photo dans le navigateur avant envoi (1600 px) + tests
 src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
@@ -123,6 +123,9 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   `NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt`, et un préchargement qui retire l'en-tête `Authorization` des
   requêtes vers Supabase.
 
+- **CI e2e arrêtée pendant l'installation des navigateurs** (2 fois, #109 et #120 : miroir Ubuntu lent, limite de
+  20 min atteinte avant le premier test) : ce n'est pas le code ; relancer la tâche. Corrigé dans `ci.yml` (cache des
+  navigateurs, 10 min par essai, second essai, limite 35 min).
 - **Clone superficiel** (`git clone --depth 1`) : il ne suit que `main`, et l'alerte « branche non poussée » revient
   après chaque `git push -u`. Une fois par clone : `git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'`.
 - **Sélecteurs e2e ambigus** (2 fois : « Remplacer » trouvait « À remplacer » ; `getByRole("alert")` trouvait aussi
