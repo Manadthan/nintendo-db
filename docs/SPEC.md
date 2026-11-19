@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.21 — 19/11/2026 — statut : **à valider**
+> Version 1.22 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.22 | 19/11/2026 | **Game Boy Color** (étape 17) : US-10, même recette que N64 et GBA ; cartouches « Dual Mode » comprises ; codes DMG- / CGB- |
 > | 1.21 | 19/11/2026 | US-02 : **tri par note Metacritic**, groupes par tranche, jeux sans note à la fin (demande du propriétaire) |
 > | 1.20 | 19/11/2026 | **Statistiques** (étape 16) : US-18, page de l'administration (collection, régions, Metacritic, état du catalogue) ; compteurs de collection retirés du panneau Filtres (US-16) |
 > | 1.19 | 19/11/2026 | **N64 et GBA complétées** (étape 15) : US-10, codes produit et boîtes japonaises retrouvés par le numéro de série No-Intro |
@@ -238,6 +239,12 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       `AGB-AMKJ`), sans suffixe de pays (v1.19) ; série inconnue : « — », complété à la main (US-11), et un code saisi
       à la main n'est jamais remplacé. Titre japonais = titre anglais faute de source. Notes Metacritic manquantes :
       saisie à la main seulement (choix du propriétaire).
+- [ ] **Game Boy Color** (v1.22) : même recette que la N64 et la GBA (liste Wikipédia « List of Game Boy Color games »,
+      boîtes libretro-thumbnails, séries No-Intro). Les 45 jeux édités par Nintendo, **cartouches noires « Dual Mode »
+      comprises** (jouables aussi sur Game Boy ; le Game Boy d'origine viendra à part). Code produit : **`DMG-`** pour
+      une cartouche Dual Mode, **`CGB-`** pour une cartouche Game Boy Color seulement, suivi de la série No-Intro quand
+      elle est connue (peu de jeux) ; sinon « — », saisi à la main (US-11). Boîtes US et Europe carrées, japonaises en
+      hauteur (forme réelle).
 
 #### US-11 — Corriger une fiche (M)
 - [ ] Je modifie les champs du jeu et de chacune de ses 3 sorties (titre, date, code produit, éditeur, sorti oui/non).

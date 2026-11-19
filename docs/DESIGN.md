@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.10 — 19/11/2026 — statut : **à valider**
+> Version 1.11 — 19/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.11 | 19/11/2026 | **Game Boy Color** (étape 17) : étude (§1 octies), ADR-12, plan §8 |
 > | 1.10 | 19/11/2026 | **Statistiques** (étape 16) : ADR-11, plan §8 |
 > | 1.9 | 19/11/2026 | **N64 + GBA complétées** (étape 15) : mesures No-Intro (§1 septies), ADR-10, plan §8 |
 > | 1.8 | 19/11/2026 | **N64 + GBA** (étape 14) : étude (§1 septies), ADR-09 libretro-thumbnails, plan §8 |
@@ -154,6 +155,21 @@ série : surtout des titres japonais seuls, romanisés autrement (« Dōbutsu no
 Référence visuelle : **gamecartdb.com copie ses jaquettes chez lui** (WebP haute définition ≈ 300 Ko, servies par
 Vercel avec un cache d'un an). C'est le modèle retenu (ADR-04).
 
+## 1 octies. Étude Game Boy Color (19/11/2026)
+
+Même recette que la N64 et la GBA (ADR-09, ADR-10) : GameTDB ne couvre pas le Game Boy Color.
+
+| Mesure | Game Boy Color |
+|---|---|
+| Liste Wikipédia | Une seule ligne d'en-tête : Title, Dual Mode, Cartridge feature, Developer, Publisher, First released (dates étiquetées « (JP) », « (NA) », « (EU) » dans une cellule, comme la GBA), puis JP, NA, EU/PAL en Oui / Non |
+| Jeux édités par Nintendo (une région au moins) | **45** sur 915 (dont les cartouches noires « Dual Mode ») ; sorties JAP 29, US 37, PAL 33, toutes datées |
+| Boîtes libretro-thumbnails | 1 524 fichiers ; au moins une boîte pour **39 / 45** jeux : US 35 / 37, PAL 30 / 33, **JAP 10 / 29** (titres japonais romanisés : « Mario Tennis GB ») |
+| Taille, forme | 512 × 512 (US, Europe), 512 × 646 (Japon, en hauteur) |
+| Séries No-Intro | 2 446 entrées, mais la série manque pour la plupart des jeux Game Boy Color : codes US 8 / 37, PAL 3 / 33, JAP 2 / 29 |
+
+Planche d'exemples montrée au propriétaire avant la spec (leçon 9). Éditeurs écrits en liste sans séparateur
+(« NintendoKemco ») : le lecteur sépare désormais aussi les éléments de liste.
+
 ## 2. Stack
 
 Identique à `mon-site-sdlc` (décision 7 de l'intention) :
@@ -294,6 +310,12 @@ migration, chiffres toujours justes ; quelques milliers de lignes, lues en une r
 sans jaquette ou de source `igdb` (même règle que « à remplacer », US-12). Les compteurs du panneau Filtres sont
 retirés (le filtre « Ma collection » reste).
 
+**ADR-12 — Game Boy Color (étape 17).** Lecteur de cartouches de l'ADR-09 généralisé : en-tête sur une ou deux lignes,
+date « First released », colonnes de région seules. La colonne **Dual Mode** donne le préfixe du code produit de chaque
+jeu (`DMG-` si Oui, `CGB-` sinon), porté par le jeu à importer et prioritaire sur le préfixe de la console. Console
+`gbc` (portable, 1998), placée entre la N64 et la GBA (ordre chronologique : la N64 passe à -3) ; boîtes et séries par
+les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
+
 ## 5. Modèle de données
 
 ```
@@ -414,6 +436,10 @@ test n'appelle les sites en direct.
        l'accueil de l'administration ; compteurs retirés du panneau Filtres ; test e2e (page privée, blocs affichés).
     2. **État du catalogue** : décomptes + tests ; liens vers les listes ; filtre « sans code produit » de la liste
        Jeux de l'administration.
+
+17. **Game Boy Color** (v1.11, ADR-12) — 1 PR, migration 0015 (console `gbc`) : lecteur généralisé et préfixe par jeu
+    (fixtures GBC réduites : liste, index libretro, No-Intro) ; page d'import, forme des boîtes, À propos. Puis relais
+    (index libretro GBC) et import par le propriétaire.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
