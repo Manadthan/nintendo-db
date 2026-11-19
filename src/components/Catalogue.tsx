@@ -31,16 +31,17 @@ import {
   enregistrerRecherche,
   lireRecherche,
 } from "@/lib/catalogue/recherche";
-import type {
-  JeuCatalogue,
-  Marche,
-  Tri,
-  VersionAffichee,
+import {
+  REGIONS,
+  type JeuCatalogue,
+  type Marche,
+  type Tri,
+  type VersionAffichee,
 } from "@/lib/catalogue/types";
 import {
-  affichePossedee,
   compteurs,
   filtrerCollection,
+  possede,
 } from "@/lib/collection/collection";
 import { useCollection } from "@/lib/collection/navigateur";
 import { Disponibilite } from "./Disponibilite";
@@ -135,8 +136,11 @@ export function Catalogue({ jeux, consoles }: Props) {
     collection.possessions,
     marche,
   );
-  const possedee = (v: VersionAffichee) =>
-    connecte && affichePossedee(collection.possessions, v, marche);
+  // Étiquettes JAP / US / PAL en vert pour les versions possédées (US-16) ; rien pour un visiteur.
+  const possedees = (v: VersionAffichee) =>
+    connecte
+      ? REGIONS.filter((r) => possede(collection.possessions, v.jeu.id, r))
+      : [];
   const groupes = grouperParAnnee(versions, tri);
   const lien = (v: VersionAffichee) =>
     `/jeux/${v.jeu.console.slug}/${v.jeu.slug}`;
@@ -311,16 +315,13 @@ export function Catalogue({ jeux, consoles }: Props) {
               {groupe.versions.map((v) => (
                 <li key={v.jeu.id}>
                   <Link href={lien(v)} className="flex flex-col gap-2">
-                    <div className="relative">
-                      <Jaquette
-                        sortie={v.sortie}
-                        titre={v.sortie.titre!}
-                        console={v.jeu.console.nom}
-                        consoleSlug={v.jeu.console.slug}
-                        sizes="(max-width: 640px) 50vw, 200px"
-                      />
-                      {possedee(v) && <CochePossede />}
-                    </div>
+                    <Jaquette
+                      sortie={v.sortie}
+                      titre={v.sortie.titre!}
+                      console={v.jeu.console.nom}
+                      consoleSlug={v.jeu.console.slug}
+                      sizes="(max-width: 640px) 50vw, 200px"
+                    />
                     <div className="flex flex-col gap-[3px]">
                       <span className="line-clamp-2 text-sm leading-tight font-semibold">
                         {v.sortie.titre}
@@ -330,7 +331,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                         {v.jeu.console.nom}
                       </span>
                       <div className="flex items-center gap-1">
-                        <Disponibilite jeu={v.jeu} />
+                        <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
                         <NoteMetacritic note={v.jeu.metacritic} />
                       </div>
                     </div>
@@ -349,7 +350,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                     href={lien(v)}
                     className="flex items-center gap-3 px-3 py-2.5"
                   >
-                    <div className="relative w-[54px] shrink-0">
+                    <div className="w-[54px] shrink-0">
                       <Jaquette
                         sortie={v.sortie}
                         titre={v.sortie.titre!}
@@ -358,7 +359,6 @@ export function Catalogue({ jeux, consoles }: Props) {
                         sizes="54px"
                         petite
                       />
-                      {possedee(v) && <CochePossede petite />}
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col gap-1">
                       <span className="text-sm leading-tight font-semibold">
@@ -369,7 +369,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                         {v.jeu.console.nom}
                       </span>
                       <div className="flex items-center gap-1">
-                        <Disponibilite jeu={v.jeu} />
+                        <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
                         <NoteMetacritic note={v.jeu.metacritic} />
                       </div>
                     </div>
@@ -381,32 +381,5 @@ export function Catalogue({ jeux, consoles }: Props) {
         </div>
       ))}
     </section>
-  );
-}
-
-/** Coche verte en haut à droite de la jaquette d'une version possédée (US-16). */
-function CochePossede({ petite = false }: { petite?: boolean }) {
-  return (
-    <span
-      role="img"
-      aria-label="Possédé"
-      className={`absolute flex items-center justify-center rounded-full bg-possede text-inverse shadow ${
-        petite ? "-top-1 -right-1 size-5" : "top-1.5 right-1.5 size-7"
-      }`}
-    >
-      <svg
-        width={petite ? 12 : 16}
-        height={petite ? 12 : 16}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M5 12.5l4.5 4.5L19 7.5" />
-      </svg>
-    </span>
   );
 }

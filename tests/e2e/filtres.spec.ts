@@ -143,5 +143,5 @@ test("un visiteur n'a ni filtre Collection, ni compteur, ni coche ; un lien ?col
   await expect(
     page.getByRole("list", { name: "Ma collection par console" }),
   ).toHaveCount(0);
-  await expect(page.getByRole("img", { name: "Possédé" })).toHaveCount(0);
+  await expect(page.getByRole("listitem", { name: /possédé/ })).toHaveCount(0);
 });

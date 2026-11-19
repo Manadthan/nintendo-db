@@ -34,7 +34,9 @@ jobs:
   e2e:
     name: Tests e2e (iPhone 12 mini, Chromium + WebKit)
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # 35 min : l'installation des navigateurs peut bloquer sur un miroir Ubuntu lent (2 fois les 18-19/11/2026), elle
+    # a alors droit à un second essai (ci-dessous).
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -63,7 +65,24 @@ jobs:
             echo "E2E_SUPABASE_SECRET_KEY=$secret"
           } >> "$GITHUB_ENV"
       # WebKit = moteur de Safari : vérifié ici, il n'est pas installé dans l'environnement de Claude.
-      - run: npx playwright install --with-deps chromium webkit
+      # Navigateurs gardés en cache d'une exécution à l'autre (clé : version de Playwright).
+      - name: Cache des navigateurs Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      # Le miroir Ubuntu peut être très lent : 10 min au plus, puis un second essai (souvent sur un autre miroir).
+      - name: Navigateurs et dépendances (1er essai)
+        id: navigateurs
+        continue-on-error: true
+        timeout-minutes: 10
+        run: npx playwright install --with-deps chromium webkit
+      - name: Navigateurs et dépendances (2e essai)
+        if: steps.navigateurs.outcome != 'success'
+        timeout-minutes: 12
+        run: |
+          sudo apt-get clean
+          npx playwright install --with-deps chromium webkit
       - run: npm run e2e
       - name: Rapport en cas d'échec
         if: failure()
