@@ -168,7 +168,7 @@ export function lireListeCartouches(html: string): ListeCartouches {
     dates: {
       JAP: colonne(/^Release date/, /^(Japan|JP)$/),
       US: colonne(/^Release date/, /^(North America|NA)$/),
-      PAL: colonne(/^Release date/, /^(PAL|Europe|EU\/PAL)$/),
+      PAL: colonne(/^Release date/, /^(PAL|PAL region|Europe|EU\/PAL)$/),
     } as Record<Region, number>,
     dateUnique: colonne(
       /^(Release date|First released)/,

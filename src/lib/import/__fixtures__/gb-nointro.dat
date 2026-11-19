@@ -1,0 +1,8578 @@
+	name "Nintendo - Game Boy"
+)
+game (
+	name "10-Pin Bowling (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "14 Juillet (World) (Fr)"
+	region "World"
+)
+game (
+	name "3 Choume no Tama - Tama and Friends - 3 Choume Obake Panic!! (Japan)"
+	region "Japan"
+)
+game (
+	name "3-pun Yosou - Umaban Club (Japan)"
+	region "Japan"
+)
+game (
+	name "4 in 1 (Europe) (4B-001, Sachen-Commin)"
+	region "Europe"
+)
+game (
+	name "4 in 1 (Europe) (4B-002, Sachen)"
+	region "Europe"
+)
+game (
+	name "4 in 1 (Europe) (4B-004, Sachen-Commin)"
+	region "Europe"
+)
+game (
+	name "4 in 1 (Europe) (4B-005, Sachen-Commin)"
+	region "Europe"
+)
+game (
+	name "4 in 1 (Europe) (4B-006, Sachen)"
+	region "Europe"
+)
+game (
+	name "4 in 1 (Europe) (4B-007, Sachen)"
+	region "Europe"
+)
+game (
+	name "4 in 1 (Europe) (4B-008, Sachen)"
+	region "Europe"
+)
+game (
+	name "4 in 1 (Europe) (4B-009, Sachen)"
+	region "Europe"
+)
+game (
+	name "4 in 1 (Taiwan) (En,Zh) (4B-003, Sachen-Commin)"
+	region "Taiwan"
+)
+game (
+	name "4-in-1 Fun Pak (Japan)"
+	region "Japan"
+)
+game (
+	name "4-in-1 Fun Pak (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "4-in-1 Funpak - Volume II (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "8-in-1 (Taiwan) (En)"
+	region "Taiwan"
+)
+game (
+	name "A Fairy Without Wings (World) (v1.3.0)"
+	region "World"
+)
+game (
+	name "A-mazing Tater (USA)"
+	region "USA"
+)
+game (
+	name "AJXI - Cosmic Climb (World)"
+	region "World"
+)
+game (
+	name "ASM 2016 Christmas Card (World) (Album)"
+	region "World"
+)
+game (
+	name "Aa Harimanada (Japan)"
+	region "Japan"
+)
+game (
+	name "Action Replay Pro (World)"
+	region "World"
+)
+game (
+	name "Addams Family, The (Europe) (En,Fr,De)"
+	region "Europe"
+)
+game (
+	name "Addams Family, The (Japan)"
+	region "Japan"
+)
+game (
+	name "Addams Family, The (USA)"
+	region "USA"
+)
+game (
+	name "Addams Family, The - Pugsley's Scavenger Hunt (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Adulting! (World) (v2.0)"
+	region "World"
+)
+game (
+	name "Adventure Island (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Adventure Island II - Aliens in Paradise (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Adventures of Lolo (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Adventures of Pinocchio, The (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Adventures of Rocky and Bullwinkle and Friends, The (USA)"
+	region "USA"
+)
+game (
+	name "Adventures of Star Saver, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Aerostar (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Aerostar (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "After Burst (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Agro Soar (Australia)"
+	region "Australia"
+)
+game (
+	name "Akazukin Chacha (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Akumajou Dracula - Shikkoku Taru Zensoukyoku - Dark Night Prelude (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Akumajou Special - Boku Dracula-kun (Japan)"
+	region "Japan"
+)
+game (
+	name "Aladdin (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Aladdin (Europe) (Sample) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Aladdin (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Aladdin (World) (Disney Classic Games) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Alfred Chicken (Europe)"
+	region "Europe"
+)
+game (
+	name "Alfred Chicken (Japan) (En) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Alfred Chicken (USA)"
+	region "USA"
+)
+game (
+	name "Alien 3 (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Alien 3 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Alien Games (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Alien Invasion (World)"
+	region "World"
+)
+game (
+	name "Alien Olympics (Europe)"
+	region "Europe"
+)
+game (
+	name "Alien vs Predator (Japan)"
+	region "Japan"
+)
+game (
+	name "Alien vs Predator - The Last of His Clan (USA)"
+	region "USA"
+)
+game (
+	name "All-Star Baseball 99 (USA)"
+	region "USA"
+)
+game (
+	name "Alley (World)"
+	region "World"
+)
+game (
+	name "Alleyway (World)"
+	region "World"
+)
+game (
+	name "Alphamax (World)"
+	region "World"
+)
+game (
+	name "Altered Space - A 3-D Alien Adventure (Europe)"
+	region "Europe"
+)
+game (
+	name "Altered Space - A 3-D Alien Adventure (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Altered Space - A 3-D Alien Adventure (USA)"
+	region "USA"
+)
+game (
+	name "Amazing Penguin (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Amazing Penguin (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Amazing Spider-Man, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "America Oudan Ultra Quiz (Japan)"
+	region "Japan"
+)
+game (
+	name "America Oudan Ultra Quiz Part 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "America Oudan Ultra Quiz Part 2 (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "America Oudan Ultra Quiz Part 3 - Champion Taikai (Japan)"
+	region "Japan"
+)
+game (
+	name "America Oudan Ultra Quiz Part 4 (Japan)"
+	region "Japan"
+)
+game (
+	name "Amida (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Anctrayl (World)"
+	region "World"
+)
+game (
+	name "Animal Breeder (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Animal Breeder 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Animaniacs (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Animaniacs (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Another Bible (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Another Push Game (World) (v1.07) (Proto)"
+	region "World"
+)
+game (
+	name "Aoki Densetsu Shoot! (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Aqua (World) (v1.0)"
+	region "World"
+)
+game (
+	name "Aqua (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Arcade Classic No. 1 - Asteroids & Missile Command (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Arcade Classic No. 2 - Centipede & Millipede (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Arcade Classic No. 3 - Galaga & Galaxian (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Arcade Classic No. 3 - Galaga & Galaxian (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Arcade Classic No. 4 - Defender & Joust (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Arcade Classics - Super Breakout & Battlezone (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Aretha (Japan)"
+	region "Japan"
+)
+game (
+	name "Aretha II (Japan)"
+	region "Japan"
+)
+game (
+	name "Aretha III (Japan)"
+	region "Japan"
+)
+game (
+	name "Art School Pocket (World) (De)"
+	region "World"
+)
+game (
+	name "Art School Pocket (World) (En)"
+	region "World"
+)
+game (
+	name "Art School Pocket (World) (Es)"
+	region "World"
+)
+game (
+	name "Art School Pocket (World) (Fr)"
+	region "World"
+)
+game (
+	name "Ask Her Out (World)"
+	region "World"
+)
+game (
+	name "Asmik-kun World 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Asterix & Obelix (Europe) (En,Es) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Asterix & Obelix (Europe) (Fr,De) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Asterix (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "Asterix (USA) (Proto 1)"
+	region "USA"
+)
+game (
+	name "Asterix (USA) (Proto 2)"
+	region "USA"
+)
+game (
+	name "Asterix (USA) (Proto 3)"
+	region "USA"
+)
+game (
+	name "Asteroids (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Asteroids Chasers (World)"
+	region "World"
+)
+game (
+	name "Astro Rabby (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Astro-Jump (World)"
+	region "World"
+)
+game (
+	name "Atomic Punk (USA)"
+	region "USA"
+)
+game (
+	name "Attack of the Killer Tomatoes (Japan)"
+	region "Japan"
+)
+game (
+	name "Attack of the Killer Tomatoes (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Auto Zone (World)"
+	region "World"
+)
+game (
+	name "Avenging Spirit (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Avenging Spirit (USA, Europe) (Retro-Bit)"
+	region "USA / Europe"
+)
+game (
+	name "Ayakashi no Shiro (Japan)"
+	region "Japan"
+)
+game (
+	name "B.C. Kid (Europe)"
+	region "Europe"
+)
+game (
+	name "B.C. Kid 2 (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Baby T-Rex (Europe)"
+	region "Europe"
+)
+game (
+	name "Baby T-Rex (World) (ModRetro Chromatic)"
+	region "World"
+)
+game (
+	name "Baby T-Rex (World) (v1.1) (ModRetro Chromatic)"
+	region "World"
+)
+game (
+	name "Baby's Day Out (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Bakenou TV '94 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bakenou V3 (Japan)"
+	region "Japan"
+)
+game (
+	name "Bakuchou Retrieve Master (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bakuchou Retsuden Shou - Hyper Fishing (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bakuretsu Senshi Warrior (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Balloon Kid (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Bamse (Sweden)"
+	region "Sweden"
+)
+game (
+	name "Banishing Racer (Japan)"
+	region "Japan"
+)
+game (
+	name "Barbie - Game Girl (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Bart Simpson's Escape from Camp Deadly (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Bart no Survival Camp (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Baseball (World)"
+	region "World"
+)
+game (
+	name "Baseball Kids (Japan)"
+	region "Japan"
+)
+game (
+	name "Bases Loaded (USA)"
+	region "USA"
+)
+game (
+	name "Bass Fishing Tatsujin Techou (Japan)"
+	region "Japan"
+)
+game (
+	name "Bataille Navale (France) (En,Fr,De,Es)"
+	region "France"
+)
+game (
+	name "Batman - Return of the Joker (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Batman - Return of the Joker (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Batman - The Animated Series (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Batman - The Video Game (World)"
+	region "World"
+)
+game (
+	name "Batman Forever (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Batman Forever (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Battle Arena Toshinden (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Battle Arena Toshinden (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Battle Bull (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Battle Bull (USA)"
+	region "USA"
+)
+game (
+	name "Battle Crusher (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Battle Dodge Ball (Japan)"
+	region "Japan"
+)
+game (
+	name "Battle Pingpong (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Battle Space (Japan)"
+	region "Japan"
+)
+game (
+	name "Battle Unit Zeoth (Japan)"
+	region "Japan"
+)
+game (
+	name "Battle Unit Zeoth (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Battle of Kingdom (Japan)"
+	region "Japan"
+)
+game (
+	name "Battle of Olympus, The (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "BattleCity (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Battleship (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Battletoads (Japan)"
+	region "Japan"
+)
+game (
+	name "Battletoads (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Battletoads in Ragnarok's World (Europe)"
+	region "Europe"
+)
+game (
+	name "Battletoads in Ragnarok's World (USA)"
+	region "USA"
+)
+game (
+	name "Battletoads-Double Dragon (Europe)"
+	region "Europe"
+)
+game (
+	name "Battletoads-Double Dragon (USA)"
+	region "USA"
+)
+game (
+	name "Beavis and Butt-head (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Beethoven (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Beethoven (USA) (Proto) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Beetlejuice (USA)"
+	region "USA"
+)
+game (
+	name "Best of the Best - Championship Karate (Europe)"
+	region "Europe"
+)
+game (
+	name "Best of the Best - Championship Karate (USA)"
+	region "USA"
+)
+game (
+	name "Beta Soul (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Bikkuri Nekketsu Shin Kiroku! - Dokodemo Kin Medal (Japan)"
+	region "Japan"
+)
+game (
+	name "Bill & Ted's Excellent Game Boy Adventure - A Bogus Journey! (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Bill & Ted's Excellent Portable Adventure - A Bogus Journey! (World) (Retro Collection)"
+	region "World"
+)
+game (
+	name "Bill Elliott's NASCAR Fast Tracks (USA)"
+	region "USA"
+)
+game (
+	name "Binary Monsters II - Adventure of Hell (Taiwan) (En)"
+	region "Taiwan"
+)
+game (
+	name "Binding of Isaac, The - Game Boy Edition (World)"
+	region "World"
+)
+game (
+	name "Bionic Battler (USA)"
+	region "USA"
+)
+game (
+	name "Bionic Commando (Europe)"
+	region "Europe"
+)
+game (
+	name "Bionic Commando (Japan)"
+	region "Japan"
+)
+game (
+	name "Bionic Commando (USA)"
+	region "USA"
+)
+game (
+	name "Birdie Bartender (World)"
+	region "World"
+)
+game (
+	name "Birdie Bartender (World) (v1.2)"
+	region "World"
+)
+game (
+	name "Bishoujo Senshi Sailor Moon (Japan)"
+	region "Japan"
+)
+game (
+	name "Bishoujo Senshi Sailor Moon R (Japan)"
+	region "Japan"
+)
+game (
+	name "Bitamina Oukoku Monogatari (Japan)"
+	region "Japan"
+)
+game (
+	name "Black Bass - Lure Fishing (USA)"
+	region "USA"
+)
+game (
+	name "Black Castle (World)"
+	region "World"
+)
+game (
+	name "Black Castle 2 (World)"
+	region "World"
+)
+game (
+	name "Blade Warrior (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Blades of Steel (Europe)"
+	region "Europe"
+)
+game (
+	name "Blades of Steel (USA)"
+	region "USA"
+)
+game (
+	name "Blaster Master Boy (USA)"
+	region "USA"
+)
+game (
+	name "Blaster Master Boy (World) (Evercade)"
+	region "World"
+)
+game (
+	name "Blaster Master Jr. (Europe)"
+	region "Europe"
+)
+game (
+	name "Blitz Bomber (World)"
+	region "World"
+)
+game (
+	name "Block Kuzushi GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Blockade (World)"
+	region "World"
+)
+game (
+	name "Blodia (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Blues Brothers, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Blues Brothers, The - Jukebox Adventure (Europe)"
+	region "Europe"
+)
+game (
+	name "Bo Jackson - Two Games in One (USA)"
+	region "USA"
+)
+game (
+	name "Bobby's World (Europe) (Proto) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Bobby's World (USA) (Proto) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Boggle Plus (USA)"
+	region "USA"
+)
+game (
+	name "Bokujou Monogatari GB (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bokujou Monogatari GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bokujou Monogatari GB (Japan) (SGB Enhanced) (NP)"
+	region "Japan"
+)
+game (
+	name "Bomb Jack (Europe)"
+	region "Europe"
+)
+game (
+	name "Bomber Boy (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Bomber King - Scenario 2 (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Bomberman Collection (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bomberman GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bomberman GB (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Bomberman GB 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bomberman GB 3 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bonesy aka Farewell (World)"
+	region "World"
+)
+game (
+	name "Bonk's Adventure (USA)"
+	region "USA"
+)
+game (
+	name "Bonk's Revenge (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Booby Boys (Japan)"
+	region "Japan"
+)
+game (
+	name "Boomer's Adventure in ASMIK World (USA)"
+	region "USA"
+)
+game (
+	name "Bork Paw Kisses (World)"
+	region "World"
+)
+game (
+	name "Borruga - Neo Pinball (World)"
+	region "World"
+)
+game (
+	name "Bouken! Puzzle Road (Japan)"
+	region "Japan"
+)
+game (
+	name "Boulder Dash (Europe)"
+	region "Europe"
+)
+game (
+	name "Boulder Dash (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Bounce (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Bouncing Ball, The (World)"
+	region "World"
+)
+game (
+	name "Bourgogne Game Show 2022 (World)"
+	region "World"
+)
+game (
+	name "Box Head Husband (World)"
+	region "World"
+)
+game (
+	name "Boxing (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Boxxle (USA)"
+	region "USA"
+)
+game (
+	name "Boxxle (USA, Europe) (Rev 1)"
+	region "USA / Europe"
+)
+game (
+	name "Boxxle II (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Brain Bender (Europe)"
+	region "Europe"
+)
+game (
+	name "Brain Bender (USA)"
+	region "USA"
+)
+game (
+	name "Brain Bender (World) (Evercade)"
+	region "World"
+)
+game (
+	name "Brain Drain (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Brain Drain (Japan) (En) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Brain Drain (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Bram Stoker's Dracula (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "BreakThru! (USA)"
+	region "USA"
+)
+game (
+	name "Breakout Lava-Lamp (World)"
+	region "World"
+)
+game (
+	name "Bubble Bobble (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Bubble Bobble (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Bubble Bobble Junior (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Bubble Bobble Part 2 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Bubble Ghost (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Bubble Ghost (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Bubblemania (World) (v0.7)"
+	region "World"
+)
+game (
+	name "Bubsy II (Europe)"
+	region "Europe"
+)
+game (
+	name "Bubsy II (USA)"
+	region "USA"
+)
+game (
+	name "Bubsy II (World) (The Purrfect Collection)"
+	region "World"
+)
+game (
+	name "Bug Bites! (World)"
+	region "World"
+)
+game (
+	name "Bugs Bunny Collection (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bugs Bunny Collection (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Bugs Bunny Crazy Castle 2, The (USA)"
+	region "USA"
+)
+game (
+	name "Bugs Bunny Crazy Castle, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Bung's Math Test (World)"
+	region "World"
+)
+game (
+	name "Burai Fighter Deluxe (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Burai Senshi Deluxe (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "BurgerTime Deluxe (World)"
+	region "World"
+)
+game (
+	name "Burning Paper (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Bust-A-Move 2 - Arcade Edition (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Bust-A-Move 3 DX (Europe)"
+	region "Europe"
+)
+game (
+	name "Buster Bros. (USA)"
+	region "USA"
+)
+game (
+	name "Busty Bunny the Bounty Babe (World) (v1.02)"
+	region "World"
+)
+game (
+	name "Cadillac II (Japan)"
+	region "Japan"
+)
+game (
+	name "Caesars Palace (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "Caesars Palace (Japan)"
+	region "Japan"
+)
+game (
+	name "Caesars Palace (USA)"
+	region "USA"
+)
+game (
+	name "Caesars Palace (USA) (Rev 1)"
+	region "USA"
+)
+game (
+	name "Caihong Zhanshi - Rainbow Prince (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Calculator (Unknown) (Proto)"
+)
+game (
+	name "Capcom Quiz - Hatena no Daibouken (Japan)"
+	region "Japan"
+)
+game (
+	name "Captain America and the Avengers (USA)"
+	region "USA"
+)
+game (
+	name "Captain Tsubasa J - Zenkoku Seiha e no Chousen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Captain Tsubasa VS (Japan)"
+	region "Japan"
+)
+game (
+	name "Card Game (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Card Games (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Casino FunPak (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Casper (Europe)"
+	region "Europe"
+)
+game (
+	name "Casper (USA)"
+	region "USA"
+)
+game (
+	name "Castelian (Europe)"
+	region "Europe"
+)
+game (
+	name "Castelian (USA)"
+	region "USA"
+)
+game (
+	name "Castle Quest (Europe)"
+	region "Europe"
+)
+game (
+	name "Castlevania - The Adventure (Europe)"
+	region "Europe"
+)
+game (
+	name "Castlevania - The Adventure (USA)"
+	region "USA"
+)
+game (
+	name "Castlevania - The Adventure (USA) (Castlevania Anniversary Collection)"
+	region "USA"
+)
+game (
+	name "Castlevania II - Belmont's Revenge (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Castlevania II - Belmont's Revenge (USA, Europe) (Castlevania Anniversary Collection)"
+	region "USA / Europe"
+)
+game (
+	name "Castlevania Legends (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Catrap (USA)"
+	region "USA"
+)
+game (
+	name "Cave Fighter (World)"
+	region "World"
+)
+game (
+	name "Cave Noire (Japan)"
+	region "Japan"
+)
+game (
+	name "Cel Story (World)"
+	region "World"
+)
+game (
+	name "Celeste (World) (Pirate)"
+	region "World"
+)
+game (
+	name "Centipede (USA) (Majesco)"
+	region "USA"
+)
+game (
+	name "Centipede (USA, Europe) (Accolade)"
+	region "USA / Europe"
+)
+game (
+	name "Chachamaru Boukenki 3 - Abyss no Tou (Japan)"
+	region "Japan"
+)
+game (
+	name "Chachamaru Panic (Japan)"
+	region "Japan"
+)
+game (
+	name "Chain Break (World)"
+	region "World"
+)
+game (
+	name "Chalvo 55 - Super Puzzle Action (Japan)"
+	region "Japan"
+)
+game (
+	name "Championship Pool (USA)"
+	region "USA"
+)
+game (
+	name "Chase H.Q. (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Cheesy Town (World) (En,Ja)"
+	region "World"
+)
+game (
+	name "Cherry Rescue! (World)"
+	region "World"
+)
+game (
+	name "Chessmaster, The (Europe)"
+	region "Europe"
+)
+game (
+	name "Chessmaster, The (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Chessmaster, The (USA) (Rev 1)"
+	region "USA"
+)
+game (
+	name "Chessmaster, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Chibi Maruko-chan - Maruko Deluxe Theater (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Chibi Maruko-chan - Okozukai Daisakusen! (Japan)"
+	region "Japan"
+)
+game (
+	name "Chibi Maruko-chan 2 - Deluxe Maruko World (Japan)"
+	region "Japan"
+)
+game (
+	name "Chibi Maruko-chan 3 - Mezase! Game Taishou no Maki (Japan)"
+	region "Japan"
+)
+game (
+	name "Chibi Maruko-chan 4 - Kore ga Nihon Da yo! Ouji-sama (Japan)"
+	region "Japan"
+)
+game (
+	name "Chiki Chiki Machine Mou Race (Japan)"
+	region "Japan"
+)
+game (
+	name "Chiki Chiki Tengoku (Japan)"
+	region "Japan"
+)
+game (
+	name "Chikyuu Kaihou Gun ZAS (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Chikyuu Kaihou Gun ZAS (World) (ModRetro Chromatic)"
+	region "World"
+)
+game (
+	name "Choplifter II (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Choplifter II - Rescue & Survive (Europe)"
+	region "Europe"
+)
+game (
+	name "Choplifter II - Rescue & Survive (USA)"
+	region "USA"
+)
+game (
+	name "Choplifter III (Europe)"
+	region "Europe"
+)
+game (
+	name "Chou Mashin Eiyuu Den Wataru - Mazekko Monster (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Chou Mashin Eiyuu Den Wataru - Mazekko Monster 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Chousoku Spinner (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Christmas Carols (World)"
+	region "World"
+)
+game (
+	name "Chuck Rock (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Ciao Nonna (World)"
+	region "World"
+)
+game (
+	name "Ciao Nonna (World) (En,It) (v2.2)"
+	region "World"
+)
+game (
+	name "Ciao Nonna (World) (Es,Eu) (v2.2)"
+	region "World"
+)
+game (
+	name "Ciao Nonna (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Ciao Nonna (World) (v2.0)"
+	region "World"
+)
+game (
+	name "Ciao Nonna (World) (v2.1)"
+	region "World"
+)
+game (
+	name "Cliffhanger (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Coat Man (World)"
+	region "World"
+)
+game (
+	name "Collection Pocket (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "College Slam (USA)"
+	region "USA"
+)
+game (
+	name "Commando (World)"
+	region "World"
+)
+game (
+	name "Commodore 16+4 Pack (World) (Demo 2)"
+	region "World"
+)
+game (
+	name "Commodore 16+4 Pack (World) (Digital)"
+	region "World"
+)
+game (
+	name "Conefuse (World)"
+	region "World"
+)
+game (
+	name "Conefuse (World) (Rev 1)"
+	region "World"
+)
+game (
+	name "Contra (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Contra (World) (Contra Anniversary Collection)"
+	region "World"
+)
+game (
+	name "Contra - The Alien Wars (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Contra Spirits (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Cool Ball (USA)"
+	region "USA"
+)
+game (
+	name "Cool Hand (Europe)"
+	region "Europe"
+)
+game (
+	name "Cool Hand (Europe) (Fr,De)"
+	region "Europe"
+)
+game (
+	name "Cool Spot (Europe)"
+	region "Europe"
+)
+game (
+	name "Cool Spot (USA)"
+	region "USA"
+)
+game (
+	name "Cool World (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Cosmic Courier - Trapped in Limbo (World)"
+	region "World"
+)
+game (
+	name "Cosmo Tank (Japan)"
+	region "Japan"
+)
+game (
+	name "Cosmo Tank (USA)"
+	region "USA"
+)
+game (
+	name "Coucou (World)"
+	region "World"
+)
+game (
+	name "Counting Sheep (World)"
+	region "World"
+)
+game (
+	name "Crayon Shin-chan - Ora no Gokigen Collection (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Crayon Shin-chan - Ora to Shiro wa Otomodachi Da yo (Japan)"
+	region "Japan"
+)
+game (
+	name "Crayon Shin-chan 2 - Ora to Wanpaku Gokko Dazo (Japan)"
+	region "Japan"
+)
+game (
+	name "Crayon Shin-chan 3 - Ora no Gokigen Athletic (Japan)"
+	region "Japan"
+)
+game (
+	name "Crayon Shin-chan 4 - Ora no Itazura Daihenshin (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Cryohazard (World)"
+	region "World"
+)
+game (
+	name "Crystal Quest (USA)"
+	region "USA"
+)
+game (
+	name "Cult Jump (Japan)"
+	region "Japan"
+)
+game (
+	name "Cult Master - Ultraman ni Miserarete (Japan)"
+	region "Japan"
+)
+game (
+	name "CutThroat Island (Japan) (En) (Proto)"
+	region "Japan"
+)
+game (
+	name "CutThroat Island (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Cuthbert in the Cooler (World)"
+	region "World"
+)
+game (
+	name "Cyber Dreamscape Battle-Deckers 2199 (World)"
+	region "World"
+)
+game (
+	name "Cyberlice (World) (Proto)"
+	region "World"
+)
+game (
+	name "Cyraid (USA)"
+	region "USA"
+)
+game (
+	name "DMG Deals Damage (World)"
+	region "World"
+)
+game (
+	name "DX Bakenou Z (Japan)"
+	region "Japan"
+)
+game (
+	name "DX Bakenou Z (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Daedalian Opus (USA)"
+	region "USA"
+)
+game (
+	name "Daffy Duck (Europe)"
+	region "Europe"
+)
+game (
+	name "Daffy Duck (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Dai-2-ji Super Robot Taisen G (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Daikaijuu Monogatari - The Miracle of the Zone (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Daiku no Gen-san - Ghost Building Company (Japan)"
+	region "Japan"
+)
+game (
+	name "Daiku no Gen-san - Robot Teikoku no Yabou (Japan)"
+	region "Japan"
+)
+game (
+	name "Daisenryaku (Japan)"
+	region "Japan"
+)
+game (
+	name "Dangan GB (World)"
+	region "World"
+)
+game (
+	name "Dangan GB (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Darkman (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Darkwing Duck (Europe)"
+	region "Europe"
+)
+game (
+	name "Darkwing Duck (Germany)"
+	region "Germany"
+)
+game (
+	name "Darkwing Duck (Spain)"
+	region "Spain"
+)
+game (
+	name "Darkwing Duck (USA)"
+	region "USA"
+)
+game (
+	name "Dash (World)"
+	region "World"
+)
+game (
+	name "David Crane's The Rescue of Princess Blobette (Europe)"
+	region "Europe"
+)
+game (
+	name "David Crane's The Rescue of Princess Blobette (USA)"
+	region "USA"
+)
+game (
+	name "David Crane's The Rescue of Princess Blobette (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Days of Thunder (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Dead Heat Scramble (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Dead Heat Scramble (USA)"
+	region "USA"
+)
+game (
+	name "Dead Names (World)"
+	region "World"
+)
+game (
+	name "Deadeus (World) (v1.1.0)"
+	region "World"
+)
+game (
+	name "Deadeus (World) (v1.2.5)"
+	region "World"
+)
+game (
+	name "Deadeus (World) (v1.3.8)"
+	region "World"
+)
+game (
+	name "Death Planet (World)"
+	region "World"
+)
+game (
+	name "Death Track (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Death of Me, The (World) (v1.0.1)"
+	region "World"
+)
+game (
+	name "Decline (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Deep Forest (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Dennis (Europe)"
+	region "Europe"
+)
+game (
+	name "Dennis the Menace (USA)"
+	region "USA"
+)
+game (
+	name "Desert Strike - Return to the Gulf (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Desert Strike - Return to the Gulf (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Dexterity (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "DiaMaze (World)"
+	region "World"
+)
+game (
+	name "Diablo (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Dick Tracy (USA)"
+	region "USA"
+)
+game (
+	name "Die And Retry (World)"
+	region "World"
+)
+game (
+	name "Dig Dug (Europe)"
+	region "Europe"
+)
+game (
+	name "Dig Dug (USA)"
+	region "USA"
+)
+game (
+	name "Dino Breeder (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Dino Breeder (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Dino Breeder 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Dino's Offline Adventure (World)"
+	region "World"
+)
+game (
+	name "Dirty Racing (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Dirty Racing (Japan)"
+	region "Japan"
+)
+game (
+	name "Do I Pass (World) (En) (v1.4)"
+	region "World"
+)
+game (
+	name "Do I Pass (World) (En) (v1.4) (Web)"
+	region "World"
+)
+game (
+	name "Do I Pass (World) (En) (v1.5)"
+	region "World"
+)
+game (
+	name "Do I Pass (World) (Fr) (v1.4.2)"
+	region "World"
+)
+game (
+	name "Doctor GB Card 16M Loader (World)"
+	region "World"
+)
+game (
+	name "Doctor GB Card 4M (World)"
+	region "World"
+)
+game (
+	name "Dodge Boy (Japan)"
+	region "Japan"
+)
+game (
+	name "Dog's Muck Island (World)"
+	region "World"
+)
+game (
+	name "Don't Call Me Mama But Yes I Am Your Mama (World) (v2.0)"
+	region "World"
+)
+game (
+	name "Donkey Kong (Japan, USA) (En) (SGB Enhanced)"
+	region "Japan / USA"
+)
+game (
+	name "Donkey Kong (World) (Rev 1) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Donkey Kong Land (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Donkey Kong Land (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Donkey Kong Land 2 (Japan) (Proto) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Donkey Kong Land 2 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Donkey Kong Land III (USA, Europe) (Rev 1) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Donkey Kong Land III (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Doomsayer - A Hero's Crusade (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Doraemon - Taiketsu HimitsuDougu!! (Japan)"
+	region "Japan"
+)
+game (
+	name "Doraemon 2 - Animal Planet Densetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Doraemon Kart (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Doraemon no Game Boy de Asobouyo Deluxe 10 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Doraemon no Study Boy 1 - Shou 1 Kokugo Kanji (Japan)"
+	region "Japan"
+)
+game (
+	name "Doraemon no Study Boy 2 - Shou 1 Sansuu Keisan (Japan)"
+	region "Japan"
+)
+game (
+	name "Doraemon no Study Boy 3 - Ku Ku Master (Japan)"
+	region "Japan"
+)
+game (
+	name "Doraemon no Study Boy 4 - Shou ni Kokugo Kanji (Japan)"
+	region "Japan"
+)
+game (
+	name "Doraemon no Study Boy 5 - Shou 2 Sansuu Keisan (Japan)"
+	region "Japan"
+)
+game (
+	name "Doraemon no Study Boy 6 - Gakushuu Kanji Master 1006 (Japan)"
+	region "Japan"
+)
+game (
+	name "Dorotea (World) (It) (v1.1)"
+	region "World"
+)
+game (
+	name "Dorotea (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Double Dragon (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Double Dragon (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Double Dragon (World) (Evercade)"
+	region "World"
+)
+game (
+	name "Double Dragon 3 - The Arcade Game (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Double Dragon II (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Double Dribble - 5 on 5 (USA)"
+	region "USA"
+)
+game (
+	name "Double Yakuman (Japan)"
+	region "Japan"
+)
+game (
+	name "Double Yakuman II (Japan)"
+	region "Japan"
+)
+game (
+	name "Double Yakuman Jr. (Japan)"
+	region "Japan"
+)
+game (
+	name "Downtown - Nekketsu Koushinkyoku - Dokodemo Daiundoukai (Japan)"
+	region "Japan"
+)
+game (
+	name "Downtown Special - Kunio-kun no Jidaigeki Da yo Zenin Shuugou! (Japan)"
+	region "Japan"
+)
+game (
+	name "Dr. Franken (Europe) (En,Fr,De,Es,It,Nl,Sv)"
+	region "Europe"
+)
+game (
+	name "Dr. Franken (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Dr. Franken (USA)"
+	region "USA"
+)
+game (
+	name "Dr. Franken 3 (USA, Europe) (Proto)"
+	region "USA / Europe"
+)
+game (
+	name "Dr. Franken II (USA, Europe) (En,Fr,De,Es,It,Nl,Sv)"
+	region "USA / Europe"
+)
+game (
+	name "Dr. Mario (World)"
+	region "World"
+)
+game (
+	name "Dr. Mario (World) (Rev 1)"
+	region "World"
+)
+game (
+	name "Dracula Densetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Dracula Densetsu (Japan) (Castlevania Anniversary Collection)"
+	region "Japan"
+)
+game (
+	name "Dracula Densetsu II (Japan)"
+	region "Japan"
+)
+game (
+	name "Dracula Densetsu II (Japan) (Castlevania Anniversary Collection)"
+	region "Japan"
+)
+game (
+	name "Dragon Ball Z - Gokuu Gekitouden (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Dragon Ball Z - Gokuu Hishouden (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Dragon Ball Z 3 (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Dragon Slayer Gaiden - Nemuri no Oukan (Japan)"
+	region "Japan"
+)
+game (
+	name "Dragon Slayer I (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Dragon Tail (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Dragon's Lair (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Dragon's Lair - The Legend (Europe)"
+	region "Europe"
+)
+game (
+	name "Dragon's Lair - The Legend (USA)"
+	region "USA"
+)
+game (
+	name "Dragon's Lair - The Legend (World) (Incube8 Games)"
+	region "World"
+)
+game (
+	name "DragonHeart (France)"
+	region "France"
+)
+game (
+	name "DragonHeart (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Dragonborne (World)"
+	region "World"
+)
+game (
+	name "Dragonborne (World)"
+	region "World"
+)
+game (
+	name "Dropzone (Europe)"
+	region "Europe"
+)
+game (
+	name "Druaga no Tou (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Duck (World)"
+	region "World"
+)
+game (
+	name "DuckTales (Europe)"
+	region "Europe"
+)
+game (
+	name "DuckTales (Japan)"
+	region "Japan"
+)
+game (
+	name "DuckTales (USA)"
+	region "USA"
+)
+game (
+	name "DuckTales 2 (Europe)"
+	region "Europe"
+)
+game (
+	name "DuckTales 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "DuckTales 2 (USA)"
+	region "USA"
+)
+game (
+	name "Dungeon Land (Japan)"
+	region "Japan"
+)
+game (
+	name "Dungeon Warrior (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Dynablaster (Europe)"
+	region "Europe"
+)
+game (
+	name "Earthworm Jim (Europe)"
+	region "Europe"
+)
+game (
+	name "Earthworm Jim (USA)"
+	region "USA"
+)
+game (
+	name "Earthworm Jim (World) (ModRetro Chromatic)"
+	region "World"
+)
+game (
+	name "Eclipse (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Edd the Duck (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Eddie's Puzzle Time (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Elden Ring GB (World)"
+	region "World"
+)
+game (
+	name "Elevator Action (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Elevator Action (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Elite Soccer (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Elle's Gone (World)"
+	region "World"
+)
+game (
+	name "Exodus - Journey to the Promised Land (USA)"
+	region "USA"
+)
+game (
+	name "Extra Bases (USA)"
+	region "USA"
+)
+game (
+	name "F-1 Race (World)"
+	region "World"
+)
+game (
+	name "F-1 Race (World) (Rev 1)"
+	region "World"
+)
+game (
+	name "F-1 Spirit (Japan)"
+	region "Japan"
+)
+game (
+	name "F-15 Strike Eagle (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "F-Zero - Project (World)"
+	region "World"
+)
+game (
+	name "F1 Boy (Japan)"
+	region "Japan"
+)
+game (
+	name "F1 Pole Position (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "FIFA - Road to World Cup 98 (Europe) (Rev 1) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "FIFA - Road to World Cup 98 (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "FIFA International Soccer (USA, Europe) (En,Fr,De,Es) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "FIFA Soccer 96 (USA, Europe) (En,Fr,De,Es) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "FIFA Soccer 97 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Faceball 2000 (USA)"
+	region "USA"
+)
+game (
+	name "Family Jockey (Japan)"
+	region "Japan"
+)
+game (
+	name "Family Jockey 2 - Meiba no Kettou (Japan)"
+	region "Japan"
+)
+game (
+	name "Famista (Japan)"
+	region "Japan"
+)
+game (
+	name "Famista 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Famista 3 (Japan)"
+	region "Japan"
+)
+game (
+	name "Farm, The (World)"
+	region "World"
+)
+game (
+	name "Fastest Lap (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Fastest Lap (USA)"
+	region "USA"
+)
+game (
+	name "Felix the Cat (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Ferrari (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Ferrari Grand Prix Challenge (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Fidgetts, The (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Fidgetts, The (USA, Europe) (En,Fr,De,Es,It,Nl,Sv)"
+	region "USA / Europe"
+)
+game (
+	name "Fidgetts, The (World) (En,Fr,De,Es,It,Nl,Sv) (Evercade)"
+	region "World"
+)
+game (
+	name "Fighting Simulator 2 in 1 - Flying Warriors (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Final Fantasy Adventure (USA)"
+	region "USA"
+)
+game (
+	name "Final Fantasy Adventure (World) (Collection of Mana)"
+	region "World"
+)
+game (
+	name "Final Fantasy Legend II (USA)"
+	region "USA"
+)
+game (
+	name "Final Fantasy Legend II (World) (Collection of SaGa)"
+	region "World"
+)
+game (
+	name "Final Fantasy Legend III (USA)"
+	region "USA"
+)
+game (
+	name "Final Fantasy Legend III (World) (Collection of SaGa)"
+	region "World"
+)
+game (
+	name "Final Fantasy Legend, The (USA)"
+	region "USA"
+)
+game (
+	name "Final Fantasy Legend, The (World) (Collection of SaGa)"
+	region "World"
+)
+game (
+	name "Final Fantasy XI Adventure (World)"
+	region "World"
+)
+game (
+	name "Final Reverse (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Finders Keepers (World)"
+	region "World"
+)
+game (
+	name "Fire Fighter (Europe)"
+	region "Europe"
+)
+game (
+	name "Fish Dude (USA)"
+	region "USA"
+)
+game (
+	name "Fist of the North Star (USA)"
+	region "USA"
+)
+game (
+	name "Flappy Special (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Flappy Special (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "FlappyBird GB (World)"
+	region "World"
+)
+game (
+	name "Flash, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Fleet Commander VS. (Japan)"
+	region "Japan"
+)
+game (
+	name "Flintstones, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Flintstones, The - King Rock Treasure Island (Japan) (Proto)"
+	region "Japan"
+)
+game (
+	name "Flintstones, The - King Rock Treasure Island (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Flipull (USA)"
+	region "USA"
+)
+game (
+	name "Flipull - An Exciting Cube Game (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Fly O'Clock (World)"
+	region "World"
+)
+game (
+	name "Football International (Europe)"
+	region "Europe"
+)
+game (
+	name "Footballer of the Year (World)"
+	region "World"
+)
+game (
+	name "Footballer of the Year (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Foreman for Real (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Foreman for Real (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Fortified Zone (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Fortified Zone 2 (World)"
+	region "World"
+)
+game (
+	name "Four of a Kind - A Short Horror Anthology (World)"
+	region "World"
+)
+game (
+	name "Frank Thomas Big Hurt Baseball (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Franky, Joe & Dirk - On the Tiles (Europe) (En,Fr,De,Es,It,Nl)"
+	region "Europe"
+)
+game (
+	name "Friend of the Void (World)"
+	region "World"
+)
+game (
+	name "Frisky Tom (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Frogger (USA)"
+	region "USA"
+)
+game (
+	name "From TV Animation Slam Dunk - Gakeppuchi no Kesshou League (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "From TV Animation Slam Dunk 2 - Zenkoku e no Tip Off (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "From TV Animation Slam Dunk Limited Edition (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Funny Field (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Fushigi no Dungeon - Fuurai no Shiren GB - Tsukikage Mura no Kaibutsu (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Fushigina Blobby - Princess Blob o Sukue! (Japan)"
+	region "Japan"
+)
+game (
+	name "G Arms - Operation Gundam (Japan)"
+	region "Japan"
+)
+game (
+	name "G-Man (World)"
+	region "World"
+)
+game (
+	name "G-ZERO (World) (v2.6)"
+	region "World"
+)
+game (
+	name "GB Basketball (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "GB Genjin (Japan)"
+	region "Japan"
+)
+game (
+	name "GB Genjin 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "GB Genjin Land - Viva! Chikkun Oukoku (Japan)"
+	region "Japan"
+)
+game (
+	name "GB Pachi-Slot Hisshouhou! Jr. (Japan)"
+	region "Japan"
+)
+game (
+	name "GB Pixel Jam 2023 Gallery (World)"
+	region "World"
+)
+game (
+	name "GBKiss Mini Games (Japan)"
+	region "Japan"
+)
+game (
+	name "GI King! - Sanbiki no Yosouya (Japan)"
+	region "Japan"
+)
+game (
+	name "Galaga & Galaxian (Japan) (En) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Game & Watch Gallery (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Game & Watch Gallery (USA) (Rev 1) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Game & Watch Gallery (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Game Boy Aging Cartridge (World) (En,Ja) (v1.1)"
+	region "World"
+)
+game (
+	name "Game Boy Camera (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Game Boy Camera Gold (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Game Boy Controller Kensa Cartridge (Japan)"
+	region "Japan"
+)
+game (
+	name "Game Boy Datenlogger 1 (Germany)"
+	region "Germany"
+)
+game (
+	name "Game Boy Digital Sampling Oscilloscope (Europe)"
+	region "Europe"
+)
+game (
+	name "Game Boy Gallery (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Game Boy Gallery - 5 Games in 1 (Europe, Australia) (SGB Enhanced)"
+	region "Europe / Australia"
+)
+game (
+	name "Game Boy Gallery 2 (Australia) (SGB Enhanced)"
+	region "Australia"
+)
+game (
+	name "Game Boy Gallery 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Game Boy Hero (World)"
+	region "World"
+)
+game (
+	name "Game Boy Wars (Japan)"
+	region "Japan"
+)
+game (
+	name "Game Boy Wars Turbo (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Game Boy Wars Turbo - Famitsu Version (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Game Genie (USA) (v2.1)"
+	region "USA"
+)
+game (
+	name "Game de Hakken!! Tamagotchi (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Game de Hakken!! Tamagotchi - Osutchi to Mesutchi (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Game de Hakken!! Tamagotchi 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Game of Harmony, The (USA)"
+	region "USA"
+)
+game (
+	name "GameBoy WORDLE (World)"
+	region "World"
+)
+game (
+	name "Gamera - Daikaijuu Kuuchuu Kessen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Ganbare Goemon - Kurofunetou no Nazo (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Ganbare Goemon - Sarawareta Ebisumaru (Japan)"
+	region "Japan"
+)
+game (
+	name "Ganso!! Yancha Maru (Japan)"
+	region "Japan"
+)
+game (
+	name "Garfield Labyrinth (Europe)"
+	region "Europe"
+)
+game (
+	name "Gargoyle's Quest (Europe) (Rev 1)"
+	region "Europe"
+)
+game (
+	name "Gargoyle's Quest (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Gargoyle's Quest II - The Demon Darkness (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Gargoyle's Quest II - The Demon Darkness (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Gas Station Story OST (World) (Album)"
+	region "World"
+)
+game (
+	name "Gauntlet II (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Gear Works (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Gegege no Kitarou - Youkai Souzoushu Arawaru! (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Gekitou Power Modeller (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Gem Gem (Japan)"
+	region "Japan"
+)
+game (
+	name "Genesis (World)"
+	region "World"
+)
+game (
+	name "Genesis II (World)"
+	region "World"
+)
+game (
+	name "Genjin Collection (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Genjin Cottsu (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Genki Bakuhatsu Gambaruger (Japan)"
+	region "Japan"
+)
+game (
+	name "George Foreman's KO Boxing (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Gerry Anderson's Thunderbirds (Japan)"
+	region "Japan"
+)
+game (
+	name "Getaway, The - High Speed II (USA)"
+	region "USA"
+)
+game (
+	name "Ghost Town (World)"
+	region "World"
+)
+game (
+	name "Ghostbusters II (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Ghostbusters II (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Ginga - Card & Puzzle Collection (Japan) (En,Ja)"
+	region "Japan"
+)
+game (
+	name "Gluecksrad (Germany)"
+	region "Germany"
+)
+game (
+	name "Go Go Ackman (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Go! Go! Hitchhike (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Go! Go! Tank (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Go! Go! Tank (USA)"
+	region "USA"
+)
+game (
+	name "Goal! (Europe)"
+	region "Europe"
+)
+game (
+	name "Goal! (USA)"
+	region "USA"
+)
+game (
+	name "God Medicine - Fantasy Sekai no Tanjou (Japan)"
+	region "Japan"
+)
+game (
+	name "God Medicine - Fukkokuban (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Godzilla (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Gojira-kun - Kaijuu Daikoushin (Japan)"
+	region "Japan"
+)
+game (
+	name "Golden Rays of Sunshine (World)"
+	region "World"
+)
+game (
+	name "Golf (World)"
+	region "World"
+)
+game (
+	name "Golf Classic (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Goukaku Boy GOLD - Shikakui Atama o Maruku Suru - Joushiki no Sho (Japan) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy GOLD - Shikakui Atama o Maruku Suru - Joushiki no Sho (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy GOLD - Shikakui Atama o Maruku Suru - Kanji no Tatsujin (Japan) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy GOLD - Shikakui Atama o Maruku Suru - Kanji no Tatsujin (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy GOLD - Shikakui Atama o Maruku Suru - Keisan no Tatsujin (Japan) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy GOLD - Shikakui Atama o Maruku Suru - Keisan no Tatsujin (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy GOLD - Shikakui Atama o Maruku Suru - Nanmon no Sho (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy GOLD - Shikakui Atama o Maruku Suru - Nanmon no Sho (Japan) (Proto) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy GOLD - Shikakui Atama o Maruku Suru - Zukei no Tatsujin (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - 99 Nendo Ban Eitango Center 1500 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Eijukugo Target 1000 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Eiken 2kyuu Level no Kaiwa Hyougen 333 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Eitango Target 1900 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Gakken - Kanyouku Kotowaza 210 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Gakken - Rekishi 512 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Gakken - Yojijukugo 288 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Gakken - Yojijukugo 288 (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Kirihara Shoten Hinshutsu Eibunpou Gohou Mondai 1000 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Koukou Nyuushi Derujun - Chuugaku Eijukugo 350 (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Koukou Nyuushi Derujun - Chuugaku Eijukugo 350 (Japan) (Possible Proto) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Koukou Nyuushi Derujun - Chuugaku Eitango 1700 (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Koukou Nyuushi Derujun - Chuugaku Eitango 1700 (Japan) (Possible Proto) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Koukou Nyuushi Derujun - Kanji Mondai no Seifuku (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Koukou Nyuushi Derujun - Rekishi Nendai Anki Point 240 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Koukou Nyuushi Derujun - Rika Anki Point 250 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Nihonshi Target 201 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Kokugo Battle Hen (Japan) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Kokugo Battle Hen (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Rika Battle Hen (Japan) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Rika Battle Hen (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Sansuu Battle Hen (Japan) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Sansuu Battle Hen (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Shakai Battle Hen (Japan) (IE Institute)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Shakai Battle Hen (Japan) (Imagineer)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Suuji de Asobou Sansuu Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Shikakui Atama o Maruku Suru - Suuji de Asobou Sansuu Hen (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Yamakawa Ichimonittou - Nihonshi B Yougo Mondaishuu (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Yamakawa Ichimonittou - Sekaishi B Yougo Mondaishuu (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Z-Kai Kyuukyoku no Eigo Koubun 285 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Z-Kai Kyuukyoku no Eijukugo 1017 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Z-Kai Kyuukyoku no Eitango 1500 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Z-Kai Reibun de Oboeru - Chuugaku Eitango 1132 (Japan)"
+	region "Japan"
+)
+game (
+	name "Goukaku Boy Series - Z-Kai Reibun de Oboeru - Kyuukyoku no Kobun Tango (Japan)"
+	region "Japan"
+)
+game (
+	name "Gradius - The Interstellar Assault (USA)"
+	region "USA"
+)
+game (
+	name "Grander Musashi RV (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Great Detention Getaway, The (World)"
+	region "World"
+)
+game (
+	name "Great Greed (USA)"
+	region "USA"
+)
+game (
+	name "Gremlins 2 - The New Batch (World)"
+	region "World"
+)
+game (
+	name "Gun Law (World)"
+	region "World"
+)
+game (
+	name "Guns&Riders (World)"
+	region "World"
+)
+game (
+	name "Gunship (World)"
+	region "World"
+)
+game (
+	name "HAL Wrestling (USA)"
+	region "USA"
+)
+game (
+	name "Hammerin' Harry (Europe)"
+	region "Europe"
+)
+game (
+	name "Hammerin' Harry - Ghost Building Company (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Handheld Heroes (World) (Album)"
+	region "World"
+)
+game (
+	name "Harbour Attack (World)"
+	region "World"
+)
+game (
+	name "Harvest Moon GB (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Hatris (Japan, USA) (En)"
+	region "Japan / USA"
+)
+game (
+	name "Hayaoshi Quiz - Ouza Ketteisen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "He Fucked the Girl Out of Me (World)"
+	region "World"
+)
+game (
+	name "He Fucked the Girl Out of Me (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Head On (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Heart Knight (World)"
+	region "World"
+)
+game (
+	name "Heavyweight Championship Boxing (USA)"
+	region "USA"
+)
+game (
+	name "Heebie-GBs Halloween 2014 (World) (Album)"
+	region "World"
+)
+game (
+	name "Heebie-GBs Halloween 2019 (World) (Album)"
+	region "World"
+)
+game (
+	name "Heiankyo Alien (USA)"
+	region "USA"
+)
+game (
+	name "Heiankyou Alien (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Heisei Tensai Bakabon (Japan)"
+	region "Japan"
+)
+game (
+	name "Hello Kitty - Pocket Camera (Japan) (Proto) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Heracles no Eikou - Ugokidashita Kamigami (Japan)"
+	region "Japan"
+)
+game (
+	name "Hercules (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Hero Shuugou!! Pinball Party (Japan)"
+	region "Japan"
+)
+game (
+	name "Hiden Inyou Kikouhou - Ca Da (Japan)"
+	region "Japan"
+)
+game (
+	name "Higashio Osamu Kanshuu Pro Yakyuu Stadium '91 (Japan)"
+	region "Japan"
+)
+game (
+	name "Higashio Osamu Kanshuu Pro Yakyuu Stadium '92 (Japan)"
+	region "Japan"
+)
+game (
+	name "High Stakes Gambling (USA)"
+	region "USA"
+)
+game (
+	name "Hiryuu no Ken Gaiden (Japan)"
+	region "Japan"
+)
+game (
+	name "Hit the Ice - VHL - The Official Video Hockey League (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Hitori de Dekirumon! - Cooking Densetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Hoi Hoi - Game Boy Ban (Japan)"
+	region "Japan"
+)
+game (
+	name "Hokuto no Ken - Seizetsu Juuban Shoubu (Japan)"
+	region "Japan"
+)
+game (
+	name "Home Alone (Japan)"
+	region "Japan"
+)
+game (
+	name "Home Alone (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Home Alone 2 - Kevin's Dream (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Home Alone 2 - Lost in New York (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Hon Shougi (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Hong Kong '97 (World) (2022 Update)"
+	region "World"
+)
+game (
+	name "Hong Kong (Japan)"
+	region "Japan"
+)
+game (
+	name "Honmei Boy (Japan)"
+	region "Japan"
+)
+game (
+	name "Honoo no Toukyuuji - Dodge Danpei (Japan)"
+	region "Japan"
+)
+game (
+	name "Hook (Europe)"
+	region "Europe"
+)
+game (
+	name "Hook (Japan)"
+	region "Japan"
+)
+game (
+	name "Hook (USA)"
+	region "USA"
+)
+game (
+	name "Hook (USA) (Sample)"
+	region "USA"
+)
+game (
+	name "Hoshi no Kirby (Japan)"
+	region "Japan"
+)
+game (
+	name "Hoshi no Kirby (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Hoshi no Kirby 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Hudson Hawk (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Hudson Hawk (Japan)"
+	region "Japan"
+)
+game (
+	name "Hudson Hawk (USA)"
+	region "USA"
+)
+game (
+	name "Hugo (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Hugo (World)"
+	region "World"
+)
+game (
+	name "Hugo 2 (Germany)"
+	region "Germany"
+)
+game (
+	name "Humans, The (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "Humans, The (USA)"
+	region "USA"
+)
+game (
+	name "Humans, The (USA) (QUByte Classics)"
+	region "USA"
+)
+game (
+	name "Hunchback of Notre Dame, The - 5 Foolishly Fun Topsy Turvy Games (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Hunt for Red October, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Hyper Black Bass '95 (Japan) (En,Ja)"
+	region "Japan"
+)
+game (
+	name "Hyper Black Bass (Japan) (En,Ja)"
+	region "Japan"
+)
+game (
+	name "Hyper Dunk (Europe)"
+	region "Europe"
+)
+game (
+	name "Hyper Lode Runner (Japan) (En) (Possible Proto)"
+	region "Japan"
+)
+game (
+	name "Hyper Lode Runner (World) (Rev 1)"
+	region "World"
+)
+game (
+	name "If (World)"
+	region "World"
+)
+game (
+	name "Ikari no Yousai (Japan)"
+	region "Japan"
+)
+game (
+	name "Ikari no Yousai 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Illuminated (World)"
+	region "World"
+)
+game (
+	name "Impossible Gameboy (World)"
+	region "World"
+)
+game (
+	name "In Your Face (USA)"
+	region "USA"
+)
+game (
+	name "Incredible Crash Dummies, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Indiana Jones - Saigo no Seisen (Japan)"
+	region "Japan"
+)
+game (
+	name "Indiana Jones and the Last Crusade (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Indien dans la Ville, Un (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "InfoGenius Productivity Pak - Berlitz French Translator (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "InfoGenius Productivity Pak - Berlitz German Translator (USA, Europe) (Proto)"
+	region "USA / Europe"
+)
+game (
+	name "InfoGenius Productivity Pak - Berlitz Japanese Translator (USA, Europe) (Proto)"
+	region "USA / Europe"
+)
+game (
+	name "InfoGenius Productivity Pak - Berlitz Spanish Translator (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "InfoGenius Productivity Pak - Frommer's Travel Guide (USA)"
+	region "USA"
+)
+game (
+	name "InfoGenius Productivity Pak - Personal Organizer and Phone Book (USA)"
+	region "USA"
+)
+game (
+	name "InfoGenius Productivity Pak - Spell Checker and Calculator (USA)"
+	region "USA"
+)
+game (
+	name "InfoGenius Systems - Personal Organizer with Phone Book (Europe)"
+	region "Europe"
+)
+game (
+	name "Initial D Gaiden (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Interblocked (World)"
+	region "World"
+)
+game (
+	name "International Space-Ball (World)"
+	region "World"
+)
+game (
+	name "International Superstar Soccer (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Into the Blue (World)"
+	region "World"
+)
+game (
+	name "Invasion From Spaaace! (World)"
+	region "World"
+)
+game (
+	name "Ippatsu Gyakuten! DX Bakenou (Japan)"
+	region "Japan"
+)
+game (
+	name "Iron Man X-O Manowar in Heavy Metal (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Ishida Yoshio Tsumego Paradise (Japan)"
+	region "Japan"
+)
+game (
+	name "Ishido - The Way of Stones (Japan)"
+	region "Japan"
+)
+game (
+	name "Ishido - The Way of Stones (USA)"
+	region "USA"
+)
+game (
+	name "Itsudemo! Nyan to Wonderful (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "J.League Big Wave Soccer (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "J.League Fighting Soccer - The King of Ace Strikers (Japan)"
+	region "Japan"
+)
+game (
+	name "J.League Live 95 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "J.League Winning Goal (Japan)"
+	region "Japan"
+)
+game (
+	name "Jabberwocky (World)"
+	region "World"
+)
+game (
+	name "Jack Nicklaus Golf (France)"
+	region "France"
+)
+game (
+	name "Jack Nicklaus Golf (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Jaleco J.Cup Soccer (Japan)"
+	region "Japan"
+)
+game (
+	name "James Bond 007 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Jane in the Jungle (World)"
+	region "World"
+)
+game (
+	name "Jankenman (Japan)"
+	region "Japan"
+)
+game (
+	name "Janshirou (Japan)"
+	region "Japan"
+)
+game (
+	name "Janshirou II - Sekai Saikyou no Janshi (Japan)"
+	region "Japan"
+)
+game (
+	name "Jantaku Boy (Japan)"
+	region "Japan"
+)
+game (
+	name "Jeep Jamboree - Off-Road Adventure (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Jeep Jamboree - Off-Road Adventure (USA)"
+	region "USA"
+)
+game (
+	name "Jelly Boy (Europe)"
+	region "Europe"
+)
+game (
+	name "Jeopardy! (USA)"
+	region "USA"
+)
+game (
+	name "Jeopardy! - Platinum Edition (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Jeopardy! - Sports Edition (USA)"
+	region "USA"
+)
+game (
+	name "Jeopardy! - Teen Tournament (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Jet Pak Jak (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Jet Pak Man (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Jet Set Willy (World)"
+	region "World"
+)
+game (
+	name "Jetsons, The - Robot Panic (Japan) (Proto)"
+	region "Japan"
+)
+game (
+	name "Jetsons, The - Robot Panic (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Jetsons, The - Robot Panic (USA, Europe) (Rev 1)"
+	region "USA / Europe"
+)
+game (
+	name "Jikuu Senki Mu (Japan)"
+	region "Japan"
+)
+game (
+	name "Jimmy Connors Tennis (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Jimmy Connors no Pro Tennis Tour (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Jinsei Game (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Jinsei Game Densetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Joe & Mac (USA)"
+	region "USA"
+)
+game (
+	name "Joe & Mac - Caveman Ninja (Europe) (En,Fr,De,Es,It,Nl,Sv)"
+	region "Europe"
+)
+game (
+	name "Joe Blade 2 (World)"
+	region "World"
+)
+game (
+	name "John Madden Football (USA) (Proto 1) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "John Madden Football (USA) (Proto 2) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Jordan vs Bird - One on One (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Jordan vs Bird - One on One (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Joshua & the Battle of Jericho (USA)"
+	region "USA"
+)
+game (
+	name "Judge Dredd (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Judge Dredd (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Jumpy (World)"
+	region "World"
+)
+game (
+	name "Jungle Book, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Jungle Book, The (World) (Disney Classic Games)"
+	region "World"
+)
+game (
+	name "Jungle Strike (Europe)"
+	region "Europe"
+)
+game (
+	name "Jungle Strike (USA)"
+	region "USA"
+)
+game (
+	name "Jungle Wars (Japan)"
+	region "Japan"
+)
+game (
+	name "Jungle no Ouja Tar-chan (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Jurassic Park (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "Jurassic Park (USA)"
+	region "USA"
+)
+game (
+	name "Jurassic Park (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Jurassic Park Part 2 - The Chaos Continues (USA, Europe) (En,Fr,De,It)"
+	region "USA / Europe"
+)
+game (
+	name "Jurassic Park Part 2 - The Chaos Continues (World) (En,Fr,De,It) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Just Fishing (World)"
+	region "World"
+)
+game (
+	name "Kachiuma Yosou Keiba Kizoku (Japan)"
+	region "Japan"
+)
+game (
+	name "Kachiuma Yosou Keiba Kizoku EX '94 (Japan)"
+	region "Japan"
+)
+game (
+	name "Kachiuma Yosou Keiba Kizoku EX '95 (Japan)"
+	region "Japan"
+)
+game (
+	name "Kaeru no Tame ni Kane wa Naru (Japan)"
+	region "Japan"
+)
+game (
+	name "Kaijuu Ou Gojira (Japan)"
+	region "Japan"
+)
+game (
+	name "Kaisen Game - Navyblue (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Kaisen Game - Navyblue 90 (Japan)"
+	region "Japan"
+)
+game (
+	name "Kaisen Game - Radarmission (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Kakomunja (Japan)"
+	region "Japan"
+)
+game (
+	name "Kamen Rider SD - Hashire! Mighty Riders (Japan)"
+	region "Japan"
+)
+game (
+	name "Kandume Monsters (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Karakuri Kengou Den Musashi Lord (Japan)"
+	region "Japan"
+)
+game (
+	name "Karamuchou no Daijiken (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Karpe Diem (World)"
+	region "World"
+)
+game (
+	name "Kaseki Sousei Reborn (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Kaseki Sousei Reborn (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Kattobi Road (Japan)"
+	region "Japan"
+)
+game (
+	name "Kawa no Nushi Tsuri 3 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Keitai Keiba Eight Special (Japan)"
+	region "Japan"
+)
+game (
+	name "Ken Griffey Jr. Presents Major League Baseball (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Kenyuu Densetsu Yaiba (Japan)"
+	region "Japan"
+)
+game (
+	name "Kenzie's Birthday Dash (World)"
+	region "World"
+)
+game (
+	name "Kick Attack (Japan) (Proto)"
+	region "Japan"
+)
+game (
+	name "Kick Boxing, The (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Kid Dracula (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Kid Icarus - Of Myths and Monsters (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Kidou Keisatsu Patlabor - Nerawareta Machi 1990 (Japan)"
+	region "Japan"
+)
+game (
+	name "Kikou Keisatsu Metal Jack (Japan)"
+	region "Japan"
+)
+game (
+	name "Killer Instinct (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "King James Bible (USA)"
+	region "USA"
+)
+game (
+	name "King of Fighters '95, The (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "King of Fighters '95, The (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "King of Fighters, The - Heat of Battle (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "King of the Zoo (Europe)"
+	region "Europe"
+)
+game (
+	name "Kingdom Crusade (USA)"
+	region "USA"
+)
+game (
+	name "Kingyo Chuuihou! - Wapiko no Wakuwaku Stamp Rally! (Japan)"
+	region "Japan"
+)
+game (
+	name "Kingyo Chuuihou! 2 - Gyopi-chan o Sagase! (Japan)"
+	region "Japan"
+)
+game (
+	name "Kinin Koumaroku Oni (Japan)"
+	region "Japan"
+)
+game (
+	name "Kinin Koumaroku Oni (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Kinnikuman - The Dream Match (Japan)"
+	region "Japan"
+)
+game (
+	name "Kirby no Block Ball (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Kirby no Kirakira Kids (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Kirby no Pinball (Japan)"
+	region "Japan"
+)
+game (
+	name "Kirby's Block Ball (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Kirby's Dream Land (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Kirby's Dream Land 2 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Kirby's Pinball Land (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Kirby's Star Stacker (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Kitchen Panic (Japan)"
+	region "Japan"
+)
+game (
+	name "Kiteretsu Daihyakka - Bouken Ooedo Juraki (Japan)"
+	region "Japan"
+)
+game (
+	name "Kitten's Getaway (World) (Es)"
+	region "World"
+)
+game (
+	name "Kizuchi da Quiz da Gen-san da! (Japan)"
+	region "Japan"
+)
+game (
+	name "Klax (Japan) (En) (Hudson Soft)"
+	region "Japan"
+)
+game (
+	name "Klax (USA) (Mindscape)"
+	region "USA"
+)
+game (
+	name "Klustar (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Knight Quest (Japan)"
+	region "Japan"
+)
+game (
+	name "Knight Quest (USA)"
+	region "USA"
+)
+game (
+	name "Koi wa Kakehiki (Japan)"
+	region "Japan"
+)
+game (
+	name "Konami GB Collection Vol.1 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Konami GB Collection Vol.2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Konami GB Collection Vol.3 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Konami GB Collection Vol.4 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Konami Golf (Europe)"
+	region "Europe"
+)
+game (
+	name "Konamic Basket (Japan)"
+	region "Japan"
+)
+game (
+	name "Konamic Golf (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Konamic Ice Hockey (Japan)"
+	region "Japan"
+)
+game (
+	name "Konamic Sports in Barcelona (Japan)"
+	region "Japan"
+)
+game (
+	name "Konchuu Hakase (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Konchuu Hakase (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Koro Dice (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Koukiatsu Boy (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Krezber (World)"
+	region "World"
+)
+game (
+	name "Krusty World (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Krusty's Fun House (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Kuma no Puutarou - Takara Sagashi da Ooiri Game Battle! (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Kung-Fu Master (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Kuru Kuru Pixel Logic (World)"
+	region "World"
+)
+game (
+	name "Kuusou Kagaku Sekai Gulliver Boy - Kuusou Kagaku Puzzle Purittopon!! (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Kwirk - He's A-maze-ing! (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Kyoro-chan Land (Japan)"
+	region "Japan"
+)
+game (
+	name "Lamborghini American Challenge (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Lasama Chuanqi - Story of Lasama (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Lasama Chuanqi - Story of Lasama (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Laser Squad Alter (World)"
+	region "World"
+)
+game (
+	name "Last Action Hero (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Lawn Mower Land (World)"
+	region "World"
+)
+game (
+	name "Lawnmower Man, The (Europe)"
+	region "Europe"
+)
+game (
+	name "Lawnmower Man, The (USA) (Proto 1) (Not For Resale)"
+	region "USA"
+)
+game (
+	name "Lawnmower Man, The (USA) (Proto 2)"
+	region "USA"
+)
+game (
+	name "Lazlos' Leap (USA)"
+	region "USA"
+)
+game (
+	name "Leak, The (World)"
+	region "World"
+)
+game (
+	name "Learn and Play - Blackjack & Solitaire (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Legend - Ashita e no Tsubasa (Japan)"
+	region "Japan"
+)
+game (
+	name "Legend of Prince Valiant, The (Europe) (En,Fr,De)"
+	region "Europe"
+)
+game (
+	name "Legend of Zelda, The - Link's Awakening (Canada) (Fr)"
+	region "Canada"
+)
+game (
+	name "Legend of Zelda, The - Link's Awakening (France)"
+	region "France"
+)
+game (
+	name "Legend of Zelda, The - Link's Awakening (Germany)"
+	region "Germany"
+)
+game (
+	name "Legend of Zelda, The - Link's Awakening (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Legend of Zelda, The - Link's Awakening (USA, Europe) (Rev 1)"
+	region "USA / Europe"
+)
+game (
+	name "Legend of Zelda, The - Link's Awakening (USA, Europe) (Rev 2)"
+	region "USA / Europe"
+)
+game (
+	name "Legend of Zelda, The - Link's Awakening DX (France) (Proto)"
+	region "France"
+)
+game (
+	name "Legend of Zelda, The - Link's Awakening DX (Germany) (Proto)"
+	region "Germany"
+)
+game (
+	name "Legend of Zelda, The - Link's Awakening DX (USA, Europe) (Proto)"
+	region "USA / Europe"
+)
+game (
+	name "Legend of the River King GB (Australia) (SGB Enhanced)"
+	region "Australia"
+)
+game (
+	name "Legend of the River King GB (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Legend of the Sea King GB (USA) (Proto) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Lemmings (Europe)"
+	region "Europe"
+)
+game (
+	name "Lemmings (Europe) (Rev 1)"
+	region "Europe"
+)
+game (
+	name "Lemmings (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Lemmings (USA)"
+	region "USA"
+)
+game (
+	name "Lemmings 2 - The Tribes (Europe)"
+	region "Europe"
+)
+game (
+	name "Lethal Weapon (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Life's Too Short (World)"
+	region "World"
+)
+game (
+	name "Linea, La (World)"
+	region "World"
+)
+game (
+	name "Lingo (Europe) (En,Fr,De,Nl)"
+	region "Europe"
+)
+game (
+	name "Lion King, The (Europe)"
+	region "Europe"
+)
+game (
+	name "Lion King, The (USA)"
+	region "USA"
+)
+game (
+	name "Lion King, The (World) (Disney Classic Games)"
+	region "World"
+)
+game (
+	name "Litti's Summer Sports (Germany)"
+	region "Germany"
+)
+game (
+	name "Little Master - Raikuban no Densetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Little Master 2 - Raikou no Kishi (Japan)"
+	region "Japan"
+)
+game (
+	name "Little Mermaid, The (Europe)"
+	region "Europe"
+)
+game (
+	name "Little Mermaid, The (Spain) (Proto)"
+	region "Spain"
+)
+game (
+	name "Little Mermaid, The (USA)"
+	region "USA"
+)
+game (
+	name "Little Tales of Alexandria, The (World) (MBC3) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Little Tales of Alexandria, The (World) (MBC3) (SGB Enhanced) (Batteryless)"
+	region "World"
+)
+game (
+	name "Little Tales of Alexandria, The (World) (MBC5) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Little Tales of Alexandria, The (World) (MBC5) (SGB Enhanced) (Batteryless)"
+	region "World"
+)
+game (
+	name "Little Tales of Alexandria, The - Mr Meows Dance Party! (World) (MBC3) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Little Tales of Alexandria, The - Mr Meows Dance Party! (World) (MBC3) (SGB Enhanced) (Batteryless)"
+	region "World"
+)
+game (
+	name "Little Tales of Alexandria, The - Mr Meows Dance Party! (World) (MBC5) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Little Tales of Alexandria, The - Mr Meows Dance Party! (World) (MBC5) (SGB Enhanced) (Batteryless)"
+	region "World"
+)
+game (
+	name "Lock n' Chase (World)"
+	region "World"
+)
+game (
+	name "Lolo no Daibouken (Japan)"
+	region "Japan"
+)
+game (
+	name "Long Xing Tianxia (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Looney Tunes (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Looney Tunes - Bugs Bunny to Yukai na Nakama-tachi (Japan)"
+	region "Japan"
+)
+game (
+	name "Looney Tunes 2 - Tasmanian Devil in Island Chase (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Looney Tunes Series - Daffy Duck (Japan) (En) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Loopz (World)"
+	region "World"
+)
+game (
+	name "Lost Knight (World) (Proto)"
+	region "World"
+)
+game (
+	name "Lost World, The - Jurassic Park (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Lucky Luke (Europe) (En,Fr,De,Es)"
+	region "Europe"
+)
+game (
+	name "Lucky Monkey (Japan)"
+	region "Japan"
+)
+game (
+	name "Lucle (Japan, Europe) (En)"
+	region "Japan / Europe"
+)
+game (
+	name "Lucy and the Gem Dungeon (World)"
+	region "World"
+)
+game (
+	name "Lunar Chase (USA) (Proto 1)"
+	region "USA"
+)
+game (
+	name "Lunar Chase (USA) (Proto 2)"
+	region "USA"
+)
+game (
+	name "Lunar Lancer (World)"
+	region "World"
+)
+game (
+	name "Lunar Lander (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "MIO - Memories in Orbit (World)"
+	region "World"
+)
+game (
+	name "MVP Baseball (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Mach Go Go Go (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Machine, The (World)"
+	region "World"
+)
+game (
+	name "Mad Monster (World)"
+	region "World"
+)
+game (
+	name "Madden 95 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Madden 96 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Madden 97 (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Maerchen Club (Japan)"
+	region "Japan"
+)
+game (
+	name "Magic Knight Rayearth (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Magic Knight Rayearth 2nd. - The Missing Colors (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Magical Taruruuto-kun (Japan)"
+	region "Japan"
+)
+game (
+	name "Magical Taruruuto-kun 2 - Raibaa Zone Panic!! (Japan)"
+	region "Japan"
+)
+game (
+	name "Magnetic Soccer (Europe)"
+	region "Europe"
+)
+game (
+	name "Mahoujin GuruGuru - Yuusha to Kukuri no Daibouken (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mai Nurse (World) (v1.01)"
+	region "World"
+)
+game (
+	name "Makai Toushi Sa-Ga (Japan)"
+	region "Japan"
+)
+game (
+	name "Makai Toushi Sa-Ga (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Makai Toushi Sa-Ga (World) (Ja) (Rev 1) (Collection of SaGa)"
+	region "World"
+)
+game (
+	name "Makaimura Gaiden - The Demon Darkness (Japan)"
+	region "Japan"
+)
+game (
+	name "Make Way (World)"
+	region "World"
+)
+game (
+	name "Malibu Beach Volleyball (USA)"
+	region "USA"
+)
+game (
+	name "Mani 4 in 1 - Bubble Bobble + Elevator Action + Chase H.Q. + Sagaia (China) (En)"
+	region "China"
+)
+game (
+	name "Mani 4 in 1 - Genki Bakuhatsu Gambaruger + Zettai Muteki Raijin-Oh + Zoids Densetsu + Miracle Adventure of Esparks - Ushinawareta Seiseki Perivron (China) (Ja)"
+	region "China"
+)
+game (
+	name "Mani 4 in 1 - R-Type II + Saigo no Nindou + Ganso!! Yancha Maru + Shisenshou - Match-Mania (China) (Ja)"
+	region "China"
+)
+game (
+	name "Mani 4 in 1 - Takahashi Meijin no Bouken-jima II + GB Genjin + Bomber Boy + Milon no Meikyuu Kumikyoku (China) (Ja)"
+	region "China"
+)
+game (
+	name "Mani 4 in 1 - Tetris + Alleyway + Yakuman + Tennis (China) (Ja)"
+	region "China"
+)
+game (
+	name "Marble Madness (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Mario & Yoshi (Europe)"
+	region "Europe"
+)
+game (
+	name "Mario no Picross (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mario's Picross (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Marmalade Boy (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Marron Helps a Friend (World)"
+	region "World"
+)
+game (
+	name "Maru's Mission (USA)"
+	region "USA"
+)
+game (
+	name "Marzipan Beef Reverser (World)"
+	region "World"
+)
+game (
+	name "Marzipan Beef Reverser (World) (v2.0)"
+	region "World"
+)
+game (
+	name "Masakari Densetsu - Kintarou Action Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Masakari Densetsu - Kintarou RPG Hen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Master Karateka (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Matchless 23 in 1 A (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Matthias Sammer Soccer (Germany) (SGB Enhanced)"
+	region "Germany"
+)
+game (
+	name "Maui Mallard in Cold Shadow (USA)"
+	region "USA"
+)
+game (
+	name "Maus, Die (Europe) (En,Fr,De,Es)"
+	region "Europe"
+)
+game (
+	name "Max (Europe)"
+	region "Europe"
+)
+game (
+	name "McDonaldland (Europe)"
+	region "Europe"
+)
+game (
+	name "Medarot - Kabuto Version (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Medarot - Kabuto Version (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Medarot - Kuwagata Version (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Medarot - Kuwagata Version (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Medarot - Parts Collection (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Medarot - Parts Collection 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mega Man - Dr. Wily's Revenge (Europe)"
+	region "Europe"
+)
+game (
+	name "Mega Man - Dr. Wily's Revenge (USA)"
+	region "USA"
+)
+game (
+	name "Mega Man II (Europe)"
+	region "Europe"
+)
+game (
+	name "Mega Man II (USA)"
+	region "USA"
+)
+game (
+	name "Mega Man III (Europe)"
+	region "Europe"
+)
+game (
+	name "Mega Man III (USA)"
+	region "USA"
+)
+game (
+	name "Mega Man III (USA) (Sample)"
+	region "USA"
+)
+game (
+	name "Mega Man IV (Europe)"
+	region "Europe"
+)
+game (
+	name "Mega Man IV (USA)"
+	region "USA"
+)
+game (
+	name "Mega Man V (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Mega Man V (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Mega Memory Card (World)"
+	region "World"
+)
+game (
+	name "Megalit (Japan)"
+	region "Japan"
+)
+game (
+	name "Megalit (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Megami Tensei Gaiden - Last Bible (Japan)"
+	region "Japan"
+)
+game (
+	name "Megami Tensei Gaiden - Last Bible II (Japan)"
+	region "Japan"
+)
+game (
+	name "Meitantei Conan - Chika Yuuenchi Satsujin Jiken (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Meitantei Conan - Giwaku no Gouka Ressha (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Melanie and the Magic Forest (World) (2025 Update)"
+	region "World"
+)
+game (
+	name "Mercenary Force (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Metal Masters (USA)"
+	region "USA"
+)
+game (
+	name "Metal Masters (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Meteorite (World)"
+	region "World"
+)
+game (
+	name "Metroid II - Return of Samus (World)"
+	region "World"
+)
+game (
+	name "Mick & Mack as the Global Gladiators (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Mick & Mack as the Global Gladiators (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Mick & Mack as the Global Gladiators (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Mick & Mack as the Global Gladiators (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Mickey Mouse (Europe)"
+	region "Europe"
+)
+game (
+	name "Mickey Mouse (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Mickey Mouse - Magic Wands! (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Mickey Mouse II (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Mickey Mouse IV - Mahou no Labyrinth (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Mickey Mouse V (Japan)"
+	region "Japan"
+)
+game (
+	name "Mickey Mouse V (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Mickey's Chase (Japan)"
+	region "Japan"
+)
+game (
+	name "Mickey's Dangerous Chase (Europe)"
+	region "Europe"
+)
+game (
+	name "Mickey's Dangerous Chase (USA)"
+	region "USA"
+)
+game (
+	name "Mickey's Ultimate Challenge (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Micro Machines (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Micro Machines 2 - Turbo Tournament (Europe)"
+	region "Europe"
+)
+game (
+	name "Midori no Makibaou (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mighty Morphin Power Rangers (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Mighty Morphin Power Rangers - The Movie (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Migrain (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Mikeneko Holmes no Kishidou (Japan)"
+	region "Japan"
+)
+game (
+	name "Milon no Meikyuu Kumikyoku (Japan)"
+	region "Japan"
+)
+game (
+	name "Milon's Secret Castle (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Miner 2049er Starring Bounty Bob (USA)"
+	region "USA"
+)
+game (
+	name "Minesweeper - Soukaitei (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Mini 4 Boy (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mini 4 Boy II (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mini Putt (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Mini Putt (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Mini Yonku GB Let's & Go!! (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mini Yonku GB Let's & Go!! - All-Star Battle Max (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mini-Putt (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Minolta 2085 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2097 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2098 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2156 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2162 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2162 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2166 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2181 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2205 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2419 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2420 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2420 Adj. Program2 (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2428 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2429 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2440 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2440 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2463 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2468 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2472-73 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2476 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta 2481 Adj. Program (USA)"
+	region "USA"
+)
+game (
+	name "Minolta SLR Data Copy (USA)"
+	region "USA"
+)
+game (
+	name "Miracle Adventure of Esparks - Ushinawareta Seiseki Perivron (Japan)"
+	region "Japan"
+)
+game (
+	name "Missile Command (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Mission Mars (World)"
+	region "World"
+)
+game (
+	name "Mofa Qiu - Magic Ball (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Mofa Qiu - Magic Ball (Taiwan) (Multicart Rip)"
+	region "Taiwan"
+)
+game (
+	name "Mogu Mogu Gombo - Harukanaru Chou Ryouri Densetsu (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mogura de Pon! (Japan)"
+	region "Japan"
+)
+game (
+	name "Moguranya (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mole Mania (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Momoiro Zousan (Japan) (Proto)"
+	region "Japan"
+)
+game (
+	name "Momotarou Collection (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Momotarou Collection 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Momotarou Dengeki (Japan)"
+	region "Japan"
+)
+game (
+	name "Momotarou Dengeki 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Momotarou Densetsu Gaiden (Japan)"
+	region "Japan"
+)
+game (
+	name "Momotarou Dentetsu jr. - Zenkoku Ramen Meguri no Maki (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Mona and the Witch's Hat (World)"
+	region "World"
+)
+game (
+	name "Monde Perdu, Le - Jurassic Park (France) (En) (SGB Enhanced)"
+	region "France"
+)
+game (
+	name "Money Idol Exchanger (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Monopoly (Europe) (En,Fr,De)"
+	region "Europe"
+)
+game (
+	name "Monopoly (Japan)"
+	region "Japan"
+)
+game (
+	name "Monopoly (USA)"
+	region "USA"
+)
+game (
+	name "Monster Maker (Japan)"
+	region "Japan"
+)
+game (
+	name "Monster Maker - Barcode Saga (Japan)"
+	region "Japan"
+)
+game (
+	name "Monster Maker 2 - Uru no Hiken (Japan)"
+	region "Japan"
+)
+game (
+	name "Monster Max (Europe) (En,Fr,De,Es,It,Nl)"
+	region "Europe"
+)
+game (
+	name "Monster Race (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Monster Race Okawari (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Monster Truck (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Monster Truck Wars (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Montezuma's Return! (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "Monty on the Run (World)"
+	region "World"
+)
+game (
+	name "Mortal Kombat & Mortal Kombat II (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Mortal Kombat & Mortal Kombat II (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Mortal Kombat (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Mortal Kombat - Shinken Kourin Densetsu (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Mortal Kombat 3 (Europe)"
+	region "Europe"
+)
+game (
+	name "Mortal Kombat 3 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Mortal Kombat II (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Mortal Kombat II - Kyuukyoku Shinken (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Motocross Maniacs (Europe)"
+	region "Europe"
+)
+game (
+	name "Motocross Maniacs (Europe) (Rev 1)"
+	region "Europe"
+)
+game (
+	name "Motocross Maniacs (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Motocross Maniacs (USA)"
+	region "USA"
+)
+game (
+	name "Mouse Trap Hotel (USA)"
+	region "USA"
+)
+game (
+	name "Mr. Chin's Gourmet Paradise (USA)"
+	region "USA"
+)
+game (
+	name "Mr. Do! (Europe)"
+	region "Europe"
+)
+game (
+	name "Mr. Do! (USA)"
+	region "USA"
+)
+game (
+	name "Mr. Go no Baken Tekichuu Jutsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Mr. Nutz (Europe)"
+	region "Europe"
+)
+game (
+	name "Ms. Pac-Man (Europe)"
+	region "Europe"
+)
+game (
+	name "Ms. Pac-Man (USA)"
+	region "USA"
+)
+game (
+	name "Muhammad Ali Heavyweight Boxing (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Mulan (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Mulan (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Muncher (World)"
+	region "World"
+)
+game (
+	name "My Dinner with Andre (World) (v1.1)"
+	region "World"
+)
+game (
+	name "My Husband is a WITCH (World) (v1.1)"
+	region "World"
+)
+game (
+	name "My Pet Avocado (World)"
+	region "World"
+)
+game (
+	name "My World (World)"
+	region "World"
+)
+game (
+	name "Mysterium (Japan)"
+	region "Japan"
+)
+game (
+	name "Mysterium (USA)"
+	region "USA"
+)
+game (
+	name "Mystic Quest (Europe)"
+	region "Europe"
+)
+game (
+	name "Mystic Quest (France)"
+	region "France"
+)
+game (
+	name "Mystic Quest (Germany)"
+	region "Germany"
+)
+game (
+	name "Mystic Quest (World) (Collection of Mana)"
+	region "World"
+)
+game (
+	name "Mystic Quest (World) (De) (Collection of Mana)"
+	region "World"
+)
+game (
+	name "Mystic Quest (World) (Fr) (Collection of Mana)"
+	region "World"
+)
+game (
+	name "Mystical Ninja Starring Goemon (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Mystical Ninja Starring Goemon (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "NBA All-Star Challenge (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "NBA All-Star Challenge 2 (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "NBA All-Star Challenge 2 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "NBA Jam (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "NBA Jam - Tournament Edition (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "NBA Jam - Tournament Edition (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "NBA Live 96 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "NFL Football (USA)"
+	region "USA"
+)
+game (
+	name "NFL Quarterback Club '95 (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "NFL Quarterback Club (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "NFL Quarterback Club 96 (Japan) (En) (Proto)"
+	region "Japan"
+)
+game (
+	name "NFL Quarterback Club 96 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "NFL Quarterback Club II (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "NHL 96 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "NHL Hockey 95 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "NIV Bible & the 20 Lost Levels of Joshua (USA)"
+	region "USA"
+)
+game (
+	name "Nada Asatarou & Kojima Takeo no Jissen Mahjong Kyoushitsu (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nada Asatarou no Powerful Mahjong - Tsugi no Itte 100 Dai (Japan)"
+	region "Japan"
+)
+game (
+	name "Nail 'n Scale (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Nakajima Satoru - F-1 Hero GB - World Championship '91 (Japan)"
+	region "Japan"
+)
+game (
+	name "Nakajima Satoru Kanshuu - F-1 Hero GB '92 - The Graded Driver (Japan)"
+	region "Japan"
+)
+game (
+	name "Namco Classic (Japan)"
+	region "Japan"
+)
+game (
+	name "Namco Gallery Vol.1 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Namco Gallery Vol.2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Namco Gallery Vol.3 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nangoku Shounen Papuwa-kun - Ganmadan no Yabou (Japan)"
+	region "Japan"
+)
+game (
+	name "Nanonote (Japan)"
+	region "Japan"
+)
+game (
+	name "Navy SEALs (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Navyblue 98 (Japan)"
+	region "Japan"
+)
+game (
+	name "Nectaris GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nekketsu Kouha Kunio-kun - Bangai Rantou Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Nekketsu Koukou Dodgeball-bu - Kyouteki! Dodge Soldier no Maki (Japan)"
+	region "Japan"
+)
+game (
+	name "Nekketsu Koukou Soccer-bu - World Cup Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Nekketsu! Beach Volley Da yo Kunio-kun (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Neko Can Dream (World) (En)"
+	region "World"
+)
+game (
+	name "Nekojara Monogatari (Japan)"
+	region "Japan"
+)
+game (
+	name "Nemesis (Europe)"
+	region "Europe"
+)
+game (
+	name "Nemesis (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Nemesis (USA)"
+	region "USA"
+)
+game (
+	name "Nemesis II (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Nemesis II - The Return of the Hero (Europe)"
+	region "Europe"
+)
+game (
+	name "Nettou Garou Densetsu 2 - Aratanaru Tatakai (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou Real Bout Garou Densetsu Special (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou Samurai Spirits (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou Samurai Spirits (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou Samurai Spirits - Zankurou Musouken (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou The King of Fighters '95 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou The King of Fighters '96 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou Toushinden (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou Toushinden (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou World Heroes 2 Jet (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nettou World Heroes 2 Jet (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "New Chessmaster, The (Japan) (En,Ja)"
+	region "Japan"
+)
+game (
+	name "New Chessmaster, The (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Nichibutsu Mahjong - Yoshimoto Gekijou (Japan)"
+	region "Japan"
+)
+game (
+	name "Nick Faldo Championship Golf (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Nigel Mansell's World Championship (Europe)"
+	region "Europe"
+)
+game (
+	name "Nigel Mansell's World Championship Racing (Europe)"
+	region "Europe"
+)
+game (
+	name "Nigel Mansell's World Championship Racing (USA)"
+	region "USA"
+)
+game (
+	name "Nihon Daihyou Team - Eikou no Eleven (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nihon Daihyou Team France de Ganbare! - J.League Supporter Soccer (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nikkan Berutomo Club (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Ninja Boy (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Ninja Boy 2 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Ninja Gaiden Shadow (USA)"
+	region "USA"
+)
+game (
+	name "Ninja Ryuuken Den - Matenrou Kessen (Japan)"
+	region "Japan"
+)
+game (
+	name "Ninja Spirit (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Ninja Spirit (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Ninja Taro (USA)"
+	region "USA"
+)
+game (
+	name "Ninja Twins (World) (Digital) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Ninku (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Ninku Dai-2-dan - Ninku Sensou Hen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nintama Rantarou GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nintama Rantarou GB - Eawase Challenge Puzzle (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Nintendo World Cup (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Nobunaga no Yabou - Game Boy Ban (Japan)"
+	region "Japan"
+)
+game (
+	name "Nobunaga's Ambition (USA)"
+	region "USA"
+)
+game (
+	name "Nontan to Issho - Kurukuru Puzzle (Japan)"
+	region "Japan"
+)
+game (
+	name "Noobow (Japan)"
+	region "Japan"
+)
+game (
+	name "Nyghtmare - Betrayed (World) (Alpha A)"
+	region "World"
+)
+game (
+	name "Obelisk (World)"
+	region "World"
+)
+game (
+	name "Oblique Strategies (World)"
+	region "World"
+)
+game (
+	name "Oddworld Adventures (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Oira Jajamaru! Sekai Daibouken (Japan)"
+	region "Japan"
+)
+game (
+	name "Olympic Skier (World)"
+	region "World"
+)
+game (
+	name "Olympic Summer Games (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Oni (World) (Digital)"
+	region "World"
+)
+game (
+	name "Oni II - Oni Densetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Oni III - Kuro no Hakaishin (Japan)"
+	region "Japan"
+)
+game (
+	name "Oni IV - Kijin no Ketsuzoku (Japan)"
+	region "Japan"
+)
+game (
+	name "Oni V - Oni wo Tsugumono (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Onigashima Pachinkoten (Japan)"
+	region "Japan"
+)
+game (
+	name "Operation C (USA)"
+	region "USA"
+)
+game (
+	name "Operation C (World) (Contra Anniversary Collection)"
+	region "World"
+)
+game (
+	name "Opossum a la Mode (World)"
+	region "World"
+)
+game (
+	name "Osawagase! Penguin Boy (Japan)"
+	region "Japan"
+)
+game (
+	name "Othello (Europe)"
+	region "Europe"
+)
+game (
+	name "Othello (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Othello World (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Otogibanashi Taisen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Otto's Ottifanten - Baby Bruno's Alptraum (Europe) (En,Fr,De,Es)"
+	region "Europe"
+)
+game (
+	name "Out of Gas (USA)"
+	region "USA"
+)
+game (
+	name "Out on a Limb (World)"
+	region "World"
+)
+game (
+	name "Outburst (Japan)"
+	region "Japan"
+)
+game (
+	name "Oyatsu Quiz Mogu Mogu Q (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "P-Man GB (Japan)"
+	region "Japan"
+)
+game (
+	name "PGA European Tour (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "PGA Tour 96 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Pac-Attack (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Pac-In-Time (Europe) (Rev 1) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Pac-In-Time (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Pac-In-Time (Japan) (En) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pac-In-Time (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Pac-Man (Europe)"
+	region "Europe"
+)
+game (
+	name "Pac-Man (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Pac-Man (USA)"
+	region "USA"
+)
+game (
+	name "Pac-Panic (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Pac-Panic (Japan) (En) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pachi-Slot Hisshou Guide GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pachi-Slot Kids (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachi-Slot Kids 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachi-Slot Kids 3 (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachi-Slot World Cup '94 (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachinko CR Daiku no Gen-san GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pachinko Data Card - Chou Ataru-kun (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pachinko Kaguya Hime (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachinko Monogatari Gaiden (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pachinko Saiyuuki (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachinko Time (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachio-kun (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachio-kun - Puzzle Castle (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachio-kun 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachio-kun 3 (Japan)"
+	region "Japan"
+)
+game (
+	name "Pachio-kun Game Gallery (Japan)"
+	region "Japan"
+)
+game (
+	name "Pagemaster, The (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Pagemaster, The (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Painter Momopie (Japan)"
+	region "Japan"
+)
+game (
+	name "Palamedes (Europe)"
+	region "Europe"
+)
+game (
+	name "Palamedes (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Palamedes (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Panel Action Bingo (USA)"
+	region "USA"
+)
+game (
+	name "Panel no Ninja Kesamaru (Japan)"
+	region "Japan"
+)
+game (
+	name "Pang (Europe)"
+	region "Europe"
+)
+game (
+	name "Panty Hunty (World) (v1.4)"
+	region "World"
+)
+game (
+	name "Paperboy (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Paperboy 2 (World)"
+	region "World"
+)
+game (
+	name "Paramo Yermo (World)"
+	region "World"
+)
+game (
+	name "Paramo Yermo (World) (Es)"
+	region "World"
+)
+game (
+	name "Paramo Yermo (World) (Fr-CA)"
+	region "World"
+)
+game (
+	name "Parasol Henbee (Japan)"
+	region "Japan"
+)
+game (
+	name "Parasol Islands (World)"
+	region "World"
+)
+game (
+	name "Parasol Stars - Rainbow Islands II (Europe)"
+	region "Europe"
+)
+game (
+	name "Parodius (Europe)"
+	region "Europe"
+)
+game (
+	name "Parodius Da! (Japan)"
+	region "Japan"
+)
+game (
+	name "Peetan (Japan)"
+	region "Japan"
+)
+game (
+	name "Peke to Poko no Daruman Busters (Japan)"
+	region "Japan"
+)
+game (
+	name "Penguin Land (Japan)"
+	region "Japan"
+)
+game (
+	name "Penguin Migrants (World) (v1.0)"
+	region "World"
+)
+game (
+	name "Penguin Migrants (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Penguin Migrants (World) (v1.2)"
+	region "World"
+)
+game (
+	name "Penguin Wars (USA)"
+	region "USA"
+)
+game (
+	name "Penguin-kun Wars VS. (Japan)"
+	region "Japan"
+)
+game (
+	name "Penta Dragon (Japan)"
+	region "Japan"
+)
+game (
+	name "Perfect Blend (World) (v0.9)"
+	region "World"
+)
+game (
+	name "Perfect Blend (World) (v0.9) (Bugfix)"
+	region "World"
+)
+game (
+	name "Phantasm (Japan)"
+	region "Japan"
+)
+game (
+	name "Phantom Air Mission (Europe)"
+	region "Europe"
+)
+game (
+	name "Phantom Pain (World) (v3.0)"
+	region "World"
+)
+game (
+	name "Philip & Marlowe in Bloomland (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Phobos Dere .GB (World)"
+	region "World"
+)
+game (
+	name "Picross 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pierre le Chef is... Out to Lunch (Europe)"
+	region "Europe"
+)
+game (
+	name "Pinball - 66hiki no Wani Daikoushin! (Japan)"
+	region "Japan"
+)
+game (
+	name "Pinball - Revenge of the 'Gator (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Pinball Deluxe (Europe)"
+	region "Europe"
+)
+game (
+	name "Pinball Dreams (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Pinball Fantasies (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Pinball Mania (Europe)"
+	region "Europe"
+)
+game (
+	name "Pineapple Kid (World)"
+	region "World"
+)
+game (
+	name "Pingu - Sekai de 1ban Genki na Penguin (Japan)"
+	region "Japan"
+)
+game (
+	name "Pinocchio (Europe)"
+	region "Europe"
+)
+game (
+	name "Pinocchio (USA)"
+	region "USA"
+)
+game (
+	name "Pipe Dream (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Pipe Dream (USA)"
+	region "USA"
+)
+game (
+	name "Pit-Fighter (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Pitman (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Pixel Who - The Lost Legions (World)"
+	region "World"
+)
+game (
+	name "Plants Eat My Zombies (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Play Action Football (USA)"
+	region "USA"
+)
+game (
+	name "Pluto's Corner (World)"
+	region "World"
+)
+game (
+	name "Pocahontas (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Pocket Bass Fishing (Japan)"
+	region "Japan"
+)
+game (
+	name "Pocket Battle (Japan)"
+	region "Japan"
+)
+game (
+	name "Pocket Bomberman (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Pocket Bomberman (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Camera (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Densha (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Family GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Golf (Japan)"
+	region "Japan"
+)
+game (
+	name "Pocket Kanjirou (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Kyoro-chan (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Love (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Love 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Mahjong (Japan)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters - Aka (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters - Aka (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters - Ao (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters - Green Version - English Edition (Taiwan) (En) (Pirate)"
+	region "Taiwan"
+)
+game (
+	name "Pocket Monsters - Midori (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters - Midori (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters - Pikachu (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters - Pikachu (Japan) (Rev 2) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters - Pikachu (Japan) (Rev 3) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters - Pikachu (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Monsters Yellow (Hong Kong) (SGB Enhanced) (Pirate)"
+	region "Hong Kong"
+)
+game (
+	name "Pocket Puyo Puyo Tsuu (Japan) (Rev 1) (SGB Enhanced) (NP)"
+	region "Japan"
+)
+game (
+	name "Pocket Puyo Puyo Tsuu (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Shougi (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pocket Sonar (Japan)"
+	region "Japan"
+)
+game (
+	name "Pocket Stadium (Japan)"
+	region "Japan"
+)
+game (
+	name "Pogo Pete (World)"
+	region "World"
+)
+game (
+	name "Pokemon - Blaue Edition (Germany) (SGB Enhanced)"
+	region "Germany"
+)
+game (
+	name "Pokemon - Blue Version (Hong Kong) (SGB Enhanced) (Pirate)"
+	region "Hong Kong"
+)
+game (
+	name "Pokemon - Blue Version (USA, Europe) (Debug) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Pokemon - Blue Version (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+	serial "APEE"
+)
+game (
+	name "Pokemon - Edicion Amarilla - Edicion Especial Pikachu (Spain) (CGB+SGB Enhanced)"
+	region "Spain"
+)
+game (
+	name "Pokemon - Edicion Azul (Spain) (SGB Enhanced)"
+	region "Spain"
+)
+game (
+	name "Pokemon - Edicion Roja (Spain) (SGB Enhanced)"
+	region "Spain"
+)
+game (
+	name "Pokemon - Gelbe Edition - Special Pikachu Edition (Germany) (CGB+SGB Enhanced)"
+	region "Germany"
+)
+game (
+	name "Pokemon - Red Version (Hong Kong) (SGB Enhanced) (Pirate)"
+	region "Hong Kong"
+)
+game (
+	name "Pokemon - Red Version (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+	serial "APAU"
+)
+game (
+	name "Pokemon - Rote Edition (Germany) (SGB Enhanced)"
+	region "Germany"
+)
+game (
+	name "Pokemon - Version Bleue (France) (SGB Enhanced)"
+	region "France"
+)
+game (
+	name "Pokemon - Version Jaune - Edition Speciale Pikachu (France) (CGB+SGB Enhanced)"
+	region "France"
+)
+game (
+	name "Pokemon - Version Rouge (France) (SGB Enhanced)"
+	region "France"
+)
+game (
+	name "Pokemon - Versione Blu (Italy) (SGB Enhanced)"
+	region "Italy"
+)
+game (
+	name "Pokemon - Versione Gialla - Speciale Edizione Pikachu (Italy) (CGB+SGB Enhanced)"
+	region "Italy"
+)
+game (
+	name "Pokemon - Versione Rossa (Italy) (SGB Enhanced)"
+	region "Italy"
+)
+game (
+	name "Pokemon - Yellow Version - Special Pikachu Edition (USA, Europe) (CGB+SGB Enhanced)"
+	region "USA / Europe"
+	serial "APSU"
+)
+game (
+	name "Pokemon - Yellow Version - Special Pikachu Edition (USA, Europe) (Debug) (CGB+SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Pokonyan! - Yume no Daibouken (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pong Boy (World)"
+	region "World"
+)
+game (
+	name "Ponta to Hinako no Chindouchuu - Yuujou Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Pop Up (Europe)"
+	region "Europe"
+)
+game (
+	name "Pop'n TwinBee (Europe)"
+	region "Europe"
+)
+game (
+	name "Popeye (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Popeye (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Popeye 2 (Europe)"
+	region "Europe"
+)
+game (
+	name "Popeye 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Popeye 2 (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Popeye 2 (USA)"
+	region "USA"
+)
+game (
+	name "Populous (Europe)"
+	region "Europe"
+)
+game (
+	name "Populous Gaiden (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Porklike (World) (v1.0.13)"
+	region "World"
+)
+game (
+	name "Porklike (World) (v1.0.14)"
+	region "World"
+)
+game (
+	name "Porklike (World) (v1.0.3)"
+	region "World"
+)
+game (
+	name "Porklike (World) (v1.0.9) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Porklike (World) (v1.05) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Power Mission (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Power Mission (Japan) (En) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Power Mission (USA)"
+	region "USA"
+)
+game (
+	name "Power Paws (Europe) (Proto 1)"
+	region "Europe"
+)
+game (
+	name "Power Paws (Europe) (Proto 2)"
+	region "Europe"
+)
+game (
+	name "Power Pro GB (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Power Pro GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Power Racer (Europe)"
+	region "Europe"
+)
+game (
+	name "Power Racer (USA)"
+	region "USA"
+)
+game (
+	name "Prehistorik Man (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Pri Pri - Primitive Princess! (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Pri Pri - Primitive Princess! (World) (Evercade)"
+	region "World"
+)
+game (
+	name "Primal Rage (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Prince YehRude (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Prince of Persia (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "Prince of Persia (Japan)"
+	region "Japan"
+)
+game (
+	name "Prince of Persia (USA)"
+	region "USA"
+)
+game (
+	name "Pro Action Replay (Europe)"
+	region "Europe"
+)
+game (
+	name "Pro Mahjong Kiwame GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Pro Soccer (Japan)"
+	region "Japan"
+)
+game (
+	name "Pro Wrestling (Japan)"
+	region "Japan"
+)
+game (
+	name "Probotector (Europe)"
+	region "Europe"
+)
+game (
+	name "Probotector (World) (Contra Anniversary Collection)"
+	region "World"
+)
+game (
+	name "Probotector 2 (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Prophecy - The Viking Child (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "Prophecy - The Viking Child (USA)"
+	region "USA"
+)
+game (
+	name "Pull of the Void (World)"
+	region "World"
+)
+game (
+	name "Punisher, The - The Ultimate Payback (USA)"
+	region "USA"
+)
+game (
+	name "Purikura Pocket - Fukanzen Joshikousei Manual (Japan) (Rev 1) (NP)"
+	region "Japan"
+)
+game (
+	name "Purikura Pocket - Fukanzen Joshikousei Manual (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Purikura Pocket 2 - Kareshi Kaizou Daisakusen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Purikura Pocket 3 - Talent Debut Daisakusen (Japan) (Rev 1) (SGB Enhanced) (NP)"
+	region "Japan"
+)
+game (
+	name "Purikura Pocket 3 - Talent Debut Daisakusen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Purple Turtles (World)"
+	region "World"
+)
+game (
+	name "Pushingo (World)"
+	region "World"
+)
+game (
+	name "Puyo Puyo (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Puyo Puyo (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Puzzle Bobble GB (Japan)"
+	region "Japan"
+)
+game (
+	name "Puzzle Boy (Japan)"
+	region "Japan"
+)
+game (
+	name "Puzzle Boy II (Japan)"
+	region "Japan"
+)
+game (
+	name "Puzzle Nintama Rantarou GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Puzznic (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Puzznic (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Pyramids of Ra (USA)"
+	region "USA"
+)
+game (
+	name "Pyro la Chronoflamme (World) (Fr) (Proto)"
+	region "World"
+)
+game (
+	name "Q Billion (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Q Billion (USA)"
+	region "USA"
+)
+game (
+	name "Q-bert for Game Boy (Japan)"
+	region "Japan"
+)
+game (
+	name "Q-bert for Game Boy (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "QIX (World)"
+	region "World"
+)
+game (
+	name "Quarth (Japan)"
+	region "Japan"
+)
+game (
+	name "Quarth (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Quick Draw (World)"
+	region "World"
+)
+game (
+	name "Quiz Nihon Mukashibanashi - Athena no Hatena (Japan)"
+	region "Japan"
+)
+game (
+	name "Quiz Sekai wa Show by Shoubai!! (Japan)"
+	region "Japan"
+)
+game (
+	name "R-Type (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "R-Type (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "R-Type II (Europe)"
+	region "Europe"
+)
+game (
+	name "R-Type II (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "R-Type II (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Race Days (Europe)"
+	region "Europe"
+)
+game (
+	name "Race Days (USA)"
+	region "USA"
+)
+game (
+	name "Race Drivin' (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Racing Damashii (Japan)"
+	region "Japan"
+)
+game (
+	name "Radar Mission (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Raffles (World)"
+	region "World"
+)
+game (
+	name "Raging Fighter (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Rampart (Japan)"
+	region "Japan"
+)
+game (
+	name "Rampart (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Ranma 1-2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Ranma 1-2 - Kakugeki Mondou!! (Japan)"
+	region "Japan"
+)
+game (
+	name "Ranma 1-2 - Netsuretsu Kakutou Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Rap Quest (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Ray-Thunder (Japan)"
+	region "Japan"
+)
+game (
+	name "Real Ghostbusters, The (USA)"
+	region "USA"
+)
+game (
+	name "Red Arremer - Makaimura Gaiden (Japan)"
+	region "Japan"
+)
+game (
+	name "Red October o Oe! (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Remute - Living Electronics (World) (Album)"
+	region "World"
+)
+game (
+	name "Ren & Stimpy Show, The - Space Cadet Adventures (USA)"
+	region "USA"
+)
+game (
+	name "Ren & Stimpy Show, The - Veediots! (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Renju Club - Gomoku Narabe (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Rentaiou (Japan)"
+	region "Japan"
+)
+game (
+	name "Reservoir Rat (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "Retroid (World)"
+	region "World"
+)
+game (
+	name "Retrospekt Retro Gaming Museum the Game, The - AVCon 2019 Version (World)"
+	region "World"
+)
+game (
+	name "Rewind Time (World)"
+	region "World"
+)
+game (
+	name "Rex Run (World)"
+	region "World"
+)
+game (
+	name "Rhythm Land (World)"
+	region "World"
+)
+game (
+	name "Rhythm Land (World) (v1.0.1)"
+	region "World"
+)
+game (
+	name "Riddick Bowe Boxing (Europe)"
+	region "Europe"
+)
+game (
+	name "Riddick Bowe Boxing (USA)"
+	region "USA"
+)
+game (
+	name "Rig Attack (World)"
+	region "World"
+)
+game (
+	name "Ring Rage (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Ring Rage (USA)"
+	region "USA"
+)
+game (
+	name "Road Rash (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Roadster (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Robby's Day Out (World)"
+	region "World"
+)
+game (
+	name "Robin Hood - Prince of Thieves (Europe)"
+	region "Europe"
+)
+game (
+	name "Robin Hood - Prince of Thieves (France)"
+	region "France"
+)
+game (
+	name "Robin Hood - Prince of Thieves (Germany)"
+	region "Germany"
+)
+game (
+	name "Robin Hood - Prince of Thieves (Spain)"
+	region "Spain"
+)
+game (
+	name "Robin Hood - Prince of Thieves (USA)"
+	region "USA"
+)
+game (
+	name "RoboCop (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "RoboCop (USA)"
+	region "USA"
+)
+game (
+	name "RoboCop (USA, Europe) (Rev 1)"
+	region "USA / Europe"
+)
+game (
+	name "RoboCop 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "RoboCop 2 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "RoboCop Versus The Terminator (Europe)"
+	region "Europe"
+)
+game (
+	name "RoboCop Versus The Terminator (USA)"
+	region "USA"
+)
+game (
+	name "Robot Ponkots - Sun Version - Comic Bom Bom Special Version (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Rock'n! Monster!! (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Rockman 8 (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Rockman World (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Rockman World 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Rockman World 3 (Japan)"
+	region "Japan"
+)
+game (
+	name "Rockman World 4 (Japan)"
+	region "Japan"
+)
+game (
+	name "Rockman World 5 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Rod Land (World) (Retro-Bit)"
+	region "World"
+)
+game (
+	name "Rodland (Europe)"
+	region "Europe"
+)
+game (
+	name "Roger Clemens' MVP Baseball (USA)"
+	region "USA"
+)
+game (
+	name "Roger Clemens' MVP Baseball (USA) (Rev 1)"
+	region "USA"
+)
+game (
+	name "Rolan's Curse (USA)"
+	region "USA"
+)
+game (
+	name "Rolan's Curse II (USA)"
+	region "USA"
+)
+game (
+	name "Roommate Simulator (World)"
+	region "World"
+)
+game (
+	name "Rubble Saver (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Rubble Saver II (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Rugrats Movie, The (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Rugrats Movie, The (World) (Retro Rewind Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "SD Gundam - SD Sengokuden - Kunitori Monogatari (Japan)"
+	region "Japan"
+)
+game (
+	name "SD Gundam Gaiden - Lacroan' Heroes (Japan)"
+	region "Japan"
+)
+game (
+	name "SD Hiryuu no Ken Gaiden (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "SD Hiryuu no Ken Gaiden 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "SD Lupin Sansei - Kinko Yaburi Daisakusen (Japan)"
+	region "Japan"
+)
+game (
+	name "SD Sengokuden 2 - Tenka Touitsu Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "SD Sengokuden 3 - Chijou Saikyou Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Sa-Ga 2 - Hihou Densetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Sa-Ga 2 - Hihou Densetsu (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Sa-Ga 2 - Hihou Densetsu (World) (Ja) (Rev 1) (Collection of SaGa)"
+	region "World"
+)
+game (
+	name "Sa-Ga 3 - Jikuu no Hasha (Japan)"
+	region "Japan"
+)
+game (
+	name "Sa-Ga 3 - Jikuu no Hasha (World) (Ja) (Collection of SaGa)"
+	region "World"
+)
+game (
+	name "Sacred Meat (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Sacred Meat (World) (v1.3)"
+	region "World"
+)
+game (
+	name "Safe File (World) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Sagaia (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Sagaia (World) (Darius Cozmic Revelation)"
+	region "World"
+)
+game (
+	name "Saigo no Nindou (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Sakigake!! Otoko Juku - Meioutou Kessen (Japan)"
+	region "Japan"
+)
+game (
+	name "Sam Mallard - The Case of the Missing Swan (World) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Same Game (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Samurai Shodown (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Sangokushi - Game Boy Ban (Japan)"
+	region "Japan"
+)
+game (
+	name "Sanrio Carnival (Japan)"
+	region "Japan"
+)
+game (
+	name "Sanrio Carnival 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Sanrio Uranai Party (Japan)"
+	region "Japan"
+)
+game (
+	name "Sanrio Uranai Party (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Sarakon (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Schiffe Versenken (Germany) (En,Fr,De,Es)"
+	region "Germany"
+)
+game (
+	name "Scorching Light (World) (v1.0.1)"
+	region "World"
+)
+game (
+	name "Scotland Yard (Japan)"
+	region "Japan"
+)
+game (
+	name "Sea Battle (Europe) (En,Fr,De,Es)"
+	region "Europe"
+)
+game (
+	name "Seaside Volley (Japan)"
+	region "Japan"
+)
+game (
+	name "Seiken Densetsu - Final Fantasy Gaiden (Japan)"
+	region "Japan"
+)
+game (
+	name "Seiken Densetsu - Final Fantasy Gaiden (Japan) (Seiken Densetsu Collection)"
+	region "Japan"
+)
+game (
+	name "Seisenshi - Saint Paradise - Saikyou no Senshitachi (Japan)"
+	region "Japan"
+)
+game (
+	name "Selection - Erabareshi Mono (Japan)"
+	region "Japan"
+)
+game (
+	name "Selection I & II - Erabareshi Mono & Ankoku no Fuuin (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Selection II - Ankoku no Fuuin (Japan)"
+	region "Japan"
+)
+game (
+	name "Sengoku Ninja-kun (Japan)"
+	region "Japan"
+)
+game (
+	name "Sensible Soccer - European Champions (Europe)"
+	region "Europe"
+)
+game (
+	name "Serpent (USA)"
+	region "USA"
+)
+game (
+	name "Shadow Warriors (Europe)"
+	region "Europe"
+)
+game (
+	name "Shanghai (Japan)"
+	region "Japan"
+)
+game (
+	name "Shanghai (Japan) (HAL Laboratory)"
+	region "Japan"
+)
+game (
+	name "Shanghai (USA)"
+	region "USA"
+)
+game (
+	name "Shanghai Pocket (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Shapeshifter, The (World)"
+	region "World"
+)
+game (
+	name "Shaq Fu (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Shark Attack (World)"
+	region "World"
+)
+game (
+	name "Sheep It Up (World) (Digital)"
+	region "World"
+)
+game (
+	name "Shikinjou (Japan)"
+	region "Japan"
+)
+game (
+	name "Shin Keiba Kizoku Pocket Jockey (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Shin Nihon Pro Wrestling - Toukon Sanjuushi (Japan)"
+	region "Japan"
+)
+game (
+	name "Shin Nihon Pro Wrestling - Toukon Sanjuushi (Japan) (Sample)"
+	region "Japan"
+)
+game (
+	name "Shin SD Gundam Gaiden - Knight Gundam Monogatari (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Shinri Game 2, The - Oosaka Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Shinri Game, The (Japan)"
+	region "Japan"
+)
+game (
+	name "Shinseiki GPX - Cyber Formula (Japan)"
+	region "Japan"
+)
+game (
+	name "Shippo de Bun (Japan)"
+	region "Japan"
+)
+game (
+	name "Shippuu! Iron Leaguer (Japan)"
+	region "Japan"
+)
+game (
+	name "Shisenshou - Match-Mania (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Shock Lobster (World)"
+	region "World"
+)
+game (
+	name "Shock Lobster (World) (v1.3)"
+	region "World"
+)
+game (
+	name "Shootris (World)"
+	region "World"
+)
+game (
+	name "Shougi (Japan)"
+	region "Japan"
+)
+game (
+	name "Shougi Saikyou (Japan) (Rev 1) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Shougi Saikyou (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Shounen Ashibe - Yuuenchi Panic (Japan)"
+	region "Japan"
+)
+game (
+	name "Shuyaku Sentai Irem Fighter (Japan)"
+	region "Japan"
+)
+game (
+	name "Side Pocket (World)"
+	region "World"
+)
+game (
+	name "Simpsons, The - Bart & the Beanstalk (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Simpsons, The - Bart no Jack to Mame no Ki (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Simpsons, The - Bart vs. the Juggernauts (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Simpsons, The - Itchy & Scratchy - Miniature Golf Madness (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Skate or Die - Bad 'N Rad (Europe)"
+	region "Europe"
+)
+game (
+	name "Skate or Die - Bad 'N Rad (USA)"
+	region "USA"
+)
+game (
+	name "Skate or Die - Tour de Thrash (USA)"
+	region "USA"
+)
+game (
+	name "Skinner & The Superintendent (World)"
+	region "World"
+)
+game (
+	name "Skinner & The Superintendent (World) (Pt)"
+	region "World"
+)
+game (
+	name "Slender - The 8 Pages (World)"
+	region "World"
+)
+game (
+	name "Sloth Story (World)"
+	region "World"
+)
+game (
+	name "Slurpee Cycle (World)"
+	region "World"
+)
+game (
+	name "Small Soldiers (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Small Town Emo (World)"
+	region "World"
+)
+game (
+	name "Small Town Emo (World)"
+	region "World"
+)
+game (
+	name "SmartCom (Europe)"
+	region "Europe"
+)
+game (
+	name "Smickeonn - The Game (World)"
+	region "World"
+)
+game (
+	name "Smickeonn 2 - The Game (World)"
+	region "World"
+)
+game (
+	name "Smurfs Nightmare, The (Europe) (En,Fr,De,Es)"
+	region "Europe"
+)
+game (
+	name "Smurfs Travel the World, The (Europe) (En,Fr,De,Es)"
+	region "Europe"
+)
+game (
+	name "Smurfs, The (Europe) (En,Fr,De,Es)"
+	region "Europe"
+)
+game (
+	name "Smurfs, The (USA, Europe) (En,Fr,De) (Rev 1) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Snail, The (World) (v1.3)"
+	region "World"
+)
+game (
+	name "Snakebird (World)"
+	region "World"
+)
+game (
+	name "Snaky Pocket (World)"
+	region "World"
+)
+game (
+	name "Sneaky Snakes (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Snoopy - Magic Show (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Snoopy no Hajimete no Otsukai (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Snoopy's Magic Show (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Snow Bros. Jr. (Japan)"
+	region "Japan"
+)
+game (
+	name "Snow Bros. Jr. (World) (En) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Snow Bros. Jr. (World) (Ja) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Snow Brothers (Europe)"
+	region "Europe"
+)
+game (
+	name "Snow Brothers (USA)"
+	region "USA"
+)
+game (
+	name "Soccer (Europe, Australia) (En,Fr,De) (SGB Enhanced)"
+	region "Europe / Australia"
+)
+game (
+	name "Soccer (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Soccer Boy (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Soccer Mania (USA)"
+	region "USA"
+)
+game (
+	name "SolarStriker (World)"
+	region "World"
+)
+game (
+	name "Soldam (Japan)"
+	region "Japan"
+)
+game (
+	name "Solitaire (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Solitaire FunPak (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Solomon's Club (Europe)"
+	region "Europe"
+)
+game (
+	name "Solomon's Club (Japan)"
+	region "Japan"
+)
+game (
+	name "Solomon's Club (USA)"
+	region "USA"
+)
+game (
+	name "Solution, A (World) (v1.0.4)"
+	region "World"
+)
+game (
+	name "Solution, A (World) (v1.0.5)"
+	region "World"
+)
+game (
+	name "Song of Morus - Ghostly Night (World)"
+	region "World"
+)
+game (
+	name "Song of Morus - Ghostly Night (World)"
+	region "World"
+)
+game (
+	name "Sonic 6 (USA) (Pirate)"
+	region "USA"
+)
+game (
+	name "Soreyuke! Speedy Gonzales (Japan)"
+	region "Japan"
+)
+game (
+	name "Soreyuke!! Kid (Japan)"
+	region "Japan"
+)
+game (
+	name "Soukoban (Japan)"
+	region "Japan"
+)
+game (
+	name "Soukoban 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Space Date (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Space Invaders (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Space Invaders (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Space Invaders (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Space Trouble (World) (Proto)"
+	region "World"
+)
+game (
+	name "Spanky's Quest (Europe)"
+	region "Europe"
+)
+game (
+	name "Spanky's Quest (USA)"
+	region "USA"
+)
+game (
+	name "Spartan X (Japan)"
+	region "Japan"
+)
+game (
+	name "Speedball 2 - Brutal Deluxe (Japan) (En) (Possible Proto)"
+	region "Japan"
+)
+game (
+	name "Speedball 2 - Brutal Deluxe (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Speedy Gonzales (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Spider-Man - X-Men - Arcade's Revenge (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Spider-Man - X-Men - Arcade's Revenge (World) (Marvel MaXimum Collection)"
+	region "World"
+)
+game (
+	name "Spider-Man 2 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Spider-Man 3 - Invasion of the Spider-Slayers (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Spiky Harold (World)"
+	region "World"
+)
+game (
+	name "Spirit of F-1, The (Europe)"
+	region "Europe"
+)
+game (
+	name "Spiritual Warfare (USA)"
+	region "USA"
+)
+game (
+	name "Spirou (Europe) (En,Fr,De,Es) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Splitz (Europe)"
+	region "Europe"
+)
+game (
+	name "Splitz - Nigaoe 15 Game (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Sports Collection (Japan)"
+	region "Japan"
+)
+game (
+	name "Sports Illustrated - Championship Football & Baseball (USA)"
+	region "USA"
+)
+game (
+	name "Sports Illustrated - Golf Classic (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Sports Illustrated for Kids - The Ultimate Triple Dare! (USA)"
+	region "USA"
+)
+game (
+	name "Spot (Japan)"
+	region "Japan"
+)
+game (
+	name "Spot - Cool Adventure (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Spot - The Cool Adventure (USA)"
+	region "USA"
+)
+game (
+	name "Spot - The Video Game (Europe)"
+	region "Europe"
+)
+game (
+	name "Spot - The Video Game (USA)"
+	region "USA"
+)
+game (
+	name "Spud's Adventure (USA)"
+	region "USA"
+)
+game (
+	name "Spy vs Spy - Operation Boobytrap (Europe)"
+	region "Europe"
+)
+game (
+	name "Spy vs Spy - Operation Boobytrap (USA)"
+	region "USA"
+)
+game (
+	name "Square Deal - The Game of Two-Dimensional Poker (USA)"
+	region "USA"
+)
+game (
+	name "Squirrel Falls (World) (v1.7)"
+	region "World"
+)
+game (
+	name "Star Catcher (World)"
+	region "World"
+)
+game (
+	name "Star Sweep (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Star Trek - 25th Anniversary (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Star Trek - The Next Generation (Germany)"
+	region "Germany"
+)
+game (
+	name "Star Trek - The Next Generation (Spain)"
+	region "Spain"
+)
+game (
+	name "Star Trek - The Next Generation (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Star Trek Generations - Beyond the Nexus (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Star Trek Generations - Beyond the Nexus (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Star Wars (Europe)"
+	region "Europe"
+)
+game (
+	name "Star Wars (USA)"
+	region "USA"
+)
+game (
+	name "Star Wars (USA, Europe) (Rev 1)"
+	region "USA / Europe"
+)
+game (
+	name "Star Wars (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Star Wars - The Empire Strikes Back (USA)"
+	region "USA"
+)
+game (
+	name "Star Wars - The Empire Strikes Back (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Star Wars - The Empire Strikes Back (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "StarHawk (Europe)"
+	region "Europe"
+)
+game (
+	name "StarHawk (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Stardiver (World)"
+	region "World"
+)
+game (
+	name "Stargate (Japan) (En) (Possible Proto)"
+	region "Japan"
+)
+game (
+	name "Stargate (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Stick Man Guy (World)"
+	region "World"
+)
+game (
+	name "Stop That Roach! (USA)"
+	region "USA"
+)
+game (
+	name "Street Fighter II (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Street Fighter II (USA, Europe) (Rev 1) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Street Fighter II (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Street Racer (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Street Racer (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Sumo Fighter (USA)"
+	region "USA"
+)
+game (
+	name "Sumou Fighter - Toukaidou Basho (Japan)"
+	region "Japan"
+)
+game (
+	name "Sunsoft Grand Prix (Europe)"
+	region "Europe"
+)
+game (
+	name "Super 69 in 1 (Europe)"
+	region "Europe"
+)
+game (
+	name "Super Ayanami Discovery SlideShow (Japan)"
+	region "Japan"
+)
+game (
+	name "Super Ayanami Discovery SlideShow (Japan) (v1.1)"
+	region "Japan"
+)
+game (
+	name "Super B-Daman - Fighting Phoenix (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super Battletank (Europe)"
+	region "Europe"
+)
+game (
+	name "Super Battletank (USA)"
+	region "USA"
+)
+game (
+	name "Super Bikkuriman - Densetsu no Sekiban (Japan)"
+	region "Japan"
+)
+game (
+	name "Super Black Bass (USA)"
+	region "USA"
+)
+game (
+	name "Super Black Bass Pocket (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super Black Bass Pocket 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super Bombliss (Japan) (En) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super Breakout (USA)"
+	region "USA"
+)
+game (
+	name "Super Chase H.Q. (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Super Chinese Fighter GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super Chinese Land (Japan)"
+	region "Japan"
+)
+game (
+	name "Super Chinese Land 1-2-3' (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super Chinese Land 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Super Chinese Land 3 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super Connard (World) (Fr)"
+	region "World"
+)
+game (
+	name "Super Connard (World) (Fr) (Digital)"
+	region "World"
+)
+game (
+	name "Super Covid Go Get Biscuits Adventure (World)"
+	region "World"
+)
+game (
+	name "Super Donkey Kong 3 (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Super Donkey Kong GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super Hard Bouncer (World) (v1.0)"
+	region "World"
+)
+game (
+	name "Super Hard Bouncer (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Super Hunchback (Europe)"
+	region "Europe"
+)
+game (
+	name "Super Hunchback (Japan)"
+	region "Japan"
+)
+game (
+	name "Super Hunchback (USA)"
+	region "USA"
+)
+game (
+	name "Super James Pond (Europe)"
+	region "Europe"
+)
+game (
+	name "Super James Pond (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Super Kick Off (Europe) (En,Fr,De,It,Nl)"
+	region "Europe"
+)
+game (
+	name "Super Mario 4 (Unknown) (Ja) (Pirate)"
+)
+game (
+	name "Super Mario Land (World)"
+	region "World"
+)
+game (
+	name "Super Mario Land (World) (Rev 1)"
+	region "World"
+)
+game (
+	name "Super Mario Land 2 - 6 Golden Coins (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Super Mario Land 2 - 6 Golden Coins (USA, Europe) (Rev 1)"
+	region "USA / Europe"
+)
+game (
+	name "Super Mario Land 2 - 6 Golden Coins (USA, Europe) (Rev 2)"
+	region "USA / Europe"
+)
+game (
+	name "Super Mario Land 2 - 6-tsu no Kinka (Japan)"
+	region "Japan"
+)
+game (
+	name "Super Mario Land 2 - 6-tsu no Kinka (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Super Mario Land 2 - 6-tsu no Kinka (Japan) (Rev 2)"
+	region "Japan"
+)
+game (
+	name "Super Mario Land 4 (Unknown) (Ja) (Pirate)"
+)
+game (
+	name "Super Mario World 7 (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Super Momotarou Dentetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Super Momotarou Dentetsu II (Japan)"
+	region "Japan"
+)
+game (
+	name "Super Off Road (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Super Pachinko Taisen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super R.C. Pro-Am (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Super Robot Taisen (Japan)"
+	region "Japan"
+)
+game (
+	name "Super Scrabble (USA)"
+	region "USA"
+)
+game (
+	name "Super Snakey (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Super Star Wars - Return of the Jedi (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Super Street Basketball (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Super Street Basketball 2 (Japan) (En) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Superman (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Sushi Gun (World)"
+	region "World"
+)
+game (
+	name "Sushi Nights (World) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Sutte Hakkun (Japan) (Proto) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Suzuki Aguri no F-1 Super Driving (Japan)"
+	region "Japan"
+)
+game (
+	name "Swamp Thing (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Swaplatformer (World)"
+	region "World"
+)
+game (
+	name "Sword of Hope II, The (USA)"
+	region "USA"
+)
+game (
+	name "Sword of Hope, The (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Sword of Hope, The (Germany)"
+	region "Germany"
+)
+game (
+	name "Sword of Hope, The (Spain)"
+	region "Spain"
+)
+game (
+	name "Sword of Hope, The (Sweden)"
+	region "Sweden"
+)
+game (
+	name "Sword of Hope, The (USA)"
+	region "USA"
+)
+game (
+	name "T2 - The Arcade Game (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "T2 - The Arcade Game (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "TV Champion (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "TV-Chan's Great Escape! (World)"
+	region "World"
+)
+game (
+	name "Taikyoku Renju (Japan) (En,Ja)"
+	region "Japan"
+)
+game (
+	name "Tail 'Gator (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Tail 'Gator (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "Taito Chase H.Q. (Japan)"
+	region "Japan"
+)
+game (
+	name "Taito Variety Pack (Japan)"
+	region "Japan"
+)
+game (
+	name "Taiyou no Tenshi Marlowe - Ohanabatake wa Dai-panic (Japan)"
+	region "Japan"
+)
+game (
+	name "Taiyou no Yuusha - Fighbird GB (Japan)"
+	region "Japan"
+)
+game (
+	name "Takahashi Meijin no Bouken-jima II (Japan)"
+	region "Japan"
+)
+game (
+	name "Takahashi Meijin no Bouken-jima III (Japan)"
+	region "Japan"
+)
+game (
+	name "Takeda Nobuhiro no Ace Striker (Japan)"
+	region "Japan"
+)
+game (
+	name "TaleSpin (Europe)"
+	region "Europe"
+)
+game (
+	name "TaleSpin (Spain) (Proto)"
+	region "Spain"
+)
+game (
+	name "TaleSpin (USA)"
+	region "USA"
+)
+game (
+	name "Tamagotchi (France) (SGB Enhanced)"
+	region "France"
+)
+game (
+	name "Tamagotchi (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Tarzan - Lord of the Jungle (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Tasmania Monogatari (Japan)"
+	region "Japan"
+)
+game (
+	name "Tasmania Story (USA)"
+	region "USA"
+)
+game (
+	name "Taz-Mania (Europe)"
+	region "Europe"
+)
+game (
+	name "Taz-Mania 2 (USA)"
+	region "USA"
+)
+game (
+	name "Tech and Blood (World)"
+	region "World"
+)
+game (
+	name "Tecmo Bowl (USA)"
+	region "USA"
+)
+game (
+	name "Tecmo Bowl GB (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Teenage Mutant Hero Turtles - Fall of the Foot Clan (Europe)"
+	region "Europe"
+)
+game (
+	name "Teenage Mutant Hero Turtles II - Back from the Sewers (Europe)"
+	region "Europe"
+)
+game (
+	name "Teenage Mutant Hero Turtles III - Radical Rescue (Europe)"
+	region "Europe"
+)
+game (
+	name "Teenage Mutant Hero Turtles III - Radical Rescue (Europe) (Rev 1)"
+	region "Europe"
+)
+game (
+	name "Teenage Mutant Ninja Turtles (Japan)"
+	region "Japan"
+)
+game (
+	name "Teenage Mutant Ninja Turtles (Japan) (Cowabunga Collection, The)"
+	region "Japan"
+)
+game (
+	name "Teenage Mutant Ninja Turtles - Fall of the Foot Clan (USA)"
+	region "USA"
+)
+game (
+	name "Teenage Mutant Ninja Turtles - Fall of the Foot Clan (USA) (Cowabunga Collection, The)"
+	region "USA"
+)
+game (
+	name "Teenage Mutant Ninja Turtles 2 (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Teenage Mutant Ninja Turtles 2 (Japan) (En) (Cowabunga Collection, The)"
+	region "Japan"
+)
+game (
+	name "Teenage Mutant Ninja Turtles 3 - Turtles Kikiippatsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Teenage Mutant Ninja Turtles 3 - Turtles Kikiippatsu (Japan) (Cowabunga Collection, The)"
+	region "Japan"
+)
+game (
+	name "Teenage Mutant Ninja Turtles II - Back from the Sewers (USA)"
+	region "USA"
+)
+game (
+	name "Teenage Mutant Ninja Turtles II - Back from the Sewers (USA) (Cowabunga Collection, The)"
+	region "USA"
+)
+game (
+	name "Teenage Mutant Ninja Turtles III - Radical Rescue (USA)"
+	region "USA"
+)
+game (
+	name "Teenage Mutant Ninja Turtles III - Radical Rescue (USA) (Cowabunga Collection, The)"
+	region "USA"
+)
+game (
+	name "Teke Teke! Asmik-kun World (Japan)"
+	region "Japan"
+)
+game (
+	name "Tekichuu Rush (Japan)"
+	region "Japan"
+)
+game (
+	name "Tekkyu Fight! - The Great Battle Gaiden (Japan)"
+	region "Japan"
+)
+game (
+	name "Tenchi o Kurau (Japan)"
+	region "Japan"
+)
+game (
+	name "Tenjin Kaisen (Japan)"
+	region "Japan"
+)
+game (
+	name "Tennis (World)"
+	region "World"
+)
+game (
+	name "Terminator 2 - Judgment Day (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Tesserae (Europe) (En,Fr,De,Es,It)"
+	region "Europe"
+)
+game (
+	name "Tesserae (USA)"
+	region "USA"
+)
+game (
+	name "Tetris (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Tetris (World) (Rev 1)"
+	region "World"
+)
+game (
+	name "Tetris 2 (USA)"
+	region "USA"
+)
+game (
+	name "Tetris 2 (USA, Europe) (Rev 1) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Tetris 2 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Tetris Attack (USA, Europe) (Rev 1) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Tetris Attack (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Tetris Blast (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Tetris Flash (Japan) (En) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Tetris Plus (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Tetris Plus (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "The Light, The Fire (World)"
+	region "World"
+)
+game (
+	name "There's Nothing to Do in This Town (World)"
+	region "World"
+)
+game (
+	name "Thin Ice Rescue, The (World)"
+	region "World"
+)
+game (
+	name "TimberMan (World)"
+	region "World"
+)
+game (
+	name "Tintin - Prisoners of the Sun (Europe) (En,Fr,De)"
+	region "Europe"
+)
+game (
+	name "Tintin in Tibet (Europe) (En,Es,It,Sv) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Tintin in Tibet (Europe) (En,Fr,De,Nl) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Tiny Toon Adventures (Japan)"
+	region "Japan"
+)
+game (
+	name "Tiny Toon Adventures - Babs' Big Break (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Tiny Toon Adventures - Wacky Sports (Europe)"
+	region "Europe"
+)
+game (
+	name "Tiny Toon Adventures - Wacky Sports (USA)"
+	region "USA"
+)
+game (
+	name "Tiny Toon Adventures 2 - Buster Bunny no Kattobi Daibouken (Japan)"
+	region "Japan"
+)
+game (
+	name "Tiny Toon Adventures 2 - Montana's Movie Madness (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Tiny Toon Adventures 3 - Dokidoki Sport Festival (Japan)"
+	region "Japan"
+)
+game (
+	name "Tip Off (Europe)"
+	region "Europe"
+)
+game (
+	name "Tip Off (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Titus the Fox (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Tobu Tobu Girl (World)"
+	region "World"
+)
+game (
+	name "Tokio Senki - Eiyuu Retsuden (Japan)"
+	region "Japan"
+)
+game (
+	name "Tokoro's Mahjong Jr. (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Tokyo Disneyland - Fantasy Tour (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Tokyo Disneyland - Mickey no Cinderella-jou Mystery Tour (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Tom & Jerry (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Tom and Jerry - Frantic Antics! (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Tom to Jerry (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Tom to Jerry Part 2 (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Top Gun - Guts & Glory (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Top Rank Tennis (USA)"
+	region "USA"
+)
+game (
+	name "Top Ranking Tennis (Europe)"
+	region "Europe"
+)
+game (
+	name "Torpedo Range (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Torpedo Range (USA)"
+	region "USA"
+)
+game (
+	name "Total Carnage (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Totsugeki Valations (Japan)"
+	region "Japan"
+)
+game (
+	name "Totsugeki! Ponkotsu Tank (Japan)"
+	region "Japan"
+)
+game (
+	name "Tottemo! Lucky Man - Lucky Cookie Minna Daisuki!! (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Touch the Cat (World)"
+	region "World"
+)
+game (
+	name "Tower of Hanoi (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Toxic Crusaders (USA)"
+	region "USA"
+)
+game (
+	name "Toy Story (Europe) (SGB Enhanced)"
+	region "Europe"
+)
+game (
+	name "Toy Story (USA) (Rev 1) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Toy Story (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Toy Story (USA) (Toy Story Retro Roundup!) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Track & Field (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Track Meet (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Track Meet - Mezase! Barcelona (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Trappers Tengoku - Spy vs Spy (Japan)"
+	region "Japan"
+)
+game (
+	name "Traumatarium - Penitent (World) (Proto)"
+	region "World"
+)
+game (
+	name "Trax (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Treasure Island (World)"
+	region "World"
+)
+game (
+	name "Trip World (Europe)"
+	region "Europe"
+)
+game (
+	name "Trip World (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Trip World (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "TripleA (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Triumph (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "Tronimal - 35 (World) (Album)"
+	region "World"
+)
+game (
+	name "Tronimal - Hello_World! (World) (Album)"
+	region "World"
+)
+game (
+	name "True Lies (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Trump Boy (Japan)"
+	region "Japan"
+)
+game (
+	name "Trump Boy II (Japan)"
+	region "Japan"
+)
+game (
+	name "Trump Collection GB (Japan)"
+	region "Japan"
+)
+game (
+	name "Tsumego Series 1 - Fujisawa Hideyuki Meiyo Kisei (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Tsumeshougi - Hyakuban Shoubu (Japan)"
+	region "Japan"
+)
+game (
+	name "Tsumeshougi - Kanki Godan (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Tsumeshougi - Mondai Teikyou Shougi Sekai (Japan)"
+	region "Japan"
+)
+game (
+	name "Tsuri Sensei (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Tuff (World)"
+	region "World"
+)
+game (
+	name "Tumble Pop (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Tumble Pop (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Turn 'Em Off (World)"
+	region "World"
+)
+game (
+	name "Turn and Burn - The F-14 Dogfight Simulator (USA)"
+	region "USA"
+)
+game (
+	name "Turok - Battle of the Bionosaurs (Japan)"
+	region "Japan"
+)
+game (
+	name "Turok - Battle of the Bionosaurs (USA, Europe) (En,Fr,De,Es)"
+	region "USA / Europe"
+)
+game (
+	name "Turrican (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Twin (Japan)"
+	region "Japan"
+)
+game (
+	name "TwinBee da!! (Japan)"
+	region "Japan"
+)
+game (
+	name "Uchiiwai - Kyoudaijingi no Puzzle Game (Japan)"
+	region "Japan"
+)
+game (
+	name "Uchuu Senkan Yamato (Japan)"
+	region "Japan"
+)
+game (
+	name "Uchuu no Kishi Tekkaman Blade (Japan)"
+	region "Japan"
+)
+game (
+	name "Ultima - Runes of Virtue (USA)"
+	region "USA"
+)
+game (
+	name "Ultima - Runes of Virtue II (USA)"
+	region "USA"
+)
+game (
+	name "Ultima - Ushinawareta Runes (Japan)"
+	region "Japan"
+)
+game (
+	name "Ultima - Ushinawareta Runes 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Ultra Golf (USA)"
+	region "USA"
+)
+game (
+	name "Ultraman (Japan)"
+	region "Japan"
+)
+game (
+	name "Ultraman Ball (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Ultraman Chou Toushi Gekiden (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Ultraman Club - Tekikaijuu o Hakken seyo! (Japan)"
+	region "Japan"
+)
+game (
+	name "Umi no Nushi Tsuri 2 (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Undercover Cops Gaiden - Hakaishin Garumaa (Japan)"
+	region "Japan"
+)
+game (
+	name "Unearthed OST (World) (Album)"
+	region "World"
+)
+game (
+	name "Universal Soldier (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Uno - Small World (Japan)"
+	region "Japan"
+)
+game (
+	name "Uno 2 - Small World (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Uoozu (Japan)"
+	region "Japan"
+)
+game (
+	name "Urban Strike (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Urusei Yatsura - Miss Tomobiki o Sagase! (Japan)"
+	region "Japan"
+)
+game (
+	name "V-Rally - Championship Edition (Europe) (En,Fr,De)"
+	region "Europe"
+)
+game (
+	name "VS Battler (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Vampire Night Shift (World)"
+	region "World"
+)
+game (
+	name "Vattle Giuce (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Vegas Stakes (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Velious - Roland no Majuu (Japan)"
+	region "Japan"
+)
+game (
+	name "Velious II - Fukushuu no Jashin (Japan)"
+	region "Japan"
+)
+game (
+	name "Versus Hero - Kakutou Ou e no Michi (Japan)"
+	region "Japan"
+)
+game (
+	name "Virtual Wars (Japan)"
+	region "Japan"
+)
+game (
+	name "Volley Fire (Japan)"
+	region "Japan"
+)
+game (
+	name "WCW - The Main Event (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "WWF King of the Ring (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "WWF King of the Ring (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "WWF Raw (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "WWF Superstars (Japan)"
+	region "Japan"
+)
+game (
+	name "WWF Superstars (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "WWF Superstars 2 (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "WWF Superstars 2 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "WWF War Zone (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Waifu Clicker (World)"
+	region "World"
+)
+game (
+	name "Wario Blast Featuring Bomberman! (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Wario Land - Super Mario Land 3 (World)"
+	region "World"
+)
+game (
+	name "Wario Land II (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "Waterworld (Europe)"
+	region "Europe"
+)
+game (
+	name "Wave Race (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Wayne's World (USA)"
+	region "USA"
+)
+game (
+	name "We're Back! - A Dinosaur's Story (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Wedding Peach - Jamapii Panic (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Welcome Nakayoshi Park (Japan)"
+	region "Japan"
+)
+game (
+	name "What Friends Are For (World)"
+	region "World"
+)
+game (
+	name "Wheel of Fortune (USA)"
+	region "USA"
+)
+game (
+	name "Who Framed Roger Rabbit (Europe)"
+	region "Europe"
+)
+game (
+	name "Who Framed Roger Rabbit (Spain)"
+	region "Spain"
+)
+game (
+	name "Who Framed Roger Rabbit (USA)"
+	region "USA"
+)
+game (
+	name "Wild Snake (USA) (SGB Enhanced)"
+	region "USA"
+)
+game (
+	name "Wily & Right no Rockboard - That's Paradise (Japan) (Proto)"
+	region "Japan"
+)
+game (
+	name "Windows93 Adventure (World)"
+	region "World"
+)
+game (
+	name "Winner's Horse (Japan)"
+	region "Japan"
+)
+game (
+	name "Winter Gold (Europe)"
+	region "Europe"
+)
+game (
+	name "Winter Olympic Games (USA)"
+	region "USA"
+)
+game (
+	name "Wishing Sarah (World) (Pt-BR) (v1.1)"
+	region "World"
+)
+game (
+	name "Wishing Sarah (World) (v1.1)"
+	region "World"
+)
+game (
+	name "Witchscape (World) (Proto)"
+	region "World"
+)
+game (
+	name "Wizard of Wor (World)"
+	region "World"
+)
+game (
+	name "Wizardry Gaiden I - Joou no Junan (Japan)"
+	region "Japan"
+)
+game (
+	name "Wizardry Gaiden II - Kodai Koutei no Noroi (Japan)"
+	region "Japan"
+)
+game (
+	name "Wizardry Gaiden III - Yami no Seiten (Japan)"
+	region "Japan"
+)
+game (
+	name "Wizards & Warriors X - The Fortress of Fear (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Woolball's Backyard (World)"
+	region "World"
+)
+game (
+	name "WordZap (USA)"
+	region "USA"
+)
+game (
+	name "Wordtris (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Wordtris (France) (Fr) (Proto)"
+	region "France"
+)
+game (
+	name "Wordtris (Germany) (De) (Proto)"
+	region "Germany"
+)
+game (
+	name "Wordtris (USA)"
+	region "USA"
+)
+game (
+	name "WorkBoy (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "World Beach Volley - 1991 GB Cup (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "World Beach Volley - 1992 GB Cup (Europe)"
+	region "Europe"
+)
+game (
+	name "World Bowling (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "World Bowling (USA)"
+	region "USA"
+)
+game (
+	name "World Circuit Series (USA)"
+	region "USA"
+)
+game (
+	name "World Cup 98 (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "World Cup Striker (Europe) (En,Fr,De) (Possible Proto)"
+	region "Europe"
+)
+game (
+	name "World Cup Striker (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "World Cup USA 94 (Europe) (En,Fr,De,Es,It,Nl,Pt,Sv)"
+	region "Europe"
+)
+game (
+	name "World Cup USA 94 (Japan) (En,Fr,De,Es,It,Nl,Pt,Sv)"
+	region "Japan"
+)
+game (
+	name "World Heroes 2 Jet (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)
+game (
+	name "World Ice Hockey (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "World Ice Hockey (USA) (Proto)"
+	region "USA"
+)
+game (
+	name "World Soccer GB (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Worms (Europe)"
+	region "Europe"
+)
+game (
+	name "Worms (World) (Limited Run Games)"
+	region "World"
+)
+game (
+	name "X (Japan)"
+	region "Japan"
+)
+game (
+	name "Xenon 2 (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Xenon 2 - Megablast (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Xin Nushen Zhuansheng Waizhuan - Zuihou de Shengjing (Taiwan) (Pirate)"
+	region "Taiwan"
+)
+game (
+	name "Xin Shuma Baobei Huang (China) (Pirate)"
+	region "China"
+)
+game (
+	name "Yakuman (Japan)"
+	region "Japan"
+)
+game (
+	name "Yakuman (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Yannick Noah Tennis (France) (En)"
+	region "France"
+)
+game (
+	name "Year After, The (World) (En) (Proto)"
+	region "World"
+)
+game (
+	name "Year After, The (World) (Fr) (Proto)"
+	region "World"
+)
+game (
+	name "Year I Wrote You, The (World)"
+	region "World"
+)
+game (
+	name "Yelu Wangzi (Prince Yeh Rude) (Taiwan) (En)"
+	region "Taiwan"
+)
+game (
+	name "Yogi Bear's Gold Rush (Europe)"
+	region "Europe"
+)
+game (
+	name "Yogi Bear's Gold Rush (USA)"
+	region "USA"
+)
+game (
+	name "Yomihon Yumegoyomi - Tenjin Kaisen 2 (Japan)"
+	region "Japan"
+)
+game (
+	name "Yoshi (USA)"
+	region "USA"
+)
+game (
+	name "Yoshi no Cookie (Japan)"
+	region "Japan"
+)
+game (
+	name "Yoshi no Panepon (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Yoshi no Tamago (Japan)"
+	region "Japan"
+)
+game (
+	name "Yoshi's Cookie (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "You Are a Skeleton & That Is a Problem (World)"
+	region "World"
+)
+game (
+	name "Yousei Monogatari - Rod Land (Japan)"
+	region "Japan"
+)
+game (
+	name "Yu Yu Hakusho (Japan)"
+	region "Japan"
+)
+game (
+	name "Yu Yu Hakusho Dai-2-dan - Ankoku Bujutsukai Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Yu Yu Hakusho Dai-3-dan - Makai no Tobira Hen (Japan)"
+	region "Japan"
+)
+game (
+	name "Yu Yu Hakusho Dai-4-dan - Makai Touitsu Hen (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (De) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (De) (v1.1) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (Es) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (Es) (v1.1) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (Fr) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (Fr) (v1.1) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (It) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (It) (v1.1) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (Ja) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yu-Gi-Oh! Duel Monsters (World) (v1.1) (Early Days Collection) (SGB Enhanced)"
+	region "World"
+)
+game (
+	name "Yuuto Ichika Makes Friends (World) (En,Ja)"
+	region "World"
+)
+game (
+	name "Yvonne Goes to Carbonic (World) (v4.2)"
+	region "World"
+)
+game (
+	name "ZAS (Europe) (Proto)"
+	region "Europe"
+)
+game (
+	name "Zagan Warrior (World)"
+	region "World"
+)
+game (
+	name "Zelda no Densetsu - Yume o Miru Shima (Japan)"
+	region "Japan"
+)
+game (
+	name "Zelda no Densetsu - Yume o Miru Shima (Japan) (Rev 1)"
+	region "Japan"
+)
+game (
+	name "Zelda's Adventure (World) (v1.3.0)"
+	region "World"
+)
+game (
+	name "Zen - Intergalactic Ninja (Europe)"
+	region "Europe"
+)
+game (
+	name "Zen - Intergalactic Ninja (USA)"
+	region "USA"
+)
+game (
+	name "Zen-Nihon Pro Wrestling Jet (Japan) (SGB Enhanced)"
+	region "Japan"
+)
+game (
+	name "Zerd no Densetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Zerd no Densetsu 2 - Xerd!! Gishin no Ryouiki (Japan)"
+	region "Japan"
+)
+game (
+	name "Zettai Muteki Raijin-Oh (Japan)"
+	region "Japan"
+)
+game (
+	name "Zoids Densetsu (Japan)"
+	region "Japan"
+)
+game (
+	name "Zool (Japan) (En) (Proto)"
+	region "Japan"
+)
+game (
+	name "Zool - Ninja of the 'Nth' Dimension (Europe)"
+	region "Europe"
+)
+game (
+	name "Zool - Ninja of the 'Nth' Dimension (USA)"
+	region "USA"
+)
+game (
+	name "Zoop (Japan) (En)"
+	region "Japan"
+)
+game (
+	name "Zoop (USA, Europe)"
+	region "USA / Europe"
+)
+game (
+	name "Zuigao Jimi (Top Secret) (Taiwan)"
+	region "Taiwan"
+)
+game (
+	name "Zuigao Jimi (Top Secret) (Taiwan) (Multicart Rip)"
+	region "Taiwan"
+)
+game (
+	name "ever - Lucid Space Program (World)"
+	region "World"
+)
+game (
+	name "radioRealm (World) (Ja)"
+	region "World"
+)
+game (
+	name "seaQuest DSV (USA, Europe) (SGB Enhanced)"
+	region "USA / Europe"
+)

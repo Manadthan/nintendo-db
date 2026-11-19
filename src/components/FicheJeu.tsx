@@ -67,9 +67,14 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
     ),
   ];
   // Wii U : Wikipédia + GameTDB ; Switch 2 : Wikipédia seul (étape 10) ; les autres : GameTDB seul.
-  const parWikipedia = ["wii-u", "switch-2", "n64", "gbc", "gba"].includes(
-    jeu.console.slug,
-  );
+  const parWikipedia = [
+    "wii-u",
+    "switch-2",
+    "gb",
+    "n64",
+    "gbc",
+    "gba",
+  ].includes(jeu.console.slug);
   const region = choix ?? regionParDefaut(jeu, marche);
   const sortie = jeu.sorties[region];
   const titre =

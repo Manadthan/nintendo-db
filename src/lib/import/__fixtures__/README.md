@@ -173,3 +173,13 @@ node scripts/fixture-nointro.mjs "Nintendo - Nintendo 64.dat" > src/lib/import/_
 | Contenu | Liste : ligne d'en-tête, 45 jeux Nintendo et 15 autres ; index : 1 524 boîtes ; No-Intro : 2 446 entrées, réduites aux lignes lues |
 
 Fabriquées par `scripts/fixture-wikipedia-cartouches.mjs`, `scripts/fixture-libretro.mjs` et `scripts/fixture-nointro.mjs`, comme pour la N64 et la GBA.
+
+## `gb-wikipedia.html`, `gb-libretro.xml`, `gb-nointro.dat` (étape 18)
+
+| | |
+|---|---|
+| Source | https://en.wikipedia.org/w/index.php?title=List_of_Game_Boy_games&action=render ; dépôt https://github.com/libretro-thumbnails/Nintendo_-_Game_Boy (noms de fichiers) ; libretro-database `metadat/no-intro/Nintendo - Game Boy.dat` ; le 19/11/2026 |
+| Conditions | Wikipédia : CC BY-SA 4.0 ; libretro : noms de fichiers et numéros de série seulement |
+| Contenu | Liste : 2 lignes d'en-tête, 91 jeux Nintendo et 15 autres ; index : 1 647 boîtes ; No-Intro : 2 144 entrées, réduites aux lignes lues |
+
+Fabriquées par les mêmes scripts que la Game Boy Color.

@@ -12,6 +12,12 @@ export const maxDuration = 60;
 
 /** Consoles importables (étape 8) : leurs sources, telles que la page les présente. */
 const CONSOLES = {
+  gb: {
+    nom: "Game Boy",
+    sources: "la liste Wikipédia",
+    description:
+      "Lit la liste Wikipédia (SPEC v1.23, GameTDB ne couvre pas le Game Boy) : jeux édités par Nintendo dans au moins une région, y compris ceux que Nintendo n'éditait qu'en Europe ; dates par région ; boîtes libretro-thumbnails. Codes produit DMG- à compléter à la main (No-Intro les connaît rarement).",
+  },
   n64: {
     nom: "Nintendo 64",
     sources: "la liste Wikipédia",
