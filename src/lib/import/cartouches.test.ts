@@ -64,3 +64,31 @@ describe("liste Wikipédia GBA", () => {
     expect(b.sorties.PAL).toBeNull();
   });
 });
+
+describe("éditeurs tels que Wikipédia les sert en direct (#139)", () => {
+  // Page en direct : chaque retour à la ligne porte un attribut (<br id="…">), absent des fixtures nettoyées.
+  const ligne = (editeurs: string) =>
+    lireListeCartouches(`<table class="wikitable">
+      <tr><th rowspan="2">Title</th><th rowspan="2">Developer</th><th rowspan="2">Publisher</th><th colspan="3">Release date</th></tr>
+      <tr><th>Japan</th><th>North America</th><th>PAL</th></tr>
+      <tr><td><i>Un jeu</i></td><td>Studio</td><td>${editeurs}</td>
+        <td>June 1, 2000</td><td>July 1, 2000</td><td>August 1, 2000</td></tr>
+    </table>`).jeux[0]?.sorties;
+
+  it("un retour à la ligne avec attribut sépare deux éditeurs (Hudson Soft au Japon, Nintendo ailleurs)", () => {
+    const sorties = ligne(
+      '<a id="a1">Hudson Soft</a><sup id="s1"> JP</sup><br id="b1"><a id="a2">Nintendo</a><sup id="s2"> WW</sup>',
+    );
+    expect(sorties?.JAP?.editeur).toBe("Hudson Soft");
+    expect(sorties?.US?.editeur).toBe("Nintendo");
+  });
+
+  it("un éditeur sans région vaut pour les régions sans éditeur précisé (Nintendo, Kemco au Japon)", () => {
+    const sorties = ligne(
+      '<a id="a1">Nintendo</a><br id="b1"><a id="a2">Kemco</a><sup id="s1"> JP</sup>',
+    );
+    expect(sorties?.JAP?.editeur).toBe("Kemco");
+    expect(sorties?.US?.editeur).toBe("Nintendo");
+    expect(sorties?.PAL?.editeur).toBe("Nintendo");
+  });
+});
