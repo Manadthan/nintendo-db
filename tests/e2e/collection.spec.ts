@@ -107,6 +107,17 @@ test("Statistiques : ma collection par console, par région et notes (US-18)", a
     page.getByRole("region", { name: "Notes Metacritic" }),
   ).toBeVisible();
 
+  // Bascule « First party » (SPEC v1.32) : Wii Karaoke U (Xing) n'est plus compté, Splatoon l'est.
+  const bascule = page.getByRole("navigation", { name: "Jeux comptés" });
+  await expect(
+    bascule.getByRole("link", { name: "Tous", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+  await bascule.getByRole("link", { name: "First party", exact: true }).click();
+  await expect(page).toHaveURL("/admin/statistiques?jeux=first-party");
+  await expect(
+    collection.getByRole("listitem", { name: "Wii U : 1 / 3", exact: true }),
+  ).toBeVisible();
+
   // Remise en état : Splatoon décoché.
   await page.goto("/jeux/wii-u/splatoon");
   await caseEurope(page).uncheck();
