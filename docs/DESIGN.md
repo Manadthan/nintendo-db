@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.15 — 19/11/2026 — statut : **à valider**
+> Version 1.16 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.16 | 20/11/2026 | **Boîte PAL française d'abord** (Wii U, Switch, SPEC v1.28) : ordre FR, EN, DE au relais ; `scripts/jaquettes-pal-francaises.mjs` remplace une fois les jaquettes PAL GameTDB en place |
 > | 1.15 | 19/11/2026 | **NES** (étape 21) : étude (§1 duodecies), plan §8 |
 > | 1.14 | 19/11/2026 | **Super Nintendo** (étape 20) : étude (§1 undecies), plan §8 |
 > | 1.13 | 19/11/2026 | **Virtual Boy** (étape 19) : étude (§1 decies), plan §8 |
@@ -303,7 +304,7 @@ v0.2 (sélecteur sur toutes les pages), écartée au retour sur les maquettes. A
 5. *(Identifiants IGDB : supprimés avec IGDB, v0.8.)*
 
 **ADR-04 — Jaquettes copiées chez nous, en WebP haute définition.** Source par ordre de priorité : **scan GameTDB**
-de la région (`coverHQ`, 768 × 1080 ; PAL : langue EN, sinon FR, DE) ; sans scan, vignette neutre, remplaçable à la
+de la région (`coverHQ`, 768 × 1080 ; PAL : langue FR, sinon EN, DE depuis v1.16) ; sans scan, vignette neutre, remplaçable à la
 main (US-12). Les anciennes jaquettes IGDB (v0.2 à v0.7) restent jusqu'à leur remplacement. Une jaquette `photo` ou `url` n'est jamais
 remplacée par l'import. Image convertie avec sharp en **trois tailles WebP** : 300, 600 et **768 px** de large
 (768 = largeur d'un scan GameTDB, pour la grande jaquette de la fiche sur écran ×3 ; jamais d'agrandissement),
@@ -455,7 +456,7 @@ test n'appelle les sites en direct.
    réutilise les jeux « à venir » de la PR 1, et sa migration 0010 doit passer après la 0009 de la Switch :
    1. **Import des nouveautés** (toutes consoles) : comparaison base / import dans l'aperçu (nouveau, modifié,
       inchangé), case « Afficher les inchangés », enregistrement des seuls changements ; jeux « à venir » ignorés.
-   2. **Switch** : relais (base réduite `switch/switchtdb.xml`, scans `switch/scans` : `coverHQ` US, EN, FR, sinon
+   2. **Switch** : relais (base réduite `switch/switchtdb.xml`, scans `switch/scans` : `coverHQ` US, FR, EN, DE (FR d'abord depuis v1.16), sinon
       `coverM` ; JA en `coverM`) ; migration 0009 (console `switch`, salon, 2017) ; cartouche « ALL » = 3 régions,
       variantes écartées, codes `HAC-P-` ; proportions 1166 × 1888 ; fixture réduite.
    3. **Switch 2** : migration 0010 (console `switch-2`, 2025 ; table `exclusions` + RLS + pgTAP) ; lecteur de la

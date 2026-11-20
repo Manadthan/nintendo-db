@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.27 — 19/11/2026 — statut : **à valider**
+> Version 1.28 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.28 | 20/11/2026 | **Boîte PAL française d'abord** (Wii U, Switch ; choix du propriétaire) : l'anglaise de GameTDB est souvent un scan allemand (USK) ; jaquettes en place remplacées une fois |
 > | 1.27 | 19/11/2026 | **NES** (étape 21) : US-10, 104 jeux ; boîte « (World) » jamais pour le Japon ; codes à la main |
 > | 1.26 | 19/11/2026 | **Jaquettes Switch 2 de gamecartdb** (choix du propriétaire, revient sur v1.11) : boîtes américaine et européenne, source citée ; JAP à la main |
 > | 1.25 | 19/11/2026 | **Super Nintendo** (étape 20) : US-10, 98 jeux ; boîtes japonaises par les titres japonais de Wikipédia ; codes à la main |
@@ -212,7 +213,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       région la remplace dans cette région. Cartouches seulement chinoises ou coréennes ignorées ; packs et éditions
       spéciales (identifiant terminé par un chiffre) écartés ; une réédition avec extension (« + … Expansion ») cède
       la place à la cartouche d'origine.
-- [ ] Switch : jaquette **propre à chaque région** : US (scan US), PAL (scan EN, sinon FR), JAP (scan japonais,
+- [ ] Switch : jaquette **propre à chaque région** : US (scan US), PAL (scan FR, sinon EN, sinon DE : SPEC v1.28), JAP (scan japonais,
       352 × 570 px, le plus grand qui existe) ; proportions de la boîte Switch (en hauteur, ≈ 0,62).
 - [ ] **Switch 2** (SPEC v1.11) : GameTDB n'a pas de base. Liste Wikipédia « List of Nintendo Switch 2 games » :
       jeux dont l'éditeur contient Nintendo ; titre, développeur et **une date commune aux 3 régions** ; pas de code
