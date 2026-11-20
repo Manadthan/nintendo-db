@@ -70,10 +70,22 @@ const DELAI_RETOUR_MS = 5000;
 let dernierRetour = -Infinity;
 // Le type de chargement de la page vaut pour toute la visite : seul le premier affichage du catalogue le lit.
 let premierAffichage = true;
-if (typeof window !== "undefined")
+if (typeof window !== "undefined") {
   window.addEventListener("popstate", () => {
     dernierRetour = performance.now();
   });
+  // Safari remet sa propre hauteur (en haut) après la nôtre : le site gère seul la hauteur au retour arrière.
+  // Les fiches sont courtes ; ailleurs, Next.js remet déjà la page en haut à chaque navigation.
+  try {
+    history.scrollRestoration = "manual";
+  } catch {
+    // Navigateur sans réglage : il fait comme il peut.
+  }
+}
+
+// Le catalogue peut s'allonger encore un peu après le premier rendu, ou Safari remettre sa hauteur : la nôtre est
+// remise pendant 1,5 s au plus, jusqu'à ce qu'elle tienne, sauf si le visiteur se met à défiler lui-même.
+const DUREE_REMISE_MS = 1500;
 
 /** Vrai si le catalogue s'affiche après « Précédent » (dans le site, ou page rechargée par le navigateur). */
 function consommerRetourArriere(): boolean {
@@ -106,8 +118,15 @@ export function noterPositionCatalogue(clic: {
   }
 }
 
-/** À l'affichage du catalogue : remet la hauteur notée si l'on revient d'une fiche. */
+/**
+ * À l'affichage du catalogue : remet la hauteur notée si l'on revient d'une fiche. React affiche le catalogue
+ * PENDANT l'événement « popstate », avant que notre écoute ne le voie : la décision attend la fin de l'événement.
+ */
 export function remettrePositionCatalogue() {
+  setTimeout(decider, 0);
+}
+
+function decider() {
   const retour = consommerRetourArriere();
   let y: number | null = null;
   try {
@@ -116,9 +135,33 @@ export function remettrePositionCatalogue() {
     return;
   }
   if (y === null) return;
-  const hauteur = y;
-  // Après le rendu du catalogue (la page a retrouvé sa longueur).
-  requestAnimationFrame(() => window.scrollTo(0, hauteur));
+  remettre(y);
+}
+
+const GESTES = ["touchstart", "wheel", "keydown", "mousedown"] as const;
+const PAS_MS = 50;
+
+/** Remet la hauteur toutes les 50 ms jusqu'à ce qu'elle tienne (≈ 250 ms), 1,5 s au plus ou au premier geste. */
+function remettre(y: number) {
+  const debut = performance.now();
+  let tenue = 0;
+  let arret = false;
+  const arreter = () => {
+    arret = true;
+    for (const type of GESTES) window.removeEventListener(type, arreter);
+  };
+  for (const type of GESTES)
+    window.addEventListener(type, arreter, { passive: true });
+  const essai = () => {
+    if (arret) return;
+    if (Math.abs(window.scrollY - y) > 2) {
+      window.scrollTo(0, y);
+      tenue = 0;
+    } else tenue += 1;
+    if (tenue >= 5 || performance.now() - debut > DUREE_REMISE_MS) arreter();
+    else setTimeout(essai, PAS_MS);
+  };
+  essai();
 }
 
 /**
