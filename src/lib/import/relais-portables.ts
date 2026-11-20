@@ -111,6 +111,8 @@ export type CarteRelais = { id: string; region: string };
 export function reduireBasePortable(
   portable: Portable,
   xml: string,
+  /** Carte sans éditeur éditée par Nintendo selon Nintendo Europe ou Japon (ADR-13) : base, région → oui / non. */
+  editeOfficiellement: (base: string, region: string) => boolean = () => false,
 ): { xml: string; disques: CarteRelais[] } {
   const $ = cheerio.load(xml, { xml: true });
   const parBase = new Map<
@@ -138,7 +140,9 @@ export function reduireBasePortable(
       nintendo: false,
       disques: [],
     };
-    base.nintendo ||= EDITEUR_NINTENDO.test(champ("publisher"));
+    base.nintendo ||=
+      EDITEUR_NINTENDO.test(champ("publisher")) ||
+      (!champ("publisher") && editeOfficiellement(id.slice(0, 3), region));
     base.disques.push({ id, region });
     parBase.set(id.slice(0, 3), base);
   });
@@ -168,6 +172,15 @@ export function reduireBasePortable(
     // Région déduite de l'identifiant quand GameTDB n'en donne pas : l'import lit ce champ.
     const region = jeu.children("region").first();
     if (!region.text().trim()) region.text(regionCarte(id, ""));
+    // Éditeur vide complété par la liste officielle (ADR-13) : l'import lit ce champ ; un éditeur renseigné reste.
+    const editeur = jeu.children("publisher").first();
+    if (
+      !editeur.text().trim() &&
+      editeOfficiellement(id.slice(0, 3), region.text().trim())
+    ) {
+      if (editeur.length) editeur.text("Nintendo");
+      else jeu.append("<publisher>Nintendo</publisher>");
+    }
     jeu.find("locale").children(":not(title)").remove();
   });
   $("datafile").children(":not(game, DSTDB, TDB3DS, genres)").remove();

@@ -34,6 +34,7 @@ import { languesScan, reduireBasePortable } from "../src/lib/import/relais-porta
 import { reduireBaseSwitch, SCANS_SWITCH } from "../src/lib/import/relais-switch.ts";
 import { DEPOTS_LIBRETRO, indexEnXml } from "../src/lib/import/libretro.ts";
 import { avecReessais, decrireErreurStockage, telechargerAvecReessais } from "../src/lib/import/reessais.ts";
+import { basesNintendo, editeOfficiellement, FILTRES_JAPON } from "../src/lib/import/editeurs-officiels.ts";
 
 const { SUPABASE_URL, SUPABASE_SECRET_KEY } = process.env;
 if (!SUPABASE_URL || !SUPABASE_SECRET_KEY) throw new Error("SUPABASE_URL et SUPABASE_SECRET_KEY requis");
@@ -59,6 +60,49 @@ async function deposer(chemin, contenu, type) {
     if (error) throw new Error(`${chemin} : ${decrireErreurStockage(error)}`);
   });
 }
+
+// Étape 22 (ADR-13) : éditeurs officiels, pour compléter un éditeur vide chez GameTDB (Switch, 3DS). Les deux bases
+// sont publiques ; leur échec n'arrête pas le relais (les éditeurs vides restent écartés, comme avant).
+async function json(url) {
+  const reponse = await fetch(url, { headers: { "User-Agent": "nintendo-db (relais)" } });
+  if (!reponse.ok) throw new Error(`${url} : HTTP ${reponse.status}`);
+  return reponse.json();
+}
+async function editeursOfficiels() {
+  try {
+    const europe = [];
+    for (let debut = 0; ; debut += 1000) {
+      const page = await json(
+        "https://searching.nintendo-europe.com/en/select?wt=json&q=*&rows=1000&sort=fs_id%20asc" +
+          "&fq=type:GAME%20AND%20originally_for_t:(HAC%20OR%20CTR%20OR%20KTR)&fl=publisher,product_code_txt" +
+          `&start=${debut}`,
+      );
+      europe.push(...page.response.docs);
+      if (debut + 1000 >= page.response.numFound) break;
+    }
+    const japon = [];
+    for (const filtre of FILTRES_JAPON) {
+      for (let numero = 1; ; numero++) {
+        const { result } = await json(
+          `https://search.nintendo.jp/nintendo_soft/search.json?opt_hard=${filtre}&limit=300&page=${numero}&opt_sshow=1`,
+        );
+        japon.push(...result.items.map((i) => ({ icode: i.icode, hard: i.hard, maker: i.maker })));
+        if (numero * 300 >= result.total || !result.items.length) break;
+      }
+    }
+    const sw = basesNintendo("switch", europe, japon);
+    const ds3 = basesNintendo("3ds", europe, japon);
+    console.log(
+      `Éditeurs officiels : ${europe.length} jeux (Europe), ${japon.length} (Japon) ; bases Nintendo : ` +
+        `Switch ${sw.europe.size} + ${sw.japon.size}, 3DS ${ds3.europe.size} + ${ds3.japon.size}`,
+    );
+    return { switch: editeOfficiellement(sw), "3ds": editeOfficiellement(ds3) };
+  } catch (e) {
+    console.warn(`Éditeurs officiels indisponibles (${e.message}) : éditeurs vides écartés.`);
+    return { switch: () => false, "3ds": () => false };
+  }
+}
+const editeurs = await editeursOfficiels();
 
 async function base(url) {
   // La base est indispensable : son échec (après les réessais) arrête le relais, avec l'adresse.
@@ -151,6 +195,7 @@ const CONSOLES = [
       const { xml, disques } = reduireBasePortable(
         portable,
         strFromU8(await base(`https://www.gametdb.com/${portable}tdb.zip?LANG=EN`)),
+        editeurs[portable] ?? (() => false),
       );
       return { fichier: `${portable}tdb.xml`, xml: new TextEncoder().encode(xml), disques };
     },
@@ -171,7 +216,10 @@ const CONSOLES = [
     chemin: ({ id, region }) => `switch/scans/${region}/${id}.jpg`,
     languesDe: (_id, region) => SCANS_SWITCH[region],
     async preparer() {
-      const { xml, disques } = reduireBaseSwitch(strFromU8(await base("https://www.gametdb.com/switchtdb.zip?LANG=EN")));
+      const { xml, disques } = reduireBaseSwitch(
+        strFromU8(await base("https://www.gametdb.com/switchtdb.zip?LANG=EN")),
+        editeurs.switch,
+      );
       return { fichier: "switchtdb.xml", xml: new TextEncoder().encode(xml), disques };
     },
     async scan(id, chemin) {
