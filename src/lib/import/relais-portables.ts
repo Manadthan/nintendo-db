@@ -14,14 +14,40 @@ const REGLES: Record<
   Portable,
   { types: Set<string>; garde: (id: string) => boolean }
 > = {
-  // DS : identifiants en Y = démos et téléchargements des bornes.
-  ds: { types: new Set(["DS", "DSi"]), garde: (id) => !id.startsWith("Y") },
+  // DS : toutes les initiales. Les identifiants en Y ne sont pas tous des démos (Kirby Super Star Ultra YKWE,
+  // Professeur Layton YLTP… : SPEC v1.33) ; les démos et bornes sont écartées par leur titre et leur genre.
+  ds: { types: new Set(["DS", "DSi"]), garde: () => true },
   // 3DS : U = jeux Super Nintendo (New 3DS), J = eShop, V = boîtes de codes, H = logiciel.
   "3ds": {
     types: new Set(["3DS", "New3DS"]),
     garde: (id) => /^[ABCE]/.test(id),
   },
 };
+
+/** Régions d'une carte d'après la 4ᵉ lettre de son identifiant (O = internationale : États-Unis et Europe). */
+const REGION_PAR_LETTRE: Record<string, string> = {
+  J: "NTSC-J",
+  E: "NTSC-U",
+  O: "NTSC-U,PAL",
+  P: "PAL",
+  D: "PAL",
+  F: "PAL",
+  S: "PAL",
+  I: "PAL",
+  H: "PAL",
+  U: "PAL",
+  X: "PAL",
+  Y: "PAL",
+  Z: "PAL",
+  V: "PAL",
+};
+
+/**
+ * Région d'une carte : le champ `region` de GameTDB, sinon (champ vide : Pokémon Noir IRBO) celle de la 4ᵉ lettre de
+ * son identifiant (SPEC v1.33). Les cartes coréennes (K) restent hors des régions suivies.
+ */
+export const regionCarte = (id: string, region: string): string =>
+  region || (REGION_PAR_LETTRE[id.charAt(3)] ?? "");
 
 /** Genres et titres des cartes qui ne sont pas des jeux vendus en boîte. */
 const GENRES_HORS_JEU = /\b(demo|software|sampler)\b/i;
@@ -42,7 +68,7 @@ export function estCarteDuCommerce(
     regle.types.has(type) &&
     /^[A-Z0-9]{4}$/.test(id) &&
     regle.garde(id) &&
-    REGIONS_SUIVIES.has(region) &&
+    region.split(",").every((r) => REGIONS_SUIVIES.has(r)) &&
     !GENRES_HORS_JEU.test(genre) &&
     !TITRES_HORS_JEU.test(titre)
   );
@@ -97,7 +123,7 @@ export function reduireBasePortable(
     const jeu = $(el);
     const champ = (nom: string) => jeu.children(nom).first().text().trim();
     const id = champ("id");
-    const region = champ("region");
+    const region = regionCarte(id, champ("region"));
     const titre = jeu.find("locale[lang=EN] > title").first().text().trim();
     if (
       !estCarteDuCommerce(
@@ -143,12 +169,14 @@ export function reduireBasePortable(
     jeu.children().each((_, c) => {
       if (c.type === "tag" && !champsGardes.has(c.tagName)) $(c).remove();
     });
+    // Région déduite de l'identifiant quand GameTDB n'en donne pas : l'import lit ce champ.
+    const region = jeu.children("region").first();
+    if (!region.text().trim()) region.text(regionCarte(id, ""));
     // Éditeur vide complété par la liste officielle (ADR-13) : l'import lit ce champ ; un éditeur renseigné reste.
     const editeur = jeu.children("publisher").first();
-    const regionCarte = jeu.children("region").first().text().trim();
     if (
       !editeur.text().trim() &&
-      editeOfficiellement(id.slice(0, 3), regionCarte)
+      editeOfficiellement(id.slice(0, 3), region.text().trim())
     ) {
       if (editeur.length) editeur.text("Nintendo");
       else jeu.append("<publisher>Nintendo</publisher>");
