@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.29 — 20/11/2026 — statut : **à valider**
+> Version 1.30 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.30 | 20/11/2026 | US-17 : la note Metacritic du catalogue passe **en surimpression sur la jaquette** (coin en haut à droite, couleurs Metacritic), en grille et en liste, au lieu d'une étiquette (demande du propriétaire) |
 > | 1.29 | 20/11/2026 | **Boîtes européennes officielles de Nintendo** (choix du propriétaire) : 39 jeux Wii U et Switch sans boîte française chez GameTDB reçoivent la boîte PEGI de nintendo.com, source citée ; boîtes JAP du site japonais écartées (illustrations carrées, pas des boîtes) |
 > | 1.28 | 20/11/2026 | **Boîte PAL française d'abord** (Wii U, Switch ; choix du propriétaire) : l'anglaise de GameTDB est souvent un scan allemand (USK) ; jaquettes en place remplacées une fois |
 > | 1.27 | 19/11/2026 | **NES** (étape 21) : US-10, 104 jeux ; boîte « (World) » jamais pour le Japon ; codes à la main |
@@ -113,8 +114,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Sur la fiche, dans le bloc d'informations : « Metacritic » et la note seule (« 85 », sans « /100 ») aux **couleurs Metacritic** (vert ≥ 75, jaune
       50 à 74, rouge < 50), avec un **lien** vers la page Metacritic du jeu quand il est connu ; « — » sans note. La source
       est citée en pied de fiche (« note Metacritic via Wikipédia »).
-- [ ] Dans le catalogue, une étiquette **avec le seul chiffre** (« 85 ») sur la même ligne que JAP / US / PAL, **dans le
-      même style que ces étiquettes** (demande du propriétaire). Un jeu sans note n'a pas d'étiquette.
+- [ ] Dans le catalogue, une pastille **avec le seul chiffre** (« 85 ») **en surimpression dans le coin en haut à droite
+      de la jaquette**, aux **couleurs Metacritic** comme sur la fiche, en grille comme en liste (v1.30, demande du
+      propriétaire ; elle remplace l'étiquette de la ligne JAP / US / PAL). Un jeu sans note n'a pas de pastille.
 - [ ] Une note par jeu (celle de sa console ; pas de note par région).
 
 #### US-05 — Rechercher un jeu (M)
