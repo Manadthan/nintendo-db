@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { noterPosition, positionARemettre } from "./defilement";
+import {
+  noterPosition,
+  ouverteDepuisCatalogue,
+  positionARemettre,
+} from "./defilement";
 
 function stockage() {
   const valeurs = new Map<string, string>();
@@ -45,5 +49,13 @@ describe("position du catalogue au retour d'une fiche", () => {
     expect(positionARemettre(s, "/", true)).toBeNull();
     noterPosition(s, "/", 0);
     expect(positionARemettre(s, "/", true)).toBeNull();
+  });
+
+  it("reconnaît la fiche ouverte depuis le catalogue (lien « Retour au catalogue »)", () => {
+    const s = stockage();
+    expect(ouverteDepuisCatalogue(s, "/jeux/wii-u/splatoon")).toBe(false);
+    noterPosition(s, "/", 3000, "/jeux/wii-u/splatoon");
+    expect(ouverteDepuisCatalogue(s, "/jeux/wii-u/splatoon")).toBe(true);
+    expect(ouverteDepuisCatalogue(s, "/jeux/wii-u/mario-kart-8")).toBe(false);
   });
 });

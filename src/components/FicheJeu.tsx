@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useSyncExternalStore } from "react";
 import { formaterDate } from "@/lib/catalogue/catalogue";
+import { retourParPrecedent } from "@/lib/catalogue/defilement";
 import { lireMarche } from "@/lib/catalogue/marche";
 import { REGIONS, type Marche, type Region } from "@/lib/catalogue/types";
 import {
@@ -49,6 +51,7 @@ const sansAbonnement = () => () => {};
 
 /** Fiche d'un jeu (US-04) : sélecteur JAP / US / PAL sous la jaquette, informations, disponibilité, sources. */
 export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
+  const router = useRouter();
   // Page préparée à l'avance (ADR-02) : PAL au premier affichage, puis le marché choisi dans ce navigateur.
   const marche = useSyncExternalStore<Marche>(
     sansAbonnement,
@@ -94,6 +97,12 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-5 px-4 pt-2 pb-7">
       <Link
         href="/"
+        onClick={(e) => {
+          // Fiche ouverte depuis le catalogue : revenir comme « Précédent » (même hauteur, mêmes filtres).
+          if (!retourParPrecedent()) return;
+          e.preventDefault();
+          router.back();
+        }}
         className="flex h-11 items-center gap-1 text-sm font-medium"
       >
         <span aria-hidden="true">‹</span> Retour au catalogue

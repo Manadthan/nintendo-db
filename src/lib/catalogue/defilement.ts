@@ -7,11 +7,34 @@
 const CLE = "nintendo-db:defilement";
 
 type Stockage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
-type Position = { adresse: string; y: number };
+type Position = { adresse: string; y: number; fiche?: string };
 
-/** Note la hauteur du catalogue à cette adresse (chemin + paramètres : filtres, recherche, marché). */
-export function noterPosition(stockage: Stockage, adresse: string, y: number) {
-  stockage.setItem(CLE, JSON.stringify({ adresse, y } satisfies Position));
+/**
+ * Note la hauteur du catalogue à cette adresse (chemin + paramètres : filtres, recherche, marché), et la fiche
+ * ouverte : son lien « Retour au catalogue » fait alors comme « Précédent ».
+ */
+export function noterPosition(
+  stockage: Stockage,
+  adresse: string,
+  y: number,
+  fiche?: string,
+) {
+  stockage.setItem(
+    CLE,
+    JSON.stringify({ adresse, y, fiche } satisfies Position),
+  );
+}
+
+/** Vrai si cette fiche a été ouverte depuis le catalogue (la page précédente de l'historique est le catalogue). */
+export function ouverteDepuisCatalogue(stockage: Stockage, fiche: string) {
+  try {
+    const position = JSON.parse(
+      stockage.getItem(CLE) ?? "null",
+    ) as Partial<Position> | null;
+    return position?.fiche === fiche;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -61,17 +84,23 @@ function consommerRetourArriere(): boolean {
   if (retour) return true;
   if (!premier) return false;
   const chargement = performance.getEntriesByType("navigation")[0] as
-    | PerformanceNavigationTiming
-    | undefined;
+    PerformanceNavigationTiming | undefined;
   return chargement?.type === "back_forward";
 }
 
 const adresseCourante = () => location.pathname + location.search;
 
 /** Au clic sur un jeu du catalogue. Stockage indisponible (navigation privée) : rien n'est noté. */
-export function noterPositionCatalogue() {
+export function noterPositionCatalogue(clic: {
+  currentTarget: { getAttribute(nom: string): string | null };
+}) {
   try {
-    noterPosition(sessionStorage, adresseCourante(), window.scrollY);
+    noterPosition(
+      sessionStorage,
+      adresseCourante(),
+      window.scrollY,
+      clic.currentTarget.getAttribute("href") ?? undefined,
+    );
   } catch {
     // Sans stockage, le navigateur fait comme il peut.
   }
@@ -90,4 +119,16 @@ export function remettrePositionCatalogue() {
   const hauteur = y;
   // Après le rendu du catalogue (la page a retrouvé sa longueur).
   requestAnimationFrame(() => window.scrollTo(0, hauteur));
+}
+
+/**
+ * « Retour au catalogue » depuis une fiche ouverte dans le catalogue : vrai si le lien doit faire « Précédent »
+ * (même hauteur, mêmes filtres) plutôt qu'ouvrir l'accueil en haut de page.
+ */
+export function retourParPrecedent(): boolean {
+  try {
+    return ouverteDepuisCatalogue(sessionStorage, location.pathname);
+  } catch {
+    return false;
+  }
 }

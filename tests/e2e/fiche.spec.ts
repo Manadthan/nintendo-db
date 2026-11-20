@@ -117,7 +117,7 @@ test("un visiteur ne voit aucune case de collection (US-16 : collection privée)
   await expect(page.getByRole("checkbox")).toHaveCount(0);
 });
 
-test("« Précédent » depuis une fiche ramène le catalogue à la même hauteur, le lien Retour en haut", async ({
+test("« Précédent » et « Retour au catalogue » ramènent le catalogue à la même hauteur", async ({
   page,
 }) => {
   await page.goto("/");
@@ -136,8 +136,20 @@ test("« Précédent » depuis une fiche ramène le catalogue à la même hauteu
     .poll(() => page.evaluate(() => Math.round(window.scrollY)))
     .toBeGreaterThanOrEqual(hauteur - 2);
 
-  // Revenir par le lien de la fiche n'est pas un retour arrière : le catalogue repart du haut.
+  // Le lien de la fiche fait comme « Précédent ».
   await jeux.last().click();
+  await expect(page).toHaveURL(/\/jeux\/wii-u\//);
+  await page.getByRole("link", { name: /Retour au catalogue/ }).click();
+  await expect(page).toHaveURL("/");
+  await expect
+    .poll(() => page.evaluate(() => Math.round(window.scrollY)))
+    .toBeGreaterThanOrEqual(hauteur - 2);
+});
+
+test("« Retour au catalogue » d'une fiche ouverte directement mène à l'accueil, en haut", async ({
+  page,
+}) => {
+  await page.goto(KIRBY);
   await page.getByRole("link", { name: /Retour au catalogue/ }).click();
   await expect(page).toHaveURL("/");
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
