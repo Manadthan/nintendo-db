@@ -48,6 +48,15 @@ const SOURCES = [
     licenceLien: "https://gamecartdb.com/terms",
   },
   {
+    nom: "Nintendo",
+    lien: "https://www.nintendo.com/fr-fr/",
+    apport:
+      "Boîtes européennes officielles (PEGI) de jeux Wii U et Switch dont GameTDB n'a pas de boîte française.",
+    licence:
+      "Images reprises avec mention de la source ; elles restent la propriété de Nintendo ; retrait sur demande.",
+    licenceLien: "https://www.nintendo.com/fr-fr/",
+  },
+  {
     nom: "GameTDB",
     lien: "https://www.gametdb.com/",
     apport:
@@ -73,10 +82,10 @@ export default function APropos() {
           <p className="text-sm leading-relaxed text-texte-doux">
             Nintendo DB recense les jeux édités par Nintendo et sortis en boîte,
             version par version : jaquette, titre, date et code produit au
-            Japon, en Amérique du Nord et en Europe. Consoles couvertes : NES, Game
-            Boy, Super Nintendo, Virtual Boy, Nintendo 64, Game Boy Color, Game
-            Boy Advance, GameCube, Wii U, Wii, DS, 3DS, Switch et Switch 2 ; les
-            autres suivront.
+            Japon, en Amérique du Nord et en Europe. Consoles couvertes : NES,
+            Game Boy, Super Nintendo, Virtual Boy, Nintendo 64, Game Boy Color,
+            Game Boy Advance, GameCube, Wii U, Wii, DS, 3DS, Switch et Switch 2
+            ; les autres suivront.
           </p>
         </section>
 

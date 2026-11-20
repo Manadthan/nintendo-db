@@ -186,6 +186,16 @@ export type JaquetteEnBase = {
  * la main ou déjà scannée ; une ancienne image IGDB est remplacée par le scan. `recopier` : recopier aussi les
  * scans déjà copiés (nouvelle taille d'image, #48), jamais les ajouts à la main.
  */
+/**
+ * Jaquettes que l'import ne remplace jamais : ajoutées à la main (photo, adresse) ou choisies par le propriétaire
+ * (gamecartdb pour la Switch 2, SPEC v1.26 ; boîtes européennes de Nintendo, SPEC v1.29).
+ */
+export const estGardee = (source: SourceJaquette | null | undefined) =>
+  source === "photo" ||
+  source === "url" ||
+  source === "gamecartdb" ||
+  source === "nintendo";
+
 export function choisirJaquettes(
   jeu: JeuImporte,
   disques: JeuAImporter["disques"],
@@ -197,11 +207,7 @@ export function choisirJaquettes(
   return Object.fromEntries(
     REGIONS.map((r) => {
       const deja = existantes?.[r];
-      // gamecartdb : choisie par le propriétaire (Switch 2), gardée comme un ajout à la main.
-      const manuelle =
-        deja?.source === "photo" ||
-        deja?.source === "url" ||
-        deja?.source === "gamecartdb";
+      const manuelle = estGardee(deja?.source);
       const scanne = deja?.path && deja.source === "gametdb";
       const id = disques[r];
       if (!jeu.releases[r].sortie || !id || manuelle || (scanne && !recopier))
