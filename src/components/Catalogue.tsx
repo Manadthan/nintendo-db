@@ -5,6 +5,7 @@ import { useState, useSyncExternalStore } from "react";
 import {
   formaterDate,
   grouperParAnnee,
+  TRI_PAR_DEFAUT,
   trier,
 } from "@/lib/catalogue/catalogue";
 import {
@@ -82,7 +83,7 @@ type Props = {
  * la console), grille / liste, groupes par année.
  */
 export function Catalogue({ jeux, consoles }: Props) {
-  const [tri, setTri] = useState<Tri>("anciens");
+  const [tri, setTri] = useState<Tri>(TRI_PAR_DEFAUT);
   // Page préparée à l'avance, identique pour tous (ADR-02) : « grille » au premier affichage,
   // puis le choix enregistré dans ce navigateur.
   const vue = useSyncExternalStore(abonner, lireVue, () => "grille" as Vue);
@@ -207,8 +208,8 @@ export function Catalogue({ jeux, consoles }: Props) {
           onChange={(e) => setTri(e.target.value as Tri)}
           className="h-9 rounded-[10px] border border-champ bg-carte px-2.5 text-[13px] font-medium"
         >
-          <option value="anciens">Plus anciens</option>
           <option value="recents">Plus récents</option>
+          <option value="anciens">Plus anciens</option>
           <option value="az">A → Z</option>
           <option value="note">Mieux notés</option>
         </select>

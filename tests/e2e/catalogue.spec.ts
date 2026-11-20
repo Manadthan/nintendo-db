@@ -28,9 +28,16 @@ test("l'accueil présente le site puis « Tous les jeux » avec le nombre total"
   await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
 });
 
-test("les jeux sont groupés par année, du plus ancien au plus récent", async ({
+test("les jeux sont groupés par année, du plus récent au plus ancien par défaut (SPEC v1.31)", async ({
   page,
 }) => {
+  await expect(page.getByLabel("Tri")).toHaveValue("recents");
+  await expect(page.getByRole("heading", { level: 3 })).toHaveText([
+    "2015",
+    "2014",
+    "2013",
+  ]);
+  await page.getByLabel("Tri").selectOption("anciens");
   await expect(page.getByRole("heading", { level: 3 })).toHaveText([
     "2013",
     "2014",

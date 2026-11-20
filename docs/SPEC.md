@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.30 — 20/11/2026 — statut : **à valider**
+> Version 1.31 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.31 | 20/11/2026 | US-02 : tri par défaut **plus récents d'abord** (demande du propriétaire ; avant : plus anciens d'abord) |
 > | 1.30 | 20/11/2026 | US-17 : la note Metacritic du catalogue passe **en surimpression sur la jaquette** (coin en haut à droite, couleurs Metacritic), en grille et en liste, au lieu d'une étiquette (demande du propriétaire) |
 > | 1.29 | 20/11/2026 | **Boîtes européennes officielles de Nintendo** (choix du propriétaire) : 39 jeux Wii U et Switch sans boîte française chez GameTDB reçoivent la boîte PEGI de nintendo.com, source citée ; boîtes JAP du site japonais écartées (illustrations carrées, pas des boîtes) |
 > | 1.28 | 20/11/2026 | **Boîte PAL française d'abord** (Wii U, Switch ; choix du propriétaire) : l'anglaise de GameTDB est souvent un scan allemand (USK) ; jaquettes en place remplacées une fois |
@@ -85,7 +86,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       tri, grille / liste, filtres (US-06), et « N jeux affichés sur M ».
 - [ ] Les jeux s'affichent en **grille de jaquettes** (2 par ligne sur iPhone) ou en **liste** ; le dernier choix est retenu.
 - [ ] Chaque jeu montre jaquette, titre, date et sa **disponibilité par région** (JAP · US · PAL, cochées si sorti).
-- [ ] Tri : plus anciens d'abord (par défaut), plus récents d'abord, A → Z, **mieux notés** (note Metacritic, v1.21 : de la meilleure
+- [ ] Tri : plus récents d'abord (par défaut, v1.31), plus anciens d'abord, A → Z, **mieux notés** (note Metacritic, v1.21 : de la meilleure
       à la moins bonne, à égalité par titre, jeux sans note à la fin) ; regroupement **par année** en tri par date, **par
       tranche** en tri par note (« 90 et plus », « 75 à 89 », « 50 à 74 », « Moins de 50 », « Sans note »).
 - [ ] La page reste fluide avec 300 jeux (images chargées au fil du défilement).
