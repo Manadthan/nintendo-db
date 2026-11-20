@@ -3,6 +3,7 @@ import {
   disponibilite,
   formaterDate,
   grouperParAnnee,
+  TRI_PAR_DEFAUT,
   trancheNote,
   trier,
   versionAffichee,
@@ -106,7 +107,11 @@ describe("formaterDate", () => {
 describe("trier et grouperParAnnee (US-02)", () => {
   const jeux = [MK8, KARAOKE, SING, JAP_SEUL];
 
-  it("trie du plus ancien au plus récent par défaut, sur la date de la version affichée", () => {
+  it("tri par défaut : du plus récent au plus ancien (SPEC v1.31)", () => {
+    expect(TRI_PAR_DEFAUT).toBe("recents");
+  });
+
+  it("trie du plus ancien au plus récent, sur la date de la version affichée", () => {
     expect(trier(jeux, "anciens", "TOUS").map((v) => v.jeu.slug)).toEqual([
       "sing-party", // PAL 18/01/2013
       "wii-karaoke-u", // PAL 04/10/2013

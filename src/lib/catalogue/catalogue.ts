@@ -68,6 +68,9 @@ export function formaterDate(
 }
 
 /** Jeux sortis sur le marché choisi, triés (US-02, US-03). */
+/** Tri à l'ouverture du catalogue : les plus récents d'abord (SPEC v1.31, demande du propriétaire). */
+export const TRI_PAR_DEFAUT: Tri = "recents";
+
 export function trier(
   jeux: JeuCatalogue[],
   tri: Tri,
