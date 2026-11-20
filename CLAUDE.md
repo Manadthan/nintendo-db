@@ -23,7 +23,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.4 validée |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.32 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.34 à valider |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.17 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques : `docs/maquettes/`) | v0.7 validée |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10) : chiffres, réussites, difficultés, leçons | v1.4 validée |
@@ -75,7 +75,7 @@ src/lib/catalogue/       toutes les consoles (charger.ts : jeux + consoles, éta
 src/lib/statistiques/   statistiques du propriétaire (US-18, ADR-11) : calculs purs (statistiques.ts : collection par console, régions, Metacritic, état du catalogue) + tests, lecture paginée (charger.ts) ; page src/app/admin/statistiques/
 src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; src/app/not-found.tsx : 404 en français
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
-src/components/          EnTete (Logo ; icônes Catalogue, À propos, BoutonTheme, BoutonCompte : seul accès à la connexion ou à l'administration, SPEC v1.15), Catalogue (client : recherche, marché, tri, filtres, grille/liste), Filtres (panneau et pastilles, US-06), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite, NoteMetacritic (pastille aux couleurs Metacritic sur la jaquette du catalogue, US-17)
+src/components/          EnTete (collé en haut au défilement ; Logo ; icônes Catalogue, À propos, BoutonTheme, BoutonCompte : seul accès à la connexion ou à l'administration, SPEC v1.15 ; BoutonHaut « Remonter en haut », SPEC v1.34), Catalogue (client : recherche, marché, tri, filtres, grille/liste), Filtres (panneau et pastilles, US-06), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite, NoteMetacritic (pastille aux couleurs Metacritic sur la jaquette du catalogue, US-17)
 src/lib/referencement/   adresse du site, sitemap, robots, métadonnées et données structurées des fiches (étape 7) + tests ; src/app/sitemap.ts, robots.ts
 src/lib/theme/           choix du thème : auto/clair/sombre, script anti-éclair (US-08) + tests
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
