@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.33 — 20/11/2026 — statut : **à valider**
+> Version 1.34 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.34 | 20/11/2026 | En-tête **toujours visible** pendant le défilement (comme gamecartdb) et bouton flottant **« Remonter en haut »** en bas à droite (demande du propriétaire) |
 > | 1.33 | 20/11/2026 | US-10 : **jeux absents** (contrôle par les bases officielles de Nintendo) : DS, identifiants en Y et régions vides ; Switch et 3DS, éditeur repris de Nintendo Europe et Japon quand GameTDB n'en donne pas |
 > | 1.32 | 20/11/2026 | US-18 : bascule **Tous / First party** en tête de la page Statistiques (demande du propriétaire) |
 > | 1.31 | 20/11/2026 | US-02 : tri par défaut **plus récents d'abord** (demande du propriétaire ; avant : plus anciens d'abord) |
@@ -178,6 +179,8 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       connexion ; connecté, elle est pleine et colorée et ouvre directement l'administration (le propriétaire est
       le seul compte ; des profils utilisateurs viendront plus tard). Pour lui faire place sur 375 px, « Catalogue »
       et « À propos » deviennent des **icônes** (nommées pour les lecteurs d'écran, page courante en couleur).
+- [ ] L'en-tête (logo, nom, icônes) **reste collé en haut de l'écran** pendant le défilement (v1.34) ; sur les pages
+      publiques, un bouton rond **« Remonter en haut »** apparaît en bas à droite après un défilement et ramène en haut.
 - [ ] Les fonctions de modification n'apparaissent qu'une fois connecté ; un visiteur ne peut rien modifier,
       même en appelant directement le serveur.
 - [ ] Un bouton permet de se déconnecter.

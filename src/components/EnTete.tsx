@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BoutonCompte } from "./BoutonCompte";
+import { BoutonHaut } from "./BoutonHaut";
 import { BoutonTheme } from "./BoutonTheme";
 import { Logo } from "./Logo";
 
@@ -45,10 +46,11 @@ function LienIcone({
 /**
  * En-tête des pages publiques (maquettes 1 et 2) : logo et nom du site, puis des icônes (SPEC v1.15, demande du
  * propriétaire : place pour l'icône de compte sur 375 px) : Catalogue, À propos, thème (US-08), compte (US-09).
+ * Collé en haut de l'écran pendant le défilement, comme gamecartdb ; avec le bouton « Remonter en haut » (SPEC v1.34).
  */
 export function EnTete({ page }: { page?: "catalogue" | "a-propos" }) {
   return (
-    <header className="flex h-14 items-center justify-between gap-1 border-b border-bordure bg-carte pr-1 pl-4">
+    <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-1 border-b border-bordure bg-carte pr-1 pl-4">
       <Link
         href="/"
         className="flex items-center gap-2 font-titre text-[19px] font-bold tracking-tight"
@@ -76,6 +78,7 @@ export function EnTete({ page }: { page?: "catalogue" | "a-propos" }) {
         <BoutonTheme />
         <BoutonCompte />
       </nav>
+      <BoutonHaut />
     </header>
   );
 }

@@ -21,6 +21,31 @@ test.describe("accueil", () => {
     ).toBeVisible();
   });
 
+  test("bandeau toujours visible et bouton « Remonter en haut » au défilement (SPEC v1.34)", async ({
+    page,
+  }) => {
+    const remonter = page.getByRole("button", {
+      name: "Remonter en haut",
+      exact: true,
+    });
+    await expect(remonter).toBeHidden();
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await expect
+      .poll(() => page.evaluate(() => window.scrollY))
+      .toBeGreaterThan(0);
+    // Le bandeau reste collé en haut de l'écran, avec ses icônes.
+    const bandeau = page.getByRole("banner");
+    await expect(bandeau).toBeInViewport();
+    expect((await bandeau.boundingBox())?.y).toBeLessThanOrEqual(1);
+    await expect(
+      bandeau.getByRole("link", { name: "À propos", exact: true }),
+    ).toBeInViewport();
+    await expect(remonter).toBeVisible();
+    await remonter.click();
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+    await expect(remonter).toBeHidden();
+  });
+
   test("tient dans la largeur de l'iPhone (pas de défilement horizontal)", async ({
     page,
   }) => {
