@@ -35,6 +35,17 @@ const texte = ($: CheerioAPI, el: Cheerio<AnyNode>) =>
     .replace(/\s+/g, " ")
     .trim();
 
+/** Plusieurs noms en liste à puces (« Nintendo R&D1 », « Tose ») : « a, b », pas collés. */
+const noms = ($: CheerioAPI, el: Cheerio<AnyNode>): string | null =>
+  (el.find("li").length
+    ? el
+        .find("li")
+        .toArray()
+        .map((li) => texte($, $(li)))
+        .filter(Boolean)
+        .join(", ")
+    : texte($, el)) || null;
+
 /** Tableau → grille de cellules, cellules fusionnées recopiées dans chaque case qu'elles couvrent. */
 function grille($: CheerioAPI, table: Cheerio<Element>): Element[][] {
   const lignes: Element[][] = [];
@@ -264,7 +275,7 @@ export function lireListeCartouches(html: string): ListeCartouches {
         .map((_, i) => texte($, $(i)))
         .get()
         .filter(Boolean),
-      developpeur: texte($, cell(col.developpeur)) || null,
+      developpeur: noms($, cell(col.developpeur)),
       wikipediaUrl: lien ? lien.replace(/#.*$/, "") : null,
       sorties,
       disques: {},

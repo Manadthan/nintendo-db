@@ -115,6 +115,14 @@ describe("listes lues telles que Wikipédia les écrit (Virtual Boy, étape 19)"
     expect(sorties?.JAP?.editeur).toBe("T&E Soft");
     expect(sorties?.US?.editeur).toBe("Nintendo");
   });
+
+  // Contrôle du 20/11/2026 : « Nintendo R&D1Tose », « Hudson SoftRaizing » (noms collés).
+  it("plusieurs développeurs en liste à puces : séparés par une virgule", () => {
+    const VB = lire("vb-wikipedia.html");
+    expect(jeu(VB, "marios-tennis").developpeur).toBe("Nintendo R&D1, Tose");
+    expect(jeu(VB, "panic-bomber").developpeur).toBe("Hudson Soft, Raizing");
+    expect(jeu(VB, "red-alarm").developpeur).toBe("T&E Soft");
+  });
 });
 
 describe("Super Nintendo (étape 20) : liste lue telle que Wikipédia l'écrit", () => {
