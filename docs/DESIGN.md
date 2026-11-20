@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.17 — 20/11/2026 — statut : **à valider**
+> Version 1.18 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.18 | 20/11/2026 | **Contrôle par les bases officielles** (§1 terdecies) : jeux absents expliqués ; ADR-13 (éditeur repris de Nintendo Europe et Japon quand GameTDB est vide ; DS : identifiants en Y et régions vides) ; étape 22 |
 > | 1.17 | 20/11/2026 | Source de jaquette `nintendo` (migration 0021) : packshots PEGI de nintendo.com/eu trouvés par code produit (API de recherche de Nintendo Europe), copiés une fois par `scripts/jaquettes-nintendo-eu.mjs`, gardés par l'import comme gamecartdb (`estGardee`) |
 > | 1.16 | 20/11/2026 | **Boîte PAL française d'abord** (Wii U, Switch, SPEC v1.28) : ordre FR, EN, DE au relais ; `scripts/jaquettes-pal-francaises.mjs` remplace une fois les jaquettes PAL GameTDB en place |
 > | 1.15 | 19/11/2026 | **NES** (étape 21) : étude (§1 duodecies), plan §8 |
@@ -72,7 +73,7 @@ Bases `dstdb.zip` et `3dstdb.zip` du 17/11 ; jeu retenu si au moins une carte a 
 | Mesure | DS | 3DS |
 |---|---|---|
 | Types gardés | `DS`, `DSi` (pas `DSiWare`) | `3DS`, `New3DS` (pas `3DSWare`, `VC-*`) |
-| Écartés | identifiants en **Y** (démos, téléchargements), genre `software`/`demo`/`sampler`, titres « (Demo) », « Download », « Kiosk », « Taikenban » | identifiants autres que **A, B, C, E** (U = Super Nintendo, J = eShop, V = codes, H = logiciel), mêmes genres et titres |
+| Écartés | identifiants en **Y** (démos, téléchargements ; règle levée en v1.18, ADR-13), genre `software`/`demo`/`sampler`, titres « (Demo) », « Download », « Kiosk », « Taikenban » | identifiants autres que **A, B, C, E** (U = Super Nintendo, J = eShop, V = codes, H = logiciel), mêmes genres et titres |
 | Jeux Nintendo / cartes | **116** / 358 | **118** / 295 |
 | Dates au jour près | 324 / 358 | 276 / 295 |
 | Titres japonais (locale JA) | 99 / 106 cartes JAP | 81 / 85 |
@@ -230,6 +231,24 @@ confondus dans la clé de titre.
 Les boîtes « (World) » (92 fichiers) sont la boîte américaine noire (Super Mario Bros., Duck Hunt) : réservées aux
 États-Unis et à l'Europe. Planche montrée au propriétaire avant la spec (leçon 9).
 
+## 1 terdecies. Contrôle par les bases officielles de Nintendo (20/11/2026)
+
+Demande du propriétaire : trop d'erreurs sur les jeux manquants. Catalogue des 6 consoles récentes (504 jeux) comparé
+à deux bases officielles, par code produit (sinon titre anglais). Rapport : 301 écarts (artifact « Contrôle du catalogue »).
+
+| Source | Contenu | Couverture |
+|---|---|---|
+| Nintendo Europe (`searching.nintendo-europe.com`, API Solr publique) | 23 928 jeux : éditeur, codes produit, dates, support (`*_gamecard`, `*_disc`, `*_cartridge`) | toutes consoles ; codes absents des jeux Switch récents et de la DS |
+| Nintendo Japon (`search.nintendo.jp`) | 19 428 jeux : éditeur japonais, date, format (`*_CARD`, `*_DOWNLOADABLE` = boîte ; `*_DL` = téléchargement) | Switch, Switch 2, 3DS, Wii U (ni Wii ni DS) |
+| Nintendo US | boutique : date, éditeur, code produit, page par page | recherche par un service tiers non autorisé : pas encore utilisé |
+
+| Écart | Nombre | Cause principale |
+|---|---|---|
+| Jeux absents | 78 | **éditeur vide dans GameTDB** (686 cartouches Switch, dont ~20 jeux Nintendo : Fire Emblem: Three Houses, Pikmin 4…) ; **DS : identifiants en Y écartés** comme démos (~15 jeux : Kirby Super Star Ultra, Layton, Rhythm Paradise, Dragon Quest IX…) ; **DS : région vide** (Pokémon Noir et Blanc, 1 et 2) |
+| Régions | 82 | cartes d'une région éditées par un autre (Level-5, Marvelous) ; à revoir au cas par cas |
+| Dates | 123 | dates de réédition (GameTDB), années seules (« 1er janvier ») |
+| Éditeur | 18 | éditeur d'une seule région étendu aux autres (Hyrule Warriors au Japon : Koei Tecmo) |
+
 ## 2. Stack
 
 Identique à `mon-site-sdlc` (décision 7 de l'intention) :
@@ -369,6 +388,14 @@ pures** (`src/lib/statistiques/`), testées sur des jeux d'exemple. Rien n'est s
 migration, chiffres toujours justes ; quelques milliers de lignes, lues en une requête. « Jaquette manquante » = sortie
 sans jaquette ou de source `igdb` (même règle que « à remplacer », US-12). Les compteurs du panneau Filtres sont
 retirés (le filtre « Ma collection » reste).
+
+**ADR-13 — Éditeur officiel quand GameTDB est vide (étape 22).** Le relais dépose `nintendo/editeurs.json` : les
+bases de code (identifiant sans la lettre de région) des jeux que Nintendo Europe ou Nintendo Japon disent édités par
+Nintendo (ou The Pokémon Company au Japon), pour la Switch et la 3DS. L'import tient une cartouche pour « éditée par
+Nintendo » si GameTDB le dit **ou**, quand son éditeur est vide, si sa base est dans ce fichier ; il ne contredit jamais un
+éditeur renseigné. DS : les identifiants en Y ne sont plus écartés (les démos le restent par leur titre et leur genre) ;
+une carte sans région prend celle de la 4ᵉ lettre de son identifiant (E = US, P et pays européens = PAL, J = JAP,
+O = US et PAL). Testé sur des copies réduites des deux bases (fixtures).
 
 **ADR-12 — Game Boy Color (étape 17).** Lecteur de cartouches de l'ADR-09 généralisé : en-tête sur une ou deux lignes,
 date « First released », colonnes de région seules. La colonne **Dual Mode** donne le préfixe du code produit de chaque
@@ -514,6 +541,10 @@ test n'appelle les sites en direct.
 
 21. **NES** (v1.15) — 1 PR, migration 0019 ou suivante (console `nes`, 1983, en tête de l'ordre) : règle « World » sans
     le Japon ; préfixe du code selon la région de la série (rare) ; fixtures NES réduites.
+
+22. **Jeux absents** (v1.18, ADR-13) — 2 PR : (1) DS, identifiants en Y et régions vides ; (2) Switch et 3DS, éditeur
+    repris de Nintendo Europe et Japon (relais + import). Puis relais et nouvel import de la DS, de la Switch et de la 3DS
+    par le propriétaire (aperçu avant enregistrement).
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
