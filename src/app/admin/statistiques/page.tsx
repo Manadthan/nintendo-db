@@ -6,6 +6,9 @@ import { REGIONS } from "@/lib/catalogue/types";
 import { chargerStatistiques } from "@/lib/statistiques/charger";
 import {
   etatCatalogue,
+  lirePerimetre,
+  selonPerimetre,
+  type Perimetre,
   maCollection,
   notesMetacritic,
   parRegion,
@@ -80,12 +83,29 @@ function ListeNotes({ titre, jeux }: { titre: string; jeux: JeuNote[] }) {
 }
 
 /** Statistiques du propriétaire (US-18) : page réservée (proxy /admin, puis exigerProprietaire au chargement). */
-export default async function PageStatistiques() {
-  const { jeux, consoles, possessions } = await chargerStatistiques();
+/** Bascule Tous / First party (SPEC v1.32) : dans l'adresse, pour qu'un lien la garde. */
+const PERIMETRES: { valeur: Perimetre; nom: string; lien: string }[] = [
+  { valeur: "tous", nom: "Tous", lien: "/admin/statistiques" },
+  {
+    valeur: "first-party",
+    nom: "First party",
+    lien: "/admin/statistiques?jeux=first-party",
+  },
+];
+
+export default async function PageStatistiques({
+  searchParams,
+}: {
+  searchParams: Promise<{ jeux?: string | string[] }>;
+}) {
+  const perimetre = lirePerimetre((await searchParams).jeux);
+  const { jeux: tous, consoles, possessions } = await chargerStatistiques();
+  // Collection, régions et notes : sur le périmètre choisi ; l'état du catalogue porte toujours sur tous les jeux.
+  const jeux = selonPerimetre(tous, perimetre);
   const collection = maCollection(jeux, consoles, possessions);
   const regions = parRegion(jeux, possessions);
   const notes = notesMetacritic(jeux, possessions);
-  const etat = etatCatalogue(jeux, consoles);
+  const etat = etatCatalogue(tous, consoles);
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-4 px-4 py-6">
@@ -98,6 +118,29 @@ export default async function PageStatistiques() {
       <h1 className="font-titre text-[26px] font-bold tracking-tight">
         Statistiques
       </h1>
+
+      <nav
+        aria-label="Jeux comptés"
+        className="flex rounded-[10px] border border-bordure bg-carte p-1"
+      >
+        {PERIMETRES.map((p) => (
+          <Link
+            key={p.valeur}
+            href={p.lien}
+            aria-current={p.valeur === perimetre ? "page" : undefined}
+            className={`flex h-9 flex-1 items-center justify-center rounded-md text-sm font-semibold ${p.valeur === perimetre ? "bg-texte text-inverse" : "text-texte-doux"}`}
+          >
+            {p.nom}
+          </Link>
+        ))}
+      </nav>
+      {perimetre === "first-party" && (
+        <p className="-mt-2 text-xs text-texte-discret">
+          Jeux développés par les studios internes de Nintendo (comme le filtre
+          « Nintendo (first party) » du catalogue). L&apos;état du catalogue
+          compte toujours tous les jeux.
+        </p>
+      )}
 
       <Bloc titre="Ma collection">
         <p className="flex items-baseline gap-2">

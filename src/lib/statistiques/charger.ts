@@ -2,6 +2,7 @@ import "server-only";
 import { aRemplacer, type Source } from "@/lib/admin/jaquettes";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import { ensemble } from "@/lib/collection/collection";
+import { estFirstParty, studios } from "@/lib/catalogue/developpeurs";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
 import { toutesLesPages } from "@/lib/supabase/pages";
 import type { JeuStat } from "./statistiques";
@@ -9,6 +10,7 @@ import type { JeuStat } from "./statistiques";
 type LigneJeu = {
   id: string;
   metacritic_note: number | null;
+  developpeur: string | null;
   consoles: { slug: string; nom: string };
   releases: {
     region: Region;
@@ -39,7 +41,7 @@ export async function chargerStatistiques() {
         supabase
           .from("games")
           .select(
-            "id, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre, code_produit, jaquette_path, jaquette_source)",
+            "id, metacritic_note, developpeur, consoles!inner(slug, nom), releases(region, sortie, titre, code_produit, jaquette_path, jaquette_source)",
           )
           .order("id")
           .range(de, a)
@@ -72,6 +74,7 @@ export async function chargerStatistiques() {
     sansCode: sorties(l)
       .filter((s) => !s.code_produit)
       .map((s) => s.region),
+    firstParty: studios(l.developpeur).some(estFirstParty),
   }));
   return {
     jeux,
