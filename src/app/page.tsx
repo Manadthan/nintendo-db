@@ -9,21 +9,12 @@ export const revalidate = 300;
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
-/** « Wii », « Wii et Wii U », « GameCube, Wii et Wii U ». */
-const enumerer = (noms: string[]) =>
-  noms.length < 2
-    ? (noms[0] ?? "")
-    : `${noms.slice(0, -1).join(", ")} et ${noms.at(-1)}`;
-
 // L'accueil EST le catalogue de toutes les consoles (US-01, SPEC v1.9 ; ADR-06).
 export default async function Accueil() {
   const [jeux, consoles] = await Promise.all([
     chargerCatalogue(),
     chargerConsoles(),
   ]);
-  const couvertes = consoles.filter((c) =>
-    jeux.some((j) => j.console.slug === c.slug),
-  );
 
   return (
     <>
@@ -38,9 +29,8 @@ export default async function Accueil() {
             Les jeux Nintendo en boîte, version par version
           </h1>
           <p className="text-sm leading-relaxed text-texte-doux">
-            {enumerer(couvertes.map((c) => c.nom))} : chaque jeu édité par
-            Nintendo, avec ses jaquettes, titres et dates au Japon, en Amérique
-            du Nord et en Europe.
+            Tous les jeux édités par Nintendo, avec leurs jaquettes, titres et
+            dates au Japon, en Amérique du Nord et en Europe.
           </p>
         </section>
 
