@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.4 — 19/11/2026 — statut : **validé**
+> Version 1.5 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.5 | 20/11/2026 | **Étapes 18 à 22** : Game Boy, Virtual Boy, Super Nintendo, NES, jaquettes officielles, contrôle par les bases officielles (§11) |
 > | 1.4 | 19/11/2026 | **Étapes 15 à 17** : N64 et GBA complétées, statistiques, tri par note, Game Boy Color ; CI réparée (§10) |
 > | 1.3 | 19/11/2026 | **Étapes 11 à 14** : GameCube, filtre Développeur, ma collection, note Metacritic, Nintendo 64 et Game Boy Advance (§9) |
 > | 1.2 | 18/11/2026 | **Étapes 8 à 10** : Wii, DS, 3DS, Switch, Switch 2, import des nouveautés (§8) |
@@ -203,3 +204,33 @@ Leçons ajoutées :
 
 Pistes : boîtes japonaises GBC (titres romanisés), codes produit GBC (No-Intro rare), Game Boy d'origine, Super
 Nintendo, NES ; notes Metacritic à compléter à la main depuis la page Statistiques.
+
+## 11. Étapes 18 à 22 : Game Boy, Virtual Boy, Super Nintendo, NES, contrôle par les bases officielles
+
+| | |
+|---|---|
+| Durée | 2 jours (19 et 20/11/2026) |
+| Livré | **4 consoles** par la recette Wikipédia + libretro (+ No-Intro) : Game Boy (91 jeux), Virtual Boy (11, Japon et États-Unis), Super Nintendo (98, boîtes JAP par les titres japonais de la cellule), NES (104, boîte « World » jamais pour le Japon) ; **jaquettes** : Switch 2 US / PAL de gamecartdb, boîte PAL française d'abord (Wii U, Switch), packshots PEGI officiels de Nintendo Europe ; catalogue **lu page par page au-delà de 1 000 jeux** ; note Metacritic sur la jaquette, tri « plus récents » par défaut, bascule Tous / First party des statistiques, en-tête collé et « Remonter en haut » ; **contrôle par les bases officielles** de Nintendo Europe et Japon (301 écarts) : 27 jeux ajoutés, 161 corrections avec verrou |
+| Pull requests | 23 mergées (#145 à #168) |
+| Tests | 350 unitaires, 71 de bout en bout, 78 sur la base ; 21 migrations |
+| Code applicatif | ≈ 11 000 lignes (hors tests) |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| **Limite de 1 000 lignes** de Supabase par requête | Au-delà de 1 000 jeux (NES), le catalogue s'arrêtait net, sans erreur | Lecture page par page (#157), comme les statistiques |
+| **Éditeur vide chez GameTDB** (686 cartouches Switch) | Fire Emblem: Three Houses, Pikmin 4… absents du catalogue sans qu'on le voie | Contrôle par les bases officielles (§1 terdecies), éditeur repris de Nintendo Europe et Japon (ADR-13, #167) |
+| DS : identifiants en Y pris pour des démos, cartes sans région | Kirby Super Star Ultra, Layton, Pokémon Noir et Blanc absents | Démos écartées par le titre et le genre seulement (#166) |
+| Une source secondaire donne **un autre éditeur que Nintendo** pour la région où Nintendo l'édite | ~20 jeux encore absents (Fire Emblem Fates, Dragon Quest Builders…) | Étude en cours : l'éditeur officiel de la région l'emporte (suite de l'ADR-13) |
+| Le site officiel ne montre plus les boîtes retirées de la vente | 15 régions « téléchargement seulement » douteuses | Vérification jeu par jeu sur le web ; 5 jeux retirés, les autres gardés |
+| Switch 2 absente de GameTDB | Pas de boîte US ni PAL | gamecartdb, source citée (#153) |
+
+Leçons ajoutées :
+
+17. **Contrôler le catalogue contre une source officielle** : des centaines d'écarts restaient invisibles tant qu'on ne
+    comparait l'import qu'à lui-même ; un contrôle externe vaut mieux qu'une règle de plus.
+18. **Un nombre rond est une alerte** : 1 000 jeux pile cachait une limite de lecture, pas un catalogue complet.
+19. **Champ vide ≠ valeur fausse** : traiter séparément « la source ne sait pas » et « la source dit autre chose »,
+    et décider qui l'emporte, région par région.
+
+Pistes : éditeur officiel par région (étape 22, en cours), jaquettes manquantes (≈ 67, Switch 2 JAP surtout), jeux
+Wii et DS absents à ajouter à la main (Nintendo n'en donne pas le code produit), Nintendo US comme troisième source.
