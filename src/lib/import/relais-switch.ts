@@ -72,7 +72,11 @@ export const SCANS_SWITCH: Record<RegionSite, string[]> = {
  * Base Switch réduite (25 Mo → quelques centaines de Ko) aux cartouches du commerce des jeux dont au moins une
  * cartouche est éditée par Nintendo ; et la liste des scans à déposer, une par cartouche et région couverte.
  */
-export function reduireBaseSwitch(xml: string): {
+export function reduireBaseSwitch(
+  xml: string,
+  /** Carte sans éditeur éditée par Nintendo selon Nintendo Europe ou Japon (ADR-13) : base, région → oui / non. */
+  editeOfficiellement: (base: string, region: string) => boolean = () => false,
+): {
   xml: string;
   disques: { id: string; region: RegionSite }[];
 } {
@@ -100,7 +104,10 @@ export function reduireBaseSwitch(xml: string): {
       nintendo: false,
       disques: [],
     };
-    base.nintendo ||= EDITEUR_NINTENDO.test(champ("publisher"));
+    base.nintendo ||=
+      EDITEUR_NINTENDO.test(champ("publisher")) ||
+      (!champ("publisher") &&
+        editeOfficiellement(id.slice(0, 4), champ("region")));
     base.disques.push({ id, region: champ("region") });
     parBase.set(id.slice(0, 4), base);
   });
@@ -120,9 +127,20 @@ export function reduireBaseSwitch(xml: string): {
   ]);
   $("game").each((_, el) => {
     const jeu = $(el);
-    if (!ids.delete(jeu.children("id").first().text().trim())) {
+    const id = jeu.children("id").first().text().trim();
+    if (!ids.delete(id)) {
       jeu.remove();
       return;
+    }
+    // Éditeur vide complété par la liste officielle (ADR-13) : l'import lit ce champ ; un éditeur renseigné reste.
+    const editeur = jeu.children("publisher").first();
+    const regionCarte = jeu.children("region").first().text().trim();
+    if (
+      !editeur.text().trim() &&
+      editeOfficiellement(id.slice(0, 4), regionCarte)
+    ) {
+      if (editeur.length) editeur.text("Nintendo");
+      else jeu.append("<publisher>Nintendo</publisher>");
     }
     jeu.children().each((_, c) => {
       if (c.type === "tag" && !champsGardes.has(c.tagName)) $(c).remove();

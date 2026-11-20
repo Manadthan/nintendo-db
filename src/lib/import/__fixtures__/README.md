@@ -213,3 +213,14 @@ Fabriquées par les mêmes scripts que la Game Boy Color.
 | Contenu | Liste : 2 lignes d'en-tête, 104 jeux Nintendo et 15 autres ; index : 13 896 boîtes ; No-Intro : 13 296 entrées, réduites aux lignes lues (presque sans numéro de série : codes à la main) |
 
 Fabriquées par les mêmes scripts que la Game Boy Color.
+
+## `nintendo-europe.json`, `nintendo-japon.json` (étape 22, ADR-13)
+
+| | |
+|---|---|
+| Source | Base de Nintendo Europe (https://searching.nintendo-europe.com/en/select, jeux) et de Nintendo Japon (https://search.nintendo.jp/nintendo_soft/search.json), lues le 20/11/2026 |
+| Conditions | Données publiques des sites de Nintendo ; seuls l'éditeur, les codes produit et le titre sont gardés |
+| Contenu | Extraits : 5 jeux européens (4 édités par Nintendo dont Fire Emblem: Three Houses et Fire Emblem Fates, 1 par Ubisoft), 5 jeux japonais (Pikmin 4, Buddy Mission BOND, Pokémon LEGENDS Z-A par The Pokémon Company, Shovel Knight 3DS par Nintendo, Fit Boxing 3 par Imagineer) |
+
+Choisis à la main dans les bases complètes pour couvrir chaque règle (éditeur, console, région).
+

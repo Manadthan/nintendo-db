@@ -1,0 +1,37 @@
+[
+ {
+  "icode": "AMPYA",
+  "hard": "1_HAC",
+  "sform": "HAC_DOWNLOADABLE",
+  "maker": "任天堂",
+  "title": "Pikmin 4 (ピクミン4)"
+ },
+ {
+  "icode": "AQ2FA",
+  "hard": "1_HAC",
+  "sform": "HAC_DOWNLOADABLE",
+  "maker": "任天堂",
+  "title": "バディミッション BOND"
+ },
+ {
+  "icode": "ALZLA",
+  "hard": "1_HAC",
+  "sform": "HAC_DOWNLOADABLE",
+  "maker": "ポケモン",
+  "title": "Pokémon LEGENDS Z-A"
+ },
+ {
+  "icode": "AKSJ",
+  "hard": "2_CTR",
+  "sform": "CTR_DOWNLOADABLE",
+  "maker": "任天堂",
+  "title": "ショベルナイト"
+ },
+ {
+  "icode": "BDWKA",
+  "hard": "1_HAC",
+  "sform": "HAC_DOWNLOADABLE",
+  "maker": "イマジニア",
+  "title": "Fit Boxing 3 -Your パーソナルトレーナー-"
+ }
+]
