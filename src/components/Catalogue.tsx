@@ -308,13 +308,16 @@ export function Catalogue({ jeux, consoles }: Props) {
               {groupe.versions.map((v) => (
                 <li key={v.jeu.id}>
                   <Link href={lien(v)} className="flex flex-col gap-2">
-                    <Jaquette
-                      sortie={v.sortie}
-                      titre={v.sortie.titre!}
-                      console={v.jeu.console.nom}
-                      consoleSlug={v.jeu.console.slug}
-                      sizes="(max-width: 640px) 50vw, 200px"
-                    />
+                    <div className="relative">
+                      <Jaquette
+                        sortie={v.sortie}
+                        titre={v.sortie.titre!}
+                        console={v.jeu.console.nom}
+                        consoleSlug={v.jeu.console.slug}
+                        sizes="(max-width: 640px) 50vw, 200px"
+                      />
+                      <NoteMetacritic note={v.jeu.metacritic} />
+                    </div>
                     <div className="flex flex-col gap-[3px]">
                       <span className="line-clamp-2 text-sm leading-tight font-semibold">
                         {v.sortie.titre}
@@ -325,7 +328,6 @@ export function Catalogue({ jeux, consoles }: Props) {
                       </span>
                       <div className="flex flex-wrap items-center gap-1">
                         <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
-                        <NoteMetacritic note={v.jeu.metacritic} />
                       </div>
                     </div>
                   </Link>
@@ -343,7 +345,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                     href={lien(v)}
                     className="flex items-center gap-3 px-3 py-2.5"
                   >
-                    <div className="w-[54px] shrink-0">
+                    <div className="relative w-[54px] shrink-0">
                       <Jaquette
                         sortie={v.sortie}
                         titre={v.sortie.titre!}
@@ -352,6 +354,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                         sizes="54px"
                         petite
                       />
+                      <NoteMetacritic note={v.jeu.metacritic} petite />
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col gap-1">
                       <span className="text-sm leading-tight font-semibold">
@@ -363,7 +366,6 @@ export function Catalogue({ jeux, consoles }: Props) {
                       </span>
                       <div className="flex flex-wrap items-center gap-1">
                         <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
-                        <NoteMetacritic note={v.jeu.metacritic} />
                       </div>
                     </div>
                   </Link>
