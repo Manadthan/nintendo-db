@@ -3,10 +3,12 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.31 — 20/11/2026 — statut : **à valider**
+> Version 1.33 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.33 | 20/11/2026 | US-10 : **jeux absents** (contrôle par les bases officielles de Nintendo) : DS, identifiants en Y et régions vides ; Switch et 3DS, éditeur repris de Nintendo Europe et Japon quand GameTDB n'en donne pas |
+> | 1.32 | 20/11/2026 | US-18 : bascule **Tous / First party** en tête de la page Statistiques (demande du propriétaire) |
 > | 1.31 | 20/11/2026 | US-02 : tri par défaut **plus récents d'abord** (demande du propriétaire ; avant : plus anciens d'abord) |
 > | 1.30 | 20/11/2026 | US-17 : la note Metacritic du catalogue passe **en surimpression sur la jaquette** (coin en haut à droite, couleurs Metacritic), en grille et en liste, au lieu d'une étiquette (demande du propriétaire) |
 > | 1.29 | 20/11/2026 | **Boîtes européennes officielles de Nintendo** (choix du propriétaire) : 39 jeux Wii U et Switch sans boîte française chez GameTDB reçoivent la boîte PEGI de nintendo.com, source citée ; boîtes JAP du site japonais écartées (illustrations carrées, pas des boîtes) |
@@ -205,8 +207,13 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Wii : la jaquette est la **face avant** découpée dans le scan complet de la boîte (≈ 485 px de large, aucune
       source ouverte ne fait mieux) ; une photo (US-12) peut la remplacer.
 - [ ] **DS et 3DS** (SPEC v1.10) : GameTDB seul, comme la Wii. Cartes du commerce seulement : ni démos, bornes ou
-      téléchargements (DS : identifiants en Y, titres « (Demo) », « Download », « Kiosk »), ni logiciels (genre
-      « software »), ni jeux Super Nintendo ou eShop de la 3DS (seuls les identifiants en A, B, C, E sont gardés).
+      téléchargements (DS : titres « (Demo) », « Download », « Kiosk » ; les identifiants en Y ne sont plus écartés
+      depuis v1.33 : Kirby Super Star Ultra, Professeur Layton…), ni logiciels (genre « software »), ni jeux Super
+      Nintendo ou eShop de la 3DS (seuls les identifiants en A, B, C, E sont gardés). DS : une carte sans région prend
+      celle de son identifiant (Pokémon Noir et Blanc, v1.33).
+- [ ] Switch et 3DS (v1.33) : quand GameTDB ne donne **pas d'éditeur**, le jeu compte comme édité par Nintendo si
+      Nintendo Europe ou Nintendo Japon le disent (Fire Emblem: Three Houses, Pikmin 4…) ; un éditeur renseigné par
+      GameTDB n'est jamais contredit.
 - [ ] DS et 3DS : en Europe, le titre est celui de la carte anglaise quand il y en a plusieurs (pas « Professor Layton
       und… ») ; codes produit `NTR-` (DS), `CTR-P-` (3DS), `KTR-P-` (New 3DS).
 - [ ] DS et 3DS : jaquette = scan de la face (haute définition, sinon scan moyen de 400 px si c'est tout ce qui existe).
@@ -303,6 +310,10 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 public (demande du propriétaire : rien dans le panneau Filtres).*
 - [ ] Une page **Statistiques** dans l'administration, ouverte depuis un bouton en tête de son accueil ; maquette :
       `docs/maquettes/statistiques.png`. Privée comme toute l'administration.
+- [ ] Une bascule **Tous / First party** en tête de page (v1.32, « Tous » par défaut, gardée dans l'adresse) : « First
+      party » ne compte, dans Ma collection, Par région et Notes Metacritic, que les jeux développés par les studios
+      internes de Nintendo (même règle que le filtre « Nintendo (first party) », US-06). L'État du catalogue compte
+      toujours tous les jeux.
 - [ ] **Ma collection** : jeux possédés / jeux du catalogue et pourcentage, au total puis par console (ordre
       chronologique), avec une barre de progression verte. Un jeu compte comme possédé dès **une** version possédée.
 - [ ] **Par région** : nombre de versions possédées en JAP, US et PAL (un jeu possédé en JAP et PAL compte une fois
