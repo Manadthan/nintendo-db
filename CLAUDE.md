@@ -24,7 +24,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.4 validée |
 | `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.34 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.17 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.18 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques : `docs/maquettes/`) | v0.7 validée |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10) : chiffres, réussites, difficultés, leçons | v1.4 validée |
 
@@ -123,6 +123,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [ ] Étape 19 — Virtual Boy : étude (DESIGN §1 decies), Japon et États-Unis seulement, codes VUE-
   - [ ] Étape 20 — Super Nintendo : étude (DESIGN §1 undecies), titres japonais pour les boîtes JAP, codes à la main
   - [ ] Étape 21 — NES : étude (DESIGN §1 duodecies), boîte « World » jamais pour le Japon, codes à la main
+  - [ ] Étape 22 — Jeux absents : contrôle par les bases officielles (DESIGN §1 terdecies, ADR-13), DS (identifiants en Y, régions vides), Switch et 3DS (éditeur officiel)
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4
 
 ## Erreurs récurrentes
