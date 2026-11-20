@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.19 — 20/11/2026 — statut : **à valider**
+> Version 1.20 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.20 | 20/11/2026 | **Ordinateur** (SPEC v1.36) : conteneur `max-w-7xl` centré, grille du catalogue par paliers Tailwind (`sm` 3, `md` 4, `lg` 5, `xl` 6 colonnes), fiche en grille 2 colonnes dès `lg` (jaquette collante) ; tests Playwright à 1440 × 900 (`ordinateur.spec.ts`) |
 > | 1.19 | 20/11/2026 | **Éditeur officiel par région** (§1 terdecies, mesures) : ADR-14 (l'éditeur officiel de la région l'emporte ; cartes 3DSWare en boîte) |
 > | 1.18 | 20/11/2026 | **Contrôle par les bases officielles** (§1 terdecies) : jeux absents expliqués ; ADR-13 (éditeur repris de Nintendo Europe et Japon quand GameTDB est vide ; DS : identifiants en Y et régions vides) ; étape 22 |
 > | 1.17 | 20/11/2026 | Source de jaquette `nintendo` (migration 0021) : packshots PEGI de nintendo.com/eu trouvés par code produit (API de recherche de Nintendo Europe), copiés une fois par `scripts/jaquettes-nintendo-eu.mjs`, gardés par l'import comme gamecartdb (`estGardee`) |
@@ -266,10 +267,10 @@ Identique à `mon-site-sdlc` (décision 7 de l'intention) :
 | Besoin | Choix |
 |---|---|
 | Pages et serveur | **Next.js** (App Router, TypeScript strict), server actions |
-| Styles | **Tailwind CSS**, mobile d'abord, thèmes clair/sombre |
+| Styles | **Tailwind CSS**, mobile d'abord puis paliers `sm`/`md`/`lg`/`xl` pour l'ordinateur, thèmes clair/sombre |
 | Base, connexion, images | **Supabase** : Postgres (RLS), Auth (inscriptions désactivées), Storage (bucket public) |
 | Import | **cheerio** (tableau Wikipédia, base GameTDB), **sharp** (WebP), relais GameTDB par GitHub Actions |
-| Tests | **Vitest**, **Playwright** (375 × 812, WebKit + Chromium), **pgTAP** |
+| Tests | **Vitest**, **Playwright** (375 × 812, WebKit + Chromium ; 1440 × 900 pour l'ordinateur), **pgTAP** |
 | Hébergement, CI | **Vercel** (région Paris `cdg1`), **GitHub Actions** |
 
 ## 3. Architecture
