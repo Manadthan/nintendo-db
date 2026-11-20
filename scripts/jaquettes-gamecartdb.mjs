@@ -8,7 +8,7 @@
 import { createClient } from "@supabase/supabase-js";
 import sharp from "sharp";
 
-/** Jeu du site → release de gamecartdb (repérés à la main le 19/11/2026 ; 3 jeux absents de gamecartdb). */
+/** Jeu du site → release de gamecartdb (repérés à la main le 19/11/2026 ; Fire Emblem ajouté le 20/11/2026 ; Pokémon Pokopia et Fitness Boxing 3 absents de gamecartdb). */
 const RELEASES = {
   "animal-crossing-new-horizons-nintendo-switch-2-edition": "rel-western-animal-crossing-new-horizons-nintendo-switch-2-edition",
   "the-legend-of-zelda-breath-of-the-wild-nintendo-switch-2-edition": "rel-western-the-legend-of-zelda-breath-of-the-wild-for-nintendo-switch-2-edition",
@@ -32,6 +32,7 @@ const RELEASES = {
   "the-legend-of-zelda-ocarina-of-time": "rel-western-the-legend-of-zelda-ocarina-of-time",
   "xenoblade-chronicles-x-definitive-edition-nintendo-switch-2-edition": "rel-western-xenoblade-chronicles-x-definitive-edition-nintendo-switch-2-edition",
   "yoshi-and-the-mysterious-book": "rel-western-yoshi-and-the-mysterious-book",
+  "fire-emblem-fortunes-weave": "rel-western-fire-emblem-fortune-s-weave",
 };
 const FICHIER = { US: "", PAL: "--europe" };
 const TAILLES = [300, 600, 768];
