@@ -12,6 +12,13 @@ test.describe("accueil", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       "Les jeux Nintendo en boîte, version par version",
     );
+    // Description : tous les jeux édités par Nintendo, sans la liste des consoles (demande du propriétaire, 20/11/2026).
+    await expect(
+      page.getByText(
+        "Tous les jeux édités par Nintendo, avec leurs jaquettes, titres et dates au Japon, en Amérique du Nord et en Europe.",
+        { exact: true },
+      ),
+    ).toBeVisible();
   });
 
   test("tient dans la largeur de l'iPhone (pas de défilement horizontal)", async ({
