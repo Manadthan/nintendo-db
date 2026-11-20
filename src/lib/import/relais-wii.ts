@@ -10,6 +10,16 @@ export const LANGUES_SCAN_WII: Record<string, string[]> = {
   PAL: ["EN", "FR", "DE"],
 };
 
+/**
+ * Wii U : langues des scans à essayer, dans l'ordre. PAL : la boîte française (PEGI) d'abord ; l'anglaise de GameTDB
+ * est souvent un scan allemand avec le grand logo USK (choix du propriétaire, 20/11/2026, SPEC v1.28).
+ */
+export const LANGUES_SCAN_WII_U: Record<string, string[]> = {
+  "NTSC-J": ["JA"],
+  "NTSC-U": ["US"],
+  PAL: ["FR", "EN", "DE"],
+};
+
 /** Champs d'un jeu gardés dans la base réduite : ceux que lit l'import. */
 const CHAMPS_GARDES = new Set([
   "id",

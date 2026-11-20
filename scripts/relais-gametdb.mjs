@@ -26,6 +26,7 @@ import {
   decouperFaceAvant,
   estDisqueGameCubeDuCommerce,
   LANGUES_SCAN_WII,
+  LANGUES_SCAN_WII_U,
   reduireBaseWii,
   versJpeg,
 } from "../src/lib/import/relais-wii.ts";
@@ -92,7 +93,7 @@ const CONSOLES = [
     nom: "Wii U",
     dossier: "",
     scans: "scans",
-    langues: { "NTSC-J": ["JA"], "NTSC-U": ["US"], PAL: ["EN", "FR", "DE"] },
+    langues: LANGUES_SCAN_WII_U,
     async preparer() {
       const xml = await base("https://www.gametdb.com/wiiutdb.zip?LANG=EN");
       return { fichier: "wiiutdb.xml", xml, disques: disquesWiiU(xml, this.langues) };

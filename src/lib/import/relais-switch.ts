@@ -64,7 +64,8 @@ export const rangCartouche = (id: string): number =>
 export const SCANS_SWITCH: Record<RegionSite, string[]> = {
   JAP: ["coverHQ/JA", "coverM/JA"],
   US: ["coverHQ/US", "coverM/US"],
-  PAL: ["coverHQ/EN", "coverHQ/FR", "coverHQ/DE", "coverM/EN", "coverM/FR"],
+  // Boîte française (PEGI) d'abord : l'anglaise de GameTDB est souvent allemande (logo USK), SPEC v1.28.
+  PAL: ["coverHQ/FR", "coverHQ/EN", "coverHQ/DE", "coverM/FR", "coverM/EN"],
 };
 
 /**
