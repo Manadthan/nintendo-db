@@ -224,3 +224,5 @@ Fabriquées par les mêmes scripts que la Game Boy Color.
 
 Choisis à la main dans les bases complètes pour couvrir chaque règle (éditeur, console, région).
 
+Ajouts du 20/11/2026 (ADR-14) : champs `physical_version_b` et `system_type` (Fire Emblem Fates, Ever Oasis) et
+`sform` des jeux 3DS japonais (Ever Oasis : carte et téléchargement ; Fire Emblem if 透魔王国 : téléchargement seul).

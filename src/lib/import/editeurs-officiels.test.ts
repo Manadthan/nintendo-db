@@ -2,8 +2,10 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+  AUCUN_OFFICIEL,
   basesNintendo,
   editeOfficiellement,
+  officiels,
   type DocEurope,
   type ItemJapon,
 } from "./editeurs-officiels";
@@ -26,8 +28,11 @@ describe("bases de code éditées par Nintendo", () => {
 
   it("3DS : identifiants de 4 caractères, base de 3 (Fire Emblem Fates, Shovel Knight au Japon)", () => {
     const bases = basesNintendo("3ds", europe, japon);
-    expect([...bases.europe]).toEqual(["BFW"]);
-    expect([...bases.japon]).toEqual(["AKS"]);
+    expect([...bases.europe].sort()).toEqual(["BAG", "BFW"]);
+    expect([...bases.japon].sort()).toEqual(["AKS", "BAG", "BFW"]);
+    // Vendus en boîte : Europe (physical_version_b), Japon (carte, ou carte et téléchargement ; pas « CTRWARE »).
+    expect([...bases.boiteEurope].sort()).toEqual(["BAG", "BFW"]);
+    expect([...bases.boiteJapon].sort()).toEqual(["AKS", "BAG"]);
   });
 
   it("jamais un éditeur tiers (Ubisoft, Imagineer)", () => {
@@ -57,7 +62,7 @@ ${jeuSwitch("ZZZZA", "", "Jeu inconnu")}
   it("Switch : une cartouche sans éditeur est gardée si Nintendo l'édite, avec l'éditeur « Nintendo »", () => {
     const { xml: reduite, disques } = reduireBaseSwitch(
       xml,
-      editeOfficiellement(basesNintendo("switch", europe, japon)),
+      officiels(basesNintendo("switch", europe, japon)),
     );
     expect(disques.map((d) => d.id)).toEqual(["ANVYA", "ANVYA", "ANVYA"]);
     expect(reduite).toContain("<publisher>Nintendo</publisher>");
@@ -79,10 +84,79 @@ ${carte("AKSE", "NTSC-U")}
     const { xml: reduite, disques } = reduireBasePortable(
       "3ds",
       xml3ds,
-      editeOfficiellement(basesNintendo("3ds", europe, japon)),
+      officiels(basesNintendo("3ds", europe, japon)),
     );
     // Le jeu est gardé (édité par Nintendo au Japon) ; seule la carte japonaise reçoit l'éditeur « Nintendo ».
     expect(disques.map((d) => d.id)).toEqual(["AKSJ", "AKSE"]);
     expect(reduite.match(/<publisher>Nintendo<\/publisher>/g)).toHaveLength(1);
+  });
+});
+
+describe("relais : l'éditeur officiel de la région l'emporte (ADR-14)", () => {
+  const carte = (id: string, region: string, publisher: string) =>
+    `<game name="Dragon Quest Builders 2"><id>${id}</id><type>Switch</type><region>${region}</region><locale lang="EN"><title>Dragon Quest Builders 2</title></locale><publisher>${publisher}</publisher><genre>rpg</genre></game>`;
+  const xml = (...cartes: string[]) =>
+    `<?xml version="1.0" encoding="UTF-8"?><datafile><SwitchTDB version="1"/>\n${cartes.join("\n")}\n</datafile>`;
+  const o = officiels(basesNintendo("switch", europe, japon));
+
+  it("Switch : Nintendo Europe l'emporte sur « Square Enix » pour la carte occidentale ; la japonaise reste Square Enix", () => {
+    const { xml: reduite, disques } = reduireBaseSwitch(
+      xml(
+        carte("AH97A", "JPN", "Square Enix"),
+        carte("AH97B", "USA,EUR", "Square Enix"),
+      ),
+      o,
+    );
+    expect(disques.map((d) => `${d.id} ${d.region}`)).toEqual([
+      "AH97A JAP",
+      "AH97B US",
+      "AH97B PAL",
+    ]);
+    expect(reduite.match(/<publisher>Nintendo<\/publisher>/g)).toHaveLength(1);
+    expect(reduite).toContain("<publisher>Square Enix</publisher>");
+  });
+
+  it("jamais pour une carte seulement américaine (pas de base officielle américaine)", () => {
+    expect(o.editeIci("AH97", "USA")).toBe(false);
+    expect(
+      reduireBaseSwitch(xml(carte("AH97E", "USA", "Square Enix")), o).disques,
+    ).toEqual([]);
+  });
+
+  it("sans bases officielles, rien ne change", () => {
+    expect(
+      reduireBaseSwitch(
+        xml(carte("AH97B", "USA,EUR", "Square Enix")),
+        AUCUN_OFFICIEL,
+      ).disques,
+    ).toEqual([]);
+  });
+});
+
+describe("relais : carte 3DSWare vendue en boîte (ADR-14)", () => {
+  const carte = (id: string, region: string, titre: string) =>
+    `<game name="${titre}"><id>${id}</id><type>3DSWare</type><region>${region}</region><locale lang="EN"><title>${titre}</title></locale><publisher>Nintendo</publisher><genre>rpg</genre></game>`;
+  const xml3ds = `<?xml version="1.0" encoding="UTF-8"?><datafile><TDB3DS version="1"/>
+${carte("BAGJ", "NTSC-J", "Ever Oasis")}
+${carte("BAGE", "NTSC-U", "Ever Oasis")}
+${carte("BAGP", "PAL", "Ever Oasis")}
+${carte("BFWJ", "NTSC-J", "Fire Emblem If - Invisible Kingdom")}
+${carte("BFWZ", "PAL", "Fire Emblem Fates")}
+</datafile>`;
+  const o = officiels(basesNintendo("3ds", europe, japon));
+
+  it("gardée et retypée « 3DS » si la base officielle de sa région la dit en boîte ; l'américaine suit l'Europe ou le Japon", () => {
+    const { xml: reduite, disques } = reduireBasePortable("3ds", xml3ds, o);
+    // Fire Emblem if japonais : téléchargement seul au Japon (« CTRWARE ») → écarté ; sa carte européenne est gardée.
+    expect(disques.map((d) => d.id)).toEqual(["BAGJ", "BAGE", "BAGP", "BFWZ"]);
+    expect(reduite).not.toContain("3DSWare");
+    expect(reduite.match(/<type>3DS<\/type>/g)).toHaveLength(4);
+  });
+
+  it("sans bases officielles, les cartes 3DSWare restent écartées", () => {
+    expect(reduireBasePortable("3ds", xml3ds, AUCUN_OFFICIEL).disques).toEqual(
+      [],
+    );
+    expect(reduireBasePortable("3ds", xml3ds).disques).toEqual([]);
   });
 });

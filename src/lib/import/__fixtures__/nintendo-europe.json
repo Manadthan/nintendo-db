@@ -31,7 +31,11 @@
   "product_code_txt": [
    "CTRPBFWP"
   ],
-  "originally_for_t": "CTR"
+  "originally_for_t": "CTR",
+  "physical_version_b": true,
+  "system_type": [
+   "3ds_cartridge,3ds_digitaldistribution"
+  ]
  },
  {
   "title": "Rayman Legends: Definitive Edition",
@@ -40,5 +44,17 @@
    "HACPACVKA"
   ],
   "originally_for_t": "HAC"
+ },
+ {
+  "title": "Ever Oasis",
+  "publisher": "Nintendo",
+  "product_code_txt": [
+   "CTRPBAGP"
+  ],
+  "originally_for_t": "CTR",
+  "physical_version_b": true,
+  "system_type": [
+   "3ds_cartridge,3ds_digitaldistribution"
+  ]
  }
 ]

@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.18 — 20/11/2026 — statut : **à valider**
+> Version 1.19 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.19 | 20/11/2026 | **Éditeur officiel par région** (§1 terdecies, mesures) : ADR-14 (l'éditeur officiel de la région l'emporte ; cartes 3DSWare en boîte) |
 > | 1.18 | 20/11/2026 | **Contrôle par les bases officielles** (§1 terdecies) : jeux absents expliqués ; ADR-13 (éditeur repris de Nintendo Europe et Japon quand GameTDB est vide ; DS : identifiants en Y et régions vides) ; étape 22 |
 > | 1.17 | 20/11/2026 | Source de jaquette `nintendo` (migration 0021) : packshots PEGI de nintendo.com/eu trouvés par code produit (API de recherche de Nintendo Europe), copiés une fois par `scripts/jaquettes-nintendo-eu.mjs`, gardés par l'import comme gamecartdb (`estGardee`) |
 > | 1.16 | 20/11/2026 | **Boîte PAL française d'abord** (Wii U, Switch, SPEC v1.28) : ordre FR, EN, DE au relais ; `scripts/jaquettes-pal-francaises.mjs` remplace une fois les jaquettes PAL GameTDB en place |
@@ -249,6 +250,15 @@ Demande du propriétaire : trop d'erreurs sur les jeux manquants. Catalogue des 
 | Dates | 123 | dates de réédition (GameTDB), années seules (« 1er janvier ») |
 | Éditeur | 18 | éditeur d'une seule région étendu aux autres (Hyrule Warriors au Japon : Koei Tecmo) |
 
+**Jeux encore absents après l'ADR-13** (mesure du 20/11/2026, bases du jour) :
+
+| Console | Cause | Règle | Effet |
+|---|---|---|---|
+| Switch | GameTDB donne l'éditeur d'une autre région (« Square Enix », « Tecmo Koei », « Ubisoft ») | l'éditeur officiel de la région de la carte l'emporte | **+4 jeux** : Dragon Quest Builders 1 et 2, Hyrule Warriors: Definitive Edition, Mario + Rabbids Sparks of Hope (Japon) |
+| 3DS | même règle | idem | **+0** : la cause est ailleurs ; 7 cartes de jeux déjà présents changent d'éditeur |
+| 3DS | cartes classées **« 3DSWare »** (vendues aussi en téléchargement) alors qu'elles existent en boîte : la seule carte « 3DS » est coréenne ou d'un autre éditeur | carte 3DSWare gardée si la base officielle de sa région la dit en boîte et éditée par Nintendo (Europe : `physical_version_b` ; Japon : `sform` `CTR` ou `CTR_DOWNLOADABLE`, pas `CTRWARE`) | **≈ 11 jeux** : Fire Emblem Fates, Ever Oasis, Story of Seasons, Yo-kai Watch Blasters (×2), Puzzle & Dragons Z, Culdcept, Calciobit, Band Brothers P, Mario & Sonic à Londres (Japon), Hana to Ikimono ; régions ajoutées à 39 jeux déjà présents |
+| Wii, DS | pas de code produit chez Nintendo Europe, pas de base japonaise | — | 11 jeux à ajouter à la main |
+
 ## 2. Stack
 
 Identique à `mon-site-sdlc` (décision 7 de l'intention) :
@@ -388,6 +398,16 @@ pures** (`src/lib/statistiques/`), testées sur des jeux d'exemple. Rien n'est s
 migration, chiffres toujours justes ; quelques milliers de lignes, lues en une requête. « Jaquette manquante » = sortie
 sans jaquette ou de source `igdb` (même règle que « à remplacer », US-12). Les compteurs du panneau Filtres sont
 retirés (le filtre « Ma collection » reste).
+
+**ADR-14 — L'éditeur officiel de la région l'emporte (étape 22).** Suite de l'ADR-13 : le relais lit aussi le format
+(boîte ou téléchargement) des deux bases. Une carte Switch ou 3DS compte comme éditée par Nintendo si GameTDB le dit,
+si son éditeur est vide et que Nintendo l'édite (ADR-13), ou si Nintendo Europe (carte européenne) ou Nintendo Japon
+(carte japonaise) l'édite, **quel que soit l'éditeur donné par GameTDB** ; l'éditeur de la carte devient alors
+« Nintendo ». Une carte seulement américaine garde l'éditeur de GameTDB. 3DS : une carte « 3DSWare » est retypée « 3DS »
+(l'import n'est pas modifié) si la base de sa région la dit vendue en boîte par Nintendo ; une carte américaine suit
+l'Europe ou le Japon (choix du propriétaire). Sans bases officielles (échec du téléchargement), rien ne change.
+Alternatives écartées : base européenne pour les cartes américaines aussi (faux positifs : éditeurs différents entre
+Amérique et Europe) ; liste de jeux à la main (à refaire à chaque import).
 
 **ADR-13 — Éditeur officiel quand GameTDB est vide (étape 22).** Le relais dépose `nintendo/editeurs.json` : les
 bases de code (identifiant sans la lettre de région) des jeux que Nintendo Europe ou Nintendo Japon disent édités par

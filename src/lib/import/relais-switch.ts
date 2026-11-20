@@ -1,6 +1,7 @@
 // Relais et import GameTDB de la Switch (étape 10, DESIGN v1.4 §1 quater). Utilisé par scripts/relais-gametdb.mjs
 // (Node, sans alias « @/ ») et par l'import : imports relatifs ou de paquets seulement.
 import * as cheerio from "cheerio";
+import type { Officiels } from "./editeurs-officiels";
 
 /** Éditeur Nintendo, y compris en japonais (même règle que relais-portables.ts, non importé : Node lit ce fichier seul). */
 const EDITEUR_NINTENDO = /nintendo|任天堂/i;
@@ -69,13 +70,31 @@ export const SCANS_SWITCH: Record<RegionSite, string[]> = {
 };
 
 /**
+ * Carte éditée par Nintendo : selon GameTDB, sinon selon les bases officielles (ADR-13) : éditeur vide et Nintendo
+ * l'édite ; ou Nintendo l'édite dans la région même de la carte, quel que soit l'éditeur donné par GameTDB.
+ */
+export function editeeParNintendo(
+  editeur: string,
+  base: string,
+  region: string,
+  officiels?: Officiels,
+): boolean {
+  if (EDITEUR_NINTENDO.test(editeur)) return true;
+  if (!officiels) return false;
+  return (
+    (!editeur && officiels.edite(base, region)) ||
+    officiels.editeIci(base, region)
+  );
+}
+
+/**
  * Base Switch réduite (25 Mo → quelques centaines de Ko) aux cartouches du commerce des jeux dont au moins une
  * cartouche est éditée par Nintendo ; et la liste des scans à déposer, une par cartouche et région couverte.
  */
 export function reduireBaseSwitch(
   xml: string,
-  /** Carte sans éditeur éditée par Nintendo selon Nintendo Europe ou Japon (ADR-13) : base, région → oui / non. */
-  editeOfficiellement: (base: string, region: string) => boolean = () => false,
+  /** Bases officielles de Nintendo Europe et Japon (ADR-13) ; sans elles, rien ne change. */
+  officiels?: Officiels,
 ): {
   xml: string;
   disques: { id: string; region: RegionSite }[];
@@ -104,10 +123,12 @@ export function reduireBaseSwitch(
       nintendo: false,
       disques: [],
     };
-    base.nintendo ||=
-      EDITEUR_NINTENDO.test(champ("publisher")) ||
-      (!champ("publisher") &&
-        editeOfficiellement(id.slice(0, 4), champ("region")));
+    base.nintendo ||= editeeParNintendo(
+      champ("publisher"),
+      id.slice(0, 4),
+      champ("region"),
+      officiels,
+    );
     base.disques.push({ id, region: champ("region") });
     parBase.set(id.slice(0, 4), base);
   });
@@ -132,12 +153,17 @@ export function reduireBaseSwitch(
       jeu.remove();
       return;
     }
-    // Éditeur vide complété par la liste officielle (ADR-13) : l'import lit ce champ ; un éditeur renseigné reste.
+    // Éditeur complété ou remplacé par la liste officielle (ADR-13) : l'import lit ce champ.
     const editeur = jeu.children("publisher").first();
     const regionCarte = jeu.children("region").first().text().trim();
     if (
-      !editeur.text().trim() &&
-      editeOfficiellement(id.slice(0, 4), regionCarte)
+      !EDITEUR_NINTENDO.test(editeur.text()) &&
+      editeeParNintendo(
+        editeur.text().trim(),
+        id.slice(0, 4),
+        regionCarte,
+        officiels,
+      )
     ) {
       if (editeur.length) editeur.text("Nintendo");
       else jeu.append("<publisher>Nintendo</publisher>");

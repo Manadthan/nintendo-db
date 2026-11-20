@@ -33,5 +33,19 @@
   "sform": "HAC_DOWNLOADABLE",
   "maker": "イマジニア",
   "title": "Fit Boxing 3 -Your パーソナルトレーナー-"
+ },
+ {
+  "icode": "BAGJ",
+  "hard": "2_CTR",
+  "sform": "CTR_DOWNLOADABLE",
+  "maker": "任天堂",
+  "title": "Ever Oasis 精霊とタネビトの蜃気楼"
+ },
+ {
+  "icode": "BFWJ",
+  "hard": "2_CTR",
+  "sform": "CTRWARE",
+  "maker": "任天堂",
+  "title": "ファイアーエムブレムif 透魔王国"
  }
 ]

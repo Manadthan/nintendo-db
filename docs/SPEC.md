@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.34 — 20/11/2026 — statut : **à valider**
+> Version 1.35 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.35 | 20/11/2026 | US-10 : l'**éditeur officiel de la région** l'emporte sur GameTDB (Switch, 3DS) ; cartes 3DS « 3DSWare » vendues en boîte selon Nintendo gardées (choix du propriétaire) |
 > | 1.34 | 20/11/2026 | En-tête **toujours visible** pendant le défilement (comme gamecartdb) et bouton flottant **« Remonter en haut »** en bas à droite (demande du propriétaire) |
 > | 1.33 | 20/11/2026 | US-10 : **jeux absents** (contrôle par les bases officielles de Nintendo) : DS, identifiants en Y et régions vides ; Switch et 3DS, éditeur repris de Nintendo Europe et Japon quand GameTDB n'en donne pas |
 > | 1.32 | 20/11/2026 | US-18 : bascule **Tous / First party** en tête de la page Statistiques (demande du propriétaire) |
@@ -215,8 +216,13 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       Nintendo ou eShop de la 3DS (seuls les identifiants en A, B, C, E sont gardés). DS : une carte sans région prend
       celle de son identifiant (Pokémon Noir et Blanc, v1.33).
 - [ ] Switch et 3DS (v1.33) : quand GameTDB ne donne **pas d'éditeur**, le jeu compte comme édité par Nintendo si
-      Nintendo Europe ou Nintendo Japon le disent (Fire Emblem: Three Houses, Pikmin 4…) ; un éditeur renseigné par
-      GameTDB n'est jamais contredit.
+      Nintendo Europe ou Nintendo Japon le disent (Fire Emblem: Three Houses, Pikmin 4…). Depuis v1.35, un éditeur
+      renseigné par GameTDB cède devant l'éditeur officiel **de la région de la carte** : Nintendo Europe pour une carte
+      européenne, Nintendo Japon pour une japonaise (Dragon Quest Builders : « Square Enix » chez GameTDB, Nintendo en
+      Europe) ; une carte seulement américaine garde l'éditeur de GameTDB (pas de base officielle américaine).
+- [ ] 3DS (v1.35) : une carte classée « 3DSWare » (téléchargement) par GameTDB compte comme une boîte si la base
+      officielle de sa région la dit vendue en boîte par Nintendo (Fire Emblem Fates, Ever Oasis, Culdcept) ; une carte
+      américaine suit l'Europe ou le Japon.
 - [ ] DS et 3DS : en Europe, le titre est celui de la carte anglaise quand il y en a plusieurs (pas « Professor Layton
       und… ») ; codes produit `NTR-` (DS), `CTR-P-` (3DS), `KTR-P-` (New 3DS).
 - [ ] DS et 3DS : jaquette = scan de la face (haute définition, sinon scan moyen de 400 px si c'est tout ce qui existe).
