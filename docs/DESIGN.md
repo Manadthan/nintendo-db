@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.16 — 20/11/2026 — statut : **à valider**
+> Version 1.17 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.17 | 20/11/2026 | Source de jaquette `nintendo` (migration 0021) : packshots PEGI de nintendo.com/eu trouvés par code produit (API de recherche de Nintendo Europe), copiés une fois par `scripts/jaquettes-nintendo-eu.mjs`, gardés par l'import comme gamecartdb (`estGardee`) |
 > | 1.16 | 20/11/2026 | **Boîte PAL française d'abord** (Wii U, Switch, SPEC v1.28) : ordre FR, EN, DE au relais ; `scripts/jaquettes-pal-francaises.mjs` remplace une fois les jaquettes PAL GameTDB en place |
 > | 1.15 | 19/11/2026 | **NES** (étape 21) : étude (§1 duodecies), plan §8 |
 > | 1.14 | 19/11/2026 | **Super Nintendo** (étape 20) : étude (§1 undecies), plan §8 |

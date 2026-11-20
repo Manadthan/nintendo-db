@@ -269,7 +269,13 @@ export type Database = {
     Enums: {
       console_type: "salon" | "portable";
       jaquette_source:
-        "gametdb" | "igdb" | "libretro" | "gamecartdb" | "photo" | "url";
+        | "gametdb"
+        | "igdb"
+        | "libretro"
+        | "gamecartdb"
+        | "nintendo"
+        | "photo"
+        | "url";
       precision_date: "jour" | "mois" | "annee";
       region: "JAP" | "US" | "PAL";
     };
@@ -405,6 +411,7 @@ export const Constants = {
         "igdb",
         "libretro",
         "gamecartdb",
+        "nintendo",
         "photo",
         "url",
       ],

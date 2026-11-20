@@ -181,6 +181,16 @@ describe("choisirJaquettes (ADR-04, R6)", () => {
     ).toMatchObject({ US: null, PAL: null });
   });
 
+  it("garde les boîtes officielles de Nintendo Europe, même en recopiant les scans (SPEC v1.29)", () => {
+    const choix = choisirJaquettes(
+      construireJeu(KIRBY),
+      KIRBY.disques,
+      { PAL: { path: "x/pal", source: "nintendo" } },
+      true,
+    );
+    expect(choix.PAL).toBeNull();
+  });
+
   it("remplace une ancienne image IGDB par le scan", () => {
     const choix = choisirJaquettes(construireJeu(KIRBY), KIRBY.disques, {
       PAL: { path: "x/pal", source: "igdb" },

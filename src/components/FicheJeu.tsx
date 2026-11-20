@@ -67,7 +67,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             s === "gametdb" ||
             s === "igdb" ||
             s === "libretro" ||
-            s === "gamecartdb",
+            s === "gamecartdb" ||
+            s === "nintendo",
         )
         .map((s) => SOURCES_JAQUETTE[s]),
     ),
