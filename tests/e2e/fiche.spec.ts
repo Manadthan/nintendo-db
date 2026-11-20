@@ -116,3 +116,29 @@ test("un visiteur ne voit aucune case de collection (US-16 : collection privée)
   await expect(page.getByRole("heading", { name: "Splatoon" })).toBeVisible();
   await expect(page.getByRole("checkbox")).toHaveCount(0);
 });
+
+test("« Précédent » depuis une fiche ramène le catalogue à la même hauteur, le lien Retour en haut", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const jeux = page.locator('main a[href^="/jeux/"]');
+  await expect(jeux).toHaveCount(4);
+  // Le dernier jeu, en bas du catalogue : la page défile.
+  await jeux.last().scrollIntoViewIfNeeded();
+  const hauteur = await page.evaluate(() => window.scrollY);
+  expect(hauteur).toBeGreaterThan(100);
+
+  await jeux.last().click();
+  await expect(page).toHaveURL(/\/jeux\/wii-u\//);
+  await page.goBack();
+  await expect(page).toHaveURL("/");
+  await expect
+    .poll(() => page.evaluate(() => Math.round(window.scrollY)))
+    .toBeGreaterThanOrEqual(hauteur - 2);
+
+  // Revenir par le lien de la fiche n'est pas un retour arrière : le catalogue repart du haut.
+  await jeux.last().click();
+  await page.getByRole("link", { name: /Retour au catalogue/ }).click();
+  await expect(page).toHaveURL("/");
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+});

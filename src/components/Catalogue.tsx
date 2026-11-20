@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import {
   formaterDate,
   grouperParAnnee,
@@ -20,6 +20,10 @@ import {
   lireFiltres,
   nombreActifs,
 } from "@/lib/catalogue/filtres";
+import {
+  noterPositionCatalogue,
+  remettrePositionCatalogue,
+} from "@/lib/catalogue/defilement";
 import {
   MARCHES,
   abonnerMarche,
@@ -116,6 +120,8 @@ export function Catalogue({ jeux, consoles }: Props) {
     ? filtresAdresse
     : { ...filtresAdresse, collection: null };
   const [panneauOuvert, setPanneauOuvert] = useState(false);
+  // Retour d'une fiche par « Précédent » : reprendre à la même hauteur (Safari s'arrête en haut sinon).
+  useEffect(remettrePositionCatalogue, []);
   const actifs = nombreActifs(filtres);
 
   // Choix proposés : ceux du marché choisi, sans tenir compte de la recherche ni des autres filtres.
@@ -309,7 +315,11 @@ export function Catalogue({ jeux, consoles }: Props) {
             <ul className="grid grid-cols-2 gap-x-3 gap-y-[18px] sm:grid-cols-3 md:grid-cols-4 md:gap-x-4 lg:grid-cols-5 xl:grid-cols-6">
               {groupe.versions.map((v) => (
                 <li key={v.jeu.id}>
-                  <Link href={lien(v)} className="group flex flex-col gap-2">
+                  <Link
+                    href={lien(v)}
+                    onClick={noterPositionCatalogue}
+                    className="group flex flex-col gap-2"
+                  >
                     <div className="relative">
                       <Jaquette
                         sortie={v.sortie}
@@ -345,6 +355,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                 >
                   <Link
                     href={lien(v)}
+                    onClick={noterPositionCatalogue}
                     className="flex items-center gap-3 px-3 py-2.5 hover:bg-surface"
                   >
                     <div className="relative w-[54px] shrink-0">
