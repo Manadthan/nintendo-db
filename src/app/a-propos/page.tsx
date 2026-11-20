@@ -74,7 +74,7 @@ export default function APropos() {
   return (
     <>
       <EnTete page="a-propos" />
-      <main className="flex flex-col gap-6 px-4 pt-6 pb-4">
+      <main className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 pt-6 pb-4">
         <section className="flex flex-col gap-2">
           <h1 className="font-titre text-[26px] leading-tight font-bold tracking-tight">
             À propos

@@ -21,17 +21,19 @@ export default async function Accueil() {
       <EnTete page="catalogue" />
 
       <main>
-        <section className="flex flex-col gap-1.5 border-b border-bordure bg-carte px-4 pt-[22px] pb-5">
-          <p className="text-xs font-semibold tracking-wide text-accent uppercase">
-            Pour les collectionneurs
-          </p>
-          <h1 className="font-titre text-[26px] leading-tight font-bold tracking-tight">
-            Les jeux Nintendo en boîte, version par version
-          </h1>
-          <p className="text-sm leading-relaxed text-texte-doux">
-            Tous les jeux édités par Nintendo, avec leurs jaquettes, titres et
-            dates au Japon, en Amérique du Nord et en Europe.
-          </p>
+        <section className="border-b border-bordure bg-carte px-4 pt-[22px] pb-5">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1.5">
+            <p className="text-xs font-semibold tracking-wide text-accent uppercase">
+              Pour les collectionneurs
+            </p>
+            <h1 className="font-titre text-[26px] leading-tight font-bold tracking-tight">
+              Les jeux Nintendo en boîte, version par version
+            </h1>
+            <p className="text-sm leading-relaxed text-texte-doux">
+              Tous les jeux édités par Nintendo, avec leurs jaquettes, titres et
+              dates au Japon, en Amérique du Nord et en Europe.
+            </p>
+          </div>
         </section>
 
         <Catalogue jeux={jeux} consoles={consoles} />

@@ -145,7 +145,7 @@ export function Catalogue({ jeux, consoles }: Props) {
   return (
     <section
       aria-labelledby="tous-les-jeux"
-      className="flex flex-col gap-3.5 px-4 pt-5 pb-7"
+      className="mx-auto flex w-full max-w-7xl flex-col gap-3.5 px-4 pt-5 pb-7"
     >
       <div className="flex items-baseline gap-2">
         <h2 id="tous-les-jeux" className="font-titre text-[21px] font-bold">
@@ -305,22 +305,23 @@ export function Catalogue({ jeux, consoles }: Props) {
           )}
 
           {vue === "grille" ? (
-            <ul className="grid grid-cols-2 gap-x-3 gap-y-[18px]">
+            // 2 colonnes sur téléphone, jusqu'à 6 sur grand écran (SPEC v1.36).
+            <ul className="grid grid-cols-2 gap-x-3 gap-y-[18px] sm:grid-cols-3 md:grid-cols-4 md:gap-x-4 lg:grid-cols-5 xl:grid-cols-6">
               {groupe.versions.map((v) => (
                 <li key={v.jeu.id}>
-                  <Link href={lien(v)} className="flex flex-col gap-2">
+                  <Link href={lien(v)} className="group flex flex-col gap-2">
                     <div className="relative">
                       <Jaquette
                         sortie={v.sortie}
                         titre={v.sortie.titre!}
                         console={v.jeu.console.nom}
                         consoleSlug={v.jeu.console.slug}
-                        sizes="(max-width: 640px) 50vw, 200px"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
                       />
                       <NoteMetacritic note={v.jeu.metacritic} />
                     </div>
                     <div className="flex flex-col gap-[3px]">
-                      <span className="line-clamp-2 text-sm leading-tight font-semibold">
+                      <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
                         {v.sortie.titre}
                       </span>
                       <span className="text-xs text-texte-discret">
@@ -344,7 +345,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                 >
                   <Link
                     href={lien(v)}
-                    className="flex items-center gap-3 px-3 py-2.5"
+                    className="flex items-center gap-3 px-3 py-2.5 hover:bg-surface"
                   >
                     <div className="relative w-[54px] shrink-0">
                       <Jaquette

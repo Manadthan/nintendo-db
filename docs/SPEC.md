@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.35 — 20/11/2026 — statut : **à valider**
+> Version 1.36 — 20/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.36 | 20/11/2026 | **Ordinateur** (demande du propriétaire) : contenu centré et limité en largeur, catalogue de 2 à 6 colonnes selon l'écran, fiche en 2 colonnes (jaquette à gauche, informations à droite) ; administration inchangée (colonne centrée) |
 > | 1.35 | 20/11/2026 | US-10 : l'**éditeur officiel de la région** l'emporte sur GameTDB (Switch, 3DS) ; cartes 3DS « 3DSWare » vendues en boîte selon Nintendo gardées (choix du propriétaire) |
 > | 1.34 | 20/11/2026 | En-tête **toujours visible** pendant le défilement (comme gamecartdb) et bouton flottant **« Remonter en haut »** en bas à droite (demande du propriétaire) |
 > | 1.33 | 20/11/2026 | US-10 : **jeux absents** (contrôle par les bases officielles de Nintendo) : DS, identifiants en Y et régions vides ; Switch et 3DS, éditeur repris de Nintendo Europe et Japon quand GameTDB n'en donne pas |
@@ -59,7 +60,7 @@ Rendu dans l'esprit de gamecartdb.com, en français, pensé d'abord pour l'iPhon
 |---|---|
 | Visiteurs | Tout le monde, **sans compte**, en lecture seule |
 | Administrateur | Le propriétaire, seul à pouvoir modifier (compte créé à la main) |
-| Appareil principal | iPhone 12 mini (375 × 812), Safari iOS ; utilisable aussi sur ordinateur |
+| Appareil principal | iPhone 12 mini (375 × 812), Safari iOS ; **ordinateur** pris en charge (navigateur de bureau, dès 1024 px de large) |
 | Langue | Interface en français ; titres des jeux tels que publiés dans chaque région ; titre JAP en **japonais + romanisé** en dessous |
 
 ## 3. Vocabulaire
@@ -341,6 +342,7 @@ public (demande du propriétaire : rien dans le panneau Filtres).*
 | Sujet | Exigence |
 |---|---|
 | Mobile | Tout est utilisable à une main sur 375 px ; zones tactiles ≥ 44 px |
+| Ordinateur | Pages publiques centrées, jamais plus larges que 1280 px ; catalogue en 2 colonnes (téléphone) jusqu'à 6 (grand écran) ; fiche en 2 colonnes dès 1024 px ; aucun défilement horizontal ; effet au survol des jeux |
 | Rapidité | Catalogue affiché en moins de 2 s en 4G ; pages publiques préparées à l'avance |
 | Sécurité | Écriture réservée au propriétaire, vérifiée côté serveur ; aucun secret dans le dépôt |
 | Données | Chaque jeu cite sa source ; licences respectées (attribution si exigée) |
