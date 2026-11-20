@@ -1,6 +1,7 @@
 // Relais et import GameTDB des portables DS et 3DS (étape 9, DESIGN v1.3 §1 ter). Utilisé par
 // scripts/relais-gametdb.mjs (Node, sans alias « @/ ») et par l'import : imports relatifs ou de paquets seulement.
 import * as cheerio from "cheerio";
+import type { Officiels } from "./editeurs-officiels";
 
 export type Portable = "ds" | "3ds";
 
@@ -48,6 +49,25 @@ const REGION_PAR_LETTRE: Record<string, string> = {
  */
 export const regionCarte = (id: string, region: string): string =>
   region || (REGION_PAR_LETTRE[id.charAt(3)] ?? "");
+
+/**
+ * Carte éditée par Nintendo : selon GameTDB, sinon selon les bases officielles (ADR-13) : éditeur vide et Nintendo
+ * l'édite ; ou Nintendo l'édite dans la région même de la carte, quel que soit l'éditeur de GameTDB. Même règle que
+ * relais-switch.ts, recopiée : Node lit ces fichiers sans résoudre les imports relatifs.
+ */
+function editeeParNintendo(
+  editeur: string,
+  base: string,
+  region: string,
+  officiels?: Officiels,
+): boolean {
+  if (EDITEUR_NINTENDO.test(editeur)) return true;
+  if (!officiels) return false;
+  return (
+    (!editeur && officiels.edite(base, region)) ||
+    officiels.editeIci(base, region)
+  );
+}
 
 /** Genres et titres des cartes qui ne sont pas des jeux vendus en boîte. */
 const GENRES_HORS_JEU = /\b(demo|software|sampler)\b/i;
@@ -111,38 +131,43 @@ export type CarteRelais = { id: string; region: string };
 export function reduireBasePortable(
   portable: Portable,
   xml: string,
-  /** Carte sans éditeur éditée par Nintendo selon Nintendo Europe ou Japon (ADR-13) : base, région → oui / non. */
-  editeOfficiellement: (base: string, region: string) => boolean = () => false,
+  /** Bases officielles de Nintendo Europe et Japon (ADR-13) ; sans elles, rien ne change. */
+  officiels?: Officiels,
 ): { xml: string; disques: CarteRelais[] } {
   const $ = cheerio.load(xml, { xml: true });
   const parBase = new Map<
     string,
     { nintendo: boolean; disques: CarteRelais[] }
   >();
+  /** Cartes « 3DSWare » vendues en boîte selon Nintendo (ADR-13) : retypées « 3DS » pour l'import. */
+  const enBoite = new Set<string>();
   $("game").each((_, el) => {
     const jeu = $(el);
     const champ = (nom: string) => jeu.children(nom).first().text().trim();
     const id = champ("id");
     const region = regionCarte(id, champ("region"));
     const titre = jeu.find("locale[lang=EN] > title").first().text().trim();
+    let type = champ("type");
     if (
-      !estCarteDuCommerce(
-        portable,
-        champ("type"),
-        id,
-        region,
-        titre,
-        champ("genre"),
-      )
-    )
+      portable === "3ds" &&
+      type === "3DSWare" &&
+      officiels?.enBoite(id.slice(0, 3), region)
+    ) {
+      type = "3DS";
+      enBoite.add(id);
+    }
+    if (!estCarteDuCommerce(portable, type, id, region, titre, champ("genre")))
       return;
     const base = parBase.get(id.slice(0, 3)) ?? {
       nintendo: false,
       disques: [],
     };
-    base.nintendo ||=
-      EDITEUR_NINTENDO.test(champ("publisher")) ||
-      (!champ("publisher") && editeOfficiellement(id.slice(0, 3), region));
+    base.nintendo ||= editeeParNintendo(
+      champ("publisher"),
+      id.slice(0, 3),
+      region,
+      officiels,
+    );
     base.disques.push({ id, region });
     parBase.set(id.slice(0, 3), base);
   });
@@ -172,11 +197,17 @@ export function reduireBasePortable(
     // Région déduite de l'identifiant quand GameTDB n'en donne pas : l'import lit ce champ.
     const region = jeu.children("region").first();
     if (!region.text().trim()) region.text(regionCarte(id, ""));
-    // Éditeur vide complété par la liste officielle (ADR-13) : l'import lit ce champ ; un éditeur renseigné reste.
+    if (enBoite.has(id)) jeu.children("type").first().text("3DS");
+    // Éditeur complété ou remplacé par la liste officielle (ADR-13) : l'import lit ce champ.
     const editeur = jeu.children("publisher").first();
     if (
-      !editeur.text().trim() &&
-      editeOfficiellement(id.slice(0, 3), region.text().trim())
+      !EDITEUR_NINTENDO.test(editeur.text()) &&
+      editeeParNintendo(
+        editeur.text().trim(),
+        id.slice(0, 3),
+        region.text().trim(),
+        officiels,
+      )
     ) {
       if (editeur.length) editeur.text("Nintendo");
       else jeu.append("<publisher>Nintendo</publisher>");
