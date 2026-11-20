@@ -5,6 +5,8 @@ import {
   notesMetacritic,
   parRegion,
   etatCatalogue,
+  lirePerimetre,
+  selonPerimetre,
   type JeuStat,
 } from "./statistiques";
 
@@ -17,7 +19,9 @@ const jeu = (
   titre: string,
   console: JeuStat["console"],
   metacritic: number | null,
-  manques: Partial<Pick<JeuStat, "sansJaquette" | "sansCode">> = {},
+  manques: Partial<
+    Pick<JeuStat, "sansJaquette" | "sansCode" | "firstParty">
+  > = {},
 ): JeuStat => ({
   id,
   titre,
@@ -26,12 +30,16 @@ const jeu = (
   sorties: ["JAP", "US", "PAL"],
   sansJaquette: [],
   sansCode: [],
+  firstParty: false,
   ...manques,
 });
 const JEUX = [
   jeu("melee", "Super Smash Bros. Melee", GC, 92),
   jeu("prime", "Metroid Prime", GC, 97),
-  jeu("splatoon", "Splatoon", WIIU, 81, { sansCode: ["JAP"] }),
+  jeu("splatoon", "Splatoon", WIIU, 81, {
+    sansCode: ["JAP"],
+    firstParty: true,
+  }),
   jeu("mk8", "Mario Kart 8", WIIU, null, {
     sansJaquette: ["JAP", "US"],
     sansCode: ["US"],
@@ -91,6 +99,24 @@ describe("statistiques (US-18)", () => {
       codes: { nombre: 2, console: "wii-u" },
       notes: { nombre: 1, console: "wii-u" },
     });
+  });
+
+  it("périmètre lu dans l'adresse : « first-party », sinon tous les jeux (SPEC v1.32)", () => {
+    expect(lirePerimetre("first-party")).toBe("first-party");
+    expect(lirePerimetre(undefined)).toBe("tous");
+    expect(lirePerimetre("autre")).toBe("tous");
+    expect(lirePerimetre(["first-party", "tous"])).toBe("first-party");
+  });
+
+  it("first party : seuls les jeux des studios internes de Nintendo comptent", () => {
+    const jeux = selonPerimetre(JEUX, "first-party");
+    expect(jeux.map((j) => j.id)).toEqual(["splatoon"]);
+    expect(maCollection(jeux, [N64, GC, WIIU], POSSESSIONS).total).toEqual({
+      possedes: 1,
+      total: 1,
+      pourcent: 100,
+    });
+    expect(selonPerimetre(JEUX, "tous")).toBe(JEUX);
   });
 
   it("état du catalogue complet : rien à ouvrir", () => {

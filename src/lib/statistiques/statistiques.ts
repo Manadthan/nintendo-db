@@ -16,7 +16,24 @@ export type JeuStat = {
   sansJaquette: Region[];
   /** Régions sorties sans code produit. */
   sansCode: Region[];
+  /** Développé par un studio interne de Nintendo (filtre « Nintendo (first party) », #89). */
+  firstParty: boolean;
 };
+
+/** Jeux comptés : tous, ou les seuls jeux first party (bascule de la page, SPEC v1.32). */
+export type Perimetre = "tous" | "first-party";
+
+/** Périmètre lu dans l'adresse (`?jeux=first-party`) ; tous les jeux sinon. */
+export function lirePerimetre(
+  valeur: string | string[] | undefined,
+): Perimetre {
+  const v = Array.isArray(valeur) ? valeur[0] : valeur;
+  return v === "first-party" ? "first-party" : "tous";
+}
+
+/** Jeux du périmètre choisi. */
+export const selonPerimetre = (jeux: JeuStat[], perimetre: Perimetre) =>
+  perimetre === "first-party" ? jeux.filter((j) => j.firstParty) : jeux;
 
 export type Avancement = { possedes: number; total: number; pourcent: number };
 
