@@ -9,6 +9,7 @@ import {
   estCarteDuCommerce,
   languesScan,
   rangCartePal,
+  reduireBasePortable,
 } from "./relais-portables";
 
 // Import DS et 3DS (étape 9, SPEC v1.10 US-10) : GameTDB seul, sur les fixtures réduites du 17/11/2026.
@@ -49,6 +50,39 @@ describe("règles des cartes DS et 3DS", () => {
         "action",
       ),
     ).toBe(true);
+  });
+
+  it("garde les cartes DS en Y du commerce (Kirby Super Star Ultra, SPEC v1.33) ; les démos restent écartées par leur titre", () => {
+    expect(
+      estCarteDuCommerce(
+        "ds",
+        "DS",
+        "YKWE",
+        "NTSC-U",
+        "Kirby Super Star Ultra",
+        "platformer",
+      ),
+    ).toBe(true);
+    expect(
+      estCarteDuCommerce(
+        "ds",
+        "DS",
+        "Y52E",
+        "NTSC-U",
+        "Kirby Super Star Ultra (Demo)",
+        "platformer",
+      ),
+    ).toBe(false);
+  });
+
+  it("carte DS sans région : celle de son identifiant (Pokémon Noir IRBO = US et PAL, SPEC v1.33)", () => {
+    const xml = `<?xml version="1.0" encoding="UTF-8"?><datafile><DSTDB version="1"/>
+<game name="Pokémon Black Version"><id>IRBO</id><type>DSi</type><region></region><locale lang="EN"><title>Pokémon Black Version</title></locale><publisher>Nintendo</publisher><genre>rpg</genre></game>
+<game name="Pocket Monsters Black (Korea)"><id>IRBK</id><type>DSi</type><region></region><locale lang="EN"><title>Pocket Monsters: Black</title></locale><publisher>Nintendo</publisher><genre>rpg</genre></game>
+</datafile>`;
+    const { xml: reduite, disques } = reduireBasePortable("ds", xml);
+    expect(disques).toEqual([{ id: "IRBO", region: "NTSC-U,PAL" }]);
+    expect(reduite).toContain("<region>NTSC-U,PAL</region>");
   });
 
   it("écarte démos, bornes, logiciels, jeux Super Nintendo et eShop", () => {
@@ -133,7 +167,7 @@ describe("règles des cartes DS et 3DS", () => {
   });
 });
 
-describe("import DS (fixture du 17/11/2026)", () => {
+describe("import DS (fixture du 20/11/2026)", () => {
   const { source, disques, jeux, jeu, ecartes } = importer("ds", "dstdb.xml");
 
   it("écarte une réédition au même titre (New Super Mario Bros. japonais A85J), avec la raison", () => {
@@ -143,10 +177,25 @@ describe("import DS (fixture du 17/11/2026)", () => {
     );
   });
 
-  it("358 cartes, 114 jeux Nintendo, chacun à une adresse distincte (2 rééditions écartées)", () => {
-    expect(disques).toHaveLength(358);
-    expect(jeux).toHaveLength(114);
-    expect(new Set(jeux.map((j) => j.slug)).size).toBe(114);
+  it("420 cartes, 131 jeux Nintendo, chacun à une adresse distincte (identifiants en Y et régions vides : SPEC v1.33)", () => {
+    expect(disques).toHaveLength(420);
+    expect(jeux).toHaveLength(131);
+    expect(new Set(jeux.map((j) => j.slug)).size).toBe(131);
+  });
+
+  it("jeux autrefois absents : identifiants en Y et cartes sans région (contrôle du 20/11/2026)", () => {
+    expect(jeu("kirby-super-star-ultra").disques).toEqual({
+      JAP: "YKWJ",
+      US: "YKWE",
+      PAL: "YKWP",
+    });
+    expect(
+      jeu("dragon-quest-ix-sentinels-of-the-starry-skies").disques.PAL,
+    ).toBe("YDQP");
+    // Pokémon Noir : carte internationale IRBO (US et PAL), titre anglais au lieu de l'allemand « Schwarze Edition ».
+    const noir = jeu("pokemon-black-version");
+    expect(noir.disques).toEqual({ JAP: "IRBJ", US: "IRBO", PAL: "IRBO" });
+    expect(noir.titres.PAL).toBe("Pokémon Black Version");
   });
 
   it("titre européen de la carte anglaise, pas d'un seul pays (Pokémon Diamant : 5 cartes PAL)", () => {

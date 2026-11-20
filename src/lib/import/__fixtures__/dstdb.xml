@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datafile xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="dstdb.xsd">
-	<DSTDB version="20261117152530" filter="EN" games="8460"/>
+	<DSTDB version="20261120152947" filter="EN" games="8460"/>
 	<!--
  GameTDB: DS, Database started in 2015 (https://www.gametdb.com)
  Never modify this file manually, it will get overwritten when you update. You can add games and fixes on the website.
@@ -9185,6 +9185,39 @@
 		<date year="2010" month="3" day="26"/>
 		<genre>action,adventure,role-playing,strategy</genre>
 	</game>
+	<game name="Pok&#xe9;mon White Version 2 (EN)">
+		<id>IRDO</id>
+		<type>DS</type>
+		<region>NTSC-U,PAL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon White Version 2</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Version Blanche 2</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Wei&#xdf;e Edition 2</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Edici&#xf3;n Blanca 2</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Versione Bianca 2</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon White Version 2</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon White Version 2</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon White Version 2</title>
+		</locale>
+		<developer>Game Freak</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="10" day="12"/>
+		<genre>adventure,role-playing,action rpg</genre>
+	</game>
 	<game name="Kirby Mass Attack (USA) (EN)">
 		<id>TADE</id>
 		<type>DS</type>
@@ -9681,6 +9714,1451 @@
 		<publisher>Nintendo</publisher>
 		<date year="2004" month="1" day="1"/>
 	</game>
+	<game name="New Super Mario Bros. (Japan) (JA)">
+		<id>Y7QJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>New Super Mario Bros.</title>
+		</locale>
+		<locale lang="FR">
+			<title>New Super Mario Bros.</title>
+		</locale>
+		<locale lang="DE">
+			<title>New Super Mario Bros.</title>
+		</locale>
+		<locale lang="ES">
+			<title>New Super Mario Bros.</title>
+		</locale>
+		<locale lang="IT">
+			<title>New Super Mario Bros.</title>
+		</locale>
+		<locale lang="NL">
+			<title>New Super Mario Bros.</title>
+		</locale>
+		<locale lang="PT">
+			<title>New Super Mario Bros.</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2023" month="" day=""/>
+	</game>
+	<game name="Dragon Quest IX: Sentinels of the Starry Skies (USA) (EN)">
+		<id>Y8GE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<locale lang="FR">
+			<title>Dragon Quest IX: Les Sentinelles du firmament</title>
+		</locale>
+		<locale lang="DE">
+			<title>Dragon Quest IX: H&#xfc;ter des Himmels</title>
+		</locale>
+		<locale lang="ES">
+			<title>Dragon Quest IX: Centinelas del firmamento</title>
+		</locale>
+		<locale lang="IT">
+			<title>Dragon Quest IX: Le sentinelle del cielo</title>
+		</locale>
+		<locale lang="NL">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<locale lang="PT">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<developer>LEVEL-5</developer>
+		<publisher>Square Enix/Nintendo</publisher>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Bibliothek der Klassischen B&#xfc;cher (Europe) (DE)">
+		<id>YBND</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Bibliothek der Klassischen B&#xfc;cher</title>
+		</locale>
+		<locale lang="DE">
+			<title>Bibliothek der Klassischen B&#xfc;cher</title>
+		</locale>
+		<developer>Genius Sonority Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2010" month="3" day="5"/>
+		<genre>simulation,health,educational</genre>
+	</game>
+	<game name="100 Livres Classiques (Europe) (FR)">
+		<id>YBNF</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>100 Livres Classiques</title>
+		</locale>
+		<locale lang="FR">
+			<title>100 Livres Classiques</title>
+		</locale>
+		<developer>Genius Sonority Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2010" month="3" day="5"/>
+		<genre>simulation,health,educational</genre>
+	</game>
+	<game name="DS Bungaku Zenshuu (Japan) (JA)">
+		<id>YBNJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>DS Bungaku Zenshuu</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#xff24;&#xff33; &#x6587;&#x5b66; &#x5168;&#x96c6;</title>
+		</locale>
+		<developer>Genius Sonority Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2007" month="10" day="18"/>
+		<genre>simulation,health,educational</genre>
+	</game>
+	<game name="100 Classic Book Collection (Europe) (EN)">
+		<id>YBNP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>100 Classic Book Collection</title>
+		</locale>
+		<developer>Genius Sonority Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="12" day="26"/>
+		<genre>simulation,health,educational</genre>
+	</game>
+	<game name="CrossworDS (USA) (EN)">
+		<id>YCUE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>CrossworDS</title>
+		</locale>
+		<developer>Nuevo Retro</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="" day=""/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Nintendo presents: Crossword Collection (Europe) (EN)">
+		<id>YCUP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Nintendo presents: Crossword Collection</title>
+		</locale>
+		<developer>Nuevo Retro</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="12" day="18"/>
+		<genre>health,puzzle</genre>
+	</game>
+	<game name="Dragon Quest IX: Sentinels of the Starry Skies (USA) (EN)">
+		<id>YDQE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<locale lang="FR">
+			<title>Dragon Quest IX: Les Sentinelles du firmament</title>
+		</locale>
+		<locale lang="DE">
+			<title>Dragon Quest IX: H&#xfc;ter des Himmels</title>
+		</locale>
+		<locale lang="ES">
+			<title>Dragon Quest IX: Centinelas del firmamento</title>
+		</locale>
+		<locale lang="IT">
+			<title>Dragon Quest IX: Le sentinelle del cielo</title>
+		</locale>
+		<locale lang="NL">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<locale lang="PT">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<developer>Level 5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2010" month="" day=""/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Dragon Quest IX: Hoshizora no Mamoribito (Japan) (EN,JA)">
+		<id>YDQJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Dragon Quest IX: Hoshizora no Mamoribito</title>
+		</locale>
+		<locale lang="FR">
+			<title>Dragon Quest IX: Les Sentinelles du firmament</title>
+		</locale>
+		<locale lang="DE">
+			<title>Dragon Quest IX: H&#xfc;ter des Himmels</title>
+		</locale>
+		<locale lang="ES">
+			<title>Dragon Quest IX: Centinelas del firmamento</title>
+		</locale>
+		<locale lang="IT">
+			<title>Dragon Quest IX: Le sentinelle del cielo</title>
+		</locale>
+		<locale lang="NL">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<locale lang="PT">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<developer>Level 5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2010" month="" day=""/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Dragon Quest IX: Sentinels of the Starry Skies (Europe) (EN,FR,DE,ES,IT)">
+		<id>YDQP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<locale lang="FR">
+			<title>Dragon Quest IX: Les sentinelles du firmament</title>
+		</locale>
+		<locale lang="DE">
+			<title>Dragon Quest IX: H&#xfc;ter des Himmels</title>
+		</locale>
+		<locale lang="ES">
+			<title>Dragon Quest IX: Centinelas del firmamento</title>
+		</locale>
+		<locale lang="IT">
+			<title>Dragon Quest IX: Le sentinelle del cielo</title>
+		</locale>
+		<locale lang="NL">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<locale lang="PT">
+			<title>Dragon Quest IX: Centinelas del firmamento</title>
+		</locale>
+		<locale lang="FI">
+			<title>Dragon Quest IX: Sentinels of the Starry Skies</title>
+		</locale>
+		<developer>Level 5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2010" month="7" day="23"/>
+		<genre>adventure,role-playing</genre>
+	</game>
+	<game name="Inazuma Eleven (Europe) (DE)">
+		<id>YEED</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="FR">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="DE">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="ES">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="IT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="NL">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="PT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2011" month="1" day="28"/>
+		<genre>sports,role-playing,football</genre>
+	</game>
+	<game name="Inazuma Eleven (Europe) (FR)">
+		<id>YEEF</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="FR">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="DE">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="ES">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="IT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="NL">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="PT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2011" month="1" day="28"/>
+		<genre>sports,role-playing,football</genre>
+	</game>
+	<game name="Inazuma Eleven (Europe) (IT)">
+		<id>YEEI</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="FR">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="DE">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="ES">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="IT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="NL">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="PT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2011" month="1" day="28"/>
+		<genre>sports,role-playing,football</genre>
+	</game>
+	<game name="Inazuma Eleven (Japan) (JA)">
+		<id>YEEJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="FR">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="DE">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="ES">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="IT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="NL">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="PT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30a4;&#x30ca;&#x30ba;&#x30de;&#x30a4;&#x30ec;&#x30d6;&#x30f3;</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Level-5</publisher>
+		<date year="2008" month="8" day="22"/>
+		<genre>sports,role-playing,football</genre>
+	</game>
+	<game name="Inazuma Eleven (Europe) (EN)">
+		<id>YEEP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="FR">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="DE">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="ES">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="IT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="NL">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="PT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2011" month="1" day="28"/>
+		<genre>sports,role-playing,football</genre>
+	</game>
+	<game name="Inazuma Eleven (Europe) (ES)">
+		<id>YEES</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="FR">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="DE">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="ES">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="IT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="NL">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<locale lang="PT">
+			<title>Inazuma Eleven</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2011" month="1" day="28"/>
+		<genre>sports,role-playing,football</genre>
+	</game>
+	<game name="Mystery Case Files: MillionHeir (USA) (EN,FR,ES)">
+		<id>YFCE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<developer>Big Fish Games/Amaze</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="9" day="8"/>
+		<genre>health,puzzle</genre>
+	</game>
+	<game name="Mystery Case Files: MillionHeir (Europe) (EN,FR,DE,ES,IT)">
+		<id>YFCP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="FR">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="DE">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="ES">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="IT">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<locale lang="NL">
+			<title>Mystery Case Files: MillionHeir</title>
+		</locale>
+		<developer>Big Fish Games/Amaze</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="2" day="6"/>
+		<genre>puzzle</genre>
+	</game>
+	<game name="Fire Emblem: Shadow Dragon (USA)">
+		<id>YFEE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="FR">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="DE">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="ES">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="IT">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="NL">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="PT">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2015" month="" day=""/>
+		<genre>role-playing,strategy</genre>
+	</game>
+	<game name="Fire Emblem: Shin Ankoku Ryuu to Hikari no Ken (Japan) (EN,JA)">
+		<id>YFEJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Fire Emblem: Shin Ankoku Ryuu to Hikari no Ken</title>
+		</locale>
+		<locale lang="FR">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="DE">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="ES">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="IT">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="NL">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="PT">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a1;&#x30a4;&#x30a2;&#x30fc;&#x30a8;&#x30e0;&#x30d6;&#x30ec;&#x30e0; &#x65b0;&#x30fb;&#x6697;&#x9ed2;&#x7adc;&#x3068;&#x5149;&#x306e;&#x5263;</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="8" day="7"/>
+		<genre>role-playing,strategy</genre>
+	</game>
+	<game name="Fire Emblem: Shadow Dragon (Europe) (EN,FR,DE,ES,IT)">
+		<id>YFEP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="FR">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="DE">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="ES">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="IT">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="NL">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="PT">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<locale lang="FI">
+			<title>Fire Emblem: Shadow Dragon</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="12" day="5"/>
+		<genre>role-playing,strategy</genre>
+	</game>
+	<game name="Pokemon Mystery Dungeon: Explorers of Time (USA) (EN)">
+		<id>YFTE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pokemon Mystery Dungeon: Explorers of Time</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Donjon Myst&#xe8;re : Explorateurs du Temps</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Mystery Dungeon: Erkundungsteam Zeit</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Mundo Misterioso: Exploradores del Tiempo</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Mystery Dungeon: Esploratori del Tempo</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers Of Time</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers Of Time</title>
+		</locale>
+		<developer>Chunsoft/The Pok&#xe9;mon Company</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="" day=""/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Pok&#xe9;mon Fushigi no Dungeon: Toki no Tankentai (Japan) (JA)">
+		<id>YFTJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Fushigi no Dungeon: Toki no Tankentai</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Donjon Myst&#xe8;re : Explorateurs du Temps</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Mystery Dungeon: Erkundungsteam Zeit</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Mundo Misterioso: Exploradores del Tiempo</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Mystery Dungeon: Esploratori del Tempo</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers Of Time</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers Of Time</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30b1;&#x30e2;&#x30f3;&#x4e0d;&#x601d;&#x8b70;&#x306e;&#x30c0;&#x30f3;&#x30b8;&#x30e7;&#x30f3; &#x6642;&#x306e;&#x63a2;&#x691c;&#x968a;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x5bf6;&#x53ef;&#x5922;&#x4e0d;&#x53ef;&#x601d;&#x8b70;&#x7684;&#x8ff7;&#x5bae; &#x6642;&#x4e4b;&#x63a2;&#x96aa;&#x968a;</title>
+		</locale>
+		<locale lang="ZHCN">
+			<title>&#x5b9d;&#x53ef;&#x68a6;&#x4e0d;&#x53ef;&#x601d;&#x8bae;&#x7684;&#x8ff7;&#x5bab; &#x65f6;&#x4e4b;&#x63a2;&#x9669;&#x961f;</title>
+		</locale>
+		<developer>Chunsoft</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2007" month="9" day="13"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Pok&#xe9;mon Mystery Dungeon: Explorers of Time (Europe) (EN,FR,DE,ES,IT)">
+		<id>YFTP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers of Time</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Donjon Myst&#xe8;re : Explorateurs du Temps</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Mystery Dungeon: Erkundungsteam Zeit</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Mundo Misterioso: Exploradores del Tiempo</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Mystery Dungeon: Esploratori del Tempo</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers Of Time</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers Of Time</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers of Time</title>
+		</locale>
+		<developer>Chunsoft/The Pok&#xe9;mon Company</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="7" day="4"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Pokemon Mystery Dungeon: Explorers of Darkness (USA) (EN)">
+		<id>YFYE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pokemon Mystery Dungeon: Explorers of Darkness</title>
+		</locale>
+		<publisher/>
+		<date year="2008" month="" day=""/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Pokemon Fushigi no Dungeon: Yami no Tankentai (Japan) (EN,JA)">
+		<id>YFYJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pokemon Fushigi no Dungeon: Yami no Tankentai</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30dd;&#x30b1;&#x30e2;&#x30f3;&#x4e0d;&#x601d;&#x8b70;&#x306e;&#x30c0;&#x30f3;&#x30b8;&#x30e7;&#x30f3; &#x95c7;&#x306e;&#x63a2;&#x691c;&#x968a;</title>
+		</locale>
+		<locale lang="ZHTW">
+			<title>&#x5bf6;&#x53ef;&#x5922;&#x4e0d;&#x53ef;&#x601d;&#x8b70;&#x7684;&#x8ff7;&#x5bae; &#x95c7;&#x4e4b;&#x63a2;&#x96aa;&#x968a;</title>
+		</locale>
+		<developer>ChunSoft</developer>
+		<publisher>The Pokemon Company</publisher>
+		<date year="2007" month="9" day="13"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Pok&#xe9;mon Mystery Dungeon: Explorers of Darknes (Europe) (EN,FR,DE,ES,IT)">
+		<id>YFYP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers of Darknes</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Mystery Dungeon: Erkundungsteam Dunkelheit </title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Mundo Misterioso: Exploradores de la Oscuridad</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Mystery Dungeon: Explorers of Darkness</title>
+		</locale>
+		<developer>Chunsoft/The Pok&#xe9;mon Company</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="7" day="4"/>
+		<genre>role-playing</genre>
+	</game>
+	<game name="Facening de Hyoujou Yutaka ni Inshou Up: Otona no DS Kao Training (Japan) (JA)">
+		<id>YKOJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Facening de Hyoujou Yutaka ni Inshou Up: Otona no DS Kao Training</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30d5;&#x30a7;&#x30a4;&#x30b9;&#x30cb;&#x30f3;&#x30b0;&#x3067;&#x8868;&#x60c5;&#x8c4a;&#x304b;&#x306b;&#x5370;&#x8c61;&#x30a2;&#x30c3;&#x30d7; &#x5927;&#x4eba;&#x306e;DS&#x9854;&#x30c8;&#x30ec;&#x30fc;&#x30cb;&#x30f3;&#x30b0;</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2007" month="8" day="2"/>
+		<genre>health,coaching,exercise</genre>
+	</game>
+	<game name="Tsuji Gakuen Tsuji Cooking Kanshuu: Koharu no DS Uchigohan.: Shokuji Balance Guide Tsuki (Japan) (JA)">
+		<id>YKUJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Tsuji Gakuen Tsuji Cooking Kanshuu: Koharu no DS Uchigohan.: Shokuji Balance Guide Tsuki</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x3053;&#x306f;&#x308b;&#x306e;DS&#x3046;&#x3061;&#x3054;&#x306f;&#x3093;&#x3002; &#x98df;&#x4e8b;&#x30d0;&#x30e9;&#x30f3;&#x30b9;&#x30ac;&#x30a4;&#x30c9;&#x3064;&#x304d;</title>
+		</locale>
+		<developer>Comolink</developer>
+		<publisher>Rocket Games / Ajinomoto / Nintendo</publisher>
+		<date year="2007" month="10" day="4"/>
+		<genre>simulation,cooking,educational</genre>
+	</game>
+	<game name="Kirby Super Star Ultra (USA) (EN)">
+		<id>YKWE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="FR">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="DE">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="ES">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="IT">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="NL">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="PT">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<developer>HAL Laboratory, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="" day=""/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Hoshi no Kirby Ultra Super Deluxe (Japan) (EN,JA)">
+		<id>YKWJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Hoshi no Kirby Ultra Super Deluxe</title>
+		</locale>
+		<locale lang="FR">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="DE">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="ES">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="IT">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="NL">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="PT">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<developer>HAL Laboratory, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="" day=""/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Kirby Super Star Ultra (Europe) (EN,FR,DE,ES,IT)">
+		<id>YKWP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="FR">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="DE">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="ES">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="IT">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="NL">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="PT">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<locale lang="FI">
+			<title>Kirby Super Star Ultra</title>
+		</locale>
+		<developer>HAL Laboratory, Inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="9" day="18"/>
+		<genre>action,platformer</genre>
+	</game>
+	<game name="Professor Layton und die Schatulle der Pandora (Europe) (DE)">
+		<id>YLTD</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Professor Layton und die Schatulle der Pandora</title>
+		</locale>
+		<locale lang="FR">
+			<title>Professeur Layton et la bo&#xee;te de Pandore</title>
+		</locale>
+		<locale lang="DE">
+			<title>Professor Layton und die Schatulle der Pandora</title>
+		</locale>
+		<locale lang="ES">
+			<title>El profesor Layton y la caja de Pandora</title>
+		</locale>
+		<locale lang="IT">
+			<title>Il professor Layton e lo scrigno di Pandora</title>
+		</locale>
+		<locale lang="NL">
+			<title>Professor Layton en de doos van Pandora</title>
+		</locale>
+		<locale lang="PT">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="9" day="25"/>
+		<genre>adventure,puzzle</genre>
+	</game>
+	<game name="Professor Layton and the Diabolical Box (USA) (EN)">
+		<id>YLTE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Professor Layton and the Diabolical Box</title>
+		</locale>
+		<locale lang="FR">
+			<title>Professeur Layton et la bo&#xee;te de Pandore</title>
+		</locale>
+		<locale lang="DE">
+			<title>Professor Layton und die Schatulle der Pandora</title>
+		</locale>
+		<locale lang="ES">
+			<title>El profesor Layton y la caja de Pandora</title>
+		</locale>
+		<locale lang="IT">
+			<title>Il professor Layton e lo scrigno di Pandora</title>
+		</locale>
+		<locale lang="NL">
+			<title>Professor Layton en de doos van Pandora</title>
+		</locale>
+		<locale lang="PT">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<developer>LEVEL-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="" day=""/>
+		<genre>adventure,puzzle</genre>
+	</game>
+	<game name="Professeur Layton et la bo&#xee;te de Pandore (Europe) (FR)">
+		<id>YLTF</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Professeur Layton et la bo&#xee;te de Pandore</title>
+		</locale>
+		<locale lang="FR">
+			<title>Professeur Layton et la bo&#xee;te de Pandore</title>
+		</locale>
+		<locale lang="DE">
+			<title>Professor Layton und die Schatulle der Pandora</title>
+		</locale>
+		<locale lang="ES">
+			<title>El profesor Layton y la caja de Pandora</title>
+		</locale>
+		<locale lang="IT">
+			<title>Il professor Layton e lo scrigno di Pandora</title>
+		</locale>
+		<locale lang="NL">
+			<title>Professor Layton en de doos van Pandora</title>
+		</locale>
+		<locale lang="PT">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="9" day="25"/>
+		<genre>adventure,puzzle</genre>
+	</game>
+	<game name="Professor Layton en de Doos van Pandora (Europe) (NL)">
+		<id>YLTH</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Professor Layton en de Doos van Pandora</title>
+		</locale>
+		<locale lang="FR">
+			<title>Professeur Layton et la bo&#xee;te de Pandore</title>
+		</locale>
+		<locale lang="DE">
+			<title>Professor Layton und die Schatulle der Pandora</title>
+		</locale>
+		<locale lang="ES">
+			<title>El profesor Layton y la caja de Pandora</title>
+		</locale>
+		<locale lang="IT">
+			<title>Il professor Layton e lo scrigno di Pandora</title>
+		</locale>
+		<locale lang="NL">
+			<title>Professor Layton en de Doos van Pandora</title>
+		</locale>
+		<locale lang="PT">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="9" day="25"/>
+		<genre>adventure,puzzle</genre>
+	</game>
+	<game name="Il Professor Layton e lo Scrigno di Pandora (Europe) (IT)">
+		<id>YLTI</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Il Professor Layton e lo Scrigno di Pandora</title>
+		</locale>
+		<locale lang="FR">
+			<title>Professeur Layton et la bo&#xee;te de Pandore</title>
+		</locale>
+		<locale lang="DE">
+			<title>Professor Layton und die Schatulle der Pandora</title>
+		</locale>
+		<locale lang="ES">
+			<title>El profesor Layton y la caja de Pandora</title>
+		</locale>
+		<locale lang="IT">
+			<title>Il Professor Layton e lo Scrigno di Pandora</title>
+		</locale>
+		<locale lang="NL">
+			<title>Professor Layton en de doos van Pandora</title>
+		</locale>
+		<locale lang="PT">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="9" day="25"/>
+		<genre>adventure,puzzle</genre>
+	</game>
+	<game name="Layton Kyouju to Akuma no Hako (Japan) (EN,JA)">
+		<id>YLTJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Layton Kyouju to Akuma no Hako</title>
+		</locale>
+		<locale lang="FR">
+			<title>Professeur Layton et la bo&#xee;te de Pandore</title>
+		</locale>
+		<locale lang="DE">
+			<title>Professor Layton und die Schatulle der Pandora</title>
+		</locale>
+		<locale lang="ES">
+			<title>El profesor Layton y la caja de Pandora</title>
+		</locale>
+		<locale lang="IT">
+			<title>Il professor Layton e lo scrigno di Pandora</title>
+		</locale>
+		<locale lang="NL">
+			<title>Professor Layton en de doos van Pandora</title>
+		</locale>
+		<locale lang="PT">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<developer>LEVEL-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="" day=""/>
+		<genre>adventure,puzzle</genre>
+	</game>
+	<game name="Professor Layton and Pandora&apos;s Box (Europe) (EN)">
+		<id>YLTP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<locale lang="FR">
+			<title>Professeur Layton et la bo&#xee;te de Pandore</title>
+		</locale>
+		<locale lang="DE">
+			<title>Professor Layton und die Schatulle der Pandora</title>
+		</locale>
+		<locale lang="ES">
+			<title>El profesor Layton y la caja de Pandora</title>
+		</locale>
+		<locale lang="IT">
+			<title>Il professor Layton e lo scrigno di Pandora</title>
+		</locale>
+		<locale lang="NL">
+			<title>Professor Layton en de doos van Pandora</title>
+		</locale>
+		<locale lang="PT">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<locale lang="FI">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="9" day="25"/>
+		<genre>adventure,puzzle</genre>
+	</game>
+	<game name="El Profesor Layton y la caja de Pandora (Europe) (ES)">
+		<id>YLTS</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>El Profesor Layton y la caja de Pandora</title>
+		</locale>
+		<locale lang="FR">
+			<title>Professeur Layton et la bo&#xee;te de Pandore</title>
+		</locale>
+		<locale lang="DE">
+			<title>Professor Layton und die Schatulle der Pandora</title>
+		</locale>
+		<locale lang="ES">
+			<title>El Profesor Layton y la caja de Pandora</title>
+		</locale>
+		<locale lang="IT">
+			<title>Il professor Layton e lo scrigno di Pandora</title>
+		</locale>
+		<locale lang="NL">
+			<title>Professor Layton en de doos van Pandora</title>
+		</locale>
+		<locale lang="PT">
+			<title>Professor Layton and Pandora&apos;s Box</title>
+		</locale>
+		<developer>Level-5</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="9" day="25"/>
+		<genre>adventure,puzzle</genre>
+	</game>
+	<game name="Last Window: Mayonaka no Yakusoku (Japan) (JA)">
+		<id>YLUJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Last Window: Mayonaka no Yakusoku</title>
+		</locale>
+		<locale lang="FR">
+			<title>Last Window: le secret de Cape West</title>
+		</locale>
+		<locale lang="DE">
+			<title>Last Window: Das Geheimnis von Cape West</title>
+		</locale>
+		<locale lang="ES">
+			<title>Last Window: El secreto de Cape West</title>
+		</locale>
+		<locale lang="IT">
+			<title>Last Window: Il segreto di Cape West</title>
+		</locale>
+		<locale lang="NL">
+			<title>Last Window: The Secret of Cape West</title>
+		</locale>
+		<locale lang="PT">
+			<title>Last Window: The Secret of Cape West</title>
+		</locale>
+		<locale lang="JA">
+			<title>&#x30e9;&#x30b9;&#x30c8;&#x30a6;&#x30a3;&#x30f3;&#x30c9;&#x30a6; &#x771f;&#x591c;&#x4e2d;&#x306e;&#x7d04;&#x675f;</title>
+		</locale>
+		<developer>Cing</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2010" month="1" day="14"/>
+		<genre>adventure</genre>
+	</game>
+	<game name="Last Window: The Secret of Cape West (Europe) (EN,FR,DE,ES,IT)">
+		<id>YLUP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Last Window: The Secret of Cape West</title>
+		</locale>
+		<locale lang="FR">
+			<title>Last Window: le secret de Cape West</title>
+		</locale>
+		<locale lang="DE">
+			<title>Last Window: Das Geheimnis von Cape West</title>
+		</locale>
+		<locale lang="ES">
+			<title>Last Window: El secreto de Cape West</title>
+		</locale>
+		<locale lang="IT">
+			<title>Last Window: Il segreto di Cape West</title>
+		</locale>
+		<locale lang="NL">
+			<title>Last Window: The Secret of Cape West</title>
+		</locale>
+		<locale lang="PT">
+			<title>Last Window: The Secret of Cape West</title>
+		</locale>
+		<locale lang="FI">
+			<title>Last Window - The Secret of Cape West</title>
+		</locale>
+		<developer>Cing</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2010" month="9" day="17"/>
+		<genre>adventure</genre>
+	</game>
+	<game name="Rhythm Heaven (USA) (EN)">
+		<id>YLZE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Rhythm Heaven</title>
+		</locale>
+		<locale lang="FR">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="DE">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="ES">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="IT">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="NL">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="PT">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="4" day="5"/>
+		<genre>music,rhythm</genre>
+	</game>
+	<game name="Rhythm Tengoku Gold (Japan) (EN,JA)">
+		<id>YLZJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Rhythm Tengoku Gold</title>
+		</locale>
+		<locale lang="FR">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="DE">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="ES">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="IT">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="NL">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="PT">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<developer>Nintendo</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="" day=""/>
+		<genre>music,rhythm</genre>
+	</game>
+	<game name="Rhythm Paradise (Europe) (EN,FR,DE)">
+		<id>YLZP</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="FR">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="DE">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="ES">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="IT">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="NL">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="PT">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="FI">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="5" day="1"/>
+		<genre>music,health,rhythm</genre>
+	</game>
+	<game name="Rhythm Paradise (Europe) (EN,ES,IT)">
+		<id>YLZX</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="FR">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="DE">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="ES">
+			<title>Rythm Paradise</title>
+		</locale>
+		<locale lang="IT">
+			<title>Rythm Paradise</title>
+		</locale>
+		<locale lang="NL">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="PT">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<locale lang="FI">
+			<title>Rhythm Paradise</title>
+		</locale>
+		<developer>Nintendo EAD</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="5" day="29"/>
+		<genre>music,health,rhythm</genre>
+	</game>
+	<game name="Pokemon Ranger: Shadows of Almia (USA) (EN)">
+		<id>YP2E</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Pokemon Ranger: Shadows of Almia</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Ranger: Nuit sur Almia</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Ranger: Finsternis &#xfc;ber Almia</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Ranger: Sombras de Almia</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Ranger: Ombre su Almia</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon Ranger: Shadows of Almia</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon Ranger: Shadows of Almia</title>
+		</locale>
+		<developer>Creatures inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="" day=""/>
+	</game>
+	<game name="Pokemon Ranger: Batonnage (Japan) (EN,JA)">
+		<id>YP2J</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Pokemon Ranger: Batonnage</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Ranger: Nuit sur Almia</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Ranger: Finsternis &#xfc;ber Almia</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Ranger: Sombras de Almia</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Ranger: Ombre su Almia</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon Ranger: Shadows of Almia</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon Ranger: Shadows of Almia</title>
+		</locale>
+		<developer>Creatures inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2004" month="" day=""/>
+	</game>
+	<game name="Pok&#xe9;mon Ranger: Shadows of Almia (Europe) (EN,FR,DE,ES,IT)">
+		<id>YP2P</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Ranger: Shadows of Almia</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Ranger: Nuit sur Almia</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Ranger: Finsternis &#xfc;ber Almia</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Ranger: Sombras de Almia</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Ranger: Ombre su Almia</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon Ranger: Shadows of Almia</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon Ranger: Shadows of Almia</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Ranger: Shadows of Almia</title>
+		</locale>
+		<developer>Creatures inc.</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="11" day="21"/>
+		<genre>action,adventure,role-playing,action rpg</genre>
+	</game>
+	<game name="The Legendary Starfy (USA) (EN)">
+		<id>YSSE</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>The Legendary Starfy</title>
+		</locale>
+		<developer>TOSE</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2009" month="6" day="7"/>
+		<genre>action,platformer,2d platformer</genre>
+	</game>
+	<game name="Densetsu no Stafy: Taiketsu! Dile Kaizoku Dan (Japan) (EN,JA)">
+		<id>YSSJ</id>
+		<type>DS</type>
+		<region>NTSC-J</region>
+		<locale lang="EN">
+			<title>Densetsu no Stafy: Taiketsu! Dile Kaizoku Dan</title>
+		</locale>
+		<publisher/>
+		<date year="" month="" day=""/>
+	</game>
+	<game name="Advance Wars: Days of Ruin (USA) (EN,FR,ES)">
+		<id>YW2E</id>
+		<type>DS</type>
+		<region>NTSC-U</region>
+		<locale lang="EN">
+			<title>Advance Wars: Days of Ruin</title>
+		</locale>
+		<locale lang="FR">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="DE">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="ES">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="IT">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="NL">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="1" day="21"/>
+		<genre>strategy</genre>
+	</game>
+	<game name="Advance Wars: Dark Conflict (Europe) (EN,FR,DE,ES,IT)">
+		<id>YW2P</id>
+		<type>DS</type>
+		<region>PAL</region>
+		<locale lang="EN">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="FR">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="DE">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="ES">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="IT">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="NL">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<locale lang="FI">
+			<title>Advance Wars: Dark Conflict</title>
+		</locale>
+		<developer>Intelligent Systems</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2008" month="1" day="25"/>
+		<genre>strategy</genre>
+	</game>
 	<game name="Pok&#xe9;mon Weisse Edition (Europe) (DE)">
 		<id>IRAD</id>
 		<type>DSi</type>
@@ -9802,6 +11280,39 @@
 		<developer>Game Freak</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2010" month="9" day="18"/>
+		<genre>adventure,role-playing,strategy</genre>
+	</game>
+	<game name="Pok&#xe9;mon White Version (EN)">
+		<id>IRAO</id>
+		<type>DSi</type>
+		<region>NTSC-U,PAL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon White Version</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Version Blanche</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Wei&#xdf;e Edition</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Edici&#xf3;n Blanca</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Versione Bianca</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon White Version</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon White Version</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon White Version</title>
+		</locale>
+		<developer>Game Freak</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2011" month="3" day="4"/>
 		<genre>adventure,role-playing,strategy</genre>
 	</game>
 	<game name="Pok&#xe9;mon Edici&#xf3;n Blanca (Europe) (ES)">
@@ -9955,6 +11466,39 @@
 		<developer>Game Freak</developer>
 		<publisher>Nintendo</publisher>
 		<date year="2010" month="9" day="18"/>
+		<genre>adventure,role-playing,strategy</genre>
+	</game>
+	<game name="Pok&#xe9;mon Black Version (EN)">
+		<id>IRBO</id>
+		<type>DSi</type>
+		<region>NTSC-U,PAL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Black Version</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Version Noire</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Schwarze Edition</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Edici&#xf3;n Negra</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Versione Nera</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon Black Version</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon Black Version</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Black Version</title>
+		</locale>
+		<developer>Game Freak</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2011" month="3" day="4"/>
 		<genre>adventure,role-playing,strategy</genre>
 	</game>
 	<game name="Pok&#xe9;mon Edici&#xf3;n Negra (Europe) (ES)">
@@ -10262,6 +11806,39 @@
 		<publisher>Nintendo</publisher>
 		<date year="2012" month="6" day="23"/>
 		<genre>action,adventure,role-playing,strategy,action rpg</genre>
+	</game>
+	<game name="Pok&#xe9;mon Black Version 2 (EN)">
+		<id>IREO</id>
+		<type>DSi</type>
+		<region>NTSC-U,PAL</region>
+		<locale lang="EN">
+			<title>Pok&#xe9;mon Black Version 2</title>
+		</locale>
+		<locale lang="FR">
+			<title>Pok&#xe9;mon Version Noire 2</title>
+		</locale>
+		<locale lang="DE">
+			<title>Pok&#xe9;mon Schwarze Edition 2</title>
+		</locale>
+		<locale lang="ES">
+			<title>Pok&#xe9;mon Edici&#xf3;n Negra 2</title>
+		</locale>
+		<locale lang="IT">
+			<title>Pok&#xe9;mon Versione Nera 2</title>
+		</locale>
+		<locale lang="NL">
+			<title>Pok&#xe9;mon Black Version 2</title>
+		</locale>
+		<locale lang="PT">
+			<title>Pok&#xe9;mon Black Version 2</title>
+		</locale>
+		<locale lang="FI">
+			<title>Pok&#xe9;mon Black Version 2</title>
+		</locale>
+		<developer>Game Freak</developer>
+		<publisher>Nintendo</publisher>
+		<date year="2012" month="10" day="12"/>
+		<genre>adventure,role-playing,strategy</genre>
 	</game>
 	<game name="Pok&#xe9;mon Edici&#xf3;n Negra 2 (Europe) (ES)">
 		<id>IRES</id>
