@@ -88,6 +88,7 @@ export type Database = {
           metacritic_note: number | null;
           metacritic_url: string | null;
           physique: boolean;
+          series: string[];
           slug: string;
           updated_at: string;
           verrous: string[];
@@ -105,6 +106,7 @@ export type Database = {
           metacritic_note?: number | null;
           metacritic_url?: string | null;
           physique?: boolean;
+          series?: string[];
           slug: string;
           updated_at?: string;
           verrous?: string[];
@@ -121,6 +123,7 @@ export type Database = {
           metacritic_note?: number | null;
           metacritic_url?: string | null;
           physique?: boolean;
+          series?: string[];
           slug?: string;
           updated_at?: string;
           verrous?: string[];
