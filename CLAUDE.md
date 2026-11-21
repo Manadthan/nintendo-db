@@ -57,6 +57,8 @@ npm run e2e        # Playwright 375 × 812 (Chromium ici ; WebKit seulement en C
 npm run db:start   # base locale (Docker : absent de l'environnement de Claude → la CI fait foi)
 npm run db:test    # tests pgTAP
 npm run db:types   # régénérer src/types/database.ts après une migration
+npm run session -- scripts/xxx.mjs  # script de données sur la base de production, depuis la session Claude
+npm run relais     # relais GameTDB depuis la session Claude (GameTDB bloque GitHub)
 ```
 
 - Le schéma évolue **uniquement** par `supabase/migrations/`. Une migration appliquée en production ne se modifie
@@ -128,11 +130,12 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
 
 ## Erreurs récurrentes
 
-- **GameTDB bloque des hébergeurs** (Vercel dès #53, GitHub le 18/11/2026 : « Connect Timeout ») : le relais peut
-  tourner depuis la session Claude, qui atteint GameTDB. Clé Supabase en secret réseau de l'environnement (injectée
-  dans l'en-tête `apikey`, jamais vue), `SUPABASE_SECRET_KEY=sb_secret_proxy-injected`, `NODE_USE_ENV_PROXY=1`,
-  `NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt`, et un préchargement qui retire l'en-tête `Authorization` des
-  requêtes vers Supabase.
+- **GameTDB bloque des hébergeurs** (Vercel dès #53, GitHub le 18/11/2026 : « Connect Timeout ») : le relais tourne
+  depuis la session Claude, qui atteint GameTDB : `npm run relais` ; tout script de données : `npm run session --
+  scripts/xxx.mjs`. Environnement cloud « nintendo-db » : clé Supabase en secret réseau (injectée dans `apikey`,
+  jamais vue), `SUPABASE_URL` et la fausse clé `SUPABASE_SECRET_KEY` en variables, `npm ci` au démarrage ; la
+  commande ajoute `NODE_USE_ENV_PROXY=1` (sans lui, Supabase est injoignable). Retirer `Authorization` n'est plus
+  utile (essai du 21/11/2026 : lecture, stockage privé et RLS identiques avec ou sans).
 
 - **CI e2e arrêtée pendant l'installation des navigateurs** (#109, #120, puis toutes les PR du 19/11 : miroir Ubuntu
   lent) : ce n'est pas le code. `ci.yml` : cache des navigateurs **et des paquets Ubuntu**, 10 min par essai, second
