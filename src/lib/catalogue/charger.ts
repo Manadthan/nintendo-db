@@ -14,7 +14,7 @@ export async function chargerCatalogue(): Promise<JeuCatalogue[]> {
       supabase
         .from("games")
         .select(
-          "id, slug, developpeur, genre, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, jaquette_path)",
+          "id, slug, developpeur, genre, series, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, jaquette_path)",
         )
         .order("id")
         .range(de, a),

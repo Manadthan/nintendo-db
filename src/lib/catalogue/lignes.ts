@@ -13,6 +13,7 @@ export type LigneJeu = {
   slug: string;
   developpeur: string | null;
   genre: string | null;
+  series: string[];
   metacritic_note: number | null;
   consoles: { slug: string; nom: string };
   releases: {
@@ -70,6 +71,7 @@ export function versJeuCatalogue(
     developpeur: ligne.developpeur,
     editeur: ligne.releases.find((r) => r.editeur)?.editeur ?? null,
     // Écrits par l'import séparés par « , » (DESIGN ADR-03).
+    series: [...ligne.series].sort((a, b) => a.localeCompare(b, "fr")),
     genres: (ligne.genre ?? "")
       .split(",")
       .map((g) => g.trim())

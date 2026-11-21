@@ -29,7 +29,6 @@ export type SortieFiche = SortieCatalogue & {
 
 /** Un jeu tel que la fiche l'affiche (US-04) ; utilisable partout où un jeu du catalogue l'est. */
 export type JeuFiche = JeuCatalogue & {
-  franchise: string | null;
   genre: string | null;
   wikipediaUrl: string | null;
   /** Page Metacritic du jeu (US-17), si connue. */
@@ -40,7 +39,6 @@ export type JeuFiche = JeuCatalogue & {
 
 /** Une ligne de `games` avec sa console et ses `releases`, telle que la renvoie la requête de la fiche. */
 export type LigneFiche = Omit<LigneJeu, "releases"> & {
-  franchise: string | null;
   genre: string | null;
   wikipedia_url: string | null;
   metacritic_url: string | null;
@@ -69,7 +67,6 @@ export function versJeuFiche(ligne: LigneFiche, baseUrl: string): JeuFiche {
 
   return {
     ...jeu,
-    franchise: ligne.franchise,
     genre: ligne.genre,
     wikipediaUrl: ligne.wikipedia_url,
     metacriticUrl: ligne.metacritic_url,

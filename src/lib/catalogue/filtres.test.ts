@@ -10,6 +10,8 @@ import {
   developpeursProposes,
   genresProposes,
   nombreActifs,
+  SANS_SERIE,
+  seriesProposees,
 } from "./filtres";
 import type { JeuCatalogue, SortieCatalogue } from "./types";
 
@@ -27,6 +29,7 @@ const jeu = (
   dates: [string | null, string | null, string | null],
   genres: string[],
   developpeur: string | null = null,
+  series: string[] = [],
 ): JeuCatalogue => ({
   id: slug,
   slug,
@@ -35,6 +38,7 @@ const jeu = (
   metacritic: null,
   editeur: "Nintendo",
   genres,
+  series,
   sorties: {
     JAP: sortie(dates[0]),
     US: sortie(dates[1]),
@@ -111,6 +115,7 @@ describe("filtrer (US-06)", () => {
           annee: "2012",
           genre: "Musique",
           developpeur: null,
+          serie: null,
           collection: null,
         }),
       ),
@@ -200,6 +205,7 @@ describe("filtres dans l'adresse (vue filtrée partageable)", () => {
         annee: "2014",
         genre: "Plates-formes 3D",
         developpeur: "Nintendo EAD",
+        serie: null,
         collection: "manquants",
       }),
     ).toBe(
@@ -223,6 +229,7 @@ describe("filtres dans l'adresse (vue filtrée partageable)", () => {
       annee: "2014",
       genre: "Plates-formes 3D",
       developpeur: "Retro Studios",
+      serie: null,
       collection: "possedes",
     });
     expect(
@@ -294,5 +301,37 @@ describe("filtre Développeur (#89)", () => {
       { nom: "Retro Studios", nombre: 1 },
       { nom: "The Pokémon Company", nombre: 1 },
     ]);
+  });
+});
+
+describe("filtre Série (SPEC v1.37)", () => {
+  const DR = jeu("dr-mario", ["1990-07-27", "1990-10-01", "1990-12-01"], [], null, ["Dr. Mario", "Mario"]);
+  const MK = jeu("mario-kart-8", ["2014-05-29", "2014-05-30", "2014-05-30"], [], null, ["Mario", "Mario Kart"]);
+  const STEEL = jeu("steel-diver", ["2011-02-26", "2011-03-22", "2011-05-06"], []);
+  const versions = trier([DR, MK, STEEL], "anciens", "TOUS");
+  const slugs = (serie: string) =>
+    filtrer(versions, { ...SANS_FILTRE, serie }).map((v) => v.jeu.slug);
+
+  it("un jeu apparaît sous chacune de ses séries", () => {
+    expect(slugs("Mario")).toEqual(["dr-mario", "mario-kart-8"]);
+    expect(slugs("Dr. Mario")).toEqual(["dr-mario"]);
+  });
+
+  it("« Sans série » montre les jeux qui n'en ont pas", () => {
+    expect(slugs(SANS_SERIE)).toEqual(["steel-diver"]);
+  });
+
+  it("liste proposée : ordre alphabétique avec le nombre de jeux, puis « Sans série »", () => {
+    expect(seriesProposees(versions)).toEqual([
+      { nom: "Dr. Mario", nombre: 1 },
+      { nom: "Mario", nombre: 2 },
+      { nom: "Mario Kart", nombre: 1 },
+      { nom: SANS_SERIE, nombre: 1 },
+    ]);
+  });
+
+  it("lu et écrit dans l'adresse (?serie=)", () => {
+    expect(filtresDepuisParametres("?serie=Dr.+Mario").serie).toBe("Dr. Mario");
+    expect(avecFiltres("", { ...SANS_FILTRE, serie: "Mario Kart" })).toBe("?serie=Mario+Kart");
   });
 });

@@ -16,6 +16,7 @@ const KIRBY: JeuCatalogue = {
   slug: "kirby",
   developpeur: "HAL Laboratory, Nintendo SPD",
   genres: [],
+  series: [],
   metacritic: null,
   console: { slug: "wii-u", nom: "Wii U" },
   editeur: "Nintendo",

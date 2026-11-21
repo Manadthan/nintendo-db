@@ -19,6 +19,8 @@ export type Filtres = {
   genre: string | null;
   /** Studio (nom nettoyé), ou « Nintendo (first party) » pour tous les studios internes (#89). */
   developpeur: string | null;
+  /** Série (SPEC v1.37), ou « Sans série » pour les jeux qui n'en ont pas. */
+  serie: string | null;
   /** Ma collection (US-16) : appliqué par le catalogue, et seulement pour le propriétaire connecté. */
   collection: "possedes" | "manquants" | null;
 };
@@ -29,8 +31,12 @@ export const SANS_FILTRE: Filtres = {
   annee: null,
   genre: null,
   developpeur: null,
+  serie: null,
   collection: null,
 };
+
+/** Choix du filtre Série pour les jeux sans série connue (SPEC v1.37). */
+export const SANS_SERIE = "Sans série";
 
 /** Choix de disponibilité, dans l'ordre d'affichage. */
 export const DISPONIBILITES: readonly {
@@ -50,6 +56,7 @@ const PARAMETRES = {
   annee: "annee",
   genre: "genre",
   developpeur: "dev",
+  serie: "serie",
   collection: "collection",
 } as const satisfies Record<keyof Filtres, string>;
 
@@ -82,7 +89,11 @@ export function filtrer(
       (!filtres.disponibilite || disponible(v, filtres.disponibilite)) &&
       (!filtres.annee || annee(v) === filtres.annee) &&
       (!filtres.genre || v.jeu.genres.includes(filtres.genre)) &&
-      (!filtres.developpeur || developpePar(v, filtres.developpeur)),
+      (!filtres.developpeur || developpePar(v, filtres.developpeur)) &&
+      (!filtres.serie ||
+        (filtres.serie === SANS_SERIE
+          ? v.jeu.series.length === 0
+          : v.jeu.series.includes(filtres.serie))),
   );
 }
 
@@ -126,6 +137,25 @@ export function developpeursProposes(
   ];
 }
 
+/**
+ * Séries proposées (SPEC v1.37) : celles des jeux affichés, par ordre alphabétique, avec leur nombre de jeux (un jeu
+ * compte dans chacune de ses séries), puis « Sans série ».
+ */
+export function seriesProposees(
+  versions: VersionAffichee[],
+): { nom: string; nombre: number }[] {
+  const nombres = new Map<string, number>();
+  for (const v of versions)
+    for (const s of v.jeu.series) nombres.set(s, (nombres.get(s) ?? 0) + 1);
+  const sans = versions.filter((v) => v.jeu.series.length === 0).length;
+  return [
+    ...[...nombres]
+      .sort(([a], [b]) => a.localeCompare(b, "fr"))
+      .map(([nom, nombre]) => ({ nom, nombre })),
+    ...(sans ? [{ nom: SANS_SERIE, nombre: sans }] : []),
+  ];
+}
+
 /** Nombre de filtres actifs (affiché sur le bouton « Filtres »). */
 export const nombreActifs = (f: Filtres) =>
   Object.values(f).filter((v) => v !== null).length;
@@ -144,6 +174,7 @@ export function filtresDepuisParametres(recherche: string): Filtres {
     annee: an && /^\d{4}$/.test(an) ? an : null,
     genre: params.get(PARAMETRES.genre)?.trim() || null,
     developpeur: params.get(PARAMETRES.developpeur)?.trim() || null,
+    serie: params.get(PARAMETRES.serie)?.trim() || null,
     collection:
       (["possedes", "manquants"] as const).find(
         (c) => c === params.get(PARAMETRES.collection),

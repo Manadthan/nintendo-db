@@ -36,7 +36,7 @@ const ligne: LigneFiche = {
   id: ID,
   slug: "wii-karaoke-u",
   developpeur: "Xing",
-  franchise: null,
+  series: [],
   genre: "Musique, Karaoké",
   wikipedia_url: null,
   metacritic_note: null,

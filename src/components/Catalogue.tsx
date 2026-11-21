@@ -16,6 +16,7 @@ import {
   enregistrerFiltres,
   filtrer,
   developpeursProposes,
+  seriesProposees,
   genresProposes,
   lireFiltres,
   nombreActifs,
@@ -256,6 +257,7 @@ export function Catalogue({ jeux, consoles }: Props) {
           annees={anneesProposees(duMarche)}
           genres={genresProposes(duMarche)}
           developpeurs={developpeursProposes(duMarche)}
+          series={seriesProposees(duMarche)}
           collection={connecte}
         />
       )}

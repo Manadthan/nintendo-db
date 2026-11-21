@@ -32,6 +32,8 @@ export type JeuCatalogue = {
   editeur: string | null;
   /** Genres (US-06), traduits à l'import ; vide si inconnus. */
   genres: string[];
+  /** Séries (US-06, SPEC v1.37), triées ; vide si le jeu n'en a pas. */
+  series: string[];
   /** Note Metacritic (US-17), 0 à 100 ; null si inconnue. */
   metacritic: number | null;
   sorties: Record<Region, SortieCatalogue>;

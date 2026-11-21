@@ -21,6 +21,7 @@ test("le panneau s'ouvre depuis le bouton « Filtres »", async ({ page }) => {
   await expect(liste(page, "Année")).toBeVisible();
   await expect(liste(page, "Genre")).toBeVisible();
   await expect(liste(page, "Développeur")).toBeVisible();
+  await expect(liste(page, "Série")).toBeVisible();
 });
 
 test("les filtres se combinent, se voient en pastilles et restent dans l'adresse", async ({
@@ -142,3 +143,27 @@ test("un visiteur n'a ni filtre Collection ni coche ; un lien ?collection= est i
   await expect(liste(page, "Collection")).toHaveCount(0);
   await expect(page.getByRole("listitem", { name: /possédé/ })).toHaveCount(0);
 });
+
+test("filtre Série : séries par ordre alphabétique, puis « Sans série » (SPEC v1.37)", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await boutonFiltres(page).click();
+  const series = liste(page, "Série");
+  // Données de départ (migration 0023 : franchise reprise) : Kirby, Mario Kart, Splatoon ; Wii Karaoke U sans série.
+  await expect(series.getByRole("option")).toHaveText([
+    "Toutes",
+    "Kirby (1)",
+    "Mario Kart (1)",
+    "Splatoon (1)",
+    "Sans série (1)",
+  ]);
+  await series.selectOption({ label: "Splatoon (1)" });
+  await expect(page).toHaveURL("/?serie=Splatoon");
+  await expect(page.getByText("1 jeu affiché sur 4")).toBeVisible();
+  await actifs(page)
+    .getByRole("button", { name: "Retirer le filtre Splatoon", exact: true })
+    .click();
+  await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
+});
+

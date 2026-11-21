@@ -177,7 +177,10 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
           <dl className="grid grid-cols-2 gap-x-3 gap-y-3.5 rounded-xl border border-bordure bg-carte p-3.5">
             <Info libelle="Éditeur" valeur={sortie.editeur} />
             <Info libelle="Développeur" valeur={jeu.developpeur} />
-            <Info libelle="Franchise" valeur={jeu.franchise} />
+            <Info
+              libelle={jeu.series.length > 1 ? "Séries" : "Série"}
+              valeur={jeu.series.length ? jeu.series.join(", ") : null}
+            />
             <Info libelle="Genre" valeur={jeu.genre} />
             <Info libelle="Code produit" valeur={sortie.codeProduit} />
             <Info libelle="Console" valeur={jeu.console.nom} />
