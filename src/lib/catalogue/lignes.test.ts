@@ -10,6 +10,7 @@ const ligne: LigneJeu = {
   consoles: { slug: "wii-u", nom: "Wii U" },
   developpeur: "Xing",
   genre: "Musique, Karaoké, Démo",
+  series: ["Mario"],
   metacritic_note: 62,
   releases: [
     {

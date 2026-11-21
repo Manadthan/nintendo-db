@@ -23,15 +23,22 @@ const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 /** Éléments Wikidata « jeu vidéo » (et variantes : jeu, remake, compilation). */
 const JEU_VIDEO = new Set(["Q7889", "Q21125433", "Q865493", "Q64170203"]);
 
-/** Page publique : une requête par seconde ; refus 429 → attente croissante (5 essais). */
+/** Pages restées inaccessibles (réseau, refus répétés) : comptées dans le bilan, le script continue. */
+const inaccessibles = [];
+/** Page publique : une requête par seconde ; refus (429) ou erreur réseau → attente croissante (5 essais). */
 async function lire(adresse) {
   for (let essaiN = 1; essaiN <= 5; essaiN++) {
     await pause(1100);
-    const reponse = await fetch(adresse, { headers: ENTETES });
-    if (reponse.ok) return reponse.text();
-    if (reponse.status === 404) return null;
+    try {
+      const reponse = await fetch(adresse, { headers: ENTETES });
+      if (reponse.ok) return reponse.text();
+      if (reponse.status === 404) return null;
+    } catch {
+      // Coupure ou refus passager du réseau (vu le 21/11/2026 : 403 du proxy au milieu de l'essai complet).
+    }
     await pause(15000 * essaiN);
   }
+  inaccessibles.push(adresse);
   return null;
 }
 
@@ -118,11 +125,12 @@ for (const [i, jeu] of jeux.entries()) {
   if ((i + 1) % 100 === 0) console.log(`${i + 1} / ${jeux.length}…`);
 }
 
-if (rapport) writeFileSync(rapport, JSON.stringify({ bilan, horsListe, details }, null, 1));
+if (rapport) writeFileSync(rapport, JSON.stringify({ bilan, horsListe, inaccessibles, details }, null, 1));
 console.log(
   `${bilan.jeux} jeux (${bilan.verrouilles} verrouillés, non touchés) ; élément Wikidata : ${bilan.trouvesWikidata} ; ` +
     `avec série : ${bilan.avecSerie} (titre seul ${bilan.titreSeul}, Wikidata seul ${bilan.wikidataSeul}, les deux ${bilan.lesDeux}) ; ` +
     `${details.filter((d) => d.change).length} à changer, ${essai ? "rien écrit (--essai)" : `${bilan.ecrits} écrits`}`,
 );
+if (inaccessibles.length) console.log(`Pages inaccessibles après 5 essais (${inaccessibles.length}) : ${inaccessibles.slice(0, 10).join(", ")}`);
 const hors = Object.entries(horsListe).sort((a, b) => b[1] - a[1]);
 console.log(`Séries Wikidata hors liste (${hors.length}) : ${hors.map(([n, c]) => `${n} (${c})`).join(", ") || "aucune"}`);

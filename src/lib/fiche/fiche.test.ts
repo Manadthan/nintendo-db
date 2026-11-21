@@ -27,7 +27,7 @@ const KARAOKE: LigneFiche = {
   id: ID,
   slug: "wii-karaoke-u",
   developpeur: "Xing",
-  franchise: null,
+  series: [],
   genre: null,
   wikipedia_url: "https://en.wikipedia.org/wiki/Wii_Karaoke_U",
   metacritic_note: null,
@@ -50,7 +50,7 @@ describe("versJeuFiche (US-04)", () => {
     expect(jeu).toMatchObject({
       slug: "wii-karaoke-u",
       developpeur: "Xing",
-      franchise: null,
+      series: [],
       wikipediaUrl: "https://en.wikipedia.org/wiki/Wii_Karaoke_U",
       console: { slug: "wii-u", nom: "Wii U" },
     });

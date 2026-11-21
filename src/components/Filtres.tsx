@@ -21,6 +21,8 @@ type PropsPanneau = {
   genres: string[];
   /** Studios des jeux affichés, avec leur nombre de jeux (#89). */
   developpeurs: { nom: string; nombre: number }[];
+  /** Séries des jeux affichés, par ordre alphabétique, puis « Sans série » (SPEC v1.37). */
+  series: { nom: string; nombre: number }[];
   /** Filtre « Collection » (US-16), seulement pour le propriétaire connecté ; les compteurs sont dans Statistiques (US-18). */
   collection?: boolean;
 };
@@ -32,6 +34,7 @@ export function PanneauFiltres({
   annees,
   genres,
   developpeurs,
+  series,
   collection,
 }: PropsPanneau) {
   const changer = (patch: Partial<Filtres>) =>
@@ -154,6 +157,24 @@ export function PanneauFiltres({
             )}
         </select>
       </label>
+      <label className="flex flex-col gap-1 text-[13px] text-texte-doux">
+        Série
+        <select
+          value={filtres.serie ?? ""}
+          onChange={(e) => changer({ serie: e.target.value || null })}
+          className={CHAMP}
+        >
+          <option value="">Toutes</option>
+          {series.map((s) => (
+            <option key={s.nom} value={s.nom}>
+              {s.nom} ({s.nombre})
+            </option>
+          ))}
+          {filtres.serie && !series.some((s) => s.nom === filtres.serie) && (
+            <option value={filtres.serie}>{filtres.serie}</option>
+          )}
+        </select>
+      </label>
     </div>
   );
 }
@@ -186,6 +207,7 @@ export function FiltresActifs({
       libelle: filtres.developpeur,
       retirer: { developpeur: null },
     },
+    filtres.serie && { libelle: filtres.serie, retirer: { serie: null } },
     filtres.collection && {
       libelle: filtres.collection === "possedes" ? "Possédés" : "Manquants",
       retirer: { collection: null },
