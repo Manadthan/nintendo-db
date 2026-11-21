@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.38 — 21/11/2026 — statut : **à valider**
+> Version 1.39 — 21/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.39 | 21/11/2026 | **Collectionneurs invités** (étape 27, intention v1.5) : US-19 à US-24 (invitation, compte, collection de chacun, profil, profil public, badges) ; US-16 reste valable pour le propriétaire |
 > | 1.38 | 21/11/2026 | US-02 : vue **Frise** (demande du propriétaire, maquette validée `maquettes/frise.png`) : jeux en alternance de part et d'autre d'une ligne verticale, année seule au centre ; tris par date seulement |
 > | 1.37 | 21/11/2026 | US-06 : filtre **Série** (demande du propriétaire) ; US-04 : séries sur la fiche ; US-11 : séries corrigées à la main, verrouillées. Un jeu peut appartenir à plusieurs séries (Dr. Mario : « Dr. Mario » et « Mario ») |
 > | 1.36 | 20/11/2026 | **Ordinateur** (demande du propriétaire) : contenu centré et limité en largeur, catalogue de 2 à 6 colonnes selon l'écran, fiche en 2 colonnes (jaquette à gauche, informations à droite) ; administration inchangée (colonne centrée) |
@@ -188,6 +189,66 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       ni modifier la collection, même en appelant directement le serveur. Les pages publiques restent préparées à
       l'avance ; la collection s'ajoute dans le navigateur une fois connecté.
 - [ ] Supprimer un jeu (US-11) retire aussi ses versions de la collection.
+
+### Collectionneurs invités (étape 27, intention v1.5 décision 9)
+
+Vocabulaire : un **collectionneur** est un compte invité par le propriétaire ; il a sa collection, son profil et ses
+badges, et **ne modifie jamais le catalogue** (l'administration lui reste fermée). Le propriétaire est aussi un
+collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
+
+#### US-19 — Inviter un collectionneur (S, SPEC v1.39)
+*En tant que propriétaire, j'invite un ami pour qu'il tienne sa collection sur le site.*
+- [ ] Une page de l'administration « Collectionneurs » : je saisis une adresse e-mail et j'envoie l'invitation ; la
+      personne reçoit un e-mail en français avec un lien valable 7 jours. Pas d'inscription ouverte : sans invitation,
+      aucun compte ne peut être créé.
+- [ ] La page liste les collectionneurs (pseudo, e-mail, invité le, nombre de jeux) et les invitations en attente ;
+      je peux renvoyer une invitation, l'annuler, ou **supprimer un compte** (avec confirmation : sa collection et son
+      profil sont effacés).
+
+#### US-20 — Accepter une invitation (S, SPEC v1.39)
+*En tant qu'invité, je crée mon compte depuis l'e-mail.*
+- [ ] Le lien ouvre une page « Bienvenue » : je choisis un **mot de passe** (8 caractères au moins) et un **pseudo**
+      (3 à 20 lettres, chiffres, tirets ; unique, sans distinction de majuscules), puis j'arrive sur mon profil.
+- [ ] Un lien expiré ou déjà utilisé affiche un message clair (« demandez une nouvelle invitation »).
+- [ ] Je me connecte ensuite par la même page de connexion que le propriétaire ; l'icône de compte de l'en-tête mène
+      à **mon profil** (au propriétaire : à l'administration, avec un lien vers son profil).
+
+#### US-21 — Tenir ma collection (S, SPEC v1.39)
+*En tant que collectionneur connecté, je coche les versions que je possède, comme le propriétaire.*
+- [ ] Mêmes cases « Je l'ai » sur la fiche, étiquettes vertes et filtre **Collection** dans le catalogue que US-16 ;
+      chaque compte ne voit et ne modifie que **sa** collection, même en appelant directement le serveur.
+- [ ] La date d'ajout de chaque version est gardée (pour « derniers ajouts », US-22).
+
+#### US-22 — Mon profil (M, SPEC v1.39)
+*En tant que collectionneur, je vois ma collection résumée et mes badges.*
+- [ ] Page « Mon profil » : **pseudo**, **avatar** choisi parmi une douzaine d'icônes du site (manette, cartouche,
+      étoile, champignon…, dessinées pour le site : aucune image de Nintendo ; pas d'envoi de photo), modifiables.
+- [ ] **Statistiques** : nombre de jeux et de versions possédés ; par console (jeux possédés / jeux du catalogue,
+      en barre de progression) ; par région (JAP, US, PAL).
+- [ ] **Derniers ajouts** : les 6 dernières versions cochées (jaquette, titre, région), liens vers les fiches.
+- [ ] **Badges** gagnés (US-24), puis les prochains badges à gagner avec leur progression (« 18 / 25 jeux »).
+- [ ] Interrupteur **« Profil public »**, éteint par défaut (US-23), avec l'adresse à partager quand il est allumé.
+
+#### US-23 — Profil public (S, SPEC v1.39)
+*En tant que visiteur, j'ouvre le profil qu'un collectionneur a partagé.*
+- [ ] Adresse `/collectionneurs/{pseudo}` : pseudo, avatar, badges, statistiques, derniers ajouts, et la liste des
+      jeux possédés (par console). Jamais l'adresse e-mail.
+- [ ] Un profil non public, ou un pseudo inconnu, donne la page « introuvable » : on ne peut pas savoir si le compte
+      existe. Les profils ne sont pas proposés aux moteurs de recherche (`noindex`), ni listés nulle part.
+- [ ] Rendre le profil privé le retire aussitôt (au plus le temps de rafraîchissement des pages, 5 minutes).
+
+#### US-24 — Gagner des badges (M, SPEC v1.39)
+*En tant que collectionneur, je gagne des badges selon ma collection.*
+- [ ] Badges calculés à partir de la collection (un **jeu** compte s'il est possédé dans au moins une région) ; ils se
+      perdent si les versions sont décochées. Chacun a un nom, une icône et une explication.
+- [ ] **Total** : 10, 25, 50, 100, 250, 500 jeux (« Débutant », « Amateur », « Passionné », « Collectionneur »,
+      « Expert », « Légende »).
+- [ ] **Par console** (pour chaque console) : 10 jeux ; la moitié des jeux de la console au catalogue ; tous
+      (« Complet »). Le catalogue évolue : un badge « Complet » se perd si un jeu est ajouté à la console.
+- [ ] **Par série** : tous les jeux d'une série d'au moins 3 jeux (étape 23), sur toutes les consoles (« Série
+      complète : Metroid »).
+- [ ] **Par région** : 10 et 50 versions japonaises (« Importateur ») ; 10 et 50 versions américaines ; un même jeu
+      possédé dans les **3 régions** (« Tour du monde »), puis 10 jeux dans les 3 régions.
 
 ### Administration (propriétaire)
 
@@ -379,11 +440,11 @@ DS, 3DS.
 
 ## 7. Hors périmètre (v1)
 
-- Suivi de collection au-delà de US-16 : comptes visiteurs, état des exemplaires (complet, sans notice…), liste de
+- Suivi de collection au-delà de US-16 et US-19 à US-24 : inscription ouverte, état des exemplaires (complet, sans notice…), liste de
   souhaits, page publique de collection — étapes ultérieures.
 - Rééditions (Player's Choice, Nintendo Selects…) et variantes de pays au sein de PAL.
 - Jeux dématérialisés uniquement (eShop, WiiWare, DSiWare…).
-- Comptes visiteurs, commentaires, bandes-annonces ; note par région ou autres sites de critiques (OpenCritic…).
+- Inscription ouverte (comptes sur invitation seulement : US-19), commentaires, bandes-annonces ; note par région ou autres sites de critiques (OpenCritic…).
 - Régions hors JAP / US / PAL (Corée, Chine…).
 
 ## 8. Décisions
