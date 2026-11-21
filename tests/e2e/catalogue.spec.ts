@@ -110,3 +110,36 @@ test("le catalogue tient dans la largeur de l'iPhone", async ({ page }) => {
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(375);
 });
+
+test("vue Frise : années au centre, jeux en alternance, tris par date seulement (SPEC v1.38)", async ({
+  page,
+}) => {
+  await page.getByLabel("Tri", { exact: true }).selectOption("az");
+  await page.getByRole("button", { name: "Frise", exact: true }).click();
+  // A → Z n'a pas de sens sur une frise : elle passe en « plus récents » et ne propose que les tris par date.
+  await expect(page.getByLabel("Tri", { exact: true })).toHaveValue("recents");
+  await expect(
+    page.getByLabel("Tri", { exact: true }).getByRole("option"),
+  ).toHaveText(["Plus récents", "Plus anciens"]);
+  await expect(page.getByRole("heading", { level: 3 })).toHaveText([
+    "2015 · 2 jeux",
+    "2014 · 1 jeu",
+    "2013 · 1 jeu",
+  ]);
+  // Marché « Tous » : version PAL (Splatoon, puis Kirby, Mario Kart 8, Wii Karaoke U), à gauche puis à droite.
+  const cotes = await page
+    .locator("li[data-cote]")
+    .evaluateAll((li) => li.map((e) => e.getAttribute("data-cote")));
+  expect(cotes).toEqual(["gauche", "droite", "gauche", "droite"]);
+  await expect(page.getByRole("link", { name: /Splatoon/ })).toBeVisible();
+
+  // Le choix est retenu, et les autres tris reviennent hors de la frise.
+  await page.reload();
+  await expect(
+    page.getByRole("button", { name: "Frise", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Grille", exact: true }).click();
+  await expect(
+    page.getByLabel("Tri", { exact: true }).getByRole("option"),
+  ).toHaveCount(4);
+});

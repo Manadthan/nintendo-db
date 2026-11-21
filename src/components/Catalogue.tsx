@@ -50,14 +50,23 @@ import { Disponibilite } from "./Disponibilite";
 import { NoteMetacritic } from "./NoteMetacritic";
 import { FiltresActifs, PanneauFiltres } from "./Filtres";
 import { Jaquette } from "./Jaquette";
+import { Frise } from "./Frise";
+import { decouperFrise, triFrise } from "@/lib/catalogue/frise";
 
-type Vue = "grille" | "liste";
+type Vue = "grille" | "liste" | "frise";
+const VUES: readonly Vue[] = ["grille", "liste", "frise"];
+const LIBELLES_VUE: Record<Vue, string> = {
+  grille: "Grille",
+  liste: "Liste",
+  frise: "Frise",
+};
 const CLE_VUE = "nintendo-db:vue";
 
 /** Choix du visiteur gardé dans ce navigateur ; ignoré si le stockage est indisponible (navigation privée). */
 function lireVue(): Vue {
   try {
-    return localStorage.getItem(CLE_VUE) === "liste" ? "liste" : "grille";
+    const vue = localStorage.getItem(CLE_VUE);
+    return VUES.find((v) => v === vue) ?? "grille";
   } catch {
     return "grille";
   }
@@ -88,11 +97,13 @@ type Props = {
  * la console), grille / liste, groupes par année.
  */
 export function Catalogue({ jeux, consoles }: Props) {
-  const [tri, setTri] = useState<Tri>(TRI_PAR_DEFAUT);
+  const [triChoisi, setTri] = useState<Tri>(TRI_PAR_DEFAUT);
   // Page préparée à l'avance, identique pour tous (ADR-02) : « grille » au premier affichage,
   // puis le choix enregistré dans ce navigateur.
   const vue = useSyncExternalStore(abonner, lireVue, () => "grille" as Vue);
   const changerVue = enregistrerVue;
+  // La frise ne connaît que les tris par date (SPEC v1.38) : A → Z et « mieux notés » y deviennent « plus récents ».
+  const tri = vue === "frise" ? triFrise(triChoisi) : triChoisi;
 
   // Marché (US-03) : « Tous » au premier affichage (page identique pour tous), puis l'adresse ou ce navigateur.
   const marche = useSyncExternalStore<Marche>(
@@ -205,7 +216,8 @@ export function Catalogue({ jeux, consoles }: Props) {
         ))}
       </div>
 
-      <div className="flex items-center gap-2">
+      {/* 3 vues : la barre passe sur 2 lignes si l'écran est trop étroit (iPhone 12 mini). */}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
         <label htmlFor="tri" className="text-[13px] text-texte-doux">
           Tri
         </label>
@@ -217,8 +229,12 @@ export function Catalogue({ jeux, consoles }: Props) {
         >
           <option value="recents">Plus récents</option>
           <option value="anciens">Plus anciens</option>
-          <option value="az">A → Z</option>
-          <option value="note">Mieux notés</option>
+          {vue !== "frise" && (
+            <>
+              <option value="az">A → Z</option>
+              <option value="note">Mieux notés</option>
+            </>
+          )}
         </select>
         <button
           type="button"
@@ -235,7 +251,7 @@ export function Catalogue({ jeux, consoles }: Props) {
         </button>
         <div className="flex-1" />
         <div role="group" aria-label="Affichage" className="flex gap-0.5">
-          {(["grille", "liste"] as const).map((v) => (
+          {VUES.map((v) => (
             <button
               key={v}
               type="button"
@@ -245,7 +261,7 @@ export function Catalogue({ jeux, consoles }: Props) {
                 vue === v ? "bg-texte text-inverse" : "text-texte-doux"
               }`}
             >
-              {v === "grille" ? "Grille" : "Liste"}
+              {LIBELLES_VUE[v]}
             </button>
           ))}
         </div>
@@ -299,97 +315,106 @@ export function Catalogue({ jeux, consoles }: Props) {
         </div>
       )}
 
-      {groupes.map((groupe) => (
-        <div key={groupe.titre ?? "az"} className="flex flex-col gap-3">
-          {groupe.titre && (
-            <div className="flex items-center gap-2.5">
-              <h3 className="text-[15px] font-bold">{groupe.titre}</h3>
-              <div className="h-px flex-1 bg-filet" />
-              <span className="text-xs text-texte-discret">
-                {groupe.versions.length} jeu
-                {groupe.versions.length > 1 ? "x" : ""}
-              </span>
-            </div>
-          )}
+      {vue === "frise" && (
+        <Frise
+          annees={decouperFrise(versions)}
+          lien={lien}
+          surClic={noterPositionCatalogue}
+        />
+      )}
 
-          {vue === "grille" ? (
-            // 2 colonnes sur téléphone, jusqu'à 6 sur grand écran (SPEC v1.36).
-            <ul className="grid grid-cols-2 gap-x-3 gap-y-[18px] sm:grid-cols-3 md:grid-cols-4 md:gap-x-4 lg:grid-cols-5 xl:grid-cols-6">
-              {groupe.versions.map((v) => (
-                <li key={v.jeu.id}>
-                  <Link
-                    href={lien(v)}
-                    onClick={noterPositionCatalogue}
-                    className="group flex flex-col gap-2"
-                  >
-                    <div className="relative">
-                      <Jaquette
-                        sortie={v.sortie}
-                        titre={v.sortie.titre!}
-                        console={v.jeu.console.nom}
-                        consoleSlug={v.jeu.console.slug}
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
-                      />
-                      <NoteMetacritic note={v.jeu.metacritic} />
-                    </div>
-                    <div className="flex flex-col gap-[3px]">
-                      <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
-                        {v.sortie.titre}
-                      </span>
-                      <span className="text-xs text-texte-discret">
-                        {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
-                        {v.jeu.console.nom}
-                      </span>
-                      <div className="flex flex-wrap items-center gap-1">
-                        <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
+      {vue !== "frise" &&
+        groupes.map((groupe) => (
+          <div key={groupe.titre ?? "az"} className="flex flex-col gap-3">
+            {groupe.titre && (
+              <div className="flex items-center gap-2.5">
+                <h3 className="text-[15px] font-bold">{groupe.titre}</h3>
+                <div className="h-px flex-1 bg-filet" />
+                <span className="text-xs text-texte-discret">
+                  {groupe.versions.length} jeu
+                  {groupe.versions.length > 1 ? "x" : ""}
+                </span>
+              </div>
+            )}
+
+            {vue === "grille" ? (
+              // 2 colonnes sur téléphone, jusqu'à 6 sur grand écran (SPEC v1.36).
+              <ul className="grid grid-cols-2 gap-x-3 gap-y-[18px] sm:grid-cols-3 md:grid-cols-4 md:gap-x-4 lg:grid-cols-5 xl:grid-cols-6">
+                {groupe.versions.map((v) => (
+                  <li key={v.jeu.id}>
+                    <Link
+                      href={lien(v)}
+                      onClick={noterPositionCatalogue}
+                      className="group flex flex-col gap-2"
+                    >
+                      <div className="relative">
+                        <Jaquette
+                          sortie={v.sortie}
+                          titre={v.sortie.titre!}
+                          console={v.jeu.console.nom}
+                          consoleSlug={v.jeu.console.slug}
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
+                        />
+                        <NoteMetacritic note={v.jeu.metacritic} />
                       </div>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <ul className="flex flex-col overflow-hidden rounded-xl border border-bordure bg-carte">
-              {groupe.versions.map((v) => (
-                <li
-                  key={v.jeu.id}
-                  className="border-t border-separateur first:border-t-0"
-                >
-                  <Link
-                    href={lien(v)}
-                    onClick={noterPositionCatalogue}
-                    className="flex items-center gap-3 px-3 py-2.5 hover:bg-surface"
-                  >
-                    <div className="relative w-[54px] shrink-0">
-                      <Jaquette
-                        sortie={v.sortie}
-                        titre={v.sortie.titre!}
-                        console={v.jeu.console.nom}
-                        consoleSlug={v.jeu.console.slug}
-                        sizes="54px"
-                        petite
-                      />
-                      <NoteMetacritic note={v.jeu.metacritic} petite />
-                    </div>
-                    <div className="flex min-w-0 flex-1 flex-col gap-1">
-                      <span className="text-sm leading-tight font-semibold">
-                        {v.sortie.titre}
-                      </span>
-                      <span className="text-xs text-texte-discret">
-                        {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
-                        {v.jeu.console.nom}
-                      </span>
-                      <div className="flex flex-wrap items-center gap-1">
-                        <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
+                      <div className="flex flex-col gap-[3px]">
+                        <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
+                          {v.sortie.titre}
+                        </span>
+                        <span className="text-xs text-texte-discret">
+                          {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
+                          {v.jeu.console.nom}
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <ul className="flex flex-col overflow-hidden rounded-xl border border-bordure bg-carte">
+                {groupe.versions.map((v) => (
+                  <li
+                    key={v.jeu.id}
+                    className="border-t border-separateur first:border-t-0"
+                  >
+                    <Link
+                      href={lien(v)}
+                      onClick={noterPositionCatalogue}
+                      className="flex items-center gap-3 px-3 py-2.5 hover:bg-surface"
+                    >
+                      <div className="relative w-[54px] shrink-0">
+                        <Jaquette
+                          sortie={v.sortie}
+                          titre={v.sortie.titre!}
+                          console={v.jeu.console.nom}
+                          consoleSlug={v.jeu.console.slug}
+                          sizes="54px"
+                          petite
+                        />
+                        <NoteMetacritic note={v.jeu.metacritic} petite />
+                      </div>
+                      <div className="flex min-w-0 flex-1 flex-col gap-1">
+                        <span className="text-sm leading-tight font-semibold">
+                          {v.sortie.titre}
+                        </span>
+                        <span className="text-xs text-texte-discret">
+                          {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
+                          {v.jeu.console.nom}
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
     </section>
   );
 }
