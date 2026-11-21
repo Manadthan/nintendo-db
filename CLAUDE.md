@@ -51,7 +51,7 @@ Vercel (région Paris `cdg1`, `vercel.json`) ; Supabase (`supabase/`, migrations
 
 ```
 npm run dev        # serveur local
-npm run check      # lint + typecheck + tests unitaires : à lancer avant chaque commit, sortie montrée
+npm run check      # lint + typecheck + tests unitaires : avant chaque commit (hook .claude/hooks/ : commit refusé si rouge), sortie montrée
 npm run build      # build de production : lit la base (accueil préparé à l'avance) → variables Supabase requises
 npm run e2e        # Playwright 375 × 812 (Chromium ici ; WebKit seulement en CI) ; base requise (CI : base jetable)
 npm run db:start   # base locale (Docker : absent de l'environnement de Claude → la CI fait foi)
