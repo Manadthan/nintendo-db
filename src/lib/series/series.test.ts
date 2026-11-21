@@ -10,7 +10,9 @@ import {
 
 describe("simplifier", () => {
   it("retire accents, apostrophes et ponctuation", () => {
-    expect(simplifier("Pokémon Mystery Dungeon: Gates")).toBe("pokemon mystery dungeon gates");
+    expect(simplifier("Pokémon Mystery Dungeon: Gates")).toBe(
+      "pokemon mystery dungeon gates",
+    );
     expect(simplifier("Luigi’s Mansion")).toBe("luigis mansion");
     expect(simplifier("F-Zero GX")).toBe("f zero gx");
   });
@@ -19,8 +21,14 @@ describe("simplifier", () => {
 describe("seriesDuTitre", () => {
   it("trouve la série et ses parentes", () => {
     expect(seriesDuTitre(["Dr. Mario"])).toEqual(["Dr. Mario", "Mario"]);
-    expect(seriesDuTitre(["Mario Kart 8 Deluxe"])).toEqual(["Mario", "Mario Kart"]);
-    expect(seriesDuTitre(["Captain Toad: Treasure Tracker"])).toEqual(["Captain Toad", "Mario"]);
+    expect(seriesDuTitre(["Mario Kart 8 Deluxe"])).toEqual([
+      "Mario",
+      "Mario Kart",
+    ]);
+    expect(seriesDuTitre(["Captain Toad: Treasure Tracker"])).toEqual([
+      "Captain Toad",
+      "Mario",
+    ]);
     expect(seriesDuTitre(["Hyrule Warriors: Definitive Edition"])).toEqual([
       "Hyrule Warriors",
       "The Legend of Zelda",
@@ -28,9 +36,12 @@ describe("seriesDuTitre", () => {
   });
 
   it("lit les titres de toutes les régions, y compris japonais", () => {
-    expect(seriesDuTitre([null, "Star Fox 64", "Lylat Wars"])).toEqual(["Star Fox"]);
+    expect(seriesDuTitre([null, "Star Fox 64", "Lylat Wars"])).toEqual([
+      "Star Fox",
+    ]);
     expect(seriesDuTitre(["どうぶつの森"])).toEqual(["Animal Crossing"]);
     expect(seriesDuTitre(["Mario Slam Basketball"])).toEqual(["Mario"]);
+    expect(seriesDuTitre(["DK: Jungle Climber"])).toEqual(["Donkey Kong"]);
   });
 
   it("ne confond pas des mots voisins", () => {
@@ -45,13 +56,38 @@ describe("seriesDuTitre", () => {
 
 describe("serieWikidata", () => {
   it("ramène les noms Wikidata aux noms de référence", () => {
-    expect(serieWikidata("The Legend of Zelda")).toEqual({ nom: "The Legend of Zelda", connue: true });
+    expect(serieWikidata("The Legend of Zelda")).toEqual({
+      nom: "The Legend of Zelda",
+      connue: true,
+    });
     expect(serieWikidata("Megaman")).toEqual({ nom: "Mega Man", connue: true });
-    expect(serieWikidata("Yoshi platform series")).toEqual({ nom: "Yoshi", connue: true });
-    expect(serieWikidata("Mario Kart")).toEqual({ nom: "Mario Kart", connue: true });
-    expect(serieWikidata("Nintendo Wars")).toEqual({ nom: "Advance Wars", connue: true });
+    expect(serieWikidata("Yoshi platform series")).toEqual({
+      nom: "Yoshi",
+      connue: true,
+    });
+    expect(serieWikidata("Mario Kart")).toEqual({
+      nom: "Mario Kart",
+      connue: true,
+    });
+    expect(serieWikidata("Nintendo Wars")).toEqual({
+      nom: "Advance Wars",
+      connue: true,
+    });
     expect(serieWikidata("1080°")).toEqual({ nom: "1080°", connue: true });
-    expect(serieWikidata("Professeur Layton")).toEqual({ nom: "Professeur Layton", connue: true });
+    expect(serieWikidata("Nintendo présente : La Maison du style")).toEqual({
+      nom: "La Nouvelle Maison du Style",
+      connue: true,
+    });
+    expect(serieWikidata("Game and Watch Gallery")).toEqual({
+      nom: "Game & Watch",
+      connue: true,
+    });
+    expect(serieWikidata("DK")).toEqual({ nom: "Donkey Kong", connue: true });
+    expect(serieWikidata("X")).toBeNull();
+    expect(serieWikidata("Professeur Layton")).toEqual({
+      nom: "Professeur Layton",
+      connue: true,
+    });
   });
 
   it("garde une série hors liste, ignore consoles et éléments sans libellé", () => {
@@ -63,11 +99,18 @@ describe("serieWikidata", () => {
 
 describe("completer et lireSeries", () => {
   it("ajoute les parentes, sans doublons, triées", () => {
-    expect(completer(["Mario Kart", "Mario", "Dr. Mario"])).toEqual(["Dr. Mario", "Mario", "Mario Kart"]);
+    expect(completer(["Mario Kart", "Mario", "Dr. Mario"])).toEqual([
+      "Dr. Mario",
+      "Mario",
+      "Mario Kart",
+    ]);
   });
 
   it("lit une saisie séparée par des virgules", () => {
-    expect(lireSeries(" Mario ,Dr.  Mario,, Mario ")).toEqual(["Dr. Mario", "Mario"]);
+    expect(lireSeries(" Mario ,Dr.  Mario,, Mario ")).toEqual([
+      "Dr. Mario",
+      "Mario",
+    ]);
     expect(lireSeries("")).toEqual([]);
   });
 

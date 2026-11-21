@@ -36,7 +36,7 @@ export const SERIES: readonly Serie[] = [
   { nom: "Yoshi", motifs: m("yoshi", "yoshis") },
   { nom: "Wario", motifs: m("wario", "warioware") },
   { nom: "WarioWare", motifs: m("warioware"), parent: "Wario" },
-  { nom: "Donkey Kong", motifs: m("donkey kong", "diddy kong") },
+  { nom: "Donkey Kong", motifs: m("donkey kong", "diddy kong", "dk") },
   { nom: "Donkey Kong Country", motifs: m("donkey kong country"), parent: "Donkey Kong" },
   { nom: "Donkey Kong Land", motifs: m("donkey kong land"), parent: "Donkey Kong" },
   { nom: "The Legend of Zelda", motifs: m("zelda", "ゼルダ", "links crossbow training") },
@@ -79,7 +79,7 @@ export const SERIES: readonly Serie[] = [
   { nom: "Wave Race", motifs: m("wave race") },
   { nom: "Chibi-Robo", motifs: m("chibi robo") },
   { nom: "Fossil Fighters", motifs: m("fossil fighters", "kaseki horider") },
-  { nom: "La Nouvelle Maison du Style", motifs: m("style savvy", "nouvelle maison du style", "style boutique") },
+  { nom: "La Nouvelle Maison du Style", motifs: m("style savvy", "maison du style", "style boutique") },
   { nom: "Starfy", motifs: m("starfy", "stafy") },
   { nom: "Kururin", motifs: m("kururin") },
   { nom: "Hamtaro", motifs: m("hamtaro", "hamutaro") },
@@ -89,7 +89,7 @@ export const SERIES: readonly Serie[] = [
   { nom: "Sin and Punishment", motifs: m("sin and punishment", "sin punishment") },
   { nom: "Endless Ocean", motifs: m("endless ocean") },
   { nom: "Arms", motifs: [/^arms$/] },
-  { nom: "Game & Watch", motifs: m("game watch") },
+  { nom: "Game & Watch", motifs: m("game watch", "game and watch") },
   { nom: "Mega Man", motifs: m("mega man", "megaman", "rockman") },
   { nom: "Dragon Quest", motifs: m("dragon quest", "dragon warrior") },
   { nom: "Tetris", motifs: m("tetris") },
@@ -99,7 +99,7 @@ export const SERIES: readonly Serie[] = [
 const PAR_NOM = new Map(SERIES.map((s) => [s.nom, s]));
 
 /** Noms Wikidata qui ne sont pas des séries de jeux (une console, une gamme) : ignorés. */
-const IGNORES = new Set(["wii", "nintendo", "nintendo switch", "game boy", "touch generations"]);
+const IGNORES = new Set(["x", "wii", "nintendo", "nintendo switch", "game boy", "touch generations"]);
 
 /** Titre simplifié : minuscules, sans accents, apostrophes collées, ponctuation remplacée par des espaces. */
 export function simplifier(texte: string): string {
