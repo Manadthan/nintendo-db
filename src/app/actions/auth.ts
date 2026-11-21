@@ -1,12 +1,12 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { PAGE_ADMIN } from "@/lib/auth/routes";
+import { PAGE_ACCUEIL, PAGE_ADMIN } from "@/lib/auth/routes";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export type EtatConnexion = { erreur?: string; email?: string };
 
-/** Connexion du propriétaire par e-mail et mot de passe (US-09). */
+/** Connexion par e-mail et mot de passe (US-09) : le propriétaire va à l'administration, un collectionneur à l'accueil. */
 export async function seConnecter(
   _precedent: EtatConnexion,
   formData: FormData,
@@ -35,7 +35,8 @@ export async function seConnecter(
     };
   }
 
-  redirect(PAGE_ADMIN);
+  const { data: proprietaire } = await supabase.rpc("est_proprietaire");
+  redirect(proprietaire === true ? PAGE_ADMIN : PAGE_ACCUEIL);
 }
 
 /** Déconnexion (US-09) : retour au site public. */

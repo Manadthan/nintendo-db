@@ -1,9 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
-import { BASE_LOCALE_DISPONIBLE, PROPRIETAIRE_TEST } from "./utilisateur";
+import {
+  BASE_LOCALE_DISPONIBLE,
+  COLLECTIONNEUR_TEST,
+  PROPRIETAIRE_TEST,
+} from "./utilisateur";
 
 /**
- * Crée le compte de test sur la base Supabase locale (ADR-01 : inscriptions fermées, le compte est créé
- * par l'API d'administration, comme le propriétaire l'a fait à la main en production).
+ * Crée les comptes de test sur la base Supabase locale (ADR-01 : inscriptions fermées, les comptes sont créés
+ * par l'API d'administration) : le propriétaire, avec son profil de rôle « proprietaire » (ADR-16), et un
+ * collectionneur invité.
  */
 export default async function globalSetup() {
   if (!BASE_LOCALE_DISPONIBLE) {
@@ -29,9 +34,28 @@ export default async function globalSetup() {
   const admin = createClient(url, process.env.E2E_SUPABASE_SECRET_KEY!, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
-  const { error } = await admin.auth.admin.createUser({
-    ...PROPRIETAIRE_TEST,
-    email_confirm: true,
-  });
-  if (error && error.code !== "email_exists") throw error;
+  const comptes = [
+    { ...PROPRIETAIRE_TEST, pseudo: "e2e-proprietaire", role: "proprietaire" },
+    {
+      ...COLLECTIONNEUR_TEST,
+      pseudo: "e2e-collectionneur",
+      role: "collectionneur",
+    },
+  ] as const;
+  for (const { email, password, pseudo, role } of comptes) {
+    const { error } = await admin.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+    });
+    if (error && error.code !== "email_exists") throw error;
+    const { data, error: e } = await admin.auth.admin.listUsers();
+    if (e) throw e;
+    const compte = data.users.find((u) => u.email === email);
+    if (!compte) throw new Error(`Compte de test introuvable : ${email}`);
+    const { error: e2 } = await admin
+      .from("profils")
+      .upsert({ user_id: compte.id, pseudo, role }, { onConflict: "user_id" });
+    if (e2) throw e2;
+  }
 }

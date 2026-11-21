@@ -21,6 +21,10 @@ select results_eq(
   'la console Wii U est pré-remplie'
 );
 
+-- Étape 27 (migration 0024) : l'écriture est réservée au compte de rôle « proprietaire ».
+insert into auth.users (id, email) values ('00000000-0000-0000-0000-00000000000a', 'proprietaire@test.local');
+insert into public.profils (user_id, pseudo, role)
+  values ('00000000-0000-0000-0000-00000000000a', 'proprietaire-test', 'proprietaire');
 -- Le propriétaire, connecté, ajoute un jeu et ses 3 sorties.
 set local role authenticated;
 set local request.jwt.claims = '{"sub": "00000000-0000-0000-0000-00000000000a", "role": "authenticated"}';

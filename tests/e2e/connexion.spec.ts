@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import {
   BASE_LOCALE_DISPONIBLE,
+  COLLECTIONNEUR_TEST,
   PROPRIETAIRE_TEST,
   seConnecter,
 } from "./utilisateur";
@@ -83,4 +84,18 @@ test("le propriétaire se connecte, puis se déconnecte", async ({ page }) => {
 
   await page.goto("/admin");
   await expect(page).toHaveURL("/admin/connexion");
+});
+
+test("un collectionneur invité se connecte, mais l'administration lui reste fermée (ADR-16)", async ({
+  page,
+}) => {
+  await page.goto("/admin/connexion");
+  await page.getByLabel("E-mail").fill(COLLECTIONNEUR_TEST.email);
+  await page.getByLabel("Mot de passe").fill(COLLECTIONNEUR_TEST.password);
+  await page.getByRole("button", { name: "Se connecter" }).click();
+  await expect(page).toHaveURL("/");
+  for (const chemin of ["/admin", "/admin/jeux", "/admin/connexion"]) {
+    await page.goto(chemin);
+    await expect(page).toHaveURL("/");
+  }
 });

@@ -1,13 +1,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { redirectionAdmin } from "@/lib/auth/routes";
+import { redirectionAdmin, type EtatCompte } from "@/lib/auth/routes";
 import { supabaseEnv } from "@/lib/supabase/env";
 import type { Database } from "@/types/database";
 
 /**
  * Exécuté avant chaque page /admin (US-09) :
  * 1. rafraîchit la session Supabase (cookies), pour qu'elle reste ouverte d'une visite à l'autre ;
- * 2. renvoie vers la connexion si le propriétaire n'est pas connecté.
+ * 2. renvoie vers la connexion si personne n'est connecté, vers l'accueil un collectionneur invité (ADR-16 :
+ *    l'administration est réservée au rôle « proprietaire », vérifié dans la base).
  * Les pages publiques n'y passent pas : elles restent préparées à l'avance et rapides (ADR-02).
  */
 export async function proxy(request: NextRequest) {
@@ -20,9 +21,11 @@ export async function proxy(request: NextRequest) {
         return request.cookies.getAll();
       },
       setAll(cookiesToSet) {
-        for (const { name, value } of cookiesToSet) request.cookies.set(name, value);
+        for (const { name, value } of cookiesToSet)
+          request.cookies.set(name, value);
         response = NextResponse.next({ request });
-        for (const { name, value, options } of cookiesToSet) response.cookies.set(name, value, options);
+        for (const { name, value, options } of cookiesToSet)
+          response.cookies.set(name, value, options);
       },
     },
   });
@@ -32,11 +35,17 @@ export async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const destination = redirectionAdmin(request.nextUrl.pathname, user !== null);
+  let compte: EtatCompte = "anonyme";
+  if (user) {
+    const { data: proprietaire } = await supabase.rpc("est_proprietaire");
+    compte = proprietaire === true ? "proprietaire" : "collectionneur";
+  }
+  const destination = redirectionAdmin(request.nextUrl.pathname, compte);
   if (destination) {
     const redirect = NextResponse.redirect(new URL(destination, request.url));
     // Conserve les cookies de session éventuellement rafraîchis.
-    for (const cookie of response.cookies.getAll()) redirect.cookies.set(cookie);
+    for (const cookie of response.cookies.getAll())
+      redirect.cookies.set(cookie);
     return redirect;
   }
   return response;
