@@ -295,7 +295,7 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      est_proprietaire: { Args: never; Returns: boolean };
+      est_proprietaire: { Args: Record<PropertyKey, never>; Returns: boolean };
     };
     Enums: {
       console_type: "salon" | "portable";
