@@ -1,0 +1,40 @@
+name: Étude Giant Bomb
+
+# Étape 26 (DESIGN §11) : compare un échantillon de jeux rétro à l'API Giant Bomb, en LECTURE SEULE (rien n'est
+# écrit dans la base). Lancée à la main (onglet Actions → Étude Giant Bomb → Run workflow) : la session Claude reçoit
+# 403 de giantbomb.com. Rapport dans le résumé de la tâche, détail en pièce jointe (etude-giantbomb.json).
+on:
+  workflow_dispatch:
+    inputs:
+      taille:
+        description: "Nombre de jeux rétro tirés au hasard"
+        default: "60"
+
+permissions:
+  contents: read
+
+jobs:
+  etude:
+    name: Comparer l'échantillon à Giant Bomb
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Étude (lecture seule)
+        env:
+          GIANTBOMB_API_KEY: ${{ secrets.GIANTBOMB_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          ETUDE_TAILLE: ${{ inputs.taille }}
+        run: node scripts/etude-giantbomb.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: etude-giantbomb
+          path: etude-giantbomb.json
+          if-no-files-found: ignore
