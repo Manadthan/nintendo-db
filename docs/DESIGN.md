@@ -648,5 +648,5 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 | Étape | Sujet | À trancher d'abord |
 |---|---|---|
 | 25 | **Estimation du prix** dans la fiche (ventes terminées eBay) | accès aux ventes terminées : l'ancienne API (`findCompletedItems`) est fermée, Marketplace Insights est sur demande ; sinon autre source |
-| 26 | **Consolidation rétro** (NES à GameCube) avec l'API Giant Bomb : dates, éditeurs, jeux manquants | clé gratuite du propriétaire en secret GitHub `GIANTBOMB_API_KEY` (la clé passe dans l'adresse : tâche GitHub Actions) ; conditions d'utilisation |
-| 27 | **Profils utilisateurs** et **badges** selon le nombre de jeux possédés | **contredit l'intention actuelle** (un seul compte, inscriptions désactivées, collection privée : intention décision 5, SPEC §7) : mettre à jour l'intention d'abord (qui crée un compte, ce qui est public) |
+| 26 | **Consolidation rétro** (NES à GameCube) : dates, éditeurs, jeux manquants. **Giant Bomb écarté** (21/11 : 403 depuis la session et depuis GitHub, première requête de la tâche « Étude Giant Bomb ») ; **ScreenScraper** à la place | identifiants développeur ScreenScraper (demandés sur leur forum) en secrets GitHub `SCREENSCRAPER_DEVID`, `SCREENSCRAPER_DEVPASSWORD`, `SCREENSCRAPER_USER`, `SCREENSCRAPER_PASSWORD` ; quotas et conditions |
+| 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
