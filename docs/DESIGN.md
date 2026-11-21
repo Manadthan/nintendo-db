@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.22 — 21/11/2026 — statut : **à valider**
+> Version 1.23 — 21/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.23 | 21/11/2026 | **Collectionneurs invités** (SPEC v1.39, intention v1.5) : ADR-16 (rôle propriétaire en base, écriture du catalogue verrouillée, invitations par lien à jeton haché, profils, badges calculés), modèle de données, plan de l'étape 27 en 6 PR |
 > | 1.22 | 21/11/2026 | **Frise** (SPEC v1.38) : étape 24 ; backlog des étapes 25 à 27 (§11) |
 > | 1.21 | 21/11/2026 | **Séries** (SPEC v1.37) : étude Wikidata (§1 quattuordecies), ADR-15 (titre, puis Wikidata, puis main ; plusieurs séries ; noms de référence), colonne `series text[]` (migration 0023), étape 23 |
 > | 1.20 | 20/11/2026 | **Ordinateur** (SPEC v1.36) : conteneur `max-w-7xl` centré, grille du catalogue par paliers Tailwind (`sm` 3, `md` 4, `lg` 5, `xl` 6 colonnes), fiche en grille 2 colonnes dès `lg` (jaquette collante) ; tests Playwright à 1440 × 900 (`ordinateur.spec.ts`) |
@@ -425,6 +426,39 @@ migration, chiffres toujours justes ; quelques milliers de lignes, lues en une r
 sans jaquette ou de source `igdb` (même règle que « à remplacer », US-12). Les compteurs du panneau Filtres sont
 retirés (le filtre « Ma collection » reste).
 
+**ADR-16 — Collectionneurs invités : rôles, invitations, profils, badges (étape 27).**
+1. **Le rôle du propriétaire passe dans la base.** Aujourd'hui, « connecté » veut dire « propriétaire » : toutes les
+   règles d'écriture du catalogue sont `to authenticated using (true)` (0002, 0003, 0010) et `exigerProprietaire()`
+   vérifie seulement qu'une session existe. Un invité connecté pourrait donc modifier le catalogue. **Avant toute
+   invitation**, une migration crée `profils` (avec `role` : `proprietaire` ou `collectionneur`) et une fonction
+   `est_proprietaire()` (`security definer`, `stable`), et remplace chaque règle d'écriture (consoles, games,
+   releases, import_runs, exclusions, buckets `jaquettes` et `gametdb`) par `using (est_proprietaire())`.
+   `exigerProprietaire()` et le contrôle de `/admin` (`proxy.ts`) vérifient aussi le rôle. Le compte existant reçoit
+   le rôle `proprietaire` par la migration. Tests pgTAP : un collectionneur ne peut écrire ni le catalogue ni les
+   jaquettes, ni lire le bucket `gametdb`.
+2. **Invitations par lien** (choix du propriétaire : aucun service d'e-mail). Table `invitations` (nom, `jeton_hache`,
+   expire le, utilisée le, compte créé), lisible et modifiable par le seul propriétaire. Le jeton (32 octets
+   aléatoires, en base64url dans `/bienvenue/{jeton}`) n'est montré qu'une fois ; la base n'en garde que l'empreinte
+   SHA-256. Les inscriptions restent fermées : le compte est créé **par le serveur** (action de la page
+   « Bienvenue ») avec la clé secrète Supabase (`auth.admin.createUser`, e-mail confirmé d'office), après
+   vérification du jeton (existant, non expiré, non utilisé) ; puis le profil est créé et l'invitation marquée
+   utilisée, et l'invité est connecté. Clé secrète : variable **`SUPABASE_SECRET_KEY` côté Vercel**, lue par un module
+   `server-only`, jamais envoyée au navigateur.
+3. **Collection** : la table `possessions` (0012) est déjà privée par compte ; sa colonne `cree_le` donne les
+   derniers ajouts. Rien à changer pour US-21.
+4. **Profil public** : une fonction `profil_public(pseudo)` (`security definer`) renvoie pseudo, avatar et versions
+   possédées **seulement si le profil est public** ; les visiteurs ne lisent jamais `possessions` ni `profils`
+   directement. Page `/collectionneurs/[pseudo]` rendue à la demande et gardée 5 minutes au plus (`revalidate = 300`),
+   `noindex`, absente du plan du site ; profil privé ou inconnu → `notFound()`.
+5. **Badges calculés, jamais stockés** : fonction pure `src/lib/badges/` (possessions + catalogue + séries →
+   badges gagnés et prochains, avec progression), testée sur des cas fabriqués. Rien à resynchroniser quand le
+   catalogue ou la collection change.
+6. **Avatars** : douze icônes SVG dessinées pour le site (`public/avatars/`), choisies par un identifiant (`avatar`
+   vérifié par la base) ; pas d'envoi d'image, donc rien à modérer.
+Alternatives écartées : e-mail d'invitation de Supabase (service d'envoi à configurer, refusé par le propriétaire) ;
+inscription ouverte (hors périmètre) ; badges stockés (à recalculer à chaque changement du catalogue) ; lecture
+publique de `possessions` par la RLS (trop facile d'exposer une collection privée par erreur).
+
 **ADR-15 — Séries : titre, puis Wikidata, puis main (étape 23).** Colonne `games.series text[]` (migration 0023 ;
 les 3 valeurs de `franchise` y sont reprises, `franchise` n'est plus lue). Une **liste de référence** dans
 `src/lib/series/` donne pour chaque série son nom affiché (français s'il existe), ses motifs de titre, sa série parente
@@ -473,6 +507,9 @@ releases(id, game_id → games, region 'JAP'|'US'|'PAL', sortie bool, titre, tit
          unique (game_id, region)
 import_runs(id, console_id, lance_le, resume jsonb)
 possessions(user_id → auth.users, game_id → games (cascade), region, cree_le) primary key (user_id, game_id, region)
+profils(user_id → auth.users (cascade) primary key, pseudo citext unique 3–20 [a-z0-9-], avatar (liste fixe),
+        public bool défaut false, role 'proprietaire'|'collectionneur' défaut 'collectionneur', cree_le)   (ADR-16)
+invitations(id, nom, jeton_hache unique, cree_le, expire_le, utilisee_le, user_id → auth.users)          (ADR-16)
 ```
 
 - Un jeu = une œuvre sur une console ; ses 3 sorties sont toujours créées (`sortie = false` si absente).
@@ -612,6 +649,15 @@ test n'appelle les sites en direct.
 24. **Frise** (v1.22, SPEC v1.38) — 2 PR : (1) SPEC, maquette, plan et backlog ; (2) découpage en années et côtés
     (fonction pure, `src/lib/catalogue/`), composant `Frise` (jetons de couleur, composant `Jaquette`), bouton « Frise »
     et tri restreint aux dates, tests unitaires et e2e.
+
+27. **Collectionneurs invités** (v1.23, ADR-16, SPEC v1.39) — 6 PR, dans cet ordre (la 1re est un prérequis de
+    sécurité) : (1) **rôles** : migration `profils` + `est_proprietaire()`, écriture du catalogue et des jaquettes
+    réservée au rôle propriétaire, `exigerProprietaire()` et `/admin` vérifient le rôle, pgTAP ; (2) **invitations** :
+    migration `invitations`, page « Collectionneurs » (créer, copier, annuler, supprimer un compte), page
+    `/bienvenue/[jeton]` et création du compte par le serveur (clé secrète côté Vercel) ; (3) **mon profil** (`/profil` :
+    pseudo, avatar, public, statistiques, derniers ajouts) et icône de compte selon le rôle ; (4) **badges** (calcul pur
+    + affichage) ; (5) **profil public** (`profil_public()`, `/collectionneurs/[pseudo]`) ; (6) e2e de bout en bout
+    (invitation → compte → profil public) et bilan.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
