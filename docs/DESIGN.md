@@ -278,6 +278,12 @@ de la session, même pour une seule requête ; les pages publiques (`en.wikipedi
 `wgWikibaseItemId`) et `www.wikidata.org/wiki/Special:EntityData/{Q}.json` répondent : deux requêtes par jeu, une par
 seconde, ≈ 40 min pour tout le catalogue.
 
+**Remplissage du 21/11/2026** (`scripts/series-wikidata.mjs`, tout le catalogue) : élément Wikidata trouvé pour
+912 jeux sur 1 126 ; **754 jeux avec au moins une série** (67 %) : titre seul 230, Wikidata seul 136, les deux 388 ;
+160 séries, dont 81 hors de la liste de référence gardées sous leur nom Wikidata (Inazuma Eleven, Bomberman, Bravely
+Default…) ; 1 page inaccessible (DK: Jungle Climber, rattrapé par le titre). Par console : de 39 / 104 (NES) à
+25 / 25 (Switch 2).
+
 ## 2. Stack
 
 Identique à `mon-site-sdlc` (décision 7 de l'intention) :
