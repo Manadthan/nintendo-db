@@ -128,7 +128,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 20 — Super Nintendo : étude (DESIGN §1 undecies), titres japonais pour les boîtes JAP #150 #151
   - [x] Étape 21 — NES : étude (DESIGN §1 duodecies), boîte « World » jamais pour le Japon #154 #155 ; jaquettes officielles #153 #158 #159 ; lecture au-delà de 1 000 jeux #157
   - [x] Étape 22 — Jeux absents : contrôle par les bases officielles (DESIGN §1 terdecies, ADR-13), DS (identifiants en Y, régions vides), Switch et 3DS (éditeur officiel) #165 #166 #167, éditeur officiel par région (ADR-14) #170, jaquettes manquantes et 5 jeux retirés (dont Drag x Drive, exclu à l'import) #172, boîtes PAL sans USK #175 ; relais et imports Switch + 3DS du 21/11 (+4 et +13 jeux) ; session Claude #177
-  - [ ] Étape 23 — Séries : étude Wikidata (DESIGN §1 quattuordecies), ADR-15 ; documents, données, filtre
+  - [x] Étape 23 — Séries : étude Wikidata (DESIGN §1 quattuordecies), ADR-15 ; documents #180, données #181, filtre #182 ; remplissage du 21/11 : 754 jeux sur 1 126 avec une série
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5
 
 ## Erreurs récurrentes
