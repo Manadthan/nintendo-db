@@ -6,6 +6,12 @@ export const PROPRIETAIRE_TEST = {
   password: "Mot-de-passe-e2e-42",
 } as const;
 
+/** Collectionneur invité fictif (étape 27, ADR-16) : connecté, mais sans droit sur le catalogue. */
+export const COLLECTIONNEUR_TEST = {
+  email: "e2e-collectionneur@exemple.fr",
+  password: "Mot-de-passe-e2e-43",
+} as const;
+
 /** Les tests de connexion ont besoin d'une base Supabase locale (toujours présente en CI). */
 export const BASE_LOCALE_DISPONIBLE = Boolean(
   process.env.E2E_SUPABASE_SECRET_KEY,

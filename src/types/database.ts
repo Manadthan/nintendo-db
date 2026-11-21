@@ -199,6 +199,34 @@ export type Database = {
           },
         ];
       };
+      profils: {
+        Row: {
+          avatar: string;
+          cree_le: string;
+          pseudo: string;
+          public: boolean;
+          role: Database["public"]["Enums"]["role_compte"];
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          avatar?: string;
+          cree_le?: string;
+          pseudo: string;
+          public?: boolean;
+          role?: Database["public"]["Enums"]["role_compte"];
+          user_id: string;
+        };
+        Update: {
+          avatar?: string;
+          cree_le?: string;
+          pseudo?: string;
+          public?: boolean;
+          role?: Database["public"]["Enums"]["role_compte"];
+          user_id?: string;
+        };
+        Relationships: [];
+      };
       releases: {
         Row: {
           code_produit: string | null;
@@ -267,7 +295,7 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      est_proprietaire: { Args: never; Returns: boolean };
     };
     Enums: {
       console_type: "salon" | "portable";
@@ -281,6 +309,7 @@ export type Database = {
         | "url";
       precision_date: "jour" | "mois" | "annee";
       region: "JAP" | "US" | "PAL";
+      role_compte: "proprietaire" | "collectionneur";
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -420,6 +449,7 @@ export const Constants = {
       ],
       precision_date: ["jour", "mois", "annee"],
       region: ["JAP", "US", "PAL"],
+      role_compte: ["proprietaire", "collectionneur"],
     },
   },
 } as const;
