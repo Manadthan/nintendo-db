@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.21 — 21/11/2026 — statut : **à valider**
+> Version 1.22 — 21/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.22 | 21/11/2026 | **Frise** (SPEC v1.38) : étape 24 ; backlog des étapes 25 à 27 (§11) |
 > | 1.21 | 21/11/2026 | **Séries** (SPEC v1.37) : étude Wikidata (§1 quattuordecies), ADR-15 (titre, puis Wikidata, puis main ; plusieurs séries ; noms de référence), colonne `series text[]` (migration 0023), étape 23 |
 > | 1.20 | 20/11/2026 | **Ordinateur** (SPEC v1.36) : conteneur `max-w-7xl` centré, grille du catalogue par paliers Tailwind (`sm` 3, `md` 4, `lg` 5, `xl` 6 colonnes), fiche en grille 2 colonnes dès `lg` (jaquette collante) ; tests Playwright à 1440 × 900 (`ordinateur.spec.ts`) |
 > | 1.19 | 20/11/2026 | **Éditeur officiel par région** (§1 terdecies, mesures) : ADR-14 (l'éditeur officiel de la région l'emporte ; cartes 3DSWare en boîte) |
@@ -608,6 +609,10 @@ test n'appelle les sites en direct.
     script `series-wikidata.mjs` ; (3) filtre « Série » du catalogue (`?serie=`) et séries sur la fiche. Puis
     remplissage par le script, vérifié dans la base, corrections du propriétaire.
 
+24. **Frise** (v1.22, SPEC v1.38) — 2 PR : (1) SPEC, maquette, plan et backlog ; (2) découpage en années et côtés
+    (fonction pure, `src/lib/catalogue/`), composant `Frise` (jetons de couleur, composant `Jaquette`), bouton « Frise »
+    et tri restreint aux dates, tests unitaires et e2e.
+
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 
@@ -638,4 +643,10 @@ npm run db:start | db:test | db:types
 
 ## 11. Prochaines étapes
 
-Valider ce document avec les maquettes v0.2 → issues de l'étape 1.
+Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par une étude ou une maquette validée) :
+
+| Étape | Sujet | À trancher d'abord |
+|---|---|---|
+| 25 | **Estimation du prix** dans la fiche (ventes terminées eBay) | accès aux ventes terminées : l'ancienne API (`findCompletedItems`) est fermée, Marketplace Insights est sur demande ; sinon autre source |
+| 26 | **Consolidation rétro** (NES à GameCube) avec l'API Giant Bomb : dates, éditeurs, jeux manquants | clé gratuite du propriétaire en secret GitHub `GIANTBOMB_API_KEY` (la clé passe dans l'adresse : tâche GitHub Actions) ; conditions d'utilisation |
+| 27 | **Profils utilisateurs** et **badges** selon le nombre de jeux possédés | **contredit l'intention actuelle** (un seul compte, inscriptions désactivées, collection privée : intention décision 5, SPEC §7) : mettre à jour l'intention d'abord (qui crée un compte, ce qui est public) |
