@@ -1,9 +1,10 @@
 # Maquettes
 
-> Version 0.8 — 21/11/2026 — statut : **validée**
+> Version 0.9 — 21/11/2026 — statut : **validée**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.9 | 21/11/2026 | **Collectionneurs invités** (étape 27, SPEC v1.39) : mon profil, profil public, page « Collectionneurs » de l'administration, bienvenue ; validées (`maquettes/collectionneur-*.png`). Invitation par **lien à partager** (choisi après la maquette : le champ e-mail de la page Collectionneurs devient un nom, l'e-mail est saisi par l'invité sur la page Bienvenue) |
 > | 0.8 | 21/11/2026 | **Frise** (US-02, SPEC v1.38) : 3e vue du catalogue, validée à la 3e version (`maquettes/frise.png`) : grandes jaquettes en alternance gauche / droite, titre et console dessous, année seule au centre |
 > | 0.7 | 19/11/2026 | **Statistiques** (US-18) : page de l'administration en 4 blocs, validée sur maquette (`maquettes/statistiques.png`) |
 > | 0.6 | 17/11/2026 | **Thème sombre** (anthracite doux, accent éclairci) et **logo cartouche** dans l'en-tête, validés sur captures (#49) |
@@ -26,6 +27,10 @@ emplacements, remplacés par les scans de boîtes GameTDB de chaque région à l
 |---|---|---|---|
 | 1 | Catalogue Wii U, trame de gamecartdb : en-tête (Catalogue, À propos), présentation, « Tous les jeux N », recherche, marché (Tous / Europe / Amérique du Nord / Japon), tri, filtres, grille/liste, « N affichés sur M », groupes par année ; vignette = jaquette, titre, date, disponibilité JAP · US · PAL | `/` → `/consoles/wii-u` | US-02, US-03, US-05, US-06 |
 | 2 | Fiche : retour au catalogue, grande jaquette avec **JAP / US / PAL dessous**, titre et date de la version choisie, informations, disponibilité des 3 régions, sources | `/jeux/wii-u/[jeu]` | US-04, US-07 |
+| 5 | Mon profil : pseudo, avatar, profil public, collection, badges et prochains badges, derniers ajouts ; [`maquettes/collectionneur-profil.png`](maquettes/collectionneur-profil.png) | `/profil` | US-21, US-22, US-24 |
+| 6 | Profil public : badges, collection, jeux possédés par console ; [`maquettes/collectionneur-public.png`](maquettes/collectionneur-public.png) | `/collectionneurs/[pseudo]` | US-23 |
+| 7 | Collectionneurs (administration) : inviter, invitations en attente, comptes ; [`maquettes/collectionneur-invitation.png`](maquettes/collectionneur-invitation.png) | `/admin/collectionneurs` | US-19 |
+| 8 | Bienvenue : pseudo, mot de passe, avatar ; [`maquettes/collectionneur-bienvenue.png`](maquettes/collectionneur-bienvenue.png) | `/bienvenue/[jeton]` | US-20 |
 | 4 | Frise (vue du catalogue) : ligne verticale, jeux en alternance gauche / droite, année au centre ; image : [`maquettes/frise.png`](maquettes/frise.png) | `/` (bouton « Frise ») | US-02 |
 | 3 | Statistiques (administration) : ma collection par console, par région, notes Metacritic, état du catalogue avec liens vers les listes ; image : [`maquettes/statistiques.png`](maquettes/statistiques.png) | `/admin/statistiques` | US-18 |
 

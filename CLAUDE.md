@@ -24,8 +24,8 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.5 à valider |
 | `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.39 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.22 à valider |
-| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques et Frise : `docs/maquettes/`) | v0.8 validée |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.23 à valider |
+| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs : `docs/maquettes/`) | v0.9 validée |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11) : chiffres, réussites, difficultés, leçons | v1.5 à valider |
 
 ## Règles de travail
@@ -130,7 +130,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 22 — Jeux absents : contrôle par les bases officielles (DESIGN §1 terdecies, ADR-13), DS (identifiants en Y, régions vides), Switch et 3DS (éditeur officiel) #165 #166 #167, éditeur officiel par région (ADR-14) #170, jaquettes manquantes et 5 jeux retirés (dont Drag x Drive, exclu à l'import) #172, boîtes PAL sans USK #175 ; relais et imports Switch + 3DS du 21/11 (+4 et +13 jeux) ; session Claude #177
   - [x] Étape 23 — Séries : étude Wikidata (DESIGN §1 quattuordecies), ADR-15 ; documents #180, données #181, filtre #182 ; remplissage du 21/11 : 754 jeux sur 1 126 avec une série
   - [x] Étape 24 — Frise : 3e vue du catalogue (SPEC v1.38, maquette validée) #184 #185
-  - [ ] Étapes suivantes (DESIGN §11) : 25 prix eBay (en attente du compte développeur eBay), 26 rétro ScreenScraper (Giant Bomb refuse l'accès : 403 ; en attente des identifiants), 27 profils et badges (intention v1.5, SPEC v1.39 : US-19 à US-24)
+  - [ ] Étapes suivantes (DESIGN §11) : 25 prix eBay (en attente du compte développeur eBay), 26 rétro ScreenScraper (Giant Bomb refuse l'accès : 403 ; en attente des identifiants), 27 profils et badges (intention v1.5, SPEC v1.39, ADR-16 : 6 PR, la 1re verrouille l'écriture du catalogue au rôle propriétaire)
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5
 
 ## Erreurs récurrentes
