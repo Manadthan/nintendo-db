@@ -93,6 +93,7 @@ tests/e2e/               tests Playwright ; connexion.spec.ts ignoré sans base 
 supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais, 0007 console Wii, 0008 consoles DS et 3DS, 0009 console Switch, 0010 Switch 2 + table exclusions : jeux décochés « en boîte », 0011 console GameCube, 0012 possessions : collection privée, RLS par compte, 0013 note Metacritic du jeu, 0014 consoles N64 et GBA + source de jaquette libretro, 0015 console Game Boy Color, 0016 console Game Boy, 0017 console Virtual Boy, 0018 console Super Nintendo, 0019 source de jaquette gamecartdb, 0020 console NES, 0021 source de jaquette nintendo, 0022 corrections de données : développeurs collés des listes à cartouches, 3D Tetris JAP), tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
+.claude/skills/          skills du projet, chargées à la demande : script-prod (script sur la production), steward (PR et CI)
 ```
 
 Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair/sombre de globals.css, jamais de couleur en dur) : `fond`, `carte`, `texte`, `texte-doux`,
@@ -125,26 +126,15 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 19 — Virtual Boy : étude (DESIGN §1 decies), Japon et États-Unis seulement #148 #149
   - [x] Étape 20 — Super Nintendo : étude (DESIGN §1 undecies), titres japonais pour les boîtes JAP #150 #151
   - [x] Étape 21 — NES : étude (DESIGN §1 duodecies), boîte « World » jamais pour le Japon #154 #155 ; jaquettes officielles #153 #158 #159 ; lecture au-delà de 1 000 jeux #157
-  - [ ] Étape 22 — Jeux absents : contrôle par les bases officielles (DESIGN §1 terdecies, ADR-13), DS (identifiants en Y, régions vides), Switch et 3DS (éditeur officiel) #165 #166 #167, éditeur officiel par région (ADR-14) #170, jaquettes manquantes et 5 jeux retirés (dont Drag x Drive, exclu à l'import) #172, boîtes PAL sans USK #175 ; reste : vérifier l'import Switch et 3DS après #170
+  - [x] Étape 22 — Jeux absents : contrôle par les bases officielles (DESIGN §1 terdecies, ADR-13), DS (identifiants en Y, régions vides), Switch et 3DS (éditeur officiel) #165 #166 #167, éditeur officiel par région (ADR-14) #170, jaquettes manquantes et 5 jeux retirés (dont Drag x Drive, exclu à l'import) #172, boîtes PAL sans USK #175 ; relais et imports Switch + 3DS du 21/11 (+4 et +13 jeux) ; session Claude #177
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5
 
 ## Erreurs récurrentes
 
-- **GameTDB bloque des hébergeurs** (Vercel dès #53, GitHub le 18/11/2026 : « Connect Timeout ») : le relais tourne
-  depuis la session Claude, qui atteint GameTDB : `npm run relais` ; tout script de données : `npm run session --
-  scripts/xxx.mjs`. Environnement cloud « nintendo-db » : clé Supabase en secret réseau (injectée dans `apikey`,
-  jamais vue), `SUPABASE_URL` et la fausse clé `SUPABASE_SECRET_KEY` en variables, `npm ci` au démarrage ; la
-  commande ajoute `NODE_USE_ENV_PROXY=1` (sans lui, Supabase est injoignable). Retirer `Authorization` n'est plus
-  utile (essai du 21/11/2026 : lecture, stockage privé et RLS identiques avec ou sans).
-
-- **CI e2e arrêtée pendant l'installation des navigateurs** (#109, #120, puis toutes les PR du 19/11 : miroir Ubuntu
-  lent) : ce n'est pas le code. `ci.yml` : cache des navigateurs **et des paquets Ubuntu**, 10 min par essai, second
-  essai qui arrête d'abord l'apt-get du premier (verrou), limite 35 min.
-- **CI rouge non vue** (19/11 : test pgTAP d'une liste de sources figée, cassé par la migration 0014, rouge sur
-  `main` de #127 à #134) : avant de dire « CI verte », lire le résultat de **chaque** tâche de la PR ; une migration
-  qui ajoute une valeur d'énumération met à jour les tests qui listent ses valeurs.
-- **Clone superficiel** (`git clone --depth 1`) : il ne suit que `main`, et l'alerte « branche non poussée » revient
-  après chaque `git push -u`. Une fois par clone : `git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'`.
+- **Scripts de données et relais** sur la production (GameTDB bloque Vercel et GitHub : la session l'atteint) :
+  skill `script-prod` (`.claude/skills/script-prod/SKILL.md`).
+- **PR et CI** (lien Vercel, chaque tâche lue avant de dire « CI verte », pannes connues : installation des
+  navigateurs, pgTAP après une migration, clone superficiel) : skill `steward` (`.claude/skills/steward/SKILL.md`).
 - **Sélecteurs e2e ambigus** (2 fois : « Remplacer » trouvait « À remplacer » ; `getByRole("alert")` trouvait aussi
   l'annonceur de navigation de Next.js) : `getByRole(…, { name, exact: true })`, et toujours filtrer un rôle
   générique par son texte (`getByRole("alert").filter({ hasText })`).
