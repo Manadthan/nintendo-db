@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.37 — 21/11/2026 — statut : **à valider**
+> Version 1.38 — 21/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.38 | 21/11/2026 | US-02 : vue **Frise** (demande du propriétaire, maquette validée `maquettes/frise.png`) : jeux en alternance de part et d'autre d'une ligne verticale, année seule au centre ; tris par date seulement |
 > | 1.37 | 21/11/2026 | US-06 : filtre **Série** (demande du propriétaire) ; US-04 : séries sur la fiche ; US-11 : séries corrigées à la main, verrouillées. Un jeu peut appartenir à plusieurs séries (Dr. Mario : « Dr. Mario » et « Mario ») |
 > | 1.36 | 20/11/2026 | **Ordinateur** (demande du propriétaire) : contenu centré et limité en largeur, catalogue de 2 à 6 colonnes selon l'écran, fiche en 2 colonnes (jaquette à gauche, informations à droite) ; administration inchangée (colonne centrée) |
 > | 1.35 | 20/11/2026 | US-10 : l'**éditeur officiel de la région** l'emporte sur GameTDB (Switch, 3DS) ; cartes 3DS « 3DSWare » vendues en boîte selon Nintendo gardées (choix du propriétaire) |
@@ -95,6 +96,13 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Tri : plus récents d'abord (par défaut, v1.31), plus anciens d'abord, A → Z, **mieux notés** (note Metacritic, v1.21 : de la meilleure
       à la moins bonne, à égalité par titre, jeux sans note à la fin) ; regroupement **par année** en tri par date, **par
       tranche** en tri par note (« 90 et plus », « 75 à 89 », « 50 à 74 », « Moins de 50 », « Sans note »).
+- [ ] **Frise** (v1.38) : 3e vue à côté de grille et liste (dernier choix retenu). Une ligne verticale au centre ;
+      les jeux, dans l'ordre de leur date de sortie (version du marché choisi), sont placés **en alternance à gauche et
+      à droite** ; chacun montre une **grande jaquette**, avec la note Metacritic, puis le **titre** et la **console**
+      dessous (pas d'étiquettes de régions). Seule l'**année** est marquée, au centre de la ligne, et reste visible en
+      haut pendant le défilement. La frise ne connaît que les tris par date : la choisir passe un tri A → Z ou par note
+      en « plus récents », et le menu de tri ne propose alors que « plus récents » et « plus anciens ». Recherche,
+      marché et filtres s'appliquent comme dans les autres vues ; un jeu sans date est rangé sous « Date inconnue ».
 - [ ] La page reste fluide avec 300 jeux (images chargées au fil du défilement).
 
 #### US-03 — Filtrer le catalogue par marché (M)
