@@ -7,7 +7,7 @@
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 1.39 | 21/11/2026 | **Collectionneurs invités** (étape 27, intention v1.5) : US-19 à US-24 (invitation, compte, collection de chacun, profil, profil public, badges) ; US-16 reste valable pour le propriétaire |
+> | 1.39 | 21/11/2026 | **Collectionneurs invités** (étape 27, intention v1.5) : US-19 à US-24 (invitation par lien à partager, compte, collection de chacun, profil, profil public, badges) ; US-16 reste valable pour le propriétaire |
 > | 1.38 | 21/11/2026 | US-02 : vue **Frise** (demande du propriétaire, maquette validée `maquettes/frise.png`) : jeux en alternance de part et d'autre d'une ligne verticale, année seule au centre ; tris par date seulement |
 > | 1.37 | 21/11/2026 | US-06 : filtre **Série** (demande du propriétaire) ; US-04 : séries sur la fiche ; US-11 : séries corrigées à la main, verrouillées. Un jeu peut appartenir à plusieurs séries (Dr. Mario : « Dr. Mario » et « Mario ») |
 > | 1.36 | 20/11/2026 | **Ordinateur** (demande du propriétaire) : contenu centré et limité en largeur, catalogue de 2 à 6 colonnes selon l'écran, fiche en 2 colonnes (jaquette à gauche, informations à droite) ; administration inchangée (colonne centrée) |
@@ -198,17 +198,20 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
 
 #### US-19 — Inviter un collectionneur (S, SPEC v1.39)
 *En tant que propriétaire, j'invite un ami pour qu'il tienne sa collection sur le site.*
-- [ ] Une page de l'administration « Collectionneurs » : je saisis une adresse e-mail et j'envoie l'invitation ; la
-      personne reçoit un e-mail en français avec un lien valable 7 jours. Pas d'inscription ouverte : sans invitation,
-      aucun compte ne peut être créé.
-- [ ] La page liste les collectionneurs (pseudo, e-mail, invité le, nombre de jeux) et les invitations en attente ;
-      je peux renvoyer une invitation, l'annuler, ou **supprimer un compte** (avec confirmation : sa collection et son
-      profil sont effacés).
+- [ ] Une page de l'administration « Collectionneurs » : je crée une invitation (avec un nom pour m'en souvenir,
+      par exemple « Léa ») et j'obtiens un **lien à partager**, valable 7 jours et utilisable une seule fois, que
+      j'envoie moi-même (SMS, messagerie) ; bouton « Copier le lien » (choix du propriétaire : aucun e-mail envoyé par
+      le site, donc aucun service d'e-mail à configurer). Pas d'inscription ouverte : sans lien valide, aucun compte
+      ne peut être créé.
+- [ ] La page liste les collectionneurs (pseudo, adresse e-mail de connexion, inscrit le, nombre de jeux) et les
+      invitations en attente ; je peux copier à nouveau un lien, l'annuler, ou **supprimer un compte** (avec
+      confirmation : sa collection et son profil sont effacés).
 
 #### US-20 — Accepter une invitation (S, SPEC v1.39)
-*En tant qu'invité, je crée mon compte depuis l'e-mail.*
-- [ ] Le lien ouvre une page « Bienvenue » : je choisis un **mot de passe** (8 caractères au moins) et un **pseudo**
-      (3 à 20 lettres, chiffres, tirets ; unique, sans distinction de majuscules), puis j'arrive sur mon profil.
+*En tant qu'invité, je crée mon compte depuis le lien reçu.*
+- [ ] Le lien ouvre une page « Bienvenue » : je saisis mon **adresse e-mail** (elle sert à me connecter), un **mot de
+      passe** (8 caractères au moins), un **pseudo** (3 à 20 lettres, chiffres, tirets ; unique, sans distinction de
+      majuscules) et un avatar, puis j'arrive sur mon profil, déjà connecté.
 - [ ] Un lien expiré ou déjà utilisé affiche un message clair (« demandez une nouvelle invitation »).
 - [ ] Je me connecte ensuite par la même page de connexion que le propriétaire ; l'icône de compte de l'en-tête mène
       à **mon profil** (au propriétaire : à l'administration, avec un lien vers son profil).
