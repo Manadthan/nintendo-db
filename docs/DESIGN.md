@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.20 — 20/11/2026 — statut : **à valider**
+> Version 1.21 — 21/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.21 | 21/11/2026 | **Séries** (SPEC v1.37) : étude Wikidata (§1 quattuordecies), ADR-15 (titre, puis Wikidata, puis main ; plusieurs séries ; noms de référence), colonne `series text[]` (migration 0023), étape 23 |
 > | 1.20 | 20/11/2026 | **Ordinateur** (SPEC v1.36) : conteneur `max-w-7xl` centré, grille du catalogue par paliers Tailwind (`sm` 3, `md` 4, `lg` 5, `xl` 6 colonnes), fiche en grille 2 colonnes dès `lg` (jaquette collante) ; tests Playwright à 1440 × 900 (`ordinateur.spec.ts`) |
 > | 1.19 | 20/11/2026 | **Éditeur officiel par région** (§1 terdecies, mesures) : ADR-14 (l'éditeur officiel de la région l'emporte ; cartes 3DSWare en boîte) |
 > | 1.18 | 20/11/2026 | **Contrôle par les bases officielles** (§1 terdecies) : jeux absents expliqués ; ADR-13 (éditeur repris de Nintendo Europe et Japon quand GameTDB est vide ; DS : identifiants en Y et régions vides) ; étape 22 |
@@ -260,6 +261,23 @@ Demande du propriétaire : trop d'erreurs sur les jeux manquants. Catalogue des 
 | 3DS | cartes classées **« 3DSWare »** (vendues aussi en téléchargement) alors qu'elles existent en boîte : la seule carte « 3DS » est coréenne ou d'un autre éditeur | carte 3DSWare gardée si la base officielle de sa région la dit en boîte et éditée par Nintendo (Europe : `physical_version_b` ; Japon : `sform` `CTR` ou `CTR_DOWNLOADABLE`, pas `CTRWARE`) | **≈ 11 jeux** : Fire Emblem Fates, Ever Oasis, Story of Seasons, Yo-kai Watch Blasters (×2), Puzzle & Dragons Z, Culdcept, Calciobit, Band Brothers P, Mario & Sonic à Londres (Japon), Hana to Ikimono ; régions ajoutées à 39 jeux déjà présents |
 | Wii, DS | pas de code produit chez Nintendo Europe, pas de base japonaise | — | 11 jeux à ajouter à la main |
 
+## 1 quattuordecies. Étude des séries (21/11/2026)
+
+Demande du propriétaire : un filtre par série. La colonne `games.franchise` existe depuis le schéma initial mais n'est
+remplie que pour 3 jeux sur 1 126 (données de départ) : aucun import ne la lit.
+
+| Source | Mesure (échantillon de 150 jeux tirés au hasard, graine fixe) | Limites |
+|---|---|---|
+| **Wikidata**, propriété P179 « fait partie de la série », élément trouvé par la page Wikipédia du jeu (lien gardé, sinon titre anglais) | élément « jeu vidéo » : **120 / 150** (74 par le lien, 46 par le titre) ; **série : 79 / 150 (53 %)** ; plusieurs séries : 13 | noms anglais ou propres à Wikidata (« Megaman », « Yoshi platform series ») ; série large + sous-série (Dr. Mario → Mario) ; certains éléments sans libellé |
+| **Titre du jeu** | rattrape des jeux que Wikidata ne classe pas (Mario Slam Basketball, Hamtaro) | ne voit pas les séries absentes du titre (Captain Toad → Mario) |
+| **À la main** (US-11) | exact | à réserver aux corrections |
+
+Beaucoup de jeux n'ont vraiment pas de série (Steel Diver, Ring Fit Adventure, Balloon Fight) : ils restent « Sans
+série ». **Accès** : l'API de Wikipédia et celle de Wikidata répondent 429 (« too many requests ») à l'adresse partagée
+de la session, même pour une seule requête ; les pages publiques (`en.wikipedia.org/wiki/…`, identifiant
+`wgWikibaseItemId`) et `www.wikidata.org/wiki/Special:EntityData/{Q}.json` répondent : deux requêtes par jeu, une par
+seconde, ≈ 40 min pour tout le catalogue.
+
 ## 2. Stack
 
 Identique à `mon-site-sdlc` (décision 7 de l'intention) :
@@ -400,6 +418,18 @@ migration, chiffres toujours justes ; quelques milliers de lignes, lues en une r
 sans jaquette ou de source `igdb` (même règle que « à remplacer », US-12). Les compteurs du panneau Filtres sont
 retirés (le filtre « Ma collection » reste).
 
+**ADR-15 — Séries : titre, puis Wikidata, puis main (étape 23).** Colonne `games.series text[]` (migration 0023 ;
+les 3 valeurs de `franchise` y sont reprises, `franchise` n'est plus lue). Une **liste de référence** dans
+`src/lib/series/` donne pour chaque série son nom affiché (français s'il existe), ses motifs de titre, sa série parente
+(Dr. Mario → Mario) et ses noms Wikidata. Séries d'un jeu = union de celles trouvées par le titre et par Wikidata,
+ramenées aux noms de référence, plus les parentes ; une série Wikidata hors liste est gardée sous son libellé français
+(sinon anglais) et signalée dans le résumé, pour enrichir la liste. Remplissage du catalogue par
+`scripts/series-wikidata.mjs` (session Claude, une requête par seconde) ; l'import n'applique que les règles sur le
+titre aux nouveaux jeux (pas de Wikidata depuis Vercel, à cause de la limite des API). Correction à la main (US-11)
+→ verrou `series` dans `games.verrous` : ni l'import ni le script ne touchent alors le champ. Alternatives écartées :
+une seule série par jeu (Dr. Mario n'apparaîtrait pas sous « Mario ») ; Wikidata seul (53 % des jeux) ; Giant Bomb
+(clé dans l'adresse, réservé à la consolidation rétro, étape 26).
+
 **ADR-14 — L'éditeur officiel de la région l'emporte (étape 22).** Suite de l'ADR-13 : le relais lit aussi le format
 (boîte ou téléchargement) des deux bases. Une carte Switch ou 3DS compte comme éditée par Nintendo si GameTDB le dit,
 si son éditeur est vide et que Nintendo l'édite (ADR-13), ou si Nintendo Europe (carte européenne) ou Nintendo Japon
@@ -428,7 +458,7 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
 
 ```
 consoles(id, slug, nom, type 'salon'|'portable', annee, ordre, wikipedia_liste, igdb_platform_id — inutilisé depuis v0.8)
-games(id, console_id → consoles, slug, igdb_id, wikipedia_url, developpeur, franchise, genre,
+games(id, console_id → consoles, slug, igdb_id, wikipedia_url, developpeur, franchise (plus lue : ADR-15), series text[], genre,
       physique bool, verrous text[], metacritic_note smallint 0–100, metacritic_url, created_at, updated_at)
 releases(id, game_id → games, region 'JAP'|'US'|'PAL', sortie bool, titre, titre_romanise (JAP),
          date_sortie date, precision_date 'jour'|'mois'|'annee', code_produit, editeur,
@@ -566,6 +596,11 @@ test n'appelle les sites en direct.
 22. **Jeux absents** (v1.18, ADR-13) — 2 PR : (1) DS, identifiants en Y et régions vides ; (2) Switch et 3DS, éditeur
     repris de Nintendo Europe et Japon (relais + import). Puis relais et nouvel import de la DS, de la Switch et de la 3DS
     par le propriétaire (aperçu avant enregistrement).
+
+23. **Séries** (v1.21, ADR-15) — 3 PR : (1) SPEC et DESIGN ; (2) migration 0023, liste de référence et règles
+    (`src/lib/series/`), séries des nouveaux jeux à l'import, champ « Séries » verrouillable dans l'administration,
+    script `series-wikidata.mjs` ; (3) filtre « Série » du catalogue (`?serie=`) et séries sur la fiche. Puis
+    remplissage par le script, vérifié dans la base, corrections du propriétaire.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.

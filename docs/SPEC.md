@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.36 — 20/11/2026 — statut : **à valider**
+> Version 1.37 — 21/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.37 | 21/11/2026 | US-06 : filtre **Série** (demande du propriétaire) ; US-04 : séries sur la fiche ; US-11 : séries corrigées à la main, verrouillées. Un jeu peut appartenir à plusieurs séries (Dr. Mario : « Dr. Mario » et « Mario ») |
 > | 1.36 | 20/11/2026 | **Ordinateur** (demande du propriétaire) : contenu centré et limité en largeur, catalogue de 2 à 6 colonnes selon l'écran, fiche en 2 colonnes (jaquette à gauche, informations à droite) ; administration inchangée (colonne centrée) |
 > | 1.35 | 20/11/2026 | US-10 : l'**éditeur officiel de la région** l'emporte sur GameTDB (Switch, 3DS) ; cartes 3DS « 3DSWare » vendues en boîte selon Nintendo gardées (choix du propriétaire) |
 > | 1.34 | 20/11/2026 | En-tête **toujours visible** pendant le défilement (comme gamecartdb) et bouton flottant **« Remonter en haut »** en bas à droite (demande du propriétaire) |
@@ -110,7 +111,8 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       affichés ; une région où le jeu n'est pas sorti est désactivée (« non sorti »).
 - [ ] La région ouverte par défaut est celle du marché choisi dans le catalogue, sinon PAL.
 - [ ] Un bloc **Disponibilité** liste les 3 régions : coché ou non, date, titre s'il diffère.
-- [ ] Sont aussi affichés : console, éditeur, développeur, franchise, genre (si connus), lien « Retour au catalogue ».
+- [ ] Sont aussi affichés : console, éditeur, développeur, **séries** (v1.37, remplace « franchise »), genre (si connus),
+      lien « Retour au catalogue ».
 - [ ] La **source** des données est citée (lien vers la fiche d'origine).
 - [ ] Une donnée inconnue s'affiche « — », jamais vide ni inventée (fréquent pour le code produit au début, complété via US-11).
 - [ ] La fiche a une adresse stable que l'on peut partager.
@@ -143,6 +145,12 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       et une entrée **« Nintendo (first party) »** en tête regroupe les divisions et les filiales détenues par
       Nintendo (Retro Studios, Monolith Soft, NST, NDcube, 1-Up Studio, Next Level Games) ; HAL Laboratory,
       Intelligent Systems et Game Freak n'en font pas partie.
+- [ ] **Série** (v1.37) : liste comme Développeur, « Toutes » puis les séries par **ordre alphabétique** avec leur
+      nombre de jeux, puis **« Sans série »**. Un jeu peut appartenir à **plusieurs** séries, d'une série large à une
+      sous-série (Dr. Mario : « Mario » et « Dr. Mario ») : il apparaît sous chacune. Noms de séries en français quand
+      un nom français existe (« Professeur Layton »), sinon le nom anglais ; une même série a un seul nom.
+- [ ] Les séries sont trouvées automatiquement (titre du jeu, puis Wikidata), pour les jeux existants comme pour les
+      jeux importés ensuite ; un jeu sans série connue est « Sans série », jamais une série devinée au hasard.
 
 #### US-07 — Mentions et sources (M)
 - [ ] Une page « À propos » indique que le site est un projet de fan **non affilié à Nintendo**, que les titres et
@@ -303,6 +311,8 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Les champs obligatoires sont vérifiés (titre non vide, date valide).
 - [ ] Je saisis ou corrige la **note Metacritic** (0 à 100) et l'adresse de sa page ; une note saisie à la main est
       verrouillée contre la mise à jour automatique (SPEC v1.17).
+- [ ] Je corrige les **séries** d'un jeu (ajout, retrait) ; des séries corrigées à la main sont verrouillées : ni
+      l'import ni le remplissage automatique ne les changent (v1.37).
 - [ ] Une page d'administration met à jour les **notes Metacritic** d'une console depuis Wikipédia (aperçu puis
       enregistrement, comme l'import) : notes trouvées, jeux sans article ou sans note, notes **ambiguës** (article couvrant
       plusieurs consoles sans note propre à celle du jeu) laissées vides et signalées, à saisir à la main.
