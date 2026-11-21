@@ -34,7 +34,7 @@ export async function corrigerJeu(
     const { data, error } = await supabase
       .from("games")
       .select(
-        `developpeur, metacritic_note, metacritic_url, verrous, releases(${COLONNES_SORTIE})`,
+        `developpeur, series, metacritic_note, metacritic_url, verrous, releases(${COLONNES_SORTIE})`,
       )
       .eq("id", gameId)
       .single();
@@ -45,6 +45,7 @@ export async function corrigerJeu(
     );
     const avant: JeuCorrigeable = {
       developpeur: data.developpeur,
+      series: [...data.series].sort((a, b) => a.localeCompare(b, "fr")),
       metacritic_note: data.metacritic_note,
       metacritic_url: data.metacritic_url,
       releases: Object.fromEntries(

@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { seriesDuTitre } from "@/lib/series/series";
 import { capturer, type Resultat } from "@/lib/import/resultat";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import { VERROU_MANUEL } from "@/lib/admin/nouveau";
@@ -317,6 +318,13 @@ async function enregistrerLotInterne(
             ...fusion.game,
             console_id: fiche.id,
             slug: wikipedia.slug,
+            // Séries d'un nouveau jeu par son titre (ADR-15) ; Wikidata et les corrections viennent ensuite.
+            series: seriesDuTitre(
+              REGIONS.flatMap((r) => [
+                jeu.releases[r].titre,
+                jeu.releases[r].titre_romanise,
+              ]),
+            ),
           })
           .select("id")
           .single();

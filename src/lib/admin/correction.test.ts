@@ -18,6 +18,7 @@ const sortie = (extra: Partial<SortieCorrigeable> = {}): SortieCorrigeable => ({
 });
 const avant: JeuCorrigeable = {
   developpeur: "Nintendo EAD",
+  series: ["Splatoon"],
   metacritic_note: null,
   metacritic_url: null,
   releases: {
@@ -49,6 +50,22 @@ describe("preparerCorrection (US-11)", () => {
         },
       },
     });
+  });
+
+  it("corrige les séries et les verrouille (SPEC v1.37)", () => {
+    const apres = structuredClone(avant);
+    apres.series = ["Mario", "Splatoon"];
+    const r = preparerCorrection(avant, apres, sansVerrou);
+    expect(r.ok && r.correction.game).toEqual({
+      series: ["Mario", "Splatoon"],
+      verrous: ["series"],
+    });
+  });
+
+  it("lit les séries saisies, séparées par des virgules", () => {
+    const f = new FormData();
+    f.set("series", " Mario, Dr. Mario ,");
+    expect(lireSaisie(f).series).toEqual(["Dr. Mario", "Mario"]);
   });
 
   it("sans modification, n'écrit rien de plus", () => {

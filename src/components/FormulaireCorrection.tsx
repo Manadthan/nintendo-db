@@ -43,6 +43,7 @@ function Verrou({ actif }: { actif: boolean }) {
 export function FormulaireCorrection({
   gameId,
   developpeur,
+  series,
   metacriticNote,
   metacriticUrl,
   verrousJeu,
@@ -50,6 +51,8 @@ export function FormulaireCorrection({
 }: {
   gameId: string;
   developpeur: string;
+  /** Séries séparées par « , » (SPEC v1.37). */
+  series: string;
   metacriticNote: string;
   metacriticUrl: string;
   verrousJeu: string[];
@@ -93,6 +96,22 @@ export function FormulaireCorrection({
           defaultValue={developpeur}
           className={champ}
         />
+      </label>
+
+      <label className={etiquette}>
+        <span>
+          Séries
+          <Verrou actif={verrousJeu.includes("series")} />
+        </span>
+        <input
+          name="series"
+          defaultValue={series}
+          placeholder="Mario, Dr. Mario"
+          className={champ}
+        />
+        <span className="text-xs text-texte-discret">
+          Séparées par des virgules ; une série parente s&apos;écrit aussi.
+        </span>
       </label>
 
       <div className="grid grid-cols-[96px_1fr] gap-3">
