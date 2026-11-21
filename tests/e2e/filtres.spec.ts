@@ -166,4 +166,3 @@ test("filtre Série : séries par ordre alphabétique, puis « Sans série » (S
     .click();
   await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
 });
-

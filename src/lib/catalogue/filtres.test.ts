@@ -305,9 +305,25 @@ describe("filtre Développeur (#89)", () => {
 });
 
 describe("filtre Série (SPEC v1.37)", () => {
-  const DR = jeu("dr-mario", ["1990-07-27", "1990-10-01", "1990-12-01"], [], null, ["Dr. Mario", "Mario"]);
-  const MK = jeu("mario-kart-8", ["2014-05-29", "2014-05-30", "2014-05-30"], [], null, ["Mario", "Mario Kart"]);
-  const STEEL = jeu("steel-diver", ["2011-02-26", "2011-03-22", "2011-05-06"], []);
+  const DR = jeu(
+    "dr-mario",
+    ["1990-07-27", "1990-10-01", "1990-12-01"],
+    [],
+    null,
+    ["Dr. Mario", "Mario"],
+  );
+  const MK = jeu(
+    "mario-kart-8",
+    ["2014-05-29", "2014-05-30", "2014-05-30"],
+    [],
+    null,
+    ["Mario", "Mario Kart"],
+  );
+  const STEEL = jeu(
+    "steel-diver",
+    ["2011-02-26", "2011-03-22", "2011-05-06"],
+    [],
+  );
   const versions = trier([DR, MK, STEEL], "anciens", "TOUS");
   const slugs = (serie: string) =>
     filtrer(versions, { ...SANS_FILTRE, serie }).map((v) => v.jeu.slug);
@@ -332,6 +348,8 @@ describe("filtre Série (SPEC v1.37)", () => {
 
   it("lu et écrit dans l'adresse (?serie=)", () => {
     expect(filtresDepuisParametres("?serie=Dr.+Mario").serie).toBe("Dr. Mario");
-    expect(avecFiltres("", { ...SANS_FILTRE, serie: "Mario Kart" })).toBe("?serie=Mario+Kart");
+    expect(avecFiltres("", { ...SANS_FILTRE, serie: "Mario Kart" })).toBe(
+      "?serie=Mario+Kart",
+    );
   });
 });
