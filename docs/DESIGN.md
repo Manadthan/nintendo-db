@@ -2,11 +2,12 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.25 — 22/11/2026 — statut : **à valider**
+> Version 1.26 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 1.25 | 22/11/2026 | **Jaquettes ScreenScraper** : étude du 22/11 (164 versions sur 270 avec la boîte de la bonne région, 99 jeux introuvables par le titre, quota 20 000 requêtes par jour) ; relais vers le bucket privé, planche, puis écriture ; source `screenscraper` (migration 0027) gardée par l'import (§11) |
+> | 1.26 | 22/11/2026 | **Jaquettes ScreenScraper** : étude du 22/11 (164 versions sur 270 avec la boîte de la bonne région, 99 jeux introuvables par le titre, quota 20 000 requêtes par jour) ; relais vers le bucket privé, planche, puis écriture ; source `screenscraper` (migration 0027) gardée par l'import (§11) |
+> | 1.25 | 22/11/2026 | ADR-11 : catalogue des statistiques et des profils **en cache 5 min**, vidé par chaque modification de l'administration ; possessions toujours lues à l'ouverture (audit de performance, correction D) |
 > | 1.24 | 22/11/2026 | **ScreenScraper** (étape 26) : jaquettes manquantes d'abord (270 versions sur 2 837 le 22/11, dont 177 japonaises), dates et éditeurs ensuite ; tâche GitHub « Étude ScreenScraper » en lecture seule (§11) |
 > | 1.23 | 21/11/2026 | **Collectionneurs invités** (SPEC v1.39, intention v1.5) : ADR-16 (rôle propriétaire en base, écriture du catalogue verrouillée, invitations par lien à jeton haché, profils, badges calculés), modèle de données, plan de l'étape 27 en 6 PR |
 > | 1.22 | 21/11/2026 | **Frise** (SPEC v1.38) : étape 24 ; backlog des étapes 25 à 27 (§11) |
@@ -427,6 +428,12 @@ pures** (`src/lib/statistiques/`), testées sur des jeux d'exemple. Rien n'est s
 migration, chiffres toujours justes ; quelques milliers de lignes, lues en une requête. « Jaquette manquante » = sortie
 sans jaquette ou de source `igdb` (même règle que « à remplacer », US-12). Les compteurs du panneau Filtres sont
 retirés (le filtre « Ma collection » reste).
+*Mise à jour v1.25 (audit de performance D, choix du propriétaire du 22/11/2026)* : la partie **catalogue** (jeux,
+sorties, consoles), identique pour tous et lue en visiteur, est gardée **5 minutes en cache** (`unstable_cache`,
+étiquette `catalogue`), pour Statistiques, Mon profil et les profils publics. Chaque action de l'administration qui
+modifie un jeu (import, correction, jaquette, note) vide ce cache aussitôt (`updateTag`). Les **possessions** restent
+lues à chaque ouverture. Seule exception : un script lancé depuis la session Claude (`npm run session`) ne vide pas
+le cache, et les chiffres suivent au plus 5 minutes plus tard. Les 2 pages de 1 000 jeux sont lues en même temps.
 
 **ADR-16 — Collectionneurs invités : rôles, invitations, profils, badges (étape 27).**
 1. **Le rôle du propriétaire passe dans la base.** Aujourd'hui, « connecté » veut dire « propriétaire » : toutes les

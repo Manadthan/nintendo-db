@@ -1,6 +1,7 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
+import { TAG_CATALOGUE } from "@/lib/statistiques/charger";
 import { seriesDuTitre } from "@/lib/series/series";
 import { capturer, type Resultat } from "@/lib/import/resultat";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
@@ -544,6 +545,7 @@ async function terminerImportInterne(
   if (error)
     throw new Error(`Résumé de l'import non enregistré : ${error.message}`);
   revalidatePath("/", "layout");
+  updateTag(TAG_CATALOGUE); // Statistiques et profils (cache du catalogue, ADR-11)
 }
 
 // Actions appelées par le navigateur : erreurs rendues, pas lancées (#53, voir resultat.ts).

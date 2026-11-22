@@ -1,6 +1,7 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
+import { TAG_CATALOGUE } from "@/lib/statistiques/charger";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import {
   articlesParTitre,
@@ -131,6 +132,7 @@ async function enregistrerNotesInterne(
     ecrites++;
   }
   revalidatePath("/", "layout");
+  updateTag(TAG_CATALOGUE); // Statistiques et profils (cache du catalogue, ADR-11)
   return ecrites;
 }
 

@@ -1,6 +1,7 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
+import { TAG_CATALOGUE } from "@/lib/statistiques/charger";
 import { redirect } from "next/navigation";
 import { SLUG_CONSOLE } from "@/lib/admin/consoles";
 import { lireNouveauJeu, VERROU_MANUEL } from "@/lib/admin/nouveau";
@@ -97,6 +98,7 @@ export async function corrigerJeu(
     };
   }
   revalidatePath("/", "layout");
+  updateTag(TAG_CATALOGUE); // Statistiques et profils (cache du catalogue, ADR-11)
   return { enregistre: true };
 }
 
@@ -161,6 +163,7 @@ export async function ajouterJeu(
     };
   }
   revalidatePath("/", "layout");
+  updateTag(TAG_CATALOGUE); // Statistiques et profils (cache du catalogue, ADR-11)
   redirect(`/admin/jeux/${consoleSlug}/${slug}?nouveau=1`);
 }
 
@@ -172,6 +175,7 @@ export async function supprimerJeu(formData: FormData): Promise<void> {
   const supabase = await exigerProprietaire();
   await supprimerJeuEtJaquettes(supabase, gameId, nom);
   revalidatePath("/", "layout");
+  updateTag(TAG_CATALOGUE); // Statistiques et profils (cache du catalogue, ADR-11)
   const consoleSlug = String(formData.get("console") ?? "");
   const params = new URLSearchParams({ supprime: nom });
   if (SLUG_CONSOLE.test(consoleSlug)) params.set("console", consoleSlug);

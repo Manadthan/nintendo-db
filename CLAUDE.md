@@ -23,8 +23,8 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.5 à valider |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.40 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.25 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.41 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.26 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs : `docs/maquettes/`) | v0.9 validée |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11), 23 à 27 (§12) : chiffres, réussites, difficultés, leçons | v1.6 à valider |
 
@@ -73,15 +73,15 @@ src/app/admin/           administration (US-09) : connexion/, accueil, import/ (
 src/lib/auth/proprietaire.ts  exigerProprietaire() : en tête de CHAQUE action d'administration ; vérifie le rôle « proprietaire » en base (est_proprietaire(), ADR-16), pas seulement la session
 src/proxy.ts             contrôle de connexion et de rôle, sur /admin SEULEMENT (les pages publiques restent statiques) ; un collectionneur invité est renvoyé à son profil (/profil)
 src/lib/auth/routes.ts   règles de redirection de l'administration + tests ; session-navigateur.ts : connecté ou non, lu dans le navigateur (pages statiques)
-src/lib/catalogue/       toutes les consoles (charger.ts : jeux + consoles, étape 8), version affichée, dates en français, tri, groupes (catalogue.ts), marché : adresse ?marche= puis navigateur (marche.ts), recherche ?q= (recherche.ts), filtres ?console= ?dispo= ?annee= ?genre= ?dev= ?serie= (filtres.ts, US-06 ; Série : SPEC v1.37), studios nettoyés et « Nintendo (first party) » (developpeurs.ts, #89), couleur de la note Metacritic (metacritic.ts, US-17), frise : années et côtés, tris par date (frise.ts, SPEC v1.38), lecture (charger.ts) + tests
-src/lib/statistiques/   statistiques du propriétaire (US-18, ADR-11) : calculs purs (statistiques.ts : collection par console, régions, Metacritic, état du catalogue) + tests, lecture paginée (charger.ts : chargerCollection, aussi pour Mon profil) ; page src/app/admin/statistiques/
+src/lib/catalogue/       toutes les consoles (charger.ts : jeux + consoles, étape 8), version affichée, dates en français, tri, groupes (catalogue.ts), marché : adresse ?marche= puis navigateur (marche.ts), recherche ?q= (recherche.ts), filtres ?console= ?dispo= ?annee= ?genre= ?dev= ?serie= (filtres.ts, US-06 ; Série : SPEC v1.37), studios nettoyés et « Nintendo (first party) » (developpeurs.ts, #89), couleur de la note Metacritic (metacritic.ts, US-17), frise : années et côtés, tris par date (frise.ts, SPEC v1.38), affichage par lots de 60 (lots.ts, SPEC v1.41), position au retour d'une fiche avec le nombre de jeux dessinés (defilement.ts), lecture (charger.ts) + tests
+src/lib/statistiques/   statistiques du propriétaire (US-18, ADR-11) : calculs purs (statistiques.ts : collection par console, régions, Metacritic, état du catalogue) + tests, lecture paginée (charger.ts : chargerCollection, aussi pour Mon profil ; catalogue en cache 5 min, étiquette `catalogue` vidée par chaque action qui modifie un jeu, ADR-11 v1.25) ; page src/app/admin/statistiques/
 src/app/bienvenue/[jeton]/  page « Bienvenue » d'un lien d'invitation : compte créé par le serveur (clé secrète), invitation réservée puis rendue en cas d'échec (US-20, actions/bienvenue.ts)
 src/app/collectionneurs/[pseudo]/  profil public (US-23) : seulement si public (profil_public(), migration 0026), noindex, hors plan du site ; gardé 5 min et refait aussitôt quand le profil change (revalidatePath) ; jeux possédés par console
 src/app/profil/          Mon profil (US-22) : pseudo, avatar, profil public, ma collection (jeux, versions, badges, par console, par région), badges gagnés et prochains (US-24), derniers ajouts, déconnexion ; tout compte connecté (actions/profil.ts)
 src/lib/profil/          avatars : 12 identifiants, ceux de la base (avatars.ts + test qui relit la migration 0024) ; collection résumée, badges, derniers ajouts et jeux par console (collection.ts, calculs de US-18 réutilisés : syntheseProfil), lecture du compte (charger.ts) ou d'un profil public (public.ts), adresse publique (adresse.ts) + tests
 src/app/jeux/[console]/[jeu]/  fiche d'un jeu (US-04), préparée à l'avance ; src/app/not-found.tsx : 404 en français
 src/lib/fiche/           conversion et région par défaut de la fiche (fiche.ts), lecture (charger.ts) + tests
-src/components/          EnTete (collé en haut au défilement ; Logo ; icônes Catalogue, À propos, BoutonTheme, BoutonCompte : seul accès à la connexion ou au compte (/admin, collectionneur renvoyé à /profil), SPEC v1.15 ; Avatar + ChoixAvatar (12 icônes SVG dessinées pour le site, ADR-16) ; BoutonHaut « Remonter en haut », SPEC v1.34), Catalogue (client : recherche, marché, tri, filtres, grille/liste/frise), Frise (vue chronologique : jeux en alternance, année au centre, SPEC v1.38), Filtres (panneau et pastilles, US-06), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite, NoteMetacritic (pastille aux couleurs Metacritic sur la jaquette du catalogue, US-17)
+src/components/          EnTete (collé en haut au défilement ; Logo ; icônes Catalogue, À propos, BoutonTheme, BoutonCompte : seul accès à la connexion ou au compte (/admin, collectionneur renvoyé à /profil), SPEC v1.15 ; Avatar + ChoixAvatar (12 icônes SVG dessinées pour le site, ADR-16) ; BoutonHaut « Remonter en haut », SPEC v1.34), Catalogue (client : recherche différée et mémorisée, marché, tri, filtres, lots de 60 au défilement), ListeJeux (grille/liste/frise, mémorisée : la frappe ne redessine pas les cartes), Frise (vue chronologique : jeux en alternance, année au centre, SPEC v1.38), Filtres (panneau et pastilles, US-06), FicheJeu (client : JAP/US/PAL), AnalyseImport (client : aperçu puis enregistrement par lots), Jaquette (ou vignette neutre), Disponibilite, NoteMetacritic (pastille aux couleurs Metacritic sur la jaquette du catalogue, US-17)
 src/lib/referencement/   adresse du site, sitemap, robots, métadonnées et données structurées des fiches (étape 7) + tests ; src/app/sitemap.ts, robots.ts
 src/lib/theme/           choix du thème : auto/clair/sombre, script anti-éclair (US-08) + tests
 src/lib/recherche/       normaliser() pour la recherche (ADR-05) + tests
@@ -137,7 +137,8 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 23 — Séries : étude Wikidata (DESIGN §1 quattuordecies), ADR-15 ; documents #180, données #181, filtre #182 ; remplissage du 21/11 : 754 jeux sur 1 126 avec une série
   - [x] Étape 24 — Frise : 3e vue du catalogue (SPEC v1.38, maquette validée) #184 #185
   - [x] Étape 27 — Collectionneurs invités : intention v1.5, SPEC v1.39 et v1.40, ADR-16 #189 ; rôles #190, invitations #191 #192, Mon profil #193 #194, badges #195, profil public #196, bilan
-  - [ ] Étapes suivantes (DESIGN §11) : audit de performance avec la skill react-best-practices de Vercel (copiée dans le dépôt, rapport sans code, corrections au choix du propriétaire) ; 25 prix eBay (en attente du compte développeur eBay) ; 26 ScreenScraper : jaquettes manquantes d'abord, puis rétro (identifiants en secrets GitHub le 22/11 ; étude en lecture seule)
+  - [x] Audit de performance (skill react-best-practices, 22/11) : skill #198, page plus légère #199, recherche fluide #200, lots de 60 #201, profil et statistiques #203 ; accueil 4,06 → 1,11 Mo de HTML, JS visiteur 264 → 195 Ko
+  - [ ] Étapes suivantes (DESIGN §11) : 25 prix eBay (en attente du compte développeur eBay) ; 26 ScreenScraper : jaquettes manquantes d'abord, puis rétro (identifiants en secrets GitHub le 22/11 ; étude en lecture seule)
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5 ; étapes 23 à 27 : v1.6
 
 ## Erreurs récurrentes
@@ -153,3 +154,6 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   public le lisait ; « Jeu de test e2e » ajouté pendant que le catalogue comptait ses jeux) : les tests connectés
   qui écrivent tournent dans les projets `*-admin` de `playwright.config.ts`, après tous les tests publics ; un
   nouveau fichier de tests d'administration s'ajoute à `ADMINISTRATION`.
+- **Prettier sur des fichiers non modifiés** (3 fois le 22/11 : `defilement.ts`, toute la SPEC, `collectionneurs.ts`
+  reformatés, diff gonflé) : `npx prettier --write` seulement sur les fichiers `.ts`/`.tsx` touchés, jamais sur
+  `docs/*.md` ni sur un dossier entier ; relire `git diff --stat` avant chaque commit.
