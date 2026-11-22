@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { ensemble } from "@/lib/collection/collection";
 import {
   derniersAjouts,
+  jeuxParConsole,
   resumeCollection,
   type LigneAjout,
 } from "@/lib/profil/collection";
@@ -103,5 +104,45 @@ describe("derniersAjouts (US-22)", () => {
     );
     expect(a!.titre).toBe("Yoshi's Story");
     expect(a!.jaquetteSrcset).toBeNull();
+  });
+});
+
+describe("jeuxParConsole (US-23)", () => {
+  const jeuSlug = (id: string, console: string, titre: string) => ({
+    ...jeu(id, console),
+    titre,
+    slug: id,
+  });
+  const jeux = [
+    jeuSlug("zelda", "n64", "Zelda"),
+    jeuSlug("mario", "n64", "Mario 64"),
+    jeuSlug("tetris", "gb", "Tetris"),
+    jeuSlug("wario", "wii", "Wario"),
+  ];
+  const consoles = [
+    { slug: "gb", nom: "Game Boy" },
+    { slug: "n64", nom: "Nintendo 64" },
+    { slug: "wii", nom: "Wii" },
+  ];
+
+  it("liste les jeux possédés par console, consoles dans l'ordre, jeux par titre, avec le lien de la fiche", () => {
+    const possessions = ensemble([
+      { game_id: "zelda", region: "JAP" },
+      { game_id: "mario", region: "PAL" },
+      { game_id: "tetris", region: "US" },
+    ]);
+    expect(jeuxParConsole(jeux, consoles, possessions)).toEqual([
+      {
+        console: { slug: "gb", nom: "Game Boy" },
+        jeux: [{ id: "tetris", titre: "Tetris", href: "/jeux/gb/tetris" }],
+      },
+      {
+        console: { slug: "n64", nom: "Nintendo 64" },
+        jeux: [
+          { id: "mario", titre: "Mario 64", href: "/jeux/n64/mario" },
+          { id: "zelda", titre: "Zelda", href: "/jeux/n64/zelda" },
+        ],
+      },
+    ]);
   });
 });

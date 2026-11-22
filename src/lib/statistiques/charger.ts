@@ -11,6 +11,7 @@ import type { JeuStat } from "./statistiques";
 
 type LigneJeu = {
   id: string;
+  slug: string;
   metacritic_note: number | null;
   developpeur: string | null;
   series: string[];
@@ -45,20 +46,8 @@ export async function chargerStatistiques() {
  * page Statistiques du propriétaire (US-18) et Mon profil de tout compte (US-22).
  */
 export async function chargerCollection(supabase: SupabaseClient<Database>) {
-  const [lignes, consoles, possessions] = await Promise.all([
-    toutesLesPages<LigneJeu>(
-      (de, a) =>
-        supabase
-          .from("games")
-          .select(
-            "id, metacritic_note, developpeur, series, consoles!inner(slug, nom), releases(region, sortie, titre, code_produit, jaquette_path, jaquette_source)",
-          )
-          .order("id")
-          .range(de, a)
-          .overrideTypes<LigneJeu[], { merge: false }>(),
-      "Statistiques",
-    ),
-    supabase.from("consoles").select("slug, nom").order("ordre"),
+  const [catalogue, possessions] = await Promise.all([
+    chargerCatalogue(supabase),
     toutesLesPages<{ game_id: string; region: Region }>(
       (de, a) =>
         supabase
@@ -70,10 +59,31 @@ export async function chargerCollection(supabase: SupabaseClient<Database>) {
       "Statistiques",
     ),
   ]);
+  return { ...catalogue, possessions: ensemble(possessions) };
+}
+
+/** Jeux et consoles du catalogue, sans possessions : aussi pour le profil public d'un collectionneur (US-23). */
+export async function chargerCatalogue(supabase: SupabaseClient<Database>) {
+  const [lignes, consoles] = await Promise.all([
+    toutesLesPages<LigneJeu>(
+      (de, a) =>
+        supabase
+          .from("games")
+          .select(
+            "id, slug, metacritic_note, developpeur, series, consoles!inner(slug, nom), releases(region, sortie, titre, code_produit, jaquette_path, jaquette_source)",
+          )
+          .order("id")
+          .range(de, a)
+          .overrideTypes<LigneJeu[], { merge: false }>(),
+      "Statistiques",
+    ),
+    supabase.from("consoles").select("slug, nom").order("ordre"),
+  ]);
   if (consoles.error)
     throw new Error(`Consoles illisibles : ${consoles.error.message}`);
   const jeux: JeuStat[] = lignes.map((l) => ({
     id: l.id,
+    slug: l.slug,
     titre: titre(l),
     console: { slug: l.consoles.slug, nom: l.consoles.nom },
     metacritic: l.metacritic_note,
@@ -87,9 +97,5 @@ export async function chargerCollection(supabase: SupabaseClient<Database>) {
     firstParty: studios(l.developpeur).some(estFirstParty),
     series: l.series,
   }));
-  return {
-    jeux,
-    consoles: consoles.data ?? [],
-    possessions: ensemble(possessions),
-  };
+  return { jeux, consoles: consoles.data ?? [] };
 }

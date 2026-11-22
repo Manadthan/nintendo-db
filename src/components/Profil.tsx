@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import {
   basculerPublic,
   modifierProfil,
@@ -70,29 +70,61 @@ export function ModifierProfil({
 }
 
 /** Interrupteur « Profil public » (US-22) : enregistré dès qu'on le touche. */
-export function InterrupteurPublic({ public: estPublic }: { public: boolean }) {
+export function InterrupteurPublic({
+  public: estPublic,
+  adresse,
+}: {
+  public: boolean;
+  /** Adresse du profil public (US-23), affichée quand il est public. */
+  adresse: string;
+}) {
   return (
-    <form
-      action={basculerPublic}
-      className="flex items-center justify-between gap-3"
-    >
-      <span className="flex flex-col text-sm">
-        <span className="font-semibold">Profil public</span>
-        <span className="text-texte-doux">
-          {estPublic
-            ? "Votre profil pourra être vu par ceux qui ont le lien (page publique : bientôt)."
-            : "Privé : vous seul voyez votre collection."}
+    <div className="flex flex-col gap-3">
+      <form
+        action={basculerPublic}
+        className="flex items-center justify-between gap-3"
+      >
+        <span className="flex flex-col text-sm">
+          <span className="font-semibold">Profil public</span>
+          <span className="text-texte-doux">
+            {estPublic
+              ? "Visible par ceux qui ont le lien."
+              : "Privé : vous seul voyez votre collection."}
+          </span>
         </span>
-      </span>
-      <input
-        type="checkbox"
-        role="switch"
-        name="public"
-        aria-label="Profil public"
-        defaultChecked={estPublic}
-        onChange={(e) => e.currentTarget.form?.requestSubmit()}
-        className="relative h-7 w-12 shrink-0 cursor-pointer appearance-none rounded-full bg-champ transition-colors before:absolute before:top-1 before:left-1 before:size-5 before:rounded-full before:bg-carte before:transition-transform checked:bg-possede checked:before:translate-x-5"
-      />
-    </form>
+        <input
+          type="checkbox"
+          role="switch"
+          name="public"
+          aria-label="Profil public"
+          defaultChecked={estPublic}
+          onChange={(e) => e.currentTarget.form?.requestSubmit()}
+          className="relative h-7 w-12 shrink-0 cursor-pointer appearance-none rounded-full bg-champ transition-colors before:absolute before:top-1 before:left-1 before:size-5 before:rounded-full before:bg-carte before:transition-transform checked:bg-possede checked:before:translate-x-5"
+        />
+      </form>
+      {estPublic && <AdressePublique adresse={adresse} />}
+    </div>
+  );
+}
+
+/** Adresse à partager du profil public (US-23), avec « Copier ». */
+function AdressePublique({ adresse }: { adresse: string }) {
+  const [copie, setCopie] = useState(false);
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-[10px] bg-surface px-3 py-2.5 text-sm">
+      <a href={adresse} className="min-w-0 break-all text-texte">
+        {adresse.replace(/^https?:\/\//, "")}
+      </a>
+      <button
+        type="button"
+        className="shrink-0 font-semibold text-accent"
+        onClick={async () => {
+          await navigator.clipboard.writeText(adresse);
+          setCopie(true);
+        }}
+      >
+        {copie ? "Copiée" : "Copier"}
+      </button>
+    </div>
   );
 }

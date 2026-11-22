@@ -1,3 +1,5 @@
+import { calculerBadges, prochainsBadges } from "@/lib/badges/badges";
+import { cleVersion } from "@/lib/collection/collection";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
 import { srcsetJaquette } from "@/lib/jaquettes/stockage";
 import {
@@ -78,4 +80,51 @@ export function derniersAjouts(
         : null,
     };
   });
+}
+
+export type JeuxDeConsole = {
+  console: { slug: string; nom: string };
+  jeux: { id: string; titre: string; href: string | null }[];
+};
+
+/** Jeux possédés par console (profil public, US-23) : consoles dans l'ordre donné, jeux par titre. */
+export function jeuxParConsole(
+  jeux: JeuStat[],
+  consoles: { slug: string; nom: string }[],
+  possessions: ReadonlySet<string>,
+): JeuxDeConsole[] {
+  const possede = (j: JeuStat) =>
+    REGIONS.some((r) => possessions.has(cleVersion(j.id, r)));
+  return consoles
+    .map((c) => ({
+      console: c,
+      jeux: jeux
+        .filter((j) => j.console.slug === c.slug && possede(j))
+        .map((j) => ({
+          id: j.id,
+          titre: j.titre,
+          href: j.slug ? `/jeux/${c.slug}/${j.slug}` : null,
+        }))
+        .sort((a, b) => a.titre.localeCompare(b.titre, "fr")),
+    }))
+    .filter((c) => c.jeux.length > 0);
+}
+
+/** Tout ce qu'un profil montre de la collection (Mon profil US-22, profil public US-23) : résumé, badges, ajouts. */
+export function syntheseProfil(
+  jeux: JeuStat[],
+  consoles: { slug: string; nom: string }[],
+  possessions: ReadonlySet<string>,
+  lignesAjouts: LigneAjout[],
+  baseUrl?: string,
+) {
+  const badges = calculerBadges(jeux, consoles, possessions);
+  return {
+    resume: resumeCollection(jeux, consoles, possessions),
+    badges: {
+      gagnes: badges.filter((b) => b.gagne),
+      prochains: prochainsBadges(badges),
+    },
+    ajouts: derniersAjouts(lignesAjouts, baseUrl),
+  };
 }

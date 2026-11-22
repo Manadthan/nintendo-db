@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { PSEUDO } from "@/lib/invitations/inscription";
+import { cheminPublic } from "@/lib/profil/adresse";
 import { estAvatar } from "@/lib/profil/avatars";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -33,6 +34,11 @@ export async function modifierProfil(
   if (erreurs.length) return { erreurs };
   try {
     const { supabase, userId } = await compte();
+    const { data: avant } = await supabase
+      .from("profils")
+      .select("pseudo")
+      .eq("user_id", userId)
+      .maybeSingle();
     const { error } = await supabase
       .from("profils")
       .update({ pseudo, avatar: avatar as string })
@@ -46,19 +52,25 @@ export async function modifierProfil(
         ],
       };
     revalidatePath("/profil");
+    // L'ancienne adresse publique cesse de marcher, la nouvelle montre le nouvel avatar.
+    if (avant) revalidatePath(cheminPublic(avant.pseudo));
+    revalidatePath(cheminPublic(pseudo));
     return { enregistre: true };
   } catch (e) {
     return { erreurs: [(e as Error).message] };
   }
 }
 
-/** Rend le profil public ou privé (US-22 ; la page publique arrive avec US-23). */
+/** Rend le profil public ou privé (US-22) : la page publique (US-23) apparaît ou disparaît aussitôt. */
 export async function basculerPublic(formData: FormData): Promise<void> {
   const { supabase, userId } = await compte();
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("profils")
     .update({ public: formData.get("public") === "on" })
-    .eq("user_id", userId);
+    .eq("user_id", userId)
+    .select("pseudo")
+    .single();
   if (error) throw new Error(error.message);
   revalidatePath("/profil");
+  revalidatePath(cheminPublic(data.pseudo));
 }
