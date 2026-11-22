@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.39 — 21/11/2026 — statut : **à valider**
+> Version 1.40 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.40 | 22/11/2026 | US-19 : « copier à nouveau un lien » devient **« Nouveau lien »** (l'ancien lien cesse de marcher, 7 jours de plus) : la base ne garde que l'empreinte du jeton (ADR-16), le lien n'est donc montré qu'une fois |
 > | 1.39 | 21/11/2026 | **Collectionneurs invités** (étape 27, intention v1.5) : US-19 à US-24 (invitation par lien à partager, compte, collection de chacun, profil, profil public, badges) ; US-16 reste valable pour le propriétaire |
 > | 1.38 | 21/11/2026 | US-02 : vue **Frise** (demande du propriétaire, maquette validée `maquettes/frise.png`) : jeux en alternance de part et d'autre d'une ligne verticale, année seule au centre ; tris par date seulement |
 > | 1.37 | 21/11/2026 | US-06 : filtre **Série** (demande du propriétaire) ; US-04 : séries sur la fiche ; US-11 : séries corrigées à la main, verrouillées. Un jeu peut appartenir à plusieurs séries (Dr. Mario : « Dr. Mario » et « Mario ») |
@@ -204,7 +205,8 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
       le site, donc aucun service d'e-mail à configurer). Pas d'inscription ouverte : sans lien valide, aucun compte
       ne peut être créé.
 - [ ] La page liste les collectionneurs (pseudo, adresse e-mail de connexion, inscrit le, nombre de jeux) et les
-      invitations en attente ; je peux copier à nouveau un lien, l'annuler, ou **supprimer un compte** (avec
+      invitations en attente ; je peux créer un **nouveau lien** (le lien n'est montré qu'une fois : l'ancien cesse de marcher et le délai
+      repart pour 7 jours, SPEC v1.40), l'annuler, ou **supprimer un compte** (avec
       confirmation : sa collection et son profil sont effacés).
 
 #### US-20 — Accepter une invitation (S, SPEC v1.39)

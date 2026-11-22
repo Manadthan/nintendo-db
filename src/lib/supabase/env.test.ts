@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { readSupabaseEnv } from "@/lib/supabase/env";
+import { readSecretKey, readSupabaseEnv } from "@/lib/supabase/env";
 
 const valide = {
   NEXT_PUBLIC_SUPABASE_URL: "https://abcd.supabase.co",
@@ -45,5 +45,20 @@ describe("readSupabaseEnv", () => {
         NEXT_PUBLIC_SUPABASE_URL: "ftp://abcd.supabase.co",
       }),
     ).toThrow(/pas une adresse valide/);
+  });
+});
+
+describe("readSecretKey (ADR-16)", () => {
+  it("renvoie la clé secrète sans espaces", () => {
+    expect(readSecretKey({ SUPABASE_SECRET_KEY: " sb_secret_x \n" })).toBe(
+      "sb_secret_x",
+    );
+  });
+
+  it("nomme la variable manquante", () => {
+    expect(() => readSecretKey({})).toThrow(/SUPABASE_SECRET_KEY/);
+    expect(() => readSecretKey({ SUPABASE_SECRET_KEY: "  " })).toThrow(
+      /SUPABASE_SECRET_KEY/,
+    );
   });
 });

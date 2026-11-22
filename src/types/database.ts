@@ -169,6 +169,37 @@ export type Database = {
           },
         ];
       };
+      invitations: {
+        Row: {
+          cree_le: string;
+          expire_le: string;
+          id: string;
+          jeton_hache: string;
+          nom: string;
+          user_id: string | null;
+          utilisee_le: string | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          cree_le?: string;
+          expire_le?: string;
+          id?: string;
+          jeton_hache: string;
+          nom: string;
+          user_id?: string | null;
+          utilisee_le?: string | null;
+        };
+        Update: {
+          cree_le?: string;
+          expire_le?: string;
+          id?: string;
+          jeton_hache?: string;
+          nom?: string;
+          user_id?: string | null;
+          utilisee_le?: string | null;
+        };
+        Relationships: [];
+      };
       possessions: {
         Row: {
           cree_le: string;

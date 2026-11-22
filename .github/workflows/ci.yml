@@ -63,6 +63,7 @@ jobs:
             echo "NEXT_PUBLIC_SUPABASE_URL=$API_URL"
             echo "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$publishable"
             echo "E2E_SUPABASE_SECRET_KEY=$secret"
+            echo "SUPABASE_SECRET_KEY=$secret"
           } >> "$GITHUB_ENV"
       # WebKit = moteur de Safari : vérifié ici, il n'est pas installé dans l'environnement de Claude.
       # Navigateurs gardés en cache d'une exécution à l'autre (clé : version de Playwright).

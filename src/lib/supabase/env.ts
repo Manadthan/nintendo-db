@@ -45,3 +45,16 @@ export function supabaseEnv(): SupabaseEnv {
       process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
   });
 }
+
+/**
+ * Clé secrète Supabase (ADR-16 point 2) : comptes des collectionneurs (création, liste, suppression). Serveur
+ * seulement : jamais préfixée NEXT_PUBLIC_, lue par `admin.ts` (`server-only`).
+ */
+export function readSecretKey(env: Record<string, string | undefined>): string {
+  const cle = env.SUPABASE_SECRET_KEY?.trim();
+  if (!cle)
+    throw new Error(
+      "Variable d'environnement manquante : SUPABASE_SECRET_KEY (réglages Vercel → Environment Variables).",
+    );
+  return cle;
+}
