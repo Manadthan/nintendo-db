@@ -23,7 +23,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.5 à valider |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.39 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.40 à valider |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.23 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs : `docs/maquettes/`) | v0.9 validée |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11) : chiffres, réussites, difficultés, leçons | v1.5 à valider |
@@ -69,7 +69,7 @@ npm run relais     # relais GameTDB depuis la session Claude (GameTDB bloque Git
 
 ```
 src/app/                 pages (App Router) — layout.tsx, page.tsx, globals.css (couleurs des maquettes)
-src/app/admin/           administration (US-09) : connexion/, accueil, import/ (US-10, ?console=wii), jaquettes/ (liste ?console=, remplacement /admin/jaquettes/{console}/{jeu}/{région}, US-12), jeux/ (liste ?console= ?filtre=sans-code, correction /admin/jeux/{console}/{jeu}, US-11), notes/ (notes Metacritic depuis Wikipédia, ?console=, US-17), statistiques/ (US-18) ; actions/auth.ts, import.ts, jaquettes.ts, jeux.ts, metacritic.ts
+src/app/admin/           administration (US-09) : connexion/, accueil, import/ (US-10, ?console=wii), jaquettes/ (liste ?console=, remplacement /admin/jaquettes/{console}/{jeu}/{région}, US-12), jeux/ (liste ?console= ?filtre=sans-code, correction /admin/jeux/{console}/{jeu}, US-11), notes/ (notes Metacritic depuis Wikipédia, ?console=, US-17), statistiques/ (US-18), collectionneurs/ (invitations par lien, comptes des invités, US-19) ; actions/auth.ts, collectionneurs.ts, import.ts, jaquettes.ts, jeux.ts, metacritic.ts
 src/lib/auth/proprietaire.ts  exigerProprietaire() : en tête de CHAQUE action d'administration ; vérifie le rôle « proprietaire » en base (est_proprietaire(), ADR-16), pas seulement la session
 src/proxy.ts             contrôle de connexion et de rôle, sur /admin SEULEMENT (les pages publiques restent statiques) ; un collectionneur invité est renvoyé à l'accueil
 src/lib/auth/routes.ts   règles de redirection de l'administration + tests ; session-navigateur.ts : connecté ou non, lu dans le navigateur (pages statiques)
@@ -87,11 +87,12 @@ src/lib/jaquettes/       supprimer.ts (jeu + toutes ses jaquettes), chemins et U
 src/lib/admin/           console choisie (consoles.ts, étape 8), page « Jaquettes » (vignettes, filtre « à remplacer »), correction d'une fiche (champs modifiés → verrous), nouveau jeu (verrou « manuel »), filtre « sans code produit » (codes.ts, US-18) + tests
 src/lib/collection/      ma collection (US-16, ADR-07) : versions possédées (collection.ts, pur + tests), session et possessions chargées dans le navigateur, bascule d'une case (navigateur.ts) ; filtre ?collection= (collection.ts ; compteurs : page Statistiques, US-18), étiquettes JAP / US / PAL vertes (jeton `possede`) pour les versions possédées
 src/lib/series/          séries (étape 23, ADR-15) : liste de référence, règles sur le titre, noms Wikidata, parentes (series.ts, sans import : lu par le script) + tests
+src/lib/invitations/     jeton d'invitation (aléatoire, empreinte SHA-256 seule en base), lien, état (US-19, ADR-16) + tests
 src/lib/images/          réduction d'une photo dans le navigateur avant envoi (1600 px) + tests
-src/lib/supabase/        env.ts (variables vérifiées + tests), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
+src/lib/supabase/        env.ts (variables vérifiées + tests), admin.ts (clé secrète SUPABASE_SECRET_KEY, serveur seulement : comptes des collectionneurs, ADR-16), server.ts (session), client.ts, public.ts (pages publiques, sans cookies)
 src/types/database.ts    types de la base, générés (npm run db:types) et vérifiés en CI
 tests/e2e/               tests Playwright ; connexion.spec.ts ignoré sans base locale (tourne en CI)
-supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais, 0007 console Wii, 0008 consoles DS et 3DS, 0009 console Switch, 0010 Switch 2 + table exclusions : jeux décochés « en boîte », 0011 console GameCube, 0012 possessions : collection privée, RLS par compte, 0013 note Metacritic du jeu, 0014 consoles N64 et GBA + source de jaquette libretro, 0015 console Game Boy Color, 0016 console Game Boy, 0017 console Virtual Boy, 0018 console Super Nintendo, 0019 source de jaquette gamecartdb, 0020 console NES, 0021 source de jaquette nintendo, 0022 corrections de données : développeurs collés des listes à cartouches, 3D Tetris JAP, 0023 séries du jeu : series text[], 0024 rôles : profils + est_proprietaire(), écriture du catalogue, des jaquettes et des exclusions réservée au propriétaire, ADR-16), tests/database/ (pgTAP)
+supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais, 0007 console Wii, 0008 consoles DS et 3DS, 0009 console Switch, 0010 Switch 2 + table exclusions : jeux décochés « en boîte », 0011 console GameCube, 0012 possessions : collection privée, RLS par compte, 0013 note Metacritic du jeu, 0014 consoles N64 et GBA + source de jaquette libretro, 0015 console Game Boy Color, 0016 console Game Boy, 0017 console Virtual Boy, 0018 console Super Nintendo, 0019 source de jaquette gamecartdb, 0020 console NES, 0021 source de jaquette nintendo, 0022 corrections de données : développeurs collés des listes à cartouches, 3D Tetris JAP, 0023 séries du jeu : series text[], 0024 rôles : profils + est_proprietaire(), écriture du catalogue, des jaquettes et des exclusions réservée au propriétaire, ADR-16, 0025 invitations : empreinte du jeton, propriétaire seul), tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
 .claude/skills/          skills du projet, chargées à la demande : script-prod (script sur la production), steward (PR et CI)
