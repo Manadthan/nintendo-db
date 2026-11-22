@@ -5,14 +5,16 @@ import {
   accepterInvitation,
   type EtatBienvenue,
 } from "@/app/actions/bienvenue";
+import { ChoixAvatar } from "@/components/Avatar";
 import { LienPerime } from "@/components/LienPerime";
+import { avatarOuDefaut } from "@/lib/profil/avatars";
 
 const champ =
   "h-12 rounded-[10px] border border-champ bg-carte px-3 text-base text-texte outline-none focus:border-accent focus:ring-2 focus:ring-accent/20";
 const etiquette =
   "flex flex-col gap-1.5 text-[13px] font-semibold text-texte-doux";
 
-/** Création du compte d'un invité (US-20) : e-mail, mot de passe, pseudo. */
+/** Création du compte d'un invité (US-20) : e-mail, mot de passe, pseudo, avatar. */
 export function FormulaireBienvenue({ jeton }: { jeton: string }) {
   const [etat, action, enCours] = useActionState<EtatBienvenue, FormData>(
     accepterInvitation,
@@ -68,6 +70,7 @@ export function FormulaireBienvenue({ jeton }: { jeton: string }) {
           className={champ}
         />
       </label>
+      <ChoixAvatar valeur={avatarOuDefaut(etat.avatar)} />
       <button
         type="submit"
         disabled={enCours}

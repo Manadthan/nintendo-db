@@ -105,11 +105,12 @@ test("un invité crée son compte par le lien, qui ne sert qu'une fois ; le prop
   ).toBeVisible();
   await invite.getByLabel(/Mot de passe/).fill("Mot-de-passe-invite");
   await invite.getByRole("button", { name: "Créer mon compte" }).click();
-  await expect(invite).toHaveURL("/");
+  await expect(invite).toHaveURL("/profil");
+  await expect(invite.getByRole("heading", { name: pseudo })).toBeVisible();
 
   // Connecté en collectionneur : l'administration lui reste fermée.
   await invite.goto("/admin");
-  await expect(invite).toHaveURL("/");
+  await expect(invite).toHaveURL("/profil");
 
   // Le lien ne sert qu'une fois.
   await invite.goto(lien);

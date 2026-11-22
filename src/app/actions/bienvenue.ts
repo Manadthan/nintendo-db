@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { PAGE_ACCUEIL } from "@/lib/auth/routes";
+import { PAGE_PROFIL } from "@/lib/auth/routes";
 import { lireInscription } from "@/lib/invitations/inscription";
 import { hacherJeton, jetonValide } from "@/lib/invitations/invitations";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -13,6 +13,7 @@ export type EtatBienvenue = {
   perime?: boolean;
   email?: string;
   pseudo?: string;
+  avatar?: string;
 };
 
 /**
@@ -30,9 +31,10 @@ export async function accepterInvitation(
   const rappel = {
     email: String(formData.get("email") ?? ""),
     pseudo: String(formData.get("pseudo") ?? ""),
+    avatar: String(formData.get("avatar") ?? ""),
   };
   if (!saisie.ok) return { erreurs: saisie.erreurs, ...rappel };
-  const { email, motDePasse, pseudo } = saisie.valeur;
+  const { email, motDePasse, pseudo, avatar } = saisie.valeur;
 
   const admin = createSupabaseAdminClient();
   const { data: pris } = await admin
@@ -85,7 +87,7 @@ export async function accepterInvitation(
 
   const { error: erreurProfil } = await admin
     .from("profils")
-    .insert({ user_id: cree.user.id, pseudo });
+    .insert({ user_id: cree.user.id, pseudo, avatar });
   if (erreurProfil) {
     await admin.auth.admin.deleteUser(cree.user.id);
     await rendre();
@@ -106,6 +108,5 @@ export async function accepterInvitation(
   // Connexion de l'invité : la session est posée dans les cookies de sa réponse.
   const supabase = await createSupabaseServerClient();
   await supabase.auth.signInWithPassword({ email, password: motDePasse });
-  // Provisoire (plan validé de la PR 2b) : la page « Mon profil » arrive à la PR 3.
-  redirect(PAGE_ACCUEIL);
+  redirect(PAGE_PROFIL);
 }

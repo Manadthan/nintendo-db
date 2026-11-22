@@ -28,7 +28,7 @@ test("connecté, l'icône de compte est pleine et mène directement à l'adminis
   await page.goto("/");
   const compte = page
     .getByRole("banner")
-    .getByRole("link", { name: "Administration (connecté)", exact: true });
+    .getByRole("link", { name: "Mon compte (connecté)", exact: true });
   await expect(compte).toHaveAttribute("href", "/admin");
   await compte.click();
   await expect(page).toHaveURL("/admin");
@@ -86,16 +86,24 @@ test("le propriétaire se connecte, puis se déconnecte", async ({ page }) => {
   await expect(page).toHaveURL("/admin/connexion");
 });
 
-test("un collectionneur invité se connecte, mais l'administration lui reste fermée (ADR-16)", async ({
+test("un collectionneur invité se connecte, arrive sur son profil, et l'administration lui reste fermée (ADR-16, US-22)", async ({
   page,
 }) => {
   await page.goto("/admin/connexion");
   await page.getByLabel("E-mail").fill(COLLECTIONNEUR_TEST.email);
   await page.getByLabel("Mot de passe").fill(COLLECTIONNEUR_TEST.password);
   await page.getByRole("button", { name: "Se connecter" }).click();
-  await expect(page).toHaveURL("/");
+  await expect(page).toHaveURL("/profil");
   for (const chemin of ["/admin", "/admin/jeux", "/admin/connexion"]) {
     await page.goto(chemin);
-    await expect(page).toHaveURL("/");
+    await expect(page).toHaveURL("/profil");
   }
+
+  // L'icône de compte de l'en-tête mène à son profil (US-22).
+  await page.goto("/");
+  await page
+    .getByRole("banner")
+    .getByRole("link", { name: "Mon compte (connecté)", exact: true })
+    .click();
+  await expect(page).toHaveURL("/profil");
 });

@@ -12,6 +12,7 @@ describe("lireInscription (US-20)", () => {
     expect(
       lireInscription(
         formulaire({
+          avatar: "tortue",
           email: " Lea@Exemple.fr ",
           password: "12345678",
           pseudo: "Lea-64",
@@ -23,8 +24,21 @@ describe("lireInscription (US-20)", () => {
         email: "lea@exemple.fr",
         motDePasse: "12345678",
         pseudo: "Lea-64",
+        avatar: "tortue",
       },
     });
+  });
+
+  it("donne la manette à qui n'a pas choisi d'avatar (ou un avatar inconnu)", () => {
+    const r = lireInscription(
+      formulaire({
+        email: "a@b.fr",
+        password: "12345678",
+        pseudo: "abc",
+        avatar: "mario",
+      }),
+    );
+    expect(r.ok && r.valeur.avatar).toBe("manette");
   });
 
   it("liste toutes les erreurs d'un coup", () => {

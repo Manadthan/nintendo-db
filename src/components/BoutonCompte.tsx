@@ -4,12 +4,13 @@ import Link from "next/link";
 import { useConnecte } from "@/lib/auth/session-navigateur";
 
 /**
- * Icône de compte de l'en-tête (US-09, SPEC v1.15) : visiteur → page de connexion ; propriétaire connecté →
- * administration, icône pleine. Le lien « Administration » du pied de page reste.
+ * Icône de compte de l'en-tête (US-09, SPEC v1.15) : visiteur → page de connexion ; compte connecté → /admin,
+ * icône pleine : le propriétaire y reste, un collectionneur est envoyé à son profil par le proxy (US-20, US-22).
+ * Le rôle n'est donc jamais lu dans le navigateur (pages publiques préparées à l'avance, ADR-02).
  */
 export function BoutonCompte() {
   const connecte = useConnecte() === true;
-  const libelle = connecte ? "Administration (connecté)" : "Se connecter";
+  const libelle = connecte ? "Mon compte (connecté)" : "Se connecter";
   return (
     <Link
       href={connecte ? "/admin" : "/admin/connexion"}

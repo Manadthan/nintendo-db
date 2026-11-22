@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
-  PAGE_ACCUEIL,
   PAGE_ADMIN,
   PAGE_CONNEXION,
+  PAGE_PROFIL,
   redirectionAdmin,
 } from "@/lib/auth/routes";
 
@@ -33,9 +33,9 @@ describe("redirectionAdmin (US-09, ADR-16)", () => {
     );
   });
 
-  it("ferme l'administration à un collectionneur invité, connexion comprise", () => {
+  it("envoie un collectionneur invité vers son profil, connexion comprise (US-22)", () => {
     for (const chemin of ["/admin", "/admin/jeux", "/admin/connexion"])
-      expect(redirectionAdmin(chemin, "collectionneur")).toBe(PAGE_ACCUEIL);
+      expect(redirectionAdmin(chemin, "collectionneur")).toBe(PAGE_PROFIL);
   });
 
   it("ne touche jamais aux pages publiques", () => {
