@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.41 — 22/11/2026 — statut : **à valider**
+> Version 1.42 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.42 | 22/11/2026 | **Prix eBay** (étape 25, étude du 22/11, choix du propriétaire) : US-25, prix **demandé** (médiane des annonces en cours) par version dans la fiche, en euros, JAP et US sur eBay US, PAL sur eBay France + Royaume-Uni ; jamais plus vieux que 6 h ; lien vers les ventes terminées d'eBay |
 > | 1.41 | 22/11/2026 | US-02 : le catalogue affiche les **60 premiers jeux**, puis les suivants par lots de 60 **au défilement** (audit de performance, choix du propriétaire) ; compteurs inchangés ; « Précédent » depuis une fiche ramène à la même hauteur |
 > | 1.40 | 22/11/2026 | US-19 : « copier à nouveau un lien » devient **« Nouveau lien »** (l'ancien lien cesse de marcher, 7 jours de plus) : la base ne garde que l'empreinte du jeton (ADR-16), le lien n'est donc montré qu'une fois |
 > | 1.39 | 21/11/2026 | **Collectionneurs invités** (étape 27, intention v1.5) : US-19 à US-24 (invitation par lien à partager, compte, collection de chacun, profil, profil public, badges) ; US-16 reste valable pour le propriétaire |
@@ -140,6 +141,25 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       de la jaquette**, aux **couleurs Metacritic** comme sur la fiche, en grille comme en liste (v1.30, demande du
       propriétaire ; elle remplace l'étiquette de la ligne JAP / US / PAL). Un jeu sans note n'a pas de pastille.
 - [ ] Une note par jeu (celle de sa console ; pas de note par région).
+
+#### US-25 — Voir le prix demandé sur eBay (M, SPEC v1.42)
+*En tant que visiteur ou collectionneur, je vois combien coûte à peu près chaque version d'un jeu sur eBay.*
+- [ ] Sur la fiche, sous « Disponibilité », un bloc **« Prix eBay »** avec une ligne par région (Japon, États-Unis,
+      Europe) ; la version choisie sous la jaquette est surlignée. Maquette : `maquettes/prix-ebay.png`.
+- [ ] Prix = **médiane des annonces en cours** qui parlent bien de ce jeu (lots, guides, boîtes vides et autres
+      versions écartés), en **euros** arrondis à l'euro, avec le nombre d'annonces et le marché : **JAP** et **US** sur
+      eBay US (JAP : annonces qui mentionnent le Japon), **PAL** sur eBay France et Royaume-Uni réunis. Dollars et
+      livres convertis au taux du jour de la Banque centrale européenne.
+- [ ] Moins de **5 annonces** : « Pas assez d'annonces (N) », sans prix. Version non sortie : « Non sorti », sans lien.
+- [ ] Un lien **« eBay › »** par version sortie ouvre, dans un nouvel onglet, la recherche des **objets vendus** de ce
+      jeu sur le marché de la région (ebay.com, ebay.fr).
+- [ ] Sous le bloc : « Prix **demandé** : médiane des annonces en cours (pas des ventes), boîte complète ou jeu seul
+      confondus », la conversion et l'ancienneté (« mis à jour il y a 2 h »). La source est citée en pied de fiche.
+- [ ] Un prix n'a jamais **plus de 6 heures** (contrat d'eBay). La fiche s'affiche sans attendre ; le prix arrive juste
+      après (emplacement « Chargement du prix… »).
+- [ ] eBay indisponible ou quota du jour épuisé : le bloc entier est masqué, le reste de la fiche ne change pas.
+- [ ] Hors périmètre : prix dans le catalogue, tri par prix, prix « complet » et « jeu seul » séparés (une annonce
+      sur deux ne le précise pas), prix des ventes terminées (accès refusé par eBay au 22/11).
 
 #### US-05 — Rechercher un jeu (M)
 *En tant que visiteur, je trouve un jeu en tapant une partie de son titre, directement dans le catalogue.*
