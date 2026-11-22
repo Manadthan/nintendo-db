@@ -1,0 +1,42 @@
+name: Étude eBay
+
+# Étape 25 (DESIGN §11) : peut-on estimer le prix d'un jeu par version ? Annonces en cours (API Browse) sur un
+# échantillon du catalogue, et accès aux ventes terminées (Marketplace Insights) vérifié, en LECTURE SEULE (rien
+# n'est écrit dans la base). Lancée à la main (onglet Actions → Étude eBay → Run workflow). Rapport dans le résumé
+# de la tâche, détail en pièce jointe (etude-ebay.json, sans clé ni jeton).
+on:
+  workflow_dispatch:
+    inputs:
+      par_console:
+        description: "Jeux par console"
+        default: "2"
+
+permissions:
+  contents: read
+
+jobs:
+  etude:
+    name: Mesurer les annonces eBay d'un échantillon
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Étude (lecture seule)
+        env:
+          EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
+          EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          ETUDE_PAR_CONSOLE: ${{ inputs.par_console }}
+        run: node scripts/etude-ebay.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: etude-ebay
+          path: etude-ebay.json
+          if-no-files-found: ignore

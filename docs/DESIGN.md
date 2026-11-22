@@ -2,7 +2,7 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.26 — 22/11/2026 — statut : **à valider**
+> Version 1.27 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
@@ -702,6 +702,6 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 
 | Étape | Sujet | À trancher d'abord |
 |---|---|---|
-| 25 | **Estimation du prix** dans la fiche (ventes terminées eBay) | accès aux ventes terminées : l'ancienne API (`findCompletedItems`) est fermée, Marketplace Insights est sur demande ; sinon autre source |
+| 25 | **Estimation du prix** dans la fiche (ventes terminées eBay) | accès aux ventes terminées : l'ancienne API (`findCompletedItems`) est fermée, Marketplace Insights est sur demande ; sinon autre source. Clés de production en secrets GitHub `EBAY_CLIENT_ID`, `EBAY_CLIENT_SECRET` (22/11) ; tâche « Étude eBay » (`scripts/etude-ebay.mjs`, lecture seule) : accès Browse et Marketplace Insights, annonces en cours d'un échantillon (2 jeux par console) par version : US et JAP sur eBay US, PAL sur eBay France et Royaume-Uni ; annonces pertinentes, complet ou seul, prix médian ; puis choix de la source et plan |
 | 26 | **ScreenScraper** : 1) **jaquettes manquantes**, toutes consoles (décision du 22/11 : 270 versions sorties sans jaquette sur 2 837, dont 177 japonaises : GBA 76, GB 54, NES 48, SNES 32, GBC 24) ; 2) consolidation rétro (NES à GameCube) : dates, éditeurs, jeux manquants. **Giant Bomb écarté** (21/11 : 403 depuis la session et depuis GitHub). ScreenScraper refuse aussi la session (403 du réseau) : tout passe par des tâches GitHub | identifiants en secrets GitHub `SCREENSCRAPER_DEVID`, `SCREENSCRAPER_DEVPASSWORD`, `SCREENSCRAPER_USER` (pseudo), `SCREENSCRAPER_PASSWORD` (ajoutés le 22/11) ; tâche « Étude ScreenScraper » (`scripts/etude-screenscraper.mjs`, lecture seule) : quota du compte, boîte de face `box-2D` de la bonne région par version (exacte, monde seule, autre région, aucune, jeu non trouvé) ; droit d'héberger les images ; puis plan de l'import (source de jaquette `screenscraper` : migration) ; **étude du 22/11** : boîte de la bonne région pour 164 versions sur 270, 99 jeux introuvables par le titre (GBA 47), 9 rapprochés sans titre identique (écartés) ; accord de ScreenScraper pour héberger les images avec mention de la source. **Import** : tâche « Relais ScreenScraper » → bucket privé `gametdb/screenscraper/{console}/{jeu}/{région}.jpg` (le résultat d'une tâche GitHub n'est pas lisible depuis la session) ; planche regardée par le propriétaire ; puis `scripts/jaquettes-screenscraper.mjs` depuis la session (versions toujours sans jaquette, source `screenscraper`, gardée par l'import comme `nintendo`). Ensuite : les 99 introuvables, puis dates et éditeurs |
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
