@@ -327,6 +327,7 @@ export type Database = {
     };
     Functions: {
       est_proprietaire: { Args: Record<PropertyKey, never>; Returns: boolean };
+      profil_public: { Args: { p_pseudo: string }; Returns: Json };
     };
     Enums: {
       console_type: "salon" | "portable";

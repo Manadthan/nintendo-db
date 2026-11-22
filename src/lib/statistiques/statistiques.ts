@@ -7,6 +7,8 @@ import { cleVersion } from "@/lib/collection/collection";
  */
 export type JeuStat = {
   id: string;
+  /** Adresse de la fiche (liste des jeux du profil public, US-23). */
+  slug?: string;
   titre: string;
   console: { slug: string; nom: string };
   metacritic: number | null;

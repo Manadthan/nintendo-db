@@ -79,9 +79,12 @@ export function IconeBadge({
 export function Badges({
   gagnes,
   prochains,
+  publique = false,
 }: {
   gagnes: Badge[];
   prochains: Badge[];
+  /** Profil public (US-23) : badges gagnés seulement. */
+  publique?: boolean;
 }) {
   return (
     <section
@@ -91,8 +94,9 @@ export function Badges({
       <h2 className="font-titre text-lg font-bold">Badges gagnés</h2>
       {gagnes.length === 0 ? (
         <p className="text-sm text-texte-doux">
-          Aucun badge pour l&apos;instant : le premier, « Débutant », arrive à
-          10 jeux.
+          {publique
+            ? "Aucun badge pour l'instant."
+            : "Aucun badge pour l'instant : le premier, « Débutant », arrive à 10 jeux."}
         </p>
       ) : (
         <ul className="grid grid-cols-4 gap-x-2 gap-y-3">
@@ -111,7 +115,7 @@ export function Badges({
           ))}
         </ul>
       )}
-      {prochains.length > 0 && (
+      {!publique && prochains.length > 0 && (
         <>
           <h2 className="mt-2 font-titre text-lg font-bold">
             Prochains badges

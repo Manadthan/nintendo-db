@@ -12,8 +12,9 @@ test("sans connexion, Mon profil renvoie vers la connexion", async ({
   await expect(page).toHaveURL("/admin/connexion");
 });
 
-test("un collectionneur change d'avatar, rend son profil public, puis se déconnecte", async ({
+test("un collectionneur change d'avatar, rend son profil public (US-23), puis se déconnecte", async ({
   page,
+  browser,
 }) => {
   await page.goto("/admin/connexion");
   await page.getByLabel("E-mail").fill(COLLECTIONNEUR_TEST.email);
@@ -53,15 +54,47 @@ test("un collectionneur change d'avatar, rend son profil public, puis se déconn
     page.getByRole("img", { name: "Avatar : Tortue" }),
   ).toBeVisible();
 
-  // Profil public, gardé après rechargement, puis remis en privé.
+  // Profil public (US-23) : privé, un visiteur ne le trouve pas ; public, il le voit à l'adresse affichée ;
+  // remis en privé, il disparaît aussitôt.
+  const visiteur = await (await browser.newContext()).newPage();
+  const adresse = "/collectionneurs/e2e-collectionneur";
+  await visiteur.goto(adresse);
+  await expect(
+    visiteur.getByRole("heading", { name: "Page introuvable" }),
+  ).toBeVisible();
+
   const interrupteur = page.getByRole("switch", { name: "Profil public" });
   await expect(interrupteur).not.toBeChecked();
   await interrupteur.check();
-  await expect(page.getByText(/pourra être vu/)).toBeVisible();
+  await expect(
+    page.getByText("Visible par ceux qui ont le lien."),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /\/collectionneurs\/e2e-collectionneur$/ }),
+  ).toBeVisible();
   await page.reload();
   await expect(interrupteur).toBeChecked();
+
+  await visiteur.goto(adresse);
+  await expect(
+    visiteur.getByRole("heading", { name: "e2e-collectionneur" }),
+  ).toBeVisible();
+  await expect(
+    visiteur.getByRole("img", { name: "Avatar : Tortue" }),
+  ).toBeVisible();
+  await expect(visiteur.getByText("e2e-collectionneur@exemple.fr")).toHaveCount(
+    0,
+  );
+  // Une seule adresse par profil, quelle que soit la casse.
+  await visiteur.goto("/collectionneurs/E2E-Collectionneur");
+  await expect(visiteur).toHaveURL(adresse);
+
   await interrupteur.uncheck();
   await expect(page.getByText(/vous seul voyez/)).toBeVisible();
+  await visiteur.goto(adresse);
+  await expect(
+    visiteur.getByRole("heading", { name: "Page introuvable" }),
+  ).toBeVisible();
 
   await page.getByRole("button", { name: "Se déconnecter" }).click();
   await expect(page).toHaveURL("/");

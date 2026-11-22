@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { seDeconnecter } from "@/app/actions/auth";
 import { Avatar } from "@/components/Avatar";
@@ -8,6 +9,7 @@ import { DerniersAjouts, MaCollection } from "@/components/CollectionProfil";
 import { EnTete } from "@/components/EnTete";
 import { InterrupteurPublic, ModifierProfil } from "@/components/Profil";
 import { PAGE_CONNEXION } from "@/lib/auth/routes";
+import { cheminPublic } from "@/lib/profil/adresse";
 import { avatarOuDefaut } from "@/lib/profil/avatars";
 import { chargerCollectionProfil } from "@/lib/profil/charger";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -37,6 +39,13 @@ export default async function PageProfil() {
   const { resume, badges, ajouts } = await chargerCollectionProfil(supabase);
   const avatar = avatarOuDefaut(profil.avatar);
   const proprietaire = profil.role === "proprietaire";
+  // Adresse du site qui sert la page (production ou prévisualisation) : le lien partagé y mène.
+  const h = await headers();
+  const hote = h.get("x-forwarded-host") ?? h.get("host") ?? "localhost";
+  const protocole =
+    h.get("x-forwarded-proto") ??
+    (hote.startsWith("localhost") ? "http" : "https");
+  const adresse = `${protocole}://${hote}${cheminPublic(profil.pseudo)}`;
 
   return (
     <>
@@ -58,7 +67,7 @@ export default async function PageProfil() {
               </p>
             </div>
           </div>
-          <InterrupteurPublic public={profil.public} />
+          <InterrupteurPublic public={profil.public} adresse={adresse} />
         </section>
         <MaCollection resume={resume} badges={badges.gagnes.length} />
         <Badges gagnes={badges.gagnes} prochains={badges.prochains} />

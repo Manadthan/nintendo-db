@@ -6,21 +6,25 @@ import type { Ajout, resumeCollection } from "@/lib/profil/collection";
 const pluriel = (n: number, mot: string, motPluriel = `${mot}s`) =>
   `${n} ${n > 1 ? motPluriel : mot}`;
 
-/** « Ma collection » de Mon profil (US-22) : jeux, versions, badges, avancement par console, versions par région. */
+/** « Ma collection » de Mon profil (US-22), « Collection » du profil public (US-23) : jeux, versions, badges, avancement par console, versions par région. */
 export function MaCollection({
   resume,
   badges,
+  publique = false,
 }: {
   resume: ReturnType<typeof resumeCollection>;
   /** Nombre de badges gagnés (US-24). */
   badges: number;
+  /** Profil public (US-23) : « Collection », sans invitation à cocher. */
+  publique?: boolean;
 }) {
+  const titre = publique ? "Collection" : "Ma collection";
   return (
     <section
-      aria-label="Ma collection"
+      aria-label={titre}
       className="flex flex-col gap-3 rounded-xl border border-bordure bg-carte p-4"
     >
-      <h2 className="font-titre text-lg font-bold">Ma collection</h2>
+      <h2 className="font-titre text-lg font-bold">{titre}</h2>
       <p className="grid grid-cols-3 text-center">
         <span className="flex flex-col">
           <strong className="font-titre text-3xl">{resume.jeux}</strong>
@@ -41,7 +45,11 @@ export function MaCollection({
           </span>
         </span>
       </p>
-      {resume.jeux === 0 ? (
+      {resume.jeux === 0 && publique ? (
+        <p className="text-sm text-texte-doux">
+          Collection vide pour l&apos;instant.
+        </p>
+      ) : resume.jeux === 0 ? (
         <p className="text-sm text-texte-doux">
           Votre collection est vide : cochez « Je l&apos;ai » sur la fiche
           d&apos;un jeu pour la commencer.{" "}
