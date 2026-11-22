@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.5 — 20/11/2026 — statut : **à valider**
+> Version 1.6 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.6 | 22/11/2026 | **Fin de l'étape 22 et étapes 23 à 27** : séries, frise, étude Giant Bomb, outillage de la session, collectionneurs invités (§12) |
 > | 1.5 | 20/11/2026 | **Étapes 18 à 22** : Game Boy, Virtual Boy, Super Nintendo, NES, jaquettes officielles, contrôle par les bases officielles (§11) |
 > | 1.4 | 19/11/2026 | **Étapes 15 à 17** : N64 et GBA complétées, statistiques, tri par note, Game Boy Color ; CI réparée (§10) |
 > | 1.3 | 19/11/2026 | **Étapes 11 à 14** : GameCube, filtre Développeur, ma collection, note Metacritic, Nintendo 64 et Game Boy Advance (§9) |
@@ -234,3 +235,37 @@ Leçons ajoutées :
 
 Pistes : éditeur officiel par région (étape 22, en cours), jaquettes manquantes (≈ 67, Switch 2 JAP surtout), jeux
 Wii et DS absents à ajouter à la main (Nintendo n'en donne pas le code produit), Nintendo US comme troisième source.
+
+## 12. Fin de l'étape 22, étapes 23 à 27 : séries, frise, collectionneurs invités
+
+| | |
+|---|---|
+| Durée | 3 jours (20 au 22/11/2026) |
+| Livré | **Fin de l'étape 22** : éditeur officiel par région (ADR-14), jaquettes manquantes, 5 jeux retirés, boîtes PAL sans USK ; **outillage de la session Claude** : `npm run session` et `npm run relais` (scripts sur la production depuis la session), skills `script-prod` et `steward`, `npm run check` lancé avant chaque commit ; **séries** (titre + Wikidata, ADR-15) : 754 jeux sur 1 126 et filtre Série ; **frise**, 3e vue du catalogue ; **étude Giant Bomb** (refusée : 403) ; **collectionneurs invités** (ADR-16) : rôle propriétaire en base, invitations par lien à partager, page Bienvenue, Mon profil (12 avatars dessinés pour le site, collection, derniers ajouts), badges calculés, profil public |
+| Pull requests | 28 mergées (#169 à #196), dont 8 pour l'étape 27 (#189 à #196) |
+| Tests | 428 unitaires, 81 de bout en bout (Chromium et WebKit), 110 sur la base ; 26 migrations |
+| Code applicatif | ≈ 14 000 lignes (hors tests) |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| **Tout compte connecté pouvait écrire le catalogue** (« connecté » voulait dire « propriétaire ») | Inviter des amis leur aurait ouvert l'administration par l'API | Rôle en base et règles d'écriture réservées au propriétaire, **avant** toute invitation (#190) |
+| Lien d'invitation gardé seulement par son empreinte | « Copier à nouveau le lien » impossible | « Nouveau lien » (SPEC v1.40) : l'ancien cesse de marcher |
+| Clé secrète absente de Vercel | Liste des collectionneurs illisible | Message lisible au lieu d'une page cassée ; variable ajoutée par le propriétaire |
+| Giant Bomb refuse l'accès (403), depuis la session comme depuis GitHub | Étude rétro impossible | Abandon sans contournement ; ScreenScraper en attente d'identifiants |
+| Wikipédia et Wikidata limitent l'adresse partagée de la session (429) | Remplissage des séries interrompu | Pages publiques de Wikidata, une requête par seconde, réessais |
+| **4 bugs trouvés par la CI avant le merge** | — | Types générés (`Args`), panneau « Modifier » refermé après l'envoi, comparaison du pseudo sensible à la casse dans une fonction `security definer`, redirection mal formée sous WebKit depuis une page en cache |
+| PR de l'étape 27 au-delà de 300 lignes | Relecture plus longue sur l'iPhone | Coupées en deux (2a/2b, 3a/3b) ; restées ≈ 400 lignes, tests compris |
+
+Leçons ajoutées :
+
+20. **Revoir ce que « connecté » autorise avant d'ouvrir des comptes** : une règle juste pour un seul utilisateur
+    devient une faille dès le deuxième.
+21. **Une fonction `security definer` à `search_path` vide ne voit pas les opérateurs des extensions** (citext) :
+    écrire le test du cas limite (la casse) en même temps que la fonction.
+22. **Tester sur WebKit paie** : le bug de redirection n'existait que sous Safari, le navigateur du propriétaire.
+23. **Outiller la session** (skills, contrôle avant commit) rend les PR régulières : lien de prévisualisation,
+    4 tâches de CI lues, migration vérifiée en production après chaque merge.
+
+Pistes : audit de performance avec la skill `react-best-practices` de Vercel (Mon profil et les statistiques relisent
+tout le catalogue à chaque ouverture) ; liste des jeux du profil public repliable ; cas « adresse e-mail déjà utilisée »
+à tester ; prix eBay (étape 25) et ScreenScraper (étape 26) dès que les comptes sont prêts.

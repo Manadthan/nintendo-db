@@ -199,60 +199,60 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
 
 #### US-19 — Inviter un collectionneur (S, SPEC v1.39)
 *En tant que propriétaire, j'invite un ami pour qu'il tienne sa collection sur le site.*
-- [ ] Une page de l'administration « Collectionneurs » : je crée une invitation (avec un nom pour m'en souvenir,
+- [x] Une page de l'administration « Collectionneurs » : je crée une invitation (avec un nom pour m'en souvenir,
       par exemple « Léa ») et j'obtiens un **lien à partager**, valable 7 jours et utilisable une seule fois, que
       j'envoie moi-même (SMS, messagerie) ; bouton « Copier le lien » (choix du propriétaire : aucun e-mail envoyé par
       le site, donc aucun service d'e-mail à configurer). Pas d'inscription ouverte : sans lien valide, aucun compte
       ne peut être créé.
-- [ ] La page liste les collectionneurs (pseudo, adresse e-mail de connexion, inscrit le, nombre de jeux) et les
+- [x] La page liste les collectionneurs (pseudo, adresse e-mail de connexion, inscrit le, nombre de jeux) et les
       invitations en attente ; je peux créer un **nouveau lien** (le lien n'est montré qu'une fois : l'ancien cesse de marcher et le délai
       repart pour 7 jours, SPEC v1.40), l'annuler, ou **supprimer un compte** (avec
       confirmation : sa collection et son profil sont effacés).
 
 #### US-20 — Accepter une invitation (S, SPEC v1.39)
 *En tant qu'invité, je crée mon compte depuis le lien reçu.*
-- [ ] Le lien ouvre une page « Bienvenue » : je saisis mon **adresse e-mail** (elle sert à me connecter), un **mot de
+- [x] Le lien ouvre une page « Bienvenue » : je saisis mon **adresse e-mail** (elle sert à me connecter), un **mot de
       passe** (8 caractères au moins), un **pseudo** (3 à 20 lettres, chiffres, tirets ; unique, sans distinction de
       majuscules) et un avatar, puis j'arrive sur mon profil, déjà connecté.
-- [ ] Un lien expiré ou déjà utilisé affiche un message clair (« demandez une nouvelle invitation »).
-- [ ] Je me connecte ensuite par la même page de connexion que le propriétaire ; l'icône de compte de l'en-tête mène
+- [x] Un lien expiré ou déjà utilisé affiche un message clair (« demandez une nouvelle invitation »).
+- [x] Je me connecte ensuite par la même page de connexion que le propriétaire ; l'icône de compte de l'en-tête mène
       à **mon profil** (au propriétaire : à l'administration, avec un lien vers son profil).
 
 #### US-21 — Tenir ma collection (S, SPEC v1.39)
 *En tant que collectionneur connecté, je coche les versions que je possède, comme le propriétaire.*
-- [ ] Mêmes cases « Je l'ai » sur la fiche, étiquettes vertes et filtre **Collection** dans le catalogue que US-16 ;
+- [x] Mêmes cases « Je l'ai » sur la fiche, étiquettes vertes et filtre **Collection** dans le catalogue que US-16 ;
       chaque compte ne voit et ne modifie que **sa** collection, même en appelant directement le serveur.
-- [ ] La date d'ajout de chaque version est gardée (pour « derniers ajouts », US-22).
+- [x] La date d'ajout de chaque version est gardée (pour « derniers ajouts », US-22).
 
 #### US-22 — Mon profil (M, SPEC v1.39)
 *En tant que collectionneur, je vois ma collection résumée et mes badges.*
-- [ ] Page « Mon profil » : **pseudo**, **avatar** choisi parmi une douzaine d'icônes du site (manette, cartouche,
+- [x] Page « Mon profil » : **pseudo**, **avatar** choisi parmi une douzaine d'icônes du site (manette, cartouche,
       étoile, champignon…, dessinées pour le site : aucune image de Nintendo ; pas d'envoi de photo), modifiables.
-- [ ] **Statistiques** : nombre de jeux et de versions possédés ; par console (jeux possédés / jeux du catalogue,
+- [x] **Statistiques** : nombre de jeux et de versions possédés ; par console (jeux possédés / jeux du catalogue,
       en barre de progression) ; par région (JAP, US, PAL).
-- [ ] **Derniers ajouts** : les 6 dernières versions cochées (jaquette, titre, région), liens vers les fiches.
-- [ ] **Badges** gagnés (US-24), puis les prochains badges à gagner avec leur progression (« 18 / 25 jeux »).
-- [ ] Interrupteur **« Profil public »**, éteint par défaut (US-23), avec l'adresse à partager quand il est allumé.
+- [x] **Derniers ajouts** : les 6 dernières versions cochées (jaquette, titre, région), liens vers les fiches.
+- [x] **Badges** gagnés (US-24), puis les prochains badges à gagner avec leur progression (« 18 / 25 jeux »).
+- [x] Interrupteur **« Profil public »**, éteint par défaut (US-23), avec l'adresse à partager quand il est allumé.
 
 #### US-23 — Profil public (S, SPEC v1.39)
 *En tant que visiteur, j'ouvre le profil qu'un collectionneur a partagé.*
-- [ ] Adresse `/collectionneurs/{pseudo}` : pseudo, avatar, badges, statistiques, derniers ajouts, et la liste des
+- [x] Adresse `/collectionneurs/{pseudo}` : pseudo, avatar, badges, statistiques, derniers ajouts, et la liste des
       jeux possédés (par console). Jamais l'adresse e-mail.
-- [ ] Un profil non public, ou un pseudo inconnu, donne la page « introuvable » : on ne peut pas savoir si le compte
+- [x] Un profil non public, ou un pseudo inconnu, donne la page « introuvable » : on ne peut pas savoir si le compte
       existe. Les profils ne sont pas proposés aux moteurs de recherche (`noindex`), ni listés nulle part.
-- [ ] Rendre le profil privé le retire aussitôt (au plus le temps de rafraîchissement des pages, 5 minutes).
+- [x] Rendre le profil privé le retire aussitôt (au plus le temps de rafraîchissement des pages, 5 minutes).
 
 #### US-24 — Gagner des badges (M, SPEC v1.39)
 *En tant que collectionneur, je gagne des badges selon ma collection.*
-- [ ] Badges calculés à partir de la collection (un **jeu** compte s'il est possédé dans au moins une région) ; ils se
+- [x] Badges calculés à partir de la collection (un **jeu** compte s'il est possédé dans au moins une région) ; ils se
       perdent si les versions sont décochées. Chacun a un nom, une icône et une explication.
-- [ ] **Total** : 10, 25, 50, 100, 250, 500 jeux (« Débutant », « Amateur », « Passionné », « Collectionneur »,
+- [x] **Total** : 10, 25, 50, 100, 250, 500 jeux (« Débutant », « Amateur », « Passionné », « Collectionneur »,
       « Expert », « Légende »).
-- [ ] **Par console** (pour chaque console) : 10 jeux ; la moitié des jeux de la console au catalogue ; tous
+- [x] **Par console** (pour chaque console) : 10 jeux ; la moitié des jeux de la console au catalogue ; tous
       (« Complet »). Le catalogue évolue : un badge « Complet » se perd si un jeu est ajouté à la console.
-- [ ] **Par série** : tous les jeux d'une série d'au moins 3 jeux (étape 23), sur toutes les consoles (« Série
+- [x] **Par série** : tous les jeux d'une série d'au moins 3 jeux (étape 23), sur toutes les consoles (« Série
       complète : Metroid »).
-- [ ] **Par région** : 10 et 50 versions japonaises (« Importateur ») ; 10 et 50 versions américaines ; un même jeu
+- [x] **Par région** : 10 et 50 versions japonaises (« Importateur ») ; 10 et 50 versions américaines ; un même jeu
       possédé dans les **3 régions** (« Tour du monde »), puis 10 jeux dans les 3 régions.
 
 ### Administration (propriétaire)
