@@ -2,11 +2,12 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.28 — 22/11/2026 — statut : **à valider**
+> Version 1.29 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 1.28 | 22/11/2026 | **ScreenScraper, 2e passage** : 142 jaquettes écrites le 22/11 (128 versions encore sans jaquette) ; recherche par code produit puis par chaque titre et sa forme courte ; rapprochements « ≈ » jugés sur la planche ; boîtes refusées jamais redéposées (§11) |
+> | 1.29 | 22/11/2026 | **ScreenScraper, 2e passage** : 142 jaquettes écrites le 22/11 (128 versions encore sans jaquette) ; recherche par code produit puis par chaque titre et sa forme courte ; rapprochements « ≈ » jugés sur la planche ; boîtes refusées jamais redéposées (§11) |
+> | 1.28 | 22/11/2026 | **Prix eBay** (étape 25, SPEC v1.42) : étude du 22/11 (§1 quindecies), ADR-17 (prix demandés à eBay à l'ouverture de la fiche, gardés 6 h, rien en base), plan en 3 PR |
 > | 1.27 | 22/11/2026 | **Étude eBay** (étape 25) : tâche GitHub en lecture seule, annonces en cours et ventes terminées (§11) ; ligne ajoutée après coup |
 > | 1.26 | 22/11/2026 | **Jaquettes ScreenScraper** : étude du 22/11 (164 versions sur 270 avec la boîte de la bonne région, 99 jeux introuvables par le titre, quota 20 000 requêtes par jour) ; relais vers le bucket privé, planche, puis écriture ; source `screenscraper` (migration 0027) gardée par l'import (§11) |
 > | 1.25 | 22/11/2026 | ADR-11 : catalogue des statistiques et des profils **en cache 5 min**, vidé par chaque modification de l'administration ; possessions toujours lues à l'ouverture (audit de performance, correction D) |
@@ -291,6 +292,31 @@ seconde, ≈ 40 min pour tout le catalogue.
 Default…) ; 1 page inaccessible (DK: Jungle Climber, rattrapé par le titre). Par console : de 39 / 104 (NES) à
 25 / 25 (Switch 2).
 
+## 1 quindecies. Étude eBay (22/11/2026)
+
+Tâche GitHub « Étude eBay » (`scripts/etude-ebay.mjs`, lecture seule ; eBay est injoignable depuis la session), clés
+de production du propriétaire. Échantillon : 28 jeux (2 par console : le mieux noté et un autre), 94 couples version ×
+marché, 94 appels en 1 min 30.
+
+| Accès | Résultat |
+|---|---|
+| **Browse** (annonces en cours, ouvert par défaut, 5 000 appels par jour) | ouvert |
+| **Marketplace Insights** (ventes terminées, sur demande) | refusé (`invalid_scope`) : demande à faire par le propriétaire |
+
+| Version (marché) | Avec un prix | Annonces pertinentes / lues |
+|---|---|---|
+| US (eBay US) | 23 / 23 | 771 / 1 113 (69 %) |
+| JAP (eBay US, « japanese ») | 24 / 25 | 369 / 1 163 (32 %) |
+| PAL (eBay France) | 22 / 23 | 653 / 813 (80 %) |
+| PAL (eBay Royaume-Uni) | 23 / 23 | 717 / 1 022 (70 %) |
+
+Médianes crédibles (Super Mario Odyssey US 36 $, Super Mario Galaxy PAL 17 €, Eternal Darkness US 149 $). Limites :
+prix **demandés**, pas vendus ; JAP mince sur eBay US (Arkanoid : 3 annonces) ; jeux rares sur 2 à 7 annonces
+(Alice in Wonderland PAL France : 2 annonces, médiane 237 €) ; extrêmes à 6 000 $ ou 2 500 £ (scellés, notés) que la
+médiane absorbe ; « complet » ou « seul » précisé dans moins d'une annonce sur deux. **Contrat d'eBay** : les données de
+Browse ne se gardent pas plus de **6 heures** (lu sur le forum des développeurs ; texte officiel injoignable depuis la
+session) : pas de stockage en base.
+
 ## 2. Stack
 
 Identique à `mon-site-sdlc` (décision 7 de l'intention) :
@@ -506,6 +532,30 @@ jeu (`DMG-` si Oui, `CGB-` sinon), porté par le jeu à importer et prioritaire 
 `gbc` (portable, 1998), placée entre la N64 et la GBA (ordre chronologique : la N64 passe à -3) ; boîtes et séries par
 les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
 
+**ADR-17 — Prix eBay : demandés à l'ouverture de la fiche, gardés 6 h, rien en base (étape 25).**
+1. **Route** `GET /api/prix/{console}/{jeu}` (Node, région `cdg1`) : lit les titres du jeu (client public), puis
+   interroge la Browse API pour chaque version sortie : US et JAP sur `EBAY_US` (JAP : requête « … japanese »),
+   PAL sur `EBAY_FR` et `EBAY_GB` ; catégorie « Video Games » (139973), 50 annonces par appel ; au plus 4 appels.
+   Réponse : par région, médiane en euros, nombre d'annonces pertinentes, marchés, lien, date du calcul.
+2. **Fraîcheur** : réponse gardée **6 h** par jeu dans le cache de données de Next (`unstable_cache`, `revalidate:
+   21600`) et `Cache-Control: s-maxage=21600` ; jeton eBay (client credentials, 2 h) gardé 1 h 50 ; taux de la BCE
+   (`eurofxref-daily.xml`, sans clé) gardé 24 h. **Rien en base**, aucune migration : conforme au contrat d'eBay.
+3. **Quota** : 5 000 appels par jour, 4 par jeu toutes les 6 h. Le prix est demandé **par le navigateur** après
+   l'affichage (les pages restent statiques, les robots ne le déclenchent pas) ; `robots.txt` interdit `/api/`.
+   eBay en erreur (429, 5xx, délai de 8 s) : la route répond 503, le bloc est masqué, rien n'est gardé.
+4. **Pertinence** (module pur `src/lib/prix/`, repris de l'étude) : tous les mots du titre présents ; lots, guides,
+   manuels, boîtes vides, steelbooks, amiibo, consoles et reproductions écartés ; JAP : mention du Japon exigée ; US :
+   aucune mention du Japon ni de PAL. **Médiane** à partir de 5 annonces ; sinon « Pas assez d'annonces ».
+5. **Lien « eBay › »** : recherche des **objets vendus** du jeu (`/sch/i.html?_nkw=…&_sacat=139973&LH_Sold=1&LH_Complete=1`)
+   sur ebay.com (JAP, US) ou ebay.fr (PAL) : les ventes réelles restent consultables chez eBay.
+6. **Clés** : `EBAY_CLIENT_ID` et `EBAY_CLIENT_SECRET` dans les variables de **Vercel** (Production et Preview),
+   lues côté serveur seulement ; aussi en secrets GitHub (étude).
+7. **Tests** : unitaires sur des fixtures écrites au format de la Browse API avec des titres relevés par l'étude
+   (pertinence, médiane, conversion, liens) ; e2e : route interceptée par Playwright (prix, « pas assez », bloc
+   masqué), jamais eBay en direct.
+8. **Si eBay ouvre Marketplace Insights** : même route, médiane des ventes des 90 derniers jours à la place des
+   annonces ; libellé « prix de vente ».
+
 ## 5. Modèle de données
 
 ```
@@ -704,6 +754,6 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 
 | Étape | Sujet | À trancher d'abord |
 |---|---|---|
-| 25 | **Estimation du prix** dans la fiche (ventes terminées eBay) | accès aux ventes terminées : l'ancienne API (`findCompletedItems`) est fermée, Marketplace Insights est sur demande ; sinon autre source. Clés de production en secrets GitHub `EBAY_CLIENT_ID`, `EBAY_CLIENT_SECRET` (22/11) ; tâche « Étude eBay » (`scripts/etude-ebay.mjs`, lecture seule) : accès Browse et Marketplace Insights, annonces en cours d'un échantillon (2 jeux par console) par version : US et JAP sur eBay US, PAL sur eBay France et Royaume-Uni ; annonces pertinentes, complet ou seul, prix médian ; puis choix de la source et plan |
+| 25 | **Prix eBay** dans la fiche (SPEC v1.42, US-25) | étude du 22/11 (§1 quindecies) : annonces en cours seulement ; ADR-17 (à l'ouverture de la fiche, gardé 6 h, rien en base) ; maquette `maquettes/prix-ebay.png`. Plan : 1) `src/lib/prix/` pur + tests ; 2) route `/api/prix/…` (clés eBay dans Vercel) ; 3) bloc de la fiche + e2e. Accès aux ventes terminées demandé par le propriétaire |
 | 26 | **ScreenScraper** : 1) **jaquettes manquantes**, toutes consoles (décision du 22/11 : 270 versions sorties sans jaquette sur 2 837, dont 177 japonaises : GBA 76, GB 54, NES 48, SNES 32, GBC 24) ; 2) consolidation rétro (NES à GameCube) : dates, éditeurs, jeux manquants. **Giant Bomb écarté** (21/11 : 403 depuis la session et depuis GitHub). ScreenScraper refuse aussi la session (403 du réseau) : tout passe par des tâches GitHub | identifiants en secrets GitHub `SCREENSCRAPER_DEVID`, `SCREENSCRAPER_DEVPASSWORD`, `SCREENSCRAPER_USER` (pseudo), `SCREENSCRAPER_PASSWORD` (ajoutés le 22/11) ; tâche « Étude ScreenScraper » (`scripts/etude-screenscraper.mjs`, lecture seule) : quota du compte, boîte de face `box-2D` de la bonne région par version (exacte, monde seule, autre région, aucune, jeu non trouvé) ; droit d'héberger les images ; puis plan de l'import (source de jaquette `screenscraper` : migration) ; **étude du 22/11** : boîte de la bonne région pour 164 versions sur 270, 99 jeux introuvables par le titre (GBA 47), 9 rapprochés sans titre identique (écartés) ; accord de ScreenScraper pour héberger les images avec mention de la source. **Import** : tâche « Relais ScreenScraper » → bucket privé `gametdb/screenscraper/{console}/{jeu}/{région}.jpg` (le résultat d'une tâche GitHub n'est pas lisible depuis la session) ; planche regardée par le propriétaire ; puis `scripts/jaquettes-screenscraper.mjs` depuis la session (versions toujours sans jaquette, source `screenscraper`, gardée par l'import comme `nintendo`). Ensuite : les 99 introuvables, puis dates et éditeurs ; **22/11** : 142 jaquettes écrites (2 refusées sur la planche), 128 versions encore sans jaquette. **2e passage** : recherche par code produit (`jeuInfos`, `serialnum`), puis par chaque titre connu et sa forme courte ; sans titre identique, le premier jeu trouvé par un titre complet est déposé dans `screenscraper-approche/…`, marqué « ≈ » sur la planche ; `--sauf n,n` écarte les numéros refusés |
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
