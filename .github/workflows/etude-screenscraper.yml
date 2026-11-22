@@ -1,0 +1,44 @@
+name: Étude ScreenScraper
+
+# Étape 26 (DESIGN §11) : pour chaque version sans jaquette, regarde si ScreenScraper a une boîte de face de la bonne
+# région, en LECTURE SEULE (rien n'est écrit dans la base). Lancée à la main (onglet Actions → Étude ScreenScraper →
+# Run workflow) : la session Claude reçoit 403 de screenscraper.fr. Rapport dans le résumé de la tâche, détail en pièce
+# jointe (etude-screenscraper.json, sans aucune adresse ni identifiant).
+on:
+  workflow_dispatch:
+    inputs:
+      limite:
+        description: "Nombre de jeux au plus"
+        default: "300"
+
+permissions:
+  contents: read
+
+jobs:
+  etude:
+    name: Chercher les jaquettes manquantes chez ScreenScraper
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Étude (lecture seule)
+        env:
+          SCREENSCRAPER_DEVID: ${{ secrets.SCREENSCRAPER_DEVID }}
+          SCREENSCRAPER_DEVPASSWORD: ${{ secrets.SCREENSCRAPER_DEVPASSWORD }}
+          SCREENSCRAPER_USER: ${{ secrets.SCREENSCRAPER_USER }}
+          SCREENSCRAPER_PASSWORD: ${{ secrets.SCREENSCRAPER_PASSWORD }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          ETUDE_LIMITE: ${{ inputs.limite }}
+        run: node scripts/etude-screenscraper.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: etude-screenscraper
+          path: etude-screenscraper.json
+          if-no-files-found: ignore

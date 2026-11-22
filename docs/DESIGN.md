@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.23 — 21/11/2026 — statut : **à valider**
+> Version 1.24 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.24 | 22/11/2026 | **ScreenScraper** (étape 26) : jaquettes manquantes d'abord (270 versions sur 2 837 le 22/11, dont 177 japonaises), dates et éditeurs ensuite ; tâche GitHub « Étude ScreenScraper » en lecture seule (§11) |
 > | 1.23 | 21/11/2026 | **Collectionneurs invités** (SPEC v1.39, intention v1.5) : ADR-16 (rôle propriétaire en base, écriture du catalogue verrouillée, invitations par lien à jeton haché, profils, badges calculés), modèle de données, plan de l'étape 27 en 6 PR |
 > | 1.22 | 21/11/2026 | **Frise** (SPEC v1.38) : étape 24 ; backlog des étapes 25 à 27 (§11) |
 > | 1.21 | 21/11/2026 | **Séries** (SPEC v1.37) : étude Wikidata (§1 quattuordecies), ADR-15 (titre, puis Wikidata, puis main ; plusieurs séries ; noms de référence), colonne `series text[]` (migration 0023), étape 23 |
@@ -694,5 +695,5 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 | Étape | Sujet | À trancher d'abord |
 |---|---|---|
 | 25 | **Estimation du prix** dans la fiche (ventes terminées eBay) | accès aux ventes terminées : l'ancienne API (`findCompletedItems`) est fermée, Marketplace Insights est sur demande ; sinon autre source |
-| 26 | **Consolidation rétro** (NES à GameCube) : dates, éditeurs, jeux manquants. **Giant Bomb écarté** (21/11 : 403 depuis la session et depuis GitHub, première requête de la tâche « Étude Giant Bomb ») ; **ScreenScraper** à la place | identifiants développeur ScreenScraper (demandés sur leur forum) en secrets GitHub `SCREENSCRAPER_DEVID`, `SCREENSCRAPER_DEVPASSWORD`, `SCREENSCRAPER_USER`, `SCREENSCRAPER_PASSWORD` ; quotas et conditions |
+| 26 | **ScreenScraper** : 1) **jaquettes manquantes**, toutes consoles (décision du 22/11 : 270 versions sorties sans jaquette sur 2 837, dont 177 japonaises : GBA 76, GB 54, NES 48, SNES 32, GBC 24) ; 2) consolidation rétro (NES à GameCube) : dates, éditeurs, jeux manquants. **Giant Bomb écarté** (21/11 : 403 depuis la session et depuis GitHub). ScreenScraper refuse aussi la session (403 du réseau) : tout passe par des tâches GitHub | identifiants en secrets GitHub `SCREENSCRAPER_DEVID`, `SCREENSCRAPER_DEVPASSWORD`, `SCREENSCRAPER_USER` (pseudo), `SCREENSCRAPER_PASSWORD` (ajoutés le 22/11) ; tâche « Étude ScreenScraper » (`scripts/etude-screenscraper.mjs`, lecture seule) : quota du compte, boîte de face `box-2D` de la bonne région par version (exacte, monde seule, autre région, aucune, jeu non trouvé) ; droit d'héberger les images ; puis plan de l'import (source de jaquette `screenscraper` : migration) |
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
