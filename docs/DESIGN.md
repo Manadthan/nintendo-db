@@ -2,10 +2,12 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.32 — 22/11/2026 — statut : **à valider**
+> Version 1.34 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.34 | 22/11/2026 | **Étape 26 terminée** : dates rétro comparées à ScreenScraper sur les 585 jeux, 58 années différentes vérifiées sur Wikipédia, 4 corrigées et verrouillées ; éditeurs laissés tels quels (§11) |
+> | 1.33 | 22/11/2026 | **Captures RAWG** (étape 28, SPEC v1.43) : ADR-18 (adresses des captures RAWG en base, images servies par RAWG, rapprochement par titre et console, import une fois par tâche GitHub), plan en 5 PR (§11) |
 > | 1.32 | 22/11/2026 | **ScreenScraper, dates et éditeurs** : tâche « Étude ScreenScraper dates » en lecture seule, échantillon rétro comparé par région (§11) |
 > | 1.31 | 22/11/2026 | **ScreenScraper, bilan des jaquettes** : 2e passage +49 (1 refusée), 191 en tout ; 79 versions encore sans jaquette, introuvables chez ScreenScraper ou sans boîte de leur région (§11) |
 > | 1.30 | 22/11/2026 | **Étape 25 terminée** (#210, #211, #212) : prix eBay en ligne ; reste l'accès aux ventes terminées (§11) |
@@ -563,6 +565,38 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
 8. **Si eBay ouvre Marketplace Insights** : même route, médiane des ventes des 90 derniers jours à la place des
    annonces ; libellé « prix de vente ».
 
+**ADR-18 — Captures RAWG : adresses en base, images servies par RAWG, import une fois (étape 28, SPEC v1.43).**
+1. **Source** : API RAWG (`api.rawg.io/api`), clé gratuite du propriétaire. Conditions lues le 22/11 (description de
+   l'API) : gratuit pour un projet personnel ou de moins de 100 000 visiteurs par mois, **à condition de citer RAWG
+   avec un lien actif sur chaque page** qui montre ses données ; pas de clone de RAWG. La clé passe **dans l'adresse**
+   (`?key=`) : le formulaire de clés de la session ne sait la mettre que dans un en-tête → clé en secret GitHub
+   `RAWG_API_KEY`, jamais dans le dépôt ni dans Vercel (rien n'appelle RAWG à l'ouverture d'une fiche).
+2. **Pas de copie des images** (choix du propriétaire du 22/11) : la base garde les adresses `media.rawg.io` ; le
+   navigateur les charge chez RAWG. Le carrousel demande la version réduite par RAWG
+   (`media.rawg.io/media/resize/640/-/…`, vérifiée par l'étude), l'agrandissement la version 1280. Risque : RAWG
+   change ou retire une image → l'image cassée est retirée du carrousel (US-26) ; un nouveau passage de l'import la
+   remplace.
+3. **Rapprochement** (module pur `src/lib/captures/`, testé sur des fixtures) : recherche RAWG par titre (US, sinon
+   PAL, sinon romanisé) filtrée sur la plateforme RAWG de la console (`/platforms`, table de correspondance par
+   console) ; accepté seulement si le titre normalisé (ADR-05) est **identique** et la console présente ; sinon
+   aucun jeu (jamais « le plus proche »). Le seuil et les cas limites (suites, rééditions, compilations) sont fixés
+   par l'étude.
+4. **Données** : migration, table `captures` (`game_id`, `position` 1 à 6, `url`, `largeur`, `hauteur`) et colonne
+   `games.rawg_slug` (lien « Captures : RAWG ») ; lecture publique (RLS), écriture réservée au propriétaire
+   (`est_proprietaire()`, ADR-16) et à la clé secrète. Une ligne `captures` par image, supprimées avec le jeu.
+5. **Import** : tâche GitHub « Relais RAWG » (lecture de RAWG, secrets `RAWG_API_KEY`, `SUPABASE_URL`,
+   `SUPABASE_SECRET_KEY`) → fichier JSON dans le bucket privé `gametdb/rawg/{console}.json` (jeu, slug RAWG, captures,
+   mode de rapprochement) ; **planche** regardée par le propriétaire ; puis `scripts/captures-rawg.mjs` depuis la
+   session (skill `script-prod`, `--sauf n,n` pour écarter) écrit en base. Quota : 20 000 appels par mois (environ
+   2 par jeu, 2 800 jeux) : un passage complet tient dans un mois.
+6. **Fiche** : la fiche reste **préparée à l'avance** (les captures sont lues avec le jeu) ; composant client
+   `Captures` (carrousel CSS `scroll-snap`, agrandissement en `<dialog>`), `<img loading="lazy">` sans
+   optimisation Next (images déjà réduites par RAWG, pas de quota d'optimisation Vercel). Après un import,
+   les fiches sont refaites (étiquette `catalogue` vidée ou nouveau déploiement).
+7. **Tests** : unitaires (rapprochement, adresses réduites, ordre des captures) sur des réponses RAWG relevées par
+   l'étude et enregistrées dans `__fixtures__/` ; e2e : carrousel, agrandissement, Échap, bloc absent sans captures,
+   images de `media.rawg.io` interceptées par Playwright ; jamais RAWG en direct.
+
 ## 5. Modèle de données
 
 ```
@@ -762,5 +796,6 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 | Étape | Sujet | À trancher d'abord |
 |---|---|---|
 | 25 | **Prix eBay** dans la fiche : **terminée le 22/11** (#207, #208, #210, #211, #212 ; BILAN §14) | reste : accès aux ventes terminées (Marketplace Insights) à demander à eBay par le propriétaire ; ADR-17 point 8 |
-| 26 | **ScreenScraper** : 1) **jaquettes manquantes**, toutes consoles (décision du 22/11 : 270 versions sorties sans jaquette sur 2 837, dont 177 japonaises : GBA 76, GB 54, NES 48, SNES 32, GBC 24) ; 2) consolidation rétro (NES à GameCube) : dates, éditeurs, jeux manquants. **Giant Bomb écarté** (21/11 : 403 depuis la session et depuis GitHub). ScreenScraper refuse aussi la session (403 du réseau) : tout passe par des tâches GitHub | identifiants en secrets GitHub `SCREENSCRAPER_DEVID`, `SCREENSCRAPER_DEVPASSWORD`, `SCREENSCRAPER_USER` (pseudo), `SCREENSCRAPER_PASSWORD` (ajoutés le 22/11) ; tâche « Étude ScreenScraper » (`scripts/etude-screenscraper.mjs`, lecture seule) : quota du compte, boîte de face `box-2D` de la bonne région par version (exacte, monde seule, autre région, aucune, jeu non trouvé) ; droit d'héberger les images ; puis plan de l'import (source de jaquette `screenscraper` : migration) ; **étude du 22/11** : boîte de la bonne région pour 164 versions sur 270, 99 jeux introuvables par le titre (GBA 47), 9 rapprochés sans titre identique (écartés) ; accord de ScreenScraper pour héberger les images avec mention de la source. **Import** : tâche « Relais ScreenScraper » → bucket privé `gametdb/screenscraper/{console}/{jeu}/{région}.jpg` (le résultat d'une tâche GitHub n'est pas lisible depuis la session) ; planche regardée par le propriétaire ; puis `scripts/jaquettes-screenscraper.mjs` depuis la session (versions toujours sans jaquette, source `screenscraper`, gardée par l'import comme `nintendo`). Ensuite : les 99 introuvables, puis dates et éditeurs ; **22/11** : 142 jaquettes écrites (2 refusées sur la planche), 128 versions encore sans jaquette. **2e passage** : recherche par code produit (`jeuInfos`, `serialnum`), puis par chaque titre connu et sa forme courte ; sans titre identique, le premier jeu trouvé par un titre complet est déposé dans `screenscraper-approche/…`, marqué « ≈ » sur la planche ; `--sauf n,n` écarte les numéros refusés ; **bilan du 22/11** : 2e passage +49 (Mickey Mouse: Magic Wands! JAP refusé), **191 jaquettes ScreenScraper**, 79 versions encore sans jaquette (15 Famicom Mini GBA, Densetsu no Starfy, Fire Emblem SNES et NES… : introuvables ; Advance Wars, Ring Fit Adventure JAP… : pas de boîte de leur région) → autre source ou photo (US-12). Reste de l'étape : dates et éditeurs rétro ; **dates et éditeurs** : tâche « Étude ScreenScraper dates » (`scripts/etude-screenscraper-dates.mjs`, lecture seule) : échantillon de jeux NES à GameCube (150 par défaut, graine fixe), jeu trouvé par code produit ou titre identique, dates comparées par région à la précision commune, éditeurs ramenés à la société ; écarts dans le journal |
+| 26 | **ScreenScraper** : 1) **jaquettes manquantes**, toutes consoles (décision du 22/11 : 270 versions sorties sans jaquette sur 2 837, dont 177 japonaises : GBA 76, GB 54, NES 48, SNES 32, GBC 24) ; 2) consolidation rétro (NES à GameCube) : dates, éditeurs, jeux manquants. **Giant Bomb écarté** (21/11 : 403 depuis la session et depuis GitHub). ScreenScraper refuse aussi la session (403 du réseau) : tout passe par des tâches GitHub | identifiants en secrets GitHub `SCREENSCRAPER_DEVID`, `SCREENSCRAPER_DEVPASSWORD`, `SCREENSCRAPER_USER` (pseudo), `SCREENSCRAPER_PASSWORD` (ajoutés le 22/11) ; tâche « Étude ScreenScraper » (`scripts/etude-screenscraper.mjs`, lecture seule) : quota du compte, boîte de face `box-2D` de la bonne région par version (exacte, monde seule, autre région, aucune, jeu non trouvé) ; droit d'héberger les images ; puis plan de l'import (source de jaquette `screenscraper` : migration) ; **étude du 22/11** : boîte de la bonne région pour 164 versions sur 270, 99 jeux introuvables par le titre (GBA 47), 9 rapprochés sans titre identique (écartés) ; accord de ScreenScraper pour héberger les images avec mention de la source. **Import** : tâche « Relais ScreenScraper » → bucket privé `gametdb/screenscraper/{console}/{jeu}/{région}.jpg` (le résultat d'une tâche GitHub n'est pas lisible depuis la session) ; planche regardée par le propriétaire ; puis `scripts/jaquettes-screenscraper.mjs` depuis la session (versions toujours sans jaquette, source `screenscraper`, gardée par l'import comme `nintendo`). Ensuite : les 99 introuvables, puis dates et éditeurs ; **22/11** : 142 jaquettes écrites (2 refusées sur la planche), 128 versions encore sans jaquette. **2e passage** : recherche par code produit (`jeuInfos`, `serialnum`), puis par chaque titre connu et sa forme courte ; sans titre identique, le premier jeu trouvé par un titre complet est déposé dans `screenscraper-approche/…`, marqué « ≈ » sur la planche ; `--sauf n,n` écarte les numéros refusés ; **bilan du 22/11** : 2e passage +49 (Mickey Mouse: Magic Wands! JAP refusé), **191 jaquettes ScreenScraper**, 79 versions encore sans jaquette (15 Famicom Mini GBA, Densetsu no Starfy, Fire Emblem SNES et NES… : introuvables ; Advance Wars, Ring Fit Adventure JAP… : pas de boîte de leur région) → autre source ou photo (US-12). Reste de l'étape : dates et éditeurs rétro ; **dates et éditeurs** : tâche « Étude ScreenScraper dates » (`scripts/etude-screenscraper-dates.mjs`, lecture seule) : échantillon de jeux NES à GameCube (150 par défaut, graine fixe), jeu trouvé par code produit ou titre identique, dates comparées par région à la précision commune, éditeurs ramenés à la société ; écarts dans le journal ; **résultat complet (585 jeux, 1 137 versions)** : 457 jeux trouvés ; dates identiques à la précision commune 79 % (sur 1 084 comparées), jour ou mois différent 15 %, **58 années différentes** (5 %), toutes vérifiées sur l'encadré Wikipédia : ScreenScraper se trompe presque toujours (année seule approximative, date d'une autre console ou d'un autre jeu) ; **4 dates corrigées** chez nous (Pokémon Channel US, Top Gear Rally JAP, The Tower SP US, Nigel Mansell PAL : `scripts/dates-retro-corrigees.mjs`, date et précision verrouillées). Éditeurs : 88 % identiques ; les écarts viennent de l'éditeur unique de ScreenScraper pour toutes les régions → non repris. **Étape terminée** (22/11) |
+| 28 | **Captures RAWG** dans la fiche (SPEC v1.43, ADR-18) | plan en 5 PR : 1) documents et maquette ; 2) tâche « Étude RAWG » en lecture seule : échantillon de 28 jeux (2 par console), jeu retrouvé ou non par titre et console, nombre de captures, faux rapprochements, version réduite `resize/640` ; 3) migration `captures` ; 4) relais + planche + écriture en base ; 5) carrousel de la fiche. Avant l'étude : clé RAWG du propriétaire en secret GitHub `RAWG_API_KEY` |
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
