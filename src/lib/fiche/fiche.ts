@@ -49,8 +49,8 @@ export type LigneFiche = Omit<LigneJeu, "releases"> & {
   })[];
 };
 
-export function versJeuFiche(ligne: LigneFiche, baseUrl: string): JeuFiche {
-  const jeu = versJeuCatalogue(ligne, baseUrl);
+export function versJeuFiche(ligne: LigneFiche): JeuFiche {
+  const jeu = versJeuCatalogue(ligne);
   const parRegion = new Map(ligne.releases.map((r) => [r.region, r]));
   const sorties = Object.fromEntries(
     REGIONS.map((region) => {

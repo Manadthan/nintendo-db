@@ -143,7 +143,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
               );
             })}
           </div>
-          {sortie.jaquetteSrcset && sortie.sourceJaquette && (
+          {sortie.jaquette && sortie.sourceJaquette && (
             <p className="text-[11px] text-texte-discret">
               Jaquette : {SOURCES_JAQUETTE[sortie.sourceJaquette]}
             </p>

@@ -20,7 +20,7 @@ const sortie = (
   titreRomanise: null,
   date,
   precision: date ? "jour" : null,
-  jaquetteSrcset: null,
+  jaquette: null,
   ...extra,
 });
 

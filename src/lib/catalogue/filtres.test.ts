@@ -21,7 +21,7 @@ const sortie = (date: string | null): SortieCatalogue => ({
   titreRomanise: null,
   date,
   precision: date ? "jour" : null,
-  jaquetteSrcset: null,
+  jaquette: null,
 });
 
 const jeu = (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { clientNavigateur, clientSiSession } from "@/lib/supabase/navigateur";
 import { avecVersion, ensemble, type Version } from "./collection";
 
 /**
@@ -31,7 +31,9 @@ function changer(patch: Partial<EtatCollection>) {
 }
 
 async function charger() {
-  const supabase = createSupabaseBrowserClient();
+  // Sans cookie de session : visiteur, et la bibliothèque Supabase n'est pas téléchargée.
+  const supabase = await clientSiSession();
+  if (!supabase) return changer({ connecte: false });
   const { data } = await supabase.auth.getSession();
   if (!data.session) return changer({ connecte: false });
   const { data: lignes, error } = await supabase
@@ -66,7 +68,7 @@ export function useCollection(): EtatCollection {
 export async function basculerVersion(version: Version, avoir: boolean) {
   const avant = etat.possessions;
   changer({ possessions: avecVersion(avant, version, avoir), erreur: null });
-  const table = createSupabaseBrowserClient().from("possessions");
+  const table = (await clientNavigateur()).from("possessions");
   const { error } = avoir
     ? await table.insert({ game_id: version.gameId, region: version.region })
     : await table

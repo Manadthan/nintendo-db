@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import { versJeuCatalogue, type LigneJeu } from "./lignes";
 
 const ID = "20000000-0000-0000-0000-000000000001";
-const BASE = "https://exemple.supabase.co";
 
 const ligne: LigneJeu = {
   id: ID,
@@ -37,7 +36,7 @@ const ligne: LigneJeu = {
 };
 
 describe("versJeuCatalogue", () => {
-  const jeu = versJeuCatalogue(ligne, BASE);
+  const jeu = versJeuCatalogue(ligne);
 
   it("range les sorties par région et reprend l'éditeur connu", () => {
     expect(jeu.sorties.PAL).toMatchObject({
@@ -51,9 +50,7 @@ describe("versJeuCatalogue", () => {
 
   it("découpe les genres écrits par l'import (US-06), vide s'ils sont inconnus", () => {
     expect(jeu.genres).toEqual(["Musique", "Karaoké", "Démo"]);
-    expect(versJeuCatalogue({ ...ligne, genre: null }, BASE).genres).toEqual(
-      [],
-    );
+    expect(versJeuCatalogue({ ...ligne, genre: null }).genres).toEqual([]);
   });
 
   it("compte une région absente de la base comme non sortie", () => {
@@ -65,33 +62,24 @@ describe("versJeuCatalogue", () => {
   });
 
   it("suit le chemin versionné de la jaquette : une jaquette remplacée change d'adresse (#60)", () => {
-    const remplacee = versJeuCatalogue(
-      {
-        ...ligne,
-        releases: [
-          { ...ligne.releases[0]!, jaquette_path: `${ID}/pal-mi3x9k` },
-        ],
-      },
-      BASE,
-    );
-    expect(remplacee.sorties.PAL.jaquetteSrcset).toContain(
-      `/jaquettes/${ID}/pal-mi3x9k-600.webp 600w`,
-    );
+    const remplacee = versJeuCatalogue({
+      ...ligne,
+      releases: [{ ...ligne.releases[0]!, jaquette_path: `${ID}/pal-mi3x9k` }],
+    });
+    expect(remplacee.sorties.PAL.jaquette).toBe(`${ID}/pal-mi3x9k`);
   });
 
-  it("donne les adresses des jaquettes seulement quand il y en a une (sinon vignette neutre)", () => {
-    expect(jeu.sorties.PAL.jaquetteSrcset).toContain(
-      `/jaquettes/${ID}/pal-600.webp 600w`,
-    );
-    expect(jeu.sorties.US.jaquetteSrcset).toBeNull();
+  it("donne le chemin de la jaquette seulement quand il y en a une (sinon vignette neutre) ; les adresses sont construites à l'affichage", () => {
+    expect(jeu.sorties.PAL.jaquette).toBe(`${ID}/pal`);
+    expect(jeu.sorties.US.jaquette).toBeNull();
   });
 });
 
 describe("note Metacritic (US-17)", () => {
   it("passe telle quelle au catalogue, ou null si inconnue", () => {
-    expect(versJeuCatalogue(ligne, BASE).metacritic).toBe(62);
+    expect(versJeuCatalogue(ligne).metacritic).toBe(62);
     expect(
-      versJeuCatalogue({ ...ligne, metacritic_note: null }, BASE).metacritic,
+      versJeuCatalogue({ ...ligne, metacritic_note: null }).metacritic,
     ).toBeNull();
   });
 });

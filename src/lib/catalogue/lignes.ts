@@ -1,4 +1,3 @@
-import { srcsetJaquette } from "@/lib/jaquettes/stockage";
 import {
   REGIONS,
   type JeuCatalogue,
@@ -34,17 +33,14 @@ const NON_SORTI: SortieCatalogue = {
   titreRomanise: null,
   date: null,
   precision: null,
-  jaquetteSrcset: null,
+  jaquette: null,
 };
 
 /**
  * Convertit les lignes de la base en données du catalogue.
  * Une région absente compte comme « non sortie » ; l'éditeur affiché est le premier connu.
  */
-export function versJeuCatalogue(
-  ligne: LigneJeu,
-  baseUrl: string,
-): JeuCatalogue {
+export function versJeuCatalogue(ligne: LigneJeu): JeuCatalogue {
   const parRegion = new Map(ligne.releases.map((r) => [r.region, r]));
   const sorties = Object.fromEntries(
     REGIONS.map((region) => {
@@ -56,9 +52,7 @@ export function versJeuCatalogue(
         titreRomanise: r.titre_romanise,
         date: r.date_sortie,
         precision: r.precision_date,
-        jaquetteSrcset: r.jaquette_path
-          ? srcsetJaquette(r.jaquette_path, baseUrl)
-          : null,
+        jaquette: r.jaquette_path,
       };
       return [region, sortie];
     }),
