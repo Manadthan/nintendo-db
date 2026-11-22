@@ -1,10 +1,17 @@
+import { avatarOuDefaut, type IdAvatar } from "@/lib/profil/avatars";
+
 /** Formulaire de la page « Bienvenue » (US-20), vérifié sans accès à la base. */
 
 export const MOT_DE_PASSE_MIN = 8;
 /** Même règle que la base (0024) : 3 à 20 lettres non accentuées, chiffres ou tirets. */
 export const PSEUDO = /^[A-Za-z0-9-]{3,20}$/;
 
-export type Inscription = { email: string; motDePasse: string; pseudo: string };
+export type Inscription = {
+  email: string;
+  motDePasse: string;
+  pseudo: string;
+  avatar: IdAvatar;
+};
 
 export function lireInscription(
   formData: FormData,
@@ -14,6 +21,7 @@ export function lireInscription(
     .toLowerCase();
   const motDePasse = String(formData.get("password") ?? "");
   const pseudo = String(formData.get("pseudo") ?? "").trim();
+  const avatar = avatarOuDefaut(formData.get("avatar"));
   const erreurs: string[] = [];
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     erreurs.push("Saisissez une adresse e-mail valide.");
@@ -27,5 +35,5 @@ export function lireInscription(
     );
   return erreurs.length
     ? { ok: false, erreurs }
-    : { ok: true, valeur: { email, motDePasse, pseudo } };
+    : { ok: true, valeur: { email, motDePasse, pseudo, avatar } };
 }

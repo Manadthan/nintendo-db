@@ -1,0 +1,64 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { PSEUDO } from "@/lib/invitations/inscription";
+import { estAvatar } from "@/lib/profil/avatars";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+
+export type EtatProfil = { erreurs?: string[]; enregistre?: boolean };
+
+/** Session du compte : chacun ne modifie que son profil (règle de la base, 0024 : pseudo, avatar et visibilité). */
+async function compte() {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Connexion requise");
+  return { supabase, userId: user.id };
+}
+
+/** Modifie le pseudo et l'avatar (US-22). */
+export async function modifierProfil(
+  _p: EtatProfil,
+  formData: FormData,
+): Promise<EtatProfil> {
+  const pseudo = String(formData.get("pseudo") ?? "").trim();
+  const avatar = formData.get("avatar");
+  const erreurs: string[] = [];
+  if (!PSEUDO.test(pseudo))
+    erreurs.push(
+      "Le pseudo : 3 à 20 lettres (sans accent), chiffres ou tirets.",
+    );
+  if (!estAvatar(avatar)) erreurs.push("Choisissez un avatar.");
+  if (erreurs.length) return { erreurs };
+  try {
+    const { supabase, userId } = await compte();
+    const { error } = await supabase
+      .from("profils")
+      .update({ pseudo, avatar: avatar as string })
+      .eq("user_id", userId);
+    if (error)
+      return {
+        erreurs: [
+          error.code === "23505"
+            ? "Ce pseudo est déjà pris."
+            : `Profil non enregistré : ${error.message}`,
+        ],
+      };
+    revalidatePath("/profil");
+    return { enregistre: true };
+  } catch (e) {
+    return { erreurs: [(e as Error).message] };
+  }
+}
+
+/** Rend le profil public ou privé (US-22 ; la page publique arrive avec US-23). */
+export async function basculerPublic(formData: FormData): Promise<void> {
+  const { supabase, userId } = await compte();
+  const { error } = await supabase
+    .from("profils")
+    .update({ public: formData.get("public") === "on" })
+    .eq("user_id", userId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/profil");
+}
