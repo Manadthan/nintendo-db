@@ -23,9 +23,9 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.5 à valider |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.42 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.32 à valider |
-| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs, Prix eBay : `docs/maquettes/`) | v0.10 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.43 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.33 à valider |
+| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs, Prix eBay, Captures : `docs/maquettes/`) | v0.11 à valider |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11), 23 à 27 (§12), audit de performance (§13), étape 25 (§14) : chiffres, réussites, difficultés, leçons | v1.8 à valider |
 
 ## Règles de travail
@@ -140,6 +140,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 27 — Collectionneurs invités : intention v1.5, SPEC v1.39 et v1.40, ADR-16 #189 ; rôles #190, invitations #191 #192, Mon profil #193 #194, badges #195, profil public #196, bilan
   - [x] Audit de performance (skill react-best-practices, 22/11) : skill #198, page plus légère #199, recherche fluide #200, lots de 60 #201, profil et statistiques #203 ; accueil 4,06 → 1,11 Mo de HTML, JS visiteur 264 → 195 Ko
   - [x] Étape 25 — Prix eBay : étude #207, SPEC US-25 + ADR-17 + maquette #208, calculs #210, route #211, fiche #212 ; prix demandé (annonces en cours), gardé 6 h ; ventes terminées à demander à eBay
+  - [ ] Étape 28 — Captures RAWG : SPEC US-26, ADR-18, maquette (PR documents) ; puis étude, migration, import, fiche
   - [ ] Étapes suivantes (DESIGN §11) : 26 ScreenScraper : jaquettes manquantes d'abord (étude #202, import #205 : 142 jaquettes le 22/11 ; 2e passage #209 : +49 ; 191 jaquettes en tout, 79 versions encore sans jaquette, introuvables chez ScreenScraper), puis dates et éditeurs rétro
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5 ; étapes 23 à 27 : v1.6 ; audit de performance : v1.7 ; étape 25 : v1.8
 
