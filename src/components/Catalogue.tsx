@@ -4,6 +4,7 @@ import {
   useDeferredValue,
   useEffect,
   useMemo,
+  useRef,
   useState,
   useSyncExternalStore,
 } from "react";
@@ -25,7 +26,11 @@ import {
   lireFiltres,
   nombreActifs,
 } from "@/lib/catalogue/filtres";
-import { remettrePositionCatalogue } from "@/lib/catalogue/defilement";
+import {
+  defilerA,
+  positionCatalogueARemettre,
+} from "@/lib/catalogue/defilement";
+import { LOT, limiteRestauree } from "@/lib/catalogue/lots";
 import {
   MARCHES,
   abonnerMarche,
@@ -131,8 +136,6 @@ export function Catalogue({ jeux, consoles }: Props) {
     [connecte, filtresAdresse],
   );
   const [panneauOuvert, setPanneauOuvert] = useState(false);
-  // Retour d'une fiche par « Précédent » : reprendre à la même hauteur (Safari s'arrête en haut sinon).
-  useEffect(remettrePositionCatalogue, []);
   const actifs = nombreActifs(filtres);
 
   // Recherche fluide (audit de performance, B) : le champ affiche chaque lettre aussitôt ; la liste suit juste
@@ -169,6 +172,53 @@ export function Catalogue({ jeux, consoles }: Props) {
     () => grouperParAnnee(versions, tri),
     [versions, tri],
   );
+
+  // Affichage par lots (SPEC v1.41, audit C) : 60 jeux, puis 60 de plus en approchant du bas. Une autre recherche,
+  // un filtre, le marché, le tri ou la vue repartent des 60 premiers (état ajusté pendant le rendu).
+  const cle = JSON.stringify([rechercheAffichee, filtres, marche, tri, vue]);
+  const [lots, setLots] = useState({
+    cle,
+    limite: LOT,
+    defiler: null as number | null,
+  });
+  if (lots.cle !== cle) setLots({ cle, limite: LOT, defiler: null });
+  const limite = lots.cle === cle ? lots.limite : LOT;
+  const sentinelle = useRef<HTMLDivElement>(null);
+  const resteAAfficher = limite < versions.length;
+  useEffect(() => {
+    const element = sentinelle.current;
+    if (!element) return;
+    // Recréé à chaque lot : s'il reste proche du bas, l'observateur en demande aussitôt un autre.
+    const observateur = new IntersectionObserver(
+      ([entree]) => {
+        if (entree?.isIntersecting)
+          setLots((l) =>
+            l.cle === cle ? { ...l, limite: l.limite + LOT } : l,
+          );
+      },
+      { rootMargin: "0px 0px 1200px 0px" },
+    );
+    observateur.observe(element);
+    return () => observateur.disconnect();
+  }, [cle, limite, resteAAfficher]);
+
+  // Retour d'une fiche par « Précédent » : redessiner autant de jeux qu'avant, puis reprendre à la même hauteur
+  // (Safari s'arrête en haut sinon).
+  useEffect(() => {
+    const position = positionCatalogueARemettre();
+    if (!position) return;
+    // Après l'hydratation, quand l'adresse (filtres, recherche) est lue.
+    requestAnimationFrame(() =>
+      setLots((l) => ({
+        ...l,
+        limite: Math.max(l.limite, limiteRestauree(position.nombre)),
+        defiler: position.y,
+      })),
+    );
+  }, []);
+  useEffect(() => {
+    if (lots.defiler !== null) defilerA(lots.defiler);
+  }, [lots.defiler]);
 
   return (
     <section
@@ -334,8 +384,10 @@ export function Catalogue({ jeux, consoles }: Props) {
           versions={versions}
           groupes={groupes}
           possessions={connecte ? collection.possessions : null}
+          limite={limite}
         />
       </div>
+      {resteAAfficher && <div ref={sentinelle} aria-hidden="true" />}
     </section>
   );
 }

@@ -5,6 +5,7 @@ import { memo } from "react";
 import { formaterDate } from "@/lib/catalogue/catalogue";
 import { noterPositionCatalogue } from "@/lib/catalogue/defilement";
 import { decouperFrise } from "@/lib/catalogue/frise";
+import { premiersDesGroupes } from "@/lib/catalogue/lots";
 import { REGIONS, type VersionAffichee } from "@/lib/catalogue/types";
 import { possede } from "@/lib/collection/collection";
 import { Disponibilite } from "./Disponibilite";
@@ -18,6 +19,8 @@ type Props = {
   groupes: { titre: string | null; versions: VersionAffichee[] }[];
   /** Versions possédées (US-16) ; `null` pour un visiteur : aucune étiquette verte. */
   possessions: ReadonlySet<string> | null;
+  /** Nombre de jeux à dessiner (affichage par lots, SPEC v1.41). */
+  limite: number;
 };
 
 const lien = (v: VersionAffichee) =>
@@ -32,7 +35,10 @@ export const ListeJeux = memo(function ListeJeux({
   versions,
   groupes,
   possessions,
+  limite,
 }: Props) {
+  // Au clic sur un jeu : la hauteur et le nombre de jeux dessinés, pour le retour par « Précédent ».
+  const noter = () => noterPositionCatalogue(limite);
   // Étiquettes JAP / US / PAL en vert pour les versions possédées (US-16) ; rien pour un visiteur.
   const possedees = (v: VersionAffichee) =>
     possessions ? REGIONS.filter((r) => possede(possessions, v.jeu.id, r)) : [];
@@ -41,15 +47,15 @@ export const ListeJeux = memo(function ListeJeux({
     <div className="flex flex-col gap-3.5">
       {vue === "frise" && (
         <Frise
-          annees={decouperFrise(versions)}
+          annees={decouperFrise(versions.slice(0, limite))}
           lien={lien}
-          surClic={noterPositionCatalogue}
+          surClic={noter}
         />
       )}
 
       {vue !== "frise" &&
-        groupes.map((groupe) => (
-          <div key={groupe.titre ?? "az"} className={"flex flex-col gap-3"}>
+        premiersDesGroupes(groupes, limite).map((groupe) => (
+          <div key={groupe.titre ?? "az"} className="flex flex-col gap-3">
             {groupe.titre && (
               <div className="flex items-center gap-2.5">
                 <h3 className="text-[15px] font-bold">{groupe.titre}</h3>
@@ -64,11 +70,11 @@ export const ListeJeux = memo(function ListeJeux({
             {vue === "grille" ? (
               // 2 colonnes sur téléphone, jusqu'à 6 sur grand écran (SPEC v1.36).
               <ul className="grid grid-cols-2 gap-x-3 gap-y-[18px] sm:grid-cols-3 md:grid-cols-4 md:gap-x-4 lg:grid-cols-5 xl:grid-cols-6">
-                {groupe.versions.map((v) => (
+                {groupe.affichees.map((v) => (
                   <li key={v.jeu.id}>
                     <Link
                       href={lien(v)}
-                      onClick={noterPositionCatalogue}
+                      onClick={noter}
                       className="group flex flex-col gap-2"
                     >
                       <div className="relative">
@@ -99,14 +105,14 @@ export const ListeJeux = memo(function ListeJeux({
               </ul>
             ) : (
               <ul className="flex flex-col overflow-hidden rounded-xl border border-bordure bg-carte">
-                {groupe.versions.map((v) => (
+                {groupe.affichees.map((v) => (
                   <li
                     key={v.jeu.id}
                     className="border-t border-separateur first:border-t-0"
                   >
                     <Link
                       href={lien(v)}
-                      onClick={noterPositionCatalogue}
+                      onClick={noter}
                       className="flex items-center gap-3 px-3 py-2.5 hover:bg-surface"
                     >
                       <div className="relative w-[54px] shrink-0">

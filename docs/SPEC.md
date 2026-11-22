@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.40 — 22/11/2026 — statut : **à valider**
+> Version 1.41 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.41 | 22/11/2026 | US-02 : le catalogue affiche les **60 premiers jeux**, puis les suivants par lots de 60 **au défilement** (audit de performance, choix du propriétaire) ; compteurs inchangés ; « Précédent » depuis une fiche ramène à la même hauteur |
 > | 1.40 | 22/11/2026 | US-19 : « copier à nouveau un lien » devient **« Nouveau lien »** (l'ancien lien cesse de marcher, 7 jours de plus) : la base ne garde que l'empreinte du jeton (ADR-16), le lien n'est donc montré qu'une fois |
 > | 1.39 | 21/11/2026 | **Collectionneurs invités** (étape 27, intention v1.5) : US-19 à US-24 (invitation par lien à partager, compte, collection de chacun, profil, profil public, badges) ; US-16 reste valable pour le propriétaire |
 > | 1.38 | 21/11/2026 | US-02 : vue **Frise** (demande du propriétaire, maquette validée `maquettes/frise.png`) : jeux en alternance de part et d'autre d'une ligne verticale, année seule au centre ; tris par date seulement |
@@ -94,6 +95,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Section « Tous les jeux » avec le **nombre total**, puis la barre d'outils : recherche (US-05), marché (US-03),
       tri, grille / liste, filtres (US-06), et « N jeux affichés sur M ».
 - [ ] Les jeux s'affichent en **grille de jaquettes** (2 par ligne sur iPhone) ou en **liste** ; le dernier choix est retenu.
+- [ ] Les **60 premiers jeux** s'affichent d'abord, puis les suivants par lots de 60, **tout seuls en approchant du bas**
+      (SPEC v1.41) ; « N jeux affichés sur M » et le nombre de jeux par année comptent tous les jeux, pas seulement ceux
+      déjà dessinés ; une nouvelle recherche, un filtre, le marché, le tri ou la vue repartent des 60 premiers.
 - [ ] Chaque jeu montre jaquette, titre, date et sa **disponibilité par région** (JAP · US · PAL, cochées si sorti).
 - [ ] Tri : plus récents d'abord (par défaut, v1.31), plus anciens d'abord, A → Z, **mieux notés** (note Metacritic, v1.21 : de la meilleure
       à la moins bonne, à égalité par titre, jeux sans note à la fin) ; regroupement **par année** en tri par date, **par
