@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.6 — 22/11/2026 — statut : **à valider**
+> Version 1.7 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.7 | 22/11/2026 | **Audit de performance** (skill `react-best-practices`) : mesures avant/après, difficultés, leçons (§13) |
 > | 1.6 | 22/11/2026 | **Fin de l'étape 22 et étapes 23 à 27** : séries, frise, étude Giant Bomb, outillage de la session, collectionneurs invités (§12) |
 > | 1.5 | 20/11/2026 | **Étapes 18 à 22** : Game Boy, Virtual Boy, Super Nintendo, NES, jaquettes officielles, contrôle par les bases officielles (§11) |
 > | 1.4 | 19/11/2026 | **Étapes 15 à 17** : N64 et GBA complétées, statistiques, tri par note, Game Boy Color ; CI réparée (§10) |
@@ -269,3 +270,48 @@ Leçons ajoutées :
 Pistes : audit de performance avec la skill `react-best-practices` de Vercel (Mon profil et les statistiques relisent
 tout le catalogue à chaque ouverture) ; liste des jeux du profil public repliable ; cas « adresse e-mail déjà utilisée »
 à tester ; prix eBay (étape 25) et ScreenScraper (étape 26) dès que les comptes sont prêts.
+
+## 13. Audit de performance (skill `react-best-practices` de Vercel)
+
+| | |
+|---|---|
+| Durée | 1 jour (22/11/2026) |
+| Méthode | Skill copiée dans le dépôt (#198), rapport sans code, puis **4 corrections choisies par le propriétaire** (A à D), une PR chacune, chaque gain **mesuré avant et après** |
+| Livré | **A** page plus légère : chemin de jaquette au lieu de 3 adresses complètes, Supabase chargé seulement avec une session (#199) ; **B** recherche fluide : `useDeferredValue`, liste mémorisée (`ListeJeux`), texte de recherche préparé une fois par jeu (#200) ; **C** 60 premiers jeux puis lots de 60 au défilement, retour d'une fiche à la même hauteur (SPEC v1.41, #201) ; **D** Mon profil et Statistiques : catalogue en cache 5 min vidé par chaque modification, lectures en parallèle (DESIGN v1.25, ADR-11, #203) |
+| Pull requests | 6 mergées (#198 à #204, hors #202), dont 1 de documentation (#204) |
+| Tests | 441 unitaires (+13), e2e et base inchangés ; aucune migration |
+
+| Mesure | Avant | Après |
+|---|---|---|
+| HTML de l'accueil, brut | 4 059 115 o | 1 110 613 o (**−73 %**) |
+| HTML de l'accueil, compressé | 273 Ko | 151 Ko |
+| JS d'un visiteur, compressé | 264 Ko | 195 Ko |
+| Cartes dessinées à l'ouverture | 1 126 | 60 |
+| Pire délai en tapant « mario » (Chromium, processeur ×4) | 380 – 640 ms | 40 – 140 ms |
+| Lecture du catalogue (Mon profil, Statistiques) | 1,3 – 1,8 s à chaque ouverture | ≈ 0,6 s cache vide, rien pendant 5 min |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| Prévisualisations Vercel injoignables depuis la session | Impossible d'y mesurer | Build de production local **sur la vraie base** (lecture seule, clé injectée par le réseau), Playwright avec processeur ralenti ×4 |
+| `useDeferredValue` seul : **aucun gain mesuré** | Le plan validé ne suffisait pas | Liste sortie dans un composant mémorisé (`ListeJeux`), signalé comme changement de plan dans la PR |
+| Une propriété `estompe` passée au composant mémorisé | Les cartes redessinées à chaque lettre malgré `memo` | Estompage sur une enveloppe hors du composant ; trouvé en décomposant chaque interaction (Event Timing) |
+| `lireFiltres()` recréait l'objet à chaque lettre (clé = toute l'adresse, `?q=` compris) | Mémorisation annulée | Même objet gardé quand les filtres ne changent pas (`memesFiltres`) |
+| Lots de 60 et bouton « Précédent » | Une hauteur notée plus bas que la page redessinée | Nombre de jeux dessinés noté avec la hauteur, redessinés avant de défiler |
+| Prettier lancé trop large (3 fois) | SPEC entière reformatée, diff gonflé | Règle ajoutée dans CLAUDE.md (#204) |
+| Deux PR ouvertes en même temps prennent la même version de DESIGN (v1.24) | Conflit sur #203 | Merge de `main` dans la branche, version suivante (v1.25) |
+| Mesure de la production juste après un merge | Ancienne page encore servie | Attendre le déploiement et vérifier le contenu (nombre de cartes), pas seulement la taille |
+
+Leçons ajoutées :
+
+24. **Mesurer chaque correction, avant et après, dans les conditions du téléphone** : la première version de B ne
+    gagnait rien, et seule la mesure l'a montré.
+25. **Une optimisation React se vérifie au niveau de l'interaction** (temps de traitement, rendu) : une seule
+    propriété qui change suffit à annuler un `memo`.
+26. **Un cache n'est acceptable que s'il est vidé par chaque écriture** : l'ADR le dit, et la seule exception (scripts
+    de la session) est écrite noir sur blanc.
+27. **Un rapport sans code, puis des corrections au choix** : le propriétaire décide de ce qui vaut la complexité
+    ajoutée (le bouton « Afficher plus » a été refusé au profit du chargement automatique seul).
+
+Pistes : mesurer Mon profil et Statistiques connecté sur Vercel (non vérifié depuis la session) ; ressenti sur Safari
+iPhone (retour par « Précédent », chargement au défilement) ; mémoriser chaque carte si les lots ralentissent après
+plusieurs centaines de jeux.
