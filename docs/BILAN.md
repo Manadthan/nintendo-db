@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.7 — 22/11/2026 — statut : **à valider**
+> Version 1.8 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.8 | 22/11/2026 | **Étape 25, prix eBay** : étude, choix, 3 PR de code, difficultés, leçons (§14) |
 > | 1.7 | 22/11/2026 | **Audit de performance** (skill `react-best-practices`) : mesures avant/après, difficultés, leçons (§13) |
 > | 1.6 | 22/11/2026 | **Fin de l'étape 22 et étapes 23 à 27** : séries, frise, étude Giant Bomb, outillage de la session, collectionneurs invités (§12) |
 > | 1.5 | 20/11/2026 | **Étapes 18 à 22** : Game Boy, Virtual Boy, Super Nintendo, NES, jaquettes officielles, contrôle par les bases officielles (§11) |
@@ -315,3 +316,43 @@ Leçons ajoutées :
 Pistes : mesurer Mon profil et Statistiques connecté sur Vercel (non vérifié depuis la session) ; ressenti sur Safari
 iPhone (retour par « Précédent », chargement au défilement) ; mémoriser chaque carte si les lots ralentissent après
 plusieurs centaines de jeux.
+
+## 14. Étape 25 : prix eBay
+
+| | |
+|---|---|
+| Durée | une demi-journée (22/11/2026), dès l'arrivée des clés développeur eBay |
+| Méthode | Étude en lecture seule par une tâche GitHub (#207), puis spec, conception et maquette validées (#208), puis 3 PR de code : calculs purs (#210), route (#211), bloc de la fiche (#212) |
+| Livré | US-25 : sur chaque fiche, le **prix demandé** (médiane des annonces en cours) par version, en euros, avec le nombre d'annonces et un lien vers les **objets vendus** d'eBay ; JAP et US sur eBay US, PAL sur eBay France et Royaume-Uni ; gardé 6 h, rien en base ; bloc masqué si eBay ne répond pas |
+| Pull requests | 5 mergées (#207, #208, #210, #211, #212), dont 1 de documents |
+| Tests | 477 unitaires (+36), 4 e2e (route interceptée) ; aucune migration |
+
+| Mesure (étude, 28 jeux, 94 versions × marché) | Résultat |
+|---|---|
+| Accès aux annonces en cours (Browse) | ouvert |
+| Accès aux ventes terminées (Marketplace Insights) | refusé : demande à faire par le propriétaire |
+| Versions avec un prix | 92 / 94 |
+| Annonces pertinentes | US 69 %, JAP 32 %, PAL France 80 %, PAL Royaume-Uni 70 % |
+| Premier vrai appel (Super Mario Galaxy, prévisualisation) | JAP 13 €, US 17 €, PAL 12 € ; 12, 41 et 50 annonces |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| developer.ebay.com et l'API d'eBay injoignables depuis la session | Ni documentation ni essai en direct | Étude par une tâche GitHub ; premier essai réel sur la prévisualisation, par le propriétaire |
+| Premier lancement : `401 invalid_client` | Étude arrêtée net | Clés de production activées et secrets corrigés par le propriétaire ; message d'erreur clair dans le script |
+| Contrat d'eBay : données de Browse gardées 6 h au plus (forum des développeurs, texte officiel non lu) | Plan « mise à jour chaque semaine en base » abandonné | Prix demandé à l'ouverture de la fiche, gardé 6 h par jeu, rien en base (ADR-17) |
+| Règles du script d'étude reprises telles quelles | « Galaxy 2 » comptait pour « Galaxy », un jeu complet « avec manuel » était écarté | Trouvé par les tests de la PR 1 ; règles corrigées avant toute mise en ligne |
+| `RouteContext` de Next 16 inconnu du contrôle de types (types générés au build) | Typecheck rouge | Type des paramètres écrit à la main |
+| Abonnement à la mauvaise PR (#209 au lieu de #210) | Événements d'une PR qui n'était pas la mienne | Désabonnement aussitôt ; toujours reprendre le numéro renvoyé par la création |
+
+Leçons ajoutées :
+
+28. **Lire le contrat d'une API avant de concevoir le stockage** : la limite de 6 h a changé toute l'architecture, et
+    elle est arrivée après les choix produit.
+29. **Un script d'étude n'est pas du code de production** : ses règles se reprennent avec des tests, qui ont trouvé
+    deux défauts dès la première PR.
+30. **Quand la session ne joint pas un service, le premier essai réel est confié au propriétaire** avec une adresse
+    exacte et le résultat attendu, avant le merge (`/api/prix/wii/super-mario-galaxy`).
+
+Pistes : obtenir l'accès aux ventes terminées (même route, libellé « prix de vente », ADR-17 point 8) ; suivre la
+consommation du quota de 5 000 appels par jour ; version JAP plus fiable (peu d'annonces sur eBay US) ; prix
+« complet » et « jeu seul » séparés si les annonces le précisent plus souvent.

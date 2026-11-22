@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.29 — 22/11/2026 — statut : **à valider**
+> Version 1.30 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.30 | 22/11/2026 | **Étape 25 terminée** (#210, #211, #212) : prix eBay en ligne ; reste l'accès aux ventes terminées (§11) |
 > | 1.29 | 22/11/2026 | **ScreenScraper, 2e passage** : 142 jaquettes écrites le 22/11 (128 versions encore sans jaquette) ; recherche par code produit puis par chaque titre et sa forme courte ; rapprochements « ≈ » jugés sur la planche ; boîtes refusées jamais redéposées (§11) |
 > | 1.28 | 22/11/2026 | **Prix eBay** (étape 25, SPEC v1.42) : étude du 22/11 (§1 quindecies), ADR-17 (prix demandés à eBay à l'ouverture de la fiche, gardés 6 h, rien en base), plan en 3 PR |
 > | 1.27 | 22/11/2026 | **Étude eBay** (étape 25) : tâche GitHub en lecture seule, annonces en cours et ventes terminées (§11) ; ligne ajoutée après coup |
@@ -758,6 +759,6 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 
 | Étape | Sujet | À trancher d'abord |
 |---|---|---|
-| 25 | **Prix eBay** dans la fiche (SPEC v1.42, US-25) | étude du 22/11 (§1 quindecies) : annonces en cours seulement ; ADR-17 (à l'ouverture de la fiche, gardé 6 h, rien en base) ; maquette `maquettes/prix-ebay.png`. Plan : 1) `src/lib/prix/` pur + tests ; 2) route `/api/prix/…` (clés eBay dans Vercel) ; 3) bloc de la fiche + e2e. Accès aux ventes terminées demandé par le propriétaire |
+| 25 | **Prix eBay** dans la fiche : **terminée le 22/11** (#207, #208, #210, #211, #212 ; BILAN §14) | reste : accès aux ventes terminées (Marketplace Insights) à demander à eBay par le propriétaire ; ADR-17 point 8 |
 | 26 | **ScreenScraper** : 1) **jaquettes manquantes**, toutes consoles (décision du 22/11 : 270 versions sorties sans jaquette sur 2 837, dont 177 japonaises : GBA 76, GB 54, NES 48, SNES 32, GBC 24) ; 2) consolidation rétro (NES à GameCube) : dates, éditeurs, jeux manquants. **Giant Bomb écarté** (21/11 : 403 depuis la session et depuis GitHub). ScreenScraper refuse aussi la session (403 du réseau) : tout passe par des tâches GitHub | identifiants en secrets GitHub `SCREENSCRAPER_DEVID`, `SCREENSCRAPER_DEVPASSWORD`, `SCREENSCRAPER_USER` (pseudo), `SCREENSCRAPER_PASSWORD` (ajoutés le 22/11) ; tâche « Étude ScreenScraper » (`scripts/etude-screenscraper.mjs`, lecture seule) : quota du compte, boîte de face `box-2D` de la bonne région par version (exacte, monde seule, autre région, aucune, jeu non trouvé) ; droit d'héberger les images ; puis plan de l'import (source de jaquette `screenscraper` : migration) ; **étude du 22/11** : boîte de la bonne région pour 164 versions sur 270, 99 jeux introuvables par le titre (GBA 47), 9 rapprochés sans titre identique (écartés) ; accord de ScreenScraper pour héberger les images avec mention de la source. **Import** : tâche « Relais ScreenScraper » → bucket privé `gametdb/screenscraper/{console}/{jeu}/{région}.jpg` (le résultat d'une tâche GitHub n'est pas lisible depuis la session) ; planche regardée par le propriétaire ; puis `scripts/jaquettes-screenscraper.mjs` depuis la session (versions toujours sans jaquette, source `screenscraper`, gardée par l'import comme `nintendo`). Ensuite : les 99 introuvables, puis dates et éditeurs ; **22/11** : 142 jaquettes écrites (2 refusées sur la planche), 128 versions encore sans jaquette. **2e passage** : recherche par code produit (`jeuInfos`, `serialnum`), puis par chaque titre connu et sa forme courte ; sans titre identique, le premier jeu trouvé par un titre complet est déposé dans `screenscraper-approche/…`, marqué « ≈ » sur la planche ; `--sauf n,n` écarte les numéros refusés |
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
