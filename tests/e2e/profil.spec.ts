@@ -66,3 +66,49 @@ test("un collectionneur change d'avatar, rend son profil public, puis se déconn
   await page.getByRole("button", { name: "Se déconnecter" }).click();
   await expect(page).toHaveURL("/");
 });
+
+test("Mon profil résume la collection du collectionneur et ses derniers ajouts (US-22)", async ({
+  page,
+}) => {
+  await page.goto("/admin/connexion");
+  await page.getByLabel("E-mail").fill(COLLECTIONNEUR_TEST.email);
+  await page.getByLabel("Mot de passe").fill(COLLECTIONNEUR_TEST.password);
+  await page.getByRole("button", { name: "Se connecter" }).click();
+  await expect(page).toHaveURL("/profil");
+  const collection = page.getByRole("region", { name: "Ma collection" });
+  await expect(collection).toContainText("Votre collection est vide");
+  await expect(
+    page.getByRole("region", { name: "Derniers ajouts" }),
+  ).toHaveCount(0);
+
+  // Sa collection est la sienne : il coche Splatoon en Europe.
+  const caseEurope = page.getByRole("checkbox", {
+    name: "Je l'ai : version Europe",
+    exact: true,
+  });
+  await page.goto("/jeux/wii-u/splatoon");
+  await caseEurope.check();
+  await expect(caseEurope).toBeChecked();
+
+  await page.goto("/profil");
+  await expect(
+    collection.getByRole("listitem", { name: /^Wii U : 1 jeu sur \d+$/ }),
+  ).toBeVisible();
+  await expect(
+    collection.getByRole("listitem", { name: "PAL : 1 version" }),
+  ).toBeVisible();
+  await expect(
+    collection.getByRole("listitem", { name: "JAP : 0 version" }),
+  ).toBeVisible();
+  const ajouts = page.getByRole("region", { name: "Derniers ajouts" });
+  await expect(ajouts.getByRole("link", { name: /Splatoon/ })).toHaveAttribute(
+    "href",
+    "/jeux/wii-u/splatoon",
+  );
+
+  // Nettoyage.
+  await page.goto("/jeux/wii-u/splatoon");
+  await caseEurope.uncheck();
+  await page.reload();
+  await expect(caseEurope).not.toBeChecked();
+});
