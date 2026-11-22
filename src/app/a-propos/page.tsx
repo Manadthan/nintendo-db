@@ -57,6 +57,15 @@ const SOURCES = [
     licenceLien: "https://www.nintendo.com/fr-fr/",
   },
   {
+    nom: "ScreenScraper",
+    lien: "https://www.screenscraper.fr/",
+    apport:
+      "Boîtes par région de jeux dont aucune autre source n'avait la jaquette, surtout des versions japonaises Game Boy, NES, Game Boy Advance et Super Nintendo.",
+    licence:
+      "Reprises avec l'accord du site et mention de la source. Les images des boîtes restent la propriété de leurs éditeurs ; retrait sur demande.",
+    licenceLien: "https://www.screenscraper.fr/",
+  },
+  {
     nom: "GameTDB",
     lien: "https://www.gametdb.com/",
     apport:

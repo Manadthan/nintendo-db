@@ -191,6 +191,16 @@ describe("choisirJaquettes (ADR-04, R6)", () => {
     expect(choix.PAL).toBeNull();
   });
 
+  it("garde les boîtes de ScreenScraper, même en recopiant les scans (étape 26)", () => {
+    const choix = choisirJaquettes(
+      construireJeu(KIRBY),
+      KIRBY.disques,
+      { PAL: { path: "x/pal", source: "screenscraper" } },
+      true,
+    );
+    expect(choix.PAL).toBeNull();
+  });
+
   it("remplace une ancienne image IGDB par le scan", () => {
     const choix = choisirJaquettes(construireJeu(KIRBY), KIRBY.disques, {
       PAL: { path: "x/pal", source: "igdb" },

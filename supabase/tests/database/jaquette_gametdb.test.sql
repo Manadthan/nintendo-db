@@ -5,8 +5,8 @@ select plan(2);
 
 select enum_has_labels(
   -- « libretro » ajoutée par la migration 0014 (étape 14, N64 et GBA), « gamecartdb » par la 0019 (Switch 2),
-  -- « nintendo » par la 0021 (boîtes européennes officielles).
-  'public', 'jaquette_source', array['gametdb', 'igdb', 'libretro', 'gamecartdb', 'nintendo', 'photo', 'url'],
+  -- « nintendo » par la 0021 (boîtes européennes officielles), « screenscraper » par la 0027 (étape 26).
+  'public', 'jaquette_source', array['gametdb', 'igdb', 'libretro', 'gamecartdb', 'nintendo', 'screenscraper', 'photo', 'url'],
   'jaquette_source accepte gametdb, en tête des sources'
 );
 select lives_ok(

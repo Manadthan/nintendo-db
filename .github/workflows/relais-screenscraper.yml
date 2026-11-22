@@ -1,0 +1,35 @@
+name: Relais ScreenScraper
+
+# Étape 26 (DESIGN §11) : ScreenScraper refuse la session Claude ; GitHub y accède. Cette tâche dépose les boîtes de
+# face des versions sans jaquette dans le bucket PRIVÉ « gametdb » (screenscraper/{console}/{jeu}/{région}.jpg).
+# Le catalogue ne change pas : la session Claude les montre en planche, puis les enregistre après l'accord du
+# propriétaire (scripts/jaquettes-screenscraper.mjs). Lancée à la main (onglet Actions → Relais ScreenScraper →
+# Run workflow). Seulement sur main.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  relais:
+    name: Déposer les boîtes ScreenScraper
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Relayer ScreenScraper vers Supabase
+        env:
+          SCREENSCRAPER_DEVID: ${{ secrets.SCREENSCRAPER_DEVID }}
+          SCREENSCRAPER_DEVPASSWORD: ${{ secrets.SCREENSCRAPER_DEVPASSWORD }}
+          SCREENSCRAPER_USER: ${{ secrets.SCREENSCRAPER_USER }}
+          SCREENSCRAPER_PASSWORD: ${{ secrets.SCREENSCRAPER_PASSWORD }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+        run: node scripts/relais-screenscraper.mjs
