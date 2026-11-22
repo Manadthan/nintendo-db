@@ -2,16 +2,28 @@
  * Position du catalogue au retour d'une fiche (bouton « Précédent »). Safari remet la hauteur une seule fois, tout
  * de suite, quand le catalogue n'est pas encore réaffiché : la page est courte et il s'arrête en haut. Le catalogue
  * note donc sa hauteur au clic sur un jeu, et la remet lui-même une fois réaffiché, seulement après un retour arrière.
+ * Il note aussi le nombre de jeux dessinés (affichage par lots, SPEC v1.41) : il les redessine avant de défiler.
  */
 
 const CLE = "nintendo-db:defilement";
 
 type Stockage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
-type Position = { adresse: string; y: number };
+type Position = { adresse: string; y: number; nombre?: number };
+
+/** Hauteur à remettre, et nombre de jeux qui étaient dessinés (0 : inconnu). */
+export type PositionCatalogue = { y: number; nombre: number };
 
 /** Note la hauteur du catalogue à cette adresse (chemin + paramètres : filtres, recherche, marché). */
-export function noterPosition(stockage: Stockage, adresse: string, y: number) {
-  stockage.setItem(CLE, JSON.stringify({ adresse, y } satisfies Position));
+export function noterPosition(
+  stockage: Stockage,
+  adresse: string,
+  y: number,
+  nombre: number,
+) {
+  stockage.setItem(
+    CLE,
+    JSON.stringify({ adresse, y, nombre } satisfies Position),
+  );
 }
 
 /**
@@ -22,7 +34,7 @@ export function positionARemettre(
   stockage: Stockage,
   adresse: string,
   retourArriere: boolean,
-): number | null {
+): PositionCatalogue | null {
   const texte = stockage.getItem(CLE);
   stockage.removeItem(CLE);
   if (!retourArriere || !texte) return null;
@@ -31,7 +43,10 @@ export function positionARemettre(
     return position.adresse === adresse &&
       typeof position.y === "number" &&
       position.y > 0
-      ? position.y
+      ? {
+          y: position.y,
+          nombre: typeof position.nombre === "number" ? position.nombre : 0,
+        }
       : null;
   } catch {
     return null;
@@ -61,33 +76,35 @@ function consommerRetourArriere(): boolean {
   if (retour) return true;
   if (!premier) return false;
   const chargement = performance.getEntriesByType("navigation")[0] as
-    | PerformanceNavigationTiming
-    | undefined;
+    PerformanceNavigationTiming | undefined;
   return chargement?.type === "back_forward";
 }
 
 const adresseCourante = () => location.pathname + location.search;
 
-/** Au clic sur un jeu du catalogue. Stockage indisponible (navigation privée) : rien n'est noté. */
-export function noterPositionCatalogue() {
+/** Au clic sur un jeu du catalogue, avec le nombre de jeux dessinés. Stockage indisponible : rien n'est noté. */
+export function noterPositionCatalogue(nombre: number) {
   try {
-    noterPosition(sessionStorage, adresseCourante(), window.scrollY);
+    noterPosition(sessionStorage, adresseCourante(), window.scrollY, nombre);
   } catch {
     // Sans stockage, le navigateur fait comme il peut.
   }
 }
 
-/** À l'affichage du catalogue : remet la hauteur notée si l'on revient d'une fiche. */
-export function remettrePositionCatalogue() {
+/**
+ * À l'affichage du catalogue : la hauteur notée si l'on revient d'une fiche, sinon `null`. Le catalogue redessine
+ * d'abord assez de jeux, puis défile (`defilerA`).
+ */
+export function positionCatalogueARemettre(): PositionCatalogue | null {
   const retour = consommerRetourArriere();
-  let y: number | null = null;
   try {
-    y = positionARemettre(sessionStorage, adresseCourante(), retour);
+    return positionARemettre(sessionStorage, adresseCourante(), retour);
   } catch {
-    return;
+    return null;
   }
-  if (y === null) return;
-  const hauteur = y;
-  // Après le rendu du catalogue (la page a retrouvé sa longueur).
-  requestAnimationFrame(() => window.scrollTo(0, hauteur));
+}
+
+/** Défile à la hauteur notée, après le rendu du catalogue (la page a retrouvé sa longueur). */
+export function defilerA(y: number) {
+  requestAnimationFrame(() => window.scrollTo(0, y));
 }
