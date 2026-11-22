@@ -72,7 +72,7 @@ describe("plan du site et robots", () => {
 
   it("exclut l'administration et indique le plan du site", () => {
     expect(reglesRobots()).toEqual({
-      rules: { userAgent: "*", allow: "/", disallow: "/admin" },
+      rules: { userAgent: "*", allow: "/", disallow: ["/admin", "/api/"] },
       sitemap: "https://nintendo-db.vercel.app/sitemap.xml",
     });
   });
