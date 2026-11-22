@@ -7,6 +7,7 @@
 > | Version | Date | Changements |
 > |---|---|---|
 > | 1.28 | 22/11/2026 | **ScreenScraper, 2e passage** : 142 jaquettes écrites le 22/11 (128 versions encore sans jaquette) ; recherche par code produit puis par chaque titre et sa forme courte ; rapprochements « ≈ » jugés sur la planche ; boîtes refusées jamais redéposées (§11) |
+> | 1.27 | 22/11/2026 | **Étude eBay** (étape 25) : tâche GitHub en lecture seule, annonces en cours et ventes terminées (§11) ; ligne ajoutée après coup |
 > | 1.26 | 22/11/2026 | **Jaquettes ScreenScraper** : étude du 22/11 (164 versions sur 270 avec la boîte de la bonne région, 99 jeux introuvables par le titre, quota 20 000 requêtes par jour) ; relais vers le bucket privé, planche, puis écriture ; source `screenscraper` (migration 0027) gardée par l'import (§11) |
 > | 1.25 | 22/11/2026 | ADR-11 : catalogue des statistiques et des profils **en cache 5 min**, vidé par chaque modification de l'administration ; possessions toujours lues à l'ouverture (audit de performance, correction D) |
 > | 1.24 | 22/11/2026 | **ScreenScraper** (étape 26) : jaquettes manquantes d'abord (270 versions sur 2 837 le 22/11, dont 177 japonaises), dates et éditeurs ensuite ; tâche GitHub « Étude ScreenScraper » en lecture seule (§11) |
