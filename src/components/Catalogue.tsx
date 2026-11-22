@@ -1,9 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState, useSyncExternalStore } from "react";
 import {
-  formaterDate,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import {
   grouperParAnnee,
   TRI_PAR_DEFAUT,
   trier,
@@ -21,10 +25,7 @@ import {
   lireFiltres,
   nombreActifs,
 } from "@/lib/catalogue/filtres";
-import {
-  noterPositionCatalogue,
-  remettrePositionCatalogue,
-} from "@/lib/catalogue/defilement";
+import { remettrePositionCatalogue } from "@/lib/catalogue/defilement";
 import {
   MARCHES,
   abonnerMarche,
@@ -33,25 +34,22 @@ import {
 } from "@/lib/catalogue/marche";
 import {
   abonnerRecherche,
-  correspond,
+  contientMots,
   enregistrerRecherche,
   lireRecherche,
+  motsRecherche,
+  texteRecherche,
 } from "@/lib/catalogue/recherche";
 import {
-  REGIONS,
   type JeuCatalogue,
   type Marche,
   type Tri,
-  type VersionAffichee,
 } from "@/lib/catalogue/types";
-import { filtrerCollection, possede } from "@/lib/collection/collection";
+import { filtrerCollection } from "@/lib/collection/collection";
 import { useCollection } from "@/lib/collection/navigateur";
-import { Disponibilite } from "./Disponibilite";
-import { NoteMetacritic } from "./NoteMetacritic";
 import { FiltresActifs, PanneauFiltres } from "./Filtres";
-import { Jaquette } from "./Jaquette";
-import { Frise } from "./Frise";
-import { decouperFrise, triFrise } from "@/lib/catalogue/frise";
+import { ListeJeux } from "./ListeJeux";
+import { triFrise } from "@/lib/catalogue/frise";
 
 type Vue = "grille" | "liste" | "frise";
 const VUES: readonly Vue[] = ["grille", "liste", "frise"];
@@ -128,37 +126,49 @@ export function Catalogue({ jeux, consoles }: Props) {
   // Ma collection (US-16) : privée ; pour un visiteur, ni coche, ni filtre, ni compteur (un `?collection=` est ignoré).
   const collection = useCollection();
   const connecte = collection.connecte === true;
-  const filtres = connecte
-    ? filtresAdresse
-    : { ...filtresAdresse, collection: null };
+  const filtres = useMemo(
+    () => (connecte ? filtresAdresse : { ...filtresAdresse, collection: null }),
+    [connecte, filtresAdresse],
+  );
   const [panneauOuvert, setPanneauOuvert] = useState(false);
   // Retour d'une fiche par « Précédent » : reprendre à la même hauteur (Safari s'arrête en haut sinon).
   useEffect(remettrePositionCatalogue, []);
   const actifs = nombreActifs(filtres);
 
+  // Recherche fluide (audit de performance, B) : le champ affiche chaque lettre aussitôt ; la liste suit juste
+  // après, en priorité basse (useDeferredValue), et l'ancienne reste affichée, estompée, en attendant.
+  const rechercheAffichee = useDeferredValue(recherche);
+  // Texte de recherche de chaque jeu, normalisé une seule fois (pas à chaque lettre tapée).
+  const textes = useMemo(
+    () => new Map(jeux.map((j) => [j, texteRecherche(j)])),
+    [jeux],
+  );
+  const trouves = useMemo(() => {
+    const mots = motsRecherche(rechercheAffichee);
+    return mots.length === 0
+      ? jeux
+      : jeux.filter((j) => contientMots(textes.get(j) ?? "", mots));
+  }, [jeux, textes, rechercheAffichee]);
+
   // Choix proposés : ceux du marché choisi, sans tenir compte de la recherche ni des autres filtres.
-  const duMarche = trier(jeux, "anciens", marche);
-  const versions = filtrerCollection(
-    filtrer(
-      trier(
-        jeux.filter((j) => correspond(j, recherche)),
-        tri,
+  const duMarche = useMemo(
+    () => trier(jeux, "anciens", marche),
+    [jeux, marche],
+  );
+  const versions = useMemo(
+    () =>
+      filtrerCollection(
+        filtrer(trier(trouves, tri, marche), filtres),
+        filtres.collection,
+        collection.possessions,
         marche,
       ),
-      filtres,
-    ),
-    filtres.collection,
-    collection.possessions,
-    marche,
+    [trouves, tri, marche, filtres, collection.possessions],
   );
-  // Étiquettes JAP / US / PAL en vert pour les versions possédées (US-16) ; rien pour un visiteur.
-  const possedees = (v: VersionAffichee) =>
-    connecte
-      ? REGIONS.filter((r) => possede(collection.possessions, v.jeu.id, r))
-      : [];
-  const groupes = grouperParAnnee(versions, tri);
-  const lien = (v: VersionAffichee) =>
-    `/jeux/${v.jeu.console.slug}/${v.jeu.slug}`;
+  const groupes = useMemo(
+    () => grouperParAnnee(versions, tri),
+    [versions, tri],
+  );
 
   return (
     <section
@@ -287,14 +297,14 @@ export function Catalogue({ jeux, consoles }: Props) {
         <div className="flex flex-col items-center gap-2.5 rounded-xl border border-bordure bg-carte px-4 py-7 text-center">
           <p className="text-[15px] font-semibold">Aucun jeu ne correspond</p>
           <p className="text-[13px] text-texte-discret">
-            {recherche.trim()
-              ? `Rien pour « ${recherche.trim()} »`
+            {rechercheAffichee.trim()
+              ? `Rien pour « ${rechercheAffichee.trim()} »`
               : actifs
                 ? "Aucun jeu avec ces filtres"
                 : "Aucun jeu sur ce marché"}{" "}
             : essayez un autre titre, un autre marché ou d&apos;autres filtres.
           </p>
-          {recherche.trim() && (
+          {rechercheAffichee.trim() && (
             <button
               type="button"
               onClick={() => enregistrerRecherche("")}
@@ -315,106 +325,17 @@ export function Catalogue({ jeux, consoles }: Props) {
         </div>
       )}
 
-      {vue === "frise" && (
-        <Frise
-          annees={decouperFrise(versions)}
-          lien={lien}
-          surClic={noterPositionCatalogue}
+      {/* Estompée tant que la liste n'a pas rattrapé la recherche tapée (hors de ListeJeux, qui reste mémorisée). */}
+      <div
+        className={`transition-opacity ${rechercheAffichee !== recherche ? "opacity-60" : ""}`}
+      >
+        <ListeJeux
+          vue={vue}
+          versions={versions}
+          groupes={groupes}
+          possessions={connecte ? collection.possessions : null}
         />
-      )}
-
-      {vue !== "frise" &&
-        groupes.map((groupe) => (
-          <div key={groupe.titre ?? "az"} className="flex flex-col gap-3">
-            {groupe.titre && (
-              <div className="flex items-center gap-2.5">
-                <h3 className="text-[15px] font-bold">{groupe.titre}</h3>
-                <div className="h-px flex-1 bg-filet" />
-                <span className="text-xs text-texte-discret">
-                  {groupe.versions.length} jeu
-                  {groupe.versions.length > 1 ? "x" : ""}
-                </span>
-              </div>
-            )}
-
-            {vue === "grille" ? (
-              // 2 colonnes sur téléphone, jusqu'à 6 sur grand écran (SPEC v1.36).
-              <ul className="grid grid-cols-2 gap-x-3 gap-y-[18px] sm:grid-cols-3 md:grid-cols-4 md:gap-x-4 lg:grid-cols-5 xl:grid-cols-6">
-                {groupe.versions.map((v) => (
-                  <li key={v.jeu.id}>
-                    <Link
-                      href={lien(v)}
-                      onClick={noterPositionCatalogue}
-                      className="group flex flex-col gap-2"
-                    >
-                      <div className="relative">
-                        <Jaquette
-                          sortie={v.sortie}
-                          titre={v.sortie.titre!}
-                          console={v.jeu.console.nom}
-                          consoleSlug={v.jeu.console.slug}
-                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
-                        />
-                        <NoteMetacritic note={v.jeu.metacritic} />
-                      </div>
-                      <div className="flex flex-col gap-[3px]">
-                        <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
-                          {v.sortie.titre}
-                        </span>
-                        <span className="text-xs text-texte-discret">
-                          {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
-                          {v.jeu.console.nom}
-                        </span>
-                        <div className="flex flex-wrap items-center gap-1">
-                          <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <ul className="flex flex-col overflow-hidden rounded-xl border border-bordure bg-carte">
-                {groupe.versions.map((v) => (
-                  <li
-                    key={v.jeu.id}
-                    className="border-t border-separateur first:border-t-0"
-                  >
-                    <Link
-                      href={lien(v)}
-                      onClick={noterPositionCatalogue}
-                      className="flex items-center gap-3 px-3 py-2.5 hover:bg-surface"
-                    >
-                      <div className="relative w-[54px] shrink-0">
-                        <Jaquette
-                          sortie={v.sortie}
-                          titre={v.sortie.titre!}
-                          console={v.jeu.console.nom}
-                          consoleSlug={v.jeu.console.slug}
-                          sizes="54px"
-                          petite
-                        />
-                        <NoteMetacritic note={v.jeu.metacritic} petite />
-                      </div>
-                      <div className="flex min-w-0 flex-1 flex-col gap-1">
-                        <span className="text-sm leading-tight font-semibold">
-                          {v.sortie.titre}
-                        </span>
-                        <span className="text-xs text-texte-discret">
-                          {formaterDate(v.sortie.date, v.sortie.precision)} ·{" "}
-                          {v.jeu.console.nom}
-                        </span>
-                        <div className="flex flex-wrap items-center gap-1">
-                          <Disponibilite jeu={v.jeu} possedees={possedees(v)} />
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
+      </div>
     </section>
   );
 }

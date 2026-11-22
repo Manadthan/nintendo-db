@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { avecRecherche, correspond } from "./recherche";
+import {
+  avecRecherche,
+  contientMots,
+  correspond,
+  motsRecherche,
+  texteRecherche,
+} from "./recherche";
 import type { JeuCatalogue, SortieCatalogue } from "./types";
 
 const sortie = (titre: string | null): SortieCatalogue => ({
@@ -81,5 +87,38 @@ describe("avecRecherche", () => {
     );
     expect(avecRecherche("?marche=us&q=mario", "")).toBe("?marche=us");
     expect(avecRecherche("", "  ")).toBe("");
+  });
+});
+
+describe("texte préparé une fois par jeu (audit de performance, B)", () => {
+  const RECHERCHES = [
+    "curse",
+    "カービィ",
+    "super rainbow",
+    "hal",
+    "POKKÉN tournament!",
+    "rainbow kirby",
+    "kirby zelda",
+    "",
+    "   ",
+  ];
+
+  it("donne les mêmes résultats que correspond, pour chaque jeu et chaque recherche", () => {
+    for (const jeu of [KIRBY, POKKEN])
+      for (const recherche of RECHERCHES) {
+        const mots = motsRecherche(recherche);
+        expect(contientMots(texteRecherche(jeu), mots)).toBe(
+          correspond(jeu, recherche),
+        );
+      }
+  });
+
+  it("normalise le texte et les mots (majuscules, accents, ponctuation)", () => {
+    expect(texteRecherche(POKKEN)).toContain("pokken tournament");
+    expect(motsRecherche("  POKKÉN   Tournament! ")).toEqual([
+      "pokken",
+      "tournament",
+    ]);
+    expect(motsRecherche("   ")).toEqual([]);
   });
 });

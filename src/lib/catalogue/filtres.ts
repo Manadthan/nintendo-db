@@ -199,12 +199,30 @@ export function avecFiltres(recherche: string, filtres: Filtres): string {
   return texte ? `?${texte}` : "";
 }
 
-/** Filtres en cours, lus dans l'adresse. Mémorisés : `useSyncExternalStore` exige le même objet tant que rien ne change. */
+/** Mêmes filtres, champ par champ ? */
+export function memesFiltres(a: Filtres, b: Filtres): boolean {
+  return (Object.keys(SANS_FILTRE) as (keyof Filtres)[]).every(
+    (cle) => a[cle] === b[cle],
+  );
+}
+
+/**
+ * Filtres en cours, lus dans l'adresse. Mémorisés : `useSyncExternalStore` exige le même objet tant que rien ne
+ * change, et le catalogue ne refait pas ses calculs quand seule la recherche (`?q=`) change (audit, B).
+ */
 let dernier: { recherche: string; filtres: Filtres } | null = null;
 export function lireFiltres(): Filtres {
   const recherche = window.location.search;
-  if (dernier?.recherche !== recherche)
-    dernier = { recherche, filtres: filtresDepuisParametres(recherche) };
+  if (dernier?.recherche !== recherche) {
+    const filtres = filtresDepuisParametres(recherche);
+    dernier = {
+      recherche,
+      filtres:
+        dernier && memesFiltres(dernier.filtres, filtres)
+          ? dernier.filtres
+          : filtres,
+    };
+  }
   return dernier.filtres;
 }
 

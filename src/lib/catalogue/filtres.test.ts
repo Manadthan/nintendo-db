@@ -1,6 +1,8 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { trier } from "./catalogue";
 import {
+  lireFiltres,
+  memesFiltres,
   SANS_FILTRE,
   anneesProposees,
   avecFiltres,
@@ -351,5 +353,27 @@ describe("filtre Série (SPEC v1.37)", () => {
     expect(avecFiltres("", { ...SANS_FILTRE, serie: "Mario Kart" })).toBe(
       "?serie=Mario+Kart",
     );
+  });
+});
+
+describe("filtres mémorisés (audit de performance, B)", () => {
+  it("compare deux jeux de filtres champ par champ", () => {
+    expect(memesFiltres(SANS_FILTRE, { ...SANS_FILTRE })).toBe(true);
+    expect(memesFiltres(SANS_FILTRE, { ...SANS_FILTRE, annee: "2015" })).toBe(
+      false,
+    );
+  });
+
+  it("garde le même objet quand seule la recherche (?q=) change", () => {
+    const lire = (adresse: string) => {
+      vi.stubGlobal("window", { location: { search: adresse } });
+      return lireFiltres();
+    };
+    const avant = lire("?console=wii-u&q=m");
+    expect(lire("?console=wii-u&q=ma")).toBe(avant);
+    const autre = lire("?console=wii&q=ma");
+    expect(autre).not.toBe(avant);
+    expect(autre.console).toBe("wii");
+    vi.unstubAllGlobals();
   });
 });
