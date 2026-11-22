@@ -1,11 +1,13 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { unstable_cache } from "next/cache";
 import { aRemplacer, type Source } from "@/lib/admin/jaquettes";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import { ensemble } from "@/lib/collection/collection";
 import { estFirstParty, studios } from "@/lib/catalogue/developpeurs";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
 import { toutesLesPages } from "@/lib/supabase/pages";
+import { createSupabasePublicClient } from "@/lib/supabase/public";
 import type { Database } from "@/types/database";
 import type { JeuStat } from "./statistiques";
 
@@ -47,7 +49,7 @@ export async function chargerStatistiques() {
  */
 export async function chargerCollection(supabase: SupabaseClient<Database>) {
   const [catalogue, possessions] = await Promise.all([
-    chargerCatalogue(supabase),
+    chargerCatalogue(),
     toutesLesPages<{ game_id: string; region: Region }>(
       (de, a) =>
         supabase
@@ -62,8 +64,21 @@ export async function chargerCollection(supabase: SupabaseClient<Database>) {
   return { ...catalogue, possessions: ensemble(possessions) };
 }
 
-/** Jeux et consoles du catalogue, sans possessions : aussi pour le profil public d'un collectionneur (US-23). */
-export async function chargerCatalogue(supabase: SupabaseClient<Database>) {
+/** Étiquette du cache du catalogue : vidée par chaque action qui modifie un jeu (`updateTag`, ADR-11). */
+export const TAG_CATALOGUE = "catalogue";
+
+/**
+ * Jeux et consoles du catalogue, sans possessions : Statistiques, Mon profil et profil public (US-23). Gardés
+ * 5 minutes en cache (audit de performance D, ADR-11) : le catalogue est le même pour tous et lu en visiteur ;
+ * une modification dans l'administration vide le cache aussitôt. Les possessions, elles, sont lues à chaque fois.
+ */
+export const chargerCatalogue = unstable_cache(
+  () => lireCatalogue(createSupabasePublicClient()),
+  ["statistiques-catalogue"],
+  { revalidate: 300, tags: [TAG_CATALOGUE] },
+);
+
+async function lireCatalogue(supabase: SupabaseClient<Database>) {
   const [lignes, consoles] = await Promise.all([
     toutesLesPages<LigneJeu>(
       (de, a) =>
@@ -76,6 +91,7 @@ export async function chargerCatalogue(supabase: SupabaseClient<Database>) {
           .range(de, a)
           .overrideTypes<LigneJeu[], { merge: false }>(),
       "Statistiques",
+      2,
     ),
     supabase.from("consoles").select("slug, nom").order("ordre"),
   ]);

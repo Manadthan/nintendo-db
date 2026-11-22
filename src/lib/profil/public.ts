@@ -32,7 +32,7 @@ export async function chargerProfilPublic(pseudo: string) {
   if (error) throw new Error(`Profil illisible : ${error.message}`);
   if (!data) return null;
   const brut = data as unknown as ProfilPublicBrut;
-  const { jeux, consoles } = await chargerCatalogue(supabase);
+  const { jeux, consoles } = await chargerCatalogue();
   const possessions = ensemble(brut.versions);
   return {
     pseudo: brut.pseudo,

@@ -29,14 +29,18 @@ export default async function PageProfil() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect(PAGE_CONNEXION);
-  const { data: profil, error } = await supabase
-    .from("profils")
-    .select("pseudo, avatar, public, role, cree_le")
-    .eq("user_id", user.id)
-    .maybeSingle();
+  // Profil et collection lus en même temps (audit de performance D).
+  const [{ data: profil, error }, { resume, badges, ajouts }] =
+    await Promise.all([
+      supabase
+        .from("profils")
+        .select("pseudo, avatar, public, role, cree_le")
+        .eq("user_id", user.id)
+        .maybeSingle(),
+      chargerCollectionProfil(supabase),
+    ]);
   if (error) throw new Error(`Profil illisible : ${error.message}`);
   if (!profil) throw new Error("Ce compte n'a pas de profil.");
-  const { resume, badges, ajouts } = await chargerCollectionProfil(supabase);
   const avatar = avatarOuDefaut(profil.avatar);
   const proprietaire = profil.role === "proprietaire";
   // Adresse du site qui sert la page (production ou prévisualisation) : le lien partagé y mène.
