@@ -20,7 +20,12 @@ export type SortieCatalogue = {
   titreRomanise: string | null;
   date: string | null; // AAAA-MM-JJ
   precision: PrecisionDate | null;
-  jaquetteSrcset: string | null; // null : vignette neutre (US-12)
+  /**
+   * Base du chemin de la jaquette (`{game_id}/{région}-{version}`, ADR-04) ; null : vignette neutre (US-12). Les
+   * adresses des 3 tailles sont construites à l'affichage (srcsetJaquette) : envoyer ici les 3 adresses complètes de
+   * chaque version doublait presque les données de l'accueil (audit de performance du 22/11/2026).
+   */
+  jaquette: string | null;
 };
 
 export type JeuCatalogue = {

@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import { regionParDefaut, versJeuFiche, type LigneFiche } from "./fiche";
 
 const ID = "20000000-0000-0000-0000-000000000001";
-const BASE = "https://exemple.supabase.co";
 
 const release = (
   region: "JAP" | "US" | "PAL",
@@ -44,7 +43,7 @@ const KARAOKE: LigneFiche = {
 };
 
 describe("versJeuFiche (US-04)", () => {
-  const jeu = versJeuFiche(KARAOKE, BASE);
+  const jeu = versJeuFiche(KARAOKE);
 
   it("reprend les informations du jeu et sa console", () => {
     expect(jeu).toMatchObject({
@@ -72,7 +71,7 @@ describe("versJeuFiche (US-04)", () => {
 });
 
 describe("regionParDefaut (US-04)", () => {
-  const jeu = versJeuFiche(KARAOKE, BASE);
+  const jeu = versJeuFiche(KARAOKE);
 
   it("ouvre la fiche sur le marché choisi dans le catalogue, si le jeu y est sorti", () => {
     expect(regionParDefaut(jeu, "JAP")).toBe("JAP");

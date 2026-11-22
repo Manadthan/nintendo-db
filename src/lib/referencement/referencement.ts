@@ -2,6 +2,7 @@ import type { Metadata, MetadataRoute } from "next";
 import { REGIONS } from "@/lib/catalogue/types";
 import { versionAffichee } from "@/lib/catalogue/catalogue";
 import type { JeuFiche } from "@/lib/fiche/fiche";
+import { srcsetJaquette } from "@/lib/jaquettes/stockage";
 
 /** Adresse du site en production : adresses canoniques, sitemap, aperçus de partage (référencement, étape 7). */
 export const URL_SITE = "https://nintendo-db.vercel.app";
@@ -41,6 +42,10 @@ export function reglesRobots(): MetadataRoute.Robots {
   };
 }
 
+/** Les 3 adresses d'une jaquette, ou null sans jaquette. */
+const srcsetDe = (base: string | null | undefined) =>
+  base ? srcsetJaquette(base) : null;
+
 /** Adresse d'une taille précise dans un `srcset` (« … 600w ») ; null si absente. */
 export function imageDuSrcset(
   srcset: string | null,
@@ -64,7 +69,7 @@ export function metadonneesFiche(jeu: JeuFiche): Metadata {
   const titre = version?.sortie.titre ?? jeu.slug;
   const description = `${titre} sur ${jeu.console.nom} : jaquettes, titres et dates de sortie au Japon, en Amérique du Nord et en Europe.`;
   const chemin = cheminFiche(jeu.console.slug, jeu.slug);
-  const image = imageDuSrcset(version?.sortie.jaquetteSrcset ?? null, 600);
+  const image = imageDuSrcset(srcsetDe(version?.sortie.jaquette), 600);
   return {
     title: `${titre} · ${jeu.console.nom} · ${NOM_SITE}`,
     description,
@@ -107,7 +112,7 @@ export function donneesStructurees(jeu: JeuFiche): Record<string, unknown> {
   })
     .filter((d): d is string => !!d)
     .sort();
-  const image = imageDuSrcset(version?.sortie.jaquetteSrcset ?? null, 768);
+  const image = imageDuSrcset(srcsetDe(version?.sortie.jaquette), 768);
   return {
     "@context": "https://schema.org",
     "@type": "VideoGame",

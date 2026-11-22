@@ -8,7 +8,7 @@ const sortie = (titre: string | null): SortieCatalogue => ({
   titreRomanise: null,
   date: titre ? "2015-01-01" : null,
   precision: titre ? "jour" : null,
-  jaquetteSrcset: null,
+  jaquette: null,
 });
 
 const KIRBY: JeuCatalogue = {

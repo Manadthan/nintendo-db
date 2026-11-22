@@ -1,5 +1,4 @@
 import "server-only";
-import { supabaseEnv } from "@/lib/supabase/env";
 import { toutesLesPages } from "@/lib/supabase/pages";
 import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { versJeuCatalogue, type LigneJeu } from "./lignes";
@@ -21,9 +20,8 @@ export async function chargerCatalogue(): Promise<JeuCatalogue[]> {
     "Catalogue",
   );
 
-  const { url } = supabaseEnv();
   return (lignes as unknown as LigneJeu[]).map((ligne) =>
-    versJeuCatalogue(ligne, url),
+    versJeuCatalogue(ligne),
   );
 }
 

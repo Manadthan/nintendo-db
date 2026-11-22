@@ -1,5 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { versJeuFiche, type LigneFiche } from "@/lib/fiche/fiche";
+import { srcsetJaquette } from "@/lib/jaquettes/stockage";
 import {
   donneesStructurees,
   entreesSitemap,
@@ -12,6 +13,11 @@ import {
 const ID = "20000000-0000-0000-0000-000000000001";
 const BASE = "https://exemple.supabase.co";
 const JAQUETTE = `${BASE}/storage/v1/object/public/jaquettes/${ID}/pal-mi3x9k`;
+
+// Les adresses des jaquettes sont construites à l'affichage, avec l'adresse publique de Supabase.
+// Posées dès le chargement du fichier : certaines fiches d'exemple sont calculées hors des tests.
+vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", BASE);
+vi.stubEnv("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY", "sb_publishable_test");
 
 const release = (
   region: "JAP" | "US" | "PAL",
@@ -51,7 +57,7 @@ const ligne: LigneFiche = {
     }),
   ],
 };
-const KARAOKE = versJeuFiche(ligne, BASE);
+const KARAOKE = versJeuFiche(ligne);
 
 describe("plan du site et robots", () => {
   it("liste l'accueil, À propos et chaque fiche, en adresses absolues", () => {
@@ -74,7 +80,7 @@ describe("plan du site et robots", () => {
 
 describe("imageDuSrcset", () => {
   it("donne l'adresse d'une largeur, ou null", () => {
-    const srcset = KARAOKE.sorties.PAL.jaquetteSrcset;
+    const srcset = srcsetJaquette(KARAOKE.sorties.PAL.jaquette!);
     expect(imageDuSrcset(srcset, 600)).toBe(`${JAQUETTE}-600.webp`);
     expect(imageDuSrcset(srcset, 1200)).toBeNull();
     expect(imageDuSrcset(null, 600)).toBeNull();
@@ -105,13 +111,10 @@ describe("metadonneesFiche", () => {
   });
 
   it("sans jaquette, pas d'image d'aperçu", () => {
-    const sansJaquette = versJeuFiche(
-      {
-        ...ligne,
-        releases: ligne.releases.map((r) => ({ ...r, jaquette_path: null })),
-      },
-      BASE,
-    );
+    const sansJaquette = versJeuFiche({
+      ...ligne,
+      releases: ligne.releases.map((r) => ({ ...r, jaquette_path: null })),
+    });
     expect(metadonneesFiche(sansJaquette).openGraph).not.toHaveProperty(
       "images",
     );
@@ -135,15 +138,12 @@ describe("donneesStructurees (schema.org VideoGame)", () => {
   });
 
   it("garde une date imprécise telle quelle (année seule)", () => {
-    const annee = versJeuFiche(
-      {
-        ...ligne,
-        releases: [
-          release("JAP", "Titre", "2014-01-01", { precision_date: "annee" }),
-        ],
-      },
-      BASE,
-    );
+    const annee = versJeuFiche({
+      ...ligne,
+      releases: [
+        release("JAP", "Titre", "2014-01-01", { precision_date: "annee" }),
+      ],
+    });
     expect(donneesStructurees(annee).datePublished).toBe("2014");
   });
 

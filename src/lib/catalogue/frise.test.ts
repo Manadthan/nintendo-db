@@ -19,7 +19,7 @@ const jeu = (slug: string, date: string | null): JeuCatalogue => ({
       titreRomanise: null,
       date: null,
       precision: null,
-      jaquetteSrcset: null,
+      jaquette: null,
     },
     US: {
       sortie: false,
@@ -27,7 +27,7 @@ const jeu = (slug: string, date: string | null): JeuCatalogue => ({
       titreRomanise: null,
       date: null,
       precision: null,
-      jaquetteSrcset: null,
+      jaquette: null,
     },
     PAL: {
       sortie: true,
@@ -35,7 +35,7 @@ const jeu = (slug: string, date: string | null): JeuCatalogue => ({
       titreRomanise: null,
       date,
       precision: date ? "jour" : null,
-      jaquetteSrcset: null,
+      jaquette: null,
     },
   },
 });

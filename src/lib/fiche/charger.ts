@@ -1,5 +1,4 @@
 import "server-only";
-import { supabaseEnv } from "@/lib/supabase/env";
 import { toutesLesPages } from "@/lib/supabase/pages";
 import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { versJeuFiche, type JeuFiche, type LigneFiche } from "./fiche";
@@ -22,9 +21,7 @@ export async function chargerJeu(
     throw new Error(
       `Jeu ${consoleSlug}/${jeuSlug} illisible : ${error.message}`,
     );
-  return data
-    ? versJeuFiche(data as unknown as LigneFiche, supabaseEnv().url)
-    : null;
+  return data ? versJeuFiche(data as unknown as LigneFiche) : null;
 }
 
 /** Adresses de toutes les fiches, pour les préparer à l'avance au build (ADR-02). */

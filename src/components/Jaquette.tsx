@@ -1,5 +1,6 @@
 import type { SortieCatalogue } from "@/lib/catalogue/types";
 import { classeProportions } from "@/lib/jaquettes/proportions";
+import { srcsetJaquette } from "@/lib/jaquettes/stockage";
 
 type Props = {
   sortie: SortieCatalogue;
@@ -27,11 +28,11 @@ export function Jaquette({
   petite = false,
   formeReelle = false,
 }: Props) {
-  if (sortie.jaquetteSrcset) {
+  if (sortie.jaquette) {
     return (
       // eslint-disable-next-line @next/next/no-img-element -- images déjà en WebP 300/600 (ADR-04), pas de relais
       <img
-        srcSet={sortie.jaquetteSrcset}
+        srcSet={srcsetJaquette(sortie.jaquette)}
         sizes={sizes}
         alt={`Jaquette de ${titre}`}
         loading="lazy"
