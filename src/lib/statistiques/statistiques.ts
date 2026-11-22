@@ -18,6 +18,8 @@ export type JeuStat = {
   sansCode: Region[];
   /** Développé par un studio interne de Nintendo (filtre « Nintendo (first party) », #89). */
   firstParty: boolean;
+  /** Séries du jeu (étape 23) : badges « Série complète » (US-24). */
+  series?: string[];
 };
 
 /** Jeux comptés : tous, ou les seuls jeux first party (bascule de la page, SPEC v1.32). */

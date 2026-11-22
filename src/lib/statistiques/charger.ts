@@ -13,6 +13,7 @@ type LigneJeu = {
   id: string;
   metacritic_note: number | null;
   developpeur: string | null;
+  series: string[];
   consoles: { slug: string; nom: string };
   releases: {
     region: Region;
@@ -50,7 +51,7 @@ export async function chargerCollection(supabase: SupabaseClient<Database>) {
         supabase
           .from("games")
           .select(
-            "id, metacritic_note, developpeur, consoles!inner(slug, nom), releases(region, sortie, titre, code_produit, jaquette_path, jaquette_source)",
+            "id, metacritic_note, developpeur, series, consoles!inner(slug, nom), releases(region, sortie, titre, code_produit, jaquette_path, jaquette_source)",
           )
           .order("id")
           .range(de, a)
@@ -84,6 +85,7 @@ export async function chargerCollection(supabase: SupabaseClient<Database>) {
       .filter((s) => !s.code_produit)
       .map((s) => s.region),
     firstParty: studios(l.developpeur).some(estFirstParty),
+    series: l.series,
   }));
   return {
     jeux,

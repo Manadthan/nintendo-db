@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import { AVATARS, type IdAvatar } from "@/lib/profil/avatars";
 
-/** Trous et détails : de la couleur du fond de l'avatar. */
-const FOND = "var(--color-accent-doux)";
+/** Trous et détails : de la couleur du fond de l'icône (`--fond-icone`, posé par les badges, US-24). */
+const FOND = "var(--fond-icone, var(--color-accent-doux))";
 
-/** Icônes dessinées pour le site (ADR-16 point 6), grille 24 × 24, couleur du texte courant. */
-const DESSINS: Record<IdAvatar, ReactNode> = {
+/** Icônes dessinées pour le site (ADR-16 point 6), grille 24 × 24, couleur du texte courant ; reprises par les badges. */
+export const DESSINS: Record<IdAvatar, ReactNode> = {
   manette: (
     <>
       <rect x="2" y="7" width="20" height="11" rx="5.5" />

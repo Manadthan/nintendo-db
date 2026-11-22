@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { seDeconnecter } from "@/app/actions/auth";
 import { Avatar } from "@/components/Avatar";
+import { Badges } from "@/components/Badges";
 import { DerniersAjouts, MaCollection } from "@/components/CollectionProfil";
 import { EnTete } from "@/components/EnTete";
 import { InterrupteurPublic, ModifierProfil } from "@/components/Profil";
@@ -33,7 +34,7 @@ export default async function PageProfil() {
     .maybeSingle();
   if (error) throw new Error(`Profil illisible : ${error.message}`);
   if (!profil) throw new Error("Ce compte n'a pas de profil.");
-  const { resume, ajouts } = await chargerCollectionProfil(supabase);
+  const { resume, badges, ajouts } = await chargerCollectionProfil(supabase);
   const avatar = avatarOuDefaut(profil.avatar);
   const proprietaire = profil.role === "proprietaire";
 
@@ -59,7 +60,8 @@ export default async function PageProfil() {
           </div>
           <InterrupteurPublic public={profil.public} />
         </section>
-        <MaCollection resume={resume} />
+        <MaCollection resume={resume} badges={badges.gagnes.length} />
+        <Badges gagnes={badges.gagnes} prochains={badges.prochains} />
         <DerniersAjouts ajouts={ajouts} />
         <ModifierProfil pseudo={profil.pseudo} avatar={avatar} />
         {proprietaire && (
