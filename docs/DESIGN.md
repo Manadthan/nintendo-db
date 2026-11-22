@@ -543,9 +543,10 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
 3. **Quota** : 5 000 appels par jour, 4 par jeu toutes les 6 h. Le prix est demandé **par le navigateur** après
    l'affichage (les pages restent statiques, les robots ne le déclenchent pas) ; `robots.txt` interdit `/api/`.
    eBay en erreur (429, 5xx, délai de 8 s) : la route répond 503, le bloc est masqué, rien n'est gardé.
-4. **Pertinence** (module pur `src/lib/prix/`, repris de l'étude) : tous les mots du titre présents ; lots, guides,
-   manuels, boîtes vides, steelbooks, amiibo, consoles et reproductions écartés ; JAP : mention du Japon exigée ; US :
-   aucune mention du Japon ni de PAL. **Médiane** à partir de 5 annonces ; sinon « Pas assez d'annonces ».
+4. **Pertinence** (module pur `src/lib/prix/`, repris de l'étude et corrigé par ses tests) : tous les mots du titre
+   présents ; numéro de suite absent du titre écarté (« Super Mario Galaxy 2 ») ; lots, guides, manuels **seuls**
+   (un jeu complet « avec manuel » reste), boîtes vides, steelbooks, amiibo, consoles et reproductions écartés ; JAP :
+   mention du Japon exigée ; US : aucune mention du Japon ni de PAL ; PAL : aucune mention du Japon. **Médiane** à partir de 5 annonces ; sinon « Pas assez d'annonces ».
 5. **Lien « eBay › »** : recherche des **objets vendus** du jeu (`/sch/i.html?_nkw=…&_sacat=139973&LH_Sold=1&LH_Complete=1`)
    sur ebay.com (JAP, US) ou ebay.fr (PAL) : les ventes réelles restent consultables chez eBay.
 6. **Clés** : `EBAY_CLIENT_ID` et `EBAY_CLIENT_SECRET` dans les variables de **Vercel** (Production et Preview),

@@ -1,0 +1,21 @@
+{
+  "href": "https://api.ebay.com/buy/browse/v1/item_summary/search?q=Super+Mario+Galaxy+Wii&category_ids=139973&limit=50",
+  "total": 1874,
+  "limit": 50,
+  "offset": 0,
+  "itemSummaries": [
+    { "itemId": "v1|1|0", "title": "Super Mario Galaxy (Nintendo Wii, 2007) CIB Complete w/ Manual", "price": { "value": "19.47", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|2|0", "title": "Super Mario Galaxy Nintendo Wii Disc Only Tested", "price": { "value": "10.98", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|3|0", "title": "Super Mario Galaxy - Nintendo Wii - Complete", "price": { "value": "21.00", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|4|0", "title": "Super Mario Galaxy Wii Brand New Sealed", "price": { "value": "49.95", "currency": "USD" }, "condition": "New" },
+    { "itemId": "v1|5|0", "title": "Super Mario Galaxy Nintendo Wii Game", "price": { "value": "17.99", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|6|0", "title": "Super Mario Galaxy 2 Nintendo Wii Complete", "price": { "value": "24.99", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|7|0", "title": "Wii Game Lot Super Mario Galaxy Mario Kart Wii Sports", "price": { "value": "45.00", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|8|0", "title": "Super Mario Galaxy Prima Official Game Guide Wii", "price": { "value": "14.99", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|9|0", "title": "Super Mario Galaxy Wii Japanese Import NTSC-J", "price": { "value": "15.97", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|10|0", "title": "Super Mario Galaxy Wii PAL UK Version", "price": { "value": "12.00", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|11|0", "title": "Super Mario Galaxy Nintendo Wii Case Only No Game", "price": { "value": "5.00", "currency": "USD" }, "condition": "Used" },
+    { "itemId": "v1|12|0", "title": "Super Mario Galaxy sans prix" },
+    { "itemId": "v1|13|0", "title": "Nintendo Wii Super Mario Galaxy Black Label", "price": { "value": "18.50", "currency": "USD" }, "condition": "Used" }
+  ]
+}
