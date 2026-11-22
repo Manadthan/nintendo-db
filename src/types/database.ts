@@ -9,6 +9,39 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      captures: {
+        Row: {
+          game_id: string;
+          hauteur: number | null;
+          largeur: number | null;
+          position: number;
+          url: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          game_id: string;
+          hauteur?: number | null;
+          largeur?: number | null;
+          position: number;
+          url: string;
+        };
+        Update: {
+          game_id?: string;
+          hauteur?: number | null;
+          largeur?: number | null;
+          position?: number;
+          url?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "captures_game_id_fkey";
+            columns: ["game_id"];
+            isOneToOne: false;
+            referencedRelation: "games";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       consoles: {
         Row: {
           annee: number;
@@ -88,6 +121,7 @@ export type Database = {
           metacritic_note: number | null;
           metacritic_url: string | null;
           physique: boolean;
+          rawg_slug: string | null;
           series: string[];
           slug: string;
           updated_at: string;
@@ -106,6 +140,7 @@ export type Database = {
           metacritic_note?: number | null;
           metacritic_url?: string | null;
           physique?: boolean;
+          rawg_slug?: string | null;
           series?: string[];
           slug: string;
           updated_at?: string;
@@ -123,6 +158,7 @@ export type Database = {
           metacritic_note?: number | null;
           metacritic_url?: string | null;
           physique?: boolean;
+          rawg_slug?: string | null;
           series?: string[];
           slug?: string;
           updated_at?: string;
