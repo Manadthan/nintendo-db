@@ -14,6 +14,7 @@ import { basculerVersion, useCollection } from "@/lib/collection/navigateur";
 import { possede } from "@/lib/collection/collection";
 import { FORMES_REELLES } from "@/lib/jaquettes/proportions";
 import { Jaquette } from "./Jaquette";
+import { PrixEbay } from "./PrixEbay";
 import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
 
 /** Note Metacritic de la fiche (US-17), aux couleurs de Metacritic : vert ≥ 75, jaune 50 à 74, rouge < 50. */
@@ -273,6 +274,18 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             )}
           </section>
 
+          <PrixEbay
+            consoleSlug={jeu.console.slug}
+            jeuSlug={jeu.slug}
+            sorties={{
+              JAP: jeu.sorties.JAP.sortie,
+              US: jeu.sorties.US.sortie,
+              PAL: jeu.sorties.PAL.sortie,
+            }}
+            noms={NOMS}
+            region={region}
+          />
+
           <p className="text-xs leading-relaxed text-texte-discret">
             Sources :{" "}
             {/* Wii U, Switch 2, N64, GBA : Wikipédia ; les autres consoles, GameTDB seul (SPEC v1.9 à v1.18). */}
@@ -291,8 +304,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             {parWikipedia && " (CC BY-SA)"}
             {sourcesExternes.length > 0 &&
               ` · jaquettes ${sourcesExternes.join(", ")}`}
-            {jeu.metacritic !== null && " · note Metacritic via Wikipédia"}.
-            Site de fan non affilié à Nintendo.
+            {jeu.metacritic !== null && " · note Metacritic via Wikipédia"}
+            {" · prix via eBay"}. Site de fan non affilié à Nintendo.
           </p>
         </div>
       </div>
