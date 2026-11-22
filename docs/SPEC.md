@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.42 — 22/11/2026 — statut : **à valider**
+> Version 1.43 — 22/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.43 | 22/11/2026 | **Captures de jeu** (étape 28, choix du propriétaire) : US-26, jusqu'à 6 captures RAWG par fiche, carrousel sous les informations, image agrandie au toucher, lien actif vers RAWG (conditions de RAWG) |
 > | 1.42 | 22/11/2026 | **Prix eBay** (étape 25, étude du 22/11, choix du propriétaire) : US-25, prix **demandé** (médiane des annonces en cours) par version dans la fiche, en euros, JAP et US sur eBay US, PAL sur eBay France + Royaume-Uni ; jamais plus vieux que 6 h ; lien vers les ventes terminées d'eBay |
 > | 1.41 | 22/11/2026 | US-02 : le catalogue affiche les **60 premiers jeux**, puis les suivants par lots de 60 **au défilement** (audit de performance, choix du propriétaire) ; compteurs inchangés ; « Précédent » depuis une fiche ramène à la même hauteur |
 > | 1.40 | 22/11/2026 | US-19 : « copier à nouveau un lien » devient **« Nouveau lien »** (l'ancien lien cesse de marcher, 7 jours de plus) : la base ne garde que l'empreinte du jeton (ADR-16), le lien n'est donc montré qu'une fois |
@@ -160,6 +161,23 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [x] eBay indisponible ou quota du jour épuisé : le bloc entier est masqué, le reste de la fiche ne change pas.
 - Hors périmètre : prix dans le catalogue, tri par prix, prix « complet » et « jeu seul » séparés (une annonce
       sur deux ne le précise pas), prix des ventes terminées (accès refusé par eBay au 22/11).
+
+#### US-26 — Voir des captures du jeu (M, SPEC v1.43)
+*En tant que visiteur, je vois à quoi ressemble le jeu, pas seulement sa boîte.*
+- [ ] Sur la fiche, sous les informations et avant « Disponibilité », un bloc **« Captures »** : jusqu'à **6 images**
+      de jeu dans un **carrousel** qui défile au doigt (une image et le début de la suivante), avec des points de
+      position. Maquettes : `maquettes/captures-rawg.png`, `maquettes/captures-rawg-agrandie.png`.
+- [ ] Un toucher ouvre l'image **en grand** sur fond sombre (« 2 / 6 », glisser pour la suivante, « Fermer »,
+      touche Échap au clavier). Chaque image a un texte de remplacement (« Splatoon, capture 2 sur 6 »).
+- [ ] Les captures sont les mêmes pour les 3 régions (images du jeu, pas de la boîte).
+- [ ] Source : **RAWG**, avec un **lien actif** vers la page du jeu chez RAWG sous le carrousel (« Captures : RAWG »)
+      et dans les sources du pied de fiche et de la page « À propos » (conditions d'utilisation de RAWG).
+- [ ] Un jeu sans captures, ou que RAWG ne permet pas de reconnaître avec certitude (titre **et** console), n'a pas
+      de bloc ; jamais les captures d'un autre jeu.
+- [ ] Les images arrivent sans ralentir l'affichage de la fiche (petites images pour le carrousel, grande seulement
+      à l'agrandissement) ; une image qui ne charge pas est retirée du carrousel.
+- Hors périmètre : vidéos, captures dans le catalogue, choix des captures à la main (plus tard dans l'administration
+      si besoin), captures propres à une région.
 
 #### US-05 — Rechercher un jeu (M)
 *En tant que visiteur, je trouve un jeu en tapant une partie de son titre, directement dans le catalogue.*
