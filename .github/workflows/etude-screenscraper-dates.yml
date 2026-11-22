@@ -1,0 +1,38 @@
+name: Étude ScreenScraper dates
+
+# Étape 26, 2e partie (DESIGN §11) : compare les dates et les éditeurs d'un échantillon de jeux rétro (NES à GameCube)
+# à ceux de ScreenScraper, en LECTURE SEULE (rien n'est écrit dans la base). Lancée à la main (onglet Actions →
+# Étude ScreenScraper dates → Run workflow) : la session Claude reçoit 403 de screenscraper.fr. Résumé dans la tâche,
+# écarts dans le journal (lignes « ÉCART »).
+on:
+  workflow_dispatch:
+    inputs:
+      taille:
+        description: "Nombre de jeux rétro tirés au hasard"
+        default: "150"
+
+permissions:
+  contents: read
+
+jobs:
+  etude:
+    name: Comparer dates et éditeurs à ScreenScraper
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Étude (lecture seule)
+        env:
+          SCREENSCRAPER_DEVID: ${{ secrets.SCREENSCRAPER_DEVID }}
+          SCREENSCRAPER_DEVPASSWORD: ${{ secrets.SCREENSCRAPER_DEVPASSWORD }}
+          SCREENSCRAPER_USER: ${{ secrets.SCREENSCRAPER_USER }}
+          SCREENSCRAPER_PASSWORD: ${{ secrets.SCREENSCRAPER_PASSWORD }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          ETUDE_TAILLE: ${{ inputs.taille }}
+        run: node scripts/etude-screenscraper-dates.mjs
