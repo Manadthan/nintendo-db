@@ -188,13 +188,14 @@ export type JaquetteEnBase = {
  */
 /**
  * Jaquettes que l'import ne remplace jamais : ajoutées à la main (photo, adresse) ou choisies par le propriétaire
- * (gamecartdb pour la Switch 2, SPEC v1.26 ; boîtes européennes de Nintendo, SPEC v1.29).
+ * (gamecartdb pour la Switch 2, SPEC v1.26 ; boîtes européennes de Nintendo, SPEC v1.29 ; ScreenScraper, étape 26).
  */
 export const estGardee = (source: SourceJaquette | null | undefined) =>
   source === "photo" ||
   source === "url" ||
   source === "gamecartdb" ||
-  source === "nintendo";
+  source === "nintendo" ||
+  source === "screenscraper";
 
 export function choisirJaquettes(
   jeu: JeuImporte,

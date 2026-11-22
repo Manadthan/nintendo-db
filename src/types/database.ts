@@ -337,6 +337,7 @@ export type Database = {
         | "libretro"
         | "gamecartdb"
         | "nintendo"
+        | "screenscraper"
         | "photo"
         | "url";
       precision_date: "jour" | "mois" | "annee";
@@ -476,6 +477,7 @@ export const Constants = {
         "libretro",
         "gamecartdb",
         "nintendo",
+        "screenscraper",
         "photo",
         "url",
       ],

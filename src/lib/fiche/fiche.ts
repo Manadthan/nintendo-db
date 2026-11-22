@@ -15,6 +15,7 @@ export const SOURCES_JAQUETTE = {
   libretro: "libretro-thumbnails",
   gamecartdb: "gamecartdb",
   nintendo: "Nintendo",
+  screenscraper: "ScreenScraper",
   photo: "Photo",
   url: "Image ajoutée",
 } as const;
