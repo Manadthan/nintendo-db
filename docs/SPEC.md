@@ -144,21 +144,21 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 #### US-25 — Voir le prix demandé sur eBay (M, SPEC v1.42)
 *En tant que visiteur ou collectionneur, je vois combien coûte à peu près chaque version d'un jeu sur eBay.*
-- [ ] Sur la fiche, sous « Disponibilité », un bloc **« Prix eBay »** avec une ligne par région (Japon, États-Unis,
+- [x] Sur la fiche, sous « Disponibilité », un bloc **« Prix eBay »** avec une ligne par région (Japon, États-Unis,
       Europe) ; la version choisie sous la jaquette est surlignée. Maquette : `maquettes/prix-ebay.png`.
-- [ ] Prix = **médiane des annonces en cours** qui parlent bien de ce jeu (lots, guides, boîtes vides et autres
+- [x] Prix = **médiane des annonces en cours** qui parlent bien de ce jeu (lots, guides, boîtes vides et autres
       versions écartés), en **euros** arrondis à l'euro, avec le nombre d'annonces et le marché : **JAP** et **US** sur
       eBay US (JAP : annonces qui mentionnent le Japon), **PAL** sur eBay France et Royaume-Uni réunis. Dollars et
       livres convertis au taux du jour de la Banque centrale européenne.
-- [ ] Moins de **5 annonces** : « Pas assez d'annonces (N) », sans prix. Version non sortie : « Non sorti », sans lien.
-- [ ] Un lien **« eBay › »** par version sortie ouvre, dans un nouvel onglet, la recherche des **objets vendus** de ce
+- [x] Moins de **5 annonces** : « Pas assez d'annonces (N) », sans prix. Version non sortie : « Non sorti », sans lien.
+- [x] Un lien **« eBay › »** par version sortie ouvre, dans un nouvel onglet, la recherche des **objets vendus** de ce
       jeu sur le marché de la région (ebay.com, ebay.fr).
-- [ ] Sous le bloc : « Prix **demandé** : médiane des annonces en cours (pas des ventes), boîte complète ou jeu seul
+- [x] Sous le bloc : « Prix **demandé** : médiane des annonces en cours (pas des ventes), boîte complète ou jeu seul
       confondus », la conversion et l'ancienneté (« mis à jour il y a 2 h »). La source est citée en pied de fiche.
-- [ ] Un prix n'a jamais **plus de 6 heures** (contrat d'eBay). La fiche s'affiche sans attendre ; le prix arrive juste
+- [x] Un prix n'a jamais **plus de 6 heures** (contrat d'eBay). La fiche s'affiche sans attendre ; le prix arrive juste
       après (emplacement « Chargement du prix… »).
-- [ ] eBay indisponible ou quota du jour épuisé : le bloc entier est masqué, le reste de la fiche ne change pas.
-- [ ] Hors périmètre : prix dans le catalogue, tri par prix, prix « complet » et « jeu seul » séparés (une annonce
+- [x] eBay indisponible ou quota du jour épuisé : le bloc entier est masqué, le reste de la fiche ne change pas.
+- Hors périmètre : prix dans le catalogue, tri par prix, prix « complet » et « jeu seul » séparés (une annonce
       sur deux ne le précise pas), prix des ventes terminées (accès refusé par eBay au 22/11).
 
 #### US-05 — Rechercher un jeu (M)
