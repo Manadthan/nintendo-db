@@ -24,7 +24,8 @@ export function ModifierProfil({
   return (
     <details
       className="group rounded-xl border border-bordure bg-carte p-3"
-      open={!!etat.erreurs}
+      // Reste ouvert après un envoi : le rendu du serveur (revalidatePath) ne doit pas cacher le message.
+      open={!!etat.erreurs || !!etat.enregistre}
     >
       <summary className="flex min-h-11 cursor-pointer items-center text-sm font-semibold">
         Modifier mon pseudo ou mon avatar
