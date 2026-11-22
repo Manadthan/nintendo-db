@@ -2,7 +2,8 @@
 -- Les visiteurs ne lisent jamais `profils` ni `possessions` (RLS inchangée) : cette fonction `security definer` ne
 -- renvoie que ce qui est public — pseudo, avatar, date d'inscription, versions possédées et 6 derniers ajouts —
 -- et seulement si le profil est public. Jamais l'adresse e-mail. Profil privé ou pseudo inconnu : null (on ne peut
--- pas savoir si le compte existe). Pseudo comparé sans distinction de majuscules (citext).
+-- pas savoir si le compte existe). Pseudo comparé sans distinction de majuscules : `lower()` des deux côtés, car avec
+-- `search_path` vide l'opérateur = de citext (schéma extensions) n'est pas trouvé et la comparaison devient sensible à la casse.
 
 create function public.profil_public(p_pseudo text)
 returns jsonb
@@ -42,7 +43,7 @@ as $$
       '[]'::jsonb)
   )
   from public.profils p
-  where p.pseudo = p_pseudo::extensions.citext and p.public;
+  where lower(p.pseudo::text) = lower(p_pseudo) and p.public;
 $$;
 revoke execute on function public.profil_public(text) from public;
 grant execute on function public.profil_public(text) to anon, authenticated;
