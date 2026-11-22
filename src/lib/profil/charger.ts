@@ -1,5 +1,6 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { calculerBadges, prochainsBadges } from "@/lib/badges/badges";
 import {
   derniersAjouts,
   resumeCollection,
@@ -10,7 +11,7 @@ import type { Database } from "@/types/database";
 
 export const NOMBRE_AJOUTS = 6;
 
-/** Collection du compte de la session pour Mon profil (US-22) : résumé et derniers ajouts. */
+/** Collection du compte de la session pour Mon profil (US-22) : résumé, badges (US-24) et derniers ajouts. */
 export async function chargerCollectionProfil(
   supabase: SupabaseClient<Database>,
 ) {
@@ -27,8 +28,13 @@ export async function chargerCollectionProfil(
   ]);
   if (ajouts.error)
     throw new Error(`Derniers ajouts illisibles : ${ajouts.error.message}`);
+  const badges = calculerBadges(jeux, consoles, possessions);
   return {
     resume: resumeCollection(jeux, consoles, possessions),
+    badges: {
+      gagnes: badges.filter((b) => b.gagne),
+      prochains: prochainsBadges(badges),
+    },
     ajouts: derniersAjouts(ajouts.data ?? []),
   };
 }

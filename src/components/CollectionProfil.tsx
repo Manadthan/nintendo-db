@@ -6,11 +6,14 @@ import type { Ajout, resumeCollection } from "@/lib/profil/collection";
 const pluriel = (n: number, mot: string, motPluriel = `${mot}s`) =>
   `${n} ${n > 1 ? motPluriel : mot}`;
 
-/** « Ma collection » de Mon profil (US-22) : jeux, versions, avancement par console, versions par région. */
+/** « Ma collection » de Mon profil (US-22) : jeux, versions, badges, avancement par console, versions par région. */
 export function MaCollection({
   resume,
+  badges,
 }: {
   resume: ReturnType<typeof resumeCollection>;
+  /** Nombre de badges gagnés (US-24). */
+  badges: number;
 }) {
   return (
     <section
@@ -18,7 +21,7 @@ export function MaCollection({
       className="flex flex-col gap-3 rounded-xl border border-bordure bg-carte p-4"
     >
       <h2 className="font-titre text-lg font-bold">Ma collection</h2>
-      <p className="grid grid-cols-2 text-center">
+      <p className="grid grid-cols-3 text-center">
         <span className="flex flex-col">
           <strong className="font-titre text-3xl">{resume.jeux}</strong>
           <span className="text-sm text-texte-doux">
@@ -29,6 +32,12 @@ export function MaCollection({
           <strong className="font-titre text-3xl">{resume.versions}</strong>
           <span className="text-sm text-texte-doux">
             {resume.versions > 1 ? "versions" : "version"}
+          </span>
+        </span>
+        <span className="flex flex-col">
+          <strong className="font-titre text-3xl">{badges}</strong>
+          <span className="text-sm text-texte-doux">
+            {badges > 1 ? "badges" : "badge"}
           </span>
         </span>
       </p>

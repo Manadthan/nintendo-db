@@ -100,6 +100,15 @@ test("Mon profil résume la collection du collectionneur et ses derniers ajouts 
   await expect(
     collection.getByRole("listitem", { name: "JAP : 0 version" }),
   ).toBeVisible();
+  // Badges (US-24) : aucun gagné avec un seul jeu ; les prochains, avec leur progression.
+  const badges = page.getByRole("region", { name: "Badges" });
+  await expect(badges).toContainText("Aucun badge pour l'instant");
+  await expect(
+    badges.getByRole("listitem", { name: "Débutant : 1 / 10 jeux" }),
+  ).toBeVisible();
+  await expect(
+    badges.getByRole("listitem", { name: /^Moitié Wii U : 1 \/ \d+ jeux$/ }),
+  ).toBeVisible();
   const ajouts = page.getByRole("region", { name: "Derniers ajouts" });
   await expect(ajouts.getByRole("link", { name: /Splatoon/ })).toHaveAttribute(
     "href",
