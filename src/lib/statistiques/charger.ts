@@ -1,10 +1,12 @@
 import "server-only";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { aRemplacer, type Source } from "@/lib/admin/jaquettes";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import { ensemble } from "@/lib/collection/collection";
 import { estFirstParty, studios } from "@/lib/catalogue/developpeurs";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
 import { toutesLesPages } from "@/lib/supabase/pages";
+import type { Database } from "@/types/database";
 import type { JeuStat } from "./statistiques";
 
 type LigneJeu = {
@@ -34,7 +36,14 @@ const titre = (l: LigneJeu) =>
 
 /** Jeux, consoles et possessions du compte connecté (US-18, ADR-11), lus à l'ouverture de la page. */
 export async function chargerStatistiques() {
-  const supabase = await exigerProprietaire();
+  return chargerCollection(await exigerProprietaire());
+}
+
+/**
+ * Catalogue (lisible par tous) et possessions du compte de la session (chacun ne lit que les siennes, RLS 0012) :
+ * page Statistiques du propriétaire (US-18) et Mon profil de tout compte (US-22).
+ */
+export async function chargerCollection(supabase: SupabaseClient<Database>) {
   const [lignes, consoles, possessions] = await Promise.all([
     toutesLesPages<LigneJeu>(
       (de, a) =>

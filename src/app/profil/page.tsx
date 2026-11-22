@@ -3,10 +3,12 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { seDeconnecter } from "@/app/actions/auth";
 import { Avatar } from "@/components/Avatar";
+import { DerniersAjouts, MaCollection } from "@/components/CollectionProfil";
 import { EnTete } from "@/components/EnTete";
 import { InterrupteurPublic, ModifierProfil } from "@/components/Profil";
 import { PAGE_CONNEXION } from "@/lib/auth/routes";
 import { avatarOuDefaut } from "@/lib/profil/avatars";
+import { chargerCollectionProfil } from "@/lib/profil/charger";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
 const moisAnnee = (iso: string) =>
   new Date(iso).toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
 
-/** Mon profil (US-22) : pseudo, avatar, visibilité ; statistiques et derniers ajouts : PR suivante (3b). */
+/** Mon profil (US-22) : pseudo, avatar, visibilité, collection résumée et derniers ajouts. */
 export default async function PageProfil() {
   const supabase = await createSupabaseServerClient();
   const {
@@ -31,6 +33,7 @@ export default async function PageProfil() {
     .maybeSingle();
   if (error) throw new Error(`Profil illisible : ${error.message}`);
   if (!profil) throw new Error("Ce compte n'a pas de profil.");
+  const { resume, ajouts } = await chargerCollectionProfil(supabase);
   const avatar = avatarOuDefaut(profil.avatar);
   const proprietaire = profil.role === "proprietaire";
 
@@ -56,6 +59,8 @@ export default async function PageProfil() {
           </div>
           <InterrupteurPublic public={profil.public} />
         </section>
+        <MaCollection resume={resume} />
+        <DerniersAjouts ajouts={ajouts} />
         <ModifierProfil pseudo={profil.pseudo} avatar={avatar} />
         {proprietaire && (
           <Link
