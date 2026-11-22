@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       taille:
-        description: "Nombre de jeux rétro tirés au hasard"
+        description: "Nombre de jeux rétro tirés au hasard (600 : tous, environ 45 min)"
         default: "150"
 
 permissions:
@@ -18,7 +18,7 @@ jobs:
   etude:
     name: Comparer dates et éditeurs à ScreenScraper
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
