@@ -1,0 +1,40 @@
+name: Étude RAWG
+
+# Étape 28 (DESIGN ADR-18) : RAWG reconnaît-il nos jeux (titre ET console) et combien de captures donne-t-il ?
+# LECTURE SEULE (rien n'est écrit dans la base). Lancée à la main (onglet Actions → Étude RAWG → Run workflow).
+# Rapport dans le résumé de la tâche, détail en pièce jointe (etude-rawg.json, sans la clé).
+on:
+  workflow_dispatch:
+    inputs:
+      par_console:
+        description: "Jeux par console"
+        default: "4"
+
+permissions:
+  contents: read
+
+jobs:
+  etude:
+    name: Chercher un échantillon du catalogue chez RAWG
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Étude (lecture seule)
+        env:
+          RAWG_API_KEY: ${{ secrets.RAWG_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          ETUDE_PAR_CONSOLE: ${{ inputs.par_console }}
+        run: node scripts/etude-rawg.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: etude-rawg
+          path: etude-rawg.json
+          if-no-files-found: ignore
