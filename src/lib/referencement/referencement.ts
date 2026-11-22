@@ -37,7 +37,7 @@ export function entreesSitemap(
 /** Robots : tout le site public est indexable ; l'administration ne l'est pas. */
 export function reglesRobots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: "/admin" },
+    rules: { userAgent: "*", allow: "/", disallow: ["/admin", "/api/"] },
     sitemap: `${URL_SITE}/sitemap.xml`,
   };
 }

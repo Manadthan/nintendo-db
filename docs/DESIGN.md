@@ -551,6 +551,9 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
    sur ebay.com (JAP, US) ou ebay.fr (PAL) : les ventes réelles restent consultables chez eBay.
 6. **Clés** : `EBAY_CLIENT_ID` et `EBAY_CLIENT_SECRET` dans les variables de **Vercel** (Production et Preview),
    lues côté serveur seulement ; aussi en secrets GitHub (étude).
+   Code : `src/lib/prix/calcul.ts` (recherches par version, accès réseau passés en paramètre, testé sans réseau),
+   `src/lib/prix/ebay.ts` (`server-only` : jeton, Browse, BCE), `src/app/api/prix/[console]/[jeu]/route.ts`. Titre
+   cherché pour la version JAP : l'anglais (US, sinon PAL), sinon le romanisé.
 7. **Tests** : unitaires sur des fixtures écrites au format de la Browse API avec des titres relevés par l'étude
    (pertinence, médiane, conversion, liens) ; e2e : route interceptée par Playwright (prix, « pas assez », bloc
    masqué), jamais eBay en direct.
