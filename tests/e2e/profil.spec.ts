@@ -85,9 +85,11 @@ test("un collectionneur change d'avatar, rend son profil public (US-23), puis se
   await expect(visiteur.getByText("e2e-collectionneur@exemple.fr")).toHaveCount(
     0,
   );
-  // Une seule adresse par profil, quelle que soit la casse.
+  // Une seule adresse par profil, en minuscules.
   await visiteur.goto("/collectionneurs/E2E-Collectionneur");
-  await expect(visiteur).toHaveURL(adresse);
+  await expect(
+    visiteur.getByRole("heading", { name: "Page introuvable" }),
+  ).toBeVisible();
 
   await interrupteur.uncheck();
   await expect(page.getByText(/vous seul voyez/)).toBeVisible();

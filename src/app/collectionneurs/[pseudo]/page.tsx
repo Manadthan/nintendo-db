@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Avatar } from "@/components/Avatar";
 import { Badges } from "@/components/Badges";
 import { DerniersAjouts, MaCollection } from "@/components/CollectionProfil";
 import { EnTete } from "@/components/EnTete";
-import { cheminPublic } from "@/lib/profil/adresse";
 import { chargerProfilPublic } from "@/lib/profil/public";
 
 // Profil public (US-23, ADR-16 point 4) : préparé à la première visite, gardé 5 minutes au plus, et refait aussitôt
@@ -40,12 +39,12 @@ export default async function PageProfilPublic({
   params: Promise<Params>;
 }) {
   const { pseudo } = await params;
-  const profil = await chargerProfilPublic(decodeURIComponent(pseudo));
-  // Privé ou inconnu : la même page « introuvable » (on ne peut pas savoir si le compte existe).
+  const demande = decodeURIComponent(pseudo);
+  // Adresse en minuscules seulement (cheminPublic) ; privé ou inconnu : la même page « introuvable » (on ne peut
+  // pas savoir si le compte existe).
+  if (demande !== demande.toLowerCase()) notFound();
+  const profil = await chargerProfilPublic(demande);
   if (!profil) notFound();
-  // Une seule adresse par profil (celle que rafraîchit le changement de visibilité) : « LEA-64 » → « Lea-64 ».
-  if (profil.pseudo !== decodeURIComponent(pseudo))
-    permanentRedirect(cheminPublic(profil.pseudo));
 
   return (
     <>
