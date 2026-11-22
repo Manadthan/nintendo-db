@@ -8,18 +8,32 @@ test.skip(!BASE_LOCALE_DISPONIBLE, "Base Supabase locale nécessaire (CI)");
 const caseEurope = (page: import("@playwright/test").Page) =>
   page.getByRole("checkbox", { name: "Je l'ai : version Europe", exact: true });
 
+/**
+ * Coche ou décoche, puis attend que la base ait répondu : la case change tout de suite à l'écran, l'écriture part
+ * ensuite. Recharger sans attendre perdait parfois l'écriture (CI de #213, 22/11/2026).
+ */
+async function basculer(page: import("@playwright/test").Page, avoir: boolean) {
+  const enregistre = page.waitForResponse(
+    (r) =>
+      r.url().includes("/rest/v1/possessions") &&
+      r.request().method() === (avoir ? "POST" : "DELETE"),
+  );
+  await (avoir ? caseEurope(page).check() : caseEurope(page).uncheck());
+  expect((await enregistre).ok()).toBe(true);
+}
+
 test("connecté, je coche une version sur la fiche ; elle reste cochée après rechargement", async ({
   page,
 }) => {
   await seConnecter(page);
   await page.goto("/jeux/wii-u/splatoon");
   await expect(caseEurope(page)).not.toBeChecked();
-  await caseEurope(page).check();
+  await basculer(page, true);
   await page.reload();
   await expect(caseEurope(page)).toBeChecked();
 
   // Nettoyage : décocher, et vérifier que c'est aussi enregistré.
-  await caseEurope(page).uncheck();
+  await basculer(page, false);
   await page.reload();
   await expect(caseEurope(page)).not.toBeChecked();
 });
@@ -48,7 +62,7 @@ test("connecté, le catalogue montre la coche et le filtre Collection ; le compt
 }) => {
   await seConnecter(page);
   await page.goto("/jeux/wii-u/splatoon");
-  await caseEurope(page).check();
+  await basculer(page, true);
 
   await page.goto("/");
   const splatoon = page.getByRole("link", { name: /Splatoon/ }).first();
@@ -79,7 +93,7 @@ test("connecté, le catalogue montre la coche et le filtre Collection ; le compt
 
   // Nettoyage.
   await page.goto("/jeux/wii-u/splatoon");
-  await caseEurope(page).uncheck();
+  await basculer(page, false);
   await page.reload();
   await expect(caseEurope(page)).not.toBeChecked();
 });
@@ -89,7 +103,7 @@ test("Statistiques : ma collection par console, par région et notes (US-18)", a
 }) => {
   await seConnecter(page);
   await page.goto("/jeux/wii-u/splatoon");
-  await caseEurope(page).check();
+  await basculer(page, true);
 
   await page.goto("/admin");
   await page.getByRole("link", { name: "Statistiques", exact: true }).click();
@@ -120,7 +134,7 @@ test("Statistiques : ma collection par console, par région et notes (US-18)", a
 
   // Remise en état : Splatoon décoché.
   await page.goto("/jeux/wii-u/splatoon");
-  await caseEurope(page).uncheck();
+  await basculer(page, false);
 });
 
 test("Statistiques : réservée au propriétaire (US-18)", async ({ page }) => {
