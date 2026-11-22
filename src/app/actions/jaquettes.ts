@@ -1,6 +1,7 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
+import { TAG_CATALOGUE } from "@/lib/statistiques/charger";
 import { redirect } from "next/navigation";
 import { exigerProprietaire } from "@/lib/auth/proprietaire";
 import { SLUG_CONSOLE } from "@/lib/admin/consoles";
@@ -65,6 +66,7 @@ export async function remplacerJaquetteParAdresse(
     };
   }
   revalidatePath("/", "layout");
+  updateTag(TAG_CATALOGUE); // Statistiques et profils (cache du catalogue, ADR-11)
   redirect(retourJaquettes(formData, `${slug} ${region}`));
 }
 
@@ -116,5 +118,6 @@ export async function remplacerJaquetteParPhoto(
     };
   }
   revalidatePath("/", "layout");
+  updateTag(TAG_CATALOGUE); // Statistiques et profils (cache du catalogue, ADR-11)
   redirect(retourJaquettes(formData, `${slug} ${region}`));
 }
