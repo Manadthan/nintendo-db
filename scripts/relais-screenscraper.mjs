@@ -25,8 +25,12 @@ const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 const SYSTEMES = { nes: 3, snes: 4, n64: 14, gamecube: 13, wii: 16, "wii-u": 18, switch: 225, gb: 9, gbc: 10, gba: 12, vb: 11, ds: 15, "3ds": 17 };
 /** Régions des médias ScreenScraper acceptées pour chacune des nôtres, par ordre de préférence. */
 const REGIONS = { JAP: ["jp"], US: ["us"], PAL: ["eu", "uk", "fr", "de", "sp", "it", "au", "nl", "se", "dk", "fi", "pt"] };
-/** Boîtes refusées par le propriétaire sur la planche du 22/11 : jamais redéposées. */
-const REFUSEES = new Set(["gamecube/final-fantasy-crystal-chronicles/JAP", "gbc/shadowgate-classic/JAP"]);
+/** Boîtes refusées par le propriétaire sur les planches du 22/11 : jamais redéposées. */
+const REFUSEES = new Set([
+  "gamecube/final-fantasy-crystal-chronicles/JAP",
+  "gbc/shadowgate-classic/JAP",
+  "gb/mickey-mouse-magic-wands/JAP", // « Mickey Mouse » de 1989, un autre jeu
+]);
 
 class Arret extends Error {}
 const identifiants = () => ({
