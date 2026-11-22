@@ -63,3 +63,75 @@ test("le propriétaire invite par un lien à partager, puis annule l'invitation"
   await enAttente.getByRole("button", { name: "Annuler", exact: true }).click();
   await expect(enAttente).toHaveCount(0);
 });
+
+test("un lien d'invitation inconnu affiche un message clair (US-20)", async ({
+  page,
+}) => {
+  await page.goto(`/bienvenue/${"x".repeat(43)}`);
+  await expect(
+    page.getByText("Ce lien d'invitation n'est plus valable."),
+  ).toBeVisible();
+  await page.goto("/bienvenue/pas-un-jeton");
+  await expect(
+    page.getByText(/demandez une nouvelle invitation/),
+  ).toBeVisible();
+});
+
+test("un invité crée son compte par le lien, qui ne sert qu'une fois ; le propriétaire peut le supprimer (US-19, US-20)", async ({
+  page,
+  browser,
+}) => {
+  const pseudo = `inv-${Date.now().toString(36)}`;
+  await seConnecter(page);
+  await page.goto("/admin/collectionneurs");
+  await page.getByLabel(/Nom de l'invité/).fill(pseudo);
+  await page.getByRole("button", { name: "Créer une invitation" }).click();
+  const lien = await page
+    .getByLabel(`Lien d'invitation pour ${pseudo}`)
+    .inputValue();
+
+  // L'invité, sans session : un autre navigateur.
+  const invite = await (await browser.newContext()).newPage();
+  await invite.goto(lien);
+  await expect(
+    invite.getByRole("heading", { name: "Bienvenue" }),
+  ).toBeVisible();
+  await invite.getByLabel(/E-mail/).fill(`${pseudo}@exemple.fr`);
+  await invite.getByLabel(/Mot de passe/).fill("court");
+  await invite.getByLabel(/Pseudo/).fill(pseudo);
+  await invite.getByRole("button", { name: "Créer mon compte" }).click();
+  await expect(
+    invite.getByRole("alert").filter({ hasText: "8 caractères au moins" }),
+  ).toBeVisible();
+  await invite.getByLabel(/Mot de passe/).fill("Mot-de-passe-invite");
+  await invite.getByRole("button", { name: "Créer mon compte" }).click();
+  await expect(invite).toHaveURL("/");
+
+  // Connecté en collectionneur : l'administration lui reste fermée.
+  await invite.goto("/admin");
+  await expect(invite).toHaveURL("/");
+
+  // Le lien ne sert qu'une fois.
+  await invite.goto(lien);
+  await expect(
+    invite.getByText("Ce lien d'invitation n'est plus valable."),
+  ).toBeVisible();
+
+  // Le propriétaire le voit inscrit, puis supprime son compte.
+  await page.reload();
+  const inscrit = page
+    .getByRole("region", { name: "Collectionneurs inscrits" })
+    .getByRole("article")
+    .filter({ hasText: pseudo });
+  await expect(inscrit).toContainText(`${pseudo}@exemple.fr`);
+  await expect(
+    page
+      .getByRole("region", { name: "Invitations en attente" })
+      .getByText(pseudo),
+  ).toHaveCount(0);
+  page.once("dialog", (d) => d.accept());
+  await inscrit
+    .getByRole("button", { name: `Supprimer le compte de ${pseudo}` })
+    .click();
+  await expect(inscrit).toHaveCount(0);
+});
