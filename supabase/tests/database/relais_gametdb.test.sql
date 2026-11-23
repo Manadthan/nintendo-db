@@ -6,8 +6,8 @@ select plan(3);
 select ok(not (select public from storage.buckets where id = 'gametdb'), 'le bucket gametdb est privé');
 select is(
   (select allowed_mime_types from storage.buckets where id = 'gametdb'),
-  array['application/xml', 'image/jpeg'],
-  'seuls la base XML et les scans JPEG sont acceptés'
+  array['application/xml', 'image/jpeg', 'application/json'],
+  'seuls la base XML, les scans JPEG et les résultats JSON du relais RAWG (migration 0029) sont acceptés'
 );
 select policies_are(
   'storage', 'objects',
