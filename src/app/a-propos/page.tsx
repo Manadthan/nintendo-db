@@ -66,6 +66,15 @@ const SOURCES = [
     licenceLien: "https://www.screenscraper.fr/",
   },
   {
+    nom: "RAWG",
+    lien: "https://rawg.io/",
+    apport:
+      "Captures des jeux affichées sur les fiches (6 au plus par jeu), retrouvées par le titre et la console ; les images sont chargées depuis RAWG.",
+    licence:
+      "API RAWG, gratuite à condition de citer RAWG avec un lien sur chaque page qui montre ses données. Les captures restent la propriété de leurs éditeurs.",
+    licenceLien: "https://rawg.io/apidocs",
+  },
+  {
     nom: "GameTDB",
     lien: "https://www.gametdb.com/",
     apport:
