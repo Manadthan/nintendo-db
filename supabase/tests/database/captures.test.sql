@@ -1,7 +1,7 @@
 -- Étape 28 (migration 0028, ADR-18 point 4) : captures RAWG d'un jeu, lues par tous, écrites par le propriétaire.
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(11);
+select plan(12);
 
 select has_table('public', 'captures', 'table captures');
 select has_column('public', 'games', 'rawg_slug', 'slug RAWG du jeu');
@@ -26,6 +26,11 @@ select throws_ok(
 select throws_ok(
   $$update public.games set rawg_slug = 'Pas Un Slug' where slug = 'splatoon'$$,
   '23514', null, 'un slug RAWG mal formé est refusé'
+);
+
+select lives_ok(
+  $$update public.games set rawg_slug = 'kirby_squeak_squad' where slug = 'splatoon'$$,
+  'un slug RAWG avec un tiret bas est accepté (Kirby: Squeak Squad, 23/11)'
 );
 
 -- Le propriétaire connecté écrit.
