@@ -1,0 +1,13 @@
+{
+  "count": 4,
+  "results": [
+    { "id": 5001, "slug": "pikmin-2", "name": "Pikmin 2", "platforms": [{ "platform": { "id": 105 } }, { "platform": { "id": 11 } }] },
+    { "id": 5002, "slug": "1080deg-snowboarding-1998", "name": "1080° Snowboarding (N64)", "platforms": [{ "platform": { "id": 83 } }] },
+    { "id": 5003, "slug": "adventures-of-lolo-1989", "name": "Adventures of Lolo (1989)", "platforms": [{ "platform": { "id": 26 } }] },
+    { "id": 5004, "slug": "the-bugs-bunny-crazy-castle-3", "name": "The Bugs Bunny Crazy Castle 3", "platforms": [{ "platform": { "id": 43 } }] },
+    { "id": 5005, "slug": "sonic-lost-world", "name": "Sonic Lost World", "platforms": [{ "platform": { "id": 8 } }] },
+    { "id": 5006, "slug": "pokemon-white-version-2", "name": "Pokémon Black 2, White 2", "platforms": [{ "platform": { "id": 9 } }] },
+    { "id": 5007, "slug": "game-watch-gallery-2", "name": "Game & Watch Gallery 2", "platforms": [{ "platform": { "id": 43 } }] },
+    { "id": 5008, "slug": "super-mario-bros", "name": "Super Mario Bros.", "platforms": [{ "platform": { "id": 49 } }, { "platform": { "id": 24 } }] }
+  ]
+}
