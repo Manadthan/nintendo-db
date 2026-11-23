@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.43 — 22/11/2026 — statut : **à valider**
+> Version 1.44 — 23/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.44 | 23/11/2026 | **Jaquettes sans boîtier** (choix du propriétaire) : sur Switch et Switch 2, seule la jaquette est montrée, jamais le boîtier en plastique (gris ou rouge) des photos Nintendo et de gamecartdb, pour un catalogue homogène avec les scans GameTDB |
 > | 1.43 | 22/11/2026 | **Captures de jeu** (étape 28, choix du propriétaire) : US-26, jusqu'à 6 captures RAWG par fiche, carrousel sous les informations, image agrandie au toucher, lien actif vers RAWG (conditions de RAWG) |
 > | 1.42 | 22/11/2026 | **Prix eBay** (étape 25, étude du 22/11, choix du propriétaire) : US-25, prix **demandé** (médiane des annonces en cours) par version dans la fiche, en euros, JAP et US sur eBay US, PAL sur eBay France + Royaume-Uni ; jamais plus vieux que 6 h ; lien vers les ventes terminées d'eBay |
 > | 1.41 | 22/11/2026 | US-02 : le catalogue affiche les **60 premiers jeux**, puis les suivants par lots de 60 **au défilement** (audit de performance, choix du propriétaire) ; compteurs inchangés ; « Précédent » depuis une fiche ramène à la même hauteur |
@@ -360,6 +361,8 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
       la place à la cartouche d'origine.
 - [ ] Switch : jaquette **propre à chaque région** : US (scan US), PAL (scan FR, sinon EN, sinon DE : SPEC v1.28 ; sinon boîte européenne officielle de Nintendo quand elle existe, SPEC v1.29), JAP (scan japonais,
       352 × 570 px, le plus grand qui existe) ; proportions de la boîte Switch (en hauteur, ≈ 0,62).
+- [ ] Switch et Switch 2 : **la jaquette seule, sans le boîtier** en plastique autour (SPEC v1.44) ; une photo de
+      boîte (Nintendo, gamecartdb) est recadrée. Exceptions : boîtes Nintendo Labo (en largeur, boîte en carton).
 - [ ] **Switch 2** (SPEC v1.11) : GameTDB n'a pas de base. Liste Wikipédia « List of Nintendo Switch 2 games » :
       jeux dont l'éditeur contient Nintendo ; titre, développeur et **une date commune aux 3 régions** ; pas de code
       produit. Jaquettes US et PAL copiées de **gamecartdb.com** (v1.26 : boîte américaine ESRB, européenne PEGI ;
