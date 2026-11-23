@@ -31,6 +31,7 @@ import {
   lireGameTdb,
   regrouperGameTdb,
 } from "@/lib/import/gametdb";
+import { estVisuelEshop } from "@/lib/import/eshop";
 import { enregistrerJaquette } from "@/lib/jaquettes/enregistrer";
 import { appliquerGameTdb, type JeuAImporter } from "@/lib/import/physique";
 import { lireListeWikipediaDetaillee, urlRendu } from "@/lib/import/wikipedia";
@@ -470,7 +471,7 @@ async function copierBoitesLibretro(
  * Copie les scans choisis (ADR-04) : scan déposé par le relais GameTDB (#53) → WebP 300, 600 et 768 px → bucket
  * « jaquettes », sous un chemin versionné (#60) : nouvelle adresse à chaque copie, donc jamais d'ancienne image
  * servie par un cache ; fichiers gardés en cache un an, puis l'ancienne jaquette est supprimée. Rend les régions
- * copiées ; un scan absent du relais laisse la jaquette actuelle (ou la vignette neutre), signalée « sans scan ».
+ * copiées ; un scan absent du relais, ou visuel « Nintendo eShop », laisse la jaquette actuelle (ou la vignette neutre), signalée « sans scan ».
  */
 async function copierJaquettes(
   supabase: Awaited<ReturnType<typeof exigerProprietaire>>,
@@ -489,6 +490,8 @@ async function copierJaquettes(
     } catch {
       continue; // Scan absent du relais (GameTDB n'en a pas).
     }
+    // Visuel « Nintendo eShop » de GameTDB : pas une jaquette, la version reste « sans scan » (23/11/2026).
+    if (await estVisuelEshop(scan)) continue;
     await enregistrerJaquette(
       supabase,
       gameId,

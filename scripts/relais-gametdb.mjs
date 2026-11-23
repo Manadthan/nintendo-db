@@ -32,6 +32,7 @@ import {
 } from "../src/lib/import/relais-wii.ts";
 import { languesScan, reduireBasePortable } from "../src/lib/import/relais-portables.ts";
 import { reduireBaseSwitch, SCANS_SWITCH } from "../src/lib/import/relais-switch.ts";
+import { estVisuelEshop } from "../src/lib/import/eshop.ts";
 import { DEPOTS_LIBRETRO, indexEnXml } from "../src/lib/import/libretro.ts";
 import { avecReessais, decrireErreurStockage, telechargerAvecReessais } from "../src/lib/import/reessais.ts";
 import { AUCUN_OFFICIEL, basesNintendo, FILTRES_JAPON, officiels } from "../src/lib/import/editeurs-officiels.ts";
@@ -254,7 +255,8 @@ for (const console_ of CONSOLES) {
       aFaire.slice(i, i + 6).map(async ({ id, region }) => {
         for (const langue of console_.languesDe?.(id, region) ?? console_.langues[region]) {
           const scan = await console_.scan(id, langue);
-          if (scan) {
+          // Visuel « Nintendo eShop » (Switch, 23/11/2026) : pas une boîte, langue suivante.
+          if (scan && !(await estVisuelEshop(scan))) {
             await deposer(chemin({ id, region }), scan, "image/jpeg");
             deposes++;
             return;
