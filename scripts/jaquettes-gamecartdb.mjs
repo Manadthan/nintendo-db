@@ -4,9 +4,11 @@
 //   SUPABASE_URL=… SUPABASE_SECRET_KEY=… node scripts/jaquettes-gamecartdb.mjs
 // Une image à la fois, 2 s d'écart (conditions de gamecartdb : pas de requêtes en masse). Une jaquette ajoutée à la
 // main (photo, adresse) ou déjà copiée de gamecartdb n'est jamais remplacée. Même conversion que l'application
-// (WebP 300 / 600 / 768 px, chemin versionné, ADR-04).
+// (WebP 300 / 600 / 768 px, chemin versionné, ADR-04). Boîtier rouge retiré avant la conversion (choix du
+// propriétaire, 23/11/2026 : seulement la jaquette, comme les scans GameTDB ; gabarit de src/lib/jaquettes/boitier.ts).
 import { createClient } from "@supabase/supabase-js";
 import sharp from "sharp";
+import { aUnBoitier, GABARITS, zoneSansBoitier } from "../src/lib/jaquettes/boitier.ts";
 
 /** Jeu du site → release de gamecartdb (repérés à la main le 19/11/2026 ; Fire Emblem ajouté le 20/11/2026 ; Pokémon Pokopia et Fitness Boxing 3 absents de gamecartdb). */
 const RELEASES = {
@@ -43,6 +45,13 @@ if (!SUPABASE_URL || !SUPABASE_SECRET_KEY) throw new Error("SUPABASE_URL et SUPA
 const supabase = createClient(SUPABASE_URL, SUPABASE_SECRET_KEY);
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/** Boîte gamecartdb sans son boîtier rouge (image laissée telle quelle si aucun boîtier n'est vu). */
+async function sansBoitier(image) {
+  const { data, info } = await sharp(image).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  if (!aUnBoitier(data, info.width, info.height)) return image;
+  return sharp(image).extract(zoneSansBoitier(info.width, info.height, GABARITS.gamecartdb)).png().toBuffer();
+}
+
 const { data: jeux, error } = await supabase
   .from("games")
   .select("id, slug, consoles!inner(slug), releases(region, sortie, jaquette_path, jaquette_source)")
@@ -67,7 +76,7 @@ for (const jeu of jeux) {
       ignorees.push(`${jeu.slug} ${region} (HTTP ${reponse.status})`);
       continue;
     }
-    const image = Buffer.from(await reponse.arrayBuffer());
+    const image = await sansBoitier(Buffer.from(await reponse.arrayBuffer()));
     const version = Date.now().toString(36);
     const base = `${jeu.id}/${region.toLowerCase()}-${version}`;
     for (const taille of TAILLES) {
