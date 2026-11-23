@@ -226,3 +226,14 @@ Choisis à la main dans les bases complètes pour couvrir chaque règle (éditeu
 
 Ajouts du 20/11/2026 (ADR-14) : champs `physical_version_b` et `system_type` (Fire Emblem Fates, Ever Oasis) et
 `sform` des jeux 3DS japonais (Ever Oasis : carte et téléchargement ; Fire Emblem if 透魔王国 : téléchargement seul).
+
+## `eshop-switch.jpg`, `boite-rouge-switch.jpg`
+
+| | |
+|---|---|
+| Source | https://art.gametdb.com/switch/coverM/EN/ALC7C.jpg (visuel « Nintendo eShop » de Dragon Quest XI S) et https://art.gametdb.com/switch/coverM/JA/AF6GA.jpg (vraie boîte japonaise de Daemon X Machina, toute rouge), téléchargées le 23/11/2026 |
+| Conditions | Images GameTDB, comme les scans du relais |
+| Contenu | Réduites à 176 px de large (JPEG 80) |
+
+Cas de test de `estVisuelEshop` (`eshop.ts`) : le visuel eShop est reconnu, la boîte rouge (la vraie boîte la plus proche parmi les 2 760 jaquettes du site) ne l'est pas.
+
