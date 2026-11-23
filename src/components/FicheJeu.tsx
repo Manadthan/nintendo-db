@@ -14,6 +14,8 @@ import { basculerVersion, useCollection } from "@/lib/collection/navigateur";
 import { possede } from "@/lib/collection/collection";
 import { FORMES_REELLES } from "@/lib/jaquettes/proportions";
 import { Jaquette } from "./Jaquette";
+import { lienRawg } from "@/lib/captures/rawg";
+import { Captures } from "./Captures";
 import { PrixEbay } from "./PrixEbay";
 import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
 
@@ -206,6 +208,12 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             </div>
           </dl>
 
+          <Captures
+            titre={titre}
+            captures={jeu.captures}
+            rawgSlug={jeu.rawgSlug}
+          />
+
           <section
             aria-labelledby="disponibilite"
             className="flex flex-col gap-2.5"
@@ -305,6 +313,21 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             {sourcesExternes.length > 0 &&
               ` · jaquettes ${sourcesExternes.join(", ")}`}
             {jeu.metacritic !== null && " · note Metacritic via Wikipédia"}
+            {jeu.captures.length > 0 && (
+              <>
+                {" · captures "}
+                {jeu.rawgSlug ? (
+                  <a
+                    href={lienRawg(jeu.rawgSlug)}
+                    className="text-accent underline-offset-2 hover:underline"
+                  >
+                    RAWG
+                  </a>
+                ) : (
+                  "RAWG"
+                )}
+              </>
+            )}
             {" · prix via eBay"}. Site de fan non affilié à Nintendo.
           </p>
         </div>

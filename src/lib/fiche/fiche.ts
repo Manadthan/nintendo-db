@@ -36,6 +36,16 @@ export type JeuFiche = JeuCatalogue & {
   metacriticUrl: string | null;
   console: { slug: string; nom: string };
   sorties: Record<Region, SortieFiche>;
+  /** Captures RAWG (US-26), dans l'ordre, 6 au plus ; vides si le jeu n'a pas été reconnu. */
+  captures: CaptureFiche[];
+  /** Slug du jeu chez RAWG, pour le lien « Captures : RAWG ». */
+  rawgSlug: string | null;
+};
+
+export type CaptureFiche = {
+  url: string;
+  largeur: number | null;
+  hauteur: number | null;
 };
 
 /** Une ligne de `games` avec sa console et ses `releases`, telle que la renvoie la requête de la fiche. */
@@ -43,6 +53,15 @@ export type LigneFiche = Omit<LigneJeu, "releases"> & {
   genre: string | null;
   wikipedia_url: string | null;
   metacritic_url: string | null;
+  rawg_slug?: string | null;
+  captures?:
+    | {
+        position: number;
+        url: string;
+        largeur: number | null;
+        hauteur: number | null;
+      }[]
+    | null;
   consoles: { slug: string; nom: string };
   releases: (LigneJeu["releases"][number] & {
     code_produit: string | null;
@@ -73,6 +92,10 @@ export function versJeuFiche(ligne: LigneFiche): JeuFiche {
     metacriticUrl: ligne.metacritic_url,
     console: ligne.consoles,
     sorties,
+    captures: [...(ligne.captures ?? [])]
+      .sort((a, b) => a.position - b.position)
+      .map(({ url, largeur, hauteur }) => ({ url, largeur, hauteur })),
+    rawgSlug: ligne.rawg_slug ?? null,
   };
 }
 

@@ -42,6 +42,48 @@ const KARAOKE: LigneFiche = {
   ],
 };
 
+describe("captures RAWG de la fiche (US-26)", () => {
+  it("les remet dans l'ordre et garde le slug RAWG", () => {
+    const jeu = versJeuFiche({
+      ...KARAOKE,
+      rawg_slug: "wii-karaoke-u",
+      captures: [
+        {
+          position: 2,
+          url: "https://media.rawg.io/media/screenshots/b.jpg",
+          largeur: 1280,
+          hauteur: 720,
+        },
+        {
+          position: 1,
+          url: "https://media.rawg.io/media/screenshots/a.jpg",
+          largeur: null,
+          hauteur: null,
+        },
+      ],
+    });
+    expect(jeu.rawgSlug).toBe("wii-karaoke-u");
+    expect(jeu.captures).toEqual([
+      {
+        url: "https://media.rawg.io/media/screenshots/a.jpg",
+        largeur: null,
+        hauteur: null,
+      },
+      {
+        url: "https://media.rawg.io/media/screenshots/b.jpg",
+        largeur: 1280,
+        hauteur: 720,
+      },
+    ]);
+  });
+
+  it("sans captures : liste vide, pas de lien", () => {
+    const jeu = versJeuFiche(KARAOKE);
+    expect(jeu.captures).toEqual([]);
+    expect(jeu.rawgSlug).toBeNull();
+  });
+});
+
 describe("versJeuFiche (US-04)", () => {
   const jeu = versJeuFiche(KARAOKE);
 
