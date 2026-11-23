@@ -30,6 +30,16 @@ export function Captures({
   const casser = (url: string) =>
     setCassees((avant) => new Set(avant).add(url));
 
+  // La fiche est préparée à l'avance : une image peut échouer avant que React ne branche onError. À l'arrivée, une
+  // image déjà finie mais sans dimensions (complete et naturalWidth à 0) est donc comptée comme cassée.
+  useEffect(() => {
+    bande.current?.querySelectorAll("img").forEach((img) => {
+      const url = img.dataset.capture;
+      if (url && img.complete && img.naturalWidth === 0)
+        setCassees((avant) => new Set(avant).add(url));
+    });
+  }, []);
+
   // Ouverture : la fenêtre se montre sur la capture touchée.
   useEffect(() => {
     if (ouverte === null) return;
@@ -72,6 +82,7 @@ export function Captures({
               {/* eslint-disable-next-line @next/next/no-img-element -- images déjà réduites par RAWG (ADR-18 point 6) */}
               <img
                 src={adresseReduite(c.url, 640)}
+                data-capture={c.url}
                 alt={`${titre}, capture ${i + 1} sur ${total}`}
                 width={c.largeur ?? 640}
                 height={c.hauteur ?? 360}
