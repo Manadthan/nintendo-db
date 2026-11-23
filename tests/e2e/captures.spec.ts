@@ -69,7 +69,8 @@ test("un toucher ouvre la capture en grand ; Fermer et Échap la referment", asy
 test("une image qui ne charge pas est retirée du carrousel", async ({
   page,
 }) => {
-  await imagesRawg(page, "capture-3");
+  // La 1re image, visible dès l'ouverture : les suivantes ne se chargent (et n'échouent) qu'au défilement.
+  await imagesRawg(page, "capture-1");
   await page.goto(MARIO_KART);
   const bloc = page.getByRole("region", { name: "Captures" });
   await expect(bloc.getByText("2 · toucher pour agrandir")).toBeVisible();
