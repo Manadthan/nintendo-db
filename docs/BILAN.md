@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25 ; captures RAWG, étape 28)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.8 — 22/11/2026 — statut : **à valider**
+> Version 1.9 — 23/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.9 | 23/11/2026 | **Étape 28, captures RAWG** : étude, relais, planche, carrousel, 3 corrections en route, leçons (§15) |
 > | 1.8 | 22/11/2026 | **Étape 25, prix eBay** : étude, choix, 3 PR de code, difficultés, leçons (§14) |
 > | 1.7 | 22/11/2026 | **Audit de performance** (skill `react-best-practices`) : mesures avant/après, difficultés, leçons (§13) |
 > | 1.6 | 22/11/2026 | **Fin de l'étape 22 et étapes 23 à 27** : séries, frise, étude Giant Bomb, outillage de la session, collectionneurs invités (§12) |
@@ -356,3 +357,42 @@ Leçons ajoutées :
 Pistes : obtenir l'accès aux ventes terminées (même route, libellé « prix de vente », ADR-17 point 8) ; suivre la
 consommation du quota de 5 000 appels par jour ; version JAP plus fiable (peu d'annonces sur eBay US) ; prix
 « complet » et « jeu seul » séparés si les annonces le précisent plus souvent.
+
+## 15. Étape 28 : captures RAWG
+
+| | |
+|---|---|
+| Durée | une journée (22 et 23/11/2026) |
+| Méthode | Choix du propriétaire par questions (liens RAWG, import une fois, carrousel de 6), documents et maquette (#218), étude en lecture seule (#220, #221), migration (#222), relais et écriture après planche (#223, #224), carrousel (#228) |
+| Livré | US-26 : sur la fiche, un carrousel de 6 captures au plus, image en grand au toucher, lien actif vers RAWG ; **804 jeux** sur 1 090 cherchés (Virtual Boy et Switch 2 absents de RAWG) ; images servies par RAWG, rien de copié |
+| Pull requests | 10 mergées (#218, #220 à #225, #227, #228), dont 3 de documents et 2 corrections de migration |
+| Tests | 496 unitaires (+19), 12 pgTAP de plus, 4 e2e (images interceptées, captures de test dans la base jetable) |
+
+| Mesure | Résultat |
+|---|---|
+| Étude (56 jeux) | 81 % au titre identique, 92 % avec « (année) », « (console) » et « The » ignorés, aucun faux rapprochement accepté |
+| Relais (1 090 jeux, 2 045 appels, 26 min) | 854 trouvés, 818 avec captures |
+| Planche | 103 « ≈ » regardés, 14 refusés (Golf, Tetris, Space Invaders… : autres versions que Nintendo) |
+| Image réduite par RAWG | 31 Ko au lieu de 103 Ko |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| Clé RAWG dans l'adresse (`?key=`), que le formulaire de clés de la session ne sait pas remplir | Étude et relais impossibles depuis la session | Clé en secret GitHub, études et relais en tâches GitHub (ADR-18 point 1) |
+| Bucket `gametdb` limité au XML et au JPEG | 1er relais arrêté au premier dépôt | Migration 0029 (test d'abord) ; aucun test ne déposait de JSON |
+| Slug RAWG `kirby_squeak_squad` refusé par la contrainte de 0028 | Écriture arrêtée sur un jeu, 4 captures sans lien | Jeu écarté, les autres écrits ; migration 0030, puis jeu réécrit |
+| Fiches RAWG « (1984) » regroupant plusieurs machines | Captures Atari ou arcade pour Golf, Tetris… | Planche des cas douteux avec 3 captures chacun ; 14 refusés |
+| Image cassée avant l'hydratation (fiche préparée à l'avance) | `onError` jamais appelé, image cassée laissée | Trouvé par le test e2e ; contrôle `complete` et `naturalWidth` à l'arrivée |
+| Mauvaise explication du premier échec e2e (« image hors écran ») | Un aller-retour de CI pour rien | Ne pousser une explication qu'après l'avoir vérifiée en local |
+| Abonnement à la mauvaise PR, 2 fois encore (#219, #226) | Événements de PR étrangères | Règle ajoutée dans CLAUDE.md |
+| Adresses de prévisualisation Vercel injoignables depuis la session | Rendu non vu sur la PR | Site lancé en local sur la base de production, en lecture seule |
+
+Leçons ajoutées :
+
+31. **Une règle de rapprochement se juge sur des images, pas sur des titres** : le titre « Tetris (1984) » était
+    juste, les captures non ; la planche des cas douteux a évité 14 fausses fiches.
+32. **Les contraintes de la base se testent avec les vraies données avant la migration** : deux migrations de
+    correction (types du bucket, tiret bas) auraient été évitées par un passage à blanc sur le résultat du relais.
+33. **Un test rouge se croit avant l'explication** : le test de l'image cassée avait raison deux fois de suite.
+
+Pistes : refaire le relais pour les jeux ajoutés ensuite (`tous` à non : seuls les nouveaux) ; captures choisies à la
+main dans l'administration si besoin ; Switch 2 quand RAWG l'aura.
