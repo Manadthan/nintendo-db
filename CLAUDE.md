@@ -24,9 +24,9 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.5 à valider |
 | `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.43 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.35 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.36 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs, Prix eBay, Captures : `docs/maquettes/`) | v0.11 à valider |
-| `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11), 23 à 27 (§12), audit de performance (§13), étape 25 (§14) : chiffres, réussites, difficultés, leçons | v1.8 à valider |
+| `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11), 23 à 27 (§12), audit de performance (§13), étape 25 (§14), étape 28 (§15) : chiffres, réussites, difficultés, leçons | v1.9 à valider |
 
 ## Règles de travail
 
@@ -143,9 +143,9 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 25 — Prix eBay : étude #207, SPEC US-25 + ADR-17 + maquette #208, calculs #210, route #211, fiche #212 ; prix demandé (annonces en cours), gardé 6 h ; ventes terminées à demander à eBay
   - [x] Étape 26 — ScreenScraper : jaquettes (étude #202, import #205, 2e passage #209, bilan #215 : 191 jaquettes ; 79 versions encore sans jaquette, introuvables), dates rétro (études #216 #217 sur 585 jeux, 58 années différentes vérifiées sur Wikipédia, 4 corrigées) ; éditeurs non repris
   - [x] Fausses jaquettes « Nintendo eShop » (23/11) : détection, garde-fou relais + import, 6 versions corrigées
-  - [ ] Étape 28 — Captures RAWG : SPEC US-26, ADR-18, maquette #218 ; étude #220 (DESIGN §1 sexdecies) ; migration #222 (+ #225, #227) ; relais #223, écriture #224 : 804 jeux avec captures le 23/11 (14 refusés sur la planche) ; fiche (carrousel)
+  - [x] Étape 28 — Captures RAWG : SPEC US-26, ADR-18, maquette #218 ; étude #220 (DESIGN §1 sexdecies) ; migration #222 (+ #225, #227) ; relais #223, écriture #224 : 804 jeux avec captures le 23/11 (14 refusés sur la planche) ; carrousel #228
   - [ ] Étapes suivantes (DESIGN §11) : à définir avec le propriétaire
-- [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5 ; étapes 23 à 27 : v1.6 ; audit de performance : v1.7 ; étape 25 : v1.8
+- [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5 ; étapes 23 à 27 : v1.6 ; audit de performance : v1.7 ; étape 25 : v1.8 ; étape 28 : v1.9
 
 ## Erreurs récurrentes
 
@@ -163,3 +163,5 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
 - **Prettier sur des fichiers non modifiés** (3 fois le 22/11 : `defilement.ts`, toute la SPEC, `collectionneurs.ts`
   reformatés, diff gonflé) : `npx prettier --write` seulement sur les fichiers `.ts`/`.tsx` touchés, jamais sur
   `docs/*.md` ni sur un dossier entier ; relire `git diff --stat` avant chaque commit.
+- **Abonnement à la mauvaise PR** (3 fois : #209, #219, #226 au lieu de la PR créée) : s'abonner au numéro lu dans
+  l'adresse renvoyée par la création de la PR, jamais à un numéro deviné.

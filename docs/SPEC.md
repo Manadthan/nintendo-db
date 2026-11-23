@@ -164,17 +164,17 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 
 #### US-26 — Voir des captures du jeu (M, SPEC v1.43)
 *En tant que visiteur, je vois à quoi ressemble le jeu, pas seulement sa boîte.*
-- [ ] Sur la fiche, sous les informations et avant « Disponibilité », un bloc **« Captures »** : jusqu'à **6 images**
+- [x] Sur la fiche, sous les informations et avant « Disponibilité », un bloc **« Captures »** : jusqu'à **6 images**
       de jeu dans un **carrousel** qui défile au doigt (une image et le début de la suivante), avec des points de
       position. Maquettes : `maquettes/captures-rawg.png`, `maquettes/captures-rawg-agrandie.png`.
-- [ ] Un toucher ouvre l'image **en grand** sur fond sombre (« 2 / 6 », glisser pour la suivante, « Fermer »,
+- [x] Un toucher ouvre l'image **en grand** sur fond sombre (« 2 / 6 », glisser pour la suivante, « Fermer »,
       touche Échap au clavier). Chaque image a un texte de remplacement (« Splatoon, capture 2 sur 6 »).
-- [ ] Les captures sont les mêmes pour les 3 régions (images du jeu, pas de la boîte).
-- [ ] Source : **RAWG**, avec un **lien actif** vers la page du jeu chez RAWG sous le carrousel (« Captures : RAWG »)
+- [x] Les captures sont les mêmes pour les 3 régions (images du jeu, pas de la boîte).
+- [x] Source : **RAWG**, avec un **lien actif** vers la page du jeu chez RAWG sous le carrousel (« Captures : RAWG »)
       et dans les sources du pied de fiche et de la page « À propos » (conditions d'utilisation de RAWG).
-- [ ] Un jeu sans captures, ou que RAWG ne permet pas de reconnaître avec certitude (titre **et** console), n'a pas
+- [x] Un jeu sans captures, ou que RAWG ne permet pas de reconnaître avec certitude (titre **et** console), n'a pas
       de bloc ; jamais les captures d'un autre jeu.
-- [ ] Les images arrivent sans ralentir l'affichage de la fiche (petites images pour le carrousel, grande seulement
+- [x] Les images arrivent sans ralentir l'affichage de la fiche (petites images pour le carrousel, grande seulement
       à l'agrandissement) ; une image qui ne charge pas est retirée du carrousel.
 - Hors périmètre : vidéos, captures dans le catalogue, choix des captures à la main (plus tard dans l'administration
       si besoin), captures propres à une région.
