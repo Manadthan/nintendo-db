@@ -1,0 +1,15 @@
+{
+  "count": 8,
+  "results": [
+    { "id": 1, "image": "https://media.rawg.io/media/screenshots/a1/a1b2c3.jpg", "width": 1280, "height": 720, "is_deleted": false },
+    { "id": 2, "image": "https://media.rawg.io/media/screenshots/b2/b2c3d4.jpg", "width": 1280, "height": 720, "is_deleted": true },
+    { "id": 3, "image": "https://media.rawg.io/media/screenshots/c3/c3d4e5.jpg", "width": 1920, "height": 1080, "is_deleted": false },
+    { "id": 4, "image": "https://exemple.com/autre.jpg", "width": 640, "height": 480, "is_deleted": false },
+    { "id": 5, "image": "https://media.rawg.io/media/screenshots/d4/d4e5f6.jpg", "width": 256, "height": 224, "is_deleted": false },
+    { "id": 6, "image": "https://media.rawg.io/media/games/e5/e5f6a7.jpg", "width": 1280, "height": 720, "is_deleted": false, "hidden": true },
+    { "id": 7, "image": "https://media.rawg.io/media/screenshots/f6/f6a7b8.jpg", "width": 1280, "height": 720, "is_deleted": false },
+    { "id": 8, "image": "https://media.rawg.io/media/screenshots/07/07a8b9.jpg", "width": 1280, "height": 720, "is_deleted": false },
+    { "id": 9, "image": "https://media.rawg.io/media/screenshots/18/18b9c0.jpg", "width": 1280, "height": 720, "is_deleted": false },
+    { "id": 10, "image": "https://media.rawg.io/media/screenshots/29/29c0d1.jpg", "width": 1280, "height": 720, "is_deleted": false }
+  ]
+}

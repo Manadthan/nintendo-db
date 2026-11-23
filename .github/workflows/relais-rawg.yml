@@ -1,0 +1,43 @@
+name: Relais RAWG
+
+# Étape 28 (DESIGN ADR-18 point 5) : cherche les jeux du catalogue chez RAWG et dépose, par console, leurs captures
+# dans le bucket PRIVÉ « gametdb » (rawg/{console}.json). Le catalogue ne change pas : la session Claude montre une
+# planche, puis écrit après l'accord du propriétaire (scripts/captures-rawg.mjs). La clé RAWG passe dans l'adresse :
+# la session ne peut pas l'y mettre, d'où cette tâche. Lancée à la main (Actions → Relais RAWG → Run workflow).
+on:
+  workflow_dispatch:
+    inputs:
+      consoles:
+        description: "Consoles (ex. nes,snes ; vide : toutes)"
+        default: ""
+      tous:
+        description: "Aussi les jeux qui ont déjà des captures (oui / non)"
+        default: "non"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: relais-rawg
+
+jobs:
+  relais:
+    name: Chercher les captures RAWG
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Relayer RAWG vers Supabase
+        env:
+          RAWG_API_KEY: ${{ secrets.RAWG_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          RELAIS_CONSOLES: ${{ inputs.consoles }}
+          RELAIS_TOUS: ${{ inputs.tous }}
+        run: node scripts/relais-rawg.mjs
