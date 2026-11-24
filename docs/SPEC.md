@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.45 — 24/11/2026 — statut : **à valider**
+> Version 1.46 — 24/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.46 | 24/11/2026 | US-02 : le lien **« Retour au catalogue »** revient aussi **à la même hauteur**, comme « Précédent » (avant : en haut de la liste ; demande du propriétaire) |
 > | 1.45 | 24/11/2026 | US-02 : le **tri** est gardé dans l'adresse (`?tri=`, rien pour le tri par défaut) ; « Précédent » depuis une fiche et le lien **« Retour au catalogue »** retrouvent recherche, marché, filtres et tri (bug signalé par le propriétaire, choix du 24/11) |
 > | 1.44 | 23/11/2026 | **Jaquettes sans boîtier** (choix du propriétaire) : sur Switch et Switch 2, seule la jaquette est montrée, jamais le boîtier en plastique (gris ou rouge) des photos Nintendo et de gamecartdb, pour un catalogue homogène avec les scans GameTDB |
 > | 1.43 | 22/11/2026 | **Captures de jeu** (étape 28, choix du propriétaire) : US-26, jusqu'à 6 captures RAWG par fiche, carrousel sous les informations, image agrandie au toucher, lien actif vers RAWG (conditions de RAWG) |
@@ -108,7 +109,7 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       tranche** en tri par note (« 90 et plus », « 75 à 89 », « 50 à 74 », « Moins de 50 », « Sans note »).
 - [ ] Le tri est **dans l'adresse** comme la recherche et les filtres (`?tri=anciens`, `az`, `note` ; rien pour « plus
       récents »), v1.45. Revenir d'une fiche, par « Précédent » ou par le lien **« Retour au catalogue »**, retrouve la
-      recherche, le marché, les filtres et le tri ; le lien repart du haut de la liste, « Précédent » de la même hauteur.
+      recherche, le marché, les filtres et le tri ; tous deux reviennent à la même hauteur (v1.46). L'icône Catalogue de l'en-tête repart du haut, sans filtre.
 - [ ] **Frise** (v1.38) : 3e vue à côté de grille et liste (dernier choix retenu). Une ligne verticale au centre ;
       les jeux, dans l'ordre de leur date de sortie (version du marché choisi), sont placés **en alternance à gauche et
       à droite** ; chacun montre une **grande jaquette**, avec la note Metacritic, puis le **titre** et la **console**
