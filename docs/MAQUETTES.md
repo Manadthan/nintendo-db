@@ -1,9 +1,10 @@
 # Maquettes
 
-> Version 0.11 — 22/11/2026 — statut : **à valider**
+> Version 0.12 — 24/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.12 | 24/11/2026 | **Guides japonais** (US-27, SPEC v1.47) : coches « Jeux » / « Guides » et carte d'un guide dans le catalogue, page du guide (couverture Google Books, ISBN, jeu couvert, liens Amazon Japon et Suruga-ya), bloc « Guides » de la fiche (`maquettes/guides-catalogue.png`, `maquettes/guides-page.png`, `maquettes/guides-fiche.png` ; vraies couvertures, cadres orange = nouveautés) |
 > | 0.11 | 22/11/2026 | **Captures RAWG** (US-26, SPEC v1.43) : bloc « Captures » de la fiche sous les informations, carrousel de 6 images, mention « Captures : RAWG », image agrandie (`maquettes/captures-rawg.png`, `maquettes/captures-rawg-agrandie.png` ; images colorées en attendant les vraies) |
 > | 0.10 | 22/11/2026 | **Prix eBay** (US-25, SPEC v1.42) : bloc de la fiche sous « Disponibilité », une ligne par région, version choisie surlignée, cas « pas assez d'annonces », « non sorti », chargement (`maquettes/prix-ebay.png`) |
 > | 0.9 | 21/11/2026 | **Collectionneurs invités** (étape 27, SPEC v1.39) : mon profil, profil public, page « Collectionneurs » de l'administration, bienvenue ; validées (`maquettes/collectionneur-*.png`). Invitation par **lien à partager** (choisi après la maquette : le champ e-mail de la page Collectionneurs devient un nom, l'e-mail est saisi par l'invité sur la page Bienvenue) |
@@ -36,6 +37,9 @@ emplacements, remplacés par les scans de boîtes GameTDB de chaque région à l
 | 4 | Frise (vue du catalogue) : ligne verticale, jeux en alternance gauche / droite, année au centre ; image : [`maquettes/frise.png`](maquettes/frise.png) | `/` (bouton « Frise ») | US-02 |
 | 9 | Fiche, bloc « Prix eBay » : prix demandé par région, nombre d'annonces, lien vers les ventes eBay ; [`maquettes/prix-ebay.png`](maquettes/prix-ebay.png) | `/jeux/[console]/[jeu]` | US-25 |
 | 10 | Fiche, bloc « Captures » : carrousel de 6 captures RAWG, image agrandie au toucher ; [`maquettes/captures-rawg.png`](maquettes/captures-rawg.png), [`maquettes/captures-rawg-agrandie.png`](maquettes/captures-rawg-agrandie.png) | `/jeux/[console]/[jeu]` | US-26 |
+| 11 | Catalogue avec les guides : coches « Jeux » / « Guides » (marché Japon ou Tous), carte d'un guide (couverture, étiquette « Guide », console, éditeur, année) ; [`maquettes/guides-catalogue.png`](maquettes/guides-catalogue.png) | `/?voir=jeux,guides` | US-27 |
+| 12 | Page du guide : couverture en grand, « powered by Google », éditeur, parution, ISBN, pages, jeu couvert, Amazon Japon et Suruga-ya, lien Google Books ; [`maquettes/guides-page.png`](maquettes/guides-page.png) | `/guides/[isbn]` | US-27 |
+| 13 | Fiche, bloc « Guides (N) » après « Captures » : petite couverture (ou vignette neutre), titre, éditeur, année ; [`maquettes/guides-fiche.png`](maquettes/guides-fiche.png) | `/jeux/[console]/[jeu]` | US-27 |
 | 3 | Statistiques (administration) : ma collection par console, par région, notes Metacritic, état du catalogue avec liens vers les listes ; image : [`maquettes/statistiques.png`](maquettes/statistiques.png) | `/admin/statistiques` | US-18 |
 
 ## Repris de gamecartdb (trame) et adapté

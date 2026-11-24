@@ -23,9 +23,9 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.7 à valider |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.44 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.47 à valider |
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.39 à valider |
-| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs, Prix eBay, Captures : `docs/maquettes/`) | v0.11 à valider |
+| `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs, Prix eBay, Captures, Guides : `docs/maquettes/`) | v0.12 à valider |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11), 23 à 27 (§12), audit de performance (§13), étape 25 (§14), étape 28 (§15) : chiffres, réussites, difficultés, leçons | v1.9 à valider |
 
 ## Règles de travail
@@ -148,7 +148,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 28 — Captures RAWG : SPEC US-26, ADR-18, maquette #218 ; étude #220 (DESIGN §1 sexdecies) ; migration #222 (+ #225, #227) ; relais #223, écriture #224 : 804 jeux avec captures le 23/11 (14 refusés sur la planche) ; carrousel #228
   - [x] Jaquettes sans boîtier (23/11) : 103 jaquettes Switch et Switch 2 recadrées, script gamecartdb aussi (SPEC v1.44)
   - [x] Dates et jaquettes manquantes (23/11) : 0 version sans date (40 → 0), 13 sans jaquette (80 → 13) ; Famicom Mini complétées (10 boîtes JAP qui étaient américaines remplacées)
-  - [ ] Étape 29 — Guides japonais (攻略本) : intention v1.6 (#236) puis v1.7 (3DS et Switch d'abord, guides seulement) ; études #238 #239 #241 #243 (DESIGN §1 septdecies : NDL + couvertures Google Books, 26 sur 39 ISBN) ; à faire : SPEC, maquettes, ADR, modèle de données
+  - [ ] Étape 29 — Guides japonais (攻略本) : intention v1.6 (#236) puis v1.7 (3DS et Switch d'abord, guides seulement) ; études #238 #239 #241 #243 (DESIGN §1 septdecies : NDL + couvertures Google Books, 26 sur 39 ISBN) ; SPEC US-27 + US-28 (v1.47) et maquettes (v0.12) ; à faire : ADR, modèle de données, plan
   - [ ] Étapes suivantes (DESIGN §11) : à définir avec le propriétaire
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5 ; étapes 23 à 27 : v1.6 ; audit de performance : v1.7 ; étape 25 : v1.8 ; étape 28 : v1.9
 
