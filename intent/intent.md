@@ -1,7 +1,7 @@
 # Intention — Nintendo DB
 
 > Étape 1 du playbook : **quoi et pourquoi**, pas encore comment.
-> Version 1.5 — 21/11/2026 — statut : **à valider** (1.1 : v1 limitée à la Wii U, sources et images revues ; 1.2 : Wii, catalogue toutes consoles ; 1.3 : Switch, Switch 2, nouveautés ; 1.4 : premier pas du suivi de collection ; 1.5 : comptes sur invitation, profils et badges)
+> Version 1.6 — 24/11/2026 — statut : **à valider** (1.1 : v1 limitée à la Wii U, sources et images revues ; 1.2 : Wii, catalogue toutes consoles ; 1.3 : Switch, Switch 2, nouveautés ; 1.4 : premier pas du suivi de collection ; 1.5 : comptes sur invitation, profils et badges ; 1.6 : guides japonais)
 
 ## Problème
 
@@ -63,6 +63,7 @@ Nintendo éditeur seulement, en français, région JAP incluse.
 | 9 | Profils et badges (v1.5, 21/11) | **Comptes sur invitation** : le propriétaire invite (lien ou e-mail) ; pas d'inscription ouverte (ni spam, ni modération). Chaque compte a sa **collection** (comme la décision 5) et un **profil** : pseudo, avatar choisi parmi des icônes du site (pas d'envoi de photo), statistiques (jeux par console et par région), derniers ajouts. **Privé par défaut**, public au choix, à une adresse partageable. **Badges** gagnés selon la collection : total de jeux possédés (paliers), par console (nombre de jeux, part du catalogue, console complète), par série (série complète), par région (jeux d'import) |
 | 6 | Variantes | **Plus tard** : rééditions et variantes de pays PAL hors v1 |
 | 8 | Nouveautés (v1.3) | Les consoles encore vivantes (Switch 2) reçoivent des jeux chaque mois : un import « nouveautés seulement », lancé par le propriétaire, ajoute les nouveaux jeux sans tout réimporter |
+| 10 | Guides japonais (v1.6, 24/11) | Recenser les **guides de jeu japonais** (攻略本) des jeux du catalogue : **dans le même catalogue que les jeux** (choix du 24/11, 14 h, au lieu d'une page à part) : chaque guide a **sa propre carte** (couverture), qui mène au jeu concerné ; deux coches **« Jeux »** et **« Guides »** choisissent ce que le catalogue affiche ; la fiche du jeu liste ses guides. Par guide : **couverture**, **titre japonais et éditeur**, **date, ISBN, pages**, **lien d'achat ou prix**. **Rétro d'abord** (Famicom, Super Famicom, N64, Game Boy), les autres consoles ensuite. **Pas encore dans « Ma collection »** : la case « je l'ai » viendra dans une 2e étape. Sources à étudier avant la spec (Retromags, The Video Game Library, Internet Archive, wikis de séries, éditeurs) |
 | 7 | Stack | **Même stack** que `mon-site-sdlc` : Next.js, Tailwind, Supabase, Vercel — rendu dans l'esprit de gamecartdb (gamecartdb utilise lui-même Next.js) |
 
 ## Images
