@@ -23,8 +23,8 @@ export default async function Accueil() {
       <main>
         <section className="border-b border-bordure bg-carte px-4 pt-[22px] pb-5">
           <div className="mx-auto max-w-7xl">
-            {/* Bandeau réduit au titre (demande du propriétaire, 24/11/2026). */}
-            <h1 className="font-titre text-[26px] leading-tight font-bold tracking-tight">
+            {/* Bandeau réduit au titre, dans le style de l'ancien sur-titre (demande du propriétaire, 24/11/2026). */}
+            <h1 className="text-xs font-semibold tracking-wide text-accent uppercase">
               Pour les collectionneurs Nintendo
             </h1>
           </div>
