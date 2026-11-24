@@ -703,7 +703,7 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
    - `guides` : `id`, **`isbn` (13 chiffres, unique)** — un guide sans ISBN n'entre pas (US-28) —, `titre` (japonais),
      `editeur`, `date_parution` + `precision_date` (le type existant : NDL donne le mois), `pages`,
      `google_books_id` (couverture et lien « Google Books › » ; vide = vignette neutre), `ndl_url` (notice NDL),
-     `verrous text[]` (champs corrigés à la main, gardés par les passages suivants, comme ADR-03), `cree_le`, `maj_le` ;
+     `verrous text[]` (champs corrigés à la main, gardés par les passages suivants, comme ADR-03), `cree_le`, `updated_at` (même déclencheur que `games`) ;
    - `guides_jeux` : (`guide_id`, `game_id`) clé primaire, suppression en cascade des deux côtés : un guide peut
      couvrir **plusieurs jeux** (Pokémon Or et Argent) ;
    - `guides_exclus` : `isbn` clé primaire, `raison`, `cree_le` : un guide écarté sur la planche ou supprimé n'est
@@ -762,7 +762,7 @@ profils(user_id → auth.users (cascade) primary key, pseudo citext unique 3–2
 invitations(id, nom, jeton_hache unique, cree_le, expire_le, utilisee_le, user_id → auth.users)          (ADR-16)
 captures(game_id → games (cascade), position 1–6, url, largeur, hauteur)                                  (ADR-18)
 guides(id, isbn char(13) unique, titre, editeur, date_parution, precision_date, pages, google_books_id, ndl_url,
-       verrous text[], cree_le, maj_le)                                                                   (ADR-19)
+       verrous text[], cree_le, updated_at)                                                                   (ADR-19)
 guides_jeux(guide_id → guides (cascade), game_id → games (cascade)) primary key (guide_id, game_id)       (ADR-19)
 guides_exclus(isbn primary key, raison, cree_le)                                                          (ADR-19)
 ```
