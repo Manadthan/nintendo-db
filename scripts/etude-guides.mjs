@@ -11,6 +11,9 @@
 // Un livre est un guide du jeu si : c'est un guide (NDC 798 ou mot « 攻略 », « ガイド »…), son titre contient un titre
 // japonais du jeu non suivi d'un chiffre (« スーパーマリオブラザーズ » ne prend pas « …3 »), il ne cite pas une autre
 // console (« 3DS », « スーパーファミコン » pour un jeu Famicom…) et, s'il n'en cite aucune, il paraît dans les 4 ans.
+// v3.1 (24/11/2026) : la v3 a été arrêtée par la limite de 60 min sans rien écrire. Chaque appel a désormais 20 s au
+// plus, un hôte qui refuse 5 fois (429) n'est plus appelé, l'avancement est écrit dans le journal, et chaque phase a
+// un budget de temps : au-delà, on passe à la suite et le rapport est écrit, partiel (dit dans le résumé).
 import { appendFileSync, writeFileSync } from "node:fs";
 import * as cheerio from "cheerio";
 import { createClient } from "@supabase/supabase-js";
@@ -29,6 +32,13 @@ const CONSOLES = (env.ETUDE_CONSOLES || "nes,snes,n64,gb,gbc")
   .filter(Boolean);
 const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_SECRET_KEY);
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
+const debut = Date.now();
+const minutes = () => ((Date.now() - debut) / 60000).toFixed(1);
+const BUDGET_RECHERCHE = 30 * 60000; // fin de la recherche des guides
+const BUDGET_COUVERTURES = 52 * 60000; // fin des couvertures (limite de la tâche : 75 min)
+const partiel = []; // phases arrêtées par leur budget
+const DELAI = 20000; // un appel qui ne répond pas en 20 s est abandonné
+const COUPURE = 5; // refus 429 d'un hôte avant de ne plus l'appeler
 
 /** Forme comparable d'un titre japonais : NFKC, sans espaces ni ponctuation, minuscules. */
 const compact = (t) =>
@@ -73,18 +83,23 @@ function consolesCitees(titreLivre, titresJeu) {
 
 let appels = 0;
 const refus = {}; // nombre de 429 par hôte
+const coupe = (url) => (refus[new URL(url).host] ?? 0) >= COUPURE;
 async function lire(url, type = "text", intervalle = 1000) {
   for (let essai = 1; essai <= 3; essai++) {
+    if (coupe(url)) return { erreur: "hôte coupé (429 répétés)" };
     await pause(intervalle);
     appels++;
     try {
       const r = await fetch(url, {
         headers: { "user-agent": "nintendo-db etude-guides (lecture seule)" },
+        signal: AbortSignal.timeout(DELAI),
       });
       if (r.status === 429) {
         const hote = new URL(url).host;
         refus[hote] = (refus[hote] ?? 0) + 1;
-        await pause(20000 * essai);
+        if (refus[hote] >= COUPURE)
+          console.log(`${minutes()} min : ${hote} coupé (429)`);
+        else await pause(20000 * essai);
         continue;
       }
       if (!r.ok) return { erreur: `HTTP ${r.status}`, statut: r.status };
@@ -197,13 +212,21 @@ const titreJapLatin = lignes.filter(
   (j) => jap(j) && !JAPONAIS.test(jap(j).titre ?? ""),
 ).length;
 console.log(
-  `${lignes.length} jeux rétro, ${sansJap} sans sortie japonaise, ${titreJapLatin} au titre JAP en lettres latines`,
+  `${lignes.length} jeux, ${sansJap} sans sortie japonaise, ${titreJapLatin} au titre JAP en lettres latines`,
 );
 
 // 2. Recherche par jeu.
 const details = [];
 const brutes = []; // 2 réponses NDL et 1 Internet Archive, pour écrire les fixtures des tests plus tard
-for (const { console: slugConsole, jeu } of echantillon) {
+for (const [n, { console: slugConsole, jeu }] of echantillon.entries()) {
+  if (Date.now() - debut > BUDGET_RECHERCHE) {
+    partiel.push(`recherche arrêtée après ${n} jeux sur ${echantillon.length}`);
+    break;
+  }
+  if (n % 10 === 0)
+    console.log(
+      `${minutes()} min : jeu ${n + 1}/${echantillon.length}, appels ${appels}, refus ${JSON.stringify(refus)}`,
+    );
   const r = jap(jeu);
   const titreUs =
     jeu.releases.find((x) => x.region === "US")?.titre ??
@@ -337,12 +360,18 @@ const isbns = [
 const couvertures = {};
 /** Image à une adresse : type, octets, dimensions (sharp) ; null si ce n'est pas une vraie couverture. */
 async function image(url, intervalle = 1000) {
+  if (coupe(url)) return null;
   await pause(intervalle);
   appels++;
   try {
     const r = await fetch(url, {
       headers: { "user-agent": "nintendo-db etude-guides (lecture seule)" },
+      signal: AbortSignal.timeout(DELAI),
     });
+    if (r.status === 429) {
+      const hote = new URL(url).host;
+      refus[hote] = (refus[hote] ?? 0) + 1;
+    }
     if (
       !r.ok ||
       !/image\/(jpeg|png|webp|gif)/.test(r.headers.get("content-type") ?? "")
@@ -369,7 +398,15 @@ if (isbns.length) {
         ((couvertures[lot[i]] ??= {}).openbd = x?.summary?.cover || null),
     );
   }
-  for (const isbn of isbns) {
+  for (const [n, isbn] of isbns.entries()) {
+    if (Date.now() - debut > BUDGET_COUVERTURES) {
+      partiel.push(`couvertures arrêtées après ${n} ISBN sur ${isbns.length}`);
+      break;
+    }
+    if (n % 25 === 0)
+      console.log(
+        `${minutes()} min : ISBN ${n + 1}/${isbns.length}, appels ${appels}, refus ${JSON.stringify(refus)}`,
+      );
     const c = (couvertures[isbn] ??= {});
     if (c.openbd) c.openbd = await image(c.openbd);
     c.ndl = await image(
@@ -420,11 +457,20 @@ for (const d of details) {
   if (d.archive?.length) r.archive++;
   if (d.erreurNdl || d.erreurIa) r.erreurs++;
 }
-const couv = Object.values(couvertures);
+const couv = Object.values(couvertures).filter((c) => "ndl" in c); // ISBN réellement interrogés
 writeFileSync(
   "etude-guides.json",
   JSON.stringify(
-    { appels, refus, consoles: CONSOLES, resume, couvertures, details, brutes },
+    {
+      appels,
+      refus,
+      partiel,
+      consoles: CONSOLES,
+      resume,
+      couvertures,
+      details,
+      brutes,
+    },
     null,
     1,
   ),
@@ -440,9 +486,12 @@ const colonnes = [
   "erreurs",
 ];
 const texte = [
-  `## Étude des guides japonais v3 (${new Date().toISOString().slice(0, 10)})`,
-  `${echantillon.length} jeux (${CONSOLES.join(", ")}), ${appels} appels, refus 429 : ${JSON.stringify(refus)}. Catalogue rétro : ${lignes.length} jeux, ${sansJap} sans sortie japonaise, ${titreJapLatin} au titre JAP en lettres latines.`,
-  `Couvertures sur ${isbns.length} ISBN : ${SOURCES_COUV.map((x) => `${x} ${couv.filter((c) => c[x]).length}`).join(", ")} ; au moins une : ${couv.filter((c) => SOURCES_COUV.some((x) => c[x])).length}.`,
+  `## Étude des guides japonais v3.1 (${new Date().toISOString().slice(0, 10)}, ${minutes()} min)`,
+  partiel.length
+    ? `**Rapport partiel** : ${partiel.join(" ; ")}.`
+    : "Étude complète.",
+  `${echantillon.length} jeux (${CONSOLES.join(", ")}), ${appels} appels, refus 429 : ${JSON.stringify(refus)}. Catalogue : ${lignes.length} jeux, ${sansJap} sans sortie japonaise, ${titreJapLatin} au titre JAP en lettres latines.`,
+  `Couvertures sur ${couv.length} ISBN : ${SOURCES_COUV.map((x) => `${x} ${couv.filter((c) => c[x]).length}`).join(", ")} ; au moins une : ${couv.filter((c) => SOURCES_COUV.some((x) => c[x])).length}.`,
   "",
   `| Console | ${colonnes.join(" | ")} |`,
   `|---|${colonnes.map(() => "---").join("|")}|`,

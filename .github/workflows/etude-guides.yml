@@ -20,9 +20,9 @@ permissions:
 
 jobs:
   etude:
-    name: Chercher les guides japonais d'un échantillon rétro
+    name: Chercher les guides japonais d'un échantillon
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
