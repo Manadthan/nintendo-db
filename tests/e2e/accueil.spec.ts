@@ -9,16 +9,15 @@ test.describe("accueil", () => {
     await expect(page).toHaveTitle("Nintendo DB");
     await expect(page.locator("html")).toHaveAttribute("lang", "fr");
     await expect(page.getByRole("banner")).toContainText("Nintendo DB");
+    // Bandeau réduit au titre seul (demande du propriétaire, 24/11/2026).
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Les jeux Nintendo en boîte, version par version",
+      "Pour les collectionneurs Nintendo",
     );
-    // Description : tous les jeux édités par Nintendo, sans la liste des consoles (demande du propriétaire, 20/11/2026).
     await expect(
-      page.getByText(
-        "Tous les jeux édités par Nintendo, avec leurs jaquettes, titres et dates au Japon, en Amérique du Nord et en Europe.",
-        { exact: true },
-      ),
-    ).toBeVisible();
+      page.getByText("Les jeux Nintendo en boîte, version par version", {
+        exact: true,
+      }),
+    ).toHaveCount(0);
   });
 
   test("bandeau toujours visible et bouton « Remonter en haut » au défilement (SPEC v1.34)", async ({
