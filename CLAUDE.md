@@ -42,7 +42,9 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 - Aucun secret dans le dépôt.
 - Une demande qui contredit SPEC ou DESIGN : le signaler, mettre le document à jour d'abord.
 - Claude fait tout jusqu'au merge sur `main`, **jamais le merge lui-même**.
-- Même erreur commise deux fois → ajouter la règle ici.
+- Même erreur commise deux fois → skill `correct` (la rendre impossible), puis ajouter la règle ici.
+- **pstack par défaut** (`.claude/skills/PSTACK.md`) : `tdd` pour chaque bug, `typescript-best-practices` pour le code,
+  `blast-radius` avant une PR risquée, `how`/`why` avant de modifier une partie inconnue. PLAYBOOK.md reste la méthode.
 
 ## Stack et commandes
 
@@ -102,7 +104,7 @@ tests/e2e/               tests Playwright ; connexion.spec.ts ignoré sans base 
 supabase/                config.toml (inscriptions désactivées), migrations/ (0001 schéma, 0002 RLS, 0003 jaquettes, 0004 données de départ : 4 jeux Wii U, 0005 source gametdb, 0006 bucket du relais, 0007 console Wii, 0008 consoles DS et 3DS, 0009 console Switch, 0010 Switch 2 + table exclusions : jeux décochés « en boîte », 0011 console GameCube, 0012 possessions : collection privée, RLS par compte, 0013 note Metacritic du jeu, 0014 consoles N64 et GBA + source de jaquette libretro, 0015 console Game Boy Color, 0016 console Game Boy, 0017 console Virtual Boy, 0018 console Super Nintendo, 0019 source de jaquette gamecartdb, 0020 console NES, 0021 source de jaquette nintendo, 0022 corrections de données : développeurs collés des listes à cartouches, 3D Tetris JAP, 0023 séries du jeu : series text[], 0024 rôles : profils + est_proprietaire(), écriture du catalogue, des jaquettes et des exclusions réservée au propriétaire, ADR-16, 0025 invitations : empreinte du jeton, propriétaire seul, 0026 profil_public() : profil public sans e-mail, security definer, 0027 source de jaquette screenscraper, 0028 captures RAWG : table captures (6 au plus, media.rawg.io seulement) + games.rawg_slug, US-26, 0029 bucket gametdb : JSON accepté (relais RAWG), 0030 slug RAWG : tiret bas accepté), tests/database/ (pgTAP)
 .github/                 CI (workflows/ci.yml), modèles de PR et d'issue
 docs/, intent/           SPEC, DESIGN, MAQUETTES, intention
-.claude/skills/          skills du projet, chargées à la demande : script-prod (script sur la production), steward (PR et CI), react-best-practices (règles de performance de Vercel, MIT, pour les audits seulement)
+.claude/skills/          skills du projet, chargées à la demande : script-prod (script sur la production), steward (PR et CI), react-best-practices (règles de performance de Vercel, MIT, pour les audits seulement) ; sélection pstack (MIT, PSTACK.md) utilisée par défaut : tdd, typescript-best-practices + 2 principes, blast-radius, how, why, correct, reflect
 ```
 
 Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair/sombre de globals.css, jamais de couleur en dur) : `fond`, `carte`, `texte`, `texte-doux`,
