@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.39 — 24/11/2026 — statut : **à valider**
+> Version 1.40 — 24/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.40 | 24/11/2026 | **ADR-19 — Guides japonais** (SPEC v1.47, US-27 et US-28) : tables `guides`, `guides_jeux` (plusieurs à plusieurs) et `guides_exclus` ; couverture servie par Google Books ; guides du catalogue chargés seulement quand « Guides » est cochée ; page `/guides/[isbn]` ; remplissage depuis la session après une planche ; plan en 5 PR (§8, étape 29) |
 > | 1.39 | 24/11/2026 | **Guides : 3DS et Switch d'abord** (intention v1.7, §1 septdecies) : couvertures du rétro introuvables (1 sur 150 ISBN) ; 3DS + Switch : 16 jeux sur 40 avec un guide, couvertures **Google Books** pour 26 ISBN sur 39 (300 px, clé, pays Japon) ; conditions de Google Books ; essais en direct depuis la session (hôtes ajoutés) |
 > | 1.38 | 24/11/2026 | **Étude des guides japonais** (étape 29, §1 septdecies) : NDL Search retenu pour la liste (49 jeux rétro sur 100 avec un guide, 95 % avec ISBN) ; couvertures introuvables (0 / 60) : étude v3 des couvertures |
 > | 1.37 | 24/11/2026 | **Guides japonais** (étape 29, intention v1.6) : ajoutés au backlog, étude des sources d'abord (§11) |
@@ -696,6 +697,54 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
    l'étude et enregistrées dans `__fixtures__/` ; e2e : carrousel, agrandissement, Échap, bloc absent sans captures,
    images de `media.rawg.io` interceptées par Playwright ; jamais RAWG en direct.
 
+**ADR-19 — Guides japonais : tables à part, couverture servie par Google, chargés à la demande (étape 29, SPEC v1.47).**
+1. **Un guide n'est pas un jeu** : tables à part plutôt qu'un « type » dans `games` (un guide n'a ni régions, ni
+   jaquettes, ni sorties ; il peut couvrir plusieurs jeux). Migration 0031 :
+   - `guides` : `id`, **`isbn` (13 chiffres, unique)** — un guide sans ISBN n'entre pas (US-28) —, `titre` (japonais),
+     `editeur`, `date_parution` + `precision_date` (le type existant : NDL donne le mois), `pages`,
+     `google_books_id` (couverture et lien « Google Books › » ; vide = vignette neutre), `ndl_url` (notice NDL),
+     `verrous text[]` (champs corrigés à la main, gardés par les passages suivants, comme ADR-03), `cree_le`, `maj_le` ;
+   - `guides_jeux` : (`guide_id`, `game_id`) clé primaire, suppression en cascade des deux côtés : un guide peut
+     couvrir **plusieurs jeux** (Pokémon Or et Argent) ;
+   - `guides_exclus` : `isbn` clé primaire, `raison`, `cree_le` : un guide écarté sur la planche ou supprimé n'est
+     **jamais remis** (comme la table `exclusions` des jeux, migration 0010) ;
+   - RLS : lecture pour tous (`guides_exclus` : propriétaire seulement), écriture réservée au propriétaire
+     (`est_proprietaire()`, ADR-16) et à la clé secrète. pgTAP : lecture anonyme, écriture refusée, ISBN unique et à
+     13 chiffres, cascade.
+2. **Couverture** : **jamais copiée** (conditions de Google Books, §1 septdecies) : la base garde `google_books_id`,
+   le navigateur charge `books.google.com/books/content?id=…&printsec=frontcover&img=1&zoom=1&fife=w800-h1200`
+   (300 px) dans un `<img loading="lazy">` sans optimisation Next (comme ADR-18) ; image cassée → vignette neutre.
+   Mention « powered by Google » à côté des couvertures et lien vers la page Google Books du guide
+   (`books.google.com/books?id=…`). Rien n'appelle Google à l'ouverture d'une page : pas de clé dans Vercel.
+3. **Liens d'achat** : adresses de recherche par ISBN, calculées (module pur), jamais stockées : Amazon Japon
+   (`www.amazon.co.jp/s?k={isbn}`) et Suruga-ya (`www.suruga-ya.jp/search?search_word={isbn}`), ouverts dans un nouvel
+   onglet (`rel="noopener noreferrer"`) ; adresses vérifiées à la main avant la PR de la page.
+4. **Catalogue** (US-27) : l'accueil reste aussi léger qu'après l'audit de performance (BILAN §13) : **les guides ne
+   sont pas dans le HTML de l'accueil**. Cocher « Guides » charge une seule fois une route préparée à l'avance
+   (`/guides.json`, gardée 5 min, étiquette `catalogue` vidée par chaque écriture) : par guide, l'ISBN, le titre,
+   l'éditeur, la date, la couverture et, pour chaque jeu couvert, son identifiant (console, genres, studios, séries,
+   titres pris dans le catalogue déjà chargé). Les cartes « guide » passent par les mêmes recherche, filtres, tris,
+   lots de 60 et frise (fonctions pures de `src/lib/catalogue/` étendues : élément « jeu » ou « guide ») ; `?voir=` dans
+   l'adresse comme `?tri=` ; guides masqués sur les marchés Europe et Amérique du Nord.
+5. **Page du guide** `/guides/[isbn]` : préparée à l'avance (ISR 5 min, `generateStaticParams`), métadonnées et
+   données structurées schema.org `Book` (ISBN, éditeur, date, `about` = jeux), dans le plan du site ; 404 en français
+   pour un ISBN inconnu. **Fiche du jeu** : bloc « Guides (N) » lu avec le jeu (page toujours statique).
+6. **Remplissage** (US-28) : depuis la **session Claude** (NDL, Google Books joints depuis le 24/11 ; clé Google en
+   en-tête ajoutée par le réseau, jamais écrite), skill `script-prod`. `scripts/guides.mjs --console 3ds` : pour
+   chaque jeu sorti au Japon, recherche NDL par titre JAP, titre en lettres latines et titre Wikidata (un appel toutes
+   les 6 s, ADR du §1 septdecies), filtres du module pur `src/lib/guides/` (guide et pas artbook ni magazine, titre
+   non suivi d'un chiffre ni d'un autre mot du titre d'un autre jeu, console citée ou date proche), couverture Google
+   Books (`country=JP`), puis `--planche dossier` (planche numérotée) ; le propriétaire écarte des numéros ;
+   `--ecrire --sauf n,n` écrit les guides gardés et ajoute les écartés à `guides_exclus`. Relancer ne crée pas de
+   doublon (`isbn` unique, liens en `upsert`) et respecte les verrous.
+7. **Tests** : unitaires sur des fixtures (réponses NDL et Google Books enregistrées par l'étude, écrites dans
+   `src/lib/guides/__fixtures__/`) : ISBN 10 → 13, filtre guide / artbook / magazine, rapprochement titre ↔ jeu (les
+   faux positifs de l'étude : *Xenoblade X*, Kirby Super Deluxe), adresses de couverture et d'achat ; extension des tests
+   du catalogue (éléments mêlés, `?voir=`, marché) ; pgTAP (point 1) ; e2e : coches, carte → page du guide, bloc de la
+   fiche, couvertures interceptées par Playwright ; jamais NDL ni Google en direct.
+8. **Plus tard** : case « j'ai ce guide » (table `possessions_guides`, ADR-07), consoles suivantes (Wii U, DS, Wii…),
+   page d'administration des guides.
+
 ## 5. Modèle de données
 
 ```
@@ -711,6 +760,11 @@ possessions(user_id → auth.users, game_id → games (cascade), region, cree_le
 profils(user_id → auth.users (cascade) primary key, pseudo citext unique 3–20 [a-z0-9-], avatar (liste fixe),
         public bool défaut false, role 'proprietaire'|'collectionneur' défaut 'collectionneur', cree_le)   (ADR-16)
 invitations(id, nom, jeton_hache unique, cree_le, expire_le, utilisee_le, user_id → auth.users)          (ADR-16)
+captures(game_id → games (cascade), position 1–6, url, largeur, hauteur)                                  (ADR-18)
+guides(id, isbn char(13) unique, titre, editeur, date_parution, precision_date, pages, google_books_id, ndl_url,
+       verrous text[], cree_le, maj_le)                                                                   (ADR-19)
+guides_jeux(guide_id → guides (cascade), game_id → games (cascade)) primary key (guide_id, game_id)       (ADR-19)
+guides_exclus(isbn primary key, raison, cree_le)                                                          (ADR-19)
 ```
 
 - Un jeu = une œuvre sur une console ; ses 3 sorties sont toujours créées (`sortie = false` si absente).
@@ -859,6 +913,13 @@ test n'appelle les sites en direct.
     pseudo, avatar, public, statistiques, derniers ajouts) et icône de compte selon le rôle ; (4) **badges** (calcul pur
     + affichage) ; (5) **profil public** (`profil_public()`, `/collectionneurs/[pseudo]`) ; (6) e2e de bout en bout
     (invitation → compte → profil public) et bilan.
+
+29. **Guides japonais** (v1.40, ADR-19, SPEC v1.47) — 5 PR : (1) **documents** (ADR-19, modèle, plan) ;
+    (2) **migration 0031** (`guides`, `guides_jeux`, `guides_exclus`, RLS), pgTAP, types ; (3) **module pur**
+    `src/lib/guides/` + fixtures + `scripts/guides.mjs` (planche, `--ecrire`, `--sauf`) ; puis **remplissage 3DS et
+    Switch** après la planche relue par le propriétaire ; (4) **page du guide** `/guides/[isbn]`, bloc « Guides » de la
+    fiche, plan du site, sources dans « À propos » ; (5) **catalogue** : `/guides.json`, coches « Jeux » / « Guides »,
+    cartes, recherche, filtres, tris, frise, e2e ; puis bilan.
 
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
