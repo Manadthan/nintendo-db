@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.37 — 24/11/2026 — statut : **à valider**
+> Version 1.38 — 24/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.38 | 24/11/2026 | **Étude des guides japonais** (étape 29, §1 septdecies) : NDL Search retenu pour la liste (49 jeux rétro sur 100 avec un guide, 95 % avec ISBN) ; couvertures introuvables (0 / 60) : étude v3 des couvertures |
 > | 1.37 | 24/11/2026 | **Guides japonais** (étape 29, intention v1.6) : ajoutés au backlog, étude des sources d'abord (§11) |
 > | 1.36 | 23/11/2026 | **Étape 28 terminée** : captures RAWG en ligne, 804 jeux (§11, BILAN §15) |
 > | 1.35 | 22/11/2026 | **Étude RAWG** (étape 28, §1 sexdecies) : 39 jeux sur 48 retrouvés au titre identique, 44 avec les suffixes « (année) » et « (console) » ignorés ; Virtual Boy et Switch 2 absents de RAWG ; 6 captures au plus ; version réduite 640 vérifiée (ADR-18 points 2 et 3 précisés) |
@@ -345,6 +346,35 @@ l'originale. Un jeu sorti sur 2 consoles est un seul jeu RAWG (Pikmin 2 Wii et G
 l'une ou l'autre console). Conclusions : la règle « titre identique » n'a laissé passer **aucun** autre jeu ; ignorer
 « (année) », « (console) » et « The » en tête rattrape 5 jeux sans risque visible ; les versions réunies et les jeux
 japonais sans titre anglais restent sans captures.
+
+## 1 septdecies. Étude des guides japonais (24/11/2026)
+
+Tâche GitHub « Étude guides » (`scripts/etude-guides.mjs`, lecture seule ; la session ne joint aucune de ces sources).
+Échantillon : 100 jeux rétro sortis au Japon (20 par console : NES, SNES, N64, GB, GBC).
+
+- **1er passage** (#238) : inutilisable. Le titre JAP du catalogue rétro est en **lettres latines** (304 jeux sur
+  304 : « Mega Man 3 » et non « ロックマン3 ») ; NDL ne trouve rien par ce titre. Faux rapprochements (guide de
+  Breath of the Wild pour Zelda NES) ; 18 refus 429 de NDL à une requête par seconde.
+- **2e passage** (#239) : titre japonais lu dans **Wikidata** (article japonais, libellé japonais, P1476) : **85 jeux
+  sur 100**. Recherche **NDL Search** (API OpenSearch) une requête toutes les 3 s : 1 refus sur 440 appels. Un livre
+  est gardé s'il est un guide (NDC 798 ou « 攻略 », « ガイド »…), contient le titre non suivi d'un chiffre, ne cite pas
+  une autre console et, sans console citée, paraît dans les 4 ans.
+
+| Console | Jeux avec ≥ 1 guide | Guides |
+|---|---|---|
+| N64 | 16 / 20 | 111 |
+| GBC | 11 / 20 | 56 |
+| GB | 10 / 20 | 27 |
+| NES | 7 / 20 | 27 |
+| SNES | 5 / 20 (dont 8 Picross NP sans titre japonais) | 31 |
+
+Champs : ISBN 240 guides sur 252, éditeur et pages pour tous, date au mois. Collections reconnues : guides officiels
+Shogakukan, 必勝攻略法 Futabasha, Tokuma, T2 Shuppan. **Faux positifs restants** : suite au sous-titre (Kirby's Dream
+Land → guides de Kirby Super Deluxe, parus dans les 4 ans), titre générique de série (Derby Stallion '98 → toute la
+série) : une **planche** regardée par le propriétaire avant toute écriture, comme pour les jaquettes. Un même guide
+peut couvrir **deux jeux** (Pokémon Or et Argent) : lien guide ↔ jeu plusieurs à plusieurs. Internet Archive : scans
+japonais pour 11 jeux seulement. **Couvertures : 0 sur 60 ISBN** (openBD ne couvre que les livres récents ; vignette
+NDL demandée avec l'ISBN à 10 chiffres au lieu de 13) → étude v3 des couvertures.
 
 ## 2. Stack
 

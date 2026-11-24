@@ -14,6 +14,7 @@
 import { appendFileSync, writeFileSync } from "node:fs";
 import * as cheerio from "cheerio";
 import { createClient } from "@supabase/supabase-js";
+import sharp from "sharp";
 
 const env = process.env;
 const manquants = ["SUPABASE_URL", "SUPABASE_SECRET_KEY"].filter(
@@ -315,32 +316,87 @@ for (const { console: slugConsole, jeu } of echantillon) {
   }
 }
 
-// 3. Couvertures : openBD (lot d'ISBN) puis vignette NDL, sur 60 ISBN au plus.
+// 3. Couvertures (v3, 24/11/2026 : 0 sur 60 au 2e passage). Pour chaque ISBN (150 au plus), ramené à 13 chiffres :
+// openBD (lot), vignette NDL, Open Library, Google Books. Une image compte si c'est une vraie image (JPEG, PNG,
+// WebP) d'au moins 80 px de large : les images « pas de couverture » des services sont petites ou absentes.
+const isbn13 = (x) => {
+  if (!x || !/^\d{9}[\dX]$/i.test(x))
+    return /^\d{13}$/.test(x ?? "") ? x : null;
+  const base = `978${x.slice(0, 9)}`;
+  const somme = [...base].reduce(
+    (t, c, n) => t + Number(c) * (n % 2 ? 3 : 1),
+    0,
+  );
+  return `${base}${(10 - (somme % 10)) % 10}`;
+};
 const isbns = [
   ...new Set(
-    details.flatMap((d) => d.guides.map((g) => g.isbn)).filter(Boolean),
+    details.flatMap((d) => d.guides.map((g) => isbn13(g.isbn))).filter(Boolean),
   ),
-].slice(0, 60);
+].slice(0, 150);
 const couvertures = {};
-if (isbns.length) {
-  const o = await lire(
-    `https://api.openbd.jp/v1/get?isbn=${isbns.join(",")}`,
-    "json",
-  );
-  (o.corps ?? []).forEach(
-    (x, n) => (couvertures[isbns[n]] = { openbd: x?.summary?.cover || null }),
-  );
-  for (const isbn of isbns) {
-    const v = await lire(
-      `https://ndlsearch.ndl.go.jp/thumbnail/${isbn}.jpg`,
-      "statut",
-      3000,
-    );
-    (couvertures[isbn] ??= {}).ndl = v.erreur
-      ? null
-      : `${v.type}, ${v.octets} o`;
+/** Image à une adresse : type, octets, dimensions (sharp) ; null si ce n'est pas une vraie couverture. */
+async function image(url, intervalle = 1000) {
+  await pause(intervalle);
+  appels++;
+  try {
+    const r = await fetch(url, {
+      headers: { "user-agent": "nintendo-db etude-guides (lecture seule)" },
+    });
+    if (
+      !r.ok ||
+      !/image\/(jpeg|png|webp|gif)/.test(r.headers.get("content-type") ?? "")
+    )
+      return null;
+    const octets = Buffer.from(await r.arrayBuffer());
+    const { width, height } = await sharp(octets).metadata();
+    return width >= 80
+      ? { url, largeur: width, hauteur: height, octets: octets.length }
+      : null;
+  } catch {
+    return null;
   }
 }
+if (isbns.length) {
+  for (let n = 0; n < isbns.length; n += 50) {
+    const lot = isbns.slice(n, n + 50);
+    const o = await lire(
+      `https://api.openbd.jp/v1/get?isbn=${lot.join(",")}`,
+      "json",
+    );
+    (o.corps ?? []).forEach(
+      (x, i) =>
+        ((couvertures[lot[i]] ??= {}).openbd = x?.summary?.cover || null),
+    );
+  }
+  for (const isbn of isbns) {
+    const c = (couvertures[isbn] ??= {});
+    if (c.openbd) c.openbd = await image(c.openbd);
+    c.ndl = await image(
+      `https://ndlsearch.ndl.go.jp/thumbnail/${isbn}.jpg`,
+      3000,
+    );
+    c.openlibrary = await image(
+      `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`,
+    );
+    const g = await lire(
+      `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`,
+      "json",
+    );
+    const vignette = g.corps?.items?.[0]?.volumeInfo?.imageLinks?.thumbnail;
+    c.google = vignette
+      ? await image(
+          vignette.replace("http://", "https://").replace("&edge=curl", ""),
+        )
+      : null;
+  }
+}
+const SOURCES_COUV = ["openbd", "ndl", "openlibrary", "google"];
+const titreDe = Object.fromEntries(
+  details.flatMap((d) =>
+    d.guides.map((g) => [isbn13(g.isbn), `${g.titre} (${d.console})`]),
+  ),
+);
 
 // 4. Rapport.
 const resume = {};
@@ -384,9 +440,9 @@ const colonnes = [
   "erreurs",
 ];
 const texte = [
-  `## Étude des guides japonais v2 (${new Date().toISOString().slice(0, 10)})`,
+  `## Étude des guides japonais v3 (${new Date().toISOString().slice(0, 10)})`,
   `${echantillon.length} jeux (${CONSOLES.join(", ")}), ${appels} appels, refus 429 : ${JSON.stringify(refus)}. Catalogue rétro : ${lignes.length} jeux, ${sansJap} sans sortie japonaise, ${titreJapLatin} au titre JAP en lettres latines.`,
-  `Couvertures sur ${isbns.length} ISBN : openBD ${couv.filter((c) => c.openbd).length}, vignette NDL ${couv.filter((c) => c.ndl).length}.`,
+  `Couvertures sur ${isbns.length} ISBN : ${SOURCES_COUV.map((x) => `${x} ${couv.filter((c) => c[x]).length}`).join(", ")} ; au moins une : ${couv.filter((c) => SOURCES_COUV.some((x) => c[x])).length}.`,
   "",
   `| Console | ${colonnes.join(" | ")} |`,
   `|---|${colonnes.map(() => "---").join("|")}|`,
@@ -407,6 +463,22 @@ const texte = [
     const e = d.ecartes;
     return `| ${d.console}/${d.slug} | ${d.titres.join(", ") || "—"} | ${d.erreurNdl ?? d.guides.length} | ${(ex || "—").replace(/\|/g, "/")} | ${e.pasGuide} / ${e.autreTitre} / ${e.suite} / ${e.autreConsole} / ${e.horsDates} | ${d.erreurIa ?? d.archive?.length ?? 0} |`;
   }),
+  "",
+  "### Planche de couvertures (30 premières trouvées)",
+  "",
+  "| Couverture | Guide | Source, taille |",
+  "|---|---|---|",
+  ...Object.entries(couvertures)
+    .map(([isbn, c]) => [
+      isbn,
+      SOURCES_COUV.map((x) => [x, c[x]]).find(([, v]) => v),
+    ])
+    .filter(([, t]) => t)
+    .slice(0, 30)
+    .map(
+      ([isbn, [x, v]]) =>
+        `| <img src="${v.url}" width="90"> | ${(titreDe[isbn] ?? isbn).replace(/\|/g, "/")} | ${x}, ${v.largeur} × ${v.hauteur} |`,
+    ),
 ].join("\n");
 console.log(texte);
 if (env.GITHUB_STEP_SUMMARY)
