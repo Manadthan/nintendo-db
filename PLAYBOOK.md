@@ -41,6 +41,8 @@
 - **Skills** (`.claude/skills/`) pour le savoir à appliquer de façon constante (ex. ajout d'une console,
   format des données) ; **hooks** pour ce qui est impératif (fichiers générés protégés, pas de secret,
   lint après modification). Les hooks restent rapides ; les contrôles lourds vont en CI.
+  Une sélection de **pstack** (`.claude/skills/PSTACK.md`, 24/11/2026) sert par défaut : test d'abord (`tdd`),
+  TypeScript, rayon d'impact d'un changement (`blast-radius`), erreurs rendues impossibles (`correct`).
 - **Sessions parallèles** seulement sur des fichiers différents, et pas plus que ce que la revue suit.
 
 ### Étape 4 — Tester
