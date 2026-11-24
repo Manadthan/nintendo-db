@@ -34,6 +34,7 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          GOOGLE_BOOKS_CLE: ${{ secrets.GOOGLE_BOOKS_CLE }}
           ETUDE_PAR_CONSOLE: ${{ inputs.par_console }}
           ETUDE_CONSOLES: ${{ inputs.consoles }}
         run: node scripts/etude-guides.mjs

@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.38 — 24/11/2026 — statut : **à valider**
+> Version 1.39 — 24/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.39 | 24/11/2026 | **Guides : 3DS et Switch d'abord** (intention v1.7, §1 septdecies) : couvertures du rétro introuvables (1 sur 150 ISBN) ; 3DS + Switch : 16 jeux sur 40 avec un guide, couvertures **Google Books** pour 26 ISBN sur 39 (300 px, clé, pays Japon) ; conditions de Google Books ; essais en direct depuis la session (hôtes ajoutés) |
 > | 1.38 | 24/11/2026 | **Étude des guides japonais** (étape 29, §1 septdecies) : NDL Search retenu pour la liste (49 jeux rétro sur 100 avec un guide, 95 % avec ISBN) ; couvertures introuvables (0 / 60) : étude v3 des couvertures |
 > | 1.37 | 24/11/2026 | **Guides japonais** (étape 29, intention v1.6) : ajoutés au backlog, étude des sources d'abord (§11) |
 > | 1.36 | 23/11/2026 | **Étape 28 terminée** : captures RAWG en ligne, 804 jeux (§11, BILAN §15) |
@@ -375,6 +376,49 @@ série) : une **planche** regardée par le propriétaire avant toute écriture, 
 peut couvrir **deux jeux** (Pokémon Or et Argent) : lien guide ↔ jeu plusieurs à plusieurs. Internet Archive : scans
 japonais pour 11 jeux seulement. **Couvertures : 0 sur 60 ISBN** (openBD ne couvre que les livres récents ; vignette
 NDL demandée avec l'ISBN à 10 chiffres au lieu de 13) → étude v3 des couvertures.
+
+**Couvertures, v3 à v3.2 (24/11/2026 au soir).**
+
+- **v3** (#241, tâche GitHub) : arrêtée par la limite de 60 min sans rapport (rien n'était écrit avant la fin ;
+  réessais de 20 à 60 s sur les refus 429). **v3.1** (#243) : 20 s par appel, avancement dans le journal, budget de
+  temps par phase, rapport toujours écrit. Rétro (100 jeux, 150 ISBN à 13 chiffres) : **1 couverture sur 150**
+  (Open Library) ; openBD et vignette NDL : 0 (livres d'avant 2000) ; Google Books sans clé : refus 429 dès le 10e
+  appel. Le rétro n'a donc presque aucune couverture disponible gratuitement.
+- **Méthode changée** : les tâches GitHub (10 à 45 min par essai) ont été remplacées par des **essais en direct depuis
+  la session**, après l'ajout de NDL, openBD, Open Library, Google Books (et Rakuten) aux hôtes de l'environnement
+  Claude. NDL refuse (429) après une dizaine d'appels rapprochés : **un appel toutes les 6 s**, 60 s d'attente par
+  refus, coupé seulement après 5 refus d'affilée (1 refus en 397 appels ensuite). Rakuten Books (couverture, prix et
+  lien d'achat) : site développeur inaccessible hors du Japon (503 depuis la France et la session), écarté pour
+  l'instant.
+- **Google Books** (clé du propriétaire, en-tête `X-Goog-Api-Key` ajouté par le réseau de la session) : le paramètre
+  `country=JP` est exigé (sans lui : 403 « unknownLocation ») ; la couverture en **300 px** s'obtient avec
+  `zoom=1&fife=w800-h1200` (au-delà, image PNG « image not available », reconnue et refusée). **v3.2** sur la **3DS et
+  la Switch** (20 + 20 jeux, 28 min) :
+
+| Console | Jeux avec ≥ 1 livre | Livres | ISBN |
+|---|---|---|---|
+| 3DS | 8 / 20 | 14 | 14 |
+| Switch | 8 / 20 | 28 | 25 |
+| **Total** | **16 / 40** | **42** | **39**, dont **26 avec couverture Google Books** (67 %) ; openBD, NDL, Open Library : 0 |
+
+  Titres japonais : 37 jeux sur 40 en ont un (catalogue 3DS + Switch : 47 titres JAP en lettres latines sur 251,
+  contre 304 sur 304 pour le rétro). **Planche relue par le propriétaire** : **artbooks et magazines** comptés comme
+  guides (« アートブック », « Art of », « 設定資料集 », « Walker » : 9 livres sur 26) → **guides seulement**
+  (intention v1.7) ; *Xenoblade Chronicles X* rattaché à *Xenoblade 3D* (« ゼノブレイドクロス » commence par
+  « ゼノブレイド ») ; *PIKMIN4 パーフェクトガイド* manqué (titre du livre en lettres latines). Reste environ
+  **15 vrais guides avec couverture pour 40 jeux**. Pas de prix japonais chez Google Books.
+- **Conditions de Google Books** (developers.google.com/books/terms et /branding, lues le 24/11) : usage gratuit
+  autorisé sans accord préalable (« You may not charge users any fee for the use of your application ») ; mention
+  **« powered by Google »** à côté des résultats ; **chaque livre affiché doit avoir un lien visible vers sa page
+  Google Books** (« Every book result displayed in your application must have a prominent link to … the Google Books
+  page for that book ») ; contenu non modifié ; cache limité par les en-têtes de la réponse (conditions générales des
+  API Google). → La couverture **reste chez Google** (adresse `books.google.com`, pas de copie dans notre stockage),
+  avec le lien vers la page Google Books du guide et la mention ; contenu retiré à la demande.
+
+**Conclusion** : **3DS et Switch d'abord** (intention v1.7) ; liste des guides **NDL Search** (ménagé), couverture
+**Google Books** (lien, sans copie) ; filtre des artbooks et magazines à ajouter, recherche aussi par le titre en
+lettres latines ; une planche relue par le propriétaire avant toute écriture. Lien d'achat ou prix : à choisir dans
+la SPEC (Rakuten inaccessible ; eBay, ADR-17, ou recherche Amazon Japon / Suruga-ya par ISBN).
 
 ## 2. Stack
 
@@ -854,4 +898,4 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 | 26 | **ScreenScraper** : 1) **jaquettes manquantes**, toutes consoles (décision du 22/11 : 270 versions sorties sans jaquette sur 2 837, dont 177 japonaises : GBA 76, GB 54, NES 48, SNES 32, GBC 24) ; 2) consolidation rétro (NES à GameCube) : dates, éditeurs, jeux manquants. **Giant Bomb écarté** (21/11 : 403 depuis la session et depuis GitHub). ScreenScraper refuse aussi la session (403 du réseau) : tout passe par des tâches GitHub | identifiants en secrets GitHub `SCREENSCRAPER_DEVID`, `SCREENSCRAPER_DEVPASSWORD`, `SCREENSCRAPER_USER` (pseudo), `SCREENSCRAPER_PASSWORD` (ajoutés le 22/11) ; tâche « Étude ScreenScraper » (`scripts/etude-screenscraper.mjs`, lecture seule) : quota du compte, boîte de face `box-2D` de la bonne région par version (exacte, monde seule, autre région, aucune, jeu non trouvé) ; droit d'héberger les images ; puis plan de l'import (source de jaquette `screenscraper` : migration) ; **étude du 22/11** : boîte de la bonne région pour 164 versions sur 270, 99 jeux introuvables par le titre (GBA 47), 9 rapprochés sans titre identique (écartés) ; accord de ScreenScraper pour héberger les images avec mention de la source. **Import** : tâche « Relais ScreenScraper » → bucket privé `gametdb/screenscraper/{console}/{jeu}/{région}.jpg` (le résultat d'une tâche GitHub n'est pas lisible depuis la session) ; planche regardée par le propriétaire ; puis `scripts/jaquettes-screenscraper.mjs` depuis la session (versions toujours sans jaquette, source `screenscraper`, gardée par l'import comme `nintendo`). Ensuite : les 99 introuvables, puis dates et éditeurs ; **22/11** : 142 jaquettes écrites (2 refusées sur la planche), 128 versions encore sans jaquette. **2e passage** : recherche par code produit (`jeuInfos`, `serialnum`), puis par chaque titre connu et sa forme courte ; sans titre identique, le premier jeu trouvé par un titre complet est déposé dans `screenscraper-approche/…`, marqué « ≈ » sur la planche ; `--sauf n,n` écarte les numéros refusés ; **bilan du 22/11** : 2e passage +49 (Mickey Mouse: Magic Wands! JAP refusé), **191 jaquettes ScreenScraper**, 79 versions encore sans jaquette (15 Famicom Mini GBA, Densetsu no Starfy, Fire Emblem SNES et NES… : introuvables ; Advance Wars, Ring Fit Adventure JAP… : pas de boîte de leur région) → autre source ou photo (US-12). Reste de l'étape : dates et éditeurs rétro ; **dates et éditeurs** : tâche « Étude ScreenScraper dates » (`scripts/etude-screenscraper-dates.mjs`, lecture seule) : échantillon de jeux NES à GameCube (150 par défaut, graine fixe), jeu trouvé par code produit ou titre identique, dates comparées par région à la précision commune, éditeurs ramenés à la société ; écarts dans le journal ; **résultat complet (585 jeux, 1 137 versions)** : 457 jeux trouvés ; dates identiques à la précision commune 79 % (sur 1 084 comparées), jour ou mois différent 15 %, **58 années différentes** (5 %), toutes vérifiées sur l'encadré Wikipédia : ScreenScraper se trompe presque toujours (année seule approximative, date d'une autre console ou d'un autre jeu) ; **4 dates corrigées** chez nous (Pokémon Channel US, Top Gear Rally JAP, The Tower SP US, Nigel Mansell PAL : `scripts/dates-retro-corrigees.mjs`, date et précision verrouillées). Éditeurs : 88 % identiques ; les écarts viennent de l'éditeur unique de ScreenScraper pour toutes les régions → non repris. **Étape terminée** (22/11) |
 | 28 | **Captures RAWG** dans la fiche (SPEC v1.43, ADR-18) : **terminée le 23/11** (#218, #220 à #225, #227, #228 ; BILAN §15) : 804 jeux avec captures | plan en 5 PR : 1) documents et maquette ; 2) tâche « Étude RAWG » en lecture seule (#220, **faite le 22/11**, §1 sexdecies : 81 % au titre identique, 92 % avec suffixes ignorés, aucun faux rapprochement accepté) ; 3) migration `captures` ; 4) relais + planche + écriture en base ; 5) carrousel de la fiche. Avant l'étude : clé RAWG du propriétaire en secret GitHub `RAWG_API_KEY` |
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
-| 29 | **Guides japonais** (攻略本, intention v1.6 décision 10) : guides dans le même catalogue que les jeux (carte propre avec la couverture, menant au jeu ; coches d'affichage « Jeux » et « Guides ») et listés dans la fiche du jeu ; rétro d'abord (Famicom, Super Famicom, N64, Game Boy) ; case « je l'ai » plus tard | **étude des sources** en lecture seule (la session ne joint aucune de ces sources : tâche GitHub) : couverture du catalogue rétro (part des jeux avec au moins un guide), champs disponibles (couverture, éditeur, date, ISBN, pages), droit d'héberger les couvertures, rapprochement guide → jeu ; candidates : Retromags (base « Japanese Language Guides »), The Video Game Library, Internet Archive (`strategyguides`), NDL Search (ISBN), Zelda Dungeon et Bulbapedia ; lien d'achat ou prix : eBay (ADR-17) ou recherche Suruga-ya ; puis SPEC, maquettes (fiche + page), ADR, plan |
+| 29 | **Guides japonais** (攻略本, intention v1.6 décision 10, v1.7) : guides dans le même catalogue que les jeux (carte propre avec la couverture, menant au jeu ; coches d'affichage « Jeux » et « Guides ») et listés dans la fiche du jeu ; ~~rétro d'abord~~ **3DS et Switch d'abord**, guides seulement (§1 septdecies : NDL + couvertures Google Books) ; case « je l'ai » plus tard | **étude des sources** en lecture seule (la session ne joint aucune de ces sources : tâche GitHub) : couverture du catalogue rétro (part des jeux avec au moins un guide), champs disponibles (couverture, éditeur, date, ISBN, pages), droit d'héberger les couvertures, rapprochement guide → jeu ; candidates : Retromags (base « Japanese Language Guides »), The Video Game Library, Internet Archive (`strategyguides`), NDL Search (ISBN), Zelda Dungeon et Bulbapedia ; lien d'achat ou prix : eBay (ADR-17) ou recherche Suruga-ya ; puis SPEC, maquettes (fiche + page), ADR, plan |
