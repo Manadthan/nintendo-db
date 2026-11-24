@@ -14,6 +14,11 @@
 // v3.1 (24/11/2026) : la v3 a été arrêtée par la limite de 60 min sans rien écrire. Chaque appel a désormais 20 s au
 // plus, un hôte qui refuse 5 fois (429) n'est plus appelé, l'avancement est écrit dans le journal, et chaque phase a
 // un budget de temps : au-delà, on passe à la suite et le rapport est écrit, partiel (dit dans le résumé).
+// v3.2 (24/11/2026, essais en direct depuis la session) : NDL refuse (429) après une dizaine d'appels rapprochés ; il
+// est appelé toutes les 6 s, attend 60 s par refus et n'est coupé qu'après 5 refus D'AFFILÉE. Google Books exige une
+// clé (en-tête X-Goog-Api-Key, ajouté par le réseau de la session ou GOOGLE_BOOKS_CLE en tâche GitHub) et le pays
+// (country=JP) ; sa couverture en 300 px s'obtient avec « fife=w800-h1200 » (au-delà : image « image not available »,
+// PNG reconnue et refusée).
 import { appendFileSync, writeFileSync } from "node:fs";
 import * as cheerio from "cheerio";
 import { createClient } from "@supabase/supabase-js";
@@ -38,7 +43,25 @@ const BUDGET_RECHERCHE = 30 * 60000; // fin de la recherche des guides
 const BUDGET_COUVERTURES = 52 * 60000; // fin des couvertures (limite de la tâche : 75 min)
 const partiel = []; // phases arrêtées par leur budget
 const DELAI = 20000; // un appel qui ne répond pas en 20 s est abandonné
-const COUPURE = 5; // refus 429 d'un hôte avant de ne plus l'appeler
+const COUPURE = 5; // refus 429 D'AFFILÉE d'un hôte avant de ne plus l'appeler
+const suite429 = {}; // refus d'affilée par hôte (remis à 0 à chaque réponse)
+const coupes = new Set();
+function noter429(hote) {
+  refus[hote] = (refus[hote] ?? 0) + 1;
+  suite429[hote] = (suite429[hote] ?? 0) + 1;
+  if (suite429[hote] >= COUPURE && !coupes.has(hote)) {
+    coupes.add(hote);
+    console.log(
+      `${minutes()} min : ${hote} coupé (${COUPURE} refus 429 d'affilée)`,
+    );
+  }
+}
+const ENTETES = { "user-agent": "nintendo-db etude-guides (lecture seule)" };
+/** En-têtes d'un appel ; la clé Google Books n'est jamais écrite dans le journal. */
+const entetes = (url) =>
+  new URL(url).host === "www.googleapis.com" && env.GOOGLE_BOOKS_CLE
+    ? { ...ENTETES, "x-goog-api-key": env.GOOGLE_BOOKS_CLE }
+    : ENTETES;
 
 /** Forme comparable d'un titre japonais : NFKC, sans espaces ni ponctuation, minuscules. */
 const compact = (t) =>
@@ -83,7 +106,7 @@ function consolesCitees(titreLivre, titresJeu) {
 
 let appels = 0;
 const refus = {}; // nombre de 429 par hôte
-const coupe = (url) => (refus[new URL(url).host] ?? 0) >= COUPURE;
+const coupe = (url) => coupes.has(new URL(url).host);
 async function lire(url, type = "text", intervalle = 1000) {
   for (let essai = 1; essai <= 3; essai++) {
     if (coupe(url)) return { erreur: "hôte coupé (429 répétés)" };
@@ -91,17 +114,16 @@ async function lire(url, type = "text", intervalle = 1000) {
     appels++;
     try {
       const r = await fetch(url, {
-        headers: { "user-agent": "nintendo-db etude-guides (lecture seule)" },
+        headers: entetes(url),
         signal: AbortSignal.timeout(DELAI),
       });
+      const hote = new URL(url).host;
       if (r.status === 429) {
-        const hote = new URL(url).host;
-        refus[hote] = (refus[hote] ?? 0) + 1;
-        if (refus[hote] >= COUPURE)
-          console.log(`${minutes()} min : ${hote} coupé (429)`);
-        else await pause(20000 * essai);
+        noter429(hote);
+        if (!coupes.has(hote)) await pause(60000 * essai);
         continue;
       }
+      suite429[hote] = 0;
       if (!r.ok) return { erreur: `HTTP ${r.status}`, statut: r.status };
       if (type === "statut")
         return {
@@ -263,7 +285,7 @@ for (const [n, { console: slugConsole, jeu }] of echantillon.entries()) {
     const ndl = await lire(
       `https://ndlsearch.ndl.go.jp/api/opensearch?mediatype=books&cnt=50&title=${encodeURIComponent(titre)}`,
       "text",
-      3000,
+      6000,
     );
     if (ndl.erreur) {
       ligne.erreurNdl = ndl.erreur;
@@ -365,20 +387,20 @@ async function image(url, intervalle = 1000) {
   appels++;
   try {
     const r = await fetch(url, {
-      headers: { "user-agent": "nintendo-db etude-guides (lecture seule)" },
+      headers: entetes(url),
       signal: AbortSignal.timeout(DELAI),
     });
-    if (r.status === 429) {
-      const hote = new URL(url).host;
-      refus[hote] = (refus[hote] ?? 0) + 1;
-    }
+    if (r.status === 429) noter429(new URL(url).host);
+    else suite429[new URL(url).host] = 0;
     if (
       !r.ok ||
       !/image\/(jpeg|png|webp|gif)/.test(r.headers.get("content-type") ?? "")
     )
       return null;
     const octets = Buffer.from(await r.arrayBuffer());
-    const { width, height } = await sharp(octets).metadata();
+    const { width, height, format } = await sharp(octets).metadata();
+    // « image not available » de Google Books : PNG de 575 × 750 ou 300 × 391.
+    if (format === "png" && /books\.google\.com/.test(url)) return null;
     return width >= 80
       ? { url, largeur: width, hauteur: height, octets: octets.length }
       : null;
@@ -411,19 +433,22 @@ if (isbns.length) {
     if (c.openbd) c.openbd = await image(c.openbd);
     c.ndl = await image(
       `https://ndlsearch.ndl.go.jp/thumbnail/${isbn}.jpg`,
-      3000,
+      6000,
     );
     c.openlibrary = await image(
       `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`,
     );
     const g = await lire(
-      `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`,
+      `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&country=JP`,
       "json",
     );
     const vignette = g.corps?.items?.[0]?.volumeInfo?.imageLinks?.thumbnail;
     c.google = vignette
       ? await image(
-          vignette.replace("http://", "https://").replace("&edge=curl", ""),
+          vignette
+            .replace("http://", "https://")
+            .replace("&edge=curl", "")
+            .replace(/&zoom=\d/, "&zoom=1") + "&fife=w800-h1200",
         )
       : null;
   }
@@ -486,7 +511,7 @@ const colonnes = [
   "erreurs",
 ];
 const texte = [
-  `## Étude des guides japonais v3.1 (${new Date().toISOString().slice(0, 10)}, ${minutes()} min)`,
+  `## Étude des guides japonais v3.2 (${new Date().toISOString().slice(0, 10)}, ${minutes()} min)`,
   partiel.length
     ? `**Rapport partiel** : ${partiel.join(" ; ")}.`
     : "Étude complète.",
