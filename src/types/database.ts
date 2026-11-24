@@ -175,6 +175,102 @@ export type Database = {
           },
         ];
       };
+      guides: {
+        Row: {
+          cree_le: string;
+          date_parution: string | null;
+          editeur: string | null;
+          google_books_id: string | null;
+          id: string;
+          isbn: string;
+          ndl_url: string | null;
+          pages: number | null;
+          precision_date: Database["public"]["Enums"]["precision_date"] | null;
+          titre: string;
+          updated_at: string;
+          verrous: string[];
+        };
+        ComputedFields: never;
+        Insert: {
+          cree_le?: string;
+          date_parution?: string | null;
+          editeur?: string | null;
+          google_books_id?: string | null;
+          id?: string;
+          isbn: string;
+          ndl_url?: string | null;
+          pages?: number | null;
+          precision_date?: Database["public"]["Enums"]["precision_date"] | null;
+          titre: string;
+          updated_at?: string;
+          verrous?: string[];
+        };
+        Update: {
+          cree_le?: string;
+          date_parution?: string | null;
+          editeur?: string | null;
+          google_books_id?: string | null;
+          id?: string;
+          isbn?: string;
+          ndl_url?: string | null;
+          pages?: number | null;
+          precision_date?: Database["public"]["Enums"]["precision_date"] | null;
+          titre?: string;
+          updated_at?: string;
+          verrous?: string[];
+        };
+        Relationships: [];
+      };
+      guides_exclus: {
+        Row: {
+          cree_le: string;
+          isbn: string;
+          raison: string | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          cree_le?: string;
+          isbn: string;
+          raison?: string | null;
+        };
+        Update: {
+          cree_le?: string;
+          isbn?: string;
+          raison?: string | null;
+        };
+        Relationships: [];
+      };
+      guides_jeux: {
+        Row: {
+          game_id: string;
+          guide_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          game_id: string;
+          guide_id: string;
+        };
+        Update: {
+          game_id?: string;
+          guide_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "guides_jeux_game_id_fkey";
+            columns: ["game_id"];
+            isOneToOne: false;
+            referencedRelation: "games";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "guides_jeux_guide_id_fkey";
+            columns: ["guide_id"];
+            isOneToOne: false;
+            referencedRelation: "guides";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       import_runs: {
         Row: {
           console_id: string;
