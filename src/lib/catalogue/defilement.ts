@@ -53,6 +53,19 @@ export function positionARemettre(
   }
 }
 
+const CLE_ADRESSE = "nintendo-db:catalogue";
+
+/** Note l'adresse du catalogue (recherche, marché, filtres, tri) pour le lien « Retour au catalogue » (v1.45). */
+export function noterAdresse(stockage: Stockage, adresse: string) {
+  stockage.setItem(CLE_ADRESSE, adresse);
+}
+
+/** Adresse du lien « Retour au catalogue » : la dernière notée, si c'est bien le catalogue ; sinon l'accueil. */
+export function adresseRetour(stockage: Pick<Storage, "getItem">): string {
+  const adresse = stockage.getItem(CLE_ADRESSE);
+  return adresse?.startsWith("/?") ? adresse : "/";
+}
+
 // --- Navigateur -------------------------------------------------------------------------------------------------
 
 // Retour arrière ou avant dans le site (Next.js ne recharge pas la page : l'événement « popstate » le signale).
@@ -86,6 +99,7 @@ const adresseCourante = () => location.pathname + location.search;
 export function noterPositionCatalogue(nombre: number) {
   try {
     noterPosition(sessionStorage, adresseCourante(), window.scrollY, nombre);
+    noterAdresse(sessionStorage, adresseCourante());
   } catch {
     // Sans stockage, le navigateur fait comme il peut.
   }
@@ -107,4 +121,13 @@ export function positionCatalogueARemettre(): PositionCatalogue | null {
 /** Défile à la hauteur notée, après le rendu du catalogue (la page a retrouvé sa longueur). */
 export function defilerA(y: number) {
   requestAnimationFrame(() => window.scrollTo(0, y));
+}
+
+/** Pour le lien « Retour au catalogue » de la fiche. Stockage indisponible : l'accueil. */
+export function adresseRetourCatalogue(): string {
+  try {
+    return adresseRetour(sessionStorage);
+  } catch {
+    return "/";
+  }
 }

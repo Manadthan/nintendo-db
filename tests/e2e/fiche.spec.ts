@@ -142,3 +142,31 @@ test("« Précédent » depuis une fiche ramène le catalogue à la même hauteu
   await expect(page).toHaveURL("/");
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
 });
+
+test("revenir d'une fiche garde les filtres et le tri, par « Précédent » comme par le lien (SPEC v1.45)", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const tri = page.getByLabel("Tri", { exact: true });
+  await tri.selectOption("az");
+  await page.getByRole("button", { name: /^Filtres/ }).click();
+  await page
+    .getByRole("combobox", { name: "Disponibilité", exact: true })
+    .selectOption({ label: "Sorti dans les 3 régions" });
+  await expect(page).toHaveURL("/?tri=az&dispo=toutes");
+  await expect(page.getByText("3 jeux affichés sur 4")).toBeVisible();
+
+  const jeux = page.locator('main a[href^="/jeux/"]');
+  await jeux.first().click();
+  await expect(page).toHaveURL(/\/jeux\/wii-u\//);
+  await page.goBack();
+  await expect(page).toHaveURL("/?tri=az&dispo=toutes");
+  await expect(tri).toHaveValue("az");
+  await expect(page.getByText("3 jeux affichés sur 4")).toBeVisible();
+
+  await jeux.first().click();
+  await page.getByRole("link", { name: /Retour au catalogue/ }).click();
+  await expect(page).toHaveURL("/?tri=az&dispo=toutes");
+  await expect(tri).toHaveValue("az");
+  await expect(page.getByText("3 jeux affichés sur 4")).toBeVisible();
+});
