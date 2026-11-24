@@ -1,0 +1,306 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:dcndl="http://ndl.go.jp/dcndl/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" version="2.0">
+  <channel>
+    <title>books ゼノブレイド - 国立国会図書館サーチ OpenSearch</title>
+    <link>https://ios-v2-prod-eks-alb.ndlsearch.ndl.go.jp/api/opensearch?mediatype=books&amp;cnt=50&amp;title=%E3%82%BC%E3%83%8E%E3%83%96%E3%83%AC%E3%82%A4%E3%83%89</link>
+    <description>Search results for mediatype=books cnt=50 title=ゼノブレイド</description>
+    <language>ja</language>
+    <openSearch:totalResults>10</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>50</openSearch:itemsPerPage>
+    <item>
+      <title>ゼノブレイドクロスオフィシャルガイド</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I026493292</link>
+      <description><![CDATA[<p>KADOKAWA,2015,978-4-04-865220-9<p><ul><li>タイトル：ゼノブレイドクロスオフィシャルガイド</li><li>タイトル（読み）：ゼノブレイド クロス オフィシャル ガイド</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I026493292</guid>
+      <pubDate>Fri, 10 Jul 2015 19:00:57 +0900</pubDate>
+      <dc:title>ゼノブレイドクロスオフィシャルガイド</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド クロス オフィシャル ガイド</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2015</dc:date>
+      <dcterms:issued>2015.6</dcterms:issued>
+      <dcndl:price>2000円</dcndl:price>
+      <dc:extent>383p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-865220-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">026493292</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22590708</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33297141</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.lib-sakai.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1007000542807"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I026493292"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784048652209"/>
+      <dc:description> 2015</dc:description>
+    </item>
+    <item>
+      <title>ゼノブレイドクロスザ・シークレットファイルアート・オブ・ミラ</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I026979242</link>
+      <description><![CDATA[<p>KADOKAWA,2015,978-4-04-865556-9<p><ul><li>タイトル：ゼノブレイドクロスザ・シークレットファイルアート・オブ・ミラ</li><li>タイトル（読み）：ゼノブレイド クロス ザ シークレット ファイル アート オブ ミラ</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I026979242</guid>
+      <pubDate>Wed, 27 Jan 2016 02:42:22 +0900</pubDate>
+      <dc:title>ゼノブレイドクロスザ・シークレットファイルアート・オブ・ミラ</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド クロス ザ シークレット ファイル アート オブ ミラ</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2015</dc:date>
+      <dcterms:issued>2015.12</dcterms:issued>
+      <dcndl:price>3000円</dcndl:price>
+      <dc:extent>319p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-865556-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">026979242</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22677389</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33380409</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y88</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://opac.miraionlibrary.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1000002430587"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I026979242"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784048655569"/>
+      <dc:description> 2015</dc:description>
+    </item>
+    <item>
+      <title>ゼノブレイドザ・コンプリートガイド</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000010950793</link>
+      <description><![CDATA[<p>アスキー・メディアワークス,2010,978-4-04-868841-3<p><ul><li>タイトル：ゼノブレイドザ・コンプリートガイド</li><li>タイトル（読み）：ゼノブレイド ザ コンプリート ガイド</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000010950793</guid>
+      <pubDate>Tue, 5 Oct 2010 20:14:55 +0900</pubDate>
+      <dc:title>ゼノブレイドザ・コンプリートガイド</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド ザ コンプリート ガイド</dcndl:titleTranscription>
+      <dc:publisher>アスキー・メディアワークス</dc:publisher>
+      <dc:publisher>角川グループパブリッシング (発売)</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2010</dc:date>
+      <dcterms:issued>2010.7</dcterms:issued>
+      <dcndl:price>1800円</dcndl:price>
+      <dc:extent>287p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-868841-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000010950793</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21815608</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NSMARCNO">113080800</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y78</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000010950793"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784048688413"/>
+      <dc:description> 2010</dc:description>
+    </item>
+    <item>
+      <title>ゼノブレイドザ・シークレットファイルモナド・アーカイブス</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000011059466</link>
+      <description><![CDATA[<p>アスキー・メディアワークス,2010,978-4-04-870200-3<p><ul><li>タイトル：ゼノブレイドザ・シークレットファイルモナド・アーカイブス</li><li>タイトル（読み）：ゼノブレイド ザ シークレット ファイル モナド アーカイブス</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000011059466</guid>
+      <pubDate>Fri, 28 Jan 2011 03:34:03 +0900</pubDate>
+      <dc:title>ゼノブレイドザ・シークレットファイルモナド・アーカイブス</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド ザ シークレット ファイル モナド アーカイブス</dcndl:titleTranscription>
+      <dc:publisher>アスキー・メディアワークス</dc:publisher>
+      <dc:publisher>角川グループパブリッシング (発売)</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2010</dc:date>
+      <dcterms:issued>2010.11</dcterms:issued>
+      <dcndl:price>2800円</dcndl:price>
+      <dc:extent>251p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-870200-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000011059466</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21864613</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NSMARCNO">114801800</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y88</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000011059466"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784048702003"/>
+      <dc:description> 2010</dc:description>
+    </item>
+    <item>
+      <title>ゼノブレイド3オフィシャルアートワークスアイオニオン・モーメント</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I033387333</link>
+      <description><![CDATA[<p>KADOKAWA Game Linkage,2024,978-4-04-733720-6<p><ul><li>タイトル：ゼノブレイド3オフィシャルアートワークスアイオニオン・モーメント</li><li>タイトル（読み）：ゼノブレイド スリー オフィシャル アート ワークス アイオニオン モーメント</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I033387333</guid>
+      <pubDate>Thu, 9 May 2024 23:09:36 +0900</pubDate>
+      <dc:title>ゼノブレイド3オフィシャルアートワークスアイオニオン・モーメント</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド スリー オフィシャル アート ワークス アイオニオン モーメント</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA Game Linkage</dc:publisher>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2024</dc:date>
+      <dcterms:issued>2024.4</dcterms:issued>
+      <dcndl:price>4000円</dcndl:price>
+      <dc:extent>447p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-733720-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">033387333</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23973685</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">34589637</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>頒布</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I033387333"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/04733720A17814100000"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784047337206"/>
+      <dc:description> 2024</dc:description>
+    </item>
+    <item>
+      <title>ゼノブレイド3パーフェクトガイド</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032388220</link>
+      <description><![CDATA[<p>KADOKAWA Game Linkage,2022,978-4-04-733632-2<p><ul><li>タイトル：ゼノブレイド3パーフェクトガイド</li><li>タイトル（読み）：ゼノブレイド スリー パーフェクト ガイド</li><li>責任表示：ファミ通書籍編集部 責任編集</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author>ファミ通書籍編集部 責任編集</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032388220</guid>
+      <pubDate>Tue, 22 Nov 2022 18:55:38 +0900</pubDate>
+      <dc:title>ゼノブレイド3パーフェクトガイド</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド スリー パーフェクト ガイド</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA Game Linkage</dc:publisher>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.9</dcterms:issued>
+      <dcndl:price>2000円</dcndl:price>
+      <dc:extent>303p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-733632-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032388220</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23760454</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">34389927</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>頒布</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032388220"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784047336322"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>ゼノブレイド2オフィシャルアートワークスアルスト・レコード</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I029481024</link>
+      <description><![CDATA[<p>Gzブレイン,2019,978-4-04-733367-3<p><ul><li>タイトル：ゼノブレイド2オフィシャルアートワークスアルスト・レコード</li><li>タイトル（読み）：ゼノブレイド ツー オフィシャル アート ワークス アルスト レコード</li><li>責任表示：ファミ通 責任編集</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author>Gzブレイン,ファミ通 責任編集</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I029481024</guid>
+      <pubDate>Thu, 21 Mar 2019 01:48:20 +0900</pubDate>
+      <dc:title>ゼノブレイド2オフィシャルアートワークスアルスト・レコード</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド ツー オフィシャル アート ワークス アルスト レコード</dcndl:titleTranscription>
+      <dc:creator>Gzブレイン</dc:creator>
+      <dcndl:creatorTranscription>Gz ブレイン</dcndl:creatorTranscription>
+      <dc:publisher>Gzブレイン</dc:publisher>
+      <dc:publisher>KADOKAWA (発売)</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2019</dc:date>
+      <dcterms:issued>2019.2</dcterms:issued>
+      <dcndl:price>2900円</dcndl:price>
+      <dc:extent>351p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-733367-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">029481024</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23182819</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33880229</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y88</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>タイトルは奥付等による.標題紙のタイトル: Xenoblade2 Xenoblade2黄金の国イーラオフィシャルアートワークスアルスト・レコード</dc:description>
+      <rdfs:seeAlso rdf:resource="https://www.shiga-pref-library.jp/wo/opc_srh/srh_detail/4631599/"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I029481024"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784047333673"/>
+      <dc:description> 2019</dc:description>
+    </item>
+    <item>
+      <title>ゼノブレイド2ザ・コンプリートガイド</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028747566</link>
+      <description><![CDATA[<p>KADOKAWA,2018,978-4-04-893657-6<p><ul><li>タイトル：ゼノブレイド2ザ・コンプリートガイド</li><li>タイトル（読み）：ゼノブレイド ツー ザ コンプリート ガイド</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028747566</guid>
+      <pubDate>Thu, 15 Feb 2018 19:42:57 +0900</pubDate>
+      <dc:title>ゼノブレイド2ザ・コンプリートガイド</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド ツー ザ コンプリート ガイド</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2018</dc:date>
+      <dcterms:issued>2018.1</dcterms:issued>
+      <dcndl:price>2000円</dcndl:price>
+      <dc:extent>367p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-893657-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028747566</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23006713</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">33711722</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028747566"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784048936576"/>
+      <dc:description> 2018</dc:description>
+    </item>
+    <item>
+      <title>ゼノブレイドディフィニティブ・エディションオフィシャルガイド</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I030465852</link>
+      <description><![CDATA[<p>KADOKAWA Game Linkage,2020,978-4-04-733485-4<p><ul><li>タイトル：ゼノブレイドディフィニティブ・エディションオフィシャルガイド</li><li>タイトル（読み）：ゼノブレイド ディフィニティブ エディション オフィシャル ガイド</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I030465852</guid>
+      <pubDate>Fri, 27 Nov 2020 02:03:57 +0900</pubDate>
+      <dc:title>ゼノブレイドディフィニティブ・エディションオフィシャルガイド</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド ディフィニティブ エディション オフィシャル ガイド</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA Game Linkage</dc:publisher>
+      <dc:publisher>KADOKAWA (発売)</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2020</dc:date>
+      <dcterms:issued>2020.7</dcterms:issued>
+      <dcndl:price>2300円</dcndl:price>
+      <dc:extent>415p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-733485-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">030465852</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23455494</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">34084539</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I030465852"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784047334854"/>
+      <dc:description> 2020</dc:description>
+    </item>
+    <item>
+      <title>ゼノブレイド : 任天堂公式ガイドブック : Wii</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000010932793</link>
+      <description><![CDATA[<p>小学館,2010,978-4-09-106470-7<p><ul><li>タイトル：ゼノブレイド : 任天堂公式ガイドブック : Wii</li><li>タイトル（読み）：ゼノブレイド : ニンテンドウ コウシキ ガイドブック : Wii</li><li>シリーズ名：ワンダーライフスペシャル</li><li>シリーズ名（読み）：ワンダー ライフ スペシャル</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000010932793</guid>
+      <pubDate>Wed, 25 Aug 2010 22:50:11 +0900</pubDate>
+      <dc:title>ゼノブレイド : 任天堂公式ガイドブック : Wii</dc:title>
+      <dcndl:titleTranscription>ゼノブレイド : ニンテンドウ コウシキ ガイドブック : Wii</dcndl:titleTranscription>
+      <dcndl:seriesTitle>ワンダーライフスペシャル</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ワンダー ライフ スペシャル</dcndl:seriesTitleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2010</dc:date>
+      <dcterms:issued>2010.7</dcterms:issued>
+      <dcndl:price>1600円</dcndl:price>
+      <dc:extent>240p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-09-106470-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000010932793</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">21796705</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NSMARCNO">125678600</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y78</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://opac.libnet.pref.okayama.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009811322852"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000010932793"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784091064707"/>
+      <dc:description> 2010</dc:description>
+    </item>
+  </channel>
+</rss>

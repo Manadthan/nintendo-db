@@ -1,0 +1,591 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:dcndl="http://ndl.go.jp/dcndl/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" version="2.0">
+  <channel>
+    <title>books スプラトゥーン3 - 国立国会図書館サーチ OpenSearch</title>
+    <link>https://ios-v2-prod-eks-alb.ndlsearch.ndl.go.jp/api/opensearch?mediatype=books&amp;cnt=50&amp;title=%E3%82%B9%E3%83%97%E3%83%A9%E3%83%88%E3%82%A5%E3%83%BC%E3%83%B33</link>
+    <description>Search results for mediatype=books cnt=50 title=スプラトゥーン3</description>
+    <language>ja</language>
+    <openSearch:totalResults>20</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>50</openSearch:itemsPerPage>
+    <item>
+      <title>ゲーム攻略大全スペシャル : スプラトゥーン3最新テク徹底攻略</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032726103</link>
+      <description><![CDATA[<p>晋遊舎,2023,978-4-8018-2078-4<p><ul><li>タイトル：ゲーム攻略大全スペシャル : スプラトゥーン3最新テク徹底攻略</li><li>タイトル（読み）：ゲーム コウリャク タイゼン スペシャル : スプラトゥーン スリー サイシン テク テッテイ コウリャク</li><li>シリーズ名：100%ムックシリーズ</li><li>シリーズ名（読み）：ヒャクパーセント ムック シリーズ</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032726103</guid>
+      <pubDate>Wed, 19 Apr 2023 19:49:54 +0900</pubDate>
+      <dc:title>ゲーム攻略大全スペシャル : スプラトゥーン3最新テク徹底攻略</dc:title>
+      <dcndl:titleTranscription>ゲーム コウリャク タイゼン スペシャル : スプラトゥーン スリー サイシン テク テッテイ コウリャク</dcndl:titleTranscription>
+      <dcndl:seriesTitle>100%ムックシリーズ</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ヒャクパーセント ムック シリーズ</dcndl:seriesTitleTranscription>
+      <dc:publisher>晋遊舎</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>2023.5</dcterms:issued>
+      <dcndl:price>700円</dcndl:price>
+      <dc:extent>178p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-8018-2078-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032726103</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23821610</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07504290</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>2023春アプデ対応</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032726103"/>
+      <dc:description> 2023</dc:description>
+    </item>
+    <item>
+      <title>ゲーム攻略大全</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032445003</link>
+      <description><![CDATA[<p>Vol.30,晋遊舎,2022,978-4-8018-1990-0<p><ul><li>タイトル：ゲーム攻略大全</li><li>タイトル（読み）：ゲーム コウリャク タイゼン</li><li>シリーズ名：100%ムックシリーズ</li><li>シリーズ名（読み）：ヒャクパーセント ムック シリーズ</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032445003</guid>
+      <pubDate>Mon, 21 Nov 2022 18:45:59 +0900</pubDate>
+      <dc:title>ゲーム攻略大全</dc:title>
+      <dcndl:titleTranscription>ゲーム コウリャク タイゼン</dcndl:titleTranscription>
+      <dcndl:volume>Vol.30</dcndl:volume>
+      <dcndl:seriesTitle>100%ムックシリーズ</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ヒャクパーセント ムック シリーズ</dcndl:seriesTitleTranscription>
+      <dc:publisher>晋遊舎</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.12</dcterms:issued>
+      <dcndl:price>1200円</dcndl:price>
+      <dc:extent>226p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-8018-1990-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032445003</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23759737</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07495803</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032445003"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>ゲーム攻略大全</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032940742</link>
+      <description><![CDATA[<p>Vol.32,晋遊舎,2023,978-4-8018-2135-4<p><ul><li>タイトル：ゲーム攻略大全</li><li>タイトル（読み）：ゲーム コウリャク タイゼン</li><li>シリーズ名：100%ムックシリーズ</li><li>シリーズ名（読み）：ヒャクパーセント ムック シリーズ</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032940742</guid>
+      <pubDate>Fri, 4 Aug 2023 23:38:13 +0900</pubDate>
+      <dc:title>ゲーム攻略大全</dc:title>
+      <dcndl:titleTranscription>ゲーム コウリャク タイゼン</dcndl:titleTranscription>
+      <dcndl:volume>Vol.32</dcndl:volume>
+      <dcndl:seriesTitle>100%ムックシリーズ</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ヒャクパーセント ムック シリーズ</dcndl:seriesTitleTranscription>
+      <dc:publisher>晋遊舎</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>2023.9</dcterms:issued>
+      <dcndl:price>1200円</dcndl:price>
+      <dc:extent>242p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-8018-2135-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032940742</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23866776</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07511783</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>2023夏アプデ対応</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032940742"/>
+      <dc:description> 2023</dc:description>
+    </item>
+    <item>
+      <title>ゲームスペシャル</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032528591</link>
+      <description><![CDATA[<p>スプラトゥーン3特大号,KADOKAWA,2022,978-4-04-897536-0<p><ul><li>タイトル：ゲームスペシャル</li><li>タイトル（読み）：ゲーム スペシャル</li><li>シリーズ名：角川SSCムック</li><li>シリーズ名（読み）：カドカワ エスエスシー ムック</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032528591</guid>
+      <pubDate>Tue, 10 Jan 2023 20:12:54 +0900</pubDate>
+      <dc:title>ゲームスペシャル</dc:title>
+      <dcndl:titleTranscription>ゲーム スペシャル</dcndl:titleTranscription>
+      <dcndl:volume>スプラトゥーン3特大号</dcndl:volume>
+      <dcndl:seriesTitle>角川SSCムック</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>カドカワ エスエスシー ムック</dcndl:seriesTitleTranscription>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.12</dcterms:issued>
+      <dcndl:price>909円</dcndl:price>
+      <dc:extent>43p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-897536-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032528591</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23779642</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07497915</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dcndl:genre>児童図書</dcndl:genre>
+      <dcndl:genreTranscription>ジドウ トショ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y12</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032528591"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784048975360"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>スプラトゥーン3イカすアートブック</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032721073</link>
+      <description><![CDATA[<p>KADOKAWA Game Linkage,2023,978-4-04-733655-1<p><ul><li>タイトル：スプラトゥーン3イカすアートブック</li><li>タイトル（読み）：スプラトゥーン スリー イカス アート ブック</li><li>責任表示：ファミ通書籍編集部 責任編集</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author>ファミ通書籍編集部 責任編集</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032721073</guid>
+      <pubDate>Fri, 12 May 2023 22:25:07 +0900</pubDate>
+      <dc:title>スプラトゥーン3イカすアートブック</dc:title>
+      <dcndl:titleTranscription>スプラトゥーン スリー イカス アート ブック</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA Game Linkage</dc:publisher>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>2023.3</dcterms:issued>
+      <dcndl:price>3000円</dcndl:price>
+      <dc:extent>399p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-733655-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032721073</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23830532</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">34457360</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>頒布</dc:description>
+      <dc:description>奥付のタイトル: Splatoon3イカすアートブック</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032721073"/>
+      <rdfs:seeAlso rdf:resource="https://cir.nii.ac.jp/crid/1970304959897854518"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784047336551"/>
+      <dc:description> 2023</dc:description>
+    </item>
+    <item>
+      <title>スプラトゥーン3イカす攻略パラダイス</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032437691</link>
+      <description><![CDATA[<p>マイウェイ出版,2022,978-4-86690-691-1<p><ul><li>タイトル：スプラトゥーン3イカす攻略パラダイス</li><li>タイトル（読み）：スプラトゥーン スリー イカス コウリャク パラダイス</li><li>シリーズ名：マイウェイムック</li><li>シリーズ名（読み）：マイウェイ ムック</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032437691</guid>
+      <pubDate>Mon, 21 Nov 2022 18:57:54 +0900</pubDate>
+      <dc:title>スプラトゥーン3イカす攻略パラダイス</dc:title>
+      <dcndl:titleTranscription>スプラトゥーン スリー イカス コウリャク パラダイス</dcndl:titleTranscription>
+      <dcndl:seriesTitle>マイウェイムック</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>マイウェイ ムック</dcndl:seriesTitleTranscription>
+      <dc:publisher>マイウェイ出版</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.12</dcterms:issued>
+      <dcndl:price>1300円</dcndl:price>
+      <dc:extent>191p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-86690-691-1</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032437691</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23759768</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07495026</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032437691"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>スプラトゥーン3最強チーム作戦立案BOOK : 2022年月刊コロコロ12月号ふろく</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000128-IB16551945</link>
+      <description><![CDATA[<p>小学館,2022,<p><ul><li>タイトル：スプラトゥーン3最強チーム作戦立案BOOK : 2022年月刊コロコロ12月号ふろく</li><li>タイトル（読み）：スプラトゥーン スリー サイキョウ チーム サクセン リツアン ブック : ニセンニジュウニネン ゲッカン コロコロ ジュウニガツゴウ フロク</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000128-IB16551945</guid>
+      <pubDate>Sun, 1 Mar 2026 12:14:54 +0900</pubDate>
+      <dc:title>スプラトゥーン3最強チーム作戦立案BOOK : 2022年月刊コロコロ12月号ふろく</dc:title>
+      <dcndl:titleTranscription>スプラトゥーン スリー サイキョウ チーム サクセン リツアン ブック : ニセンニジュウニネン ゲッカン コロコロ ジュウニガツゴウ フロク</dcndl:titleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JA</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.11</dcterms:issued>
+      <dcndl:price>[記載なし]</dcndl:price>
+      <dc:extent>51p ; 15cm</dc:extent>
+      <dc:description>出版年月日は本誌による</dc:description>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16551945"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>超人気ゲーム究極攻略大全特集スプラトゥーン3完全ガイド : Switch版大人気のシューターゲームを完全攻略! : ふりがな付き</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032444993</link>
+      <description><![CDATA[<p>英和出版社,2022,978-4-86730-190-6<p><ul><li>タイトル：超人気ゲーム究極攻略大全特集スプラトゥーン3完全ガイド : Switch版大人気のシューターゲームを完全攻略! : ふりがな付き</li><li>タイトル（読み）：チョウニンキ ゲーム キュウキョク コウリャク タイゼン トクシュウ スプラトゥーン スリー カンゼン ガイド : スイッチバン ダイニンキ ノ シューター ゲーム オ カンゼン コウリャク : フリガナツキ</li><li>シリーズ名：EIWA MOOK. らくらく講座 ; 400</li><li>シリーズ名（読み）：エイワ ムック. ラクラク コウザ ; 400</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032444993</guid>
+      <pubDate>Sat, 19 Nov 2022 01:20:03 +0900</pubDate>
+      <dc:title>超人気ゲーム究極攻略大全特集スプラトゥーン3完全ガイド : Switch版大人気のシューターゲームを完全攻略! : ふりがな付き</dc:title>
+      <dcndl:titleTranscription>チョウニンキ ゲーム キュウキョク コウリャク タイゼン トクシュウ スプラトゥーン スリー カンゼン ガイド : スイッチバン ダイニンキ ノ シューター ゲーム オ カンゼン コウリャク : フリガナツキ</dcndl:titleTranscription>
+      <dcndl:seriesTitle>EIWA MOOK. らくらく講座 ; 400</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>エイワ ムック. ラクラク コウザ ; 400</dcndl:seriesTitleTranscription>
+      <dc:publisher>英和出版社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.12</dcterms:issued>
+      <dcndl:price>1000円</dcndl:price>
+      <dc:extent>175p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-86730-190-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032444993</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23759518</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07495767</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032444993"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>超人気ナワバリバトル最強攻略ガイドスプラトゥーン3</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032414531</link>
+      <description><![CDATA[<p>コスミック出版,2022,978-4-7747-4169-7<p><ul><li>タイトル：超人気ナワバリバトル最強攻略ガイドスプラトゥーン3</li><li>タイトル（読み）：チョウニンキ ナワバリ バトル サイキョウ コウリャク ガイド スプラトゥーン スリー</li><li>シリーズ名：COSMIC MOOK</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032414531</guid>
+      <pubDate>Sat, 26 Nov 2022 01:40:01 +0900</pubDate>
+      <dc:title>超人気ナワバリバトル最強攻略ガイドスプラトゥーン3</dc:title>
+      <dcndl:titleTranscription>チョウニンキ ナワバリ バトル サイキョウ コウリャク ガイド スプラトゥーン スリー</dcndl:titleTranscription>
+      <dcndl:seriesTitle>COSMIC MOOK</dcndl:seriesTitle>
+      <dc:publisher>コスミック出版</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.11</dcterms:issued>
+      <dcndl:price>1100円</dcndl:price>
+      <dc:extent>159p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-7747-4169-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032414531</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23762755</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07494625</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>カバーによる情報あり</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032414531"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784774741697"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>超人気ナワバリバトル対戦攻略ガイドスプラトゥーン3ウデマエUP虎の巻</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032769586</link>
+      <description><![CDATA[<p>コスミック出版,2023,978-4-7747-4248-9<p><ul><li>タイトル：超人気ナワバリバトル対戦攻略ガイドスプラトゥーン3ウデマエUP虎の巻</li><li>タイトル（読み）：チョウニンキ ナワバリ バトル タイセン コウリャク ガイド スプラトゥーン スリー ウデマエ アップ トラノマキ</li><li>シリーズ名：COSMIC MOOK</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032769586</guid>
+      <pubDate>Tue, 23 May 2023 20:43:43 +0900</pubDate>
+      <dc:title>超人気ナワバリバトル対戦攻略ガイドスプラトゥーン3ウデマエUP虎の巻</dc:title>
+      <dcndl:titleTranscription>チョウニンキ ナワバリ バトル タイセン コウリャク ガイド スプラトゥーン スリー ウデマエ アップ トラノマキ</dcndl:titleTranscription>
+      <dcndl:seriesTitle>COSMIC MOOK</dcndl:seriesTitle>
+      <dc:publisher>コスミック出版</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>2023.6</dcterms:issued>
+      <dcndl:price>1400円</dcndl:price>
+      <dc:extent>159p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-7747-4248-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032769586</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23834955</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07504603</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>Ver.3.1.0対応!</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032769586"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784774742489"/>
+      <dc:description> 2023</dc:description>
+    </item>
+    <item>
+      <title>ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!10月号ふろく</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000128-IB16551298</link>
+      <description><![CDATA[<p>VOL.30,小学館,2022,<p><ul><li>タイトル：ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!10月号ふろく</li><li>タイトル（読み）：ニンテンドー オール スター ギャグ ブック : ゲッカン コロコロ イチバン ジュウガツゴウ フロク</li><li>責任表示：ダイナミック太郎∥[ほか]作,後藤英貴 作</li></ul>]]></description>
+      <author>ダイナミック/太郎,後藤/英貴,ダイナミック太郎∥[ほか]作,後藤英貴 作</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000128-IB16551298</guid>
+      <pubDate>Sun, 1 Mar 2026 12:14:53 +0900</pubDate>
+      <dc:title>ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!10月号ふろく</dc:title>
+      <dcndl:titleTranscription>ニンテンドー オール スター ギャグ ブック : ゲッカン コロコロ イチバン ジュウガツゴウ フロク</dcndl:titleTranscription>
+      <dc:creator>ダイナミック/太郎</dc:creator>
+      <dc:creator>後藤/英貴</dc:creator>
+      <dcndl:volume>VOL.30</dcndl:volume>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JA</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.8</dcterms:issued>
+      <dcndl:price>[記載なし]</dcndl:price>
+      <dc:extent>53,15p ; 18×12cm</dc:extent>
+      <dc:description>出版年月日は本誌による</dc:description>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16551298"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!11月号ふろく</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000128-IB16551576</link>
+      <description><![CDATA[<p>VOL.31,小学館,2022,<p><ul><li>タイトル：ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!11月号ふろく</li><li>タイトル（読み）：ニンテンドー オール スター ギャグ ブック : ゲッカン コロコロ イチバン ジュウイチガツゴウ フロク</li><li>責任表示：ダイナミック太郎∥[ほか]作,後藤英貴 作</li></ul>]]></description>
+      <author>ダイナミック/太郎,後藤/英貴,ダイナミック太郎∥[ほか]作,後藤英貴 作</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000128-IB16551576</guid>
+      <pubDate>Sun, 1 Mar 2026 12:14:53 +0900</pubDate>
+      <dc:title>ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!11月号ふろく</dc:title>
+      <dcndl:titleTranscription>ニンテンドー オール スター ギャグ ブック : ゲッカン コロコロ イチバン ジュウイチガツゴウ フロク</dcndl:titleTranscription>
+      <dc:creator>ダイナミック/太郎</dc:creator>
+      <dc:creator>後藤/英貴</dc:creator>
+      <dcndl:volume>VOL.31</dcndl:volume>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JA</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.9</dcterms:issued>
+      <dcndl:price>[記載なし]</dcndl:price>
+      <dc:extent>66,14p ; 18×12cm</dc:extent>
+      <dc:description>出版年月日は本誌による</dc:description>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16551576"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!12月号ふろく</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000128-IB16551775</link>
+      <description><![CDATA[<p>VOL.32,小学館,2022,<p><ul><li>タイトル：ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!12月号ふろく</li><li>タイトル（読み）：ニンテンドー オール スター ギャグ ブック : ゲッカン コロコロ イチバン ジュウニガツゴウ フロク</li><li>責任表示：ダイナミック太郎∥[ほか]作,後藤英貴 作</li></ul>]]></description>
+      <author>ダイナミック/太郎,後藤/英貴,ダイナミック太郎∥[ほか]作,後藤英貴 作</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000128-IB16551775</guid>
+      <pubDate>Sun, 1 Mar 2026 12:14:53 +0900</pubDate>
+      <dc:title>ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!12月号ふろく</dc:title>
+      <dcndl:titleTranscription>ニンテンドー オール スター ギャグ ブック : ゲッカン コロコロ イチバン ジュウニガツゴウ フロク</dcndl:titleTranscription>
+      <dc:creator>ダイナミック/太郎</dc:creator>
+      <dc:creator>後藤/英貴</dc:creator>
+      <dcndl:volume>VOL.32</dcndl:volume>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JA</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.10</dcterms:issued>
+      <dcndl:price>[記載なし]</dcndl:price>
+      <dc:extent>66,11p ; 18×12cm</dc:extent>
+      <dc:description>出版年月日は本誌による</dc:description>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16551775"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!4月号ふろく</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000128-IB16552614</link>
+      <description><![CDATA[<p>VOL.36,小学館,2023,<p><ul><li>タイトル：ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!4月号ふろく</li><li>タイトル（読み）：ニンテンドー オール スター ギャグ ブック : ゲッカン コロコロ イチバン シガツゴウ フロク</li><li>責任表示：ダイナミック太郎∥[ほか]作,後藤英貴 作</li></ul>]]></description>
+      <author>ダイナミック/太郎,後藤/英貴,ダイナミック太郎∥[ほか]作,後藤英貴 作</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000128-IB16552614</guid>
+      <pubDate>Sun, 1 Mar 2026 12:14:54 +0900</pubDate>
+      <dc:title>ニンテンドーオールスターギャグBOOK : 月刊コロコロイチバン!4月号ふろく</dc:title>
+      <dcndl:titleTranscription>ニンテンドー オール スター ギャグ ブック : ゲッカン コロコロ イチバン シガツゴウ フロク</dcndl:titleTranscription>
+      <dc:creator>ダイナミック/太郎</dc:creator>
+      <dc:creator>後藤/英貴</dc:creator>
+      <dcndl:volume>VOL.36</dcndl:volume>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JA</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>2023.2</dcterms:issued>
+      <dcndl:price>[記載なし]</dcndl:price>
+      <dc:extent>54,9p ; 18×12cm</dc:extent>
+      <dc:description>出版年月日は本誌による</dc:description>
+      <rdfs:seeAlso rdf:resource="https://www.library.pref.osaka.jp/bibj/?B16552614"/>
+      <dc:description> 2023</dc:description>
+    </item>
+    <item>
+      <title>バンカラウォーカーバイスプラトゥーン3</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I033823146</link>
+      <description><![CDATA[<p>KADOKAWA Game Linkage,2024,978-4-04-733753-4<p><ul><li>タイトル：バンカラウォーカーバイスプラトゥーン3</li><li>タイトル（読み）：バンカラ ウォーカー バイ スプラトゥーン スリー</li><li>責任表示：ファミ通 責任編集</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author>ファミ通 責任編集</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I033823146</guid>
+      <pubDate>Sat, 8 Feb 2025 01:33:04 +0900</pubDate>
+      <dc:title>バンカラウォーカーバイスプラトゥーン3</dc:title>
+      <dcndl:titleTranscription>バンカラ ウォーカー バイ スプラトゥーン スリー</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA Game Linkage</dc:publisher>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2024</dc:date>
+      <dcterms:issued>2024.12</dcterms:issued>
+      <dcndl:price>2700円</dcndl:price>
+      <dc:extent>286p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-733753-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">033823146</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">24078167</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">34682834</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>頒布</dc:description>
+      <dc:description>カバーによる情報あり</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I033823146"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784047337534"/>
+      <dc:description> 2024</dc:description>
+    </item>
+    <item>
+      <title>ピアノで楽しむスプラトゥーン3 : スプラトゥーン2の楽曲も3曲入ってます</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I033068080</link>
+      <description><![CDATA[<p>ヤマハミュージックエンタテインメントホールディングスミュージックメディア部,2023,978-4-636-10910-8<p><ul><li>タイトル：ピアノで楽しむスプラトゥーン3 : スプラトゥーン2の楽曲も3曲入ってます</li><li>タイトル（読み）：ピアノ デ タノシム スプラトゥーン 3 : スプラトゥーン 2 ノ ガッキョク モ 3キョク ハイッテ マス</li><li>責任表示：天宅しのぶ, 鈴木奈美 編曲,任天堂株式会社 著作・監修,AMKミュージック アレンジ統括</li><li>シリーズ名：ピアノソロ・連弾 ; 中級</li><li>シリーズ名（読み）：ピアノソロ ・ レンダン ; チュウキュウ</li><li>NDC(10)：763</li></ul>]]></description>
+      <author>天宅しのぶ, 鈴木奈美 編曲,任天堂株式会社 著作・監修,AMKミュージック アレンジ統括</author>
+      <category>図書</category>
+      <category>楽譜</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I033068080</guid>
+      <pubDate>Wed, 20 Mar 2024 00:08:35 +0900</pubDate>
+      <dc:title>ピアノで楽しむスプラトゥーン3 : スプラトゥーン2の楽曲も3曲入ってます</dc:title>
+      <dcndl:titleTranscription>ピアノ デ タノシム スプラトゥーン 3 : スプラトゥーン 2 ノ ガッキョク モ 3キョク ハイッテ マス</dcndl:titleTranscription>
+      <dcndl:seriesTitle>ピアノソロ・連弾 ; 中級</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ピアノソロ ・ レンダン ; チュウキュウ</dcndl:seriesTitleTranscription>
+      <dc:publisher>ヤマハミュージックエンタテインメントホールディングスミュージックメディア部</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>2023.10</dcterms:issued>
+      <dcndl:price>2000円</dcndl:price>
+      <dc:extent>48 p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-636-10910-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">033068080</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23955475</dc:identifier>
+      <dcndl:genre>楽譜</dcndl:genre>
+      <dcndl:genreTranscription>ガクフ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">YM11</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">763</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I033068080"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784636109108"/>
+      <dc:description> 2023</dc:description>
+    </item>
+    <item>
+      <title>Splatoon 3 : イカすファンブック : お出かけに!イカすガジェットポーチ&amp;メインブキカタログ付き</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032571509</link>
+      <description><![CDATA[<p>小学館,2022,<p><ul><li>タイトル：Splatoon 3 : イカすファンブック : お出かけに!イカすガジェットポーチ&メインブキカタログ付き</li><li>タイトル（読み）：Splatoon 3 : イカス ファンブック : オデカケニ ! イカス ガジェットポーチ & メイン ブキ カタログ ツキ</li><li>シリーズ名：小学館てれコロスペシャル ; 2月号</li><li>シリーズ名（読み）：ショウガクカン テレコロ スペシャル ; 2ガツゴウ</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032571509</guid>
+      <pubDate>Fri, 13 Jan 2023 00:05:18 +0900</pubDate>
+      <dc:title>Splatoon 3 : イカすファンブック : お出かけに!イカすガジェットポーチ&amp;メインブキカタログ付き</dc:title>
+      <dcndl:titleTranscription>Splatoon 3 : イカス ファンブック : オデカケニ ! イカス ガジェットポーチ &amp; メイン ブキ カタログ ツキ</dcndl:titleTranscription>
+      <dcndl:seriesTitle>小学館てれコロスペシャル ; 2月号</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ショウガクカン テレコロ スペシャル ; 2ガツゴウ</dcndl:seriesTitleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2022</dc:date>
+      <dcterms:issued>2022.12</dcterms:issued>
+      <dcndl:price>1600円</dcndl:price>
+      <dc:extent>102 p</dc:extent>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032571509</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23781152</dc:identifier>
+      <dcndl:genre>児童図書</dcndl:genre>
+      <dcndl:genreTranscription>ジドウ トショ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y12</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032571509"/>
+      <dc:description> 2022</dc:description>
+    </item>
+    <item>
+      <title>Splatoon 3 : 金のキラキラロッカーコレクション付き</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I033383526</link>
+      <description><![CDATA[<p>小学館,2024,<p><ul><li>タイトル：Splatoon 3 : 金のキラキラロッカーコレクション付き</li><li>タイトル（読み）：Splatoon 3 : キン ノ キラキラ ロッカー コレクション ツキ</li><li>シリーズ名：てれコロスペシャル ; 4月号. イカすファンブック ; 4</li><li>シリーズ名（読み）：テレコロ スペシャル ; 4ガツゴウ. イカス ファンブック ; 4</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I033383526</guid>
+      <pubDate>Mon, 8 Apr 2024 20:51:37 +0900</pubDate>
+      <dc:title>Splatoon 3 : 金のキラキラロッカーコレクション付き</dc:title>
+      <dcndl:titleTranscription>Splatoon 3 : キン ノ キラキラ ロッカー コレクション ツキ</dcndl:titleTranscription>
+      <dcndl:seriesTitle>てれコロスペシャル ; 4月号. イカすファンブック ; 4</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>テレコロ スペシャル ; 4ガツゴウ. イカス ファンブック ; 4</dcndl:seriesTitleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2024</dc:date>
+      <dcterms:issued>2024.3</dcterms:issued>
+      <dcndl:price>1818円</dcndl:price>
+      <dc:extent>34 p</dc:extent>
+      <dc:identifier xsi:type="dcndl:NDLBibID">033383526</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23962599</dc:identifier>
+      <dcndl:genre>児童図書</dcndl:genre>
+      <dcndl:genreTranscription>ジドウ トショ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y12</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I033383526"/>
+      <dc:description> 2024</dc:description>
+    </item>
+    <item>
+      <title>Splatoon 3 : 金のギアコレクション付き</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I033302003</link>
+      <description><![CDATA[<p>小学館,2024,<p><ul><li>タイトル：Splatoon 3 : 金のギアコレクション付き</li><li>タイトル（読み）：Splatoon 3 : キン ノ ギア コレクション ツキ</li><li>シリーズ名：てれコロスペシャル ; 2月号. イカすファンブック ; 3</li><li>シリーズ名（読み）：テレコロ スペシャル ; 2ガツゴウ. イカス ファンブック ; 3</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I033302003</guid>
+      <pubDate>Mon, 19 Feb 2024 18:30:14 +0900</pubDate>
+      <dc:title>Splatoon 3 : 金のギアコレクション付き</dc:title>
+      <dcndl:titleTranscription>Splatoon 3 : キン ノ ギア コレクション ツキ</dcndl:titleTranscription>
+      <dcndl:seriesTitle>てれコロスペシャル ; 2月号. イカすファンブック ; 3</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>テレコロ スペシャル ; 2ガツゴウ. イカス ファンブック ; 3</dcndl:seriesTitleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2024</dc:date>
+      <dcterms:issued>2024.1</dcterms:issued>
+      <dcndl:price>1818円</dcndl:price>
+      <dc:extent>34 p</dc:extent>
+      <dc:identifier xsi:type="dcndl:NDLBibID">033302003</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23943448</dc:identifier>
+      <dcndl:genre>児童図書</dcndl:genre>
+      <dcndl:genreTranscription>ジドウ トショ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y12</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I033302003"/>
+      <dc:description> 2024</dc:description>
+    </item>
+    <item>
+      <title>Splatoon 3 : 容量バッチリ!イカすマルチケース&amp;キラキラポストカード付き</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I032880407</link>
+      <description><![CDATA[<p>小学館,2023,<p><ul><li>タイトル：Splatoon 3 : 容量バッチリ!イカすマルチケース&キラキラポストカード付き</li><li>タイトル（読み）：Splatoon 3 : ヨウリョウ バッチリ ! イカス マルチケース & キラキラ ポストカード ツキ</li><li>シリーズ名：小学館てれコロスペシャル ; 8月号. イカすファンブック ; 2</li><li>シリーズ名（読み）：ショウガクカン テレコロ スペシャル ; 8ガツゴウ. イカス ファンブック ; 2</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I032880407</guid>
+      <pubDate>Tue, 1 Aug 2023 19:37:36 +0900</pubDate>
+      <dc:title>Splatoon 3 : 容量バッチリ!イカすマルチケース&amp;キラキラポストカード付き</dc:title>
+      <dcndl:titleTranscription>Splatoon 3 : ヨウリョウ バッチリ ! イカス マルチケース &amp; キラキラ ポストカード ツキ</dcndl:titleTranscription>
+      <dcndl:seriesTitle>小学館てれコロスペシャル ; 8月号. イカすファンブック ; 2</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ショウガクカン テレコロ スペシャル ; 8ガツゴウ. イカス ファンブック ; 2</dcndl:seriesTitleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>2023.6</dcterms:issued>
+      <dcndl:price>1600円</dcndl:price>
+      <dc:extent>68 p</dc:extent>
+      <dc:identifier xsi:type="dcndl:NDLBibID">032880407</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23864648</dc:identifier>
+      <dcndl:genre>児童図書</dcndl:genre>
+      <dcndl:genreTranscription>ジドウ トショ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDLC">Y12</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I032880407"/>
+      <dc:description> 2023</dc:description>
+    </item>
+  </channel>
+</rss>

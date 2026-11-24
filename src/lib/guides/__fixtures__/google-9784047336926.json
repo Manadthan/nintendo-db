@@ -1,0 +1,76 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 1,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "W6E70AEACAAJ",
+      "etag": "3fbOUUPjL+8",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/W6E70AEACAAJ",
+      "volumeInfo": {
+        "title": "ピクミン4 パーフェクトガイド",
+        "authors": [
+          "ファミ通書籍編集部"
+        ],
+        "publisher": "KADOKAWA Game Linkage",
+        "publishedDate": "2023-11-14",
+        "description": "プラチナメダルも夢じゃない!? 葉っぱ仙人の挑戦状を徹底解説!",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "4047336920"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9784047336926"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 0,
+        "printType": "BOOK",
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=W6E70AEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=W6E70AEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "ja",
+        "previewLink": "http://books.google.co.jp/books?id=W6E70AEACAAJ&dq=isbn:9784047336926&hl=&cd=1&source=gbs_api",
+        "infoLink": "http://books.google.co.jp/books?id=W6E70AEACAAJ&dq=isbn:9784047336926&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/%E3%83%94%E3%82%AF%E3%83%9F%E3%83%B34_%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%82%AC%E3%82%A4.html?hl=&id=W6E70AEACAAJ"
+      },
+      "saleInfo": {
+        "country": "JP",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "JP",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=W6E70AEACAAJ&hl=&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "プラチナメダルも夢じゃない!? 葉っぱ仙人の挑戦状を徹底解説!"
+      }
+    }
+  ]
+}
