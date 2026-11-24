@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
 import { formaterDate } from "@/lib/catalogue/catalogue";
+import { adresseRetourCatalogue } from "@/lib/catalogue/defilement";
 import { lireMarche } from "@/lib/catalogue/marche";
 import { REGIONS, type Marche, type Region } from "@/lib/catalogue/types";
 import {
@@ -58,6 +59,12 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
     lireMarche,
     () => "TOUS",
   );
+  // « Retour au catalogue » retrouve recherche, marché, filtres et tri (SPEC v1.45) ; l'accueil seul avant lecture.
+  const retour = useSyncExternalStore(
+    sansAbonnement,
+    adresseRetourCatalogue,
+    () => "/",
+  );
   const [choix, setChoix] = useState<Region | null>(null);
   // Ma collection (US-16) : seulement pour le propriétaire connecté ; un visiteur ne voit rien de plus.
   const collection = useCollection();
@@ -97,7 +104,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-5 px-4 pt-2 pb-7">
       <Link
-        href="/"
+        href={retour}
         className="flex h-11 items-center gap-1 text-sm font-medium"
       >
         <span aria-hidden="true">‹</span> Retour au catalogue

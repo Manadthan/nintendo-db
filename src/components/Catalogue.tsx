@@ -55,6 +55,7 @@ import { useCollection } from "@/lib/collection/navigateur";
 import { FiltresActifs, PanneauFiltres } from "./Filtres";
 import { ListeJeux } from "./ListeJeux";
 import { triFrise } from "@/lib/catalogue/frise";
+import { abonnerTri, enregistrerTri, lireTri } from "@/lib/catalogue/tri";
 
 type Vue = "grille" | "liste" | "frise";
 const VUES: readonly Vue[] = ["grille", "liste", "frise"];
@@ -100,7 +101,12 @@ type Props = {
  * la console), grille / liste, groupes par année.
  */
 export function Catalogue({ jeux, consoles }: Props) {
-  const [triChoisi, setTri] = useState<Tri>(TRI_PAR_DEFAUT);
+  // Tri : dans l'adresse (?tri=, SPEC v1.45), retrouvé au retour d'une fiche ; le défaut au premier affichage.
+  const triChoisi = useSyncExternalStore<Tri>(
+    abonnerTri,
+    lireTri,
+    () => TRI_PAR_DEFAUT,
+  );
   // Page préparée à l'avance, identique pour tous (ADR-02) : « grille » au premier affichage,
   // puis le choix enregistré dans ce navigateur.
   const vue = useSyncExternalStore(abonner, lireVue, () => "grille" as Vue);
@@ -284,7 +290,7 @@ export function Catalogue({ jeux, consoles }: Props) {
         <select
           id="tri"
           value={tri}
-          onChange={(e) => setTri(e.target.value as Tri)}
+          onChange={(e) => enregistrerTri(e.target.value as Tri)}
           className="h-9 rounded-[10px] border border-champ bg-carte px-2.5 text-[13px] font-medium"
         >
           <option value="recents">Plus récents</option>
