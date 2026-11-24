@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.46 — 24/11/2026 — statut : **à valider**
+> Version 1.47 — 24/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.47 | 24/11/2026 | **Guides japonais** (étape 29, intention v1.7, choix du propriétaire du 24/11) : US-27 (guides dans le catalogue, coches « Jeux » / « Guides », page du guide, bloc « Guides » de la fiche ; 3DS et Switch d'abord) et US-28 (ajout des guides par le propriétaire, après une planche) |
 > | 1.46 | 24/11/2026 | US-02 : le lien **« Retour au catalogue »** revient aussi **à la même hauteur**, comme « Précédent » (avant : en haut de la liste ; demande du propriétaire) |
 > | 1.45 | 24/11/2026 | US-02 : le **tri** est gardé dans l'adresse (`?tri=`, rien pour le tri par défaut) ; « Précédent » depuis une fiche et le lien **« Retour au catalogue »** retrouvent recherche, marché, filtres et tri (bug signalé par le propriétaire, choix du 24/11) |
 > | 1.44 | 23/11/2026 | **Jaquettes sans boîtier** (choix du propriétaire) : sur Switch et Switch 2, seule la jaquette est montrée, jamais le boîtier en plastique (gris ou rouge) des photos Nintendo et de gamecartdb, pour un catalogue homogène avec les scans GameTDB |
@@ -184,6 +185,38 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       à l'agrandissement) ; une image qui ne charge pas est retirée du carrousel.
 - Hors périmètre : vidéos, captures dans le catalogue, choix des captures à la main (plus tard dans l'administration
       si besoin), captures propres à une région.
+
+#### US-27 — Voir les guides japonais (L, SPEC v1.47)
+*En tant que visiteur ou collectionneur, je trouve les guides de jeu japonais (攻略本) d'un jeu et où les acheter.*
+- [ ] Un **guide** est un livre japonais de stratégie consacré à un ou plusieurs jeux du catalogue (guide officiel,
+      « パーフェクトガイド », « 攻略本 »…) ; **jamais** un artbook, un livre de croquis, un magazine ou un manga. Un guide
+      peut couvrir **plusieurs jeux** (Pokémon Or et Argent). Consoles : **3DS et Switch d'abord**, les autres ensuite.
+- [ ] Dans la barre d'outils du catalogue, deux coches **« Jeux »** et **« Guides »** choisissent ce qui s'affiche ;
+      à l'ouverture, **« Jeux » seule** est cochée (catalogue inchangé). Le choix est gardé dans l'adresse
+      (`?voir=guides`, `?voir=jeux,guides` ; rien pour le défaut) ; on ne peut pas tout décocher.
+- [ ] Les guides ne s'affichent que sur les marchés **« Tous »** et **« Japon »** (US-03) ; sur « Europe » ou
+      « Amérique du Nord », la coche « Guides » est grisée avec la mention « Guides : marché Japon ».
+- [ ] Chaque guide a **sa carte** (grille et liste) : **couverture**, titre japonais, éditeur, année, une étiquette
+      **« Guide »** et la console du jeu ; sans couverture, une vignette neutre (titre, éditeur, année), comme un jeu
+      sans jaquette. Compteur : « N jeux et M guides affichés ».
+- [ ] La **recherche** (US-05) porte aussi sur le titre du guide, son éditeur et le titre des jeux qu'il couvre ; les
+      **filtres** (US-06) Console, Année, Genre, Développeur et Série s'appliquent au **jeu** couvert (année : celle du
+      guide) ; les **tris** par titre et par date classent jeux et guides ensemble ; le tri par note place les guides
+      à la fin. Frise : les guides prennent la date de leur parution.
+- [ ] Un toucher sur la carte ouvre la **page du guide** (`/guides/{isbn}`) : couverture en grand, titre japonais,
+      éditeur, date de parution, **ISBN**, nombre de pages, le ou les **jeux couverts** (vignette et lien vers leur
+      fiche), et des liens d'achat **« Amazon Japon › »** et **« Suruga-ya › »** (occasion) qui ouvrent, dans un nouvel
+      onglet, la recherche de cet ISBN. Pas de prix affiché.
+- [ ] Sur la **fiche du jeu**, un bloc **« Guides (N) »** après « Captures » liste ses guides (petite couverture, titre,
+      éditeur, année), chacun menant à sa page ; pas de bloc si le jeu n'a aucun guide.
+- [ ] Couvertures : **Google Books**, affichées depuis Google (jamais copiées chez nous), avec la mention **« powered by
+      Google »** et, sur la page du guide, un lien **« Google Books › »** vers la page du livre (conditions de Google
+      Books) ; la liste des guides vient de la **Bibliothèque nationale de la Diète** (NDL Search). Sources citées en
+      pied de page et dans « À propos ». Une couverture qui ne charge pas laisse place à la vignette neutre.
+- [ ] La page du guide est préparée à l'avance comme la fiche d'un jeu, a son titre et sa description pour les
+      moteurs de recherche, et figure dans le plan du site.
+- Hors périmètre : case « j'ai ce guide » dans Ma collection (plus tard), prix des guides, scans ou aperçu du contenu,
+      guides en anglais ou en français, guides du rétro avant les 3DS et Switch (couvertures quasi introuvables).
 
 #### US-05 — Rechercher un jeu (M)
 *En tant que visiteur, je trouve un jeu en tapant une partie de son titre, directement dans le catalogue.*
@@ -448,6 +481,20 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
       bouton **Remplacer** sur chacune, pour repérer d'un coup d'œil celles qui ne sont pas des scans de boîte.
 - [ ] La source de la jaquette est mentionnée (ex. « Jaquette : GameTDB »).
 - [ ] Sans jaquette, une vignette neutre affiche le titre et la console.
+
+#### US-28 — Ajouter les guides d'une console (M, SPEC v1.47)
+*En tant que propriétaire, je fais entrer les guides d'une console sans en ajouter de faux.*
+- [ ] Pour une console, Claude cherche les guides de chaque jeu (titre japonais du jeu, et aussi son titre en lettres
+      latines : « PIKMIN4 パーフェクトガイド ») et les couvertures, puis montre une **planche numérotée** : couverture,
+      titre du guide, éditeur, année et jeu rattaché.
+- [ ] Sont écartés d'office : artbooks et livres de croquis (« アート », « Art of », « 設定資料集 »), magazines
+      (« Walker », numéros de revues), suppléments de magazines, livres d'un autre jeu au titre proche (« ゼノブレイドクロス »
+      n'est pas « ゼノブレイド »).
+- [ ] Seuls les guides **avec un ISBN** entrent (adresse de la page, liens d'achat, couverture).
+- [ ] Le propriétaire écarte des numéros de la planche ; seuls les guides gardés sont écrits. Relancer ne crée pas de
+      doublon (un ISBN = un guide) et ne remet pas un guide écarté.
+- [ ] Un guide supprimé ou corrigé à la main le reste (comme les verrous des jeux, US-11).
+- Hors périmètre (pour l'instant) : page d'administration des guides ; l'ajout passe par Claude et la planche.
 
 #### US-18 — Voir mes statistiques (M, SPEC v1.20)
 *En tant que propriétaire connecté, je vois où en est ma collection et ce qui manque au catalogue, hors du catalogue
