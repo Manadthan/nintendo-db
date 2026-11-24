@@ -1,0 +1,495 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:dcndl="http://ndl.go.jp/dcndl/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" version="2.0">
+  <channel>
+    <title>books ピクミン - 国立国会図書館サーチ OpenSearch</title>
+    <link>https://ios-v2-prod-eks-alb.ndlsearch.ndl.go.jp/api/opensearch?mediatype=books&amp;cnt=50&amp;title=%E3%83%94%E3%82%AF%E3%83%9F%E3%83%B3</link>
+    <description>Search results for mediatype=books cnt=50 title=ピクミン</description>
+    <language>ja</language>
+    <openSearch:totalResults>17</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>50</openSearch:itemsPerPage>
+    <item>
+      <title>愛のうた　：　ピクミンのテーマ</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000001-I22213001301797789</link>
+      <description><![CDATA[<p>東芝EMI,2001-12,<p><ul><li>タイトル：愛のうた　：　ピクミンのテーマ</li><li>タイトル（読み）：アイ　ノ　ウタ　ピクミン　ノ　テーマ</li><li>責任表示：ストロベリー・フラワー／歌</li></ul>]]></description>
+      <author>ストロベリー・フラワー／歌</author>
+      <category>図書</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000001-I22213001301797789</guid>
+      <pubDate>Thu, 18 Jun 2026 22:55:30 +0900</pubDate>
+      <dc:title>愛のうた　：　ピクミンのテーマ</dc:title>
+      <dcndl:titleTranscription>アイ　ノ　ウタ　ピクミン　ノ　テーマ</dcndl:titleTranscription>
+      <dc:publisher>東芝EMI</dc:publisher>
+      <dc:date xsi:type="dcterms:W3CDTF">2001-12</dc:date>
+      <dcterms:issued>200112</dcterms:issued>
+      <dcndl:price>１０００円</dcndl:price>
+      <dc:subject>ポピュラーミュージック</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=3001301797789"/>
+      <dc:description> 2001-12</dc:description>
+    </item>
+    <item>
+      <title>愛のうた : ピクミンCMソング替え歌集</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000003633725</link>
+      <description><![CDATA[<p>道出版,2002,4-944154-68-2<p><ul><li>タイトル：愛のうた : ピクミンCMソング替え歌集</li><li>タイトル（読み）：アイ ノ ウタ : ピクミン CM ソング カエウタシュウ</li><li>責任表示：あなたに従い尽くす会 編</li><li>NDC(9)：911.66</li></ul>]]></description>
+      <author>あなたに従い尽くす会,あなたに従い尽くす会 編</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000003633725</guid>
+      <pubDate>Wed, 17 Jul 2002 18:51:00 +0900</pubDate>
+      <dc:title>愛のうた : ピクミンCMソング替え歌集</dc:title>
+      <dcndl:titleTranscription>アイ ノ ウタ : ピクミン CM ソング カエウタシュウ</dcndl:titleTranscription>
+      <dc:creator>あなたに従い尽くす会</dc:creator>
+      <dcndl:creatorTranscription>アナタ ニ シタガイ ツクス カイ</dcndl:creatorTranscription>
+      <dc:publisher>道出版</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2002</dc:date>
+      <dcterms:issued>2002.4</dcterms:issued>
+      <dcndl:price>600円</dcndl:price>
+      <dc:extent>63p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-944154-68-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-944154-68-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000003633725</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20270290</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">KH14</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">911.66</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.shiga-pref-library.jp/wo/opc_srh/srh_detail/1553233/"/>
+      <rdfs:seeAlso rdf:resource="https://alislibopac.bunmori.tokushima.jp/winj/opac/switch-detail-iccap.do?bibid=1101168985"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000003633725"/>
+      <dc:description> 2002</dc:description>
+    </item>
+    <item>
+      <title>愛のうた～ピクミンCMソング : ピアノ弾き語り/やさしいピアノ・ソロ/ギター弾き語り</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000003672263</link>
+      <description><![CDATA[<p>ドレミ楽譜出版社,2001,4-8108-1594-3<p><ul><li>タイトル：愛のうた～ピクミンCMソング : ピアノ弾き語り/やさしいピアノ・ソロ/ギター弾き語り</li><li>タイトル（読み）：アイ ノ ウタ ピクミン CM ソング</li><li>シリーズ名：ピアノ&ギター・ピース</li><li>シリーズ名（読み）：ピアノ & ギター ピース</li><li>NDC(9)：763.2</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>楽譜</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000003672263</guid>
+      <pubDate>Mon, 24 Apr 2023 20:07:31 +0900</pubDate>
+      <dc:title>愛のうた～ピクミンCMソング : ピアノ弾き語り/やさしいピアノ・ソロ/ギター弾き語り</dc:title>
+      <dcndl:titleTranscription>アイ ノ ウタ ピクミン CM ソング</dcndl:titleTranscription>
+      <dcndl:seriesTitle>ピアノ&amp;ギター・ピース</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ピアノ &amp; ギター ピース</dcndl:seriesTitleTranscription>
+      <dc:publisher>ドレミ楽譜出版社</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2001</dc:date>
+      <dcterms:issued>2001.12</dcterms:issued>
+      <dcndl:price>500円</dcndl:price>
+      <dc:extent>10p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-8108-1594-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-8108-1594-3</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000003672263</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20309667</dc:identifier>
+      <dcndl:genre>楽譜</dcndl:genre>
+      <dcndl:genreTranscription>ガクフ</dcndl:genreTranscription>
+      <dc:subject xsi:type="dcndl:NDC9">763.2</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000003672263"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784810815948"/>
+      <dc:description> 2001</dc:description>
+    </item>
+    <item>
+      <title>Wiiであそぶセレクション楽しむガイド　：　完全攻略ピクミン/ピクミン2/マリオテニスGC/ドンキーコングジャングルビート/メトロイドプライム</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000001-I33111009811175637</link>
+      <description><![CDATA[<p>アンビット,2009,978-4-8399-3203-9<p><ul><li>タイトル：Wiiであそぶセレクション楽しむガイド　：　完全攻略ピクミン/ピクミン2/マリオテニスGC/ドンキーコングジャングルビート/メトロイドプライム</li><li>タイトル（読み）：ウィー デ アソブ セレクション タノシム ガイド　カンゼン コウリャク ピクミン ピクミン ツー マリオ テニス ジーシー ドンキー コング ジャングル ビート メトロイド プライム</li><li>責任表示：NintendoDREAM／責任編集</li><li>シリーズ名：マイコミMOOK</li><li>シリーズ名（読み）：マイコミ ムック</li><li>NDC(10)：798.5</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author>NintendoDREAM,毎日コミュニケーションズ,NintendoDREAM／責任編集</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000001-I33111009811175637</guid>
+      <pubDate>Sun, 13 Jul 2025 07:59:39 +0900</pubDate>
+      <dc:title>Wiiであそぶセレクション楽しむガイド　：　完全攻略ピクミン/ピクミン2/マリオテニスGC/ドンキーコングジャングルビート/メトロイドプライム</dc:title>
+      <dcndl:titleTranscription>ウィー デ アソブ セレクション タノシム ガイド　カンゼン コウリャク ピクミン ピクミン ツー マリオ テニス ジーシー ドンキー コング ジャングル ビート メトロイド プライム</dcndl:titleTranscription>
+      <dc:creator>NintendoDREAM</dc:creator>
+      <dc:creator>毎日コミュニケーションズ</dc:creator>
+      <dcndl:creatorTranscription>ニンテンドウ ドリーム</dcndl:creatorTranscription>
+      <dcndl:creatorTranscription>マイニチ コミュニケーションズ</dcndl:creatorTranscription>
+      <dcndl:seriesTitle>マイコミMOOK</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>マイコミ ムック</dcndl:seriesTitleTranscription>
+      <dc:publisher>アンビット</dc:publisher>
+      <dc:publisher>毎日コミュニケーションズ</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2009</dc:date>
+      <dcterms:issued>c2009</dcterms:issued>
+      <dcndl:price>￥９３３</dcndl:price>
+      <dc:extent>161p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-8399-3203-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TRCMARCNO">09019668</dc:identifier>
+      <dc:subject>ゲームソフト</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC8">798</dc:subject>
+      <dc:description>「ピクミン2」「マリオテニスGC」「ドンキーコングジャングルビート」など、Wiiで遊べる全5タイトルの攻略情報を収録するほか、「メトロイドプライム2」「ちびロボ!」を先行公開。</dc:description>
+      <rdfs:seeAlso rdf:resource="https://opac.libnet.pref.okayama.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009811175637"/>
+      <dc:description> 2009</dc:description>
+    </item>
+    <item>
+      <title>オリマーの惑星観察記 : ピクミン完全攻略ガイド</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000003051855</link>
+      <description><![CDATA[<p>エンターブレイン,2001,4-7577-0699-5<p><ul><li>タイトル：オリマーの惑星観察記 : ピクミン完全攻略ガイド</li><li>タイトル（読み）：オリマー ノ ワクセイ カンサツキ : ピクミン カンゼン コウリャク ガイド</li><li>責任表示：ファミ通 責任編集</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author>ファミコン通信編集部,ファミ通 責任編集</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000003051855</guid>
+      <pubDate>Tue, 19 Mar 2002 00:05:00 +0900</pubDate>
+      <dc:title>オリマーの惑星観察記 : ピクミン完全攻略ガイド</dc:title>
+      <dcndl:titleTranscription>オリマー ノ ワクセイ カンサツキ : ピクミン カンゼン コウリャク ガイド</dcndl:titleTranscription>
+      <dc:creator>ファミコン通信編集部</dc:creator>
+      <dcndl:creatorTranscription>ファミコン ツウシン ヘンシュウブ</dcndl:creatorTranscription>
+      <dc:publisher>エンターブレイン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2001</dc:date>
+      <dcterms:issued>2001.12</dcterms:issued>
+      <dcndl:price>1100円</dcndl:price>
+      <dc:extent>127p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-7577-0699-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-7577-0699-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000003051855</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20228926</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000003051855"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784757706996"/>
+      <dc:description> 2001</dc:description>
+    </item>
+    <item>
+      <title>ピクミン3ザ・コンプリートガイド</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024683644</link>
+      <description><![CDATA[<p>アスキー・メディアワークス,2013,978-4-04-891957-9<p><ul><li>タイトル：ピクミン3ザ・コンプリートガイド</li><li>タイトル（読み）：ピクミン スリー ザ コンプリート ガイド</li><li>シリーズ名：電撃Nintendo</li><li>シリーズ名（読み）：デンゲキ ニンテンドー</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024683644</guid>
+      <pubDate>Tue, 6 Aug 2013 23:12:56 +0900</pubDate>
+      <dc:title>ピクミン3ザ・コンプリートガイド</dc:title>
+      <dcndl:titleTranscription>ピクミン スリー ザ コンプリート ガイド</dcndl:titleTranscription>
+      <dcndl:seriesTitle>電撃Nintendo</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>デンゲキ ニンテンドー</dcndl:seriesTitleTranscription>
+      <dc:publisher>アスキー・メディアワークス</dc:publisher>
+      <dc:publisher>KADOKAWA (発売)</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.7</dcterms:issued>
+      <dcndl:price>1200円</dcndl:price>
+      <dc:extent>223p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-891957-9</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024683644</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22280731</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">32957928</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://opac.libnet.pref.okayama.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009811697881"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024683644"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784048919579"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>ピクミン3デラックスオフィシャルガイド : NINTENDO SWITCH</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I030763012</link>
+      <description><![CDATA[<p>KADOKAWA Game Linkage,2020,978-4-04-733513-4<p><ul><li>タイトル：ピクミン3デラックスオフィシャルガイド : NINTENDO SWITCH</li><li>タイトル（読み）：ピクミン スリー デラックス オフィシャル ガイド : ニンテンドー スイッチ</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I030763012</guid>
+      <pubDate>Tue, 6 Apr 2021 22:37:05 +0900</pubDate>
+      <dc:title>ピクミン3デラックスオフィシャルガイド : NINTENDO SWITCH</dc:title>
+      <dcndl:titleTranscription>ピクミン スリー デラックス オフィシャル ガイド : ニンテンドー スイッチ</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA Game Linkage</dc:publisher>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2020</dc:date>
+      <dcterms:issued>2020.11</dcterms:issued>
+      <dcndl:price>1900円</dcndl:price>
+      <dc:extent>351p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-733513-4</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">030763012</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23507876</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">34142757</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>頒布</dc:description>
+      <dc:description>「ピクミン3ザ・コンプリートガイド」(アスキー・メディアワークス 2013年刊)の改題、増補改訂版</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I030763012"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784047335134"/>
+      <dc:description> 2020</dc:description>
+    </item>
+    <item>
+      <title>ピクミン3</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I024718828</link>
+      <description><![CDATA[<p>小学館,2013,978-4-09-106524-7<p><ul><li>タイトル：ピクミン3</li><li>タイトル（読み）：ピクミン スリー</li><li>責任表示：任天堂株式会社 監修</li><li>シリーズ名：ワンダーライフスペシャル. 任天堂公式ガイドブック</li><li>シリーズ名（読み）：ワンダー ライフ スペシャル. ニンテンドウ コウシキ ガイドブック</li></ul>]]></description>
+      <author>任天堂株式会社 監修</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I024718828</guid>
+      <pubDate>Thu, 15 Aug 2013 20:33:25 +0900</pubDate>
+      <dc:title>ピクミン3</dc:title>
+      <dcndl:titleTranscription>ピクミン スリー</dcndl:titleTranscription>
+      <dcndl:seriesTitle>ワンダーライフスペシャル. 任天堂公式ガイドブック</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ワンダー ライフ スペシャル. ニンテンドウ コウシキ ガイドブック</dcndl:seriesTitleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2013</dc:date>
+      <dcterms:issued>2013.8</dcterms:issued>
+      <dcndl:price>1400円</dcndl:price>
+      <dc:extent>303p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-09-106524-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">024718828</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22285005</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07307668</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://opac.libnet.pref.okayama.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009811700971"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I024718828"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784091065247"/>
+      <dc:description> 2013</dc:description>
+    </item>
+    <item>
+      <title>ピクミン2コンプリートナビブック : Nintendo gamecube</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000001-I25111748474</link>
+      <description><![CDATA[<p>メディアワークス,2004,4-8402-2722-5<p><ul><li>タイトル：ピクミン2コンプリートナビブック : Nintendo gamecube</li><li>タイトル（読み）：ピクミン ニ コンプリート ナビ ブック : ニンテンドウ ゲームキューブ : NINTENDO GAMECUBE</li><li>シリーズ名：任天堂の攻略本シリーズ</li><li>シリーズ名（読み）：ニンテンドウ ノ コウリャクボン シリーズ</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000001-I25111748474</guid>
+      <pubDate>Sat, 19 Apr 2008 09:00:00 +0900</pubDate>
+      <dc:title>ピクミン2コンプリートナビブック : Nintendo gamecube</dc:title>
+      <dcndl:titleTranscription>ピクミン ニ コンプリート ナビ ブック : ニンテンドウ ゲームキューブ : NINTENDO GAMECUBE</dcndl:titleTranscription>
+      <dcndl:seriesTitle>任天堂の攻略本シリーズ</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ニンテンドウ ノ コウリャクボン シリーズ</dcndl:seriesTitleTranscription>
+      <dc:publisher>メディアワークス</dc:publisher>
+      <dc:date xsi:type="dcterms:W3CDTF">2004</dc:date>
+      <dcndl:price>1200円</dcndl:price>
+      <dc:extent>239p ; 21cm</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-8402-2722-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-8402-2722-5</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NSMARCNO">042731200</dc:identifier>
+      <dc:subject>コンピュータ・ゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC8">797</dc:subject>
+      <dc:description>索引あり</dc:description>
+      <rdfs:seeAlso rdf:resource="https://www.shiga-pref-library.jp/wo/opc_srh/srh_detail/1748474/"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784840227223"/>
+      <dc:description> 2004</dc:description>
+    </item>
+    <item>
+      <title>ピクミン : 任天堂公式ガイドブック</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000003048024</link>
+      <description><![CDATA[<p>小学館,2002,4-09-106025-0<p><ul><li>タイトル：ピクミン : 任天堂公式ガイドブック</li><li>タイトル（読み）：ピクミン : ニンテンドウ コウシキ ガイドブック</li><li>シリーズ名：ワンダーライフスペシャル</li><li>シリーズ名（読み）：ワンダー ライフ スペシャル</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000003048024</guid>
+      <pubDate>Thu, 27 Mar 2003 08:59:59 +0900</pubDate>
+      <dc:title>ピクミン : 任天堂公式ガイドブック</dc:title>
+      <dcndl:titleTranscription>ピクミン : ニンテンドウ コウシキ ガイドブック</dcndl:titleTranscription>
+      <dcndl:seriesTitle>ワンダーライフスペシャル</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ワンダー ライフ スペシャル</dcndl:seriesTitleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2002</dc:date>
+      <dcterms:issued>2002.1</dcterms:issued>
+      <dcndl:price>952円</dcndl:price>
+      <dc:extent>159p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-09-106025-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-09-106025-0</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000003048024</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20226392</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://opac.lib.city.yokohama.lg.jp/winj/opac/switch-detail-iccap.do?bibid=1101080245"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000003048024"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784091060259"/>
+      <dc:description> 2002</dc:description>
+    </item>
+    <item>
+      <title>PIKMIN4パーフェクトガイド</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I033140587</link>
+      <description><![CDATA[<p>KADOKAWA Game Linkage,2023,978-4-04-733692-6<p><ul><li>タイトル：PIKMIN4パーフェクトガイド</li><li>タイトル（読み）：ピクミン フォー パーフェクト ガイド</li><li>責任表示：ファミ通書籍編集部 責任編集</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author>ファミ通書籍編集部 責任編集</author>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I033140587</guid>
+      <pubDate>Wed, 13 Dec 2023 22:19:59 +0900</pubDate>
+      <dc:title>PIKMIN4パーフェクトガイド</dc:title>
+      <dcndl:titleTranscription>ピクミン フォー パーフェクト ガイド</dcndl:titleTranscription>
+      <dc:publisher>KADOKAWA Game Linkage</dc:publisher>
+      <dc:publisher>KADOKAWA</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2023</dc:date>
+      <dcterms:issued>2023.11</dcterms:issued>
+      <dcndl:price>1800円</dcndl:price>
+      <dc:extent>367p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-04-733692-6</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">033140587</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">23919821</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">34540422</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <dc:description>出版</dc:description>
+      <dc:description>頒布</dc:description>
+      <dc:description>奥付・背のタイトル: ピクミン4パーフェクトガイド</dc:description>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I033140587"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784047336926"/>
+      <dc:description> 2023</dc:description>
+    </item>
+    <item>
+      <title>ピクミンワールド　：　ピクミン オリジナル・サウンドトラック　：　Including 36 tracks</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000001-I22213001300091349</link>
+      <description><![CDATA[<p>東芝EMI,2002-07,<p><ul><li>タイトル：ピクミンワールド　：　ピクミン オリジナル・サウンドトラック　：　Including 36 tracks</li><li>タイトル（読み）：ピクミン ワールド　ピクミン オリジナル サウンドトラック　：　インクルーディング 36 トラックス</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>記録メディア</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000001-I22213001300091349</guid>
+      <pubDate>Mon, 8 Jun 2026 20:55:31 +0900</pubDate>
+      <dc:title>ピクミンワールド　：　ピクミン オリジナル・サウンドトラック　：　Including 36 tracks</dc:title>
+      <dcndl:titleTranscription>ピクミン ワールド　ピクミン オリジナル サウンドトラック　：　インクルーディング 36 トラックス</dcndl:titleTranscription>
+      <dc:publisher>東芝EMI</dc:publisher>
+      <dc:date xsi:type="dcterms:W3CDTF">2002-07</dc:date>
+      <dcterms:issued>2002.7</dcterms:issued>
+      <dcndl:price>￥２３８１</dcndl:price>
+      <dc:extent>1</dc:extent>
+      <dc:identifier xsi:type="dcndl:TRCMARCNO">02907365</dc:identifier>
+      <rdfs:seeAlso rdf:resource="https://www.toshokan.city.shizuoka.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=3001300091349"/>
+      <dc:description> 2002-07</dc:description>
+    </item>
+    <item>
+      <title>ピクミン100ぴきとすごす30日</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000003053749</link>
+      <description><![CDATA[<p>毎日コミュニケーションズ,2001,<p><ul><li>タイトル：ピクミン100ぴきとすごす30日</li><li>タイトル（読み）：ピクミン 100ピキ ト スゴス 30ニチ</li><li>シリーズ名：任天堂ゲーム攻略本</li><li>シリーズ名（読み）：ニンテンドウ ゲーム コウリャクボン</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000003053749</guid>
+      <pubDate>Thu, 6 Feb 2003 20:02:25 +0900</pubDate>
+      <dc:title>ピクミン100ぴきとすごす30日</dc:title>
+      <dcndl:titleTranscription>ピクミン 100ピキ ト スゴス 30ニチ</dcndl:titleTranscription>
+      <dcndl:seriesTitle>任天堂ゲーム攻略本</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ニンテンドウ ゲーム コウリャクボン</dcndl:seriesTitleTranscription>
+      <dc:publisher>毎日コミュニケーションズ</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2001</dc:date>
+      <dcterms:issued>2001.12</dcterms:issued>
+      <dcndl:price>全1350円</dcndl:price>
+      <dc:extent>3冊</dc:extent>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000003053749</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20230760</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000003053749"/>
+      <dc:description> 2001</dc:description>
+    </item>
+    <item>
+      <title>ピクミン2</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000007372768</link>
+      <description><![CDATA[<p>毎日コミュニケーションズ,2004,4-8399-1537-7<p><ul><li>タイトル：ピクミン2</li><li>タイトル（読み）：ピクミン 2</li><li>シリーズ名：任天堂ゲーム攻略本</li><li>シリーズ名（読み）：ニンテンドウ ゲーム コウリャクボン</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000007372768</guid>
+      <pubDate>Thu, 19 Aug 2004 19:12:06 +0900</pubDate>
+      <dc:title>ピクミン2</dc:title>
+      <dcndl:titleTranscription>ピクミン 2</dcndl:titleTranscription>
+      <dcndl:seriesTitle>任天堂ゲーム攻略本</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ニンテンドウ ゲーム コウリャクボン</dcndl:seriesTitleTranscription>
+      <dc:publisher>毎日コミュニケーションズ</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2004</dc:date>
+      <dcterms:issued>2004.6</dcterms:issued>
+      <dcndl:price>950円</dcndl:price>
+      <dc:extent>143p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-8399-1537-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-8399-1537-7</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000007372768</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20635607</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y78</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://opac.libnet.pref.okayama.jp/licsxp-opac/WOpacMsgNewListToTifTilDetailAction.do?tilcod=1009810576762"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000007372768"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784839915377"/>
+      <dc:description> 2004</dc:description>
+    </item>
+    <item>
+      <title>ピクミン2ねこそぎお宝回収ガイド</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000007378729</link>
+      <description><![CDATA[<p>エンターブレイン,2004,4-7577-1924-8<p><ul><li>タイトル：ピクミン2ねこそぎお宝回収ガイド</li><li>タイトル（読み）：ピクミン 2 ネコソギ オタカラ カイシュウ ガイド</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000007378729</guid>
+      <pubDate>Thu, 26 Aug 2004 02:04:33 +0900</pubDate>
+      <dc:title>ピクミン2ねこそぎお宝回収ガイド</dc:title>
+      <dcndl:titleTranscription>ピクミン 2 ネコソギ オタカラ カイシュウ ガイド</dcndl:titleTranscription>
+      <dc:publisher>エンターブレイン</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2004</dc:date>
+      <dcterms:issued>2004.6</dcterms:issued>
+      <dcndl:price>1300円</dcndl:price>
+      <dc:extent>239p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-7577-1924-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-7577-1924-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000007378729</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20640593</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y78</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.shiga-pref-library.jp/wo/opc_srh/srh_detail/1749273/"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000007378729"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784757719248"/>
+      <dc:description> 2004</dc:description>
+    </item>
+    <item>
+      <title>ピクミン2 : 任天堂公式ガイドブック</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I000007376935</link>
+      <description><![CDATA[<p>小学館,2004,4-09-106164-8<p><ul><li>タイトル：ピクミン2 : 任天堂公式ガイドブック</li><li>タイトル（読み）：ピクミン 2</li><li>シリーズ名：ワンダーライフスペシャル</li><li>シリーズ名（読み）：ワンダー ライフ スペシャル</li><li>NDC(9)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I000007376935</guid>
+      <pubDate>Wed, 11 Aug 2004 23:08:18 +0900</pubDate>
+      <dc:title>ピクミン2 : 任天堂公式ガイドブック</dc:title>
+      <dcndl:titleTranscription>ピクミン 2</dcndl:titleTranscription>
+      <dcndl:seriesTitle>ワンダーライフスペシャル</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ワンダー ライフ スペシャル</dcndl:seriesTitleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2004</dc:date>
+      <dcterms:issued>2004.7</dcterms:issued>
+      <dcndl:price>1000円</dcndl:price>
+      <dc:extent>145p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">4-09-106164-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:ISBN13">4-09-106164-8</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">000007376935</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">20629427</dc:identifier>
+      <dc:subject xsi:type="dcndl:NDLC">Y78</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC9">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://www.shiga-pref-library.jp/wo/opc_srh/srh_detail/1749865/"/>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I000007376935"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784091061645"/>
+      <dc:description> 2004</dc:description>
+    </item>
+    <item>
+      <title>Hey!ピクミン</title>
+      <link>https://ndlsearch.ndl.go.jp/books/R100000002-I028335060</link>
+      <description><![CDATA[<p>小学館,2017,978-4-09-106602-2<p><ul><li>タイトル：Hey!ピクミン</li><li>タイトル（読み）：ヘイ ピクミン</li><li>シリーズ名：ワンダーライフスペシャル. 任天堂公式ガイドブック</li><li>シリーズ名（読み）：ワンダー ライフ スペシャル. ニンテンドウ コウシキ ガイドブック</li><li>NDC(10)：798.5</li></ul>]]></description>
+      <author/>
+      <category>図書</category>
+      <category>紙</category>
+      <guid isPermaLink="true">https://ndlsearch.ndl.go.jp/books/R100000002-I028335060</guid>
+      <pubDate>Tue, 25 Jul 2017 19:21:43 +0900</pubDate>
+      <dc:title>Hey!ピクミン</dc:title>
+      <dcndl:titleTranscription>ヘイ ピクミン</dcndl:titleTranscription>
+      <dcndl:seriesTitle>ワンダーライフスペシャル. 任天堂公式ガイドブック</dcndl:seriesTitle>
+      <dcndl:seriesTitleTranscription>ワンダー ライフ スペシャル. ニンテンドウ コウシキ ガイドブック</dcndl:seriesTitleTranscription>
+      <dc:publisher>小学館</dc:publisher>
+      <dcndl:publicationPlace>JP</dcndl:publicationPlace>
+      <dc:date xsi:type="dcterms:W3CDTF">2017</dc:date>
+      <dcterms:issued>2017.7</dcterms:issued>
+      <dcndl:price>1200円</dcndl:price>
+      <dc:extent>176p</dc:extent>
+      <dc:identifier xsi:type="dcndl:ISBN">978-4-09-106602-2</dc:identifier>
+      <dc:identifier xsi:type="dcndl:NDLBibID">028335060</dc:identifier>
+      <dc:identifier xsi:type="dcndl:JPNO">22918148</dc:identifier>
+      <dc:identifier xsi:type="dcndl:TOHANMARCNO">07392674</dc:identifier>
+      <dc:subject>コンピューターゲーム</dc:subject>
+      <dc:subject xsi:type="dcndl:NDLC">Y94</dc:subject>
+      <dc:subject xsi:type="dcndl:NDC10">798.5</dc:subject>
+      <rdfs:seeAlso rdf:resource="https://ndlsearch.ndl.go.jp/books/R100000002-I028335060"/>
+      <rdfs:seeAlso rdf:resource="https://www.books.or.jp/book-details/9784091066022"/>
+      <dc:description> 2017</dc:description>
+    </item>
+  </channel>
+</rss>

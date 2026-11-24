@@ -1,0 +1,64 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 1,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "GN17zwEACAAJ",
+      "etag": "1Q0nnDnJ3EQ",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/GN17zwEACAAJ",
+      "volumeInfo": {
+        "title": "スプラトゥーン3イカす攻略パラダイス",
+        "publishedDate": "2022",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "486690691X"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9784866906911"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 0,
+        "printType": "BOOK",
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "language": "ja",
+        "previewLink": "http://books.google.co.jp/books?id=GN17zwEACAAJ&dq=isbn:9784866906911&hl=&cd=1&source=gbs_api",
+        "infoLink": "http://books.google.co.jp/books?id=GN17zwEACAAJ&dq=isbn:9784866906911&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/%E3%82%B9%E3%83%97%E3%83%A9%E3%83%88%E3%82%A5%E3%83%BC%E3%83%B33%E3%82%A4%E3%82%AB%E3%81%99%E6%94%BB%E7%95%A5%E3%83%91.html?hl=&id=GN17zwEACAAJ"
+      },
+      "saleInfo": {
+        "country": "JP",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "JP",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=GN17zwEACAAJ&hl=&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      }
+    }
+  ]
+}
