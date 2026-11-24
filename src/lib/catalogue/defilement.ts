@@ -80,10 +80,25 @@ if (typeof window !== "undefined")
     dernierRetour = performance.now();
   });
 
-/** Vrai si le catalogue s'affiche après « Précédent » (dans le site, ou page rechargée par le navigateur). */
+// Lien « Retour au catalogue » de la fiche : un retour comme « Précédent » (SPEC v1.46). Daté comme lui.
+let dernierLien = -Infinity;
+
+/** Au clic sur le lien « Retour au catalogue » de la fiche. */
+export function noterRetourParLien() {
+  dernierLien = performance.now();
+}
+
+/**
+ * Vrai si le catalogue s'affiche après « Précédent » (dans le site, ou page rechargée par le navigateur) ou après le
+ * lien « Retour au catalogue ».
+ */
 function consommerRetourArriere(): boolean {
-  const retour = performance.now() - dernierRetour < DELAI_RETOUR_MS;
+  const maintenant = performance.now();
+  const retour =
+    maintenant - dernierRetour < DELAI_RETOUR_MS ||
+    maintenant - dernierLien < DELAI_RETOUR_MS;
   dernierRetour = -Infinity;
+  dernierLien = -Infinity;
   const premier = premierAffichage;
   premierAffichage = false;
   if (retour) return true;
