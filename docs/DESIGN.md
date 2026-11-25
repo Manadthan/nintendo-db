@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.41 — 25/11/2026 — statut : **à valider**
+> Version 1.42 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.42 | 25/11/2026 | **Étude « À venir »** (étape 31, §1 novodecies) : jeux et amiibo à venir lisibles dans les bases officielles de Nintendo Japon (`search.nintendo.jp`), Europe (`searching.nintendo-europe.com`) et US (pages `nintendo.com/us`) ; dates JAP et PAL des amiibo de 2026 (complète §1 octodecies) ; guides à venir non vérifiés (NDL en 429) |
 > | 1.41 | 25/11/2026 | **Étude des amiibo** (intention v1.8, décision 11 ; §1 octodecies) : AmiiboAPI (932 amiibo, dates par région, jeux compatibles) jusqu'à décembre 2025, complétée par la liste officielle Nintendo US pour 2026 ; ~100 amiibo d'autres éditeurs à trancher ; étape 30 au §11 |
 > | 1.40 | 24/11/2026 | **ADR-19 — Guides japonais** (SPEC v1.47, US-27 et US-28) : tables `guides`, `guides_jeux` (plusieurs à plusieurs) et `guides_exclus` ; couverture servie par Google Books ; guides du catalogue chargés seulement quand « Guides » est cochée ; page `/guides/[isbn]` ; remplissage depuis la session après une planche ; plan en 5 PR (§8, étape 29) |
 > | 1.39 | 24/11/2026 | **Guides : 3DS et Switch d'abord** (intention v1.7, §1 septdecies) : couvertures du rétro introuvables (1 sur 150 ISBN) ; 3DS + Switch : 16 jeux sur 40 avec un guide, couvertures **Google Books** pour 26 ISBN sur 39 (300 px, clé, pays Japon) ; conditions de Google Books ; essais en direct depuis la session (hôtes ajoutés) |
@@ -446,6 +447,39 @@ Conclusions : **AmiiboAPI pour la base** (tous les types, dates par région, jeu
 et pour la photo de la boîte ; rapprochement des jeux compatibles avec notre catalogue par le titre (comme RAWG,
 §1 sexdecies). À trancher : amiibo des autres éditeurs, images (copiées comme les jaquettes ou servies par la source),
 dates JAP et PAL de 2026.
+
+## 1 novodecies. Étude « À venir » : jeux, guides et amiibo (25/11/2026)
+
+Demande du propriétaire (25/11) : une section en haut de l'accueil, comme « Coming up » de gamecartdb, avec les
+**jeux, guides et amiibo à venir**. Aujourd'hui le catalogue n'a aucun jeu à venir : l'import les écarte (« à venir »,
+SPEC v1.11). Essais depuis la session, lecture seule.
+
+| Source | Jeux à venir | Amiibo à venir | Remarques |
+|---|---|---|---|
+| **Nintendo Japon** `search.nintendo.jp/nintendo_soft/search.json` (celle du calendrier `nintendo.com/jp/schedule`, déjà lue par le relais) | oui : Xenoblade 3 Switch 2 Edition (03/12/2026), Metroid Ravenous (28/01/2027), Kirby World Beyond (« 2027.春 »), Pokémon Wave / Wind, Xenoblade Genesis (« 2027 ») | **oui** (`hard` = `9_amiibo`) : Samus, Samus (Metroid Suit), Chozo Statue (28/01/2027), Young Link, Young Zelda (2027) | éditeur `maker` (« 任天堂 », « ポケモン ») ; à écarter : contenus téléchargeables (`DLC`, `DL_DLC`), consoles (`hard`, `hard-soft`), accessoires ; `sform` distingue la carte (`BEE_CARD`, `HAC_CARD`) du téléchargement ; date en texte (« 2026.12.3 », « 2027.春 », « 2027 ») ; filtre du calendrier : `sche_s:1` |
+| **Nintendo Europe** `searching.nintendo-europe.com/fr/select` (Solr, déjà lu par le relais, ADR-13) | oui : `type:GAME AND publisher:Nintendo AND dates_released_dts:[NOW TO *]` → 7 jeux (Xenoblade 3 S2 Edition, Metroid Ravenous, Hyrule Warriors Édition ultime 25/02/2027, Pokémon Vents / Vagues…) | partiel : `type:FIGURE` (257 amiibo), mais pas encore les amiibo Metroid Ravenous | date inconnue écrite **31/12 de l'année** (« 2027 ») ou **31/12/2050** (« à déterminer ») : ne pas l'afficher comme une date ; titres français |
+| **Nintendo US** pages `nintendo.com/us/store/games/coming-soon/` et `nintendo.com/us/amiibo/` (données `__NEXT_DATA__`) | oui : 77 jeux, éditeur `softwarePublisher` → Nintendo : Xenoblade 3 S2 Edition, Metroid Ravenous (+ Special Edition), Hyrule Warriors | **oui** : Samus, Samus (Metroid Suit), Chozo Statue (28/01/2027), Young Link, Young Zelda (« 31/12/2027 » = 2027) | page web, pas une API : plus fragile ; jeux sans date (Pokémon) absents |
+| AmiiboAPI (`amiiboapi.org`, `.com`) | — | — | site **refusé par le réseau** de la session (403) ; ses fichiers sur GitHub s'arrêtent à fin 2025 (§1 octodecies) |
+| Wikipédia « List of Nintendo Switch 2 games » | oui (déjà lu par l'import, jeux « à venir » écartés) | non (pas de liste d'amiibo : « List of amiibo » renvoie vers l'article général) | |
+| **Guides à venir** : NDL Search | **non vérifié** : NDL répond 429 (trop de demandes) toute la matinée | | NDL reçoit les données « 近刊 » (à paraître) de JPRO : à confirmer ; 版元ドットコム refusé par le réseau ; Google Books ne donne rien d'utile pour les livres à paraître |
+
+Conclusions provisoires :
+1. **Jeux et amiibo** : les bases officielles de Nintendo Japon (une seule demande pour les deux) et Europe
+   suffisent, US en complément. Le Japon est la source la plus complète et la plus en avance.
+2. **Amiibo** : le catalogue des amiibo est décidé à part (intention v1.8, étape 30, §1 octodecies). Ces deux bases
+   donnent ce qui manquait à §1 octodecies pour 2026 : la **date JAP** (Nintendo Japon) et la **date PAL** (Nintendo
+   Europe, `type:FIGURE`, quand elle est publiée : pas encore pour les amiibo Metroid Ravenous). La section « À venir » montrera les amiibo de l'étape 30 dont la date n'est pas passée.
+3. **Dates imprécises** à garder telles quelles (« 2027 », « printemps 2027 ») : la précision existe déjà pour les
+   jeux (`precision_date`), il faudra une saison ou « à déterminer ».
+4. **Guides à venir** : à vérifier quand NDL répondra ; sinon la section se limite aux jeux et amiibo.
+5. Un jeu à venir entrerait au catalogue **avant sa sortie** : changement de la règle de l'import (SPEC v1.11, « jeux
+   à venir cachés »). À trancher : jeu ajouté au catalogue dès son annonce, ou liste « À venir » séparée qui ne sert
+   que la section.
+
+**Décisions du propriétaire (25/11)** : 1) un jeu à venir **entre au catalogue dès son annonce**, avec sa fiche et
+une étiquette « À venir » (la règle de l'import « jeux à venir cachés », SPEC v1.11, changera dans la SPEC) ; la
+section montre les prochains ; 2) **guides à venir plus tard** : la section commence avec les jeux et les amiibo, les
+guides viendront après l'étape 29 et une vérification de NDL.
 
 ## 2. Stack
 
@@ -987,3 +1021,4 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
 | 29 | **Guides japonais** (攻略本, intention v1.6 décision 10, v1.7) : guides dans le même catalogue que les jeux (carte propre avec la couverture, menant au jeu ; coches d'affichage « Jeux » et « Guides ») et listés dans la fiche du jeu ; ~~rétro d'abord~~ **3DS et Switch d'abord**, guides seulement (§1 septdecies : NDL + couvertures Google Books) ; case « je l'ai » plus tard | **étude des sources** en lecture seule (la session ne joint aucune de ces sources : tâche GitHub) : couverture du catalogue rétro (part des jeux avec au moins un guide), champs disponibles (couverture, éditeur, date, ISBN, pages), droit d'héberger les couvertures, rapprochement guide → jeu ; candidates : Retromags (base « Japanese Language Guides »), The Video Game Library, Internet Archive (`strategyguides`), NDL Search (ISBN), Zelda Dungeon et Bulbapedia ; lien d'achat ou prix : eBay (ADR-17) ou recherche Suruga-ya ; puis SPEC, maquettes (fiche + page), ADR, plan |
 | 30 | **Amiibo** (intention v1.8, décision 11) : tous les types, dans le même catalogue (coche « Amiibo »), fiche (image, séries, dates JAP / US / PAL, jeux compatibles, prix eBay), case « je l'ai » par amiibo | étude faite (§1 octodecies) ; à trancher : amiibo des autres éditeurs, images, dates 2026 ; puis SPEC, maquettes, ADR, plan ; après l'étape 29 |
+| 31 | **À venir** sur l'accueil (demande du 25/11, comme « Coming up » de gamecartdb) : bande à faire défiler, jeux, guides et amiibo à venir | étude **faite le 25/11** (§1 novodecies) ; amiibo : catalogue décidé (étape 30, intention v1.8), la section montre ses amiibo à venir ; **décidé le 25/11** : jeu à venir au catalogue dès l'annonce (étiquette « À venir »), guides à venir plus tard ; puis SPEC, maquette, ADR, plan |

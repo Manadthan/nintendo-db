@@ -24,7 +24,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.8 à valider |
 | `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.48 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.41 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.42 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs, Prix eBay, Captures, Guides : `docs/maquettes/`) | v0.12 à valider |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11), 23 à 27 (§12), audit de performance (§13), étape 25 (§14), étape 28 (§15) : chiffres, réussites, difficultés, leçons | v1.9 à valider |
 
@@ -151,6 +151,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Dates et jaquettes manquantes (23/11) : 0 version sans date (40 → 0), 13 sans jaquette (80 → 13) ; Famicom Mini complétées (10 boîtes JAP qui étaient américaines remplacées)
   - [ ] Étape 29 — Guides japonais (攻略本) : intention v1.6 (#236) puis v1.7 (3DS et Switch d'abord, guides seulement) ; études #238 #239 #241 #243 (DESIGN §1 septdecies : NDL + couvertures Google Books, 26 sur 39 ISBN) ; SPEC US-27 + US-28 (v1.47) et maquettes (v0.12) #245 ; ADR-19 et plan en 5 PR (DESIGN v1.40, §8) ; migration 0031 #247 ; module src/lib/guides/ ; script guides.mjs ; à faire : remplissage 3DS et Switch (planche), page du guide, catalogue
   - [ ] Étape 30 — Amiibo : intention v1.8 (#255) ; étude (DESIGN §1 octodecies : AmiiboAPI jusqu'à fin 2025 + Nintendo US pour 2026) ; à faire : décisions, SPEC, maquettes, ADR, plan
+  - [ ] Étape 31 — À venir (jeux, guides, amiibo) sur l'accueil : étude (DESIGN §1 novodecies) ; décidé : jeu à venir au catalogue dès l'annonce, guides plus tard ; à faire : SPEC, maquette, plan
   - [ ] Étapes suivantes (DESIGN §11) : à définir avec le propriétaire
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5 ; étapes 23 à 27 : v1.6 ; audit de performance : v1.7 ; étape 25 : v1.8 ; étape 28 : v1.9
 
