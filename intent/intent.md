@@ -1,7 +1,7 @@
 # Intention — Nintendo DB
 
 > Étape 1 du playbook : **quoi et pourquoi**, pas encore comment.
-> Version 1.7 — 24/11/2026 — statut : **à valider** (1.1 : v1 limitée à la Wii U, sources et images revues ; 1.2 : Wii, catalogue toutes consoles ; 1.3 : Switch, Switch 2, nouveautés ; 1.4 : premier pas du suivi de collection ; 1.5 : comptes sur invitation, profils et badges ; 1.6 : guides japonais ; 1.7 : guides 3DS et Switch d'abord, guides seulement)
+> Version 1.8 — 25/11/2026 — statut : **à valider** (1.1 : v1 limitée à la Wii U, sources et images revues ; 1.2 : Wii, catalogue toutes consoles ; 1.3 : Switch, Switch 2, nouveautés ; 1.4 : premier pas du suivi de collection ; 1.5 : comptes sur invitation, profils et badges ; 1.6 : guides japonais ; 1.7 : guides 3DS et Switch d'abord, guides seulement ; 1.8 : amiibo)
 
 ## Problème
 
@@ -64,6 +64,7 @@ Nintendo éditeur seulement, en français, région JAP incluse.
 | 6 | Variantes | **Plus tard** : rééditions et variantes de pays PAL hors v1 |
 | 8 | Nouveautés (v1.3) | Les consoles encore vivantes (Switch 2) reçoivent des jeux chaque mois : un import « nouveautés seulement », lancé par le propriétaire, ajoute les nouveaux jeux sans tout réimporter |
 | 10 | Guides japonais (v1.6, 24/11) | Recenser les **guides de jeu japonais** (攻略本) des jeux du catalogue : **dans le même catalogue que les jeux** (choix du 24/11, 14 h, au lieu d'une page à part) : chaque guide a **sa propre carte** (couverture), qui mène au jeu concerné ; deux coches **« Jeux »** et **« Guides »** choisissent ce que le catalogue affiche ; la fiche du jeu liste ses guides. Par guide : **couverture**, **titre japonais et éditeur**, **date, ISBN, pages**, **lien d'achat ou prix**. ~~Rétro d'abord~~ → **3DS et Switch d'abord** (v1.7, 24/11, après l'étude : guides récents avec ISBN et couverture ; le rétro n'a presque aucune couverture disponible, 1 sur 150), les autres consoles ensuite. **Guides seulement** (v1.7) : ni artbooks, ni livres de croquis, ni magazines. **Pas encore dans « Ma collection »** : la case « je l'ai » viendra dans une 2e étape. Sources à étudier avant la spec (Retromags, The Video Game Library, Internet Archive, wikis de séries, éditeurs) |
+| 11 | Amiibo (v1.8, 25/11) | Recenser **tous les amiibo** : figurines, cartes (dont Animal Crossing), peluches (Yoshi en laine) et bracelets. **Dans le même catalogue que les jeux et les guides** : une 3e coche **« Amiibo »** ; chaque amiibo a **sa carte** (image) qui mène à **sa fiche**. Par amiibo : **image**, **série amiibo** (Super Smash Bros., Zelda…) et **série de jeux**, **dates de sortie JAP / US / PAL** avec la bascule de région, **jeux compatibles** du catalogue (et ce que l'amiibo y débloque), **prix eBay** (bloc de l'étape 25). La fiche d'un jeu liste ses amiibo. **Dans « Ma collection » dès le départ** : une case « je l'ai » **par amiibo** (pas par région), comptée dans le profil ; badges plus tard. À faire après les guides (étape 29), qui touchent aussi le catalogue. Sources à étudier avant la spec (AmiiboAPI, sites officiels Nintendo, Wikipédia) |
 | 7 | Stack | **Même stack** que `mon-site-sdlc` : Next.js, Tailwind, Supabase, Vercel — rendu dans l'esprit de gamecartdb (gamecartdb utilise lui-même Next.js) |
 
 ## Images
