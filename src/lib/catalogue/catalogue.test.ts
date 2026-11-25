@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   disponibilite,
   formaterDate,
+  formaterDateCourte,
   grouperParAnnee,
   TRI_PAR_DEFAUT,
   trancheNote,
@@ -109,6 +110,16 @@ describe("formaterDate", () => {
     expect(formaterDate("2026-12-01", "saison")).toBe("Hiver 2026");
     expect(formaterDate(null, "inconnue")).toBe("Date à venir");
     expect(formaterDate("2027-12-31", "inconnue")).toBe("Date à venir");
+  });
+});
+
+describe("formaterDateCourte (bande « À venir », US-32)", () => {
+  it("mois abrégé au jour et au mois ; saison, année et date inconnue comme formaterDate", () => {
+    expect(formaterDateCourte("2027-01-28", "jour")).toBe("28 janv. 2027");
+    expect(formaterDateCourte("2026-09-17", "jour")).toBe("17 sept. 2026");
+    expect(formaterDateCourte("2027-05-01", "mois")).toBe("mai 2027");
+    expect(formaterDateCourte("2027-03-01", "saison")).toBe("Printemps 2027");
+    expect(formaterDateCourte(null, "inconnue")).toBe("Date à venir");
   });
 });
 
