@@ -6,8 +6,10 @@
 //   npm run session -- scripts/guides.mjs --ecrire /dossier --sauf 3,17        (sans les n° 3 et 17, notés écartés)
 //   … --limite 10                                                             (10 premiers jeux seulement, pour un essai)
 // L'écriture relit le fichier guides-{console}.json déposé avec la planche : les numéros sont ceux qu'on a regardés.
-// NDL refuse (429) les appels rapprochés : un appel toutes les 6 s (§1 septdecies) ; compter ~15 min pour 100 jeux.
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+// NDL refuse (429) les appels rapprochés : un appel toutes les 6 s (§1 septdecies) ; compter près d'une heure pour 120 jeux.
+// Relancer la même commande après une coupure reprend la recherche (réponses gardées dans /dossier/cache).
+import { createHash } from "node:crypto";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { createClient } from "@supabase/supabase-js";
 import sharp from "sharp";
@@ -33,8 +35,31 @@ const option = (nom) => {
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 const UA = { "user-agent": "nintendo-db guides" };
 
+/**
+ * Réponses déjà lues (texte et JSON), gardées sur disque dans {dossier}/cache : si la session redémarre au milieu
+ * d'une recherche (NDL impose 6 s entre deux appels, une console prend près d'une heure), la relance reprend sans
+ * rappeler NDL ni Wikidata pour les jeux déjà vus (24/11/2026 : deux recherches 3DS perdues ainsi).
+ */
+let dossierCache = null;
+const cheminCache = (url) =>
+  join(dossierCache, createHash("sha1").update(url).digest("hex"));
+
 /** Appel HTTP : 20 s au plus, 3 essais ; un 429 attend 60 s par essai. */
 async function lire(url, type = "text", intervalle = 1000) {
+  if (dossierCache && type !== "octets" && existsSync(cheminCache(url))) {
+    const garde = readFileSync(cheminCache(url), "utf8");
+    return type === "json" ? JSON.parse(garde) : garde;
+  }
+  const corps = await appeler(url, type, intervalle);
+  if (dossierCache && type !== "octets" && corps !== null)
+    writeFileSync(
+      cheminCache(url),
+      type === "json" ? JSON.stringify(corps) : corps,
+    );
+  return corps;
+}
+
+async function appeler(url, type, intervalle) {
   for (let essai = 1; essai <= 3; essai++) {
     await pause(intervalle);
     try {
@@ -107,6 +132,8 @@ async function titresWikidata(jeu, titreUs) {
 
 // ——— 1. Recherche et planche ———
 async function chercher(slugConsole, dossier, limite) {
+  dossierCache = join(dossier, "cache");
+  mkdirSync(dossierCache, { recursive: true });
   const consoles = await tout("consoles", "id, slug");
   const consoleId = consoles.find((c) => c.slug === slugConsole)?.id;
   if (!consoleId) throw new Error(`console inconnue : ${slugConsole}`);
@@ -357,12 +384,10 @@ async function ecrire(dossier, sauf) {
       .single();
     if (error) throw new Error(`guide ${g.isbn} : ${error.message}`);
     const liens = g.jeux.map((j) => ({ guide_id: data.id, game_id: j.id }));
-    const { error: e2 } = await supabase
-      .from("guides_jeux")
-      .upsert(liens, {
-        onConflict: "guide_id,game_id",
-        ignoreDuplicates: true,
-      });
+    const { error: e2 } = await supabase.from("guides_jeux").upsert(liens, {
+      onConflict: "guide_id,game_id",
+      ignoreDuplicates: true,
+    });
     if (e2) throw new Error(`liens ${g.isbn} : ${e2.message}`);
     ecrits++;
   }
