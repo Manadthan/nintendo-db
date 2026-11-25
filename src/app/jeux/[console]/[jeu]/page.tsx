@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EnTete } from "@/components/EnTete";
 import { FicheJeu } from "@/components/FicheJeu";
+import { aujourdhuiParis } from "@/lib/catalogue/a-venir";
 import { chargerJeu, listerFiches } from "@/lib/fiche/charger";
 import {
   donneesStructurees,
@@ -46,7 +47,7 @@ export default async function PageJeu({ params }: { params: Promise<Params> }) {
           __html: jsonPourScript(donneesStructurees(jeu)),
         }}
       />
-      <FicheJeu jeu={jeu} />
+      <FicheJeu jeu={jeu} aujourdhui={aujourdhuiParis()} />
     </>
   );
 }
