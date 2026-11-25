@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.42 — 25/11/2026 — statut : **à valider**
+> Version 1.43 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.43 | 25/11/2026 | **ADR-20 — À venir** (SPEC v1.50, US-32 et US-33) : un jeu annoncé est un jeu ordinaire, « à venir » calculé depuis la date et sa précision ; précisions `saison` et `inconnue` (migration) ; bande de l'accueil dans le HTML préparé ; annonces lues par le relais (Nintendo Japon, Europe, US) puis import depuis l'administration ; plan en 6 PR (§8, étape 31) |
 > | 1.42 | 25/11/2026 | **Étude « À venir »** (étape 31, §1 novodecies) : jeux et amiibo à venir lisibles dans les bases officielles de Nintendo Japon (`search.nintendo.jp`), Europe (`searching.nintendo-europe.com`) et US (pages `nintendo.com/us`) ; dates JAP et PAL des amiibo de 2026 (complète §1 octodecies) ; guides à venir non vérifiés (NDL en 429) |
 > | 1.41 | 25/11/2026 | **Étude des amiibo** (intention v1.8, décision 11 ; §1 octodecies) : AmiiboAPI (932 amiibo, dates par région, jeux compatibles) jusqu'à décembre 2025, complétée par la liste officielle Nintendo US pour 2026 ; ~100 amiibo d'autres éditeurs à trancher ; étape 30 au §11 |
 > | 1.40 | 24/11/2026 | **ADR-19 — Guides japonais** (SPEC v1.47, US-27 et US-28) : tables `guides`, `guides_jeux` (plusieurs à plusieurs) et `guides_exclus` ; couverture servie par Google Books ; guides du catalogue chargés seulement quand « Guides » est cochée ; page `/guides/[isbn]` ; remplissage depuis la session après une planche ; plan en 5 PR (§8, étape 29) |
@@ -805,6 +806,52 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
 8. **Plus tard** : case « j'ai ce guide » (table `possessions_guides`, ADR-07), consoles suivantes (Wii U, DS, Wii…),
    page d'administration des guides.
 
+
+**ADR-20 — À venir : un jeu annoncé est un jeu ordinaire, « à venir » calculé (étape 31, SPEC v1.50).**
+1. **Pas de table à part** : un jeu annoncé est une ligne de `games` avec ses `releases`, comme les autres (le même
+   jeu est complété à sa sortie par l'import de la console, sans doublon). Une région annoncée a `sortie = true` et sa
+   date annoncée ; une région pas annoncée garde `sortie = false`.
+2. **« À venir » n'est jamais stocké** : il se **calcule** (module pur `src/lib/catalogue/a-venir.ts`) depuis la date
+   et sa précision, au jour de la préparation de la page : `jour` → date > aujourd'hui ; `mois` → mois pas encore
+   commencé ; `saison` → saison pas encore commencée ; `annee` → année pas encore commencée ; `inconnue` → toujours à
+   venir. Un jeu est à venir si **toutes** ses régions annoncées le sont (sur « Tous ») ou si la région du marché
+   l'est. Les pages sont refaites toutes les 5 minutes (accueil et fiches, `revalidate = 300`) : l'étiquette
+   disparaît seule le jour de la sortie, sans écriture en base.
+3. **Précision de la date** : le type `precision_date` (`jour`, `mois`, `annee`) gagne **`saison`** et **`inconnue`**
+   (migration : `alter type … add value`, sans toucher aux lignes existantes ; pgTAP mis à jour s'il liste les
+   valeurs). `saison` : `date_sortie` = 1er jour de la saison (printemps 1/03, été 1/06, automne 1/09, hiver 1/12) ;
+   `inconnue` : `date_sortie` = 31/12 de l'année si elle est connue, sinon vide. Libellés : « 28 janv. 2027 »,
+   « Janvier 2027 », « Printemps 2027 », « 2027 », « Date à venir ». Tri par date : clé de tri calculée (une date à la
+   saison ou à l'année seule va à la fin de son année, une date inconnue tout à la fin), jamais la date brute.
+4. **Bande « À venir »** (US-32) : calculée au serveur avec le catalogue déjà chargé (aucun appel en plus) et placée
+   dans le HTML préparé de l'accueil (12 cartes au plus, petites jaquettes en 300) ; composant client seulement pour
+   le marché choisi (même lecture que le catalogue, US-03). Le défilement de côté est en CSS (`overflow-x: auto`,
+   `scroll-snap`), sans bibliothèque. Catalogue : étiquette « À venir » (nouveau jeton de couleur clair / sombre dans
+   `globals.css`) ; fiche : pas de case « je l'ai » ni de bloc « Prix eBay » tant que la version est à venir.
+5. **Lecture des annonces** (US-33) : par le **relais** (`scripts/relais-gametdb.mjs`, qui lit déjà Nintendo Japon et
+   Europe pour les éditeurs, ADR-13) : un fichier `gametdb/annonces.json` dans le bucket privé, avec, par jeu et par
+   région, titre, date et précision, console, code ou identifiant officiel, image officielle. Sources (§1
+   novodecies) : **Nintendo Japon** `search.nintendo.jp` (filtre du calendrier `sche_s:1`, éditeurs « 任天堂 » et
+   « ポケモン », cartes `HAC_CARD` / `BEE_CARD` et logiciels ; écartés : `DLC`, `DL_DLC`, `hard`, `hard-soft`,
+   `accessory`, `app`), **Nintendo Europe** (Solr, `type:GAME AND publisher:Nintendo AND dates_released_dts:[NOW TO *]`)
+   et **Nintendo US** (données de `nintendo.com/us/store/games/coming-soon/`, `softwarePublisher` Nintendo ; page web,
+   la plus fragile : son échec n'arrête pas le relais). Dates « à déterminer » des sources (31/12/2050 en Europe,
+   31/12 de l'année aux US, « 2027 » ou « 2027.春 » au Japon) converties par le module pur `src/lib/import/annonces.ts`
+   en date + précision.
+6. **Import des annonces** : page « Import → Annonces » de l'administration (`exigerProprietaire()`), même schéma
+   que l'import des nouveautés (US-10) : aperçu (nouveau / modifié / inchangé / écarté avec raison), case « en boîte »
+   par jeu (décoché → table `exclusions`, déjà là), enregistrement par lots. Rapprochement d'un jeu déjà au catalogue :
+   console + titre normalisé (ADR-05) d'une région, ou code produit quand il existe ; sinon nouveau jeu (slug du titre
+   PAL, puis US, puis JAP). **Verrous** respectés (ADR-03) : une date corrigée à la main n'est jamais écrasée.
+   Jaquette : image officielle de Nintendo Europe ou Japon copiée en WebP comme les autres (source `nintendo`, gardée
+   par les imports suivants), sinon vignette neutre.
+7. **Tests** : unitaires sur des fixtures écrites à la main d'après les réponses du 25/11 (Nintendo Japon, Europe,
+   US) : conversions de dates, filtres (DLC, consoles, autres éditeurs), rapprochement ; `estAVenir` et libellés aux
+   bornes (veille, jour même, saison, année) ; pgTAP (point 3) ; e2e sur la base jetable avec un jeu à venir de test
+   (bande, étiquette, fiche sans case ni prix). Jamais Nintendo en direct dans les tests.
+8. **Plus tard** : amiibo à venir dans la bande (étape 30, mêmes règles de date), guides à venir (NDL à vérifier),
+   import des annonces automatique (tâche planifiée), jeux annulés signalés.
+
 ## 5. Modèle de données
 
 ```
@@ -981,6 +1028,15 @@ test n'appelle les sites en direct.
     fiche, plan du site, sources dans « À propos » ; (5) **catalogue** : `/guides.json`, coches « Jeux » / « Guides »,
     cartes, recherche, filtres, tris, frise, e2e ; puis bilan.
 
+
+31. **À venir** (v1.43, ADR-20, SPEC v1.50) — 6 PR : (1) **documents** (ADR-20, plan) ; (2) **migration**
+    (`precision_date` + `saison`, `inconnue`), pgTAP, types ; (3) **module pur** `src/lib/catalogue/a-venir.ts`
+    (à venir, libellés, clé de tri) + étiquette « À venir » au catalogue et sur la fiche (sans case ni prix eBay) ;
+    (4) **bande « À venir »** de l'accueil + e2e avec un jeu à venir de test ; (5) **relais** : module pur
+    `src/lib/import/annonces.ts` + fixtures, `gametdb/annonces.json` ; (6) **import des annonces** dans
+    l'administration (aperçu, « en boîte », verrous, jaquette officielle) ; puis premier import depuis la session et
+    bilan.
+
 **Réglages de comptes** (Supabase, Vercel, compte développeur Twitch pour IGDB) : regroupés dans une session
 faite **depuis le PC** (leçon du bilan précédent), avant l'étape 2.
 
@@ -1021,4 +1077,4 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
 | 29 | **Guides japonais** (攻略本, intention v1.6 décision 10, v1.7) : guides dans le même catalogue que les jeux (carte propre avec la couverture, menant au jeu ; coches d'affichage « Jeux » et « Guides ») et listés dans la fiche du jeu ; ~~rétro d'abord~~ **3DS et Switch d'abord**, guides seulement (§1 septdecies : NDL + couvertures Google Books) ; case « je l'ai » plus tard | **étude des sources** en lecture seule (la session ne joint aucune de ces sources : tâche GitHub) : couverture du catalogue rétro (part des jeux avec au moins un guide), champs disponibles (couverture, éditeur, date, ISBN, pages), droit d'héberger les couvertures, rapprochement guide → jeu ; candidates : Retromags (base « Japanese Language Guides »), The Video Game Library, Internet Archive (`strategyguides`), NDL Search (ISBN), Zelda Dungeon et Bulbapedia ; lien d'achat ou prix : eBay (ADR-17) ou recherche Suruga-ya ; puis SPEC, maquettes (fiche + page), ADR, plan |
 | 30 | **Amiibo** (intention v1.8, décision 11) : tous les types, dans le même catalogue (coche « Amiibo »), fiche (image, séries, dates JAP / US / PAL, jeux compatibles, prix eBay), case « je l'ai » par amiibo | étude faite (§1 octodecies) ; à trancher : amiibo des autres éditeurs, images, dates 2026 ; puis SPEC, maquettes, ADR, plan ; après l'étape 29 |
-| 31 | **À venir** sur l'accueil (demande du 25/11, comme « Coming up » de gamecartdb) : bande à faire défiler, jeux, guides et amiibo à venir | étude **faite le 25/11** (§1 novodecies) ; amiibo : catalogue décidé (étape 30, intention v1.8), la section montre ses amiibo à venir ; **décidé le 25/11** : jeu à venir au catalogue dès l'annonce (étiquette « À venir »), guides à venir plus tard ; **SPEC v1.50** (US-32, US-33) et maquette (`maquettes/a-venir.png`) le 25/11 ; puis ADR (date à la saison : `precision_date` sans « saison » aujourd'hui), plan |
+| 31 | **À venir** sur l'accueil (demande du 25/11, comme « Coming up » de gamecartdb) : bande à faire défiler, jeux, guides et amiibo à venir | étude **faite le 25/11** (§1 novodecies) ; amiibo : catalogue décidé (étape 30, intention v1.8), la section montre ses amiibo à venir ; **décidé le 25/11** : jeu à venir au catalogue dès l'annonce (étiquette « À venir »), guides à venir plus tard ; **SPEC v1.50** (US-32, US-33) et maquette (`maquettes/a-venir.png`) le 25/11 ; **ADR-20** et plan en 6 PR (§8) |
