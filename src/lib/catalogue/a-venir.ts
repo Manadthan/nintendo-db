@@ -3,6 +3,7 @@ import {
   type JeuCatalogue,
   type Marche,
   type PrecisionDate,
+  type VersionAffichee,
 } from "./types";
 
 /**
@@ -59,4 +60,43 @@ export function cleTriDate(
   if (precision === "annee" || precision === "saison")
     return `${date.slice(0, 4)}-12-31`;
   return date;
+}
+
+/** Nombre de cartes de la bande « À venir » de l'accueil (ADR-20 point 4). */
+export const CARTES_BANDE = 12;
+
+/**
+ * Jeux de la bande « À venir » (US-32) : un jeu à venir sur le marché choisi, dans la version dont la date est la plus
+ * proche (sur « Tous », la plus proche des trois régions), la sortie la plus proche d'abord.
+ */
+export function versionsAVenir(
+  jeux: JeuCatalogue[],
+  marche: Marche,
+  aujourdhui: string,
+): VersionAffichee[] {
+  const versions: VersionAffichee[] = [];
+  for (const jeu of jeux) {
+    if (!jeuAVenir(jeu, marche, aujourdhui)) continue;
+    const regions = marche === "TOUS" ? REGIONS : [marche];
+    let choisie: VersionAffichee | null = null;
+    for (const region of regions) {
+      const sortie = jeu.sorties[region];
+      if (!sortie.sortie || !sortie.titre) continue;
+      const cle = cleTriDate(sortie.date, sortie.precision) ?? "9999-12-31";
+      const cleChoisie = choisie
+        ? (cleTriDate(choisie.sortie.date, choisie.sortie.precision) ??
+          "9999-12-31")
+        : null;
+      if (cleChoisie === null || cle < cleChoisie)
+        choisie = { jeu, region, sortie };
+    }
+    if (choisie) versions.push(choisie);
+  }
+  const cle = (v: VersionAffichee) =>
+    cleTriDate(v.sortie.date, v.sortie.precision) ?? "9999-12-31";
+  return versions.sort(
+    (a, b) =>
+      cle(a).localeCompare(cle(b)) ||
+      a.sortie.titre!.localeCompare(b.sortie.titre!, "fr"),
+  );
 }

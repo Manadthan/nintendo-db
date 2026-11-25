@@ -54,6 +54,8 @@ import {
 import { filtrerCollection } from "@/lib/collection/collection";
 import { useCollection } from "@/lib/collection/navigateur";
 import { FiltresActifs, PanneauFiltres } from "./Filtres";
+import { versionsAVenir } from "@/lib/catalogue/a-venir";
+import { BandeAVenir } from "./BandeAVenir";
 import { ListeJeux } from "./ListeJeux";
 import { triFrise } from "@/lib/catalogue/frise";
 import { abonnerTri, enregistrerTri, lireTri } from "@/lib/catalogue/tri";
@@ -145,6 +147,12 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
     abonnerMarche,
     lireMarche,
     () => "TOUS",
+  );
+
+  // Bande « À venir » (US-32) : jeux annoncés sur le marché choisi, la sortie la plus proche d'abord.
+  const aVenir = useMemo(
+    () => versionsAVenir(jeux, marche, aujourdhui),
+    [jeux, marche, aujourdhui],
   );
 
   // Coches « Jeux » / « Guides » (US-27) : dans l'adresse (?voir=) ; les guides seulement sur « Tous » et « Japon ».
@@ -329,6 +337,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
       aria-labelledby="tous-les-jeux"
       className="mx-auto flex w-full max-w-7xl flex-col gap-3.5 px-4 pt-5 pb-7"
     >
+      <BandeAVenir versions={aVenir} />
       <div className="flex items-baseline gap-2">
         <h2 id="tous-les-jeux" className="font-titre text-[21px] font-bold">
           Tous les jeux
