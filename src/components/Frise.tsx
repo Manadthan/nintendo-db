@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { AnneeFrise } from "@/lib/catalogue/frise";
 import type { VersionAffichee } from "@/lib/catalogue/types";
 import { CouvertureCarte, EtiquettesGuide } from "./CarteGuide";
+import { EtiquetteAVenir } from "./EtiquetteAVenir";
 import { Jaquette } from "./Jaquette";
 import { NoteMetacritic } from "./NoteMetacritic";
 
@@ -14,9 +15,12 @@ export function Frise({
   annees,
   lien,
   surClic,
+  aVenir,
 }: {
   annees: AnneeFrise[];
   lien: (v: VersionAffichee) => string;
+  /** Jeu annoncé (US-32) : étiquette « À venir » à côté de la console. */
+  aVenir: (v: VersionAffichee) => boolean;
   /** Mémorise la position du catalogue avant d'ouvrir une fiche. */
   surClic: () => void;
 }) {
@@ -84,7 +88,8 @@ export function Frise({
                       <EtiquettesGuide v={v} />
                     </span>
                   ) : (
-                    <span className="text-xs text-texte-discret">
+                    <span className="flex flex-wrap items-center gap-1 text-xs text-texte-discret">
+                      {aVenir(v) && <EtiquetteAVenir />}
                       {v.jeu.console.nom}
                     </span>
                   )}

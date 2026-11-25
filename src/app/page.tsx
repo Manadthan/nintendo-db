@@ -1,6 +1,7 @@
 import { Catalogue } from "@/components/Catalogue";
 import { EnTete } from "@/components/EnTete";
 import type { Metadata } from "next";
+import { aujourdhuiParis } from "@/lib/catalogue/a-venir";
 import { chargerCatalogue, chargerConsoles } from "@/lib/catalogue/charger";
 
 // Page préparée à l'avance et régénérée au plus toutes les 5 minutes (ADR-02) :
@@ -37,7 +38,11 @@ export default async function Accueil() {
           </div>
         </section>
 
-        <Catalogue jeux={jeux} consoles={consoles} />
+        <Catalogue
+          jeux={jeux}
+          consoles={consoles}
+          aujourdhui={aujourdhuiParis()}
+        />
       </main>
     </>
   );

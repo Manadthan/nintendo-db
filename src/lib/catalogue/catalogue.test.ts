@@ -103,6 +103,45 @@ describe("formaterDate", () => {
   it("affiche « — » pour une date inconnue (jamais inventée)", () => {
     expect(formaterDate(null, null)).toBe("—");
   });
+
+  it("jeu annoncé (US-32) : saison et date pas encore connue", () => {
+    expect(formaterDate("2027-03-01", "saison")).toBe("Printemps 2027");
+    expect(formaterDate("2026-12-01", "saison")).toBe("Hiver 2026");
+    expect(formaterDate(null, "inconnue")).toBe("Date à venir");
+    expect(formaterDate("2027-12-31", "inconnue")).toBe("Date à venir");
+  });
+});
+
+describe("trier : jeux annoncés (ADR-20 point 3)", () => {
+  const annonce = (
+    slug: string,
+    date: string | null,
+    precision: SortieCatalogue["precision"],
+  ) => {
+    const j = jeu(slug, null, null, "2027-01-01");
+    j.sorties.PAL = { ...j.sorties.PAL, date, precision };
+    return j;
+  };
+  const metroid = annonce("metroid", "2027-01-28", "jour");
+  const kirby = annonce("kirby", "2027-03-01", "saison");
+  const pokemon = annonce("pokemon", "2027-12-31", "annee");
+  const xeno = annonce("xeno", null, "inconnue");
+
+  it("plus anciens : jour, puis saison et année en fin d'année, puis date inconnue tout à la fin", () => {
+    expect(
+      trier([xeno, pokemon, kirby, metroid, MK8], "anciens", "TOUS").map(
+        (v) => v.jeu.slug,
+      ),
+    ).toEqual(["mario-kart-8", "metroid", "pokemon", "kirby", "xeno"]); // saison et année : même clé (fin 2027)
+  });
+
+  it("groupe « Date à venir » pour une date pas encore connue", () => {
+    const groupes = grouperParAnnee(
+      trier([xeno, metroid], "anciens", "TOUS"),
+      "anciens",
+    );
+    expect(groupes.map((g) => g.titre)).toEqual(["2027", "Date à venir"]);
+  });
 });
 
 describe("trier et grouperParAnnee (US-02)", () => {

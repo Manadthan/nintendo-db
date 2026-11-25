@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
+import { sortieAVenir } from "@/lib/catalogue/a-venir";
 import { formaterDate } from "@/lib/catalogue/catalogue";
 import {
   adresseRetourCatalogue,
@@ -21,6 +22,7 @@ import { Jaquette } from "./Jaquette";
 import { lienRawg } from "@/lib/captures/rawg";
 import { Captures } from "./Captures";
 import { GuidesFiche } from "./GuidesFiche";
+import { EtiquetteAVenir } from "./EtiquetteAVenir";
 import { PrixEbay } from "./PrixEbay";
 import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
 
@@ -56,7 +58,18 @@ function Info({ libelle, valeur }: { libelle: string; valeur: string | null }) {
 const sansAbonnement = () => () => {};
 
 /** Fiche d'un jeu (US-04) : sélecteur JAP / US / PAL sous la jaquette, informations, disponibilité, sources. */
-export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
+export function FicheJeu({
+  jeu,
+  aujourdhui,
+}: {
+  jeu: JeuFiche;
+  /** Jour de préparation de la page (AAAA-MM-JJ, Paris) : versions à venir (US-32, ADR-20). */
+  aujourdhui: string;
+}) {
+  // Version annoncée, pas encore sortie : ni case « je l'ai », ni prix eBay (US-32).
+  const aVenir = (r: Region) =>
+    jeu.sorties[r].sortie &&
+    sortieAVenir(jeu.sorties[r].date, jeu.sorties[r].precision, aujourdhui);
   // Page préparée à l'avance (ADR-02) : PAL au premier affichage, puis le marché choisi dans ce navigateur.
   const marche = useSyncExternalStore<Marche>(
     sansAbonnement,
@@ -184,10 +197,20 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
                 {sortie.titreRomanise}
               </p>
             )}
-            <p className="text-[15px] font-semibold text-accent-fonce">
-              Sorti le {formaterDate(sortie.date, sortie.precision)} ·{" "}
-              {NOMS[region]}
-            </p>
+            {aVenir(region) ? (
+              <p className="flex flex-wrap items-center gap-2 text-[15px] font-semibold text-accent-fonce">
+                <EtiquetteAVenir grande />
+                Sortie prévue : {formaterDate(
+                  sortie.date,
+                  sortie.precision,
+                )} · {NOMS[region]}
+              </p>
+            ) : (
+              <p className="text-[15px] font-semibold text-accent-fonce">
+                Sorti le {formaterDate(sortie.date, sortie.precision)} ·{" "}
+                {NOMS[region]}
+              </p>
+            )}
           </div>
 
           <dl className="grid grid-cols-2 gap-x-3 gap-y-3.5 rounded-xl border border-bordure bg-carte p-3.5">
@@ -255,7 +278,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
                         <span className="font-normal text-texte-discret">
                           ·{" "}
                           {s.sortie
-                            ? formaterDate(s.date, s.precision)
+                            ? `${aVenir(r) ? "à venir, " : ""}${formaterDate(s.date, s.precision)}`
                             : "non sorti"}
                         </span>
                       </span>
@@ -265,7 +288,7 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
                         </span>
                       )}
                     </div>
-                    {collection.connecte && s.sortie && (
+                    {collection.connecte && s.sortie && !aVenir(r) && (
                       <label className="-my-1 flex min-h-11 shrink-0 items-center gap-2 text-[13px] font-medium">
                         <input
                           type="checkbox"
@@ -300,9 +323,9 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             consoleSlug={jeu.console.slug}
             jeuSlug={jeu.slug}
             sorties={{
-              JAP: jeu.sorties.JAP.sortie,
-              US: jeu.sorties.US.sortie,
-              PAL: jeu.sorties.PAL.sortie,
+              JAP: jeu.sorties.JAP.sortie && !aVenir("JAP"),
+              US: jeu.sorties.US.sortie && !aVenir("US"),
+              PAL: jeu.sorties.PAL.sortie && !aVenir("PAL"),
             }}
             noms={NOMS}
             region={region}

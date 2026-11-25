@@ -118,13 +118,15 @@ type Props = {
   jeux: JeuCatalogue[];
   /** Consoles du site, par ordre chronologique (filtre « Console », étape 8). */
   consoles: { slug: string; nom: string }[];
+  /** Jour de préparation de la page (AAAA-MM-JJ, Paris) : jeux à venir (US-32, ADR-20). */
+  aujourdhui: string;
 };
 
 /**
  * Catalogue de toutes les consoles (US-01, US-02) : recherche (US-05), marché (US-03), tri, filtres (US-06, dont
  * la console), grille / liste, groupes par année.
  */
-export function Catalogue({ jeux, consoles }: Props) {
+export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
   // Tri : dans l'adresse (?tri=, SPEC v1.45), retrouvé au retour d'une fiche ; le défaut au premier affichage.
   const triChoisi = useSyncExternalStore<Tri>(
     abonnerTri,
@@ -536,6 +538,7 @@ export function Catalogue({ jeux, consoles }: Props) {
           groupes={groupes}
           possessions={connecte ? collection.possessions : null}
           limite={limite}
+          aujourdhui={aujourdhui}
         />
       </div>
       {resteAAfficher && <div ref={sentinelle} aria-hidden="true" />}
