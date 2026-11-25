@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.43 — 25/11/2026 — statut : **à valider**
+> Version 1.44 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.44 | 25/11/2026 | **ADR-21 — Amiibo** (étape 30, SPEC v1.49, maquettes v0.14) : tables `amiibo`, `amiibo_sorties`, `amiibo_jeux`, `amiibo_exclus`, `possessions_amiibo` ; images copiées en WebP (bucket `amiibo`) ; remplissage par la session (AmiiboAPI + Nintendo US, JP, Europe) après une planche ; `/amiibo.json` pour le catalogue ; plan en 7 PR (§8, point 30) |
 > | 1.43 | 25/11/2026 | **ADR-20 — À venir** (SPEC v1.50, US-32 et US-33) : un jeu annoncé est un jeu ordinaire, « à venir » calculé depuis la date et sa précision ; précisions `saison` et `inconnue` (migration) ; bande de l'accueil dans le HTML préparé ; annonces lues par le relais (Nintendo Japon, Europe, US) puis import depuis l'administration ; plan en 6 PR (§8, étape 31) |
 > | 1.42 | 25/11/2026 | **Étude « À venir »** (étape 31, §1 novodecies) : jeux et amiibo à venir lisibles dans les bases officielles de Nintendo Japon (`search.nintendo.jp`), Europe (`searching.nintendo-europe.com`) et US (pages `nintendo.com/us`) ; dates JAP et PAL des amiibo de 2026 (complète §1 octodecies) ; guides à venir non vérifiés (NDL en 429) |
 > | 1.41 | 25/11/2026 | **Étude des amiibo** (intention v1.8, décision 11 ; §1 octodecies) : AmiiboAPI (932 amiibo, dates par région, jeux compatibles) jusqu'à décembre 2025, complétée par la liste officielle Nintendo US pour 2026 ; ~100 amiibo d'autres éditeurs à trancher ; étape 30 au §11 |
@@ -852,6 +853,66 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
 8. **Plus tard** : amiibo à venir dans la bande (étape 30, mêmes règles de date), guides à venir (NDL à vérifier),
    import des annonces automatique (tâche planifiée), jeux annulés signalés.
 
+**ADR-21 — Amiibo : tables à part, images copiées, remplis par la session, chargés à la demande (étape 30, SPEC v1.49).**
+1. **Un amiibo n'est pas un jeu** (pas de console, pas de jaquette par région) : tables à part, comme les guides
+   (ADR-19). Migration 0032 ou suivante :
+   - `amiibo` : `id`, **`identifiant` (unique)** : les 16 chiffres hexadécimaux de l'amiibo (AmiiboAPI, ex.
+     `010a000004a40902`) ou, pour un amiibo de 2026 absent d'AmiiboAPI, `us:{slug Nintendo US}` ; `slug` (unique,
+     adresse `/amiibo/{slug}`), `nom` (anglais), `nom_jap`, `type` (énuméré `amiibo_type` : `figurine`, `carte`,
+     `peluche`, `bracelet`, `bloc` ; lu dans l'identifiant), `serie_amiibo`, `serie_jeux`, `personnage`, `editeur`,
+     `image_path`, `boite_path` (vide si Nintendo US n'a pas la boîte), `verrous text[]`, `cree_le`, `updated_at` ;
+   - `amiibo_sorties` : (`amiibo_id`, `region` : le type existant) clé primaire, `date_sortie`, `precision_date` (le
+     type existant) ; **pas de ligne = pas sorti** dans cette région ;
+   - `amiibo_jeux` : `amiibo_id`, `game_id` (**vide** pour un jeu absent du catalogue : autre éditeur, dématérialisé),
+     `titre_jeu` et `console` (texte de la source, gardés même quand `game_id` est rempli), `usage` (anglais), unique
+     (`amiibo_id`, `titre_jeu`, `console`) ; suppression en cascade ;
+   - `amiibo_exclus` : `identifiant` clé primaire, `raison`, `cree_le` : un amiibo écarté n'est jamais remis ;
+   - `possessions_amiibo` : (`user_id`, `amiibo_id`) clé primaire, `cree_le` : **une case par amiibo**, privée, mêmes
+     règles que `possessions` (migration 0012 : chacun ne voit et ne modifie que ses lignes) ;
+   - RLS : lecture pour tous (sauf `amiibo_exclus` et `possessions_amiibo`), écriture du catalogue réservée au
+     propriétaire (`est_proprietaire()`, ADR-16) et à la clé secrète. pgTAP : lecture anonyme, écriture refusée,
+     identifiant et slug uniques, cascade, possessions privées.
+2. **Images copiées chez nous** (choix du 25/11) : photo de la figurine (AmiiboAPI, sinon Nintendo US) et photo de la
+   boîte américaine (Nintendo US, 264 amiibo) converties en **WebP 300 et 600 px, transparence gardée**, dans un bucket
+   public `amiibo` (`{id}/figurine-{version}-{300|600}.webp`, `{id}/boite-…`, version comme ADR-04) ; mêmes fonctions
+   que les jaquettes (`sharp`, `src/lib/jaquettes/`). Sources citées en pied de page et dans « À propos ».
+3. **Sources** (§1 octodecies, §1 novodecies), lues seulement par la session : **AmiiboAPI** (fichiers `amiibo.json` et
+   `games_info.json` du dépôt GitHub : liste, types, séries, dates JP / NA / EU, jeux compatibles), **Nintendo US**
+   (données de la page des amiibo : amiibo de 2026, boîtes, dates US), **Nintendo Japon** (`search.nintendo.jp`,
+   `hard` = `9_amiibo` : nom japonais, dates JAP de 2026) et **Nintendo Europe** (Solr, `type:FIGURE` : dates PAL de
+   2026). Date AU d'AmiiboAPI ignorée (PAL = Europe). Éditeur : « Nintendo », sauf les séries d'autres éditeurs
+   (Street Fighter 6 et Mega Man : Capcom ; Monster Hunter : Capcom ; Yu-Gi-Oh! et Power Pros : Konami ; Shovel
+   Knight : Yacht Club Games ; Skylanders : Activision ; Diablo : Blizzard), liste fixe du module pur.
+4. **Remplissage** (US-31), depuis la **session Claude**, skill `script-prod` : `scripts/amiibo.mjs --planche
+   dossier` lit les sources, rattache les jeux compatibles au catalogue (module pur `src/lib/amiibo/` : titre normalisé
+   comme RAWG, ADR-18, et console : `gamesSwitch` → Switch puis Switch 2, `gamesWiiU`, `games3DS` ; « ≈ » quand le
+   titre n'est pas identique) et fait **une planche par série amiibo** (image, nom, type, dates, jeux) ; le
+   propriétaire écarte des numéros ; `--ecrire dossier --sauf n,n` écrit les amiibo gardés, leurs images et leurs
+   jeux, et met les écartés dans `amiibo_exclus`. Les jeux compatibles **génériques** d'AmiiboAPI (ex. Sidon →
+   Animal Crossing « Mineru », maquette v0.14) se voient sur la planche ; une ligne fausse s'écarte avec
+   `--sans-jeu n:titre`. Relancer ne crée pas de doublon et respecte les verrous.
+5. **Catalogue** (US-29) : comme les guides (ADR-19 point 4), **rien dans le HTML de l'accueil** : cocher « Amiibo »
+   charge une seule fois `/amiibo.json` (préparé, gardé 5 min, étiquette `catalogue`) : par amiibo, slug, nom, nom
+   japonais, type, séries, dates par région, image 300, consoles des jeux compatibles. Les fonctions pures de
+   `src/lib/catalogue/` passent à un élément « jeu », « guide » ou « amiibo » : recherche, filtres Année / Série /
+   Console (Genre et Développeur cachent les amiibo), tris, lots de 60, frise ; `?voir=` accepte `amiibo` ; un amiibo
+   non sorti sur le marché choisi est caché.
+6. **Fiche de l'amiibo** `/amiibo/[slug]` : préparée à l'avance (ISR 5 min, `generateStaticParams`), bascule
+   JAP / US / PAL (composant de la fiche du jeu, sur les dates), jeux compatibles (lien si `game_id`), métadonnées et
+   schema.org `Product`, plan du site, 404 en français. **Fiche du jeu** : bloc « Amiibo (N) » lu avec le jeu (page
+   toujours statique). **Prix eBay** : route `/api/prix/amiibo/[slug]` qui reprend `src/lib/prix/` (ADR-17 : recherche
+   « amiibo {nom} », annonces en cours, médiane, 6 h, 503 si eBay ne répond pas).
+7. **Ma collection** (US-30) : case « Je l'ai » sur la fiche, lue et écrite dans le navigateur comme les versions des
+   jeux (`src/lib/collection/navigateur.ts`) ; marque verte et filtre `?collection=` dans le catalogue ; ligne
+   « Amiibo : N / total » et derniers ajouts dans Mon profil et le profil public (`profil_public()` complété).
+8. **Tests** : unitaires sur des fixtures écrites à la main d'après les sources du 25/11 (`src/lib/amiibo/__fixtures__/` :
+   extraits AmiiboAPI, Nintendo US, Japon, Europe) : type lu dans l'identifiant, éditeur par série, dates par région,
+   rapprochement des jeux (identique, « ≈ », absent du catalogue), fusion des sources pour 2026 ; extension des tests du
+   catalogue (éléments mêlés, `?voir=amiibo`, marché, filtres) ; pgTAP (point 1) ; e2e avec `tests/e2e/amiibo.sql` :
+   coche, carte → fiche, bascule, bloc de la fiche du jeu, case « Je l'ai » (projet `*-admin`) ; jamais les sources en
+   direct.
+9. **Plus tard** : badges amiibo, boîtes JAP et PAL, page d'administration des amiibo, nouveaux amiibo (même script).
+
 ## 5. Modèle de données
 
 ```
@@ -872,6 +933,12 @@ guides(id, isbn char(13) unique, titre, editeur, date_parution, precision_date, 
        verrous text[], cree_le, updated_at)                                                                   (ADR-19)
 guides_jeux(guide_id → guides (cascade), game_id → games (cascade)) primary key (guide_id, game_id)       (ADR-19)
 guides_exclus(isbn primary key, raison, cree_le)                                                          (ADR-19)
+amiibo(id, identifiant unique, slug unique, nom, nom_jap, type amiibo_type, serie_amiibo, serie_jeux, personnage, editeur,
+       image_path, boite_path, verrous text[], cree_le, updated_at)                                         (ADR-21)
+amiibo_sorties(amiibo_id → amiibo (cascade), region, date_sortie, precision_date) primary key (amiibo_id, region) (ADR-21)
+amiibo_jeux(amiibo_id → amiibo (cascade), game_id → games (cascade, vide si hors catalogue), titre_jeu, console, usage) (ADR-21)
+amiibo_exclus(identifiant primary key, raison, cree_le)                                                   (ADR-21)
+possessions_amiibo(user_id → auth.users (cascade), amiibo_id → amiibo (cascade), cree_le) primary key (user_id, amiibo_id) (ADR-21)
 ```
 
 - Un jeu = une œuvre sur une console ; ses 3 sorties sont toujours créées (`sortie = false` si absente).
@@ -1029,6 +1096,14 @@ test n'appelle les sites en direct.
     cartes, recherche, filtres, tris, frise, e2e ; puis bilan.
 
 
+30. **Amiibo** (v1.44, ADR-21, SPEC v1.49, maquettes v0.14) — 7 PR : (1) **documents** (ADR-21, modèle, plan) ;
+    (2) **migration** (tables, bucket `amiibo`, RLS), pgTAP, types ; (3) **module pur** `src/lib/amiibo/` + fixtures +
+    `scripts/amiibo.mjs` (planche par série, `--ecrire`, `--sauf`, `--sans-jeu`) ; puis **remplissage** après la planche
+    relue par le propriétaire ; (4) **fiche de l'amiibo** `/amiibo/[slug]`, bloc « Amiibo » de la fiche du jeu, plan du
+    site, sources dans « À propos » ; (5) **catalogue** : `/amiibo.json`, coche « Amiibo », cartes, recherche, filtres,
+    tris, frise, e2e ; (6) **prix eBay** de l'amiibo ; (7) **Ma collection** (US-30) : case, marque verte, filtre,
+    profils ; puis bilan.
+
 31. **À venir** (v1.43, ADR-20, SPEC v1.50) — 6 PR : (1) **documents** (ADR-20, plan) ; (2) **migration**
     (`precision_date` + `saison`, `inconnue`), pgTAP, types ; (3) **module pur** `src/lib/catalogue/a-venir.ts`
     (à venir, libellés, clé de tri) + étiquette « À venir » au catalogue et sur la fiche (sans case ni prix eBay) ;
@@ -1076,5 +1151,5 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 | 28 | **Captures RAWG** dans la fiche (SPEC v1.43, ADR-18) : **terminée le 23/11** (#218, #220 à #225, #227, #228 ; BILAN §15) : 804 jeux avec captures | plan en 5 PR : 1) documents et maquette ; 2) tâche « Étude RAWG » en lecture seule (#220, **faite le 22/11**, §1 sexdecies : 81 % au titre identique, 92 % avec suffixes ignorés, aucun faux rapprochement accepté) ; 3) migration `captures` ; 4) relais + planche + écriture en base ; 5) carrousel de la fiche. Avant l'étude : clé RAWG du propriétaire en secret GitHub `RAWG_API_KEY` |
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
 | 29 | **Guides japonais** (攻略本, intention v1.6 décision 10, v1.7) : guides dans le même catalogue que les jeux (carte propre avec la couverture, menant au jeu ; coches d'affichage « Jeux » et « Guides ») et listés dans la fiche du jeu ; ~~rétro d'abord~~ **3DS et Switch d'abord**, guides seulement (§1 septdecies : NDL + couvertures Google Books) ; case « je l'ai » plus tard | **étude des sources** en lecture seule (la session ne joint aucune de ces sources : tâche GitHub) : couverture du catalogue rétro (part des jeux avec au moins un guide), champs disponibles (couverture, éditeur, date, ISBN, pages), droit d'héberger les couvertures, rapprochement guide → jeu ; candidates : Retromags (base « Japanese Language Guides »), The Video Game Library, Internet Archive (`strategyguides`), NDL Search (ISBN), Zelda Dungeon et Bulbapedia ; lien d'achat ou prix : eBay (ADR-17) ou recherche Suruga-ya ; puis SPEC, maquettes (fiche + page), ADR, plan |
-| 30 | **Amiibo** (intention v1.8, décision 11) : tous les types, dans le même catalogue (coche « Amiibo »), fiche (image, séries, dates JAP / US / PAL, jeux compatibles, prix eBay), case « je l'ai » par amiibo | étude faite (§1 octodecies) ; à trancher : amiibo des autres éditeurs, images, dates 2026 ; puis SPEC, maquettes, ADR, plan ; après l'étape 29 |
+| 30 | **Amiibo** (intention v1.8, décision 11) : tous les types et éditeurs, dans le même catalogue (coche « Amiibo »), fiche (image, boîte US, séries, dates JAP / US / PAL, jeux compatibles, prix eBay), case « je l'ai » par amiibo | étude (§1 octodecies) #257, SPEC v1.49 #260, maquettes v0.14 #264, **ADR-21 et plan (§8, point 30)** ; après les PR de l'étape 29 qui touchent le catalogue |
 | 31 | **À venir** sur l'accueil (demande du 25/11, comme « Coming up » de gamecartdb) : bande à faire défiler, jeux, guides et amiibo à venir | étude **faite le 25/11** (§1 novodecies) ; amiibo : catalogue décidé (étape 30, intention v1.8), la section montre ses amiibo à venir ; **décidé le 25/11** : jeu à venir au catalogue dès l'annonce (étiquette « À venir »), guides à venir plus tard ; **SPEC v1.50** (US-32, US-33) et maquette (`maquettes/a-venir.png`) le 25/11 ; **ADR-20** et plan en 6 PR (§8) |
