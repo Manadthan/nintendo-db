@@ -75,6 +75,24 @@ const SOURCES = [
     licenceLien: "https://rawg.io/apidocs",
   },
   {
+    nom: "NDL Search",
+    lien: "https://ndlsearch.ndl.go.jp/",
+    apport:
+      "Liste des guides de jeu japonais (攻略本) : titre, éditeur, date de parution, pages et ISBN, d'après le catalogue de la Bibliothèque nationale de la Diète (Japon).",
+    licence:
+      "API publique de NDL Search ; chaque page de guide renvoie à sa notice.",
+    licenceLien: "https://ndlsearch.ndl.go.jp/help/api",
+  },
+  {
+    nom: "Google Books",
+    lien: "https://books.google.com/",
+    apport:
+      "Couvertures des guides japonais, chargées depuis Google Books (jamais copiées ici), avec un lien vers la page de chaque livre.",
+    licence:
+      "API Google Books, avec la mention « powered by Google » à côté des couvertures. Les couvertures restent la propriété de leurs éditeurs.",
+    licenceLien: "https://developers.google.com/books/terms",
+  },
+  {
     nom: "GameTDB",
     lien: "https://www.gametdb.com/",
     apport:

@@ -84,6 +84,39 @@ describe("captures RAWG de la fiche (US-26)", () => {
   });
 });
 
+describe("guides japonais de la fiche (US-27)", () => {
+  const guide = (isbn: string, titre: string, date: string | null) => ({
+    guides: {
+      isbn,
+      titre,
+      editeur: "KADOKAWA",
+      date_parution: date,
+      google_books_id: null,
+    },
+  });
+
+  it("les classe du plus ancien au plus récent, sans date à la fin", () => {
+    const jeu = versJeuFiche({
+      ...KARAOKE,
+      guides_jeux: [
+        guide("9784000000031", "C", null),
+        guide("9784000000024", "B", "2023-05-01"),
+        guide("9784000000017", "A", "2022-10-01"),
+        { guides: null },
+      ],
+    });
+    expect(jeu.guides.map((g) => [g.titre, g.annee])).toEqual([
+      ["A", "2022"],
+      ["B", "2023"],
+      ["C", null],
+    ]);
+  });
+
+  it("sans guide : liste vide (pas de bloc)", () => {
+    expect(versJeuFiche(KARAOKE).guides).toEqual([]);
+  });
+});
+
 describe("versJeuFiche (US-04)", () => {
   const jeu = versJeuFiche(KARAOKE);
 

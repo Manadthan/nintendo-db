@@ -20,6 +20,7 @@ import { FORMES_REELLES } from "@/lib/jaquettes/proportions";
 import { Jaquette } from "./Jaquette";
 import { lienRawg } from "@/lib/captures/rawg";
 import { Captures } from "./Captures";
+import { GuidesFiche } from "./GuidesFiche";
 import { PrixEbay } from "./PrixEbay";
 import { CLASSES_NOTE, niveauNote } from "@/lib/catalogue/metacritic";
 
@@ -225,6 +226,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
             rawgSlug={jeu.rawgSlug}
           />
 
+          <GuidesFiche guides={jeu.guides} />
+
           <section
             aria-labelledby="disponibilite"
             className="flex flex-col gap-2.5"
@@ -339,6 +342,8 @@ export function FicheJeu({ jeu }: { jeu: JeuFiche }) {
                 )}
               </>
             )}
+            {jeu.guides.length > 0 &&
+              " · guides : Bibliothèque nationale de la Diète (NDL Search)"}
             {" · prix via eBay"}. Site de fan non affilié à Nintendo.
           </p>
         </div>

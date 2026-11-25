@@ -40,6 +40,16 @@ export type JeuFiche = JeuCatalogue & {
   captures: CaptureFiche[];
   /** Slug du jeu chez RAWG, pour le lien « Captures : RAWG ». */
   rawgSlug: string | null;
+  /** Guides japonais du jeu (US-27, bloc « Guides (N) »), du plus ancien au plus récent ; vide sans guide. */
+  guides: GuideFiche[];
+};
+
+export type GuideFiche = {
+  isbn: string;
+  titre: string;
+  editeur: string | null;
+  annee: string | null;
+  googleBooksId: string | null;
 };
 
 export type CaptureFiche = {
@@ -60,6 +70,17 @@ export type LigneFiche = Omit<LigneJeu, "releases"> & {
         url: string;
         largeur: number | null;
         hauteur: number | null;
+      }[]
+    | null;
+  guides_jeux?:
+    | {
+        guides: {
+          isbn: string;
+          titre: string;
+          editeur: string | null;
+          date_parution: string | null;
+          google_books_id: string | null;
+        } | null;
       }[]
     | null;
   consoles: { slug: string; nom: string };
@@ -96,6 +117,21 @@ export function versJeuFiche(ligne: LigneFiche): JeuFiche {
       .sort((a, b) => a.position - b.position)
       .map(({ url, largeur, hauteur }) => ({ url, largeur, hauteur })),
     rawgSlug: ligne.rawg_slug ?? null,
+    guides: (ligne.guides_jeux ?? [])
+      .flatMap(({ guides: g }) => (g ? [g] : []))
+      .sort(
+        (a, b) =>
+          (a.date_parution ?? "9999").localeCompare(
+            b.date_parution ?? "9999",
+          ) || a.titre.localeCompare(b.titre, "ja"),
+      )
+      .map((g) => ({
+        isbn: g.isbn,
+        titre: g.titre,
+        editeur: g.editeur,
+        annee: g.date_parution?.slice(0, 4) ?? null,
+        googleBooksId: g.google_books_id,
+      })),
   };
 }
 
