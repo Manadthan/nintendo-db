@@ -113,6 +113,28 @@ describe("noms et slugs", () => {
   });
 });
 
+describe("slugs : identifiants à la même fin (bug du 25/11, Palamute 2021 et 2022)", () => {
+  it("donne deux slugs différents quand la fin de l'identifiant ne départage pas", () => {
+    const sidon = trouver(api, "Sidon")!;
+    const palamute = (identifiant: string, date: string): Amiibo => ({
+      ...sidon,
+      identifiant,
+      nom: "Palamute",
+      serieAmiibo: "Monster Hunter Rise",
+      sorties: [{ region: "JAP", date, precision: "jour" }],
+    });
+    const slugs = attribuerSlugs([
+      palamute("350a0100042c1802", "2022-06-30"),
+      palamute("350a000004111802", "2021-03-26"),
+    ]);
+    expect(new Set(slugs.values()).size).toBe(2);
+    expect([...slugs.values()]).toEqual([
+      "palamute-monster-hunter-rise-2022",
+      "palamute-monster-hunter-rise-2021",
+    ]);
+  });
+});
+
 describe("Nintendo US", () => {
   const avecUs = completerAvecUs(api, us);
 
