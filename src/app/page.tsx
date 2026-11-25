@@ -22,11 +22,18 @@ export default async function Accueil() {
 
       <main>
         <section className="border-b border-bordure bg-carte px-4 pt-[22px] pb-5">
-          <div className="mx-auto max-w-7xl">
-            {/* Bandeau réduit au titre, dans le style de l'ancien sur-titre (demande du propriétaire, 24/11/2026). */}
-            <h1 className="text-xs font-semibold tracking-wide text-accent uppercase">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1.5">
+            {/* Sur-titre, titre et sous-titre comme sur gamecartdb (demande du propriétaire, 25/11/2026). */}
+            <p className="text-xs font-semibold tracking-wide text-accent uppercase">
               Pour les collectionneurs Nintendo
+            </p>
+            <h1 className="font-titre text-[26px] leading-tight font-bold tracking-tight">
+              Les jeux Nintendo en boîte, version par version
             </h1>
+            <p className="text-sm leading-relaxed text-texte-doux">
+              Tous les jeux édités par Nintendo, avec leurs jaquettes, titres et
+              dates au Japon, en Amérique du Nord et en Europe.
+            </p>
           </div>
         </section>
 
