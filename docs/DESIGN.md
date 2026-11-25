@@ -476,6 +476,11 @@ Conclusions provisoires :
    à venir cachés »). À trancher : jeu ajouté au catalogue dès son annonce, ou liste « À venir » séparée qui ne sert
    que la section.
 
+**Décisions du propriétaire (25/11)** : 1) un jeu à venir **entre au catalogue dès son annonce**, avec sa fiche et
+une étiquette « À venir » (la règle de l'import « jeux à venir cachés », SPEC v1.11, changera dans la SPEC) ; la
+section montre les prochains ; 2) **guides à venir plus tard** : la section commence avec les jeux et les amiibo, les
+guides viendront après l'étape 29 et une vérification de NDL.
+
 ## 2. Stack
 
 Identique à `mon-site-sdlc` (décision 7 de l'intention) :
