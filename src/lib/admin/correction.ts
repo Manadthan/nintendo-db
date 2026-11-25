@@ -53,7 +53,13 @@ const CHAMPS_SORTIE = [
   "editeur",
 ] as const satisfies readonly (keyof SortieCorrigeable)[];
 
-const PRECISIONS: readonly PrecisionDate[] = ["jour", "mois", "annee"];
+const PRECISIONS: readonly PrecisionDate[] = [
+  "jour",
+  "mois",
+  "saison",
+  "annee",
+  "inconnue",
+];
 
 const texte = (v: FormDataEntryValue | null) => {
   const t = String(v ?? "").trim();
@@ -116,7 +122,7 @@ export function preparerCorrection(
       erreurs.push(`${r} : date invalide (attendu AAAA-MM-JJ).`);
     if (s.date_sortie && !s.precision_date)
       erreurs.push(
-        `${r} : précise si la date est au jour, au mois ou à l'année.`,
+        `${r} : précise si la date est au jour, au mois, à la saison ou à l'année.`,
       );
   }
   const note = apres.metacritic_note;
