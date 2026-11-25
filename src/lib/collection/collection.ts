@@ -65,7 +65,10 @@ export function filtrerCollection(
   marche: Marche,
 ): VersionAffichee[] {
   if (!filtre) return versions;
+  // Un guide (US-27) ne se possède pas encore (ADR-19 point 8) : le filtre « Ma collection » ne montre que des jeux.
   return versions.filter(
-    (v) => affichePossedee(possessions, v, marche) === (filtre === "possedes"),
+    (v) =>
+      !v.guide &&
+      affichePossedee(possessions, v, marche) === (filtre === "possedes"),
   );
 }

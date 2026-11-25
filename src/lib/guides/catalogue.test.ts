@@ -2,7 +2,9 @@ import { describe, expect, it } from "vitest";
 import type { JeuCatalogue } from "@/lib/catalogue/types";
 import {
   relierGuides,
+  texteRechercheGuide,
   versGuidesCatalogue,
+  versionsGuides,
   type LigneGuideCatalogue,
 } from "./catalogue";
 
@@ -106,5 +108,37 @@ describe("guides du catalogue (/guides.json)", () => {
       "fe-birthright",
       "fe-conquest",
     ]);
+  });
+});
+
+describe("cartes des guides dans le catalogue", () => {
+  const [guide] = relierGuides(
+    versGuidesCatalogue([ligne("9784000000017", ["fe-birthright"], "abcDEF12345_")]),
+    [{ ...jeu("fe-birthright"), metacritic: 81 }],
+  );
+
+  it("porte le titre et la date du guide, le jeu couvert sans note et jamais possédé", () => {
+    const [v] = versionsGuides(guide ? [guide] : []);
+    expect(v?.sortie).toMatchObject({
+      titre: "Guide 9784000000017",
+      date: "2016-06-01",
+      precision: "mois",
+    });
+    expect(v?.jeu).toMatchObject({
+      id: "guide:9784000000017",
+      metacritic: null,
+      console: { slug: "3ds", nom: "3DS" },
+    });
+    expect(v?.guide).toEqual({
+      isbn: "9784000000017",
+      editeur: "KADOKAWA",
+      couverture: "abcDEF12345_",
+    });
+  });
+
+  it("se cherche par son titre, son éditeur et le titre des jeux couverts", () => {
+    const texte = texteRechercheGuide(guide!);
+    expect(texte).toContain("kadokawa");
+    expect(texte).toContain("birthright");
   });
 });

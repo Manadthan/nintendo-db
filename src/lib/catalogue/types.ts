@@ -49,6 +49,19 @@ export type VersionAffichee = {
   jeu: JeuCatalogue;
   region: Region;
   sortie: SortieCatalogue;
+  /**
+   * Présent pour la carte d'un guide japonais (US-27) : `sortie` porte alors son titre et sa date (tris, groupes,
+   * frise, filtre Année) et `jeu` le premier jeu couvert (filtres Console, Genre, Développeur, Série).
+   */
+  guide?: GuideCarte;
+};
+
+/** Ce que la carte d'un guide affiche en plus (US-27). */
+export type GuideCarte = {
+  isbn: string;
+  editeur: string | null;
+  /** Identifiant Google Books de la couverture ; null : vignette neutre. */
+  couverture: string | null;
 };
 
 export type Groupe = { titre: string | null; versions: VersionAffichee[] };

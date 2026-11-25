@@ -1,7 +1,13 @@
 // Guides japonais dans le catalogue (US-27, ADR-19 point 4) : ce que la route /guides.json envoie au navigateur,
 // et le lien de chaque guide avec les jeux du catalogue déjà chargés (console, genres, studios, séries, titres).
 // Module pur, testé sans base.
-import type { JeuCatalogue, PrecisionDate } from "@/lib/catalogue/types";
+import { texteRecherche } from "@/lib/catalogue/recherche";
+import type {
+  JeuCatalogue,
+  PrecisionDate,
+  VersionAffichee,
+} from "@/lib/catalogue/types";
+import { normaliser } from "@/lib/recherche/normaliser";
 
 /** Un guide tel que /guides.json l'envoie : le strict nécessaire à sa carte, les jeux par leur identifiant. */
 export type GuideCatalogue = {
@@ -63,4 +69,39 @@ export function relierGuides(
     });
     return couverts.length ? [{ ...g, jeux: couverts }] : [];
   });
+}
+
+/**
+ * Cartes des guides, mêlées aux jeux du catalogue : la « sortie » porte le titre et la date du guide (tris, groupes,
+ * frise, filtre Année), le « jeu » est le premier jeu couvert, sans note (filtres Console, Genre, Développeur, Série ;
+ * tri par note : en fin). Son identifiant commence par « guide: » (jamais une possession).
+ */
+export function versionsGuides(guides: readonly GuideRelie[]): VersionAffichee[] {
+  return guides.flatMap((g) => {
+    const [premier] = g.jeux;
+    if (!premier) return [];
+    return [
+      {
+        jeu: { ...premier, id: `guide:${g.isbn}`, metacritic: null },
+        region: "JAP" as const,
+        sortie: {
+          sortie: true,
+          titre: g.titre,
+          titreRomanise: null,
+          date: g.date,
+          precision: g.precision,
+          jaquette: null,
+        },
+        guide: { isbn: g.isbn, editeur: g.editeur, couverture: g.couverture },
+      },
+    ];
+  });
+}
+
+/** Texte cherché d'un guide (US-27) : son titre, son éditeur et les titres des jeux qu'il couvre. */
+export function texteRechercheGuide(guide: GuideRelie): string {
+  return [
+    normaliser([guide.titre, guide.editeur].filter(Boolean).join(" ")),
+    ...guide.jeux.map(texteRecherche),
+  ].join(" ");
 }
