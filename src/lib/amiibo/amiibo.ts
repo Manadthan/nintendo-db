@@ -185,34 +185,38 @@ export function nomComparable(nom: string): string {
 
 const tiret = (t: string) => simplifier(t).replace(/ /g, "-");
 
-/** Slug unique de chaque amiibo : nom, puis série amiibo, puis fin de l'identifiant en cas de doublon. */
+/**
+ * Slug unique de chaque amiibo : le nom ; en cas de doublon, la série ; puis la fin de l'identifiant ; si elle ne
+ * départage pas (Palamute 2021 et 2022 finissent tous deux par « 1802 »), l'année de sortie ; en dernier recours,
+ * tout l'identifiant.
+ */
 export function attribuerSlugs(amiibo: readonly Amiibo[]): Map<string, string> {
-  const compter = (cles: string[]) =>
-    cles.reduce(
-      (m, c) => m.set(c, (m.get(c) ?? 0) + 1),
-      new Map<string, number>(),
+  const doublons = (cles: string[]) => {
+    const vus = new Map<string, number>();
+    for (const c of cles) vus.set(c, (vus.get(c) ?? 0) + 1);
+    return (c: string) => (vus.get(c) ?? 0) > 1;
+  };
+  const brut = (a: Amiibo) =>
+    a.identifiant.replace(/^[a-z]+:/, "").replace(/[^a-z0-9]/g, "");
+  const annee = (a: Amiibo) =>
+    a.sorties.map((s) => s.date.slice(0, 4)).sort()[0] ?? "";
+  const etapes: ((a: Amiibo, base: string) => string)[] = [
+    (a, base) => `${base}-${tiret(a.serieAmiibo)}`.replace(/-$/, ""),
+    (a, base) => `${base}-${brut(a).slice(-4)}`,
+    (a, base) =>
+      `${base.replace(/-[a-z0-9]{4}$/, "")}-${annee(a)}`.replace(/-$/, ""),
+    (a, base) => `${base}-${brut(a)}`,
+  ];
+  let slugs = amiibo.map((a) => tiret(a.nom));
+  for (const etape of etapes) {
+    const enDouble = doublons(slugs);
+    slugs = slugs.map((slug, i) =>
+      enDouble(slug) ? etape(amiibo[i]!, slug) : slug,
     );
-  const parNom = amiibo.map((a) => tiret(a.nom));
-  const nomsVus = compter(parNom);
-  const avecSerie = amiibo.map((a, i) =>
-    (nomsVus.get(parNom[i]!) ?? 0) > 1
-      ? `${parNom[i]}-${tiret(a.serieAmiibo)}`.replace(/-$/, "")
-      : parNom[i]!,
+  }
+  return new Map(
+    amiibo.map((a, i) => [a.identifiant, slugs[i]!.slice(0, 140)]),
   );
-  const seriesVues = compter(avecSerie);
-  const slugs = new Map<string, string>();
-  amiibo.forEach((a, i) => {
-    const base = avecSerie[i]!;
-    const fin = a.identifiant
-      .replace(/^[a-z]+:/, "")
-      .replace(/[^a-z0-9]/g, "")
-      .slice(-4);
-    slugs.set(
-      a.identifiant,
-      ((seriesVues.get(base) ?? 0) > 1 ? `${base}-${fin}` : base).slice(0, 140),
-    );
-  });
-  return slugs;
 }
 
 // --- Nintendo US -------------------------------------------------------------------------------------------------

@@ -115,6 +115,8 @@ if (planche) {
     if (data.length < 1000) break;
   }
   const slugs = attribuerSlugs(amiibo);
+  if (new Set(slugs.values()).size !== amiibo.length)
+    throw new Error("slugs en double : planche annulée");
   const ordre = (a) => `${a.serieAmiibo}\u0000${a.type}\u0000${a.nom}`;
   const liste = amiibo
     .sort((a, b) => ordre(a).localeCompare(ordre(b)))
