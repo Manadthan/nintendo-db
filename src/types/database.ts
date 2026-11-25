@@ -9,6 +9,153 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      amiibo: {
+        Row: {
+          boite_path: string | null;
+          cree_le: string;
+          editeur: string;
+          id: string;
+          identifiant: string;
+          image_path: string | null;
+          nom: string;
+          nom_jap: string | null;
+          personnage: string | null;
+          serie_amiibo: string | null;
+          serie_jeux: string | null;
+          slug: string;
+          type: Database["public"]["Enums"]["amiibo_type"];
+          updated_at: string;
+          verrous: string[];
+        };
+        ComputedFields: never;
+        Insert: {
+          boite_path?: string | null;
+          cree_le?: string;
+          editeur?: string;
+          id?: string;
+          identifiant: string;
+          image_path?: string | null;
+          nom: string;
+          nom_jap?: string | null;
+          personnage?: string | null;
+          serie_amiibo?: string | null;
+          serie_jeux?: string | null;
+          slug: string;
+          type: Database["public"]["Enums"]["amiibo_type"];
+          updated_at?: string;
+          verrous?: string[];
+        };
+        Update: {
+          boite_path?: string | null;
+          cree_le?: string;
+          editeur?: string;
+          id?: string;
+          identifiant?: string;
+          image_path?: string | null;
+          nom?: string;
+          nom_jap?: string | null;
+          personnage?: string | null;
+          serie_amiibo?: string | null;
+          serie_jeux?: string | null;
+          slug?: string;
+          type?: Database["public"]["Enums"]["amiibo_type"];
+          updated_at?: string;
+          verrous?: string[];
+        };
+        Relationships: [];
+      };
+      amiibo_exclus: {
+        Row: {
+          cree_le: string;
+          identifiant: string;
+          raison: string | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          cree_le?: string;
+          identifiant: string;
+          raison?: string | null;
+        };
+        Update: {
+          cree_le?: string;
+          identifiant?: string;
+          raison?: string | null;
+        };
+        Relationships: [];
+      };
+      amiibo_jeux: {
+        Row: {
+          amiibo_id: string;
+          console: string;
+          game_id: string | null;
+          id: string;
+          titre_jeu: string;
+          usage: string | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          amiibo_id: string;
+          console: string;
+          game_id?: string | null;
+          id?: string;
+          titre_jeu: string;
+          usage?: string | null;
+        };
+        Update: {
+          amiibo_id?: string;
+          console?: string;
+          game_id?: string | null;
+          id?: string;
+          titre_jeu?: string;
+          usage?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "amiibo_jeux_amiibo_id_fkey";
+            columns: ["amiibo_id"];
+            isOneToOne: false;
+            referencedRelation: "amiibo";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "amiibo_jeux_game_id_fkey";
+            columns: ["game_id"];
+            isOneToOne: false;
+            referencedRelation: "games";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      amiibo_sorties: {
+        Row: {
+          amiibo_id: string;
+          date_sortie: string | null;
+          precision_date: Database["public"]["Enums"]["precision_date"] | null;
+          region: Database["public"]["Enums"]["region"];
+        };
+        ComputedFields: never;
+        Insert: {
+          amiibo_id: string;
+          date_sortie?: string | null;
+          precision_date?: Database["public"]["Enums"]["precision_date"] | null;
+          region: Database["public"]["Enums"]["region"];
+        };
+        Update: {
+          amiibo_id?: string;
+          date_sortie?: string | null;
+          precision_date?: Database["public"]["Enums"]["precision_date"] | null;
+          region?: Database["public"]["Enums"]["region"];
+        };
+        Relationships: [
+          {
+            foreignKeyName: "amiibo_sorties_amiibo_id_fkey";
+            columns: ["amiibo_id"];
+            isOneToOne: false;
+            referencedRelation: "amiibo";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       captures: {
         Row: {
           game_id: string;
@@ -362,6 +509,33 @@ export type Database = {
           },
         ];
       };
+      possessions_amiibo: {
+        Row: {
+          amiibo_id: string;
+          cree_le: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          amiibo_id: string;
+          cree_le?: string;
+          user_id?: string;
+        };
+        Update: {
+          amiibo_id?: string;
+          cree_le?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "possessions_amiibo_amiibo_id_fkey";
+            columns: ["amiibo_id"];
+            isOneToOne: false;
+            referencedRelation: "amiibo";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       profils: {
         Row: {
           avatar: string;
@@ -462,6 +636,7 @@ export type Database = {
       profil_public: { Args: { p_pseudo: string }; Returns: Json };
     };
     Enums: {
+      amiibo_type: "figurine" | "carte" | "peluche" | "bracelet" | "bloc";
       console_type: "salon" | "portable";
       jaquette_source:
         | "gametdb"
@@ -602,6 +777,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      amiibo_type: ["figurine", "carte", "peluche", "bracelet", "bloc"],
       console_type: ["salon", "portable"],
       jaquette_source: [
         "gametdb",
