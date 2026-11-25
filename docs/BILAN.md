@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25 ; captures RAWG, étape 28)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25 ; captures RAWG, étape 28 ; guides japonais, étape 29)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.9 — 23/11/2026 — statut : **à valider**
+> Version 1.10 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.10 | 25/11/2026 | **Étape 29, guides japonais** : études, page du guide, catalogue, remplissage 3DS et Switch, écriture sur la mauvaise planche réparée, leçons (§16) |
 > | 1.9 | 23/11/2026 | **Étape 28, captures RAWG** : étude, relais, planche, carrousel, 3 corrections en route, leçons (§15) |
 > | 1.8 | 22/11/2026 | **Étape 25, prix eBay** : étude, choix, 3 PR de code, difficultés, leçons (§14) |
 > | 1.7 | 22/11/2026 | **Audit de performance** (skill `react-best-practices`) : mesures avant/après, difficultés, leçons (§13) |
@@ -396,3 +397,40 @@ Leçons ajoutées :
 
 Pistes : refaire le relais pour les jeux ajoutés ensuite (`tous` à non : seuls les nouveaux) ; captures choisies à la
 main dans l'administration si besoin ; Switch 2 quand RAWG l'aura.
+
+## 16. Étape 29 : guides japonais (攻略本)
+
+| | |
+|---|---|
+| Durée | trois jours (23 au 25/11/2026) |
+| Méthode | Intention v1.6 puis v1.7 (3DS et Switch d'abord, guides seulement), 5 études en lecture seule (#238 à #244), SPEC US-27 + US-28 et maquettes (#245), ADR-19 et plan (#246), migration 0031 (#247), script et planche (#248 à #251), page du guide (#252, #254), fiche (#256), catalogue (#259, #261, #262), remplissage par planche validée |
+| Livré | US-27 : guides dans le catalogue (coche « Guides »), page de chaque guide (couverture, jeux couverts, liens Amazon Japon et Suruga-ya), bloc « Guides » de la fiche ; US-28 : recherche NDL, planche numérotée, écriture des guides gardés et des numéros écartés |
+| Pull requests | 20 mergées (#236 à #262, #273), dont 5 d'études, 3 de documents et 3 corrections du script |
+| Tests | 563 unitaires, 18 pgTAP (`guides.test.sql`), 9 e2e (`guides.spec.ts`, guides de test dans la base jetable) |
+
+| Mesure | Résultat |
+|---|---|
+| 3DS | 103 livres trouvés, 11 écartés sur la planche, **92 guides** pour 51 jeux |
+| Switch | 76 livres trouvés, 8 écartés (livres-jeux, énigmes, jeu de rôle sur table, artbooks), **68 guides** pour 43 jeux |
+| Total | **159 guides** (un guide commun aux deux consoles : Fire Emblem Warriors), 181 liens guide ↔ jeu |
+| Couvertures Google Books | 114 sur 159 (72 % ; l'étude annonçait 26 sur 39) |
+| Recherche NDL | un appel toutes les 6 s, refus 429 attendus ; environ 2 h par console |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| NDL refuse les appels rapprochés (429) | Recherche de plusieurs heures, coupée à 2 h par la session | Un appel toutes les 6 s, réponses gardées sur disque, reprise par la même commande (#250) |
+| Livres qui ne sont pas des guides (artbooks, livres-jeux, encyclopédies) | Faux guides possibles | Règle `estGuide` + planche regardée par le propriétaire ; numéros écartés gardés dans `guides_exclus` (#251) |
+| `--ecrire` relisait le premier `guides-*.json` du dossier | Numéros Switch appliqués à la 3DS le 25/11 (8 guides marqués écartés, 11 écartés réécrits) | Réparé aussitôt en base ; `--console` exigé et vérifié contre le fichier, test d'abord (#273) |
+| Tests e2e d'administration instables (clic avant l'hydratation) | 3 CI sur 4 avec un premier essai rouge | Attente de l'hydratation avant de remplir le formulaire (#267) |
+
+Leçons ajoutées :
+
+34. **Un script qui écrit choisit sa cible par un argument, jamais par « le premier fichier trouvé »** : deux planches
+    dans un même dossier ont suffi à écrire sur la mauvaise console.
+35. **Relire le message de fin d'un script d'écriture avant la suite** : « 3ds : 95 guides écrits » au lieu de
+    « switch : 68 » a permis de réparer en quelques minutes.
+36. **Une source lente se travaille par tranches reprises** : cache disque + même commande relancée, plutôt qu'une
+    seule longue course.
+
+Pistes : autres consoles (Wii U, DS, Wii…) avec le même script ; guides à venir sur la bande « À venir » (étape 31) ;
+couvertures manquantes (45) cherchées ailleurs si besoin.
