@@ -1,0 +1,11 @@
+{
+  "_source": "searching.nintendo-europe.com/fr/select, fq=type:GAME AND publisher:Nintendo AND dates_released_dts:[NOW TO *], 25/11/2026 ; extrait",
+  "docs": [
+    { "fs_id": "3039085", "dates_released_dts": ["2027-12-31T00:00:00Z"], "pretty_date_s": "2027", "publisher": "Nintendo", "title": "Pokémon Vents", "system_names_txt": ["Nintendo Switch 2"] },
+    { "fs_id": "3116255", "dates_released_dts": ["2026-12-03T00:00:00Z"], "pretty_date_s": "03/12/2026", "publisher": "Nintendo", "title": "Xenoblade Chronicles 3 – Nintendo Switch 2 Edition", "system_names_txt": ["Nintendo Switch 2"] },
+    { "fs_id": "3188729", "dates_released_dts": ["2027-01-28T00:00:00Z"], "pretty_date_s": "28/01/2027", "publisher": "Nintendo", "title": "Metroid Ravenous", "system_names_txt": ["Nintendo Switch 2"], "image_url": "https://fs-prod-cdn.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_2_7/metroid.jpg" },
+    { "fs_id": "3200001", "dates_released_dts": ["2050-12-31T00:00:00Z"], "pretty_date_s": "Date à déterminer", "publisher": "Nintendo", "title": "Jeu sans date", "system_names_txt": ["Nintendo Switch"] },
+    { "fs_id": "3200002", "dates_released_dts": ["2027-03-01T00:00:00Z"], "pretty_date_s": "Mars 2027", "publisher": "Nintendo", "title": "Jeu au mois", "system_names_txt": ["Nintendo Switch"] },
+    { "fs_id": "3200003", "dates_released_dts": ["2025-02-01T00:00:00Z"], "pretty_date_s": "01/02/2025", "publisher": "Nintendo", "title": "Déjà sorti", "system_names_txt": ["Nintendo Switch"] }
+  ]
+}
