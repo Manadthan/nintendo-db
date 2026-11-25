@@ -1,9 +1,10 @@
 # Maquettes
 
-> Version 0.12 — 24/11/2026 — statut : **à valider**
+> Version 0.13 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 0.13 | 25/11/2026 | **Amiibo** (US-29, US-30, SPEC v1.49) : coche « Amiibo » et carte d'un amiibo dans le catalogue (`maquettes/amiibo-catalogue.png`), fiche de l'amiibo avec boîte US, « Je l'ai », jeux compatibles (`maquettes/amiibo-fiche.png`), bloc « Amiibo (N) » de la fiche du jeu (`maquettes/amiibo-jeu.png`) ; faites sur le vrai site, éléments nouveaux entourés en orange |
 > | 0.12 | 24/11/2026 | **Guides japonais** (US-27, SPEC v1.47) : coches « Jeux » / « Guides » et carte d'un guide dans le catalogue, page du guide (couverture Google Books, ISBN, jeu couvert, liens Amazon Japon et Suruga-ya), bloc « Guides » de la fiche (`maquettes/guides-catalogue.png`, `maquettes/guides-page.png`, `maquettes/guides-fiche.png` ; vraies couvertures, cadres orange = nouveautés) |
 > | 0.11 | 22/11/2026 | **Captures RAWG** (US-26, SPEC v1.43) : bloc « Captures » de la fiche sous les informations, carrousel de 6 images, mention « Captures : RAWG », image agrandie (`maquettes/captures-rawg.png`, `maquettes/captures-rawg-agrandie.png` ; images colorées en attendant les vraies) |
 > | 0.10 | 22/11/2026 | **Prix eBay** (US-25, SPEC v1.42) : bloc de la fiche sous « Disponibilité », une ligne par région, version choisie surlignée, cas « pas assez d'annonces », « non sorti », chargement (`maquettes/prix-ebay.png`) |
@@ -40,6 +41,9 @@ emplacements, remplacés par les scans de boîtes GameTDB de chaque région à l
 | 11 | Catalogue avec les guides : coches « Jeux » / « Guides » (marché Japon ou Tous), carte d'un guide (couverture, étiquette « Guide », console, éditeur, année) ; [`maquettes/guides-catalogue.png`](maquettes/guides-catalogue.png) | `/?voir=jeux,guides` | US-27 |
 | 12 | Page du guide : couverture en grand, « powered by Google », éditeur, parution, ISBN, pages, jeu couvert, Amazon Japon et Suruga-ya, lien Google Books ; [`maquettes/guides-page.png`](maquettes/guides-page.png) | `/guides/[isbn]` | US-27 |
 | 13 | Fiche, bloc « Guides (N) » après « Captures » : petite couverture (ou vignette neutre), titre, éditeur, année ; [`maquettes/guides-fiche.png`](maquettes/guides-fiche.png) | `/jeux/[console]/[jeu]` | US-27 |
+| 14 | Catalogue avec les amiibo : coche « Amiibo », carte d'un amiibo (photo de la figurine, nom, date, série, étiquettes « Amiibo » et type), marque verte « Je l'ai » ; [`maquettes/amiibo-catalogue.png`](maquettes/amiibo-catalogue.png) | `/` (`?voir=amiibo`) | US-29, US-30 |
+| 15 | Fiche de l'amiibo : photo, boîte US, JAP / US / PAL, case « Je l'ai », séries, éditeur, type, jeux compatibles (texte anglais de la source), disponibilité, prix eBay ; [`maquettes/amiibo-fiche.png`](maquettes/amiibo-fiche.png) | `/amiibo/[amiibo]` | US-29, US-30 |
+| 16 | Fiche du jeu, bloc « Amiibo (N) » après « Captures » : vignettes à faire défiler, nom ; [`maquettes/amiibo-jeu.png`](maquettes/amiibo-jeu.png) | `/jeux/[console]/[jeu]` | US-29 |
 | 3 | Statistiques (administration) : ma collection par console, par région, notes Metacritic, état du catalogue avec liens vers les listes ; image : [`maquettes/statistiques.png`](maquettes/statistiques.png) | `/admin/statistiques` | US-18 |
 
 ## Repris de gamecartdb (trame) et adapté
