@@ -11,11 +11,14 @@ export function CouvertureGuide({
   googleBooksId,
   titre,
   legende,
+  petite = false,
 }: {
   googleBooksId: string | null;
   titre: string;
   /** Éditeur et année, sur la vignette neutre. */
   legende: string;
+  /** Liste « Guides (N) » de la fiche : vignette neutre réduite au début du titre. */
+  petite?: boolean;
 }) {
   const [cassee, setCassee] = useState(false);
   const image = useRef<HTMLImageElement>(null);
@@ -26,6 +29,16 @@ export function CouvertureGuide({
     if (img?.complete && img.naturalWidth === 0) setCassee(true);
   }, []);
 
+  if ((!googleBooksId || cassee) && petite)
+    return (
+      <div
+        role="img"
+        aria-label={`${titre} — couverture indisponible`}
+        className="flex aspect-[2/3] w-full items-center justify-center overflow-hidden rounded-sm bg-vignette p-1 text-center text-[9px] leading-snug text-texte-doux"
+      >
+        <span className="line-clamp-4">{titre}</span>
+      </div>
+    );
   if (!googleBooksId || cassee)
     return (
       <div
@@ -54,7 +67,7 @@ export function CouvertureGuide({
       decoding="async"
       referrerPolicy="no-referrer"
       onError={() => setCassee(true)}
-      className="h-auto w-full rounded-md border border-vignette-bordure bg-vignette"
+      className={`h-auto w-full border border-vignette-bordure bg-vignette ${petite ? "rounded-sm" : "rounded-md"}`}
     />
   );
 }
