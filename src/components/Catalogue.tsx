@@ -12,6 +12,7 @@ import {
   grouperParAnnee,
   TRI_PAR_DEFAUT,
   trier,
+  trierVersions,
 } from "@/lib/catalogue/catalogue";
 import {
   SANS_FILTRE,
@@ -56,6 +57,22 @@ import { FiltresActifs, PanneauFiltres } from "./Filtres";
 import { ListeJeux } from "./ListeJeux";
 import { triFrise } from "@/lib/catalogue/frise";
 import { abonnerTri, enregistrerTri, lireTri } from "@/lib/catalogue/tri";
+import {
+  VOIR_PAR_DEFAUT,
+  abonnerVoir,
+  basculer,
+  enregistrerVoir,
+  guidesPermis,
+  lireVoir,
+  voirEffectif,
+  type Voir,
+} from "@/lib/catalogue/voir";
+import {
+  relierGuides,
+  texteRechercheGuide,
+  versionsGuides,
+  type GuideCatalogue,
+} from "@/lib/guides/catalogue";
 
 type Vue = "grille" | "liste" | "frise";
 const VUES: readonly Vue[] = ["grille", "liste", "frise"];
@@ -90,6 +107,13 @@ function enregistrerVue(vue: Vue) {
   for (const rappel of abonnes) rappel();
 }
 
+/** « 48 jeux et 31 guides affichés » (US-27). */
+function compteMele(versions: { guide?: unknown }[]): string {
+  const guides = versions.filter((v) => v.guide).length;
+  const jeux = versions.length - guides;
+  return `${jeux} jeu${jeux > 1 ? "x" : ""} et ${guides} guide${guides > 1 ? "s" : ""} affiché${versions.length > 1 ? "s" : ""}`;
+}
+
 type Props = {
   jeux: JeuCatalogue[];
   /** Consoles du site, par ordre chronologique (filtre « Console », étape 8). */
@@ -119,6 +143,40 @@ export function Catalogue({ jeux, consoles }: Props) {
     abonnerMarche,
     lireMarche,
     () => "TOUS",
+  );
+
+  // Coches « Jeux » / « Guides » (US-27) : dans l'adresse (?voir=) ; les guides seulement sur « Tous » et « Japon ».
+  const voirChoisi = useSyncExternalStore<Voir>(
+    abonnerVoir,
+    lireVoir,
+    () => VOIR_PAR_DEFAUT,
+  );
+  const permis = guidesPermis(marche);
+  const voir = voirEffectif(voirChoisi, marche);
+  // Guides chargés une seule fois, à la première coche (ADR-19 point 4) : l'accueil reste aussi léger qu'avant.
+  const [guides, setGuides] = useState<GuideCatalogue[] | null>(null);
+  const [erreurGuides, setErreurGuides] = useState(false);
+  useEffect(() => {
+    if (!voir.guides || guides) return;
+    let annule = false;
+    fetch("/guides.json")
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+        return r.json() as Promise<GuideCatalogue[]>;
+      })
+      .then((liste) => {
+        if (!annule) setGuides(liste);
+      })
+      .catch(() => {
+        if (!annule) setErreurGuides(true);
+      });
+    return () => {
+      annule = true;
+    };
+  }, [voir.guides, guides]);
+  const guidesRelies = useMemo(
+    () => relierGuides(guides ?? [], jeux),
+    [guides, jeux],
   );
 
   // Recherche (US-05) : dans l'adresse (?q=), filtrée dans le navigateur au fil de la frappe (ADR-05).
@@ -158,6 +216,19 @@ export function Catalogue({ jeux, consoles }: Props) {
       ? jeux
       : jeux.filter((j) => contientMots(textes.get(j) ?? "", mots));
   }, [jeux, textes, rechercheAffichee]);
+  // Guides (US-27) : cherchés par leur titre, leur éditeur et le titre des jeux couverts.
+  const textesGuides = useMemo(
+    () => new Map(guidesRelies.map((g) => [g, texteRechercheGuide(g)])),
+    [guidesRelies],
+  );
+  const guidesTrouves = useMemo(() => {
+    const mots = motsRecherche(rechercheAffichee);
+    return mots.length === 0
+      ? guidesRelies
+      : guidesRelies.filter((g) =>
+          contientMots(textesGuides.get(g) ?? "", mots),
+        );
+  }, [guidesRelies, textesGuides, rechercheAffichee]);
 
   // Choix proposés : ceux du marché choisi, sans tenir compte de la recherche ni des autres filtres.
   const duMarche = useMemo(
@@ -167,12 +238,30 @@ export function Catalogue({ jeux, consoles }: Props) {
   const versions = useMemo(
     () =>
       filtrerCollection(
-        filtrer(trier(trouves, tri, marche), filtres),
+        filtrer(
+          // Jeux et guides mêlés, classés ensemble (US-27).
+          trierVersions(
+            [
+              ...(voir.jeux ? trier(trouves, tri, marche) : []),
+              ...(voir.guides ? versionsGuides(guidesTrouves) : []),
+            ],
+            tri,
+          ),
+          filtres,
+        ),
         filtres.collection,
         collection.possessions,
         marche,
       ),
-    [trouves, tri, marche, filtres, collection.possessions],
+    [
+      trouves,
+      guidesTrouves,
+      voir,
+      tri,
+      marche,
+      filtres,
+      collection.possessions,
+    ],
   );
   const groupes = useMemo(
     () => grouperParAnnee(versions, tri),
@@ -181,7 +270,14 @@ export function Catalogue({ jeux, consoles }: Props) {
 
   // Affichage par lots (SPEC v1.41, audit C) : 60 jeux, puis 60 de plus en approchant du bas. Une autre recherche,
   // un filtre, le marché, le tri ou la vue repartent des 60 premiers (état ajusté pendant le rendu).
-  const cle = JSON.stringify([rechercheAffichee, filtres, marche, tri, vue]);
+  const cle = JSON.stringify([
+    rechercheAffichee,
+    filtres,
+    marche,
+    tri,
+    vue,
+    voir,
+  ]);
   const [lots, setLots] = useState({
     cle,
     limite: LOT,
@@ -282,6 +378,42 @@ export function Catalogue({ jeux, consoles }: Props) {
         ))}
       </div>
 
+      <div
+        role="group"
+        aria-label="Afficher"
+        className="flex flex-wrap items-center gap-2"
+      >
+        {(["jeux", "guides"] as const).map((coche) => {
+          const grisee = coche === "guides" && !permis;
+          return (
+            <label
+              key={coche}
+              className={`flex h-10 items-center gap-2 rounded-[10px] border px-3 text-sm font-medium ${
+                grisee
+                  ? "border-champ text-texte-discret"
+                  : voir[coche]
+                    ? "border-accent bg-carte"
+                    : "border-champ bg-carte"
+              }`}
+            >
+              <input
+                type="checkbox"
+                checked={voir[coche]}
+                disabled={grisee}
+                onChange={() => enregistrerVoir(basculer(voir, coche))}
+                className="size-[18px] accent-accent"
+              />
+              {coche === "jeux" ? "Jeux" : "Guides"}
+            </label>
+          );
+        })}
+        {!permis && (
+          <span className="text-xs text-texte-discret">
+            Guides : marché Japon
+          </span>
+        )}
+      </div>
+
       {/* 3 vues : la barre passe sur 2 lignes si l'écran est trop étroit (iPhone 12 mini). */}
       <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
         <label htmlFor="tri" className="text-[13px] text-texte-doux">
@@ -345,9 +477,22 @@ export function Catalogue({ jeux, consoles }: Props) {
       )}
       <FiltresActifs filtres={filtres} consoles={consoles} />
       <p className="text-[13px] text-texte-discret">
-        {versions.length} jeu{versions.length > 1 ? "x" : ""} affiché
-        {versions.length > 1 ? "s" : ""} sur {jeux.length}
+        {voir.guides ? (
+          compteMele(versions)
+        ) : (
+          <>
+            {versions.length} jeu{versions.length > 1 ? "x" : ""} affiché
+            {versions.length > 1 ? "s" : ""} sur {jeux.length}
+          </>
+        )}
       </p>
+      {voir.guides && !guides && (
+        <p role="status" className="text-[13px] text-texte-discret">
+          {erreurGuides
+            ? "Les guides n'ont pas pu être chargés."
+            : "Chargement des guides…"}
+        </p>
+      )}
 
       {versions.length === 0 && (
         <div className="flex flex-col items-center gap-2.5 rounded-xl border border-bordure bg-carte px-4 py-7 text-center">
