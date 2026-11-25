@@ -101,3 +101,20 @@ test("une fiche sans guide n'a pas de bloc « Guides »", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await expect(page.getByRole("heading", { name: /^Guides/ })).toHaveCount(0);
 });
+
+test("/guides.json donne les guides du catalogue, jeux par identifiant", async ({
+  request,
+}) => {
+  const reponse = await request.get("/guides.json");
+  expect(reponse.ok()).toBe(true);
+  const guides = (await reponse.json()) as { isbn: string; jeux: string[] }[];
+  const guide = guides.find((g) => g.isbn === "9784000000017");
+  expect(guide).toMatchObject({
+    titre: "マリオカート8 パーフェクトガイド",
+    editeur: "エンターブレイン",
+    date: "2014-06-01",
+    precision: "mois",
+    couverture: "e2eCouverture1",
+  });
+  expect(guide?.jeux).toHaveLength(1);
+});
