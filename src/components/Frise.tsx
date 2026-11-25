@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { AnneeFrise } from "@/lib/catalogue/frise";
 import type { VersionAffichee } from "@/lib/catalogue/types";
+import { CouvertureCarte, EtiquettesGuide } from "./CarteGuide";
 import { Jaquette } from "./Jaquette";
 import { NoteMetacritic } from "./NoteMetacritic";
 
@@ -35,7 +36,7 @@ export function Frise({
           <ol>
             {jeux.map(({ version: v, cote }) => (
               <li
-                key={v.jeu.id}
+                key={v.guide?.isbn ?? v.jeu.id}
                 data-cote={cote}
                 className={`relative flex pb-3 [&:not(:last-child)]:-mb-20 ${
                   cote === "droite" ? "justify-end" : "justify-start"
@@ -59,24 +60,34 @@ export function Frise({
                   onClick={surClic}
                   className="group flex w-[calc(50%-20px)] flex-col gap-1"
                 >
-                  <div className="relative">
-                    <Jaquette
-                      sortie={v.sortie}
-                      titre={v.sortie.titre!}
-                      console={v.jeu.console.nom}
-                      consoleSlug={v.jeu.console.slug}
-                      sizes="(max-width: 672px) 45vw, 300px"
-                      // Grande jaquette à sa forme réelle (boîtes N64 européennes à l'horizontale, cartes carrées…).
-                      formeReelle
-                    />
-                    <NoteMetacritic note={v.jeu.metacritic} />
-                  </div>
+                  {v.guide ? (
+                    <CouvertureCarte v={v} />
+                  ) : (
+                    <div className="relative">
+                      <Jaquette
+                        sortie={v.sortie}
+                        titre={v.sortie.titre!}
+                        console={v.jeu.console.nom}
+                        consoleSlug={v.jeu.console.slug}
+                        sizes="(max-width: 672px) 45vw, 300px"
+                        // Grande jaquette à sa forme réelle (boîtes N64 européennes à l'horizontale, cartes carrées…).
+                        formeReelle
+                      />
+                      <NoteMetacritic note={v.jeu.metacritic} />
+                    </div>
+                  )}
                   <span className="mt-1 text-sm leading-tight font-semibold group-hover:underline">
                     {v.sortie.titre}
                   </span>
-                  <span className="text-xs text-texte-discret">
-                    {v.jeu.console.nom}
-                  </span>
+                  {v.guide ? (
+                    <span className="flex flex-wrap gap-1">
+                      <EtiquettesGuide v={v} />
+                    </span>
+                  ) : (
+                    <span className="text-xs text-texte-discret">
+                      {v.jeu.console.nom}
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}
