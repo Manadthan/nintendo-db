@@ -1,0 +1,108 @@
+{
+ "amiibos": {
+  "0x0001000404401c02": {
+   "name": "Luigi - My Mario Wooden Blocks",
+   "release": {
+    "au": null,
+    "eu": null,
+    "jp": "2025-08-26",
+    "na": null
+   }
+  },
+  "0x00020003039dff02": {
+   "name": "Peach - Power Up Band",
+   "release": {
+    "au": null,
+    "na": null,
+    "eu": null,
+    "jp": "2021-02-04"
+   }
+  },
+  "0x00800102035d0302": {
+   "name": "Poochy",
+   "release": {
+    "au": "2017-02-04",
+    "na": "2017-02-03",
+    "eu": "2017-02-03",
+    "jp": "2017-01-19"
+   }
+  },
+  "0x0100000000040002": {
+   "name": "Link",
+   "release": {
+    "au": "2014-11-29",
+    "na": "2014-11-21",
+    "eu": "2014-11-28",
+    "jp": "2014-12-06"
+   }
+  },
+  "0x010a000004a40902": {
+   "name": "Sidon",
+   "release": {
+    "au": "2025-06-05",
+    "eu": "2025-06-05",
+    "jp": "2025-06-05",
+    "na": "2025-06-05"
+   }
+  },
+  "0x01810000037d0002": {
+   "name": "Isabelle",
+   "release": {
+    "au": "2019-07-19",
+    "na": "2019-07-26",
+    "eu": "2019-07-19",
+    "jp": "2019-07-19"
+   }
+  },
+  "0x0181000100440502": {
+   "name": "Isabelle",
+   "release": {
+    "au": "2015-10-03",
+    "na": "2015-09-25",
+    "eu": "2015-10-02",
+    "jp": "2015-07-30"
+   }
+  },
+  "0x34c2000104ab1d02": {
+   "name": "Luke",
+   "release": {
+    "au": "2025-06-05",
+    "eu": "2025-06-05",
+    "jp": "2025-06-05",
+    "na": "2025-06-05"
+   }
+  }
+ },
+ "amiibo_series": {
+  "0x05": "Animal Crossing",
+  "0x09": "Legend Of Zelda",
+  "0xff": "Super Nintendo World",
+  "0x00": "Super Smash Bros.",
+  "0x03": "Yoshi's Woolly World",
+  "0x1c": "My Mario Wooden Blocks",
+  "0x1d": "Street Fighter 6"
+ },
+ "game_series": {
+  "0x018": "Animal Crossing",
+  "0x000": "Super Mario",
+  "0x008": "Yoshi's Woolly World",
+  "0x010": "The Legend of Zelda",
+  "0x34c": "Street Fighter"
+ },
+ "types": {
+  "0x01": "Card",
+  "0x00": "Figure",
+  "0x03": "Band",
+  "0x02": "Yarn",
+  "0x04": "Block"
+ },
+ "characters": {
+  "0x0001": "Luigi",
+  "0x0181": "Isabelle",
+  "0x0100": "Link",
+  "0x0002": "Peach",
+  "0x0080": "Poochy",
+  "0x010a": "Sidon",
+  "0x34c2": "Luke"
+ }
+}

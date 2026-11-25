@@ -1,0 +1,114 @@
+[
+ {
+  "name": "Young Zelda",
+  "releaseDate": "2027-12-31T00:00:00.000Z",
+  "releaseDateDisplay": "2027",
+  "figureAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/The Legend of Zelda Ocarina of Time/PNG_Derivative-NVL_AK_char29_1_R_ad-0"
+  },
+  "boxartAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/The Legend of Zelda Ocarina of Time/JPG_Derivative-NVL_AK_USpkge31_1_R_ad_0"
+  },
+  "slug": "young-zelda-the-legend-of-zelda-ocarina-of-time-series",
+  "series": "The Legend of Zelda: Ocarina of Time",
+  "presentedBy": "Nintendo"
+ },
+ {
+  "name": "Sword Kirby & Dragoon",
+  "releaseDate": "2026-11-12T00:00:00.000Z",
+  "releaseDateDisplay": null,
+  "figureAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/Kirby Air RIders/sword-kirby-and-dragoon-kirby-air-riders-series"
+  },
+  "boxartAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/Kirby Air RIders/sword-kirby-and-dragoon-kirby-air-riders-series-packshot"
+  },
+  "slug": "sword-kirby-and-dragoon-kirby-air-riders-series",
+  "series": "Kirby Air Riders",
+  "presentedBy": "Nintendo"
+ },
+ {
+  "name": "Sylux - Metroid Prime™ 4: Beyond Series",
+  "releaseDate": "2025-12-04T00:00:00.000Z",
+  "releaseDateDisplay": null,
+  "figureAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/Metroid Prime 4/Sylux_Metroid_Prime_4_Beyond_Figure"
+  },
+  "boxartAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/Metroid Prime 4/Sylux_Metroid_Prime_4_Beyond_Package"
+  },
+  "slug": "sylux-metroid-prime-4-beyond-series",
+  "series": "Metroid Prime 4: Beyond",
+  "presentedBy": "Nintendo"
+ },
+ {
+  "name": "Sidon",
+  "releaseDate": "2025-06-05T00:00:00.000Z",
+  "releaseDateDisplay": null,
+  "figureAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/The Legend of Zelda/Tears of the Kingdom/sidon-the-legend-of-zelda-tears-of-the-kingdom"
+  },
+  "boxartAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/The Legend of Zelda/Tears of the Kingdom/sidon-the-legend-of-zelda-tears-of-the-kingdom-box"
+  },
+  "slug": "sidon-the-legend-of-zelda-tears-of-the-kingdom-series",
+  "series": "The Legend of Zelda: Tears of the Kingdom",
+  "presentedBy": "Nintendo"
+ },
+ {
+  "name": "Zelda and Loftwing",
+  "releaseDate": "2021-07-16T07:00:00.000Z",
+  "releaseDateDisplay": null,
+  "figureAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/The Legend of Zelda/zelda-and-loftwing-amiibo-the-legend-of-zelda-series"
+  },
+  "boxartAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/The Legend of Zelda/zelda-and-loftwing-amiibo-the-legend-of-zelda-series-box"
+  },
+  "slug": "zelda-and-loftwing-amiibo-the-legend-of-zelda-series",
+  "series": "The Legend of Zelda",
+  "presentedBy": "Nintendo"
+ },
+ {
+  "name": "Animal Crossing Cards - Series 1",
+  "releaseDate": "2015-09-24T07:00:00.000Z",
+  "releaseDateDisplay": null,
+  "figureAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/Animal Crossing/Animal Crossing Cards - Series 1/animal-crossing-cards-series-1-amiibo-animal-crossing-series"
+  },
+  "boxartAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/Animal Crossing/Animal Crossing Cards - Series 1/animal-crossing-cards-series-1-amiibo-animal-crossing-series-box"
+  },
+  "slug": "animal-crossing-cards-series-1-amiibo-animal-crossing-series",
+  "series": "Animal Crossing",
+  "presentedBy": "Nintendo"
+ },
+ {
+  "name": "Wolf Link",
+  "releaseDate": "2016-03-04T00:00:00.000Z",
+  "releaseDateDisplay": null,
+  "figureAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/The Legend of Zelda/Breath of the Wild/wolf-link-amiibo"
+  },
+  "boxartAsset": {
+   "__typename": "CloudinaryAsset",
+   "publicId": "amiibo/The Legend of Zelda/Breath of the Wild/wolf-link-amiibo-box"
+  },
+  "slug": "wolf-link-amiibo",
+  "series": "The Legend of Zelda",
+  "presentedBy": "Nintendo"
+ }
+]
