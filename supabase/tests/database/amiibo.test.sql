@@ -2,7 +2,7 @@
 -- jeux compatibles du catalogue ou hors catalogue ; amiibo écartés et possessions visibles par leur seul titulaire.
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(29);
+select plan(31);
 
 select has_table('public', 'amiibo', 'table amiibo');
 select has_table('public', 'amiibo_sorties', 'table amiibo_sorties');
@@ -44,6 +44,15 @@ select lives_ok(
     values ('us:sword-kirby-and-dragoon-kirby-air-riders-series', 'sword-kirby-dragoon', 'Sword Kirby & Dragoon',
             'figurine', 'Kirby Air Riders', 'Nintendo')$$,
   'le propriétaire ajoute un amiibo de 2026 venu de Nintendo US'
+);
+select lives_ok(
+  $$insert into public.amiibo (identifiant, slug, nom, type, editeur)
+    values ('eu:leon-s-kennedy', 'leon-s-kennedy', 'Leon S. Kennedy', 'figurine', 'Capcom')$$,
+  'le propriétaire ajoute un amiibo vu seulement chez Nintendo Europe (migration 0034)'
+);
+select throws_ok(
+  $$insert into public.amiibo (identifiant, slug, nom, type) values ('jp:caaf', 'caaf', 'Inconnu', 'figurine')$$,
+  '23514', null, 'un autre préfixe d''identifiant est refusé'
 );
 select is((select editeur from public.amiibo where slug = 'sidon-tears-of-the-kingdom'), 'Nintendo',
   'éditeur « Nintendo » par défaut');
@@ -110,7 +119,7 @@ select is((select count(*)::int from public.possessions_amiibo), 0, 'les amiibo 
 -- Un visiteur lit les amiibo, leurs sorties et leurs jeux, rien d'autre.
 reset role;
 set local role anon;
-select is((select count(*)::int from public.amiibo), 2, 'un visiteur voit les amiibo');
+select is((select count(*)::int from public.amiibo), 3, 'un visiteur voit les amiibo');
 select is((select count(*)::int from public.amiibo_sorties), 3, 'un visiteur voit les sorties');
 select is((select count(*)::int from public.possessions_amiibo), 0, 'un visiteur ne voit aucune possession');
 

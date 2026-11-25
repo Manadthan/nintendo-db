@@ -1,0 +1,50 @@
+{
+ "result": {
+  "items": [
+   {
+    "id": "4630",
+    "title": "コックカワサキ&ホップスター",
+    "icode": "caad",
+    "hard": "9_amiibo",
+    "sdate": "2026.9.3",
+    "dsdate": "2026-09-03 00:00:00",
+    "maker": "任天堂",
+    "series": "am_kirbyairriders_カービィのエアライダーシリーズ_kirbyairriders",
+    "url": "https://www.nintendo.com/jp/hardware/amiibo/lineup/caad/index.html"
+   },
+   {
+    "id": "4733",
+    "title": "ソードカービィ&ドラグーン",
+    "icode": "caaf",
+    "hard": "9_amiibo",
+    "sdate": "2026.11.12",
+    "dsdate": "2026-11-12 00:00:00",
+    "maker": "任天堂",
+    "series": "am_kirbyairriders_カービィのエアライダーシリーズ_kirbyairriders",
+    "url": "https://www.nintendo.com/jp/hardware/amiibo/lineup/caaf/index.html"
+   },
+   {
+    "id": "4737",
+    "title": "ノワールデデデ&ハイドラ",
+    "icode": "caag",
+    "hard": "9_amiibo",
+    "sdate": "2026.11.12",
+    "dsdate": "2026-11-12 00:00:00",
+    "maker": "任天堂",
+    "series": "am_kirbyairriders_カービィのエアライダーシリーズ_kirbyairriders",
+    "url": "https://www.nintendo.com/jp/hardware/amiibo/lineup/caag/index.html"
+   },
+   {
+    "id": "4833",
+    "title": "レオン・S・ケネディ",
+    "icode": "bcab",
+    "hard": "9_amiibo",
+    "sdate": "2026.7.30",
+    "dsdate": "2026-07-30 00:00:00",
+    "maker": "カプコン",
+    "series": "am_biohazard_バイオハザードシリーズ_biohazard",
+    "url": "https://www.nintendo.com/jp/hardware/amiibo/lineup/bcab/index.html"
+   }
+  ]
+ }
+}

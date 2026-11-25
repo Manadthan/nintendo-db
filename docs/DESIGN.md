@@ -857,7 +857,8 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
 1. **Un amiibo n'est pas un jeu** (pas de console, pas de jaquette par région) : tables à part, comme les guides
    (ADR-19). Migration 0033 (0032 : précisions de date, ADR-20) :
    - `amiibo` : `id`, **`identifiant` (unique)** : les 16 chiffres hexadécimaux de l'amiibo (AmiiboAPI, ex.
-     `010a000004a40902`) ou, pour un amiibo de 2026 absent d'AmiiboAPI, `us:{slug Nintendo US}` ; `slug` (unique,
+     `010a000004a40902`) ou, pour un amiibo de 2026 absent d'AmiiboAPI, `us:{slug Nintendo US}`, ou `eu:{nom}` s'il
+     n'est que chez Nintendo Europe (Resident Evil, Pragmata : migration 0034) ; `slug` (unique,
      adresse `/amiibo/{slug}`), `nom` (anglais), `nom_jap`, `type` (énuméré `amiibo_type` : `figurine`, `carte`,
      `peluche`, `bracelet`, `bloc` ; lu dans l'identifiant), `serie_amiibo`, `serie_jeux`, `personnage`, `editeur`,
      `image_path`, `boite_path` (vide si Nintendo US n'a pas la boîte), `verrous text[]`, `cree_le`, `updated_at` ;
@@ -880,7 +881,8 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
    `games_info.json` du dépôt GitHub : liste, types, séries, dates JP / NA / EU, jeux compatibles), **Nintendo US**
    (données de la page des amiibo : amiibo de 2026, boîtes, dates US), **Nintendo Japon** (`search.nintendo.jp`,
    `hard` = `9_amiibo` : nom japonais, dates JAP de 2026) et **Nintendo Europe** (Solr, `type:FIGURE` : dates PAL de
-   2026). Date AU d'AmiiboAPI ignorée (PAL = Europe). Éditeur : « Nintendo », sauf les séries d'autres éditeurs
+   2026) ; le **code de la figurine** de Nintendo Europe (`figure_number_s`, « BCAB ») est l'`icode` de Nintendo
+   Japon : il relie les deux et donne le nom japonais de 197 figurines). Date AU d'AmiiboAPI ignorée (PAL = Europe). Éditeur : « Nintendo », sauf les séries d'autres éditeurs
    (Street Fighter 6 et Mega Man : Capcom ; Monster Hunter : Capcom ; Yu-Gi-Oh! et Power Pros : Konami ; Shovel
    Knight : Yacht Club Games ; Skylanders : Activision ; Diablo : Blizzard), liste fixe du module pur.
 4. **Remplissage** (US-31), depuis la **session Claude**, skill `script-prod` : `scripts/amiibo.mjs --planche
