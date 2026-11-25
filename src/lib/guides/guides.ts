@@ -209,3 +209,19 @@ export function idGoogleBooks(reponse: unknown): string | null {
   if (!premier?.id || !premier.volumeInfo?.imageLinks) return null;
   return /^[A-Za-z0-9_-]{8,20}$/.test(premier.id) ? premier.id : null;
 }
+
+/**
+ * Fichier de planche relu par l'écriture : celui de la console demandée, jamais « le premier
+ * trouvé » (bug du 25/11/2026 : numéros Switch appliqués à la planche 3DS). `lue` : console
+ * inscrite dans le fichier, vérifiée après lecture.
+ */
+export function fichierPlanche(
+  demandee: string,
+  lue: string | undefined,
+): string {
+  if (!demandee)
+    throw new Error("--ecrire exige --console (ex. --console switch)");
+  if (lue !== undefined && lue !== demandee)
+    throw new Error(`planche de la console ${lue}, pas ${demandee}`);
+  return `guides-${demandee}.json`;
+}
