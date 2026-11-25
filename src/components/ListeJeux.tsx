@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { memo } from "react";
+import { sortieAVenir } from "@/lib/catalogue/a-venir";
 import { formaterDate } from "@/lib/catalogue/catalogue";
 import { noterPositionCatalogue } from "@/lib/catalogue/defilement";
 import { decouperFrise } from "@/lib/catalogue/frise";
@@ -15,6 +16,7 @@ import {
   lienGuide,
 } from "./CarteGuide";
 import { Disponibilite } from "./Disponibilite";
+import { EtiquetteAVenir } from "./EtiquetteAVenir";
 import { Frise } from "./Frise";
 import { Jaquette } from "./Jaquette";
 import { NoteMetacritic } from "./NoteMetacritic";
@@ -27,6 +29,8 @@ type Props = {
   possessions: ReadonlySet<string> | null;
   /** Nombre de jeux à dessiner (affichage par lots, SPEC v1.41). */
   limite: number;
+  /** Jour de préparation de la page (AAAA-MM-JJ, Paris) : étiquette « À venir » des jeux annoncés (US-32). */
+  aujourdhui: string;
 };
 
 const lien = (v: VersionAffichee) =>
@@ -35,12 +39,18 @@ const lien = (v: VersionAffichee) =>
     : `/jeux/${v.jeu.console.slug}/${v.jeu.slug}`;
 const cle = (v: VersionAffichee) => v.guide?.isbn ?? v.jeu.id;
 
-/** « 3 jeux », « 1 jeu · 2 guides » (en-tête d'un groupe, US-27). */
-function compte(versions: VersionAffichee[]): string {
+/** La version affichée d'un jeu est-elle encore à venir (US-32) ? Un guide ne l'est jamais. */
+const estAVenir = (v: VersionAffichee, aujourdhui: string) =>
+  !v.guide && sortieAVenir(v.sortie.date, v.sortie.precision, aujourdhui);
+
+/** « 3 jeux », « 1 jeu · 2 guides », « 2 jeux à venir » (en-tête d'un groupe, US-27, US-32). */
+function compte(versions: VersionAffichee[], aujourdhui: string): string {
   const guides = versions.filter((v) => v.guide).length;
   const jeux = versions.length - guides;
+  const tousAVenir =
+    jeux > 0 && versions.every((v) => estAVenir(v, aujourdhui));
   return [
-    jeux && `${jeux} jeu${jeux > 1 ? "x" : ""}`,
+    jeux && `${jeux} jeu${jeux > 1 ? "x" : ""}${tousAVenir ? " à venir" : ""}`,
     guides && `${guides} guide${guides > 1 ? "s" : ""}`,
   ]
     .filter(Boolean)
@@ -57,6 +67,7 @@ export const ListeJeux = memo(function ListeJeux({
   groupes,
   possessions,
   limite,
+  aujourdhui,
 }: Props) {
   // Au clic sur un jeu : la hauteur et le nombre de jeux dessinés, pour le retour par « Précédent ».
   const noter = () => noterPositionCatalogue(limite);
@@ -71,6 +82,7 @@ export const ListeJeux = memo(function ListeJeux({
           annees={decouperFrise(versions.slice(0, limite))}
           lien={lien}
           surClic={noter}
+          aVenir={(v) => estAVenir(v, aujourdhui)}
         />
       )}
 
@@ -82,7 +94,7 @@ export const ListeJeux = memo(function ListeJeux({
                 <h3 className="text-[15px] font-bold">{groupe.titre}</h3>
                 <div className="h-px flex-1 bg-filet" />
                 <span className="text-xs text-texte-discret">
-                  {compte(groupe.versions)}
+                  {compte(groupe.versions, aujourdhui)}
                 </span>
               </div>
             )}
@@ -136,6 +148,7 @@ export const ListeJeux = memo(function ListeJeux({
                               · {v.jeu.console.nom}
                             </span>
                             <div className="flex flex-wrap items-center gap-1">
+                              {estAVenir(v, aujourdhui) && <EtiquetteAVenir />}
                               <Disponibilite
                                 jeu={v.jeu}
                                 possedees={possedees(v)}
@@ -202,6 +215,7 @@ export const ListeJeux = memo(function ListeJeux({
                               · {v.jeu.console.nom}
                             </span>
                             <div className="flex flex-wrap items-center gap-1">
+                              {estAVenir(v, aujourdhui) && <EtiquetteAVenir />}
                               <Disponibilite
                                 jeu={v.jeu}
                                 possedees={possedees(v)}

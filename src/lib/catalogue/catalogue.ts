@@ -1,4 +1,5 @@
 import { normaliser } from "@/lib/recherche/normaliser";
+import { cleTriDate } from "./a-venir";
 import {
   REGIONS,
   type Groupe,
@@ -51,11 +52,23 @@ const MOIS = [
   "décembre",
 ];
 
-/** Date en français, selon ce que la source connaît : « 30 mai 2014 », « mai 2014 » ou « 2014 ». */
+/** Saison d'une date annoncée (ADR-20 point 3 : le 1er jour de la saison est enregistré). */
+const SAISONS: Record<number, string> = {
+  3: "Printemps",
+  6: "Été",
+  9: "Automne",
+  12: "Hiver",
+};
+
+/**
+ * Date en français, selon ce que la source connaît : « 30 mai 2014 », « mai 2014 », « 2014 », et pour un jeu annoncé
+ * (US-32) « Printemps 2027 » ou « Date à venir ».
+ */
 export function formaterDate(
   date: string | null,
   precision: PrecisionDate | null,
 ): string {
+  if (precision === "inconnue") return "Date à venir";
   if (!date) return "—";
   const [annee, mois, jour] = date.split("-").map(Number) as [
     number,
@@ -63,6 +76,8 @@ export function formaterDate(
     number,
   ];
   if (precision === "annee") return String(annee);
+  if (precision === "saison")
+    return `${SAISONS[mois] ?? MOIS[mois - 1]} ${annee}`;
   if (precision === "mois") return `${MOIS[mois - 1]} ${annee}`;
   return `${jour === 1 ? "1er" : jour} ${MOIS[mois - 1]} ${annee}`;
 }
@@ -102,11 +117,15 @@ export function trierVersions(
         (b.jeu.metacritic ?? -1) - (a.jeu.metacritic ?? -1) || parTitre(a, b),
     );
   const sens = tri === "recents" ? -1 : 1;
-  // Une date inconnue va en fin de liste, quel que soit le sens.
+  // Clé de tri (ADR-20) : saison et année seule en fin d'année, date annoncée inconnue après toutes les autres ; une
+  // date absente va en fin de liste, quel que soit le sens.
+  const cle = (v: VersionAffichee) =>
+    cleTriDate(v.sortie.date, v.sortie.precision);
   return versions.sort((a, b) => {
-    if (!a.sortie.date || !b.sortie.date)
-      return a.sortie.date ? -1 : b.sortie.date ? 1 : 0;
-    return a.sortie.date.localeCompare(b.sortie.date) * sens;
+    const ca = cle(a);
+    const cb = cle(b);
+    if (!ca || !cb) return ca ? -1 : cb ? 1 : 0;
+    return ca.localeCompare(cb) * sens;
   });
 }
 
@@ -133,7 +152,9 @@ export function grouperParAnnee(
     const titre =
       tri === "note"
         ? trancheNote(v.jeu.metacritic)
-        : (v.sortie.date?.slice(0, 4) ?? "Date inconnue");
+        : v.sortie.precision === "inconnue"
+          ? "Date à venir"
+          : (v.sortie.date?.slice(0, 4) ?? "Date inconnue");
     const dernier = groupes.at(-1);
     if (dernier?.titre === titre) dernier.versions.push(v);
     else groupes.push({ titre, versions: [v] });
