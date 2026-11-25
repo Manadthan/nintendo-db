@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.50 — 25/11/2026 — statut : **à valider**
+> Version 1.51 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.51 | 25/11/2026 | **À venir** (choix du propriétaire du 25/11) : US-32, une version annoncée n'a pas de coche « ✓ » (catalogue, fiche) avant sa sortie |
 > | 1.50 | 25/11/2026 | **À venir** (étape 31, DESIGN §1 novodecies, choix du propriétaire du 25/11 : bande à faire défiler, jeux au catalogue dès l'annonce, guides plus tard) : US-32 (bande « À venir » de l'accueil, étiquette « À venir » au catalogue et sur la fiche), US-33 (importer les annonces de Nintendo) ; US-10 : un jeu à venir n'est plus écarté par l'import des annonces |
 > | 1.49 | 25/11/2026 | **Amiibo** (étape 30, intention v1.8, choix du propriétaire du 25/11 : tous les éditeurs, images copiées chez nous, boîte US en plus) : US-29 (amiibo dans le catalogue, coche « Amiibo », fiche de l'amiibo, bloc « Amiibo » de la fiche du jeu), US-30 (« je l'ai » par amiibo), US-31 (ajout des amiibo par le propriétaire, après une planche) |
 > | 1.48 | 25/11/2026 | **Guides : livres écartés d'office** (planche 3DS du 25/11, choix du propriétaire) : aussi les recueils de visuels (« 資料集 »), carnets de motifs (« デザインブック ») et imagiers (« ずかん ») |
@@ -274,6 +275,8 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Le jour de sa sortie, l'étiquette disparaît et le jeu quitte la bande **sans intervention** (page refaite
       toutes les 5 minutes) ; jaquette de la boîte, code produit et date exacte arrivent avec l'import suivant (US-10).
 - [ ] Sur la fiche d'un jeu à venir : pas de case « je l'ai » (US-16) ni de prix eBay (US-25) avant sa sortie.
+- [ ] Une version annoncée garde son étiquette de région (JAP · US · PAL) **sans coche « ✓ »** avant sa sortie
+      (catalogue et fiche, choix du 25/11) ; la coche arrive le jour de la sortie.
 - [ ] **Amiibo** : les amiibo à venir entrent dans la bande quand l'étape 30 sera faite (US-29, mêmes règles de date).
 - Hors périmètre : guides à venir (plus tard, après l'étape 29 et une vérification de NDL), précommandes et prix,
   alertes de sortie, jeux annulés affichés comme tels (retirés à la main par le propriétaire).

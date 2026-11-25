@@ -152,6 +152,7 @@ export const ListeJeux = memo(function ListeJeux({
                               <Disponibilite
                                 jeu={v.jeu}
                                 possedees={possedees(v)}
+                                aujourdhui={aujourdhui}
                               />
                             </div>
                           </div>
@@ -219,6 +220,7 @@ export const ListeJeux = memo(function ListeJeux({
                               <Disponibilite
                                 jeu={v.jeu}
                                 possedees={possedees(v)}
+                                aujourdhui={aujourdhui}
                               />
                             </div>
                           </div>
