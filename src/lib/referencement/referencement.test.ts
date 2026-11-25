@@ -60,13 +60,17 @@ const ligne: LigneFiche = {
 const KARAOKE = versJeuFiche(ligne);
 
 describe("plan du site et robots", () => {
-  it("liste l'accueil, À propos et chaque fiche, en adresses absolues", () => {
+  it("liste l'accueil, À propos, chaque fiche et chaque guide, en adresses absolues", () => {
     expect(
-      entreesSitemap([{ console: "wii-u", jeu: "splatoon" }]).map((e) => e.url),
+      entreesSitemap(
+        [{ console: "wii-u", jeu: "splatoon" }],
+        [{ isbn: "9784047336926" }],
+      ).map((e) => e.url),
     ).toEqual([
       "https://nintendo-db.vercel.app/",
       "https://nintendo-db.vercel.app/a-propos",
       "https://nintendo-db.vercel.app/jeux/wii-u/splatoon",
+      "https://nintendo-db.vercel.app/guides/9784047336926",
     ]);
   });
 
