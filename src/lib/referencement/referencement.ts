@@ -19,9 +19,10 @@ export const OPEN_GRAPH_DE_BASE = {
   type: "website",
 } as const;
 
-/** Plan du site : accueil, À propos, puis chaque fiche. */
+/** Plan du site : accueil, À propos, chaque fiche, puis chaque guide japonais (US-27). */
 export function entreesSitemap(
   fiches: { console: string; jeu: string }[],
+  guides: { isbn: string }[] = [],
 ): MetadataRoute.Sitemap {
   return [
     { url: `${URL_SITE}/`, changeFrequency: "weekly", priority: 1 },
@@ -30,6 +31,11 @@ export function entreesSitemap(
       url: `${URL_SITE}${cheminFiche(f.console, f.jeu)}`,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    ...guides.map((g) => ({
+      url: `${URL_SITE}/guides/${g.isbn}`,
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
     })),
   ];
 }
