@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.48 — 25/11/2026 — statut : **à valider**
+> Version 1.49 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.49 | 25/11/2026 | **Amiibo** (étape 30, intention v1.8, choix du propriétaire du 25/11 : tous les éditeurs, images copiées chez nous, boîte US en plus) : US-29 (amiibo dans le catalogue, coche « Amiibo », fiche de l'amiibo, bloc « Amiibo » de la fiche du jeu), US-30 (« je l'ai » par amiibo), US-31 (ajout des amiibo par le propriétaire, après une planche) |
 > | 1.48 | 25/11/2026 | **Guides : livres écartés d'office** (planche 3DS du 25/11, choix du propriétaire) : aussi les recueils de visuels (« 資料集 »), carnets de motifs (« デザインブック ») et imagiers (« ずかん ») |
 > | 1.47 | 24/11/2026 | **Guides japonais** (étape 29, intention v1.7, choix du propriétaire du 24/11) : US-27 (guides dans le catalogue, coches « Jeux » / « Guides », page du guide, bloc « Guides » de la fiche ; 3DS et Switch d'abord) et US-28 (ajout des guides par le propriétaire, après une planche) |
 > | 1.46 | 24/11/2026 | US-02 : le lien **« Retour au catalogue »** revient aussi **à la même hauteur**, comme « Précédent » (avant : en haut de la liste ; demande du propriétaire) |
@@ -219,6 +220,40 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - Hors périmètre : case « j'ai ce guide » dans Ma collection (plus tard), prix des guides, scans ou aperçu du contenu,
       guides en anglais ou en français, guides du rétro avant les 3DS et Switch (couvertures quasi introuvables).
 
+#### US-29 — Voir les amiibo (L, SPEC v1.49)
+*En tant que visiteur ou collectionneur, je trouve tous les amiibo, leur sortie dans chaque région et les jeux qui les lisent.*
+- [ ] Un **amiibo** est un objet NFC de Nintendo : **figurine**, **carte** (Animal Crossing, Mario Sports Superstars…),
+      **peluche** (Yoshi en laine), **bracelet** (Super Nintendo World) ou **bloc** (My Mario). **Tous les éditeurs**
+      sont inclus (Street Fighter 6, Monster Hunter, Shovel Knight…), avec l'éditeur affiché sur la fiche.
+- [ ] Dans la barre d'outils du catalogue, une coche **« Amiibo »** s'ajoute à « Jeux » et « Guides » (US-27) ; à
+      l'ouverture, « Jeux » seule est cochée. Le choix est gardé dans l'adresse (`?voir=amiibo`, `?voir=jeux,amiibo`…) ;
+      on ne peut pas tout décocher.
+- [ ] Chaque amiibo a **sa carte** (grille et liste) : **image de la figurine**, nom, **série amiibo**, une étiquette
+      du type (**« Figurine »**, « Carte », « Peluche », « Bracelet », « Bloc ») et la date de sortie du marché choisi
+      (US-03) ; un amiibo non sorti sur ce marché est caché, comme un jeu. Compteur : « N jeux, M guides et P amiibo
+      affichés » (seulement ce qui est coché).
+- [ ] La **recherche** (US-05) porte aussi sur le nom de l'amiibo, sa série amiibo et sa série de jeux ; filtres
+      (US-06) : **Année** (date de sortie), **Série** (série de jeux) et **Console** (amiibo lu par au moins un jeu de
+      cette console) s'appliquent ; Genre et Développeur ne concernent que les jeux et cachent les amiibo. Les tris
+      par titre et par date classent tout ensemble ; le tri par note place les amiibo à la fin. Frise : date de sortie.
+- [ ] Un toucher sur la carte ouvre la **fiche de l'amiibo** (`/amiibo/{nom-serie}`) : image en grand, **photo de la
+      boîte américaine** quand Nintendo US la montre (264 amiibo ; sinon rien), nom, type, série amiibo, série de jeux,
+      éditeur ; **bascule JAP / US / PAL** (même composant que la fiche du jeu) qui change la **date de sortie** (« Non
+      sorti dans cette région » sinon).
+- [ ] Bloc **« Jeux compatibles (N) »** : les jeux qui lisent l'amiibo et ce qu'il y débloque (texte de la source, en
+      anglais) ; un jeu du catalogue mène à sa fiche, un jeu absent du catalogue (autre éditeur, dématérialisé) est
+      listé sans lien.
+- [ ] Bloc **« Prix eBay »** comme sur la fiche du jeu (US-25) : prix demandé de l'amiibo neuf ou d'occasion, masqué si
+      eBay ne répond pas.
+- [ ] Sur la **fiche du jeu**, un bloc **« Amiibo (N) »** liste les amiibo qu'il lit (petite image, nom), chacun menant
+      à sa fiche ; pas de bloc s'il n'en lit aucun.
+- [ ] Images **copiées chez nous** (comme les jaquettes) ; sources citées en pied de page et dans « À propos » :
+      AmiiboAPI (liste, dates, jeux compatibles, images) et Nintendo (amiibo de 2026, boîtes US).
+- [ ] La fiche de l'amiibo est préparée à l'avance, a son titre et sa description pour les moteurs de recherche, et
+      figure dans le plan du site.
+- Hors périmètre : boîtes JAP et PAL, variantes de boîte (éditions limitées, packs), cartes en vente au détail
+      regroupées par coffret, traduction en français de ce que débloque un amiibo, badges amiibo (plus tard).
+
 #### US-05 — Rechercher un jeu (M)
 *En tant que visiteur, je trouve un jeu en tapant une partie de son titre, directement dans le catalogue.*
 - [ ] Le champ de recherche est **dans la barre d'outils du catalogue** ; la liste se filtre **au fil de la frappe**.
@@ -272,6 +307,16 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       ni modifier la collection, même en appelant directement le serveur. Les pages publiques restent préparées à
       l'avance ; la collection s'ajoute dans le navigateur une fois connecté.
 - [ ] Supprimer un jeu (US-11) retire aussi ses versions de la collection.
+
+#### US-30 — Mes amiibo (S, SPEC v1.49)
+*En tant que collectionneur connecté (propriétaire ou invité), je coche les amiibo que je possède.*
+- [ ] Sur la fiche de l'amiibo, une case **« Je l'ai »** (une seule par amiibo, pas par région), privée comme le reste
+      de la collection (US-16, US-21) ; non connecté, elle n'apparaît pas.
+- [ ] Dans le catalogue, la carte d'un amiibo possédé porte une **marque verte** (jeton `possede`, comme les
+      étiquettes JAP / US / PAL des jeux) ; le filtre « Ma collection » (`?collection=`) s'applique aussi aux amiibo.
+- [ ] **Mon profil** (US-22) et le **profil public** (US-23) ajoutent une ligne **« Amiibo : N / total »** et les
+      derniers amiibo ajoutés figurent dans « Derniers ajouts ».
+- Hors périmètre : badges amiibo, état de l'exemplaire (en boîte ou non), version régionale possédée.
 
 ### Collectionneurs invités (étape 27, intention v1.5 décision 9)
 
@@ -497,6 +542,19 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
       doublon (un ISBN = un guide) et ne remet pas un guide écarté.
 - [ ] Un guide supprimé ou corrigé à la main le reste (comme les verrous des jeux, US-11).
 - Hors périmètre (pour l'instant) : page d'administration des guides ; l'ajout passe par Claude et la planche.
+
+#### US-31 — Ajouter les amiibo (M, SPEC v1.49)
+*En tant que propriétaire, je fais entrer tous les amiibo et leurs jeux compatibles sans en ajouter de faux.*
+- [ ] Claude lit AmiiboAPI (932 amiibo jusqu'au 4/12/2025) et la liste Nintendo US (amiibo de 2026, photos des boîtes),
+      rattache les jeux compatibles au catalogue par le titre et la console, puis montre une **planche numérotée par
+      série amiibo** : image, nom, type, dates JAP / US / PAL, jeux rattachés (« ≈ » quand le titre n'est pas
+      identique).
+- [ ] Le propriétaire écarte des numéros de la planche ; seuls les amiibo gardés sont écrits avec leurs images. Relancer
+      ne crée pas de doublon (un identifiant amiibo = un amiibo) et ne remet pas un amiibo écarté.
+- [ ] Les amiibo de 2026 absents d'AmiiboAPI sont ajoutés depuis Nintendo US ; leurs dates JAP et PAL sont complétées
+      quand une source officielle les donne, sinon laissées vides (« Date inconnue »).
+- [ ] Un amiibo corrigé à la main le reste (comme les verrous des jeux, US-11).
+- Hors périmètre (pour l'instant) : page d'administration des amiibo ; l'ajout passe par Claude et la planche.
 
 #### US-18 — Voir mes statistiques (M, SPEC v1.20)
 *En tant que propriétaire connecté, je vois où en est ma collection et ce qui manque au catalogue, hors du catalogue
