@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 
-// US-27 — Voir les guides japonais (docs/SPEC.md) : page du guide. Guide de test chargé en CI
+// US-27 — Voir les guides japonais (docs/SPEC.md) : page du guide et bloc « Guides » de la fiche. Guide de test chargé en CI
 // (tests/e2e/guides.sql) pour Mario Kart 8 ; la couverture de books.google.com est interceptée : jamais Google en direct.
 
 const GUIDE = "/guides/9784000000017";
@@ -80,4 +80,24 @@ test("un ISBN inconnu ou mal formé mène à la page introuvable", async ({
       page.getByRole("heading", { name: "Page introuvable" }),
     ).toBeVisible();
   }
+});
+
+test("la fiche du jeu liste ses guides, chacun menant à sa page", async ({
+  page,
+}) => {
+  await couvertures(page);
+  await page.goto("/jeux/wii-u/mario-kart-8");
+  const bloc = page.getByRole("region", { name: "Guides (1)" });
+  await expect(bloc.getByText("エンターブレイン · 2014")).toBeVisible();
+  await expect(bloc.getByText("powered by Google")).toBeVisible();
+  await bloc
+    .getByRole("link", { name: /マリオカート8 パーフェクトガイド/ })
+    .click();
+  await expect(page).toHaveURL(GUIDE);
+});
+
+test("une fiche sans guide n'a pas de bloc « Guides »", async ({ page }) => {
+  await page.goto("/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /^Guides/ })).toHaveCount(0);
 });

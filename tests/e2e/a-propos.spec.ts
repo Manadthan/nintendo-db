@@ -47,6 +47,8 @@ test("les sources sont listées avec leur licence", async ({ page }) => {
     "Nintendo",
     "ScreenScraper",
     "RAWG",
+    "NDL Search",
+    "Google Books",
     "GameTDB",
   ]);
   await expect(sources).toContainText("CC BY-SA 4.0");
