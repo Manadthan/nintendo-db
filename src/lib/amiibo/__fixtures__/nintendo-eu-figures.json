@@ -1,0 +1,48 @@
+{
+ "response": {
+  "docs": [
+   {
+    "fs_id": "3094333",
+    "title": "Chef Kawasaki & Hop Star",
+    "date_from": "2026-12-31T00:00:00Z",
+    "pretty_date_s": "2026",
+    "game_series_txt": [
+     "kirby"
+    ],
+    "figure_number_s": "CAAD",
+    "figure_image_url_s": "https://www.nintendo.com/eu/media/images/08_content_images/others_2/amiibo_5/1x1_Amiibo_KirbyAirRiders_ChefKawasakiAndHopStar_image500w.jpg"
+   },
+   {
+    "fs_id": "3090971",
+    "title": "Leon S. Kennedy",
+    "date_from": "2026-07-30T00:00:00Z",
+    "pretty_date_s": "30/07/2026",
+    "game_series_txt": null,
+    "figure_number_s": "BCAB",
+    "figure_image_url_s": "https://www.nintendo.com/eu/media/images/08_content_images/others_2/amiibo_5/1x1_amiibo_ResidentEvilRequiem_LeonSKennedy_image500w.jpg"
+   },
+   {
+    "fs_id": "3090963",
+    "title": "Rosalina & Luma",
+    "date_from": "2026-04-02T00:00:00Z",
+    "pretty_date_s": "02/04/2026",
+    "game_series_txt": [
+     "super_mario"
+    ],
+    "figure_number_s": "ABBC",
+    "figure_image_url_s": "https://www.nintendo.com/eu/media/images/08_content_images/others_2/amiibo_5/1x1_amiibo_SuperMarioGalaxy_RosalinaAndLumas_image500w.jpg"
+   },
+   {
+    "fs_id": "2961723",
+    "title": "Sidon",
+    "date_from": "2025-06-05T00:00:00Z",
+    "pretty_date_s": "05/06/2025",
+    "game_series_txt": [
+     "the_legend_of_zelda"
+    ],
+    "figure_number_s": "AKBB",
+    "figure_image_url_s": "https://www.nintendo.com/eu/media/images/08_content_images/others_2/amiibo_5/1x1_Amiibo_TheLegendOfZelda_Sidon_image500w.jpg"
+   }
+  ]
+ }
+}
