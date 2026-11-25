@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.47 — 24/11/2026 — statut : **à valider**
+> Version 1.48 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.48 | 25/11/2026 | **Guides : livres écartés d'office** (planche 3DS du 25/11, choix du propriétaire) : aussi les recueils de visuels (« 資料集 »), carnets de motifs (« デザインブック ») et imagiers (« ずかん ») |
 > | 1.47 | 24/11/2026 | **Guides japonais** (étape 29, intention v1.7, choix du propriétaire du 24/11) : US-27 (guides dans le catalogue, coches « Jeux » / « Guides », page du guide, bloc « Guides » de la fiche ; 3DS et Switch d'abord) et US-28 (ajout des guides par le propriétaire, après une planche) |
 > | 1.46 | 24/11/2026 | US-02 : le lien **« Retour au catalogue »** revient aussi **à la même hauteur**, comme « Précédent » (avant : en haut de la liste ; demande du propriétaire) |
 > | 1.45 | 24/11/2026 | US-02 : le **tri** est gardé dans l'adresse (`?tri=`, rien pour le tri par défaut) ; « Précédent » depuis une fiche et le lien **« Retour au catalogue »** retrouvent recherche, marché, filtres et tri (bug signalé par le propriétaire, choix du 24/11) |
@@ -487,7 +488,8 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
 - [ ] Pour une console, Claude cherche les guides de chaque jeu (titre japonais du jeu, et aussi son titre en lettres
       latines : « PIKMIN4 パーフェクトガイド ») et les couvertures, puis montre une **planche numérotée** : couverture,
       titre du guide, éditeur, année et jeu rattaché.
-- [ ] Sont écartés d'office : artbooks et livres de croquis (« アート », « Art of », « 設定資料集 »), magazines
+- [ ] Sont écartés d'office : artbooks et livres de croquis (« アート », « Art of », « 設定資料集 », « ビジュアル資料集 »), carnets
+      de motifs (« デザインブック »), imagiers (« どうぶつずかん »), magazines
       (« Walker », numéros de revues), suppléments de magazines, livres d'un autre jeu au titre proche (« ゼノブレイドクロス »
       n'est pas « ゼノブレイド »).
 - [ ] Seuls les guides **avec un ISBN** entrent (adresse de la page, liens d'achat, couverture).
