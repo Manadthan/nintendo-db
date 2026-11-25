@@ -209,7 +209,9 @@ export function FormulaireCorrection({
                 >
                   <option value="jour">Jour</option>
                   <option value="mois">Mois</option>
+                  <option value="saison">Saison</option>
                   <option value="annee">Année</option>
+                  <option value="inconnue">À venir, date inconnue</option>
                 </select>
               </label>
             </div>

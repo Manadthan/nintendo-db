@@ -107,6 +107,21 @@ describe("preparerCorrection (US-11)", () => {
     expect(s.releases.US.sortie).toBe(false);
   });
 
+  it("accepte les précisions saison et inconnue des jeux à venir (ADR-20)", () => {
+    const f = new FormData();
+    f.set("JAP.sortie", "on");
+    f.set("JAP.titre", "星のカービィ");
+    f.set("JAP.date_sortie", "2027-03-01");
+    f.set("JAP.precision_date", "saison");
+    f.set("PAL.sortie", "on");
+    f.set("PAL.titre", "Kirby");
+    f.set("PAL.precision_date", "inconnue");
+    const s = lireSaisie(f);
+    expect(s.releases.JAP.precision_date).toBe("saison");
+    expect(s.releases.PAL.precision_date).toBe("inconnue");
+    expect(s.releases.PAL.date_sortie).toBeNull();
+  });
+
   it("note Metacritic saisie à la main : écrite et verrouillée ; hors de 0 à 100 ou mauvaise adresse, refusée", () => {
     const apres = structuredClone(avant);
     apres.metacritic_note = 81;

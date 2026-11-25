@@ -472,7 +472,7 @@ export type Database = {
         | "screenscraper"
         | "photo"
         | "url";
-      precision_date: "jour" | "mois" | "annee";
+      precision_date: "jour" | "mois" | "saison" | "annee" | "inconnue";
       region: "JAP" | "US" | "PAL";
       role_compte: "proprietaire" | "collectionneur";
     };
@@ -613,7 +613,7 @@ export const Constants = {
         "photo",
         "url",
       ],
-      precision_date: ["jour", "mois", "annee"],
+      precision_date: ["jour", "mois", "saison", "annee", "inconnue"],
       region: ["JAP", "US", "PAL"],
       role_compte: ["proprietaire", "collectionneur"],
     },
