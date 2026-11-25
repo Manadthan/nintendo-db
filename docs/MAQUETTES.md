@@ -47,7 +47,7 @@ emplacements, remplacés par les scans de boîtes GameTDB de chaque région à l
 | gamecartdb | Nintendo DB |
 |---|---|
 | En-tête : Catalog, My library, Account | Catalogue, À propos (collection plus tard) |
-| Bandeau « For physical collectors » | Titre seul « Pour les collectionneurs Nintendo », petit, orange, en capitales (24/11/2026) |
+| Bandeau « For physical collectors » | Sur-titre « Pour les collectionneurs Nintendo » (petit, en capitales), titre « Les jeux Nintendo en boîte, version par version » et sous-titre, comme gamecartdb (25/11/2026) |
 | « Coming up », « Recently updated » | Non repris en v1 (catalogue figé, pas de sorties à venir) |
 | « All releases 166 » + recherche, Market, Sort, Grid/List, Filters, « Showing N of M » | Identique, en français ; marché = filtre **et** version affichée |
 | Groupes par mois | Groupes par année (la Wii U couvre 2012–2017) |
