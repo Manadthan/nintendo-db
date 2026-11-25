@@ -174,13 +174,15 @@ if (planche) {
         return `${r[0]} ${s ? (s.precision === "annee" ? s.date.slice(0, 4) : s.date.slice(2)) : "—"}`;
       })
       .join("  ");
-  const series = [
-    ...new Set(liste.map((a) => a.serieAmiibo || "(sans série)")),
-  ];
+  // Clé de série : deux écritures d'une même série (« Donkey Kong » / « Donkey Kong™ ») vont sur la même planche.
+  const cleSerie = (a) =>
+    a.serieAmiibo
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "") || "sans-serie";
+  const series = [...new Set(liste.map(cleSerie))];
   for (const serie of series) {
-    const membres = liste.filter(
-      (a) => (a.serieAmiibo || "(sans série)") === serie,
-    );
+    const membres = liste.filter((a) => cleSerie(a) === serie);
     for (let p = 0; p < membres.length; p += PAR_PLANCHE) {
       const lot = membres.slice(p, p + PAR_PLANCHE);
       const couches = [];
@@ -205,12 +207,7 @@ if (planche) {
           top: y + IMG,
         });
       }
-      const nom = `${
-        serie
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-|-$/g, "") || "sans-serie"
-      }${membres.length > PAR_PLANCHE ? `-${p / PAR_PLANCHE + 1}` : ""}`;
+      const nom = `${serie}${membres.length > PAR_PLANCHE ? `-${p / PAR_PLANCHE + 1}` : ""}`;
       const fichier = join(planche, `amiibo-${nom}.jpg`);
       await sharp({
         create: {
@@ -328,16 +325,14 @@ for (const a of liste) {
       .eq("amiibo_id", id);
     if (e1) throw new Error(`${a.n} sorties : ${e1.message}`);
     if (a.sorties.length) {
-      const { error: e2 } = await supabase
-        .from("amiibo_sorties")
-        .insert(
-          a.sorties.map((s) => ({
-            amiibo_id: id,
-            region: s.region,
-            date_sortie: s.date,
-            precision_date: s.precision,
-          })),
-        );
+      const { error: e2 } = await supabase.from("amiibo_sorties").insert(
+        a.sorties.map((s) => ({
+          amiibo_id: id,
+          region: s.region,
+          date_sortie: s.date,
+          precision_date: s.precision,
+        })),
+      );
       if (e2) throw new Error(`${a.n} sorties : ${e2.message}`);
     }
   }
@@ -355,17 +350,15 @@ for (const a of liste) {
       ...new Map(jeux.map((j) => [`${j.titre}\u0000${j.console}`, j])).values(),
     ];
     if (uniques.length) {
-      const { error: e2 } = await supabase
-        .from("amiibo_jeux")
-        .insert(
-          uniques.map((j) => ({
-            amiibo_id: id,
-            game_id: j.gameId,
-            titre_jeu: j.titre,
-            console: j.console,
-            usage: j.usage,
-          })),
-        );
+      const { error: e2 } = await supabase.from("amiibo_jeux").insert(
+        uniques.map((j) => ({
+          amiibo_id: id,
+          game_id: j.gameId,
+          titre_jeu: j.titre,
+          console: j.console,
+          usage: j.usage,
+        })),
+      );
       if (e2) throw new Error(`${a.n} jeux : ${e2.message}`);
     }
   }

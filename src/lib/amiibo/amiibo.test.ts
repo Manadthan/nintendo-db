@@ -18,6 +18,7 @@ import {
   lireAmiiboApi,
   nomComparable,
   rattacherJeux,
+  trouverPareils,
   typeDepuisIdentifiant,
 } from "./amiibo";
 
@@ -274,5 +275,141 @@ describe("jeux compatibles", () => {
     );
     expect(jeux.map((j) => j.gameId)).toEqual([null, null]);
     expect(jeux[1]?.usage).toBe("Unlock a special costume");
+  });
+});
+
+describe("même amiibo écrit autrement", () => {
+  const sidon = trouver(api, "Sidon")!;
+  const fictif = (nom: string, date: string): Amiibo => ({
+    ...sidon,
+    identifiant: `us:${nom.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+    nom,
+    sorties: [{ region: "US", date, precision: "jour" }],
+  });
+  const liste = [
+    fictif("Mario - Cat", "2021-02-12"),
+    fictif("Mario - Classic Color", "2015-09-10"),
+    fictif("K. K. Slider", "2015-11-13"),
+    fictif("Isabelle", "2015-11-13"),
+  ];
+  const jour = (date: string) => ({
+    region: "US" as const,
+    date,
+    precision: "jour" as const,
+  });
+
+  it("reconnaît les mêmes mots dans un autre ordre, « Colours » = « Color »", () => {
+    expect(trouverPareils(liste, "Cat Mario", null).map((a) => a.nom)).toEqual([
+      "Mario - Cat",
+    ]);
+    expect(
+      trouverPareils(liste, "Mario (Classic Colours)", null).map((a) => a.nom),
+    ).toEqual(["Mario - Classic Color"]);
+  });
+
+  it("reconnaît un seul amiibo du même jour avec un mot en commun", () => {
+    expect(
+      trouverPareils(
+        liste,
+        "K.K. Slider (Animal Crossing)",
+        jour("2015-11-13"),
+      ).map((a) => a.nom),
+    ).toEqual(["K. K. Slider"]);
+  });
+
+  it("ne rapproche rien sans date au jour près ni mot en commun", () => {
+    expect(
+      trouverPareils(liste, "K.K. Slider (Animal Crossing)", null),
+    ).toEqual([]);
+    expect(trouverPareils(liste, "Diana", jour("2015-11-13"))).toEqual([]);
+  });
+
+  it("ne compte pas les mots de la série", () => {
+    const shiver = {
+      ...fictif("Shiver (Splatoon Raiders)", "2026-07-23"),
+      serieAmiibo: "Splatoon Raiders",
+    };
+    expect(
+      trouverPareils(
+        [shiver],
+        "Big Man (Splatoon Raiders)",
+        jour("2026-07-23"),
+        "Splatoon Raiders",
+      ),
+    ).toEqual([]);
+  });
+
+  it("ramène les pluriels au singulier", () => {
+    expect(
+      trouverPareils(
+        [fictif("Rosalina and Lumas", "2026-04-02")],
+        "Rosalina & Luma",
+        jour("2026-04-02"),
+      ).map((a) => a.nom),
+    ).toEqual(["Rosalina and Lumas"]);
+  });
+
+  it("lit les sigles comme un mot et ignore les espaces", () => {
+    const autres = [
+      fictif("R.O.B. - NES", "2015-09-25"),
+      fictif("Mii Swordfighter", "2015-09-25"),
+    ];
+    expect(
+      trouverPareils(autres, "R.O.B.", jour("2015-09-25")).map((a) => a.nom),
+    ).toEqual(["R.O.B. - NES"]);
+    expect(
+      trouverPareils(autres, "Mii Sword Fighter", null).map((a) => a.nom),
+    ).toEqual(["Mii Swordfighter"]);
+  });
+
+  it("prend, à 3 jours près, celui qui partage le plus de mots", () => {
+    const autres = [
+      fictif("8-Bit Mario Classic Color", "2015-09-11"),
+      fictif("8-Bit Mario Modern Color", "2015-09-11"),
+    ];
+    expect(
+      trouverPareils(
+        autres,
+        "30th Anniversary Mario - Classic Color",
+        jour("2015-09-10"),
+      ).map((a) => a.nom),
+    ).toEqual(["8-Bit Mario Classic Color"]);
+  });
+
+  it("ne prend pas pour un amiibo de 2026 un homonyme sorti des années plus tôt", () => {
+    const carte = { ...fictif("Diana", "2015-07-30"), type: "carte" as const };
+    const ancien = { ...fictif("Rudy", "2016-03-24"), type: "carte" as const };
+    expect(trouverPareils([carte], "Diana", jour("2026-06-11"))).toEqual([]);
+    expect(trouverPareils([ancien], "Rudy", jour("2026-03-13"))).toEqual([]);
+    const futur: Amiibo = {
+      ...fictif("Young Link", "2027-12-31"),
+      sorties: [{ region: "US", date: "2027-12-31", precision: "annee" }],
+    };
+    expect(
+      trouverPareils([futur], "Young Link", {
+        region: "PAL",
+        date: "2019-04-12",
+        precision: "jour",
+      }),
+    ).toEqual([]);
+  });
+
+  it("écarte les coffrets et les produits génériques", () => {
+    expect(estCoffretDeCartes("Animal Crossing amiibo cards series 1")).toBe(
+      true,
+    );
+    expect(
+      estCoffretDeCartes(
+        "Animal Crossing: New Leaf - Sanrio Collaboration Pack",
+      ),
+    ).toBe(true);
+    expect(estCoffretDeCartes("Power-Up Band")).toBe(true);
+    expect(
+      estCoffretDeCartes("Animal Crossing: New Leaf - Welcome amiibo series"),
+    ).toBe(true);
+    expect(
+      estCoffretDeCartes("Mario Sports Superstars", "Mario Sports Superstars"),
+    ).toBe(true);
+    expect(estCoffretDeCartes("Mario - Power Up Band")).toBe(false);
   });
 });

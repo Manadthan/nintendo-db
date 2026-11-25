@@ -232,9 +232,103 @@ export function imageNintendoUs(publicId: string): string {
   return `https://assets.nintendo.com/image/upload/f_png,w_600/${publicId.split("/").map(encodeURIComponent).join("/")}`;
 }
 
-/** Coffrets de cartes vendus par série (« Animal Crossing Cards - Series 1 ») : pas un amiibo, écartés. */
-export function estCoffretDeCartes(nom: string): boolean {
-  return /\bcards?\b.*\b(series|pack|set)\b|\bstarter set\b/i.test(nom);
+/**
+ * Coffrets et produits génériques, pas un amiibo : cartes vendues par série (« Animal Crossing amiibo cards series 1 »,
+ * « Card Starter Set »), packs, « Power-Up Band » seul, ou nom égal à la série (« Mario Sports Superstars »).
+ */
+export function estCoffretDeCartes(nom: string, serie = ""): boolean {
+  if (/\bnew leaf\b/i.test(nom)) return true; // « Animal Crossing: New Leaf » (cartes « Welcome amiibo »)
+  if (/\bcards?\b|\bpack\b|\bstarter set\b|^power-?up band$/i.test(nom.trim()))
+    return true;
+  return serie.trim() !== "" && nomComparable(nom) === nomComparable(serie);
+}
+
+const MOTS_VIDES = new Set([
+  "the",
+  "and",
+  "outfit",
+  "series",
+  "amiibo",
+  "figure",
+]);
+/** Mots d'un nom ; lettres isolées réunies (« R.O.B. » → « rob », « K. K. Slider » → « kk slider »). */
+const mots = (nom: string) =>
+  simplifier(nom.replace(/\s+-\s+[^-]*\bseries\s*$/i, ""))
+    .replace(/\bcolou?rs?\b/g, "color")
+    .replace(/\b([a-z0-9])\b(?: ([a-z0-9])\b)+/g, (m) => m.replace(/ /g, ""))
+    .split(" ")
+    .filter((m) => m && !MOTS_VIDES.has(m))
+    .map((m) => (m.length > 4 && m.endsWith("s") ? m.slice(0, -1) : m)); // « Lumas » = « Luma »
+const cleMots = (nom: string) => [...mots(nom)].sort().join(" ");
+const compact = (nom: string) => mots(nom).join("");
+const JOUR = 86_400_000;
+const ecartJours = (a: string, b: string) =>
+  Math.abs(Date.parse(a) - Date.parse(b)) / JOUR;
+
+/**
+ * Quand l'un des deux est récent (2025 et après) : faux si aucune de leurs dates n'est à moins de 4 mois (un an si
+ * l'une n'est connue qu'à l'année). « Diana » de 2026 n'est pas la carte « Diana » de 2015 ; « Young Link » de 2027
+ * n'est pas celui de 2019. Entre amiibo anciens, Nintendo US donne parfois la date d'une réédition : pas de contrôle.
+ */
+function datesCompatibles(a: Amiibo, sortie: SortieAmiibo | null): boolean {
+  if (!sortie || a.sorties.length === 0) return true;
+  if (sortie.date < "2025" && a.sorties.every((s) => s.date < "2025"))
+    return true;
+  return a.sorties.some(
+    (s) =>
+      ecartJours(s.date, sortie.date) <=
+      (s.precision === "jour" && sortie.precision === "jour" ? 120 : 366),
+  );
+}
+
+/**
+ * Amiibo déjà connus qui sont le même que « nom » (au nom identique, une carte compte ; sinon jamais une carte ; deux sorties à plus de 4 mois d'écart ne sont pas le même amiibo). Dans l'ordre : même nom ; mêmes mots,
+ * même dans un autre ordre (« Cat Mario » = « Mario - Cat », « Mario (Classic Colours) » = « Mario - Classic Color »,
+ * « Mii Sword Fighter » = « Mii Swordfighter ») ; sinon, parmi les amiibo sortis à 3 jours près, celui qui partage
+ * le plus de mots, s'il est seul en tête. Rien sinon : ce sera un nouvel amiibo, en rouge sur la planche.
+ */
+export function trouverPareils(
+  liste: readonly Amiibo[],
+  nom: string,
+  sortie: SortieAmiibo | null,
+  serie = "",
+): Amiibo[] {
+  const plausibles = liste.filter((a) => datesCompatibles(a, sortie));
+  const exact = plausibles.filter(
+    (a) => nomComparable(a.nom) === nomComparable(nom),
+  );
+  if (exact.length > 0) return exact; // une carte au nom identique compte (« Shadow Mewtwo »)
+  const figures = plausibles.filter((a) => a.type !== "carte");
+  for (const egal of [
+    (a: Amiibo) => cleMots(a.nom) === cleMots(nom),
+    (a: Amiibo) => compact(a.nom) === compact(nom),
+  ]) {
+    const trouves = figures.filter(egal);
+    if (trouves.length > 0) return trouves;
+  }
+  if (!sortie || sortie.precision !== "jour") return [];
+  // Une parenthèse qui répète la série ne compte pas : « Big Man (Splatoon Raiders) » n'est pas
+  // « Shiver (Splatoon Raiders) ».
+  const parenthese = /\(([^()]*)\)\s*$/.exec(nom)?.[1] ?? "";
+  const deSerie = new Set(
+    parenthese && serie && nomComparable(parenthese) === nomComparable(serie)
+      ? mots(parenthese)
+      : [],
+  );
+  const voulus = new Set(mots(nom).filter((m) => !deSerie.has(m)));
+  const scores = figures
+    .filter((a) =>
+      a.sorties.some(
+        (s) => s.precision === "jour" && ecartJours(s.date, sortie.date) <= 3,
+      ),
+    )
+    .map((a) => ({ a, n: mots(a.nom).filter((m) => voulus.has(m)).length }))
+    .filter((x) => x.n > 0)
+    .sort((x, y) => y.n - x.n);
+  return scores.length > 0 &&
+    (scores.length === 1 || scores[0]!.n > scores[1]!.n)
+    ? [scores[0]!.a]
+    : [];
 }
 
 /** Date US et sa précision : « 2027 » affiché ⇒ année seule (Nintendo US met alors le 31/12). */
@@ -254,17 +348,14 @@ export function completerAvecUs(
   us: readonly AmiiboUs[],
 ): Amiibo[] {
   const resultat = amiibo.map((a) => ({ ...a, sorties: [...a.sorties] }));
-  const index = new Map<string, Amiibo[]>();
-  for (const a of resultat)
-    index.set(nomComparable(a.nom), [
-      ...(index.get(nomComparable(a.nom)) ?? []),
-      a,
-    ]);
   for (const u of us) {
-    if (estCoffretDeCartes(u.name)) continue;
-    const memes = (index.get(nomComparable(u.name)) ?? []).filter(
-      (a) => a.type !== "carte",
-    );
+    if (estCoffretDeCartes(u.name, u.series ?? "")) continue;
+    const memes = trouverPareils(
+      resultat,
+      u.name,
+      sortieUs(u),
+      u.series ?? "",
+    ).filter((a) => a.type !== "carte");
     const boite = u.boxartAsset?.publicId
       ? imageNintendoUs(u.boxartAsset.publicId)
       : null;
@@ -297,7 +388,6 @@ export function completerAvecUs(
       origine: "nintendo-us",
     };
     resultat.push(nouvel);
-    index.set(nomComparable(nouvel.nom), [nouvel]);
   }
   return resultat;
 }
@@ -335,10 +425,13 @@ export function completerAvecEurope(
 ): Amiibo[] {
   const resultat = amiibo.map((a) => ({ ...a, sorties: [...a.sorties] }));
   for (const f of figures) {
+    if (estCoffretDeCartes(f.title)) continue;
     const sortie = sortieEurope(f);
-    const memes = resultat.filter(
-      (a) =>
-        a.type !== "carte" && nomComparable(a.nom) === nomComparable(f.title),
+    const memes = trouverPareils(
+      resultat,
+      f.title,
+      sortie,
+      (f.game_series_txt ?? [])[0] ?? "",
     );
     if (memes.length > 0) {
       for (const a of memes) {
