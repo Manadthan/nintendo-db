@@ -95,6 +95,19 @@ describe("estGuide", () => {
     expect(estGuide("ゼノブレイドクロスオフィシャルガイド", [])).toBe(true);
     expect(estGuide("ピクミン100ぴきとすごす30日", [])).toBe(false);
   });
+  it("écarte carnets de motifs, recueils de visuels et imagiers (planche 3DS du 25/11)", () => {
+    for (const titre of [
+      "とびだせどうぶつの森デザインブック : 村メロもあるよ!",
+      "NewらくらくデザインBOOK : どうぶつの森ハッピーホームデザイナーオリジナルマイデザイン",
+      "ファイアーエムブレムifビジュアル資料集ペルシード・クリスタル",
+      "とびだせどうぶつの森amiibo+どうぶつずかん",
+    ])
+      expect(estGuide(titre, ["798.5"])).toBe(false);
+    expect(estGuide("とびだせどうぶつの森超完全カタログ", ["798.5"])).toBe(
+      true,
+    );
+    expect(estGuide("ポケモン全国図鑑公式ガイドブック", ["798.5"])).toBe(true);
+  });
 });
 
 describe("consolesCitees", () => {

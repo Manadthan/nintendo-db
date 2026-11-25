@@ -41,9 +41,9 @@ export const JAPONAIS = /[぀-ヿ一-鿿]/;
 /** Mots d'un livre de stratégie (攻略本). */
 const MOTS_GUIDE =
   /攻略|ガイド|必勝|大百科|大全|マニュアル|ヒント|裏技|ウルテク|秘技|テクニック|バイブル|ナビ|完全/;
-/** Livres écartés d'office (SPEC US-28) : artbooks, croquis, magazines, suppléments, romans, mangas, musique. */
+/** Livres écartés d'office (SPEC US-28) : artbooks, croquis, recueils de visuels, carnets de motifs, imagiers, magazines, suppléments, romans, mangas, musique. */
 const PAS_UN_GUIDE =
-  /アート|シークレットファイル|アーカイブス|art\s*of|artworks?|設定資料|画集|イラスト|ウォーカー|walker|ファンブック|月刊|増刊|付録|ふろく|コミック|コロコロ|漫画|マンガ|4コマ|アンソロジー|小説|ノベル|サウンドトラック|楽譜|ピアノ|カレンダー|シール|ぬりえ|ポスター/i;
+  /アート|シークレットファイル|アーカイブス|art\s*of|artworks?|設定資料|資料集|デザインブック|デザイン\s*book|ずかん|画集|イラスト|ウォーカー|walker|ファンブック|月刊|増刊|付録|ふろく|コミック|コロコロ|漫画|マンガ|4コマ|アンソロジー|小説|ノベル|サウンドトラック|楽譜|ピアノ|カレンダー|シール|ぬりえ|ポスター/i;
 
 /** Un livre est un guide : livre de jeu (NDC 798) ou mot de guide dans le titre, et rien qui l'écarte. */
 export function estGuide(titre: string, ndc: readonly string[] = []): boolean {
