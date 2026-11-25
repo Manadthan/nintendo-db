@@ -76,9 +76,19 @@ export function trier(
   tri: Tri,
   marche: Marche,
 ): VersionAffichee[] {
-  const versions = jeux
-    .map((j) => versionAffichee(j, marche))
-    .filter((v): v is VersionAffichee => v !== null);
+  return trierVersions(
+    jeux
+      .map((j) => versionAffichee(j, marche))
+      .filter((v): v is VersionAffichee => v !== null),
+    tri,
+  );
+}
+
+/** Trie des versions déjà choisies, jeux et guides mêlés (US-27 : un guide n'a pas de note, il va en fin). */
+export function trierVersions(
+  versions: VersionAffichee[],
+  tri: Tri,
+): VersionAffichee[] {
   const parTitre = (a: VersionAffichee, b: VersionAffichee) =>
     normaliser(a.sortie.titre!).localeCompare(
       normaliser(b.sortie.titre!),

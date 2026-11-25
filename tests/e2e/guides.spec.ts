@@ -118,3 +118,44 @@ test("/guides.json donne les guides du catalogue, jeux par identifiant", async (
   });
   expect(guide?.jeux).toHaveLength(1);
 });
+
+test("cocher « Guides » mêle les guides aux jeux du catalogue", async ({
+  page,
+}) => {
+  await couvertures(page);
+  await page.goto("/");
+  const coche = page.getByRole("checkbox", { name: "Guides" });
+  await expect(coche).not.toBeChecked();
+  await expect(page.getByRole("checkbox", { name: "Jeux" })).toBeChecked();
+  await coche.check();
+  await expect(page).toHaveURL(/voir=jeux%2Cguides/);
+  await expect(page.getByText(/jeux? et 1 guide affichés?/)).toBeVisible();
+
+  // « Jeux » décochée : le guide seul, qui mène à sa page.
+  await page.getByRole("checkbox", { name: "Jeux" }).uncheck();
+  await expect(page.getByText("0 jeu et 1 guide affiché")).toBeVisible();
+  await page
+    .getByRole("link", { name: /マリオカート8 パーフェクトガイド/ })
+    .click();
+  await expect(page).toHaveURL(GUIDE);
+});
+
+test("la recherche trouve un guide par le titre du jeu couvert", async ({
+  page,
+}) => {
+  await couvertures(page);
+  await page.goto("/?voir=guides&q=mario%20kart");
+  await expect(
+    page.getByRole("link", { name: /マリオカート8 パーフェクトガイド/ }),
+  ).toBeVisible();
+  await page.getByRole("searchbox").fill("zelda");
+  await expect(page.getByText("0 jeu et 0 guide affiché")).toBeVisible();
+});
+
+test("sur le marché Europe, « Guides » est grisée", async ({ page }) => {
+  await page.goto("/?voir=guides");
+  await page.getByRole("button", { name: "Europe", exact: true }).click();
+  await expect(page.getByRole("checkbox", { name: "Guides" })).toBeDisabled();
+  await expect(page.getByText("Guides : marché Japon")).toBeVisible();
+  await expect(page.getByText(/jeux? affichés? sur/)).toBeVisible();
+});
