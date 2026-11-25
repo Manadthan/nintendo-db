@@ -1,8 +1,15 @@
-import { expect, test } from "@playwright/test";
-import { BASE_LOCALE_DISPONIBLE, seConnecter } from "./utilisateur";
+import { expect, test, type Page } from "@playwright/test";
+import {
+  attendreHydratation,
+  BASE_LOCALE_DISPONIBLE,
+  seConnecter,
+} from "./utilisateur";
 
 // US-11 — Corriger une fiche (#44). Base Supabase locale (CI) : jeux de départ (migration 0004).
 test.skip(!BASE_LOCALE_DISPONIBLE, "Base Supabase locale nécessaire (CI)");
+
+const enregistrer = (page: Page) =>
+  page.getByRole("button", { name: "Enregistrer la fiche" });
 
 test("le propriétaire corrige un code produit ; le champ est alors verrouillé contre l'import", async ({
   page,
@@ -15,9 +22,10 @@ test("le propriétaire corrige un code produit ; le champ est alors verrouillé 
     page.getByRole("heading", { name: "Mario Kart 8" }),
   ).toBeVisible();
 
+  await attendreHydratation(enregistrer(page));
   const code = page.locator('input[name="PAL.code_produit"]');
   await code.fill("WUP-P-AMKP-TEST");
-  await page.getByRole("button", { name: "Enregistrer la fiche" }).click();
+  await enregistrer(page).click();
   await expect(page.getByRole("status")).toContainText("Fiche enregistrée");
 
   await page.reload();
@@ -32,8 +40,9 @@ test("le propriétaire corrige un code produit ; le champ est alors verrouillé 
 test("une version sortie sans titre est refusée", async ({ page }) => {
   await seConnecter(page);
   await page.goto("/admin/jeux/wii-u/splatoon");
+  await attendreHydratation(enregistrer(page));
   await page.locator('input[name="US.titre"]').fill("");
-  await page.getByRole("button", { name: "Enregistrer la fiche" }).click();
+  await enregistrer(page).click();
   await expect(
     page.getByRole("alert").filter({ hasText: "le titre est obligatoire" }),
   ).toBeVisible();
@@ -45,6 +54,9 @@ test("le propriétaire ajoute un jeu manquant, puis le supprime après confirmat
   await seConnecter(page);
   await page.goto("/admin/jeux");
   await page.getByText("+ Ajouter un jeu").click();
+  await attendreHydratation(
+    page.getByRole("button", { name: "Ajouter le jeu" }),
+  );
   await page.getByLabel("Titre").fill("Jeu de test e2e");
   await page.getByLabel("PAL").check();
   await page.getByRole("button", { name: "Ajouter le jeu" }).click();
@@ -55,6 +67,9 @@ test("le propriétaire ajoute un jeu manquant, puis le supprime après confirmat
     "Jeu de test e2e",
   );
 
+  await attendreHydratation(
+    page.getByRole("button", { name: "Supprimer ce jeu" }),
+  );
   page.once("dialog", (d) => d.accept());
   await page.getByRole("button", { name: "Supprimer ce jeu" }).click();
   await expect(page).toHaveURL(/\/admin\/jeux\?supprime=.*console=wii-u/);
@@ -84,11 +99,12 @@ test("note Metacritic saisie à la main : sur la fiche (avec lien) et sur la jaq
 }) => {
   await seConnecter(page);
   await page.goto("/admin/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
+  await attendreHydratation(enregistrer(page));
   await page.locator('input[name="metacritic_note"]').fill("73");
   await page
     .locator('input[name="metacritic_url"]')
     .fill("https://www.metacritic.com/game/kirby-and-the-rainbow-curse/");
-  await page.getByRole("button", { name: "Enregistrer la fiche" }).click();
+  await enregistrer(page).click();
   await expect(page.getByRole("status")).toContainText("Fiche enregistrée");
 
   await page.goto("/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
@@ -126,8 +142,9 @@ test("note Metacritic saisie à la main : sur la fiche (avec lien) et sur la jaq
 
   // Nettoyage : note effacée (le champ reste verrouillé, sans effet sur les autres tests).
   await page.goto("/admin/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
+  await attendreHydratation(enregistrer(page));
   await page.locator('input[name="metacritic_note"]').fill("");
   await page.locator('input[name="metacritic_url"]').fill("");
-  await page.getByRole("button", { name: "Enregistrer la fiche" }).click();
+  await enregistrer(page).click();
   await expect(page.getByRole("status")).toContainText("Fiche enregistrée");
 });
