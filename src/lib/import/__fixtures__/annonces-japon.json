@@ -1,0 +1,17 @@
+{
+  "_source": "search.nintendo.jp/nintendo_soft/search.json?fq=sche_s:1&sort=sodate desc, 25/11/2026 ; extrait réduit à la main (champs utiles)",
+  "items": [
+    { "id": "70010000140001", "title": "ポケットモンスター ウェーブ", "sdate": "2027", "hard": "05_BEE", "sform": "BEE_DOWNLOADABLE", "maker": "ポケモン", "icode": "AAANA", "iurl": "a1b2c3" },
+    { "id": "70010000140002", "title": "星のカービィ ワールドビヨンド", "sdate": "2027", "hard": "05_BEE", "sform": "BEE_DOWNLOADABLE", "maker": "任天堂", "icode": "AAMQA", "iurl": null },
+    { "id": "70010000140003", "title": "星のカービィ ワールドビヨンド", "sdate": "2027.春", "hard": "05_BEE", "sform": "BEE_DOWNLOADABLE", "maker": "任天堂", "icode": null, "iurl": null },
+    { "id": "70010000140004", "title": "こどもゼルダ【時のオカリナ】", "sdate": "2027", "hard": "9_amiibo", "sform": "am_zelda", "maker": "任天堂", "icode": "akbg", "iurl": null },
+    { "id": "70010000140005", "title": "メトロイド ラヴェナス", "sdate": "2027.1.28", "hard": "05_BEE", "sform": "BEE_DOWNLOADABLE", "maker": "任天堂", "icode": "ABVTA", "iurl": "d4e5f6" },
+    { "id": "70010000140006", "title": "メトロイド ラヴェナス スペシャルエディション", "sdate": "2027.1.28", "hard": "05_BEE", "sform": "BEE_DOWNLOADABLE", "maker": "任天堂", "icode": null, "iurl": null },
+    { "id": "70010000140007", "title": "Nintendo Switch 2（日本語・国内専用） モンスターハンターワイルズ セット", "sdate": "2026.12.4", "hard": "05_BEE", "sform": "hard-soft", "maker": "任天堂", "icode": null, "iurl": null },
+    { "id": "70010000140008", "title": "Xenoblade3 (ゼノブレイド3) Nintendo Switch 2 Edition", "sdate": "2026.12.3", "hard": "05_BEE", "sform": "BEE_DOWNLOADABLE", "maker": "任天堂", "icode": "AZ3HA", "iurl": null },
+    { "id": "70010000140009", "title": "追加コンテンツ第2弾「どきどきデコレーション」", "sdate": "2026.12.9", "hard": "05_BEE", "sform": "DLC", "maker": "ポケモン", "icode": null, "iurl": null },
+    { "id": "70010000140010", "title": "Barbie™ Rewind", "sdate": "2027.4.22", "hard": "05_BEE", "sform": "BEE_DL", "maker": "Atari", "icode": "AB7VA", "iurl": null },
+    { "id": "70010000140011", "title": "ゼルダの伝説 時のオカリナ", "sdate": "2026.11.5", "hard": "05_BEE", "sform": "BEE_DOWNLOADABLE", "maker": "任天堂", "icode": null, "iurl": null },
+    { "id": "70010000140012", "title": "あそびのうた", "sdate": "2027.3", "hard": "1_HAC", "sform": "HAC_DL", "maker": "任天堂", "icode": null, "iurl": null }
+  ]
+}
