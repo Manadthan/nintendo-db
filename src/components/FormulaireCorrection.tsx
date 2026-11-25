@@ -187,8 +187,8 @@ export function FormulaireCorrection({
                 />
               </label>
             )}
-            <div className="grid grid-cols-[1fr_auto] gap-2">
-              <label className={etiquette}>
+            <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2">
+              <label className={`${etiquette} min-w-0`}>
                 <span>
                   Date de sortie
                   <Verrou actif={v("date_sortie")} />
@@ -197,7 +197,7 @@ export function FormulaireCorrection({
                   type="date"
                   name={`${s.region}.date_sortie`}
                   defaultValue={s.date_sortie}
-                  className={champ}
+                  className={`${champ} min-w-0`}
                 />
               </label>
               <label className={etiquette}>
@@ -211,7 +211,7 @@ export function FormulaireCorrection({
                   <option value="mois">Mois</option>
                   <option value="saison">Saison</option>
                   <option value="annee">Année</option>
-                  <option value="inconnue">À venir, date inconnue</option>
+                  <option value="inconnue">Inconnue</option>
                 </select>
               </label>
             </div>
