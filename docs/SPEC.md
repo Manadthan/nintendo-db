@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.49 — 25/11/2026 — statut : **à valider**
+> Version 1.50 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.50 | 25/11/2026 | **À venir** (étape 31, DESIGN §1 novodecies, choix du propriétaire du 25/11 : bande à faire défiler, jeux au catalogue dès l'annonce, guides plus tard) : US-32 (bande « À venir » de l'accueil, étiquette « À venir » au catalogue et sur la fiche), US-33 (importer les annonces de Nintendo) ; US-10 : un jeu à venir n'est plus écarté par l'import des annonces |
 > | 1.49 | 25/11/2026 | **Amiibo** (étape 30, intention v1.8, choix du propriétaire du 25/11 : tous les éditeurs, images copiées chez nous, boîte US en plus) : US-29 (amiibo dans le catalogue, coche « Amiibo », fiche de l'amiibo, bloc « Amiibo » de la fiche du jeu), US-30 (« je l'ai » par amiibo), US-31 (ajout des amiibo par le propriétaire, après une planche) |
 > | 1.48 | 25/11/2026 | **Guides : livres écartés d'office** (planche 3DS du 25/11, choix du propriétaire) : aussi les recueils de visuels (« 資料集 »), carnets de motifs (« デザインブック ») et imagiers (« ずかん ») |
 > | 1.47 | 24/11/2026 | **Guides japonais** (étape 29, intention v1.7, choix du propriétaire du 24/11) : US-27 (guides dans le catalogue, coches « Jeux » / « Guides », page du guide, bloc « Guides » de la fiche ; 3DS et Switch d'abord) et US-28 (ajout des guides par le propriétaire, après une planche) |
@@ -254,6 +255,29 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - Hors périmètre : boîtes JAP et PAL, variantes de boîte (éditions limitées, packs), cartes en vente au détail
       regroupées par coffret, traduction en français de ce que débloque un amiibo, badges amiibo (plus tard).
 
+#### US-32 — Voir ce qui arrive (M, SPEC v1.50)
+*En tant que visiteur, je vois d'un coup d'œil les prochaines sorties de Nintendo, comme « Coming up » sur gamecartdb.*
+- [ ] Sur l'accueil, sous le bandeau et avant « Tous les jeux », une section **« À venir »** avec leur nombre : une
+      **bande à faire défiler** de côté, la sortie **la plus proche d'abord**. Pas de section s'il n'y a rien à venir.
+- [ ] Une carte par élément à venir : image (jaquette officielle ou vignette neutre pour un jeu, image pour un amiibo),
+      **date annoncée** sur l'image, titre, et l'étiquette de la console (jeu) ou « Amiibo » et sa série (amiibo). Un
+      toucher ouvre la fiche.
+- [ ] La date suit le marché choisi (US-03) ; un élément pas annoncé sur ce marché n'est pas dans la bande. « Tous » :
+      la date la plus proche des trois régions.
+- [ ] Une date imprécise s'écrit comme annoncée : « 28 janv. 2027 », « Janvier 2027 », « Printemps 2027 », « 2027 » ;
+      sans date, « Date à venir », en fin de bande. Une date « à déterminer » des sources (31/12/2050 chez Nintendo
+      Europe, 31/12 de l'année chez Nintendo US) n'est jamais affichée telle quelle.
+- [ ] **Jeux** : un jeu annoncé est **dans le catalogue dès son annonce** (choix du 25/11), avec une étiquette
+      **« À venir »** sur sa carte (grille, liste, frise) et sur sa fiche, et sa date annoncée ; recherche, filtres et
+      tris s'appliquent comme aux autres jeux (tri par date : rangé à sa date annoncée ; une date à l'année seule ou à
+      la saison va à la fin de son année). Le compteur de l'année dit « N jeux à venir » quand ils le sont tous.
+- [ ] Le jour de sa sortie, l'étiquette disparaît et le jeu quitte la bande **sans intervention** (page refaite
+      toutes les 5 minutes) ; jaquette de la boîte, code produit et date exacte arrivent avec l'import suivant (US-10).
+- [ ] Sur la fiche d'un jeu à venir : pas de case « je l'ai » (US-16) ni de prix eBay (US-25) avant sa sortie.
+- [ ] **Amiibo** : les amiibo à venir entrent dans la bande quand l'étape 30 sera faite (US-29, mêmes règles de date).
+- Hors périmètre : guides à venir (plus tard, après l'étape 29 et une vérification de NDL), précommandes et prix,
+  alertes de sortie, jeux annulés affichés comme tels (retirés à la main par le propriétaire).
+
 #### US-05 — Rechercher un jeu (M)
 *En tant que visiteur, je trouve un jeu en tapant une partie de son titre, directement dans le catalogue.*
 - [ ] Le champ de recherche est **dans la barre d'outils du catalogue** ; la liste se filtre **au fil de la frappe**.
@@ -457,6 +481,8 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
 - [ ] Toutes consoles : un jeu **pas encore sorti** (toutes ses dates connues sont futures) n'est pas importé ; il est
       ignoré avec la raison « à venir » et arrivera avec un import suivant. Switch 2 : un jeu sans date au jour près
       (« 2027 », « Q2 2027 », « TBA ») est aussi « à venir ».
+      **SPEC v1.50** : cette règle reste pour l'import d'une console ; les jeux à venir entrent par l'**import des
+      annonces** (US-33), et l'import de la console complète ensuite le même jeu à sa sortie (pas de doublon).
 - [ ] **Import des nouveautés** (SPEC v1.11) : l'aperçu classe chaque jeu en **nouveau**, **modifié** (avec les champs
       qui changent) ou **inchangé** par rapport à la base ; par défaut seuls les nouveaux et modifiés sont enregistrés,
       et seules les jaquettes **manquantes** sont copiées. « Tout réenregistrer » reste possible.
@@ -555,6 +581,22 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
       quand une source officielle les donne, sinon laissées vides (« Date inconnue »).
 - [ ] Un amiibo corrigé à la main le reste (comme les verrous des jeux, US-11).
 - Hors périmètre (pour l'instant) : page d'administration des amiibo ; l'ajout passe par Claude et la planche.
+
+#### US-33 — Importer les annonces de Nintendo (S, SPEC v1.50)
+*En tant que propriétaire, j'ajoute au catalogue les jeux que Nintendo a annoncés, sans attendre leur sortie.*
+- [ ] Dans l'administration, « Import » propose **« Annonces »** : la liste des jeux **édités par Nintendo** (et The
+      Pokémon Company) **pas encore sortis**, lue dans les bases officielles de **Nintendo Japon**, **Europe** et **US**
+      (DESIGN §1 novodecies), avec titre et date annoncée par région.
+- [ ] Sont écartés d'office : contenus téléchargeables, consoles et accessoires, applications ; un jeu déjà au
+      catalogue est reconnu (titre de la région ou code produit) et seulement **mis à jour** (date annoncée), sans
+      doublon.
+- [ ] Chaque jeu a une case **« en boîte »** cochée par défaut (comme pour la Switch 2, US-10) ; un jeu décoché est
+      **mémorisé** et n'est plus reproposé.
+- [ ] Une date annoncée garde sa précision (jour, mois, saison, année, « à déterminer ») ; une date corrigée à la main
+      est verrouillée (US-11) et jamais écrasée.
+- [ ] Jaquette : la **jaquette officielle** de Nintendo quand elle existe (source « nintendo »), sinon vignette
+      neutre ; un jeu annulé se retire à la main (US-11).
+- [ ] Le résumé indique : ajoutés, mis à jour, écartés (avec la raison).
 
 #### US-18 — Voir mes statistiques (M, SPEC v1.20)
 *En tant que propriétaire connecté, je vois où en est ma collection et ce qui manque au catalogue, hors du catalogue
