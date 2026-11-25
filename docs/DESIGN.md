@@ -855,7 +855,7 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
 
 **ADR-21 — Amiibo : tables à part, images copiées, remplis par la session, chargés à la demande (étape 30, SPEC v1.49).**
 1. **Un amiibo n'est pas un jeu** (pas de console, pas de jaquette par région) : tables à part, comme les guides
-   (ADR-19). Migration 0032 ou suivante :
+   (ADR-19). Migration 0033 (0032 : précisions de date, ADR-20) :
    - `amiibo` : `id`, **`identifiant` (unique)** : les 16 chiffres hexadécimaux de l'amiibo (AmiiboAPI, ex.
      `010a000004a40902`) ou, pour un amiibo de 2026 absent d'AmiiboAPI, `us:{slug Nintendo US}` ; `slug` (unique,
      adresse `/amiibo/{slug}`), `nom` (anglais), `nom_jap`, `type` (énuméré `amiibo_type` : `figurine`, `carte`,
