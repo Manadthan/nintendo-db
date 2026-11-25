@@ -1,4 +1,4 @@
-import { expect, type Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 
 /** Compte fictif, créé uniquement sur la base Supabase locale et jetable des tests. */
 export const PROPRIETAIRE_TEST = {
@@ -23,4 +23,19 @@ export async function seConnecter(page: Page) {
   await page.getByLabel("Mot de passe").fill(PROPRIETAIRE_TEST.password);
   await page.getByRole("button", { name: "Se connecter" }).click();
   await expect(page).toHaveURL("/admin");
+}
+
+/**
+ * Attend que React ait pris la main sur un bouton de formulaire (hydratation). Avant, le HTML est déjà visible mais un
+ * clic envoie le formulaire sans JavaScript : la page est rechargée par le navigateur, le message attendu arrive trop
+ * tard ou un « Recharger » renvoie le formulaire. Cause des échecs au premier essai de correction.spec.ts (CI du 25/11).
+ */
+export async function attendreHydratation(bouton: Locator) {
+  await expect
+    .poll(() =>
+      bouton.evaluate((el) =>
+        Object.keys(el).some((k) => k.startsWith("__reactProps$")),
+      ),
+    )
+    .toBe(true);
 }
