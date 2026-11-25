@@ -2,10 +2,11 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.40 — 24/11/2026 — statut : **à valider**
+> Version 1.41 — 25/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.41 | 25/11/2026 | **Étude des amiibo** (intention v1.8, décision 11 ; §1 octodecies) : AmiiboAPI (932 amiibo, dates par région, jeux compatibles) jusqu'à décembre 2025, complétée par la liste officielle Nintendo US pour 2026 ; ~100 amiibo d'autres éditeurs à trancher ; étape 30 au §11 |
 > | 1.40 | 24/11/2026 | **ADR-19 — Guides japonais** (SPEC v1.47, US-27 et US-28) : tables `guides`, `guides_jeux` (plusieurs à plusieurs) et `guides_exclus` ; couverture servie par Google Books ; guides du catalogue chargés seulement quand « Guides » est cochée ; page `/guides/[isbn]` ; remplissage depuis la session après une planche ; plan en 5 PR (§8, étape 29) |
 > | 1.39 | 24/11/2026 | **Guides : 3DS et Switch d'abord** (intention v1.7, §1 septdecies) : couvertures du rétro introuvables (1 sur 150 ISBN) ; 3DS + Switch : 16 jeux sur 40 avec un guide, couvertures **Google Books** pour 26 ISBN sur 39 (300 px, clé, pays Japon) ; conditions de Google Books ; essais en direct depuis la session (hôtes ajoutés) |
 > | 1.38 | 24/11/2026 | **Étude des guides japonais** (étape 29, §1 septdecies) : NDL Search retenu pour la liste (49 jeux rétro sur 100 avec un guide, 95 % avec ISBN) ; couvertures introuvables (0 / 60) : étude v3 des couvertures |
@@ -420,6 +421,31 @@ NDL demandée avec l'ISBN à 10 chiffres au lieu de 13) → étude v3 des couver
 **Google Books** (lien, sans copie) ; filtre des artbooks et magazines à ajouter, recherche aussi par le titre en
 lettres latines ; une planche relue par le propriétaire avant toute écriture. Lien d'achat ou prix : à choisir dans
 la SPEC (Rakuten inaccessible ; eBay, ADR-17, ou recherche Amazon Japon / Suruga-ya par ISBN).
+
+## 1 octodecies. Étude des amiibo (25/11/2026)
+
+Intention v1.8, décision 11. Lecture seule depuis la session (fichiers dans le bloc-notes de la session, rien en base).
+
+| Source | Ce qu'elle donne | Limites |
+|---|---|---|
+| **AmiiboAPI** (`N3evin/AmiiboAPI`, fichiers `database/amiibo.json` et `games_info.json` lus sur GitHub ; licence MIT ; le site amiiboapi.com est bloqué par le réseau de la session) | **932 amiibo** : 674 cartes, 240 figurines, 9 bracelets, 5 peluches en laine, 4 blocs ; série amiibo, série de jeux, personnage ; **dates JP / NA / EU / AU** (manquantes : JP 18, NA 34, EU 140, surtout des cartes) ; image PNG par amiibo (dossier `images/`, ~110 Ko) ; **jeux compatibles** avec l'usage (« débloque… ») : 54 jeux Switch, 44 3DS, 20 Wii U, identifiés par titre et identifiants de titre | **s'arrête au 4/12/2025** : aucun amiibo de 2026 ; jeux Switch 2 absents ; la licence MIT couvre les données, **pas les images** (rendus de Nintendo) |
+| **Nintendo US** (`nintendo.com/us/amiibo/line-up/`, données de la page) | **264 amiibo** (figurines surtout, quelques coffrets de cartes) : nom, série, **date US**, photo de la figurine et **photo de la boîte** (Cloudinary), annonces à venir | dates US seulement ; cartes regroupées par coffret |
+| **Nintendo Japon** (`nintendo.com/jp/hardware/amiibo/chart/data/lineup.xml`) | 203 amiibo, nom japonais, prix, date JP | **s'arrête en octobre 2021** |
+| Wikipédia anglaise | pas de page « List of amiibo » | écartée |
+
+**2026 manquant chez AmiiboAPI** : la liste US compte **13 amiibo sortis du 5/03 au 12/11/2026** (Kirby Air Riders ×5,
+Super Mario Bros. Wonder ×3, Super Mario Galaxy ×2, Splatoon Raiders ×3, Mineru's Construct) et 5 annoncés (Metroid
+Ravenous en janvier 2027, Ocarina of Time). Il faudra les saisir à partir de Nintendo US, et chercher leurs dates JAP
+et PAL chez Nintendo Japon et Europe (pages par amiibo, à étudier).
+
+**Éditeur** : environ **100 amiibo ne sont pas de Nintendo** : Street Fighter 6 (60 cartes, 3 figurines), Monster
+Hunter (15), Yu-Gi-Oh! (7), Power Pros (6), Shovel Knight (5), Skylanders, Mega Man, Diablo. Les cartes sont surtout
+Animal Crossing (509) et Mario Sports Superstars (90).
+
+Conclusions : **AmiiboAPI pour la base** (tous les types, dates par région, jeux compatibles), **Nintendo US pour 2026**
+et pour la photo de la boîte ; rapprochement des jeux compatibles avec notre catalogue par le titre (comme RAWG,
+§1 sexdecies). À trancher : amiibo des autres éditeurs, images (copiées comme les jaquettes ou servies par la source),
+dates JAP et PAL de 2026.
 
 ## 2. Stack
 
@@ -960,3 +986,4 @@ Backlog (demandes du propriétaire, dans l'ordre ; chaque étape commence par un
 | 28 | **Captures RAWG** dans la fiche (SPEC v1.43, ADR-18) : **terminée le 23/11** (#218, #220 à #225, #227, #228 ; BILAN §15) : 804 jeux avec captures | plan en 5 PR : 1) documents et maquette ; 2) tâche « Étude RAWG » en lecture seule (#220, **faite le 22/11**, §1 sexdecies : 81 % au titre identique, 92 % avec suffixes ignorés, aucun faux rapprochement accepté) ; 3) migration `captures` ; 4) relais + planche + écriture en base ; 5) carrousel de la fiche. Avant l'étude : clé RAWG du propriétaire en secret GitHub `RAWG_API_KEY` |
 | 27 | **Profils utilisateurs** et **badges** | intention v1.5 (décision 9, 21/11) : comptes sur invitation, profil privé par défaut et public au choix, badges sur 4 axes ; puis SPEC, maquettes, conception (rôles propriétaire / invité, RLS) |
 | 29 | **Guides japonais** (攻略本, intention v1.6 décision 10, v1.7) : guides dans le même catalogue que les jeux (carte propre avec la couverture, menant au jeu ; coches d'affichage « Jeux » et « Guides ») et listés dans la fiche du jeu ; ~~rétro d'abord~~ **3DS et Switch d'abord**, guides seulement (§1 septdecies : NDL + couvertures Google Books) ; case « je l'ai » plus tard | **étude des sources** en lecture seule (la session ne joint aucune de ces sources : tâche GitHub) : couverture du catalogue rétro (part des jeux avec au moins un guide), champs disponibles (couverture, éditeur, date, ISBN, pages), droit d'héberger les couvertures, rapprochement guide → jeu ; candidates : Retromags (base « Japanese Language Guides »), The Video Game Library, Internet Archive (`strategyguides`), NDL Search (ISBN), Zelda Dungeon et Bulbapedia ; lien d'achat ou prix : eBay (ADR-17) ou recherche Suruga-ya ; puis SPEC, maquettes (fiche + page), ADR, plan |
+| 30 | **Amiibo** (intention v1.8, décision 11) : tous les types, dans le même catalogue (coche « Amiibo »), fiche (image, séries, dates JAP / US / PAL, jeux compatibles, prix eBay), case « je l'ai » par amiibo | étude faite (§1 octodecies) ; à trancher : amiibo des autres éditeurs, images, dates 2026 ; puis SPEC, maquettes, ADR, plan ; après l'étape 29 |
