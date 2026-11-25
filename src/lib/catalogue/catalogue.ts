@@ -52,6 +52,22 @@ const MOIS = [
   "décembre",
 ];
 
+/** Mois abrégés de la bande « À venir » (US-32 : « 28 janv. 2027 »). */
+const MOIS_COURTS = [
+  "janv.",
+  "févr.",
+  "mars",
+  "avr.",
+  "mai",
+  "juin",
+  "juil.",
+  "août",
+  "sept.",
+  "oct.",
+  "nov.",
+  "déc.",
+];
+
 /** Saison d'une date annoncée (ADR-20 point 3 : le 1er jour de la saison est enregistré). */
 const SAISONS: Record<number, string> = {
   3: "Printemps",
@@ -160,4 +176,22 @@ export function grouperParAnnee(
     else groupes.push({ titre, versions: [v] });
   }
   return groupes;
+}
+
+/** Date courte de la bande « À venir » (US-32) : « 28 janv. 2027 », « janv. 2027 » ; sinon comme formaterDate. */
+export function formaterDateCourte(
+  date: string | null,
+  precision: PrecisionDate | null,
+): string {
+  if (!date || (precision !== "jour" && precision !== "mois"))
+    return formaterDate(date, precision);
+  const [annee, mois, jour] = date.split("-").map(Number) as [
+    number,
+    number,
+    number,
+  ];
+  const m = MOIS_COURTS[mois - 1];
+  return precision === "mois"
+    ? `${m} ${annee}`
+    : `${jour === 1 ? "1er" : jour} ${m} ${annee}`;
 }

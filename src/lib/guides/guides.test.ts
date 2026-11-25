@@ -13,6 +13,7 @@ import {
   jugerLivre,
   liensAchat,
   pagesNdl,
+  fichierPlanche,
   type JeuCherche,
 } from "./guides";
 import { lireNdl } from "./ndl";
@@ -260,5 +261,19 @@ describe("dates, pages, adresses", () => {
   });
   it("compact", () => {
     expect(compact("PIKMIN 4")).toBe("pikmin4");
+  });
+});
+
+// Bug du 25/11/2026 : « --ecrire dossier --sauf … » a relu guides-3ds.json au lieu de
+// guides-switch.json (premier fichier trouvé), et appliqué les numéros Switch à la 3DS.
+describe("fichierPlanche (fichier relu par l'écriture)", () => {
+  it("nomme le fichier de la console demandée", () => {
+    expect(fichierPlanche("switch", "switch")).toBe("guides-switch.json");
+  });
+  it("refuse une écriture sans console", () => {
+    expect(() => fichierPlanche("", undefined)).toThrow(/--console/);
+  });
+  it("refuse un fichier d'une autre console", () => {
+    expect(() => fichierPlanche("switch", "3ds")).toThrow(/3ds/);
   });
 });

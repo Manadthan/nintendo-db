@@ -2,8 +2,8 @@
 // chez NDL Search, leurs couvertures chez Google Books, montre une planche numérotée, puis écrit les guides gardés.
 // Depuis la session Claude (skill script-prod ; NDL et Google Books joints, clé Google ajoutée par le réseau) :
 //   npm run session -- scripts/guides.mjs --console 3ds --planche /dossier    (recherche + planche, rien n'est écrit)
-//   npm run session -- scripts/guides.mjs --ecrire /dossier                    (écrit les guides de la planche)
-//   npm run session -- scripts/guides.mjs --ecrire /dossier --sauf 3,17        (sans les n° 3 et 17, notés écartés)
+//   npm run session -- scripts/guides.mjs --ecrire /dossier --console 3ds      (écrit les guides de la planche)
+//   npm run session -- scripts/guides.mjs --ecrire /dossier --console 3ds --sauf 3,17 (sans les n° 3 et 17, notés écartés)
 //   … --limite 10                                                             (10 premiers jeux seulement, pour un essai)
 // L'écriture relit le fichier guides-{console}.json déposé avec la planche : les numéros sont ceux qu'on a regardés.
 // NDL refuse (429) les appels rapprochés : un appel toutes les 6 s (§1 septdecies) ; compter près d'une heure pour 120 jeux.
@@ -21,6 +21,7 @@ import {
   isbn13,
   jugerLivre,
   pagesNdl,
+  fichierPlanche,
 } from "../src/lib/guides/guides.ts";
 import { lireNdl } from "../src/lib/guides/ndl.ts";
 
@@ -318,36 +319,12 @@ async function planche(guides, chemin) {
 }
 
 // ——— 2. Écriture des guides de la planche ———
-async function ecrire(dossier, sauf) {
-  const [fichier] = [
-    "3ds",
-    "switch",
-    "wii-u",
-    "ds",
-    "wii",
-    "gamecube",
-    "n64",
-    "snes",
-    "nes",
-    "gb",
-    "gbc",
-    "gba",
-    "switch-2",
-    "vb",
-  ]
-    .map((c) => join(dossier, `guides-${c}.json`))
-    .filter((f) => {
-      try {
-        readFileSync(f);
-        return true;
-      } catch {
-        return false;
-      }
-    });
-  if (!fichier) throw new Error(`aucun guides-{console}.json dans ${dossier}`);
+async function ecrire(dossier, consoleDemandee, sauf) {
+  const fichier = join(dossier, fichierPlanche(consoleDemandee, undefined));
   const { console: slugConsole, guides } = JSON.parse(
     readFileSync(fichier, "utf8"),
   );
+  fichierPlanche(consoleDemandee, slugConsole);
   const existants = new Map(
     (await tout("guides", "id, isbn, verrous")).map((g) => [g.isbn, g]),
   );
@@ -407,9 +384,10 @@ if (dossierPlanche)
 else if (dossierEcriture)
   await ecrire(
     dossierEcriture,
+    option("--console") ?? "",
     new Set((option("--sauf") ?? "").split(",").filter(Boolean).map(Number)),
   );
 else
   console.log(
-    "--planche /dossier --console 3ds, ou --ecrire /dossier [--sauf n,n]",
+    "--planche /dossier --console 3ds, ou --ecrire /dossier --console 3ds [--sauf n,n]",
   );

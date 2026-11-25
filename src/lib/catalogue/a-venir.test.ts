@@ -4,6 +4,7 @@ import {
   cleTriDate,
   jeuAVenir,
   sortieAVenir,
+  versionsAVenir,
 } from "./a-venir";
 import type { JeuCatalogue, SortieCatalogue } from "./types";
 
@@ -93,5 +94,67 @@ describe("aujourdhuiParis", () => {
     expect(aujourdhuiParis(new Date("2026-11-25T23:30:00Z"))).toBe(
       "2026-11-26",
     );
+  });
+});
+
+describe("versionsAVenir : bande de l'accueil (US-32)", () => {
+  const auj = "2026-11-25";
+  const avecSlug = (slug: string, j: JeuCatalogue) => ({
+    ...j,
+    slug,
+    id: slug,
+  });
+  const metroid = avecSlug(
+    "metroid",
+    jeu({
+      JAP: sortie({
+        titre: "メトロイド",
+        date: "2027-01-28",
+        precision: "jour",
+      }),
+      PAL: sortie({ date: "2027-02-25", precision: "jour" }),
+    }),
+  );
+  const kirby = avecSlug(
+    "kirby",
+    jeu({
+      PAL: sortie({ titre: "Kirby", date: "2027-03-01", precision: "saison" }),
+    }),
+  );
+  const xeno = avecSlug(
+    "xeno",
+    jeu({
+      PAL: sortie({
+        titre: "Xenoblade",
+        date: "2026-12-03",
+        precision: "jour",
+      }),
+    }),
+  );
+  const sorti = avecSlug(
+    "sorti",
+    jeu({
+      PAL: sortie({ titre: "Pikmin 4", date: "2023-07-21", precision: "jour" }),
+    }),
+  );
+
+  it("la sortie la plus proche d'abord ; un jeu déjà sorti n'y est pas", () => {
+    expect(
+      versionsAVenir([kirby, sorti, metroid, xeno], "TOUS", auj).map(
+        (v) => v.jeu.slug,
+      ),
+    ).toEqual(["xeno", "metroid", "kirby"]);
+  });
+
+  it("sur « Tous », la version à la date la plus proche des trois régions", () => {
+    const [v] = versionsAVenir([metroid], "TOUS", auj);
+    expect(v!.region).toBe("JAP");
+  });
+
+  it("sur un marché, seulement les jeux annoncés sur ce marché, dans leur version", () => {
+    expect(
+      versionsAVenir([metroid, kirby], "JAP", auj).map((v) => v.jeu.slug),
+    ).toEqual(["metroid"]);
+    expect(versionsAVenir([metroid], "PAL", auj)[0]!.region).toBe("PAL");
   });
 });
