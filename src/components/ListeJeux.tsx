@@ -8,7 +8,11 @@ import { noterPositionCatalogue } from "@/lib/catalogue/defilement";
 import { decouperFrise } from "@/lib/catalogue/frise";
 import { premiersDesGroupes } from "@/lib/catalogue/lots";
 import { REGIONS, type VersionAffichee } from "@/lib/catalogue/types";
-import { possede, possedeAmiibo } from "@/lib/collection/collection";
+import {
+  possede,
+  possedeAmiibo,
+  possedeGuide,
+} from "@/lib/collection/collection";
 import {
   CouvertureCarte,
   EtiquettesGuide,
@@ -89,6 +93,9 @@ export const ListeJeux = memo(function ListeJeux({
   // Amiibo possédé (US-30) : marque verte ; rien pour un visiteur.
   const amiiboPossede = (v: VersionAffichee) =>
     !!possessions && !!v.amiibo && possedeAmiibo(possessions, v.amiibo.id);
+  // Guide possédé : marque verte ; rien pour un visiteur.
+  const guidePossede = (v: VersionAffichee) =>
+    !!possessions && !!v.guide && possedeGuide(possessions, v.guide.id);
 
   return (
     <div className="flex flex-col gap-3.5">
@@ -99,6 +106,7 @@ export const ListeJeux = memo(function ListeJeux({
           surClic={noter}
           aVenir={(v) => estAVenir(v, aujourdhui)}
           amiiboPossede={amiiboPossede}
+          guidePossede={guidePossede}
         />
       )}
 
@@ -127,7 +135,10 @@ export const ListeJeux = memo(function ListeJeux({
                     >
                       {v.guide ? (
                         <>
-                          <CouvertureCarte v={v} />
+                          <div className="relative">
+                            <CouvertureCarte v={v} />
+                            {guidePossede(v) && <MarquePossede surPhoto />}
+                          </div>
                           <div className="flex flex-col gap-[3px]">
                             <span
                               lang="ja"
@@ -226,6 +237,7 @@ export const ListeJeux = memo(function ListeJeux({
                             </span>
                             <div className="flex flex-wrap items-center gap-1">
                               <EtiquettesGuide v={v} />
+                              {guidePossede(v) && <MarquePossede />}
                               <span className="text-xs text-texte-discret">
                                 {legendeGuide(v)}
                               </span>

@@ -41,6 +41,7 @@ const jeu = (
 });
 
 const PIKMIN: LigneGuide = {
+  id: "guide-pikmin-4",
   isbn: "9784047336926",
   titre: "PIKMIN4パーフェクトガイド",
   editeur: "KADOKAWA Game Linkage",

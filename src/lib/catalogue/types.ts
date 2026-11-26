@@ -77,6 +77,8 @@ export type AmiiboCarte = {
 
 /** Ce que la carte d'un guide affiche en plus (US-27). */
 export type GuideCarte = {
+  /** Identifiant en base : possession du guide. */
+  id: string;
   isbn: string;
   editeur: string | null;
   /** Copie Amazon ou Google Books (ADR-19 point 2) ; null : vignette neutre. */

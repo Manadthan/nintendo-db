@@ -22,6 +22,7 @@ export function Frise({
   surClic,
   aVenir,
   amiiboPossede = () => false,
+  guidePossede = () => false,
 }: {
   annees: AnneeFrise[];
   lien: (v: VersionAffichee) => string;
@@ -31,6 +32,8 @@ export function Frise({
   surClic: () => void;
   /** Amiibo possédé (US-30) : marque verte sur la photo. */
   amiiboPossede?: (v: VersionAffichee) => boolean;
+  /** Guide possédé : marque verte sur la couverture. */
+  guidePossede?: (v: VersionAffichee) => boolean;
 }) {
   return (
     <ol className="relative mx-auto w-full max-w-2xl before:absolute before:inset-y-0 before:left-1/2 before:-ml-px before:w-0.5 before:bg-filet">
@@ -73,7 +76,10 @@ export function Frise({
                   className="group flex w-[calc(50%-20px)] flex-col gap-1"
                 >
                   {v.guide ? (
-                    <CouvertureCarte v={v} />
+                    <div className="relative">
+                      <CouvertureCarte v={v} />
+                      {guidePossede(v) && <MarquePossede surPhoto />}
+                    </div>
                   ) : v.amiibo ? (
                     <div className="relative">
                       <ImageCarteAmiibo

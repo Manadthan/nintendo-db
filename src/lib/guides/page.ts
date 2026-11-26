@@ -32,6 +32,7 @@ export type JeuCouvert = {
 };
 
 export type GuidePage = {
+  id: string;
   isbn: string;
   titre: string;
   editeur: string | null;
@@ -48,6 +49,7 @@ export type GuidePage = {
 
 /** Une ligne de `guides` avec ses jeux, telle que la renvoie la requête de la page. */
 export type LigneGuide = {
+  id: string;
   isbn: string;
   titre: string;
   editeur: string | null;
@@ -78,6 +80,7 @@ export function versGuidePage(ligne: LigneGuide): GuidePage {
     .filter((j): j is JeuCouvert => j !== null)
     .sort((a, b) => a.titre.localeCompare(b.titre, "fr"));
   return {
+    id: ligne.id,
     isbn: ligne.isbn,
     titre: ligne.titre,
     editeur: ligne.editeur,

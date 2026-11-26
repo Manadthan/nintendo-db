@@ -539,6 +539,33 @@ export type Database = {
           },
         ];
       };
+      possessions_guides: {
+        Row: {
+          cree_le: string;
+          guide_id: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          cree_le?: string;
+          guide_id: string;
+          user_id?: string;
+        };
+        Update: {
+          cree_le?: string;
+          guide_id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "possessions_guides_guide_id_fkey";
+            columns: ["guide_id"];
+            isOneToOne: false;
+            referencedRelation: "guides";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       profils: {
         Row: {
           avatar: string;

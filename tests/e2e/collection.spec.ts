@@ -210,6 +210,50 @@ test("connecté, je coche un amiibo ; marque verte et filtre Collection dans le 
   await expect(caseAmiibo).not.toBeChecked();
 });
 
+// Guides possédés : une case par guide (guide de test, tests/e2e/guides.sql), marque verte et filtre Collection.
+test("connecté, je coche un guide ; marque verte et filtre Collection dans le catalogue", async ({
+  page,
+}) => {
+  const caseGuide = page.getByRole("checkbox", {
+    name: "Je l'ai",
+    exact: true,
+  });
+  const basculerGuide = async (avoir: boolean) => {
+    const enregistre = page.waitForResponse(
+      (r) =>
+        r.url().includes("/rest/v1/possessions_guides") &&
+        r.request().method() === (avoir ? "POST" : "DELETE"),
+    );
+    await (avoir ? caseGuide.check() : caseGuide.uncheck());
+    expect((await enregistre).ok()).toBe(true);
+  };
+
+  await seConnecter(page);
+  await page.goto("/guides/9784000000017");
+  await expect(caseGuide).not.toBeChecked();
+  await basculerGuide(true);
+  await page.reload();
+  await expect(caseGuide).toBeChecked();
+
+  await page.goto("/?voir=guides&collection=possedes");
+  await expect(
+    page.getByText("1 guide affiché", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /マリオカート8 パーフェクトガイド/ }),
+  ).toContainText("✓ Je l'ai");
+  await page.goto("/?voir=guides&collection=manquants");
+  await expect(
+    page.getByText("0 guide affiché", { exact: true }),
+  ).toBeVisible();
+
+  // Nettoyage : décocher, et vérifier que c'est aussi enregistré.
+  await page.goto("/guides/9784000000017");
+  await basculerGuide(false);
+  await page.reload();
+  await expect(caseGuide).not.toBeChecked();
+});
+
 // US-32 — Voir ce qui arrive. Ici, et non dans un fichier à part : les tests d'un même fichier passent l'un après
 // l'autre, et ceux de ce fichier comptent les jeux (« 1 jeu affiché sur 4 ») ; un 5ᵉ jeu ajouté en même temps par un
 // autre fichier les ferait échouer (CI de #290, 26/11/2026). Date en 2099 : toujours à venir.

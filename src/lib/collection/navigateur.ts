@@ -2,7 +2,13 @@
 
 import { useSyncExternalStore } from "react";
 import { clientNavigateur, clientSiSession } from "@/lib/supabase/navigateur";
-import { avecAmiibo, avecVersion, ensemble, type Version } from "./collection";
+import {
+  avecAmiibo,
+  avecGuide,
+  avecVersion,
+  ensemble,
+  type Version,
+} from "./collection";
 
 /**
  * Collection du propriétaire connecté, chargée dans le navigateur (DESIGN ADR-07) : les pages publiques restent
@@ -36,16 +42,21 @@ async function charger() {
   if (!supabase) return changer({ connecte: false });
   const { data } = await supabase.auth.getSession();
   if (!data.session) return changer({ connecte: false });
-  // Versions des jeux et amiibo (US-30), lus ensemble ; la RLS ne rend que les lignes du compte connecté.
-  const [jeux, amiibo] = await Promise.all([
+  // Versions des jeux, amiibo (US-30) et guides, lus ensemble ; la RLS ne rend que les lignes du compte connecté.
+  const [jeux, amiibo, guides] = await Promise.all([
     supabase.from("possessions").select("game_id, region"),
     supabase.from("possessions_amiibo").select("amiibo_id"),
+    supabase.from("possessions_guides").select("guide_id"),
   ]);
-  if (jeux.error || amiibo.error)
+  if (jeux.error || amiibo.error || guides.error)
     return changer({ connecte: true, erreur: "Collection illisible" });
   changer({
     connecte: true,
-    possessions: ensemble(jeux.data ?? [], amiibo.data ?? []),
+    possessions: ensemble(
+      jeux.data ?? [],
+      amiibo.data ?? [],
+      guides.data ?? [],
+    ),
   });
 }
 
@@ -97,6 +108,21 @@ export async function basculerAmiibo(amiiboId: string, avoir: boolean) {
   const { error } = avoir
     ? await table.insert({ amiibo_id: amiiboId })
     : await table.delete().eq("amiibo_id", amiiboId);
+  if (error && error.code !== "23505")
+    changer({
+      possessions: avant,
+      erreur: "Collection non enregistrée, réessaie dans un instant",
+    });
+}
+
+/** Coche ou décoche un guide, comme un amiibo : affiché aussitôt, rétabli si l'écriture échoue. */
+export async function basculerGuide(guideId: string, avoir: boolean) {
+  const avant = etat.possessions;
+  changer({ possessions: avecGuide(avant, guideId, avoir), erreur: null });
+  const table = (await clientNavigateur()).from("possessions_guides");
+  const { error } = avoir
+    ? await table.insert({ guide_id: guideId })
+    : await table.delete().eq("guide_id", guideId);
   if (error && error.code !== "23505")
     changer({
       possessions: avant,
