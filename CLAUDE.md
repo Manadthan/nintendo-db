@@ -27,7 +27,7 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 | `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.47 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs, Prix eBay, Captures, Guides, À venir, Amiibo : `docs/maquettes/`) | v0.14 à valider |
 | `docs/avancement/` | Avancement détaillé des étapes en cours (un fichier par étape) | à jour |
-| `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11), 23 à 27 (§12), audit de performance (§13), étape 25 (§14), étape 28 (§15), étape 29 (§16), couvertures Amazon (§17), étape 31 (§18) : chiffres, réussites, difficultés, leçons | v1.12 à valider |
+| `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11), 23 à 27 (§12), audit de performance (§13), étape 25 (§14), étape 28 (§15), étape 29 (§16), couvertures Amazon (§17), étape 30 (§18), étape 31 (§19) : chiffres, réussites, difficultés, leçons | v1.13 à valider |
 
 ## Règles de travail
 
@@ -152,11 +152,11 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Jaquettes sans boîtier (23/11) : 103 jaquettes Switch et Switch 2 recadrées, script gamecartdb aussi (SPEC v1.44)
   - [x] Dates et jaquettes manquantes (23/11) : 0 version sans date (40 → 0), 13 sans jaquette (80 → 13) ; Famicom Mini complétées (10 boîtes JAP qui étaient américaines remplacées)
   - [x] Étape 29 — Guides japonais (攻略本) : intention v1.6 (#236) puis v1.7 (3DS et Switch d'abord, guides seulement) ; études #238 #239 #241 #243 #244 (DESIGN §1 septdecies) ; SPEC US-27 + US-28 (v1.47) et maquettes (v0.12) #245 ; ADR-19 #246 ; migration 0031 #247 ; script #248 à #251 #273 ; page du guide #252 #254, fiche #256, catalogue #259 #261 #262 ; remplissage du 25/11 : 159 guides (3DS 92, Switch 68), 114 couvertures
-  - [ ] Étape 30 — Amiibo : `docs/avancement/etape-30.md`
+  - [x] Étape 30 — Amiibo : étude #257, SPEC US-29 à US-31 #260, maquettes #264, ADR-21 ; migrations 0033 0034 0036 ; script et remplissage du 25/11 (954 amiibo) #271 #274 #279 ; fiche #284, catalogue #287, prix eBay #289, « Je l'ai » #291, profils #292 ; détail : `docs/avancement/etape-30.md`
   - [x] Étape 31 — À venir sur l'accueil : étude #258, SPEC US-32 + US-33 #263, ADR-20 #265 ; migration #268, étiquette #270, bande #272, relais #275, coches #278, import des annonces #280 #283, e2e #290 ; premier import du 26/11 : 7 jeux Switch 2 à venir ; guides et amiibo à venir : plus tard
   - [x] Couvertures Amazon Japon des guides (reprise de l'étape 29, 26/11) : SPEC v1.52, ADR-19 révisé #281, migration 0035 #282, script #285, affichage #286 ; 159 couvertures copiées (45 guides qui n'en avaient pas)
   - [ ] Étapes suivantes (DESIGN §11) : à définir avec le propriétaire
-- [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5 ; étapes 23 à 27 : v1.6 ; audit de performance : v1.7 ; étape 25 : v1.8 ; étape 28 : v1.9 ; étape 29 : v1.10 ; couvertures Amazon : v1.11 ; étape 31 : v1.12
+- [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5 ; étapes 23 à 27 : v1.6 ; audit de performance : v1.7 ; étape 25 : v1.8 ; étape 28 : v1.9 ; étape 29 : v1.10 ; couvertures Amazon : v1.11 ; étape 30 : v1.12 ; étape 31 : v1.13
 
 ## Erreurs récurrentes
 
@@ -178,5 +178,6 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
 - **Conflits sur l'Avancement** (4 fois le 25/11 : deux sessions sur les étapes 30 et 31, lignes voisines) : le
   détail d'une étape en cours s'écrit dans `docs/avancement/etape-NN.md`, jamais ici ; CLAUDE.md ne reçoit que la
   ligne de l'étape (créée une fois, cochée à la fin).
-- **Abonnement à la mauvaise PR** (3 fois : #209, #219, #226 au lieu de la PR créée) : s'abonner au numéro lu dans
-  l'adresse renvoyée par la création de la PR, jamais à un numéro deviné.
+- **Abonnement à la mauvaise PR** (4 fois : #209, #219, #226, #288 au lieu de #289) : **imposé par un hook**
+  (`.claude/hooks/abonnement-pr.mjs`, `.claude/settings.json`) : pendant 30 min après une création de PR, un abonnement
+  à un autre numéro, ou envoyé avant la fin de la création, est refusé avec le bon numéro.

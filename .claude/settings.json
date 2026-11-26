@@ -11,6 +11,38 @@
             "statusMessage": "npm run check avant le commit…"
           }
         ]
+      },
+      {
+        "matcher": "mcp__github__create_pull_request",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/abonnement-pr.mjs\" avant-creation",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__claude-code-remote__subscribe_pr_activity",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/abonnement-pr.mjs\" avant-abonnement",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp__github__create_pull_request",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/abonnement-pr.mjs\" apres-creation",
+            "timeout": 10
+          }
+        ]
       }
     ]
   }

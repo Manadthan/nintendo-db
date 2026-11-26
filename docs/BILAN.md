@@ -1,13 +1,14 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25 ; captures RAWG, étape 28 ; guides japonais, étape 29 ; couvertures Amazon des guides ; à venir, étape 31)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25 ; captures RAWG, étape 28 ; guides japonais, étape 29 ; couvertures Amazon des guides ; amiibo, étape 30 ; à venir, étape 31)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.12 — 26/11/2026 — statut : **à valider**
+> Version 1.13 — 26/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 1.12 | 26/11/2026 | **Étape 31, à venir** : étude, bande de l'accueil, relais et import des annonces, premier import, 3 corrections de tests et de déconnexion en route, leçons (§18) |
+> | 1.13 | 26/11/2026 | **Étape 31, à venir** : étude, bande de l'accueil, relais et import des annonces, premier import, 3 corrections de tests et de déconnexion en route, leçons (§19) |
+> | 1.12 | 26/11/2026 | **Étape 30, amiibo** : étude, remplissage par planche (954 amiibo), fiche, catalogue, prix eBay, « Je l'ai » et profils, 7 PR de code, leçons (§18) |
 > | 1.11 | 26/11/2026 | **Couvertures Amazon Japon des guides** (reprise de l'étape 29) : étude, choix, 4 PR, 159 couvertures copiées, leçons (§17) |
 > | 1.10 | 25/11/2026 | **Étape 29, guides japonais** : études, page du guide, catalogue, remplissage 3DS et Switch, écriture sur la mauvaise planche réparée, leçons (§16) |
 > | 1.9 | 23/11/2026 | **Étape 28, captures RAWG** : étude, relais, planche, carrousel, 3 corrections en route, leçons (§15) |
@@ -469,7 +470,49 @@ Leçons ajoutées :
 39. **Une condition d'usage douteuse se décide par écrit** : le risque (images Amazon hors programme Partenaires) est
     dans ADR-19 avec la marche arrière, pas seulement dans une conversation.
 
-## 18. Étape 31 : à venir (jeux annoncés sur l'accueil)
+## 18. Étape 30 : amiibo
+
+| | |
+|---|---|
+| Durée | deux jours (25 et 26/11/2026) |
+| Méthode | Intention v1.8 (#255), étude en lecture seule (#257), SPEC US-29 à US-31 (#260), maquettes (#264), ADR-21 et plan en 7 PR, migrations 0033 et 0034 (#269, #271), module pur et script (#271, #274), remplissage par planche validée (#279), puis fiche (#284), catalogue (#287), prix eBay (#289), « Je l'ai » (#291) et profils avec la migration 0036 (#292) ; chaque PR précédée d'un plan validé par questions à choix |
+| Livré | US-29 : fiche de chaque amiibo (photo, boîte US, bascule JAP / US / PAL, jeux compatibles, prix eBay), bloc « Amiibo (N) » sur la fiche du jeu, coche « Amiibo » dans le catalogue (grille, liste, frise, recherche, filtres) ; US-30 : case « Je l'ai », marque verte, filtre « Ma collection », ligne « Amiibo : N / total » et derniers ajouts dans les deux profils ; US-31 : planche par série et écriture depuis la session |
+| Pull requests | 15 mergées pour l'étape (#255 à #292), dont 5 de code applicatif le 26/11 (#284, #287, #289, #291, #292) |
+| Tests | 675 unitaires en fin d'étape (+ 112 depuis l'étape 29), 36 pgTAP amiibo (`amiibo.test.sql`, `profil_public_amiibo.test.sql`), e2e : 8 dans `amiibo.spec.ts`, 2 prix, 1 connecté dans `collection.spec.ts`, amiibo de test dans la base jetable (`tests/e2e/amiibo.sql`) |
+
+| Mesure | Résultat |
+|---|---|
+| Amiibo écrits | **954** (674 cartes, 262 figurines, 9 bracelets, 5 peluches, 4 blocs), 3 écartés sur la planche |
+| Boîtes US | 202 photos |
+| Jeux compatibles | 6 432 liens reliés au catalogue sur 8 158 (le reste : autres éditeurs, dématérialisés) |
+| `/amiibo.json` | 360 Ko, **46 Ko compressé**, chargé seulement à la première coche (l'accueil ne change pas) |
+| Build Vercel | environ 3 minutes avec les 954 fiches préparées à l'avance |
+| Séries | les séries d'AmiiboAPI ramenées à nos noms par la règle des titres (Super Mario → Mario, Earthbound → Mother) ; 19 séries sans jeu chez nous gardent leur nom (Street Fighter : 61 amiibo) |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| Serveur de développement qui se recharge en boucle dans la session | Captures du catalogue impossibles en `next dev` | Build de production local sur la base de production (lecture seule), puis `next start` |
+| PR parallèles sur les mêmes fichiers (CLAUDE.md, fiche de l'amiibo) | 3 conflits (#287 deux fois, #291 après #289), une CI qui ne démarre pas tant que le conflit reste | `main` intégré dans la branche (jamais de réécriture), `npm run check` sur l'état fusionné avant de dire « prêt » |
+| Abonnement à la mauvaise PR (#288 au lieu de #289), 4ᵉ fois | Événements d'une autre session reçus, ceux de la PR oubliés | Abonnement corrigé aussitôt ; rendu impossible par la skill `correct` (PR suivante) |
+| Réseau de la session fermé à vercel.app | Vrais prix eBay des amiibo non vérifiés par Claude | Règles de pertinence testées sur des annonces écrites à la main ; vérification sur l'iPhone |
+| Fichiers de types d'un ancien build (`.next/`) | `tsc` rouge sans rapport avec le code | Supprimer `.next` après un build local |
+
+Leçons ajoutées :
+
+40. **Un nouveau type d'objet entre dans le catalogue sous la forme d'un jeu** : l'amiibo mis à la forme de
+    `JeuCatalogue` a hérité du marché, des tris, des lots, de la frise et des filtres Année et Série sans les
+    réécrire ; seuls Console (jeux compatibles) et Collection ont demandé une règle.
+41. **Réutiliser la règle existante avant d'écrire une table** : `seriesDuTitre` reconnaissait déjà presque toutes
+    les séries d'AmiiboAPI ; la table de correspondance prévue n'a pas été nécessaire.
+42. **Plusieurs PR ouvertes en même temps : annoncer l'ordre de merge et vérifier l'état fusionné** : une PR verte
+    seule peut entrer en conflit dès que la précédente est mergée.
+43. **Une migration seule dans sa PR** (choix du 26/11 pour US-30) : la PR 7b ne contenait que les profils et la
+    fonction remplacée, relue et testée (pgTAP) à part.
+
+Pistes : amiibo à venir dans la bande « À venir » (étape 31) ; 30 amiibo sans date JAP (dont Sword Kirby, Noir
+Dedede) ; badges amiibo, boîtes JAP et PAL, page d'administration des amiibo (ADR-21 point 9).
+
+## 19. Étape 31 : à venir (jeux annoncés sur l'accueil)
 
 | | |
 |---|---|
@@ -496,10 +539,9 @@ Leçons ajoutées :
 
 Leçons ajoutées :
 
-40. **Garder l'erreur d'origine visible** : un nettoyage en `finally` qui échoue cache la vraie cause ; la journaliser
+44. **Garder l'erreur d'origine visible** : un nettoyage en `finally` qui échoue cache la vraie cause ; la journaliser
     d'abord a montré « Connexion requise », puis le bug de déconnexion.
-41. **Une règle écrite qui n'a pas suffi devient un lint** : la règle des sélecteurs ambigus était dans CLAUDE.md ;
+45. **Une règle écrite qui n'a pas suffi devient un lint** : la règle des sélecteurs ambigus était dans CLAUDE.md ;
     elle a été recopiée de 8 tests existants. Le lint a corrigé les modèles en même temps que l'erreur.
-42. **Regarder les images d'une source avant de la croire** : la « boîte » du My Nintendo Store était une fois un
+46. **Regarder les images d'une source avant de la croire** : la « boîte » du My Nintendo Store était une fois un
     visuel ; une planche de 3 images a suffi à le voir et à écrire le garde-fou.
-
