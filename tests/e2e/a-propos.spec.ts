@@ -48,6 +48,7 @@ test("les sources sont listées avec leur licence", async ({ page }) => {
     "ScreenScraper",
     "RAWG",
     "NDL Search",
+    "Amazon Japon",
     "Google Books",
     "GameTDB",
   ]);
