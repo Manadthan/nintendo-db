@@ -44,7 +44,7 @@ async function japon() {
 
 async function europe() {
   const { response } = await lire(
-    "https://searching.nintendo-europe.com/fr/select?wt=json&q=*&rows=500" +
+    "https://searching.nintendo-europe.com/en/select?wt=json&q=*&rows=500" +
       "&fq=" +
       encodeURIComponent(
         "type:GAME AND publisher:Nintendo AND dates_released_dts:[NOW TO *]",
