@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { GuideFiche } from "@/lib/fiche/fiche";
 import { cheminGuide } from "@/lib/guides/page";
-import { CouvertureGuide } from "./CouvertureGuide";
+import { CouvertureGuide, MentionCouverture } from "./CouvertureGuide";
 
 /**
  * Bloc « Guides (N) » de la fiche (US-27, maquette guides-fiche.png) : guides japonais du jeu, chacun menant à sa
- * page ; rien si le jeu n'a aucun guide. Couvertures servies par Google Books, citée sous la liste.
+ * page ; rien si le jeu n'a aucun guide. Source des couvertures citée sous la liste (Amazon.co.jp, Google Books).
  */
 export function GuidesFiche({ guides }: { guides: GuideFiche[] }) {
   if (guides.length === 0) return null;
@@ -29,7 +29,7 @@ export function GuidesFiche({ guides }: { guides: GuideFiche[] }) {
             >
               <span className="w-12 shrink-0">
                 <CouvertureGuide
-                  googleBooksId={g.googleBooksId}
+                  couverture={g.couverture}
                   titre={g.titre}
                   legende=""
                   petite
@@ -50,12 +50,12 @@ export function GuidesFiche({ guides }: { guides: GuideFiche[] }) {
           </li>
         ))}
       </ul>
-      {guides.some((g) => g.googleBooksId) && (
-        <p className="text-[11px] text-texte-discret">
-          Couvertures : Google Books ·{" "}
-          <span className="font-semibold">powered by Google</span>
-        </p>
-      )}
+      <MentionCouverture
+        sources={guides.flatMap((g) =>
+          g.couverture ? [g.couverture.source] : [],
+        )}
+        pluriel
+      />
     </section>
   );
 }

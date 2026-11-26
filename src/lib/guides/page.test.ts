@@ -47,6 +47,7 @@ const PIKMIN: LigneGuide = {
   date_parution: "2023-11-01",
   precision_date: "mois",
   pages: 367,
+  couverture: null,
   google_books_id: "abcDEF12345_",
   ndl_url: "https://ndlsearch.ndl.go.jp/books/R100000002-I000000000001",
   guides_jeux: [
@@ -146,5 +147,17 @@ describe("page du guide", () => {
     expect(donnees).not.toHaveProperty("image");
     expect(donnees).not.toHaveProperty("numberOfPages");
     expect(metadonneesGuide(guide).openGraph).not.toHaveProperty("images");
+  });
+
+  it("la copie Amazon passe avant Google Books pour l'image (ADR-19 point 2 révisé)", () => {
+    const guide = versGuidePage({
+      ...PIKMIN,
+      couverture: "9784047336926-1.webp",
+    });
+    expect(guide.couverture).toEqual({
+      source: "amazon",
+      chemin: "9784047336926-1.webp",
+    });
+    expect(guide.googleBooksId).toBe("abcDEF12345_");
   });
 });

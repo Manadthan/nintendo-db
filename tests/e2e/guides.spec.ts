@@ -114,7 +114,7 @@ test("/guides.json donne les guides du catalogue, jeux par identifiant", async (
     editeur: "エンターブレイン",
     date: "2014-06-01",
     precision: "mois",
-    couverture: "e2eCouverture1",
+    couverture: { source: "google", id: "e2eCouverture1" },
   });
   expect(guide?.jeux).toHaveLength(1);
 });

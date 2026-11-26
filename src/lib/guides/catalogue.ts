@@ -8,6 +8,7 @@ import type {
   VersionAffichee,
 } from "@/lib/catalogue/types";
 import { normaliser } from "@/lib/recherche/normaliser";
+import { type Couverture, choisirCouverture } from "./couverture";
 
 /** Un guide tel que /guides.json l'envoie : le strict nécessaire à sa carte, les jeux par leur identifiant. */
 export type GuideCatalogue = {
@@ -16,8 +17,8 @@ export type GuideCatalogue = {
   editeur: string | null;
   date: string | null;
   precision: PrecisionDate | null;
-  /** Identifiant Google Books de la couverture ; null : vignette neutre. */
-  couverture: string | null;
+  /** Copie Amazon ou Google Books (ADR-19 point 2) ; null : vignette neutre. */
+  couverture: Couverture | null;
   /** Identifiants des jeux couverts (`games.id`). */
   jeux: string[];
 };
@@ -29,6 +30,7 @@ export type LigneGuideCatalogue = {
   editeur: string | null;
   date_parution: string | null;
   precision_date: PrecisionDate | null;
+  couverture: string | null;
   google_books_id: string | null;
   guides_jeux: { game_id: string }[];
 };
@@ -45,7 +47,7 @@ export function versGuidesCatalogue(
       editeur: l.editeur,
       date: l.date_parution,
       precision: l.precision_date,
-      couverture: l.google_books_id,
+      couverture: choisirCouverture(l.couverture, l.google_books_id),
       jeux: [...new Set(l.guides_jeux.map((j) => j.game_id))].sort(),
     }))
     .sort((a, b) => a.isbn.localeCompare(b.isbn));
@@ -76,7 +78,9 @@ export function relierGuides(
  * frise, filtre Année), le « jeu » est le premier jeu couvert, sans note (filtres Console, Genre, Développeur, Série ;
  * tri par note : en fin). Son identifiant commence par « guide: » (jamais une possession).
  */
-export function versionsGuides(guides: readonly GuideRelie[]): VersionAffichee[] {
+export function versionsGuides(
+  guides: readonly GuideRelie[],
+): VersionAffichee[] {
   return guides.flatMap((g) => {
     const [premier] = g.jeux;
     if (!premier) return [];
