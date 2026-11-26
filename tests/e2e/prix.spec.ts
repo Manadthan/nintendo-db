@@ -96,3 +96,38 @@ test("eBay indisponible : le bloc est masqué, la fiche reste identique", async 
   ).toBeVisible();
   await expect(page.getByRole("region", { name: "Prix eBay" })).toHaveCount(0);
 });
+
+// US-29 — Prix eBay d'un amiibo (ADR-21 point 6) : amiibo de test (tests/e2e/amiibo.sql), sorti au Japon et en Europe.
+
+test("la fiche de l'amiibo a son bloc Prix eBay, demandé à sa propre route", async ({
+  page,
+}) => {
+  const demandes: string[] = [];
+  await page.route("**/api/prix/**", (route) => {
+    demandes.push(new URL(route.request().url()).pathname);
+    return route.fulfill({
+      contentType: "application/json",
+      body: JSON.stringify({
+        ...reponse,
+        regions: { JAP: reponse.regions.JAP, PAL: reponse.regions.PAL },
+      }),
+    });
+  });
+  await page.goto("/amiibo/inkling-e2e");
+  const bloc = page.getByRole("region", { name: "Prix eBay" });
+  await expect(bloc).toContainText("Europe12 €50 annonces · eBay FR + UK");
+  await expect(bloc).toContainText("Amérique du NordNon sorti");
+  await expect(bloc).toContainText("neuf ou d'occasion confondus");
+  expect(demandes).toEqual(["/api/prix/amiibo/inkling-e2e"]);
+});
+
+test("eBay indisponible : pas de bloc Prix eBay sur la fiche de l'amiibo", async ({
+  page,
+}) => {
+  await intercepter(page, 503, { erreur: "eBay indisponible" });
+  await page.goto("/amiibo/inkling-e2e");
+  await expect(
+    page.getByRole("region", { name: "Disponibilité" }),
+  ).toBeVisible();
+  await expect(page.getByRole("region", { name: "Prix eBay" })).toHaveCount(0);
+});
