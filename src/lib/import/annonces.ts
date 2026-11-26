@@ -34,7 +34,27 @@ const SAISONS_FR: Record<string, string> = {
   été: "06",
   automne: "09",
   hiver: "12",
+  // Nintendo Europe en anglais (titres du catalogue PAL, 26/11/2026).
+  spring: "03",
+  summer: "06",
+  autumn: "09",
+  fall: "09",
+  winter: "12",
 };
+const MOIS_EN = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+];
 const MOIS_FR = [
   "janvier",
   "février",
@@ -91,7 +111,7 @@ export function dateJapon(sdate: string | null | undefined): {
   return { date: null, precision: "inconnue" };
 }
 
-/** Date de Nintendo Europe, lue dans son libellé (« 28/01/2027 », « 2027 », « Mars 2027 », « Date à déterminer »). */
+/** Date de Nintendo Europe, lue dans son libellé (« 28/01/2027 », « 2027 », « Mars 2027 » ou « May 2027 », « TBD »). */
 export function dateEurope(
   libelle: string | null | undefined,
   iso: string | null | undefined,
@@ -104,11 +124,11 @@ export function dateEurope(
   m = /^(\S+) (\d{4})$/.exec(t);
   if (m && SAISONS_FR[m[1]!])
     return { date: `${m[2]}-${SAISONS_FR[m[1]!]}-01`, precision: "saison" };
-  if (m && MOIS_FR.includes(m[1]!))
-    return {
-      date: `${m[2]}-${deux(MOIS_FR.indexOf(m[1]!) + 1)}-01`,
-      precision: "mois",
-    };
+  const mois = m
+    ? Math.max(MOIS_FR.indexOf(m[1]!), MOIS_EN.indexOf(m[1]!))
+    : -1;
+  if (m && mois >= 0)
+    return { date: `${m[2]}-${deux(mois + 1)}-01`, precision: "mois" };
   // Sans libellé lisible : la date brute, sauf la date de remplacement « à déterminer » (31/12/2050).
   const brute = (iso ?? "").slice(0, 10);
   if (/^\d{4}-\d{2}-\d{2}$/.test(brute) && !brute.startsWith("2050"))
