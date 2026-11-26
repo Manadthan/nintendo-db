@@ -65,10 +65,11 @@ export function filtrerCollection(
   marche: Marche,
 ): VersionAffichee[] {
   if (!filtre) return versions;
-  // Un guide (US-27) ne se possède pas encore (ADR-19 point 8) : le filtre « Ma collection » ne montre que des jeux.
+  // Un guide (US-27, ADR-19 point 8) ne se possède pas, un amiibo pas encore (US-30) : le filtre ne montre que des jeux.
   return versions.filter(
     (v) =>
       !v.guide &&
+      !v.amiibo &&
       affichePossedee(possessions, v, marche) === (filtre === "possedes"),
   );
 }

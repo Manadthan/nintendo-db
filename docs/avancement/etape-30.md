@@ -12,4 +12,5 @@
 - module src/lib/amiibo/, script scripts/amiibo.mjs, migration 0034 #271 ; slugs uniques #274
 - remplissage du 25/11 (planche relue, figurines seulement) : 954 amiibo (674 cartes, 262 figurines, 9 bracelets, 5 peluches, 4 blocs), 202 boîtes US, 2 649 sorties, 6 432 jeux compatibles reliés au catalogue sur 8 158 ; 3 écartés (n° 687, 688, 943) #279
 - fiche de l'amiibo `/amiibo/[slug]`, bloc « Amiibo (N) » de la fiche du jeu, plan du site, AmiiboAPI dans « À propos » (PR 4)
-- à faire : catalogue, prix eBay, collection ; 30 amiibo sans date JAP (dont Sword Kirby, Noir Dedede)
+- catalogue : `/amiibo.json`, coche « Amiibo » (`?voir=`), cartes en grille / liste / frise, compteur « N jeux, M guides et P amiibo », recherche, filtres Année / Série (séries ramenées aux noms de nos jeux, choix du 26/11) / Console, tris (PR 5)
+- à faire : prix eBay, collection ; 30 amiibo sans date JAP (dont Sword Kirby, Noir Dedede)

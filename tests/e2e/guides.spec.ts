@@ -133,7 +133,10 @@ test("cocher « Guides » mêle les guides aux jeux du catalogue", async ({
 
   // « Jeux » décochée : le guide seul, qui mène à sa page.
   await page.getByRole("checkbox", { name: "Jeux" }).uncheck();
-  await expect(page.getByText("0 jeu et 1 guide affiché")).toBeVisible();
+  // Seulement ce qui est coché (SPEC US-29) : plus de « 0 jeu ».
+  await expect(
+    page.getByText("1 guide affiché", { exact: true }),
+  ).toBeVisible();
   await page
     .getByRole("link", { name: /マリオカート8 パーフェクトガイド/ })
     .click();
@@ -149,7 +152,9 @@ test("la recherche trouve un guide par le titre du jeu couvert", async ({
     page.getByRole("link", { name: /マリオカート8 パーフェクトガイド/ }),
   ).toBeVisible();
   await page.getByRole("searchbox").fill("zelda");
-  await expect(page.getByText("0 jeu et 0 guide affiché")).toBeVisible();
+  await expect(
+    page.getByText("0 guide affiché", { exact: true }),
+  ).toBeVisible();
 });
 
 test("sur le marché Europe, « Guides » est grisée", async ({ page }) => {
