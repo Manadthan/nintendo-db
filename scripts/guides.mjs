@@ -8,6 +8,10 @@
 // L'écriture relit le fichier guides-{console}.json déposé avec la planche : les numéros sont ceux qu'on a regardés.
 // NDL refuse (429) les appels rapprochés : un appel toutes les 6 s (§1 septdecies) ; compter près d'une heure pour 120 jeux.
 // Relancer la même commande après une coupure reprend la recherche (réponses gardées dans /dossier/cache).
+// NDL refuse aussi parfois presque tout depuis la session (26/11/2026 : 2 h pour 31 jeux Switch 2) : la tâche GitHub
+// « Guides NDL » lance la planche avec --deposer (guides-{console}.json et la planche dans le bucket privé gametdb,
+// guides/), puis la session les reprend avant l'écriture :
+//   npm run session -- scripts/guides.mjs --recuperer /dossier --console wii
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -35,6 +39,11 @@ const option = (nom) => {
 };
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 const UA = { "user-agent": "nintendo-db guides" };
+// Clé Google Books : ajoutée par le réseau dans la session, passée par GOOGLE_BOOKS_CLE dans la tâche GitHub.
+const entetes = (url) =>
+  new URL(url).host === "www.googleapis.com" && process.env.GOOGLE_BOOKS_CLE
+    ? { ...UA, "x-goog-api-key": process.env.GOOGLE_BOOKS_CLE }
+    : UA;
 
 /**
  * Réponses déjà lues (texte et JSON), gardées sur disque dans {dossier}/cache : si la session redémarre au milieu
@@ -65,7 +74,7 @@ async function appeler(url, type, intervalle) {
     await pause(intervalle);
     try {
       const r = await fetch(url, {
-        headers: UA,
+        headers: entetes(url),
         signal: AbortSignal.timeout(20000),
       });
       if (r.status === 429) {
@@ -255,6 +264,7 @@ async function chercher(slugConsole, dossier, limite) {
     ),
   );
   await planche(guides, join(dossier, `planche-${slugConsole}.jpg`));
+  if (process.argv.includes("--deposer")) await deposer(dossier, slugConsole);
   console.log(
     `${guides.length} guides (${guides.filter((g) => g.google_books_id).length} avec couverture) → ${fichier}`,
   );
@@ -318,6 +328,38 @@ async function planche(guides, chemin) {
     .toFile(chemin);
 }
 
+// Fichiers de la planche dans le bucket privé gametdb (tâche GitHub « Guides NDL ») et retour dans la session.
+const fichiersPlanche = (c) => [
+  [`guides-${c}.json`, "application/json"],
+  [`planche-${c}.jpg`, "image/jpeg"],
+];
+
+async function deposer(dossier, slugConsole) {
+  for (const [nom, type] of fichiersPlanche(slugConsole)) {
+    const { error } = await supabase.storage
+      .from("gametdb")
+      .upload(`guides/${nom}`, readFileSync(join(dossier, nom)), {
+        contentType: type,
+        upsert: true,
+      });
+    if (error) throw new Error(`dépôt ${nom} : ${error.message}`);
+  }
+  console.log(`planche ${slugConsole} déposée dans gametdb/guides/`);
+}
+
+async function recuperer(dossier, slugConsole) {
+  if (!slugConsole) throw new Error("--recuperer exige --console");
+  mkdirSync(dossier, { recursive: true });
+  for (const [nom] of fichiersPlanche(slugConsole)) {
+    const { data, error } = await supabase.storage
+      .from("gametdb")
+      .download(`guides/${nom}`);
+    if (error) throw new Error(`lecture ${nom} : ${error.message}`);
+    writeFileSync(join(dossier, nom), Buffer.from(await data.arrayBuffer()));
+  }
+  console.log(`planche ${slugConsole} récupérée dans ${dossier}`);
+}
+
 // ——— 2. Écriture des guides de la planche ———
 async function ecrire(dossier, consoleDemandee, sauf) {
   const fichier = join(dossier, fichierPlanche(consoleDemandee, undefined));
@@ -375,7 +417,10 @@ async function ecrire(dossier, consoleDemandee, sauf) {
 
 const dossierPlanche = option("--planche");
 const dossierEcriture = option("--ecrire");
-if (dossierPlanche)
+const dossierRecupere = option("--recuperer");
+if (dossierRecupere)
+  await recuperer(dossierRecupere, option("--console") ?? "");
+else if (dossierPlanche)
   await chercher(
     option("--console") ?? "",
     dossierPlanche,
