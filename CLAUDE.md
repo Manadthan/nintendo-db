@@ -178,5 +178,6 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
 - **Conflits sur l'Avancement** (4 fois le 25/11 : deux sessions sur les étapes 30 et 31, lignes voisines) : le
   détail d'une étape en cours s'écrit dans `docs/avancement/etape-NN.md`, jamais ici ; CLAUDE.md ne reçoit que la
   ligne de l'étape (créée une fois, cochée à la fin).
-- **Abonnement à la mauvaise PR** (3 fois : #209, #219, #226 au lieu de la PR créée) : s'abonner au numéro lu dans
-  l'adresse renvoyée par la création de la PR, jamais à un numéro deviné.
+- **Abonnement à la mauvaise PR** (4 fois : #209, #219, #226, #288 au lieu de #289) : **imposé par un hook**
+  (`.claude/hooks/abonnement-pr.mjs`, `.claude/settings.json`) : pendant 30 min après une création de PR, un abonnement
+  à un autre numéro, ou envoyé avant la fin de la création, est refusé avec le bon numéro.
