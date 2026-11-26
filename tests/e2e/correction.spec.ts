@@ -26,7 +26,9 @@ test("le propriétaire corrige un code produit ; le champ est alors verrouillé 
   const code = page.locator('input[name="PAL.code_produit"]');
   await code.fill("WUP-P-AMKP-TEST");
   await enregistrer(page).click();
-  await expect(page.getByRole("status")).toContainText("Fiche enregistrée");
+  await expect(
+    page.getByRole("status").filter({ hasText: "Fiche enregistrée" }),
+  ).toBeVisible();
 
   await page.reload();
   await expect(code).toHaveValue("WUP-P-AMKP-TEST");
@@ -62,7 +64,9 @@ test("le propriétaire ajoute un jeu manquant, puis le supprime après confirmat
   await page.getByRole("button", { name: "Ajouter le jeu" }).click();
 
   await expect(page).toHaveURL("/admin/jeux/wii-u/jeu-de-test-e2e?nouveau=1");
-  await expect(page.getByRole("status")).toContainText("Jeu ajouté");
+  await expect(
+    page.getByRole("status").filter({ hasText: "Jeu ajouté" }),
+  ).toBeVisible();
   await expect(page.locator('input[name="PAL.titre"]')).toHaveValue(
     "Jeu de test e2e",
   );
@@ -73,7 +77,9 @@ test("le propriétaire ajoute un jeu manquant, puis le supprime après confirmat
   page.once("dialog", (d) => d.accept());
   await page.getByRole("button", { name: "Supprimer ce jeu" }).click();
   await expect(page).toHaveURL(/\/admin\/jeux\?supprime=.*console=wii-u/);
-  await expect(page.getByRole("status")).toContainText("a été supprimé");
+  await expect(
+    page.getByRole("status").filter({ hasText: "a été supprimé" }),
+  ).toBeVisible();
   await expect(page.getByRole("link", { name: /Jeu de test e2e/ })).toHaveCount(
     0,
   );
@@ -105,7 +111,9 @@ test("note Metacritic saisie à la main : sur la fiche (avec lien) et sur la jaq
     .locator('input[name="metacritic_url"]')
     .fill("https://www.metacritic.com/game/kirby-and-the-rainbow-curse/");
   await enregistrer(page).click();
-  await expect(page.getByRole("status")).toContainText("Fiche enregistrée");
+  await expect(
+    page.getByRole("status").filter({ hasText: "Fiche enregistrée" }),
+  ).toBeVisible();
 
   await page.goto("/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
   await expect(
@@ -146,5 +154,7 @@ test("note Metacritic saisie à la main : sur la fiche (avec lien) et sur la jaq
   await page.locator('input[name="metacritic_note"]').fill("");
   await page.locator('input[name="metacritic_url"]').fill("");
   await enregistrer(page).click();
-  await expect(page.getByRole("status")).toContainText("Fiche enregistrée");
+  await expect(
+    page.getByRole("status").filter({ hasText: "Fiche enregistrée" }),
+  ).toBeVisible();
 });

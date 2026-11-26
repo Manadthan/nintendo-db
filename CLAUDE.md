@@ -164,9 +164,10 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   skill `script-prod` (`.claude/skills/script-prod/SKILL.md`).
 - **PR et CI** (lien Vercel, chaque tâche lue avant de dire « CI verte », pannes connues : installation des
   navigateurs, pgTAP après une migration, clone superficiel) : skill `steward` (`.claude/skills/steward/SKILL.md`).
-- **Sélecteurs e2e ambigus** (2 fois : « Remplacer » trouvait « À remplacer » ; `getByRole("alert")` trouvait aussi
-  l'annonceur de navigation de Next.js) : `getByRole(…, { name, exact: true })`, et toujours filtrer un rôle
-  générique par son texte (`getByRole("alert").filter({ hasText })`).
+- **Sélecteurs e2e ambigus** (3 fois : « Remplacer » trouvait « À remplacer » ; `getByRole("alert")` trouvait aussi
+  l'annonceur de navigation de Next.js ; « Jeu ajouté » + « Fiche enregistrée », CI de #290) : `getByRole(…, { name,
+  exact: true })` ; un rôle de message se filtre par son texte (`getByRole("status").filter({ hasText })`), **imposé
+  par le lint** (`eslint.config.mjs`, `tests/e2e/`).
 - **Tests e2e qui se gênent sur la base partagée** (2 fois : code produit de Splatoon modifié pendant qu'un test
   public le lisait ; « Jeu de test e2e » ajouté pendant que le catalogue comptait ses jeux) : les tests connectés
   qui écrivent tournent dans les projets `*-admin` de `playwright.config.ts`, après tous les tests publics ; un
