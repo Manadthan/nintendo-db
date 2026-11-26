@@ -270,7 +270,8 @@ export function FicheJeu({
                       aria-hidden="true"
                       className={`w-4 font-bold ${s.sortie ? "text-accent-fonce" : "text-absent"}`}
                     >
-                      {s.sortie ? "✓" : "–"}
+                      {/* Version annoncée : pas de coche avant sa sortie (US-32, choix du 25/11). */}
+                      {s.sortie ? (aVenir(r) ? "·" : "✓") : "–"}
                     </span>
                     <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                       <span className="text-sm font-semibold">

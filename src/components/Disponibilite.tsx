@@ -1,3 +1,4 @@
+import { sortieAVenir } from "@/lib/catalogue/a-venir";
 import { disponibilite } from "@/lib/catalogue/catalogue";
 import type { JeuCatalogue, Region } from "@/lib/catalogue/types";
 
@@ -10,23 +11,30 @@ const NOMS = { JAP: "Japon", US: "Amérique du Nord", PAL: "Europe" } as const;
 export function Disponibilite({
   jeu,
   possedees = [],
+  aujourdhui,
 }: {
   jeu: JeuCatalogue;
   /** Régions possédées par le propriétaire connecté (vide pour un visiteur). */
   possedees?: readonly Region[];
+  /** Jour de préparation de la page : une version annoncée pas encore sortie n'a pas de coche (US-32, 25/11). */
+  aujourdhui: string;
 }) {
   return (
     <ul aria-label="Disponibilité" className="flex shrink-0 gap-1">
-      {disponibilite(jeu).map(({ region, sorti }) => {
+      {disponibilite(jeu).map(({ region, sorti: annoncee }) => {
+        const s = jeu.sorties[region];
+        const aVenir =
+          annoncee && sortieAVenir(s.date, s.precision, aujourdhui);
+        const sorti = annoncee && !aVenir;
         const possede = sorti && possedees.includes(region);
         return (
           <li
             key={region}
-            aria-label={`${NOMS[region]} : ${sorti ? "sorti" : "non sorti"}${possede ? ", possédé" : ""}`}
+            aria-label={`${NOMS[region]} : ${sorti ? "sorti" : aVenir ? "à venir" : "non sorti"}${possede ? ", possédé" : ""}`}
             className={`flex h-5 shrink-0 items-center rounded border px-1 text-[10px] font-bold whitespace-nowrap ${
               possede
                 ? "border-possede bg-carte text-possede"
-                : sorti
+                : sorti || aVenir
                   ? "border-transparent bg-accent-doux text-accent-fonce"
                   : "border-transparent bg-surface text-texte-discret"
             }`}
