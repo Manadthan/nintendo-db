@@ -298,8 +298,7 @@ export function FicheJeu({
           </section>
 
           <PrixEbay
-            consoleSlug={jeu.console.slug}
-            jeuSlug={jeu.slug}
+            adresse={`/api/prix/${jeu.console.slug}/${jeu.slug}`}
             sorties={{
               JAP: jeu.sorties.JAP.sortie && !aVenir("JAP"),
               US: jeu.sorties.US.sortie && !aVenir("US"),

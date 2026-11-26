@@ -15,18 +15,21 @@ type Etat =
   | { etape: "masque" };
 
 /**
- * Bloc « Prix eBay » de la fiche (US-25, ADR-17) : demandé à la route après l'affichage (la page reste statique),
- * une ligne par région, la version choisie surlignée. eBay indisponible : le bloc entier disparaît.
+ * Bloc « Prix eBay » de la fiche d'un jeu (US-25, ADR-17) ou d'un amiibo (US-29) : demandé à la route après
+ * l'affichage (la page reste statique), une ligne par région, la version choisie surlignée. eBay indisponible : le
+ * bloc entier disparaît.
  */
 export function PrixEbay({
-  consoleSlug,
-  jeuSlug,
+  adresse,
+  objet = "jeu",
   sorties,
   noms,
   region,
 }: {
-  consoleSlug: string;
-  jeuSlug: string;
+  /** Route du prix : `/api/prix/{console}/{jeu}` ou `/api/prix/amiibo/{slug}`. */
+  adresse: string;
+  /** Ce que les annonces confondent : boîte complète ou jeu seul ; amiibo neuf ou d'occasion. */
+  objet?: "jeu" | "amiibo";
   sorties: Record<Region, boolean>;
   noms: Record<Region, string>;
   region: Region;
@@ -35,7 +38,7 @@ export function PrixEbay({
 
   useEffect(() => {
     const abandon = new AbortController();
-    fetch(`/api/prix/${consoleSlug}/${jeuSlug}`, { signal: abandon.signal })
+    fetch(adresse, { signal: abandon.signal })
       .then((r) =>
         r.ok
           ? (r.json() as Promise<ReponsePrix>)
@@ -46,7 +49,7 @@ export function PrixEbay({
         if (!abandon.signal.aborted) setEtat({ etape: "masque" });
       });
     return () => abandon.abort();
-  }, [consoleSlug, jeuSlug]);
+  }, [adresse]);
 
   if (etat.etape === "masque" || !REGIONS.some((r) => sorties[r])) return null;
 
@@ -123,9 +126,12 @@ export function PrixEbay({
         <p className="text-xs leading-relaxed text-texte-discret">
           Prix{" "}
           <strong className="font-semibold text-texte-doux">demandé</strong> :
-          médiane des annonces en cours (pas des ventes), boîte complète ou jeu
-          seul confondus. Dollars et livres convertis en euros au taux du jour
-          (BCE). {anciennete(etat.prix.calculeLe, new Date())}.
+          médiane des annonces en cours (pas des ventes),{" "}
+          {objet === "amiibo"
+            ? "neuf ou d'occasion confondus"
+            : "boîte complète ou jeu seul confondus"}
+          . Dollars et livres convertis en euros au taux du jour (BCE).{" "}
+          {anciennete(etat.prix.calculeLe, new Date())}.
         </p>
       )}
     </section>

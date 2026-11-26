@@ -60,7 +60,8 @@ const HORS_SUJET = [
   "artwork",
   "insert",
 ];
-const JAPON = [
+/** Mentions du Japon et de l'Europe dans un titre d'annonce (règles de région, aussi pour les amiibo). */
+export const JAPON = [
   "jp",
   "jap",
   "japan",
@@ -70,12 +71,20 @@ const JAPON = [
   "ntsc j",
   "import",
 ];
-const PAL = ["pal", "fr", "fra", "uk", "eur", "europe", "version francaise"];
+export const PAL = [
+  "pal",
+  "fr",
+  "fra",
+  "uk",
+  "eur",
+  "europe",
+  "version francaise",
+];
 /** Numéros de suite : « Super Mario Galaxy 2 » n'est pas « Super Mario Galaxy ». */
-const SUITES = ["2", "3", "ii", "iii"];
+export const SUITES = ["2", "3", "ii", "iii"];
 
 /** Vrai si l'un des mots (ou groupes de mots) apparaît en entier dans le texte normalisé. */
-const contient = (texte: string, mots: string[]) =>
+export const contient = (texte: string, mots: string[]) =>
   mots.some((m) => ` ${texte} `.includes(` ${m} `));
 
 /** Mots significatifs du titre : plus de 2 lettres, ou avec un chiffre (« 2 », « 64 », « 3d »). */
@@ -191,7 +200,27 @@ export type PrixRegion =
     }
   | { etat: "peu"; annonces: number; marches: Marche[]; lien: string };
 
-/** Prix d'une version : annonces de tous ses marchés réunies, pertinentes seulement, médiane en euros arrondie. */
+/**
+ * Prix d'une version à partir des annonces de tous ses marchés : pertinentes seulement (`pertinente`), médiane en
+ * euros arrondie ; moins de 5 annonces : « peu ». Commun aux jeux et aux amiibo (US-29).
+ */
+export function resumerPrix(
+  annonces: Annonce[],
+  pertinente: (titreAnnonce: string) => boolean,
+  region: Region,
+  taux: Taux,
+  lien: string,
+): PrixRegion {
+  const euros = annonces
+    .filter((a) => pertinente(a.titre))
+    .map((a) => enEuros(a.prix, a.devise, taux))
+    .filter((v): v is number => v !== null);
+  const commun = { annonces: euros.length, marches: MARCHES[region], lien };
+  if (euros.length < SEUIL_ANNONCES) return { etat: "peu", ...commun };
+  return { etat: "prix", euros: Math.round(mediane(euros)!), ...commun };
+}
+
+/** Prix d'une version d'un jeu : annonces de tous ses marchés réunies, pertinentes seulement, médiane en euros. */
 export function prixRegion(
   annonces: Annonce[],
   titreJeu: string,
@@ -199,17 +228,13 @@ export function prixRegion(
   region: Region,
   taux: Taux,
 ): PrixRegion {
-  const euros = annonces
-    .filter((a) => estPertinente(a.titre, titreJeu, region))
-    .map((a) => enEuros(a.prix, a.devise, taux))
-    .filter((v): v is number => v !== null);
-  const commun = {
-    annonces: euros.length,
-    marches: MARCHES[region],
-    lien: lienVentes(titreJeu, console, region),
-  };
-  if (euros.length < SEUIL_ANNONCES) return { etat: "peu", ...commun };
-  return { etat: "prix", euros: Math.round(mediane(euros)!), ...commun };
+  return resumerPrix(
+    annonces,
+    (t) => estPertinente(t, titreJeu, region),
+    region,
+    taux,
+    lienVentes(titreJeu, console, region),
+  );
 }
 
 /** Recherche des objets vendus du jeu sur eBay : ebay.com pour JAP et US, ebay.fr pour PAL. */
