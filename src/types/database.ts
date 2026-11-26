@@ -324,6 +324,7 @@ export type Database = {
       };
       guides: {
         Row: {
+          couverture: string | null;
           cree_le: string;
           date_parution: string | null;
           editeur: string | null;
@@ -339,6 +340,7 @@ export type Database = {
         };
         ComputedFields: never;
         Insert: {
+          couverture?: string | null;
           cree_le?: string;
           date_parution?: string | null;
           editeur?: string | null;
@@ -353,6 +355,7 @@ export type Database = {
           verrous?: string[];
         };
         Update: {
+          couverture?: string | null;
           cree_le?: string;
           date_parution?: string | null;
           editeur?: string | null;
