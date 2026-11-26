@@ -1,5 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { BASE_LOCALE_DISPONIBLE, seConnecter } from "./utilisateur";
+import {
+  attendreHydratation,
+  BASE_LOCALE_DISPONIBLE,
+  seConnecter,
+} from "./utilisateur";
 
 // US-16 — Ma collection (étape 12). Base Supabase locale (CI) : jeux de départ (migration 0004). Ces tests écrivent
 // dans la base : ils tournent dans les projets `*-admin` (playwright.config.ts) et décochent ce qu'ils ont coché.
@@ -160,4 +164,66 @@ test("Statistiques : état du catalogue et filtre « sans code produit » de la 
       .getByRole("link", { name: "Sans code produit", exact: true }),
   ).toHaveAttribute("aria-current", "page");
   await expect(page.getByText(/jeux Wii U sans code produit/)).toBeVisible();
+});
+
+// US-32 — Voir ce qui arrive. Ici, et non dans un fichier à part : les tests d'un même fichier passent l'un après
+// l'autre, et ceux de ce fichier comptent les jeux (« 1 jeu affiché sur 4 ») ; un 5ᵉ jeu ajouté en même temps par un
+// autre fichier les ferait échouer (CI de #290, 26/11/2026). Date en 2099 : toujours à venir.
+test("un jeu annoncé apparaît dans la bande « À venir », avec l'étiquette, sans case « je l'ai » (US-32)", async ({
+  page,
+}) => {
+  const titre = "Jeu annoncé e2e";
+  await seConnecter(page);
+  await page.goto("/admin/jeux");
+  await page.getByText("+ Ajouter un jeu").click();
+  await attendreHydratation(
+    page.getByRole("button", { name: "Ajouter le jeu" }),
+  );
+  await page.getByLabel("Titre").fill(titre);
+  await page.getByLabel("PAL").check();
+  await page.getByRole("button", { name: "Ajouter le jeu" }).click();
+  await expect(page).toHaveURL(
+    /\/admin\/jeux\/wii-u\/jeu-annonce-e2e.*\?nouveau=1/,
+  );
+  const fiche = new URL(page.url()).pathname;
+
+  try {
+    const enregistrer = page.getByRole("button", {
+      name: "Enregistrer la fiche",
+    });
+    await attendreHydratation(enregistrer);
+    await page.locator('input[name="PAL.date_sortie"]').fill("2099-03-14");
+    await page
+      .locator('select[name="PAL.precision_date"]')
+      .selectOption("jour");
+    await enregistrer.click();
+    await expect(
+      page.getByRole("status").filter({ hasText: "Fiche enregistrée" }),
+    ).toBeVisible();
+
+    // Accueil : la bande montre le jeu (annoncé en Europe seulement) et sa date courte.
+    await page.goto("/");
+    const carte = page
+      .getByRole("region", { name: /À venir/ })
+      .getByRole("link", { name: new RegExp(titre) });
+    await expect(carte).toBeVisible();
+    await expect(carte).toContainText("14 mars 2099");
+
+    // Fiche : date annoncée, étiquette, ni case « je l'ai » pour cette version.
+    await carte.click();
+    await expect(page.getByText(/Sortie prévue : 14 mars 2099/)).toBeVisible();
+    await expect(
+      page.getByText("À venir", { exact: true }).first(),
+    ).toBeVisible();
+    await expect(caseEurope(page)).toHaveCount(0);
+  } finally {
+    await page.goto(fiche);
+    const supprimer = page.getByRole("button", { name: "Supprimer ce jeu" });
+    await attendreHydratation(supprimer);
+    page.once("dialog", (d) => d.accept());
+    await supprimer.click();
+    await expect(
+      page.getByRole("status").filter({ hasText: "a été supprimé" }),
+    ).toBeVisible();
+  }
 });
