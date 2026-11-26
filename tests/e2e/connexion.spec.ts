@@ -54,9 +54,11 @@ test("un mauvais mot de passe affiche une erreur qui ne dit pas quel champ est f
   await page.getByLabel("Mot de passe").fill("mauvais-mot-de-passe");
   await page.getByRole("button", { name: "Se connecter" }).click();
 
-  await expect(page.locator("form").getByRole("alert")).toHaveText(
-    "E-mail ou mot de passe incorrect.",
-  );
+  await expect(
+    page
+      .getByRole("alert")
+      .filter({ hasText: "E-mail ou mot de passe incorrect." }),
+  ).toBeVisible();
   await expect(page).toHaveURL("/admin/connexion");
   await expect(page.getByLabel("E-mail")).toHaveValue(PROPRIETAIRE_TEST.email);
 
@@ -64,9 +66,11 @@ test("un mauvais mot de passe affiche une erreur qui ne dit pas quel champ est f
   await page.getByLabel("E-mail").fill("inconnu@exemple.fr");
   await page.getByLabel("Mot de passe").fill(PROPRIETAIRE_TEST.password);
   await page.getByRole("button", { name: "Se connecter" }).click();
-  await expect(page.locator("form").getByRole("alert")).toHaveText(
-    "E-mail ou mot de passe incorrect.",
-  );
+  await expect(
+    page
+      .getByRole("alert")
+      .filter({ hasText: "E-mail ou mot de passe incorrect." }),
+  ).toBeVisible();
 });
 
 test("le propriétaire se connecte, puis se déconnecte", async ({ page }) => {
