@@ -19,6 +19,7 @@ import { possedeAmiibo } from "@/lib/collection/collection";
 import { basculerAmiibo, useCollection } from "@/lib/collection/navigateur";
 import { BasculeRegion, NOMS_REGION } from "./BasculeRegion";
 import { ImageAmiibo } from "./ImageAmiibo";
+import { PrixEbay } from "./PrixEbay";
 import { RetourCatalogue } from "./RetourCatalogue";
 
 function Info({ libelle, valeur }: { libelle: string; valeur: string | null }) {
@@ -38,7 +39,7 @@ const LIEN = "text-accent underline-offset-2 hover:underline";
 
 /**
  * Fiche d'un amiibo (US-29, maquette amiibo-fiche.png) : photo, boîte américaine, bascule JAP / US / PAL sur la date
- * de sortie, case « Je l'ai » (connecté, US-30), informations, jeux compatibles, disponibilité, sources.
+ * de sortie, case « Je l'ai » (connecté, US-30), informations, jeux compatibles, disponibilité, prix eBay, sources.
  */
 export function FicheAmiibo({
   amiibo,
@@ -58,10 +59,12 @@ export function FicheAmiibo({
   const region = choix ?? regionAmiiboParDefaut(amiibo.sorties, marche);
   // Ma collection (US-30) : une case par amiibo, seulement connecté, et seulement s'il est déjà sorti quelque part.
   const collection = useCollection();
-  const sortiQuelquePart = REGIONS.some((r) => {
+  // Prix eBay et case : seulement pour une région où l'amiibo est déjà sorti (US-32).
+  const sortiPasAVenir = (r: Region) => {
     const s = amiibo.sorties[r];
     return s.sortie && !sortieAVenir(s.date, s.precision, aujourdhui);
-  });
+  };
+  const sortiQuelquePart = REGIONS.some(sortiPasAVenir);
   const fenetre = useRef<HTMLDialogElement>(null);
   const type = LIBELLES_TYPE[amiibo.type];
 
@@ -272,14 +275,26 @@ export function FicheAmiibo({
             </ul>
           </section>
 
+          <PrixEbay
+            adresse={`/api/prix/amiibo/${amiibo.slug}`}
+            objet="amiibo"
+            sorties={{
+              JAP: sortiPasAVenir("JAP"),
+              US: sortiPasAVenir("US"),
+              PAL: sortiPasAVenir("PAL"),
+            }}
+            noms={NOMS_REGION}
+            region={region}
+          />
+
           <p className="text-xs leading-relaxed text-texte-discret">
             Sources :{" "}
             <a href={SOURCE_AMIIBOAPI} className={LIEN}>
               AmiiboAPI
             </a>{" "}
             (liste, dates, jeux compatibles) · photo
-            {amiibo.boite ? " et boîte" : ""} : Nintendo. Site de fan non
-            affilié à Nintendo.
+            {amiibo.boite ? " et boîte" : ""} : Nintendo · prix via eBay. Site
+            de fan non affilié à Nintendo.
           </p>
         </div>
       </div>

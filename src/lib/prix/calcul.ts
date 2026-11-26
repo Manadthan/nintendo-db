@@ -14,7 +14,12 @@ import {
 } from "./prix";
 
 export type Sources = {
-  chercher: (marche: Marche, q: string) => Promise<Annonce[]>;
+  /** `categorie` : catégorie eBay ; par défaut « Video Games », `null` pour toutes (amiibo). */
+  chercher: (
+    marche: Marche,
+    q: string,
+    categorie?: string | null,
+  ) => Promise<Annonce[]>;
   taux: () => Promise<Taux>;
 };
 
