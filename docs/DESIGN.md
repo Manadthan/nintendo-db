@@ -2,11 +2,12 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.46 — 26/11/2026 — statut : **à valider**
+> Version 1.47 — 26/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 1.46 | 26/11/2026 | ADR-20 point 6 : boîte US du My Nintendo Store recadrée (marge transparente et boîtier rouge retirés, gabarit de gamecartdb, `src/lib/jaquettes/boite-nintendo.ts`) ; une image en largeur n'est pas une boîte (vignette neutre) ; page `/admin/import/annonces` |
+> | 1.47 | 26/11/2026 | ADR-20 point 6 : boîte US du My Nintendo Store recadrée (marge transparente et boîtier rouge retirés, gabarit de gamecartdb, `src/lib/jaquettes/boite-nintendo.ts`) ; une image en largeur n'est pas une boîte (vignette neutre) ; page `/admin/import/annonces` |
+> | 1.46 | 26/11/2026 | **ADR-19 point 2 révisé — couvertures Amazon Japon copiées** (SPEC v1.52, choix du propriétaire du 26/11) : étude des 159 guides (Amazon 159 / 159, ≈ 350 × 500 contre 300 × 427 chez Google) ; bucket public `guides`, colonne `guides.couverture` (migration 0035), script `couvertures-amazon.mjs` ; conditions d'Amazon : risque accepté ; plan en 4 PR |
 > | 1.45 | 26/11/2026 | ADR-20 point 6 précisé (choix du propriétaire du 26/11) : régions d'un même jeu regroupées (Europe et US au titre identique, titres anglais de Nintendo Europe ; Japon au titre anglais cité ou au même jour, sinon menu « même jeu que ») ; jaquette : seule la boîte US du My Nintendo Store (les images de Nintendo Japon et Europe ne sont pas des boîtes) |
 > | 1.44 | 25/11/2026 | **ADR-21 — Amiibo** (étape 30, SPEC v1.49, maquettes v0.14) : tables `amiibo`, `amiibo_sorties`, `amiibo_jeux`, `amiibo_exclus`, `possessions_amiibo` ; images copiées en WebP (bucket `amiibo`) ; remplissage par la session (AmiiboAPI + Nintendo US, JP, Europe) après une planche ; `/amiibo.json` pour le catalogue ; plan en 7 PR (§8, point 30) |
 > | 1.43 | 25/11/2026 | **ADR-20 — À venir** (SPEC v1.50, US-32 et US-33) : un jeu annoncé est un jeu ordinaire, « à venir » calculé depuis la date et sa précision ; précisions `saison` et `inconnue` (migration) ; bande de l'accueil dans le HTML préparé ; annonces lues par le relais (Nintendo Japon, Europe, US) puis import depuis l'administration ; plan en 6 PR (§8, étape 31) |
@@ -775,11 +776,29 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
    - RLS : lecture pour tous (`guides_exclus` : propriétaire seulement), écriture réservée au propriétaire
      (`est_proprietaire()`, ADR-16) et à la clé secrète. pgTAP : lecture anonyme, écriture refusée, ISBN unique et à
      13 chiffres, cascade.
-2. **Couverture** : **jamais copiée** (conditions de Google Books, §1 septdecies) : la base garde `google_books_id`,
-   le navigateur charge `books.google.com/books/content?id=…&printsec=frontcover&img=1&zoom=1&fife=w800-h1200`
-   (300 px) dans un `<img loading="lazy">` sans optimisation Next (comme ADR-18) ; image cassée → vignette neutre.
-   Mention « powered by Google » à côté des couvertures et lien vers la page Google Books du guide
-   (`books.google.com/books?id=…`). Rien n'appelle Google à l'ouverture d'une page : pas de clé dans Vercel.
+2. **Couverture** (révisé le 26/11, SPEC v1.52) : **Amazon Japon, copiée chez nous** ; Google Books en secours.
+   - **Étude du 26/11** (lecture seule, depuis la session, une requête par seconde) : par ISBN 10,
+     `images-na.ssl-images-amazon.com/images/P/{ISBN10}.09.LZZZZZZZ.jpg` donne une couverture pour **159 guides sur
+     159** (les 45 sans Google Books compris), ≈ **350 × 500** (la plus grande taille par ISBN ; `_SL1500_` et
+     `_SX800_` donnent 113 × 160), contre **300 × 427** chez Google Books, deux fois plus d'octets (moins compressée),
+     même visuel. Une image de quelques octets (1 px) = pas de couverture. Rakuten : 503 hors du Japon.
+   - **Copie** : WebP (sharp, qualité de l'application) à la taille d'origine, bucket **public `guides`** (lecture pour
+     tous, écriture réservée au propriétaire et à la clé secrète, comme le bucket `amiibo` de 0033), chemin versionné
+     `{isbn}-{version}.webp` (ADR-04 : une nouvelle image change l'adresse) ; la base garde le chemin dans
+     **`guides.couverture`** (migration 0035, `null` = pas de copie). Rien n'appelle Amazon à l'ouverture d'une page.
+   - **Affichage** : `couverture` d'abord, mention **« Couverture : Amazon.co.jp »** ; sinon `google_books_id` comme
+     avant (le navigateur charge `books.google.com/books/content?id=…&zoom=1&fife=w800-h1200`, mention « powered by
+     Google », jamais copiée : conditions de Google Books) ; sinon, ou image cassée, la vignette neutre.
+     `google_books_id` est gardé pour le lien « Google Books › » de la page du guide.
+   - **Conditions d'Amazon** : ses images sont réservées au programme Partenaires (lien vers Amazon exigé) et leur
+     copie n'y est pas prévue. **Risque accepté par le propriétaire le 26/11** (site sans publicité ni vente, chaque
+     page du guide renvoie déjà vers Amazon Japon) ; pas d'inscription au programme pour l'instant. Si Amazon le
+     demande : retirer les copies (vider `couverture`, supprimer le bucket) et revenir à Google Books.
+   - **Remplissage** : `scripts/couvertures-amazon.mjs` depuis la session (skill `script-prod`) : `--planche dossier`
+     (tous les guides, numérotés), puis `--ecrire dossier --sauf n,n` ; un guide dont la couverture a été corrigée à la
+     main (`verrous` contient `couverture`) n'est jamais touché.
+   - **Plan** : 4 PR — documents ; migration 0035 (+ pgTAP, types) ; script, planche puis écriture ;
+     affichage (`CouvertureGuide`, page du guide, fiche, catalogue, « À propos »).
 3. **Liens d'achat** : adresses de recherche par ISBN, calculées (module pur), jamais stockées : Amazon Japon
    (`www.amazon.co.jp/s?k={isbn}`) et Suruga-ya (`www.suruga-ya.jp/search?search_word={isbn}`), ouverts dans un nouvel
    onglet (`rel="noopener noreferrer"`) ; adresses vérifiées à la main avant la PR de la page.
@@ -853,7 +872,7 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
    sans table : une fois importée, la sortie JAP porte le titre japonais, qui retrouve le jeu aux imports suivants.
    Jaquette (v1.45) : seule la **boîte américaine** du My Nintendo Store est une vraie boîte ; copiée en WebP comme
    les autres (source `nintendo`, gardée par les imports suivants), sans sa marge transparente ni son boîtier rouge
-   (v1.46, SPEC v1.44, gabarit de gamecartdb : mêmes photos) ; une image en largeur (Hyrule Warriors : un visuel) est
+   (v1.47, SPEC v1.44, gabarit de gamecartdb : mêmes photos) ; une image en largeur (Hyrule Warriors : un visuel) est
    ignorée. Les images de Nintendo Japon et Europe (visuels
    carrés ou en largeur, pas des boîtes, comme en v1.29 de la SPEC) ne servent pas : vignette neutre.
 7. **Tests** : unitaires sur des fixtures écrites à la main d'après les réponses du 25/11 (Nintendo Japon, Europe,
