@@ -5,6 +5,7 @@
 //   npm run session -- scripts/couvertures-amazon.mjs --planche /dossier          (téléchargement + planche, rien n'est écrit)
 //   npm run session -- scripts/couvertures-amazon.mjs --ecrire /dossier           (écrit les couvertures de la planche)
 //   npm run session -- scripts/couvertures-amazon.mjs --ecrire /dossier --sauf 3,17 (sans les n° 3 et 17)
+//   … --planche /dossier --nouveaux   (seulement les guides encore sans couverture copiée : ajouts après le 26/11)
 // L'écriture relit couvertures-amazon.json et les images déposées avec la planche : ce qu'on a regardé est ce qui est
 // écrit. Un guide verrouillé (`verrous` contient « couverture ») n'est jamais touché. Amazon : une requête par seconde.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -41,7 +42,12 @@ async function guides(colonnes = "isbn, titre, editeur, verrous") {
 // ——— 1. Téléchargement et planche (lecture seule) ———
 async function preparer(dossier, limite) {
   mkdirSync(join(dossier, "amazon"), { recursive: true });
-  const tous = await guides();
+  const nouveaux = process.argv.includes("--nouveaux");
+  const tous = (
+    await guides(
+      `isbn, titre, editeur, verrous${nouveaux ? ", couverture" : ""}`,
+    )
+  ).filter((g) => !nouveaux || !g.couverture);
   const retenus = [];
   const sans = [];
   let verrouilles = 0;

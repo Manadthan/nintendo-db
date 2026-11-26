@@ -1,0 +1,48 @@
+name: Guides NDL
+
+# Étape 29 (SPEC US-28, DESIGN ADR-19 point 6), reprise du 26/11/2026 : cherche les guides japonais des jeux d'une ou
+# plusieurs consoles chez NDL Search (un appel toutes les 6 s) et dépose, par console, guides-{console}.json et la
+# planche dans le bucket PRIVÉ « gametdb » (guides/). Rien n'est écrit dans le catalogue : la session Claude montre la
+# planche, puis écrit après l'accord du propriétaire (scripts/guides.mjs --recuperer puis --ecrire).
+# Pourquoi une tâche : depuis la session, NDL refuse presque tout (429) et une commande s'arrête au bout de 2 h.
+# Lancée à la main (Actions → Guides NDL → Run workflow).
+on:
+  workflow_dispatch:
+    inputs:
+      consoles:
+        description: "Consoles, l'une après l'autre (ex. wii-u,wii,ds)"
+        default: "wii-u,wii,ds"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: guides-ndl
+
+jobs:
+  planches:
+    name: Chercher les guides et déposer les planches
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Police japonaise de la planche
+        continue-on-error: true # sans elle, les légendes de la planche sont illisibles, pas fausses
+        timeout-minutes: 10
+        run: sudo apt-get update -qq && sudo apt-get install -y fonts-wqy-zenhei
+      - name: Planches (lecture seule pour le catalogue)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          GOOGLE_BOOKS_CLE: ${{ secrets.GOOGLE_BOOKS_CLE }}
+          CONSOLES: ${{ inputs.consoles }}
+        run: |
+          for c in ${CONSOLES//,/ }; do
+            node scripts/guides.mjs --console "$c" --planche guides --deposer
+          done
