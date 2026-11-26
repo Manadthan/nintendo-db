@@ -17,7 +17,7 @@ export async function GET() {
       supabase
         .from("guides")
         .select(
-          "isbn, titre, editeur, date_parution, precision_date, google_books_id, guides_jeux(game_id)",
+          "isbn, titre, editeur, date_parution, precision_date, couverture, google_books_id, guides_jeux(game_id)",
         )
         .order("id")
         .range(de, a),

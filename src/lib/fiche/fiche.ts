@@ -3,6 +3,7 @@ import {
   type AmiiboDuJeu,
   type LigneAmiiboDuJeu,
 } from "@/lib/amiibo/fiche";
+import { type Couverture, choisirCouverture } from "@/lib/guides/couverture";
 import { versionAffichee } from "@/lib/catalogue/catalogue";
 import { versJeuCatalogue, type LigneJeu } from "@/lib/catalogue/lignes";
 import {
@@ -56,7 +57,7 @@ export type GuideFiche = {
   titre: string;
   editeur: string | null;
   annee: string | null;
-  googleBooksId: string | null;
+  couverture: Couverture | null;
 };
 
 export type CaptureFiche = {
@@ -86,6 +87,7 @@ export type LigneFiche = Omit<LigneJeu, "releases"> & {
           titre: string;
           editeur: string | null;
           date_parution: string | null;
+          couverture: string | null;
           google_books_id: string | null;
         } | null;
       }[]
@@ -138,7 +140,7 @@ export function versJeuFiche(ligne: LigneFiche): JeuFiche {
         titre: g.titre,
         editeur: g.editeur,
         annee: g.date_parution?.slice(0, 4) ?? null,
-        googleBooksId: g.google_books_id,
+        couverture: choisirCouverture(g.couverture, g.google_books_id),
       })),
     amiibo: versAmiiboDuJeu(ligne.amiibo_jeux ?? []),
   };

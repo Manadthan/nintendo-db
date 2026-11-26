@@ -4,7 +4,7 @@ import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { versGuidePage, type GuidePage, type LigneGuide } from "./page";
 
 const COLONNES =
-  "isbn, titre, editeur, date_parution, precision_date, pages, google_books_id, ndl_url, guides_jeux(games(id, slug, developpeur, genre, series, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, jaquette_path)))";
+  "isbn, titre, editeur, date_parution, precision_date, pages, couverture, google_books_id, ndl_url, guides_jeux(games(id, slug, developpeur, genre, series, metacritic_note, consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, jaquette_path)))";
 
 /** Un guide par son ISBN (page /guides/{isbn}, US-27) ; null s'il n'existe pas. Lu en visiteur (RLS : lecture publique). */
 export async function chargerGuide(isbn: string): Promise<GuidePage | null> {

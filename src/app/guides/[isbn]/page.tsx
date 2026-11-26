@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CouvertureGuide } from "@/components/CouvertureGuide";
+import {
+  CouvertureGuide,
+  MentionCouverture,
+} from "@/components/CouvertureGuide";
 import { EnTete } from "@/components/EnTete";
 import { Jaquette } from "@/components/Jaquette";
 import { RetourCatalogue } from "@/components/RetourCatalogue";
@@ -83,17 +86,14 @@ export default async function PageGuide({
           <div className="flex flex-col items-center gap-2 lg:sticky lg:top-[72px]">
             <div className="w-full max-w-[300px] drop-shadow-[0_10px_14px_rgba(22,24,29,0.16)]">
               <CouvertureGuide
-                googleBooksId={guide.googleBooksId}
+                couverture={guide.couverture}
                 titre={guide.titre}
                 legende={[guide.editeur, annee].filter(Boolean).join(" · ")}
               />
             </div>
-            {guide.googleBooksId && (
-              <p className="text-[11px] text-texte-discret">
-                Couverture : Google Books ·{" "}
-                <span className="font-semibold">powered by Google</span>
-              </p>
-            )}
+            <MentionCouverture
+              sources={guide.couverture ? [guide.couverture.source] : []}
+            />
           </div>
 
           <div className="flex flex-col gap-5">
@@ -243,8 +243,9 @@ export default async function PageGuide({
               ) : (
                 "Bibliothèque nationale de la Diète (NDL Search)"
               )}
-              {guide.googleBooksId && " · couverture : Google Books"}. Site de
-              fan non affilié à Nintendo.
+              {guide.couverture &&
+                ` · couverture : ${guide.couverture.source === "amazon" ? "Amazon.co.jp" : "Google Books"}`}
+              . Site de fan non affilié à Nintendo.
             </p>
           </div>
         </div>

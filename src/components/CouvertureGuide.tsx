@@ -1,19 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { adresseCouverture } from "@/lib/guides/guides";
+import {
+  type Couverture,
+  adresseCouvertureGuide,
+} from "@/lib/guides/couverture";
 
 /**
- * Couverture d'un guide servie par Google Books (ADR-19 point 2 : jamais copiée chez nous). Sans couverture, ou si
- * l'image ne charge pas : vignette neutre (titre, éditeur, année), comme un jeu sans jaquette (US-27).
+ * Couverture d'un guide (ADR-19 point 2 révisé) : copie d'Amazon Japon dans notre stockage, sinon Google Books (servie
+ * par Google, jamais copiée). Sans couverture, ou si l'image ne charge pas : vignette neutre (titre, éditeur, année),
+ * comme un jeu sans jaquette (US-27).
  */
 export function CouvertureGuide({
-  googleBooksId,
+  couverture,
   titre,
   legende,
   petite = false,
 }: {
-  googleBooksId: string | null;
+  couverture: Couverture | null;
   titre: string;
   /** Éditeur et année, sur la vignette neutre. */
   legende: string;
@@ -29,7 +33,7 @@ export function CouvertureGuide({
     if (img?.complete && img.naturalWidth === 0) setCassee(true);
   }, []);
 
-  if ((!googleBooksId || cassee) && petite)
+  if ((!couverture || cassee) && petite)
     return (
       <div
         role="img"
@@ -39,7 +43,7 @@ export function CouvertureGuide({
         <span className="line-clamp-4">{titre}</span>
       </div>
     );
-  if (!googleBooksId || cassee)
+  if (!couverture || cassee)
     return (
       <div
         role="img"
@@ -58,10 +62,10 @@ export function CouvertureGuide({
       </div>
     );
   return (
-    // eslint-disable-next-line @next/next/no-img-element -- couverture servie par Google, jamais relayée (ADR-19)
+    // eslint-disable-next-line @next/next/no-img-element -- copie déjà réduite, ou Google jamais relayé (ADR-19)
     <img
       ref={image}
-      src={adresseCouverture(googleBooksId)}
+      src={adresseCouvertureGuide(couverture)}
       alt={`Couverture de ${titre}`}
       loading="lazy"
       decoding="async"
@@ -69,5 +73,30 @@ export function CouvertureGuide({
       onError={() => setCassee(true)}
       className={`h-auto w-full border border-vignette-bordure bg-vignette ${petite ? "rounded-sm" : "rounded-md"}`}
     />
+  );
+}
+
+/** Mention de la source sous les couvertures (SPEC v1.52 : Amazon.co.jp ; conditions de Google Books : powered by Google). */
+export function MentionCouverture({
+  sources,
+  pluriel = false,
+}: {
+  sources: readonly Couverture["source"][];
+  pluriel?: boolean;
+}) {
+  const amazon = sources.includes("amazon");
+  const google = sources.includes("google");
+  if (!amazon && !google) return null;
+  return (
+    <p className="text-[11px] text-texte-discret">
+      {pluriel ? "Couvertures" : "Couverture"} : {amazon && "Amazon.co.jp"}
+      {amazon && google && " · "}
+      {google && (
+        <>
+          Google Books ·{" "}
+          <span className="font-semibold">powered by Google</span>
+        </>
+      )}
+    </p>
   );
 }

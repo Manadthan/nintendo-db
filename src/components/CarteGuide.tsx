@@ -28,7 +28,7 @@ export function CouvertureCarte({
 }) {
   return (
     <CouvertureGuide
-      googleBooksId={v.guide?.couverture ?? null}
+      couverture={v.guide?.couverture ?? null}
       titre={v.sortie.titre ?? ""}
       legende={[v.guide?.editeur, v.sortie.date?.slice(0, 4)]
         .filter(Boolean)

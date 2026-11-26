@@ -93,10 +93,19 @@ const SOURCES = [
     licenceLien: "https://ndlsearch.ndl.go.jp/help/api",
   },
   {
+    nom: "Amazon Japon",
+    lien: "https://www.amazon.co.jp/",
+    apport:
+      "Couvertures des guides japonais, trouvées par leur ISBN et copiées ici, avec la mention « Amazon.co.jp » ; chaque page de guide renvoie vers Amazon Japon.",
+    licence:
+      "Images d'Amazon.co.jp, utilisées sans partenariat. Les couvertures restent la propriété de leurs éditeurs ; elles seront retirées sur simple demande.",
+    licenceLien: "https://www.amazon.co.jp/gp/help/customer/display.html",
+  },
+  {
     nom: "Google Books",
     lien: "https://books.google.com/",
     apport:
-      "Couvertures des guides japonais, chargées depuis Google Books (jamais copiées ici), avec un lien vers la page de chaque livre.",
+      "Couvertures des guides japonais absentes d'Amazon, chargées depuis Google Books (jamais copiées ici), et lien vers la page de chaque livre.",
     licence:
       "API Google Books, avec la mention « powered by Google » à côté des couvertures. Les couvertures restent la propriété de leurs éditeurs.",
     licenceLien: "https://developers.google.com/books/terms",

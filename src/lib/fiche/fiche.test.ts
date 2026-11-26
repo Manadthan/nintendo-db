@@ -91,6 +91,7 @@ describe("guides japonais de la fiche (US-27)", () => {
       titre,
       editeur: "KADOKAWA",
       date_parution: date,
+      couverture: null,
       google_books_id: null,
     },
   });
