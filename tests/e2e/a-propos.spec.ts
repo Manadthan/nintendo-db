@@ -47,6 +47,7 @@ test("les sources sont listées avec leur licence", async ({ page }) => {
     "Nintendo",
     "ScreenScraper",
     "RAWG",
+    "AmiiboAPI",
     "NDL Search",
     "Google Books",
     "GameTDB",
