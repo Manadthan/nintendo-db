@@ -59,6 +59,20 @@ describe("dates des sources (ADR-20 point 5)", () => {
       precision: "inconnue",
     });
   });
+  it("Europe en anglais (titres anglais du catalogue PAL) : « May 2027 », « Spring 2027 », « TBD »", () => {
+    expect(dateEurope("May 2027", "2027-05-31T00:00:00Z")).toEqual({
+      date: "2027-05-01",
+      precision: "mois",
+    });
+    expect(dateEurope("Spring 2027", null)).toEqual({
+      date: "2027-03-01",
+      precision: "saison",
+    });
+    expect(dateEurope("TBD", "2050-12-31T00:00:00Z")).toEqual({
+      date: null,
+      precision: "inconnue",
+    });
+  });
   it("US : le 31/12 tient lieu d'année seule", () => {
     expect(dateEtatsUnis("2027-01-28T00:00:00.000Z")).toEqual({
       date: "2027-01-28",
