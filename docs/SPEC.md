@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.52 — 26/11/2026 — statut : **à valider**
+> Version 1.53 — 26/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.53 | 26/11/2026 | US-09 : « Se déconnecter » ne ferme que la session de **cet appareil** (choix du propriétaire du 26/11 ; avant : tous les appareils du compte) |
 > | 1.52 | 26/11/2026 | **Couvertures des guides : Amazon Japon** (choix du propriétaire du 26/11, après l'étude des 159 guides : 159 couvertures Amazon sur 159, plus grandes et plus nettes que Google Books) : US-27, couvertures copiées chez nous depuis Amazon Japon, mention « Couverture : Amazon.co.jp » ; Google Books ne reste qu'en secours et pour le lien « Google Books › » |
 > | 1.51 | 25/11/2026 | **À venir** (choix du propriétaire du 25/11) : US-32, une version annoncée n'a pas de coche « ✓ » (catalogue, fiche) avant sa sortie |
 > | 1.50 | 25/11/2026 | **À venir** (étape 31, DESIGN §1 novodecies, choix du propriétaire du 25/11 : bande à faire défiler, jeux au catalogue dès l'annonce, guides plus tard) : US-32 (bande « À venir » de l'accueil, étiquette « À venir » au catalogue et sur la fiche), US-33 (importer les annonces de Nintendo) ; US-10 : un jeu à venir n'est plus écarté par l'import des annonces |
@@ -424,7 +425,8 @@ collectionneur. Une **version** est un jeu dans une région (JAP, US ou PAL).
       publiques, un bouton rond **« Remonter en haut »** apparaît en bas à droite après un défilement et ramène en haut.
 - [ ] Les fonctions de modification n'apparaissent qu'une fois connecté ; un visiteur ne peut rien modifier,
       même en appelant directement le serveur.
-- [ ] Un bouton permet de se déconnecter.
+- [ ] Un bouton permet de se déconnecter, **sur cet appareil seulement** (v1.53) : les autres appareils du compte
+      restent connectés.
 
 #### US-10 — Importer les jeux d'une console depuis Wikipédia et GameTDB (M ; Wii : GameTDB seul)
 *En tant que propriétaire, je remplis le catalogue d'une console sans tout saisir à la main.*

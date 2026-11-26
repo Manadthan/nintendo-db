@@ -39,9 +39,12 @@ export async function seConnecter(
   redirect(proprietaire === true ? PAGE_ADMIN : PAGE_PROFIL);
 }
 
-/** Déconnexion (US-09) : retour au site public. */
+/**
+ * Déconnexion (US-09) : retour au site public. Cet appareil seulement (choix du propriétaire, 26/11/2026) : par défaut,
+ * Supabase ferme toutes les sessions du compte, les autres appareils compris.
+ */
 export async function seDeconnecter() {
   const supabase = await createSupabaseServerClient();
-  await supabase.auth.signOut();
+  await supabase.auth.signOut({ scope: "local" });
   redirect("/");
 }
