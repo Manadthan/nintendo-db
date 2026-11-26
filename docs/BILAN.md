@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25 ; captures RAWG, étape 28 ; guides japonais, étape 29 ; couvertures Amazon des guides ; amiibo, étape 30)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25 ; captures RAWG, étape 28 ; guides japonais, étape 29 ; couvertures Amazon des guides ; amiibo, étape 30 ; à venir, étape 31)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.12 — 26/11/2026 — statut : **à valider**
+> Version 1.13 — 26/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.13 | 26/11/2026 | **Étape 31, à venir** : étude, bande de l'accueil, relais et import des annonces, premier import, 3 corrections de tests et de déconnexion en route, leçons (§19) |
 > | 1.12 | 26/11/2026 | **Étape 30, amiibo** : étude, remplissage par planche (954 amiibo), fiche, catalogue, prix eBay, « Je l'ai » et profils, 7 PR de code, leçons (§18) |
 > | 1.11 | 26/11/2026 | **Couvertures Amazon Japon des guides** (reprise de l'étape 29) : étude, choix, 4 PR, 159 couvertures copiées, leçons (§17) |
 > | 1.10 | 25/11/2026 | **Étape 29, guides japonais** : études, page du guide, catalogue, remplissage 3DS et Switch, écriture sur la mauvaise planche réparée, leçons (§16) |
@@ -510,3 +511,37 @@ Leçons ajoutées :
 
 Pistes : amiibo à venir dans la bande « À venir » (étape 31) ; 30 amiibo sans date JAP (dont Sword Kirby, Noir
 Dedede) ; badges amiibo, boîtes JAP et PAL, page d'administration des amiibo (ADR-21 point 9).
+
+## 19. Étape 31 : à venir (jeux annoncés sur l'accueil)
+
+| | |
+|---|---|
+| Durée | deux jours (25 et 26/11/2026) |
+| Méthode | Étude en lecture seule des bases officielles de Nintendo Japon, Europe et US (#258), décisions par questions à choix, SPEC (#263), ADR-20 et plan en 6 PR (#265), puis migration, affichage, relais, import ; premier import fait par le propriétaire depuis l'iPhone |
+| Livré | US-32 (bande « À venir » de l'accueil, étiquette au catalogue, sur la frise et la fiche, pas de case « je l'ai » ni de prix eBay pour une version annoncée), US-33 (relais des annonces, page « Import → Annonces » avec le menu « même jeu que ») ; titre et sous-titre de l'accueil (#253) |
+| Pull requests | 13 mergées pour l'étape (#253, #258, #263, #265, #268, #270, #272, #275, #277, #278, #280, #283, #290) et 2 corrections trouvées en route (#293, #294) |
+| Tests | 40 unitaires (`a-venir`, `annonces`, `import-annonces`, `boite-nintendo`), 3 pgTAP (précisions de date), e2e : page d'import et jeu annoncé de bout en bout (bande, étiquette, fiche) |
+
+| Mesure | Résultat |
+|---|---|
+| Annonces lues le 26/11 | 16 (Japon 6, Europe 7, US 3), regroupées en 10 jeux |
+| Premier import | **7 jeux Switch 2 à venir** au catalogue ; 3 versions japonaises reliées par le menu « même jeu que » |
+| Jaquettes | 2 boîtes US du My Nintendo Store, recadrées sans boîtier ; 1 visuel en largeur écarté (Hyrule Warriors) |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| Le même jeu porte un titre japonais, un titre français et un titre anglais | Regroupement impossible au titre seul | Nintendo Europe lu en anglais ; Japon relié par le titre anglais cité ou le même jour, sinon menu « même jeu que » ; le choix est retenu par le titre japonais enregistré |
+| Les photos du My Nintendo Store ne sont pas toutes des boîtes (visuel en largeur) et gardent le boîtier rouge | Fausses jaquettes possibles | Image en largeur refusée ; boîtier retiré avec le gabarit de gamecartdb, vérifié sur les vraies photos |
+| Deux sessions écrivaient l'Avancement de CLAUDE.md | 4 conflits le 25/11 | Avancement d'une étape en cours dans `docs/avancement/etape-NN.md` (#277) |
+| Un jeu de test ajouté pendant que d'autres tests comptaient les jeux | e2e rouge 3 fois sur #290 | Test placé dans le fichier qui compte, nettoyage réessayé, erreur d'origine gardée dans le journal |
+| « Se déconnecter » fermait toutes les sessions du compte | Le test de déconnexion coupait les tests d'administration en parallèle ; aussi l'iPhone du propriétaire quand il se déconnectait ailleurs | Déconnexion de cet appareil seulement (#294, SPEC v1.53, choix du propriétaire) |
+| 3e sélecteur e2e ambigu (`getByRole("status")` sans filtre) | Échec de CI | Règle de lint qui refuse ce sélecteur (#293), vérifiée sur l'erreur réelle |
+
+Leçons ajoutées :
+
+44. **Garder l'erreur d'origine visible** : un nettoyage en `finally` qui échoue cache la vraie cause ; la journaliser
+    d'abord a montré « Connexion requise », puis le bug de déconnexion.
+45. **Une règle écrite qui n'a pas suffi devient un lint** : la règle des sélecteurs ambigus était dans CLAUDE.md ;
+    elle a été recopiée de 8 tests existants. Le lint a corrigé les modèles en même temps que l'erreur.
+46. **Regarder les images d'une source avant de la croire** : la « boîte » du My Nintendo Store était une fois un
+    visuel ; une planche de 3 images a suffi à le voir et à écrire le garde-fou.
