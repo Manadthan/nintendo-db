@@ -6,5 +6,5 @@
   Amazon ≈ 350 × 500 contre 300 × 427 chez Google, même visuel, pour les 114
 - décidé le 26/11 : Amazon pour les 159 guides, copiées dans notre stockage, mention « Couverture : Amazon.co.jp »,
   pas de programme Partenaires (risque des conditions d'Amazon accepté) ; planche des 45 : toutes gardées
-- SPEC v1.52 (US-27) et DESIGN v1.45 (ADR-19 point 2) : cette PR
+- SPEC v1.52 (US-27) et DESIGN v1.46 (ADR-19 point 2) : cette PR
 - à faire : migration 0035 (bucket `guides`, colonne `couverture`), script + planche des 114 + écriture, affichage

@@ -243,6 +243,7 @@ const liste = JSON.parse(
 );
 const version = Date.now().toString(36);
 const envoyer = async (id, nom, source) => {
+  if (!source.includes("githubusercontent")) await attendre(1000); // une demande par seconde chez Nintendo
   const r = await fetch(source);
   if (!r.ok) throw new Error(`${source} : HTTP ${r.status}`);
   const brut = Buffer.from(await r.arrayBuffer());

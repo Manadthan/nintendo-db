@@ -2,11 +2,12 @@
 
 > Étape 2 du playbook : **comment** construire ce que décrit `docs/SPEC.md` v1.2.
 >
-> Version 1.45 — 26/11/2026 — statut : **à valider**
+> Version 1.46 — 26/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
-> | 1.45 | 26/11/2026 | **ADR-19 point 2 révisé — couvertures Amazon Japon copiées** (SPEC v1.52, choix du propriétaire du 26/11) : étude des 159 guides (Amazon 159 / 159, ≈ 350 × 500 contre 300 × 427 chez Google) ; bucket public `guides`, colonne `guides.couverture` (migration 0035), script `couvertures-amazon.mjs` ; conditions d'Amazon : risque accepté ; plan en 4 PR |
+> | 1.46 | 26/11/2026 | **ADR-19 point 2 révisé — couvertures Amazon Japon copiées** (SPEC v1.52, choix du propriétaire du 26/11) : étude des 159 guides (Amazon 159 / 159, ≈ 350 × 500 contre 300 × 427 chez Google) ; bucket public `guides`, colonne `guides.couverture` (migration 0035), script `couvertures-amazon.mjs` ; conditions d'Amazon : risque accepté ; plan en 4 PR |
+> | 1.45 | 26/11/2026 | ADR-20 point 6 précisé (choix du propriétaire du 26/11) : régions d'un même jeu regroupées (Europe et US au titre identique, titres anglais de Nintendo Europe ; Japon au titre anglais cité ou au même jour, sinon menu « même jeu que ») ; jaquette : seule la boîte US du My Nintendo Store (les images de Nintendo Japon et Europe ne sont pas des boîtes) |
 > | 1.44 | 25/11/2026 | **ADR-21 — Amiibo** (étape 30, SPEC v1.49, maquettes v0.14) : tables `amiibo`, `amiibo_sorties`, `amiibo_jeux`, `amiibo_exclus`, `possessions_amiibo` ; images copiées en WebP (bucket `amiibo`) ; remplissage par la session (AmiiboAPI + Nintendo US, JP, Europe) après une planche ; `/amiibo.json` pour le catalogue ; plan en 7 PR (§8, point 30) |
 > | 1.43 | 25/11/2026 | **ADR-20 — À venir** (SPEC v1.50, US-32 et US-33) : un jeu annoncé est un jeu ordinaire, « à venir » calculé depuis la date et sa précision ; précisions `saison` et `inconnue` (migration) ; bande de l'accueil dans le HTML préparé ; annonces lues par le relais (Nintendo Japon, Europe, US) puis import depuis l'administration ; plan en 6 PR (§8, étape 31) |
 > | 1.42 | 25/11/2026 | **Étude « À venir »** (étape 31, §1 novodecies) : jeux et amiibo à venir lisibles dans les bases officielles de Nintendo Japon (`search.nintendo.jp`), Europe (`searching.nintendo-europe.com`) et US (pages `nintendo.com/us`) ; dates JAP et PAL des amiibo de 2026 (complète §1 octodecies) ; guides à venir non vérifiés (NDL en 429) |
@@ -863,8 +864,14 @@ les mêmes fichiers que l'ADR-10 (dépôts `Nintendo_-_Game_Boy_Color`).
    par jeu (décoché → table `exclusions`, déjà là), enregistrement par lots. Rapprochement d'un jeu déjà au catalogue :
    console + titre normalisé (ADR-05) d'une région, ou code produit quand il existe ; sinon nouveau jeu (slug du titre
    PAL, puis US, puis JAP). **Verrous** respectés (ADR-03) : une date corrigée à la main n'est jamais écrasée.
-   Jaquette : image officielle de Nintendo Europe ou Japon copiée en WebP comme les autres (source `nintendo`, gardée
-   par les imports suivants), sinon vignette neutre.
+   **Régions d'un même jeu** (v1.45, module pur `src/lib/import/import-annonces.ts`) : Europe (titres **anglais** de
+   Nintendo Europe, comme le catalogue PAL) et US réunies au titre identique ; une annonce japonaise rejoint le seul
+   jeu de sa console dont elle cite le titre anglais (« Xenoblade Genesis（ゼノブレイド…）») ou qui sort le même jour ;
+   sinon la page propose un menu **« même jeu que »** (choix du 26/11), laissé vide = jeu à part. Le choix est retenu
+   sans table : une fois importée, la sortie JAP porte le titre japonais, qui retrouve le jeu aux imports suivants.
+   Jaquette (v1.45) : seule la **boîte américaine** du My Nintendo Store est une vraie boîte ; copiée en WebP comme
+   les autres (source `nintendo`, gardée par les imports suivants). Les images de Nintendo Japon et Europe (visuels
+   carrés ou en largeur, pas des boîtes, comme en v1.29 de la SPEC) ne servent pas : vignette neutre.
 7. **Tests** : unitaires sur des fixtures écrites à la main d'après les réponses du 25/11 (Nintendo Japon, Europe,
    US) : conversions de dates, filtres (DLC, consoles, autres éditeurs), rapprochement ; `estAVenir` et libellés aux
    bornes (veille, jour même, saison, année) ; pgTAP (point 3) ; e2e sur la base jetable avec un jeu à venir de test

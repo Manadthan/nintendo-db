@@ -12,4 +12,6 @@
 - bande « À venir » #272
 - relais des annonces #275 ; 16 annonces déposées le 25/11 (gametdb/annonces.json : Japon 6, Europe 7, US 3)
 - décidé le 25/11 : pas de coche « ✓ » pour une version à venir (catalogue, fiche)
-- à faire : coches des versions à venir, import des annonces (PR 6), premier import, bilan
+- coches des versions à venir #278
+- décidé le 26/11 : menu « même jeu que » pour une annonce japonaise non reliée ; PR 6 en deux : calculs, puis page
+- à faire : calculs de l'import des annonces (PR 6a), page « Import → Annonces » (PR 6b), premier import, bilan
