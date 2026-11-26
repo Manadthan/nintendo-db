@@ -78,6 +78,15 @@ function developpePar(v: VersionAffichee, developpeur: string): boolean {
   return liste.some((s) => cleStudio(s) === cle);
 }
 
+/**
+ * Console d'une version : celle du jeu ; un amiibo (US-29) est « sur » chaque console des jeux qui le lisent.
+ * Genre et Développeur cachent les amiibo : ils n'ont ni genre ni studio.
+ */
+const surConsole = (v: VersionAffichee, console: string) =>
+  v.amiibo
+    ? v.amiibo.consoles.includes(console)
+    : v.jeu.console.slug === console;
+
 /** Versions qui passent tous les filtres actifs (US-06 : filtres combinables). */
 export function filtrer(
   versions: VersionAffichee[],
@@ -85,7 +94,7 @@ export function filtrer(
 ): VersionAffichee[] {
   return versions.filter(
     (v) =>
-      (!filtres.console || v.jeu.console.slug === filtres.console) &&
+      (!filtres.console || surConsole(v, filtres.console)) &&
       (!filtres.disponibilite || disponible(v, filtres.disponibilite)) &&
       (!filtres.annee || annee(v) === filtres.annee) &&
       (!filtres.genre || v.jeu.genres.includes(filtres.genre)) &&
@@ -105,7 +114,7 @@ export function consolesProposees(
   return ordre
     .map((c) => ({
       ...c,
-      nombre: versions.filter((v) => v.jeu.console.slug === c.slug).length,
+      nombre: versions.filter((v) => surConsole(v, c.slug)).length,
     }))
     .filter((c) => c.nombre > 0);
 }

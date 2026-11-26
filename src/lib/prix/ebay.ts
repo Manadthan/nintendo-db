@@ -43,11 +43,11 @@ async function jetonEbay(): Promise<string> {
 }
 
 export const sourcesEbay: Sources = {
-  async chercher(marche: Marche, q: string) {
+  async chercher(marche: Marche, q: string, categorie = CATEGORIE_JEUX) {
     const url = new URL(`${API}/buy/browse/v1/item_summary/search`);
     url.search = new URLSearchParams({
       q,
-      category_ids: CATEGORIE_JEUX,
+      ...(categorie && { category_ids: categorie }),
       limit: "50",
     }).toString();
     const reponse = await fetch(url, {

@@ -23,6 +23,9 @@ test("la fiche de l'amiibo montre ses informations, ses jeux et sa disponibilit�
   await expect(dispo).toContainText("Japon · 28 mai 2015");
   await expect(dispo).toContainText("Amérique du Nord · non sorti");
 
+  // Visiteur : pas de case « Je l'ai » (US-30, collection privée).
+  await expect(page.getByRole("checkbox", { name: "Je l'ai" })).toHaveCount(0);
+
   const jeux = page.getByRole("region", { name: "Jeux compatibles (2)" });
   await expect(jeux).toContainText("Jeu hors catalogue e2e");
   await expect(jeux).toContainText("hors catalogue");
@@ -76,4 +79,55 @@ test("un amiibo inconnu ou une adresse mal formée mène à la page introuvable"
       page.getByRole("heading", { name: "Page introuvable" }),
     ).toBeVisible();
   }
+});
+
+// Catalogue (US-29, ADR-21 point 5) : coche « Amiibo », cartes mêlées aux jeux, marché, recherche, filtres.
+
+test("cocher « Amiibo » mêle les amiibo aux jeux ; la carte mène à la fiche", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const coche = page.getByRole("checkbox", { name: "Amiibo" });
+  await expect(coche).not.toBeChecked();
+  await coche.check();
+  await expect(page).toHaveURL(/voir=jeux%2Camiibo/);
+  await expect(page.getByText(/jeux? et 1 amiibo affichés?/)).toBeVisible();
+
+  // « Jeux » décochée : l'amiibo seul.
+  await page.getByRole("checkbox", { name: "Jeux" }).uncheck();
+  await expect(
+    page.getByText("1 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+  const carte = page.getByRole("link", { name: /Inkling e2e/ });
+  await expect(carte).toContainText("Figurine");
+  await carte.click();
+  await expect(page).toHaveURL(AMIIBO);
+});
+
+test("un amiibo non sorti sur le marché choisi est caché", async ({ page }) => {
+  await page.goto("/?voir=amiibo");
+  await expect(
+    page.getByText("1 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Amérique du Nord", exact: true })
+    .click();
+  await expect(
+    page.getByText("0 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+});
+
+test("la recherche trouve un amiibo par sa série ; les filtres s'appliquent", async ({
+  page,
+}) => {
+  await page.goto("/?voir=amiibo&q=splatoon");
+  await expect(page.getByRole("link", { name: /Inkling e2e/ })).toBeVisible();
+
+  // Console : amiibo lu par un jeu Wii U (Splatoon) ; Genre : les amiibo n'en ont pas.
+  await page.goto("/?voir=amiibo&console=wii-u");
+  await expect(
+    page.getByText("1 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+  await page.goto("/?voir=jeux,amiibo&genre=Action");
+  await expect(page.getByText(/et 0 amiibo affichés?/)).toBeVisible();
 });

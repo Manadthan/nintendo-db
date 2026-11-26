@@ -55,6 +55,24 @@ export type VersionAffichee = {
    * frise, filtre Année) et `jeu` le premier jeu couvert (filtres Console, Genre, Développeur, Série).
    */
   guide?: GuideCarte;
+  /**
+   * Présent pour la carte d'un amiibo (US-29) : `sortie` porte son nom et sa date sur le marché choisi, `jeu` est
+   * l'amiibo mis à la forme d'un jeu (séries, sorties ; ni genre, ni studio, ni note).
+   */
+  amiibo?: AmiiboCarte;
+};
+
+/** Ce que la carte d'un amiibo affiche en plus (US-29). */
+export type AmiiboCarte = {
+  /** Identifiant en base : possession (US-30). */
+  id: string;
+  slug: string;
+  type: Database["public"]["Enums"]["amiibo_type"];
+  serieAmiibo: string | null;
+  /** Base du chemin de la photo (bucket `amiibo`) ; null : vignette neutre. */
+  image: string | null;
+  /** Consoles des jeux du catalogue qui le lisent (filtre Console). */
+  consoles: string[];
 };
 
 /** Ce que la carte d'un guide affiche en plus (US-27). */

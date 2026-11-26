@@ -8,13 +8,20 @@ import { noterPositionCatalogue } from "@/lib/catalogue/defilement";
 import { decouperFrise } from "@/lib/catalogue/frise";
 import { premiersDesGroupes } from "@/lib/catalogue/lots";
 import { REGIONS, type VersionAffichee } from "@/lib/catalogue/types";
-import { possede } from "@/lib/collection/collection";
+import { possede, possedeAmiibo } from "@/lib/collection/collection";
 import {
   CouvertureCarte,
   EtiquettesGuide,
   legendeGuide,
   lienGuide,
 } from "./CarteGuide";
+import {
+  EtiquettesAmiibo,
+  ImageCarteAmiibo,
+  legendeAmiibo,
+  lienAmiibo,
+  MarquePossede,
+} from "./CarteAmiibo";
 import { Disponibilite } from "./Disponibilite";
 import { EtiquetteAVenir } from "./EtiquetteAVenir";
 import { Frise } from "./Frise";
@@ -36,22 +43,27 @@ type Props = {
 const lien = (v: VersionAffichee) =>
   v.guide
     ? lienGuide(v.guide.isbn)
-    : `/jeux/${v.jeu.console.slug}/${v.jeu.slug}`;
+    : v.amiibo
+      ? lienAmiibo(v)
+      : `/jeux/${v.jeu.console.slug}/${v.jeu.slug}`;
 const cle = (v: VersionAffichee) => v.guide?.isbn ?? v.jeu.id;
 
-/** La version affichée d'un jeu est-elle encore à venir (US-32) ? Un guide ne l'est jamais. */
+/** La version affichée d'un jeu ou d'un amiibo est-elle encore à venir (US-32) ? Un guide ne l'est jamais. */
 const estAVenir = (v: VersionAffichee, aujourdhui: string) =>
   !v.guide && sortieAVenir(v.sortie.date, v.sortie.precision, aujourdhui);
 
-/** « 3 jeux », « 1 jeu · 2 guides », « 2 jeux à venir » (en-tête d'un groupe, US-27, US-32). */
+/** « 3 jeux », « 1 jeu · 2 guides », « 17 jeux · 4 amiibo », « 2 jeux à venir » (en-tête d'un groupe). */
 function compte(versions: VersionAffichee[], aujourdhui: string): string {
   const guides = versions.filter((v) => v.guide).length;
-  const jeux = versions.length - guides;
+  const amiibo = versions.filter((v) => v.amiibo).length;
+  const jeux = versions.length - guides - amiibo;
   const tousAVenir =
-    jeux > 0 && versions.every((v) => estAVenir(v, aujourdhui));
+    jeux > 0 &&
+    versions.every((v) => v.guide || v.amiibo || estAVenir(v, aujourdhui));
   return [
     jeux && `${jeux} jeu${jeux > 1 ? "x" : ""}${tousAVenir ? " à venir" : ""}`,
     guides && `${guides} guide${guides > 1 ? "s" : ""}`,
+    amiibo && `${amiibo} amiibo`,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -74,6 +86,9 @@ export const ListeJeux = memo(function ListeJeux({
   // Étiquettes JAP / US / PAL en vert pour les versions possédées (US-16) ; rien pour un visiteur.
   const possedees = (v: VersionAffichee) =>
     possessions ? REGIONS.filter((r) => possede(possessions, v.jeu.id, r)) : [];
+  // Amiibo possédé (US-30) : marque verte ; rien pour un visiteur.
+  const amiiboPossede = (v: VersionAffichee) =>
+    !!possessions && !!v.amiibo && possedeAmiibo(possessions, v.amiibo.id);
 
   return (
     <div className="flex flex-col gap-3.5">
@@ -83,6 +98,7 @@ export const ListeJeux = memo(function ListeJeux({
           lien={lien}
           surClic={noter}
           aVenir={(v) => estAVenir(v, aujourdhui)}
+          amiiboPossede={amiiboPossede}
         />
       )}
 
@@ -125,6 +141,28 @@ export const ListeJeux = memo(function ListeJeux({
                             <span className="text-xs text-texte-discret">
                               {legendeGuide(v)}
                             </span>
+                          </div>
+                        </>
+                      ) : v.amiibo ? (
+                        <>
+                          <div className="relative">
+                            <ImageCarteAmiibo
+                              v={v}
+                              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
+                            />
+                            {amiiboPossede(v) && <MarquePossede surPhoto />}
+                          </div>
+                          <div className="flex flex-col gap-[3px]">
+                            <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
+                              {v.sortie.titre}
+                            </span>
+                            <span className="text-xs text-texte-discret">
+                              {legendeAmiibo(v)}
+                            </span>
+                            <div className="flex flex-wrap items-center gap-1">
+                              {estAVenir(v, aujourdhui) && <EtiquetteAVenir />}
+                              <EtiquettesAmiibo v={v} />
+                            </div>
                           </div>
                         </>
                       ) : (
@@ -191,6 +229,29 @@ export const ListeJeux = memo(function ListeJeux({
                               <span className="text-xs text-texte-discret">
                                 {legendeGuide(v)}
                               </span>
+                            </div>
+                          </div>
+                        </>
+                      ) : v.amiibo ? (
+                        <>
+                          <div className="w-[54px] shrink-0">
+                            <ImageCarteAmiibo
+                              v={v}
+                              sizes="54px"
+                              forme="petite"
+                            />
+                          </div>
+                          <div className="flex min-w-0 flex-1 flex-col gap-1">
+                            <span className="text-sm leading-tight font-semibold">
+                              {v.sortie.titre}
+                            </span>
+                            <span className="text-xs text-texte-discret">
+                              {legendeAmiibo(v)}
+                            </span>
+                            <div className="flex flex-wrap items-center gap-1">
+                              {estAVenir(v, aujourdhui) && <EtiquetteAVenir />}
+                              <EtiquettesAmiibo v={v} />
+                              {amiiboPossede(v) && <MarquePossede />}
                             </div>
                           </div>
                         </>

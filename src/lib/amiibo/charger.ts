@@ -4,7 +4,7 @@ import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { versAmiiboFiche, type AmiiboFiche, type LigneAmiibo } from "./fiche";
 
 const COLONNES =
-  "slug, identifiant, nom, nom_jap, type, serie_amiibo, serie_jeux, personnage, editeur, image_path, boite_path, amiibo_sorties(region, date_sortie, precision_date), amiibo_jeux(titre_jeu, console, usage, games(slug, consoles(slug)))";
+  "id, slug, identifiant, nom, nom_jap, type, serie_amiibo, serie_jeux, personnage, editeur, image_path, boite_path, amiibo_sorties(region, date_sortie, precision_date), amiibo_jeux(titre_jeu, console, usage, games(slug, consoles(slug)))";
 
 /** Un amiibo par son adresse /amiibo/{slug} (US-29) ; null s'il n'existe pas. Lu en visiteur (RLS : lecture publique). */
 export async function chargerAmiibo(slug: string): Promise<AmiiboFiche | null> {

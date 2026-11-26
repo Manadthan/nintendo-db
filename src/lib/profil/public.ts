@@ -3,10 +3,12 @@ import { ensemble } from "@/lib/collection/collection";
 import type { Region } from "@/lib/catalogue/types";
 import { PSEUDO } from "@/lib/invitations/inscription";
 import { avatarOuDefaut } from "@/lib/profil/avatars";
+import { compterAmiibo } from "@/lib/profil/charger";
 import {
   jeuxParConsole,
   syntheseProfil,
   type LigneAjout,
+  type LigneAjoutAmiibo,
 } from "@/lib/profil/collection";
 import { chargerCatalogue } from "@/lib/statistiques/charger";
 import { createSupabasePublicClient } from "@/lib/supabase/public";
@@ -17,6 +19,9 @@ type ProfilPublicBrut = {
   cree_le: string;
   versions: { game_id: string; region: Region }[];
   ajouts: LigneAjout[];
+  /** Amiibo possédés et derniers ajoutés (migration 0036, US-30) ; absents avant elle. */
+  amiibo?: number;
+  ajouts_amiibo?: LigneAjoutAmiibo[];
 };
 
 /**
@@ -32,13 +37,20 @@ export async function chargerProfilPublic(pseudo: string) {
   if (error) throw new Error(`Profil illisible : ${error.message}`);
   if (!data) return null;
   const brut = data as unknown as ProfilPublicBrut;
-  const { jeux, consoles } = await chargerCatalogue();
+  const [{ jeux, consoles }, total] = await Promise.all([
+    chargerCatalogue(),
+    compterAmiibo(supabase),
+  ]);
   const possessions = ensemble(brut.versions);
   return {
     pseudo: brut.pseudo,
     avatar: avatarOuDefaut(brut.avatar),
     creeLe: brut.cree_le,
-    ...syntheseProfil(jeux, consoles, possessions, brut.ajouts),
+    ...syntheseProfil(jeux, consoles, possessions, brut.ajouts, undefined, {
+      possedes: brut.amiibo ?? 0,
+      total,
+      ajouts: brut.ajouts_amiibo ?? [],
+    }),
     parConsole: jeuxParConsole(jeux, consoles, possessions),
   };
 }

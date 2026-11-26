@@ -1,3 +1,4 @@
+import { srcsetAmiibo } from "@/lib/amiibo/fiche";
 import { calculerBadges, prochainsBadges } from "@/lib/badges/badges";
 import { cleVersion } from "@/lib/collection/collection";
 import { REGIONS, type Region } from "@/lib/catalogue/types";
@@ -47,39 +48,79 @@ export type LigneAjout = {
   };
 };
 
+/** Un amiibo ajouté (US-30), tel que le lisent Mon profil et `profil_public()` (migration 0036). */
+export type LigneAjoutAmiibo = {
+  cree_le: string;
+  amiibo: { slug: string; nom: string; image_path: string | null };
+};
+
 export type Ajout = {
   cle: string;
   titre: string;
-  region: Region;
-  console: { slug: string; nom: string };
+  /** Version ajoutée ; null pour un amiibo (une case par amiibo, US-30). */
+  region: Region | null;
+  /** Console du jeu, pour les proportions de sa jaquette ; null pour un amiibo (photo carrée). */
+  console: { slug: string; nom: string } | null;
   href: string;
   jaquetteSrcset: string | null;
 };
 
-/** Derniers ajouts (US-22) : la version ajoutée, avec son titre et sa jaquette (le titre d'une autre région sinon). */
+/** Nombre d'ajouts montrés (US-22). */
+export const NOMBRE_AJOUTS = 6;
+
+/**
+ * Derniers ajouts (US-22, US-30) : versions de jeux et amiibo mêlés, du plus récent au plus ancien, 6 au plus. Une
+ * version a son titre et sa jaquette (le titre d'une autre région sinon) ; un amiibo, son nom et sa photo.
+ */
 export function derniersAjouts(
   lignes: LigneAjout[],
   baseUrl?: string,
+  lignesAmiibo: LigneAjoutAmiibo[] = [],
 ): Ajout[] {
-  return lignes.map(({ region, cree_le, games }) => {
-    const version = games.releases.find((r) => r.region === region);
-    const titre =
-      version?.titre ??
-      (["US", "PAL", "JAP"] as const)
-        .map((r) => games.releases.find((s) => s.region === r)?.titre)
-        .find(Boolean) ??
-      "Sans titre";
-    return {
-      cle: `${games.slug}-${region}-${cree_le}`,
-      titre,
-      region,
-      console: games.consoles,
-      href: `/jeux/${games.consoles.slug}/${games.slug}`,
-      jaquetteSrcset: version?.jaquette_path
-        ? srcsetJaquette(version.jaquette_path, baseUrl)
-        : null,
-    };
-  });
+  const amiibo = lignesAmiibo.map(({ cree_le, amiibo: a }) => ({
+    cree_le,
+    ajout: {
+      cle: `amiibo-${a.slug}-${cree_le}`,
+      titre: a.nom,
+      region: null,
+      console: null,
+      href: `/amiibo/${a.slug}`,
+      jaquetteSrcset: a.image_path ? srcsetAmiibo(a.image_path, baseUrl) : null,
+    } satisfies Ajout,
+  }));
+  const jeux = lignes.map(({ region, cree_le, games }) => ({
+    cree_le,
+    ajout: versionAjoutee(region, cree_le, games, baseUrl),
+  }));
+  return [...jeux, ...amiibo]
+    .sort((a, b) => b.cree_le.localeCompare(a.cree_le))
+    .slice(0, NOMBRE_AJOUTS)
+    .map(({ ajout }) => ajout);
+}
+
+function versionAjoutee(
+  region: Region,
+  cree_le: string,
+  games: LigneAjout["games"],
+  baseUrl?: string,
+): Ajout {
+  const version = games.releases.find((r) => r.region === region);
+  const titre =
+    version?.titre ??
+    (["US", "PAL", "JAP"] as const)
+      .map((r) => games.releases.find((s) => s.region === r)?.titre)
+      .find(Boolean) ??
+    "Sans titre";
+  return {
+    cle: `${games.slug}-${region}-${cree_le}`,
+    titre,
+    region,
+    console: games.consoles,
+    href: `/jeux/${games.consoles.slug}/${games.slug}`,
+    jaquetteSrcset: version?.jaquette_path
+      ? srcsetJaquette(version.jaquette_path, baseUrl)
+      : null,
+  };
 }
 
 export type JeuxDeConsole = {
@@ -110,21 +151,35 @@ export function jeuxParConsole(
     .filter((c) => c.jeux.length > 0);
 }
 
-/** Tout ce qu'un profil montre de la collection (Mon profil US-22, profil public US-23) : résumé, badges, ajouts. */
+/** Amiibo d'un profil (US-30) : nombre possédé, total du catalogue, derniers ajoutés. */
+export type AmiiboProfil = {
+  possedes: number;
+  total: number;
+  ajouts: LigneAjoutAmiibo[];
+};
+
+/**
+ * Tout ce qu'un profil montre de la collection (Mon profil US-22, profil public US-23) : résumé (avec la ligne
+ * « Amiibo : N / total », US-30), badges, ajouts.
+ */
 export function syntheseProfil(
   jeux: JeuStat[],
   consoles: { slug: string; nom: string }[],
   possessions: ReadonlySet<string>,
   lignesAjouts: LigneAjout[],
   baseUrl?: string,
+  amiibo: AmiiboProfil = { possedes: 0, total: 0, ajouts: [] },
 ) {
   const badges = calculerBadges(jeux, consoles, possessions);
   return {
-    resume: resumeCollection(jeux, consoles, possessions),
+    resume: {
+      ...resumeCollection(jeux, consoles, possessions),
+      amiibo: { possedes: amiibo.possedes, total: amiibo.total },
+    },
     badges: {
       gagnes: badges.filter((b) => b.gagne),
       prochains: prochainsBadges(badges),
     },
-    ajouts: derniersAjouts(lignesAjouts, baseUrl),
+    ajouts: derniersAjouts(lignesAjouts, baseUrl, amiibo.ajouts),
   };
 }

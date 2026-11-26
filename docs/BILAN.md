@@ -1,12 +1,13 @@
-# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25 ; captures RAWG, étape 28 ; guides japonais, étape 29)
+# Bilan — Nintendo DB (v1 Wii U, étapes 1 à 7 ; Wii, DS, 3DS, Switch, étapes 8 à 10 ; GameCube, collection, Metacritic, N64, GBA, étapes 11 à 14 ; statistiques, Game Boy Color, étapes 15 à 17 ; Game Boy, Virtual Boy, Super Nintendo, NES, contrôle du catalogue, étapes 18 à 22 ; séries, frise, collectionneurs invités, étapes 23 à 27 ; audit de performance ; prix eBay, étape 25 ; captures RAWG, étape 28 ; guides japonais, étape 29 ; couvertures Amazon des guides)
 
 > Dernière phase du playbook (`PLAYBOOK.md`) : **rétrospective** en fin de grande étape. Ce qui a été livré, ce qui a
 > bien marché, ce qui a coincé, et ce qu'on en retient pour la suite et pour un prochain projet avec Claude.
 >
-> Version 1.10 — 25/11/2026 — statut : **à valider**
+> Version 1.11 — 26/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.11 | 26/11/2026 | **Couvertures Amazon Japon des guides** (reprise de l'étape 29) : étude, choix, 4 PR, 159 couvertures copiées, leçons (§17) |
 > | 1.10 | 25/11/2026 | **Étape 29, guides japonais** : études, page du guide, catalogue, remplissage 3DS et Switch, écriture sur la mauvaise planche réparée, leçons (§16) |
 > | 1.9 | 23/11/2026 | **Étape 28, captures RAWG** : étude, relais, planche, carrousel, 3 corrections en route, leçons (§15) |
 > | 1.8 | 22/11/2026 | **Étape 25, prix eBay** : étude, choix, 3 PR de code, difficultés, leçons (§14) |
@@ -434,3 +435,36 @@ Leçons ajoutées :
 
 Pistes : autres consoles (Wii U, DS, Wii…) avec le même script ; guides à venir sur la bande « À venir » (étape 31) ;
 couvertures manquantes (45) cherchées ailleurs si besoin.
+
+## 17. Couvertures Amazon Japon des guides (reprise de l'étape 29)
+
+| | |
+|---|---|
+| Durée | une journée (26/11/2026) |
+| Méthode | Étude en lecture seule (Amazon par ISBN 10, une requête par seconde), planche, décisions par questions à choix, documents (#281), migration 0035 (#282), script (#285), affichage (#286), écriture après planche validée |
+| Livré | US-27 révisée (SPEC v1.52, ADR-19 point 2) : couverture Amazon copiée dans le bucket public `guides`, mention « Couverture : Amazon.co.jp », Google Books en secours |
+| Pull requests | 4 mergées (#281, #282, #285, #286) |
+| Tests | 11 unitaires (`amazon.test.ts`, `couverture.test.ts`) et tests existants adaptés, 9 pgTAP (`couvertures_guides.test.sql`), e2e « À propos » mis à jour |
+
+| Mesure | Résultat |
+|---|---|
+| Guides sans couverture Google Books | 45 → **0** |
+| Couvertures Amazon trouvées | **159 sur 159** (≈ 350 × 500, contre 300 × 427 chez Google pour le même visuel) |
+| Couvertures copiées | 159 WebP dans le bucket `guides`, aucune écartée sur la planche |
+
+| Difficulté | Conséquence | Parade retenue |
+|---|---|---|
+| L'affichage lisait une colonne pas encore en production | Prévisualisation Vercel et e2e rouges sur #286 jusqu'au merge de #282 | Ordre de merge annoncé dans chaque PR ; `main` intégré après la migration |
+| Plusieurs sessions modifient CLAUDE.md (arborescence) en même temps | 6 conflits à résoudre sur #281, #285 et #286 | Intégrer `main` juste avant chaque merge ; ne pas réécrire une ligne d'une autre PR |
+| Nom de branche trop long | Lien de prévisualisation donné faux (Vercel le raccourcit avec une empreinte) | Prendre le lien dans le commentaire de vercel[bot] quand le nom dépasse ~45 caractères |
+| Réseau de la session fermé à vercel.app | Affichage final vérifié seulement sur l'iPhone du propriétaire | Images vérifiées dans le bucket depuis la session, avant le merge |
+
+Leçons ajoutées :
+
+37. **Une PR d'affichage qui lit une nouvelle colonne dépend du merge de la migration** : le dire dans la PR et ne
+    pas attendre une CI verte avant que la migration soit sur `main`.
+38. **Comparer la source de secours sur les données déjà là** : l'étude des 45 manquantes a montré qu'Amazon faisait
+    mieux aussi pour les 114 autres.
+39. **Une condition d'usage douteuse se décide par écrit** : le risque (images Amazon hors programme Partenaires) est
+    dans ADR-19 avec la marche arrière, pas seulement dans une conversation.
+

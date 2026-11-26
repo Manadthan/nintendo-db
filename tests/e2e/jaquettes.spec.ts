@@ -58,7 +58,9 @@ test("le propriétaire remplace une jaquette par une photo (US-12)", async ({
   await page.getByRole("button", { name: "Utiliser cette photo" }).click();
 
   await expect(page).toHaveURL(/\/admin\/jaquettes\?remplacee=/);
-  await expect(page.getByRole("status")).toContainText("Jaquette remplacée");
+  await expect(
+    page.getByRole("status").filter({ hasText: "Jaquette remplacée" }),
+  ).toBeVisible();
   // Dans « Toutes », la sortie a maintenant une jaquette de source « Photo ».
   await page.getByRole("link", { name: "Toutes" }).click();
   await expect(page.getByText(/· Photo$/).first()).toBeVisible();

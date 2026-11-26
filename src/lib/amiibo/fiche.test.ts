@@ -21,6 +21,7 @@ const BASE_URL = "https://exemple.supabase.co/";
 const ID = "277927c3-29c7-415e-bcf4-378515375c0d";
 
 const sidon: LigneAmiibo = {
+  id: ID,
   slug: "sidon",
   identifiant: "010a000004a40902",
   nom: "Sidon",
