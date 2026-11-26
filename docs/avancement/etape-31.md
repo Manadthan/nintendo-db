@@ -14,4 +14,5 @@
 - décidé le 25/11 : pas de coche « ✓ » pour une version à venir (catalogue, fiche)
 - coches des versions à venir #278
 - décidé le 26/11 : menu « même jeu que » pour une annonce japonaise non reliée ; PR 6 en deux : calculs, puis page
-- à faire : calculs de l'import des annonces (PR 6a), page « Import → Annonces » (PR 6b), premier import, bilan
+- calculs de l'import des annonces #280
+- à faire : page « Import → Annonces » (PR 6b), relais redéposé (titres européens en anglais), premier import, bilan

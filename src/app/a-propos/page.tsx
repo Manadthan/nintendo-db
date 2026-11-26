@@ -51,7 +51,7 @@ const SOURCES = [
     nom: "Nintendo",
     lien: "https://www.nintendo.com/fr-fr/",
     apport:
-      "Boîtes européennes officielles (PEGI) de jeux Wii U et Switch dont GameTDB n'a pas de boîte française.",
+      "Boîtes européennes officielles (PEGI) de jeux Wii U et Switch dont GameTDB n'a pas de boîte française ; amiibo sortis en 2026, photos des boîtes américaines des amiibo, noms japonais et dates de sortie japonaises et européennes des amiibo récents.",
     licence:
       "Images reprises avec mention de la source ; elles restent la propriété de Nintendo ; retrait sur demande.",
     licenceLien: "https://www.nintendo.com/fr-fr/",
@@ -73,6 +73,15 @@ const SOURCES = [
     licence:
       "API RAWG, gratuite à condition de citer RAWG avec un lien sur chaque page qui montre ses données. Les captures restent la propriété de leurs éditeurs.",
     licenceLien: "https://rawg.io/apidocs",
+  },
+  {
+    nom: "AmiiboAPI",
+    lien: "https://github.com/N3evin/AmiiboAPI",
+    apport:
+      "Liste des amiibo jusqu'à fin 2025 (figurines, cartes, peluches, bracelets, blocs), séries, dates de sortie par région, jeux compatibles et ce que l'amiibo y débloque (texte en anglais), photos des figurines, copiées ici.",
+    licence:
+      "Dépôt sous licence MIT. Les photos des amiibo restent la propriété de Nintendo et de leurs éditeurs ; retrait sur demande.",
+    licenceLien: "https://github.com/N3evin/AmiiboAPI/blob/master/LICENSE",
   },
   {
     nom: "NDL Search",

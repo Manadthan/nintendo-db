@@ -4,7 +4,7 @@ import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { versJeuFiche, type JeuFiche, type LigneFiche } from "./fiche";
 
 const COLONNES =
-  "id, slug, developpeur, series, genre, wikipedia_url, metacritic_note, metacritic_url, rawg_slug, captures(position, url, largeur, hauteur), guides_jeux(guides(isbn, titre, editeur, date_parution, couverture, google_books_id)), consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, code_produit, jaquette_path, jaquette_source)";
+  "id, slug, developpeur, series, genre, wikipedia_url, metacritic_note, metacritic_url, rawg_slug, captures(position, url, largeur, hauteur), guides_jeux(guides(isbn, titre, editeur, date_parution, couverture, google_books_id)), amiibo_jeux(amiibo(slug, nom, image_path, amiibo_sorties(date_sortie))), consoles!inner(slug, nom), releases(region, sortie, titre, titre_romanise, date_sortie, precision_date, editeur, code_produit, jaquette_path, jaquette_source)";
 
 /** Un jeu par son adresse stable /jeux/{console}/{jeu} (ADR-06) ; null s'il n'existe pas. Lu en visiteur. */
 export async function chargerJeu(

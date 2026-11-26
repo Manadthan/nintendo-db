@@ -1,0 +1,79 @@
+import { expect, test } from "@playwright/test";
+
+// US-29 — Voir les amiibo (docs/SPEC.md) : fiche de l'amiibo et bloc « Amiibo » de la fiche du jeu. Amiibo de test
+// chargé en CI (tests/e2e/amiibo.sql), relié à Splatoon ; jamais AmiiboAPI ni Nintendo en direct.
+
+const AMIIBO = "/amiibo/inkling-e2e";
+
+test("la fiche de l'amiibo montre ses informations, ses jeux et sa disponibilité", async ({
+  page,
+}) => {
+  await page.goto(AMIIBO);
+  await expect(page).toHaveTitle("Inkling e2e · Amiibo · Nintendo DB");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Inkling e2e",
+  );
+  await expect(
+    page.getByText("Figurine", { exact: true }).first(),
+  ).toBeVisible();
+  await expect(page.getByText("08000000 03380002")).toBeVisible();
+
+  const dispo = page.getByRole("region", { name: "Disponibilité" });
+  await expect(dispo.getByRole("listitem")).toHaveCount(3);
+  await expect(dispo).toContainText("Japon · 28 mai 2015");
+  await expect(dispo).toContainText("Amérique du Nord · non sorti");
+
+  const jeux = page.getByRole("region", { name: "Jeux compatibles (2)" });
+  await expect(jeux).toContainText("Jeu hors catalogue e2e");
+  await expect(jeux).toContainText("hors catalogue");
+  await expect(
+    jeux.getByRole("link", { name: "Jeu hors catalogue e2e" }),
+  ).toHaveCount(0);
+  await jeux.getByRole("link", { name: /Splatoon/ }).click();
+  await expect(page).toHaveURL("/jeux/wii-u/splatoon");
+});
+
+test("la bascule change la date de sortie, ou dit que l'amiibo n'est pas sorti", async ({
+  page,
+}) => {
+  await page.goto(AMIIBO);
+  const bascule = page.getByRole("group", { name: "Version" });
+  await bascule.getByRole("button", { name: "Version Japon" }).click();
+  await expect(page.getByText("Sorti le 28 mai 2015 · Japon")).toBeVisible();
+  // Nom japonais sous le nom, version japonaise seulement.
+  await expect(page.locator("main p[lang=ja]")).toHaveText("ガール e2e");
+
+  await bascule
+    .getByRole("button", { name: "Amérique du Nord : non sorti" })
+    .click();
+  await expect(
+    page.getByText("Non sorti dans cette région · Amérique du Nord"),
+  ).toBeVisible();
+});
+
+test("la fiche du jeu liste ses amiibo, chacun menant à sa fiche", async ({
+  page,
+}) => {
+  await page.goto("/jeux/wii-u/splatoon");
+  const bloc = page.getByRole("region", { name: "Amiibo (1)" });
+  await bloc.getByRole("link", { name: /Inkling e2e/ }).click();
+  await expect(page).toHaveURL(AMIIBO);
+});
+
+test("un jeu sans amiibo n'a pas de bloc Amiibo", async ({ page }) => {
+  await page.goto("/jeux/wii-u/mario-kart-8");
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /^Amiibo/ })).toHaveCount(0);
+});
+
+test("un amiibo inconnu ou une adresse mal formée mène à la page introuvable", async ({
+  page,
+}) => {
+  for (const adresse of ["/amiibo/inconnu-e2e", "/amiibo/Pas_Un_Slug"]) {
+    const reponse = await page.goto(adresse);
+    expect(reponse?.status()).toBe(404);
+    await expect(
+      page.getByRole("heading", { name: "Page introuvable" }),
+    ).toBeVisible();
+  }
+});

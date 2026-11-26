@@ -18,6 +18,8 @@ import {
 import { basculerVersion, useCollection } from "@/lib/collection/navigateur";
 import { possede } from "@/lib/collection/collection";
 import { FORMES_REELLES } from "@/lib/jaquettes/proportions";
+import { AmiiboDuJeuBloc } from "./AmiiboDuJeu";
+import { BasculeRegion, NOMS_REGION } from "./BasculeRegion";
 import { Jaquette } from "./Jaquette";
 import { lienRawg } from "@/lib/captures/rawg";
 import { Captures } from "./Captures";
@@ -37,12 +39,6 @@ function NoteColoree({ note }: { note: number }) {
     </span>
   );
 }
-
-const NOMS: Record<Region, string> = {
-  JAP: "Japon",
-  US: "Amérique du Nord",
-  PAL: "Europe",
-};
 
 function Info({ libelle, valeur }: { libelle: string; valeur: string | null }) {
   return (
@@ -142,36 +138,15 @@ export function FicheJeu({
               sizes="(max-width: 432px) calc(100vw - 32px), 400px"
             />
           </div>
-          <div
-            role="group"
-            aria-label="Version"
-            className="grid w-[230px] grid-cols-3 gap-1 rounded-xl bg-segment p-1"
-          >
-            {REGIONS.map((r) => {
-              const sorti = jeu.sorties[r].sortie;
-              return (
-                <button
-                  key={r}
-                  type="button"
-                  aria-pressed={r === region}
-                  disabled={!sorti}
-                  aria-label={
-                    sorti ? `Version ${NOMS[r]}` : `${NOMS[r]} : non sorti`
-                  }
-                  onClick={() => setChoix(r)}
-                  className={`h-10 rounded-[9px] text-sm ${
-                    r === region
-                      ? "bg-carte font-semibold shadow-sm"
-                      : sorti
-                        ? "font-medium text-texte-doux"
-                        : "font-medium text-absent line-through"
-                  }`}
-                >
-                  {r}
-                </button>
-              );
-            })}
-          </div>
+          <BasculeRegion
+            region={region}
+            sorties={{
+              JAP: jeu.sorties.JAP.sortie,
+              US: jeu.sorties.US.sortie,
+              PAL: jeu.sorties.PAL.sortie,
+            }}
+            onChoix={setChoix}
+          />
           {sortie.jaquette && sortie.sourceJaquette && (
             <p className="text-[11px] text-texte-discret">
               Jaquette : {SOURCES_JAQUETTE[sortie.sourceJaquette]}
@@ -203,12 +178,12 @@ export function FicheJeu({
                 Sortie prévue : {formaterDate(
                   sortie.date,
                   sortie.precision,
-                )} · {NOMS[region]}
+                )} · {NOMS_REGION[region]}
               </p>
             ) : (
               <p className="text-[15px] font-semibold text-accent-fonce">
                 Sorti le {formaterDate(sortie.date, sortie.precision)} ·{" "}
-                {NOMS[region]}
+                {NOMS_REGION[region]}
               </p>
             )}
           </div>
@@ -249,6 +224,8 @@ export function FicheJeu({
             rawgSlug={jeu.rawgSlug}
           />
 
+          <AmiiboDuJeuBloc amiibo={jeu.amiibo} />
+
           <GuidesFiche guides={jeu.guides} />
 
           <section
@@ -275,7 +252,7 @@ export function FicheJeu({
                     </span>
                     <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                       <span className="text-sm font-semibold">
-                        {NOMS[r]}{" "}
+                        {NOMS_REGION[r]}{" "}
                         <span className="font-normal text-texte-discret">
                           ·{" "}
                           {s.sortie
@@ -300,7 +277,7 @@ export function FicheJeu({
                               e.target.checked,
                             )
                           }
-                          aria-label={`Je l'ai : version ${NOMS[r]}`}
+                          aria-label={`Je l'ai : version ${NOMS_REGION[r]}`}
                           className="size-5 accent-accent"
                         />
                         Je l&apos;ai
@@ -328,7 +305,7 @@ export function FicheJeu({
               US: jeu.sorties.US.sortie && !aVenir("US"),
               PAL: jeu.sorties.PAL.sortie && !aVenir("PAL"),
             }}
-            noms={NOMS}
+            noms={NOMS_REGION}
             region={region}
           />
 
@@ -366,6 +343,7 @@ export function FicheJeu({
                 )}
               </>
             )}
+            {jeu.amiibo.length > 0 && " · amiibo : AmiiboAPI"}
             {jeu.guides.length > 0 &&
               " · guides : Bibliothèque nationale de la Diète (NDL Search)"}
             {" · prix via eBay"}. Site de fan non affilié à Nintendo.

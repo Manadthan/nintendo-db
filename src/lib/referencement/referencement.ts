@@ -19,10 +19,11 @@ export const OPEN_GRAPH_DE_BASE = {
   type: "website",
 } as const;
 
-/** Plan du site : accueil, À propos, chaque fiche, puis chaque guide japonais (US-27). */
+/** Plan du site : accueil, À propos, chaque fiche, chaque guide japonais (US-27), puis chaque amiibo (US-29). */
 export function entreesSitemap(
   fiches: { console: string; jeu: string }[],
   guides: { isbn: string }[] = [],
+  amiibo: { slug: string }[] = [],
 ): MetadataRoute.Sitemap {
   return [
     { url: `${URL_SITE}/`, changeFrequency: "weekly", priority: 1 },
@@ -35,6 +36,11 @@ export function entreesSitemap(
     ...guides.map((g) => ({
       url: `${URL_SITE}/guides/${g.isbn}`,
       changeFrequency: "yearly" as const,
+      priority: 0.5,
+    })),
+    ...amiibo.map((a) => ({
+      url: `${URL_SITE}/amiibo/${a.slug}`,
+      changeFrequency: "monthly" as const,
       priority: 0.5,
     })),
   ];

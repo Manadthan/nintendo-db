@@ -54,3 +54,24 @@ test("les imports DS et 3DS s'ouvrent depuis l'administration (étape 9)", async
     page.getByRole("heading", { name: "Import 3DS", exact: true }),
   ).toBeVisible();
 });
+
+test("l'import des annonces s'ouvre depuis l'administration (US-33)", async ({
+  page,
+}) => {
+  await seConnecter(page);
+  await page.getByRole("link", { name: /Import des annonces/ }).click();
+  await expect(page).toHaveURL("/admin/import/annonces");
+  await expect(
+    page.getByRole("heading", { name: "Import des annonces", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Analyser les annonces", exact: true }),
+  ).toBeEnabled();
+  // Base jetable : le relais n'y a rien déposé, l'analyse le dit (jamais Nintendo en direct dans les tests).
+  await page
+    .getByRole("button", { name: "Analyser les annonces", exact: true })
+    .click();
+  await expect(
+    page.getByRole("alert").filter({ hasText: "Annonces absentes" }),
+  ).toBeVisible();
+});
