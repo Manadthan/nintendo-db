@@ -14,12 +14,14 @@ const ligne = (
   isbn: string,
   jeux: string[],
   google: string | null = null,
+  copie: string | null = null,
 ): LigneGuideCatalogue => ({
   isbn,
   titre: `Guide ${isbn}`,
   editeur: "KADOKAWA",
   date_parution: "2016-06-01",
   precision_date: "mois",
+  couverture: copie,
   google_books_id: google,
   guides_jeux: jeux.map((game_id) => ({ game_id })),
 });
@@ -67,6 +69,7 @@ describe("guides du catalogue (/guides.json)", () => {
       versGuidesCatalogue([
         ligne("9784000000024", ["b", "a", "a"], "abcDEF12345_"),
         ligne("9784000000017", ["c"]),
+        ligne("9784000000031", ["d"], "abcDEF12345_", "9784000000031-1.webp"),
       ]),
     ).toEqual([
       {
@@ -84,8 +87,17 @@ describe("guides du catalogue (/guides.json)", () => {
         editeur: "KADOKAWA",
         date: "2016-06-01",
         precision: "mois",
-        couverture: "abcDEF12345_",
+        couverture: { source: "google", id: "abcDEF12345_" },
         jeux: ["a", "b"],
+      },
+      {
+        isbn: "9784000000031",
+        titre: "Guide 9784000000031",
+        editeur: "KADOKAWA",
+        date: "2016-06-01",
+        precision: "mois",
+        couverture: { source: "amazon", chemin: "9784000000031-1.webp" },
+        jeux: ["d"],
       },
     ]);
   });
@@ -113,7 +125,9 @@ describe("guides du catalogue (/guides.json)", () => {
 
 describe("cartes des guides dans le catalogue", () => {
   const [guide] = relierGuides(
-    versGuidesCatalogue([ligne("9784000000017", ["fe-birthright"], "abcDEF12345_")]),
+    versGuidesCatalogue([
+      ligne("9784000000017", ["fe-birthright"], "abcDEF12345_"),
+    ]),
     [{ ...jeu("fe-birthright"), metacritic: 81 }],
   );
 
@@ -132,7 +146,7 @@ describe("cartes des guides dans le catalogue", () => {
     expect(v?.guide).toEqual({
       isbn: "9784000000017",
       editeur: "KADOKAWA",
-      couverture: "abcDEF12345_",
+      couverture: { source: "google", id: "abcDEF12345_" },
     });
   });
 

@@ -1,3 +1,4 @@
+import type { Couverture } from "@/lib/guides/couverture";
 import type { Database } from "@/types/database";
 
 export type Region = Database["public"]["Enums"]["region"];
@@ -76,8 +77,8 @@ export type AmiiboCarte = {
 export type GuideCarte = {
   isbn: string;
   editeur: string | null;
-  /** Identifiant Google Books de la couverture ; null : vignette neutre. */
-  couverture: string | null;
+  /** Copie Amazon ou Google Books (ADR-19 point 2) ; null : vignette neutre. */
+  couverture: Couverture | null;
 };
 
 export type Groupe = { titre: string | null; versions: VersionAffichee[] };

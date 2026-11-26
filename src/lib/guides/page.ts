@@ -10,7 +10,11 @@ import {
   OPEN_GRAPH_DE_BASE,
   URL_SITE,
 } from "@/lib/referencement/referencement";
-import { adresseCouverture } from "./guides";
+import {
+  type Couverture,
+  adresseCouvertureGuide,
+  choisirCouverture,
+} from "./couverture";
 
 /** Adresse stable de la page d'un guide. */
 export const cheminGuide = (isbn: string) => `/guides/${isbn}`;
@@ -34,6 +38,9 @@ export type GuidePage = {
   date: string | null;
   precision: PrecisionDate | null;
   pages: number | null;
+  /** Copie Amazon ou Google Books (ADR-19 point 2) ; null : vignette neutre. */
+  couverture: Couverture | null;
+  /** Lien « Google Books › » quand Google Books connaît le livre. */
   googleBooksId: string | null;
   ndlUrl: string | null;
   jeux: JeuCouvert[];
@@ -47,6 +54,7 @@ export type LigneGuide = {
   date_parution: string | null;
   precision_date: PrecisionDate | null;
   pages: number | null;
+  couverture: string | null;
   google_books_id: string | null;
   ndl_url: string | null;
   guides_jeux: { games: LigneJeu | null }[];
@@ -76,6 +84,7 @@ export function versGuidePage(ligne: LigneGuide): GuidePage {
     date: ligne.date_parution,
     precision: ligne.precision_date,
     pages: ligne.pages,
+    couverture: choisirCouverture(ligne.couverture, ligne.google_books_id),
     googleBooksId: ligne.google_books_id,
     ndlUrl: ligne.ndl_url,
     jeux,
@@ -108,10 +117,10 @@ export function metadonneesGuide(guide: GuidePage): Metadata {
       title: guide.titre,
       description,
       url: chemin,
-      ...(guide.googleBooksId && {
+      ...(guide.couverture && {
         images: [
           {
-            url: adresseCouverture(guide.googleBooksId),
+            url: adresseCouvertureGuide(guide.couverture),
             alt: `Couverture de ${guide.titre}`,
           },
         ],
@@ -141,8 +150,8 @@ export function donneesGuide(guide: GuidePage): Record<string, unknown> {
     }),
     ...(date && { datePublished: date }),
     ...(guide.pages && { numberOfPages: guide.pages }),
-    ...(guide.googleBooksId && {
-      image: adresseCouverture(guide.googleBooksId),
+    ...(guide.couverture && {
+      image: adresseCouvertureGuide(guide.couverture),
     }),
     ...(guide.jeux.length && {
       about: guide.jeux.map((j) => ({
