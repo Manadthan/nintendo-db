@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { AnneeFrise } from "@/lib/catalogue/frise";
 import type { VersionAffichee } from "@/lib/catalogue/types";
+import { EtiquettesAmiibo, ImageCarteAmiibo } from "./CarteAmiibo";
 import { CouvertureCarte, EtiquettesGuide } from "./CarteGuide";
 import { EtiquetteAVenir } from "./EtiquetteAVenir";
 import { Jaquette } from "./Jaquette";
@@ -66,6 +67,12 @@ export function Frise({
                 >
                   {v.guide ? (
                     <CouvertureCarte v={v} />
+                  ) : v.amiibo ? (
+                    <ImageCarteAmiibo
+                      v={v}
+                      sizes="(max-width: 672px) 45vw, 300px"
+                      forme="carree"
+                    />
                   ) : (
                     <div className="relative">
                       <Jaquette
@@ -86,6 +93,11 @@ export function Frise({
                   {v.guide ? (
                     <span className="flex flex-wrap gap-1">
                       <EtiquettesGuide v={v} />
+                    </span>
+                  ) : v.amiibo ? (
+                    <span className="flex flex-wrap items-center gap-1">
+                      {aVenir(v) && <EtiquetteAVenir />}
+                      <EtiquettesAmiibo v={v} />
                     </span>
                   ) : (
                     <span className="flex flex-wrap items-center gap-1 text-xs text-texte-discret">

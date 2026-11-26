@@ -60,15 +60,23 @@ import { ListeJeux } from "./ListeJeux";
 import { triFrise } from "@/lib/catalogue/frise";
 import { abonnerTri, enregistrerTri, lireTri } from "@/lib/catalogue/tri";
 import {
+  COCHES,
   VOIR_PAR_DEFAUT,
   abonnerVoir,
   basculer,
   enregistrerVoir,
   guidesPermis,
+  libelleCompte,
   lireVoir,
   voirEffectif,
+  type Coche,
   type Voir,
 } from "@/lib/catalogue/voir";
+import {
+  texteRechercheAmiibo,
+  versionsAmiibo,
+  type AmiiboCatalogue,
+} from "@/lib/amiibo/catalogue";
 import {
   relierGuides,
   texteRechercheGuide,
@@ -109,11 +117,38 @@ function enregistrerVue(vue: Vue) {
   for (const rappel of abonnes) rappel();
 }
 
-/** « 48 jeux et 31 guides affichés » (US-27). */
-function compteMele(versions: { guide?: unknown }[]): string {
-  const guides = versions.filter((v) => v.guide).length;
-  const jeux = versions.length - guides;
-  return `${jeux} jeu${jeux > 1 ? "x" : ""} et ${guides} guide${guides > 1 ? "s" : ""} affiché${versions.length > 1 ? "s" : ""}`;
+const LIBELLES_COCHE: Record<Coche, string> = {
+  jeux: "Jeux",
+  guides: "Guides",
+  amiibo: "Amiibo",
+};
+
+/**
+ * Liste JSON demandée une seule fois, à la première coche (guides : ADR-19 point 4 ; amiibo : ADR-21 point 5) :
+ * l'accueil reste aussi léger qu'avant. `null` tant qu'elle n'est pas arrivée.
+ */
+function useListeALaDemande<T>(adresse: string, demandee: boolean) {
+  const [liste, setListe] = useState<T[] | null>(null);
+  const [erreur, setErreur] = useState(false);
+  useEffect(() => {
+    if (!demandee || liste) return;
+    let annule = false;
+    fetch(adresse)
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+        return r.json() as Promise<T[]>;
+      })
+      .then((l) => {
+        if (!annule) setListe(l);
+      })
+      .catch(() => {
+        if (!annule) setErreur(true);
+      });
+    return () => {
+      annule = true;
+    };
+  }, [adresse, demandee, liste]);
+  return { liste, erreur };
 }
 
 type Props = {
@@ -163,27 +198,11 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
   );
   const permis = guidesPermis(marche);
   const voir = voirEffectif(voirChoisi, marche);
-  // Guides chargés une seule fois, à la première coche (ADR-19 point 4) : l'accueil reste aussi léger qu'avant.
-  const [guides, setGuides] = useState<GuideCatalogue[] | null>(null);
-  const [erreurGuides, setErreurGuides] = useState(false);
-  useEffect(() => {
-    if (!voir.guides || guides) return;
-    let annule = false;
-    fetch("/guides.json")
-      .then((r) => {
-        if (!r.ok) throw new Error(String(r.status));
-        return r.json() as Promise<GuideCatalogue[]>;
-      })
-      .then((liste) => {
-        if (!annule) setGuides(liste);
-      })
-      .catch(() => {
-        if (!annule) setErreurGuides(true);
-      });
-    return () => {
-      annule = true;
-    };
-  }, [voir.guides, guides]);
+  const { liste: guides, erreur: erreurGuides } =
+    useListeALaDemande<GuideCatalogue>("/guides.json", voir.guides);
+  // Amiibo (US-29) : sur tous les marchés ; un amiibo non sorti sur le marché choisi est caché.
+  const { liste: amiibo, erreur: erreurAmiibo } =
+    useListeALaDemande<AmiiboCatalogue>("/amiibo.json", voir.amiibo);
   const guidesRelies = useMemo(
     () => relierGuides(guides ?? [], jeux),
     [guides, jeux],
@@ -239,21 +258,38 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
           contientMots(textesGuides.get(g) ?? "", mots),
         );
   }, [guidesRelies, textesGuides, rechercheAffichee]);
+  // Amiibo (US-29) : cherchés par leur nom, leur nom japonais, leur série amiibo et leurs séries de jeux.
+  const textesAmiibo = useMemo(
+    () => new Map((amiibo ?? []).map((a) => [a, texteRechercheAmiibo(a)])),
+    [amiibo],
+  );
+  const amiiboTrouves = useMemo(() => {
+    const mots = motsRecherche(rechercheAffichee);
+    const tous = amiibo ?? [];
+    return mots.length === 0
+      ? tous
+      : tous.filter((a) => contientMots(textesAmiibo.get(a) ?? "", mots));
+  }, [amiibo, textesAmiibo, rechercheAffichee]);
 
-  // Choix proposés : ceux du marché choisi, sans tenir compte de la recherche ni des autres filtres.
+  // Choix proposés : ceux du marché choisi, sans tenir compte de la recherche ni des autres filtres ; avec les amiibo
+  // quand ils sont cochés (leurs séries, années et consoles).
   const duMarche = useMemo(
-    () => trier(jeux, "anciens", marche),
-    [jeux, marche],
+    () => [
+      ...trier(jeux, "anciens", marche),
+      ...(voir.amiibo ? versionsAmiibo(amiibo ?? [], marche) : []),
+    ],
+    [jeux, marche, voir.amiibo, amiibo],
   );
   const versions = useMemo(
     () =>
       filtrerCollection(
         filtrer(
-          // Jeux et guides mêlés, classés ensemble (US-27).
+          // Jeux, guides et amiibo mêlés, classés ensemble (US-27, US-29).
           trierVersions(
             [
               ...(voir.jeux ? trier(trouves, tri, marche) : []),
               ...(voir.guides ? versionsGuides(guidesTrouves) : []),
+              ...(voir.amiibo ? versionsAmiibo(amiiboTrouves, marche) : []),
             ],
             tri,
           ),
@@ -266,6 +302,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
     [
       trouves,
       guidesTrouves,
+      amiiboTrouves,
       voir,
       tri,
       marche,
@@ -394,7 +431,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
         aria-label="Afficher"
         className="flex flex-wrap items-center gap-2"
       >
-        {(["jeux", "guides"] as const).map((coche) => {
+        {COCHES.map((coche) => {
           const grisee = coche === "guides" && !permis;
           return (
             <label
@@ -414,7 +451,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
                 onChange={() => enregistrerVoir(basculer(voir, coche))}
                 className="size-[18px] accent-accent"
               />
-              {coche === "jeux" ? "Jeux" : "Guides"}
+              {LIBELLES_COCHE[coche]}
             </label>
           );
         })}
@@ -488,20 +525,20 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
       )}
       <FiltresActifs filtres={filtres} consoles={consoles} />
       <p className="text-[13px] text-texte-discret">
-        {voir.guides ? (
-          compteMele(versions)
-        ) : (
-          <>
-            {versions.length} jeu{versions.length > 1 ? "x" : ""} affiché
-            {versions.length > 1 ? "s" : ""} sur {jeux.length}
-          </>
-        )}
+        {libelleCompte(versions, voir, jeux.length)}
       </p>
       {voir.guides && !guides && (
         <p role="status" className="text-[13px] text-texte-discret">
           {erreurGuides
             ? "Les guides n'ont pas pu être chargés."
             : "Chargement des guides…"}
+        </p>
+      )}
+      {voir.amiibo && !amiibo && (
+        <p role="status" className="text-[13px] text-texte-discret">
+          {erreurAmiibo
+            ? "Les amiibo n'ont pas pu être chargés."
+            : "Chargement des amiibo…"}
         </p>
       )}
 
