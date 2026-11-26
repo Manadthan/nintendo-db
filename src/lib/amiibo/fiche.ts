@@ -87,6 +87,8 @@ export type JeuCompatible = {
 };
 
 export type AmiiboFiche = {
+  /** Identifiant en base (`amiibo.id`) : la case « Je l'ai » (US-30). */
+  id: string;
   slug: string;
   identifiant: string;
   nom: string;
@@ -106,6 +108,7 @@ export type AmiiboFiche = {
 
 /** Une ligne de `amiibo` avec ses sorties et ses jeux, telle que la renvoie la requête de la fiche. */
 export type LigneAmiibo = {
+  id: string;
   slug: string;
   identifiant: string;
   nom: string;
@@ -162,6 +165,7 @@ export function versAmiiboFiche(ligne: LigneAmiibo): AmiiboFiche {
         a.console.localeCompare(b.console),
     );
   return {
+    id: ligne.id,
     slug: ligne.slug,
     identifiant: ligne.identifiant,
     nom: ligne.nom,

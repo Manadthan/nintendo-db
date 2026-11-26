@@ -23,6 +23,9 @@ test("la fiche de l'amiibo montre ses informations, ses jeux et sa disponibilit�
   await expect(dispo).toContainText("Japon · 28 mai 2015");
   await expect(dispo).toContainText("Amérique du Nord · non sorti");
 
+  // Visiteur : pas de case « Je l'ai » (US-30, collection privée).
+  await expect(page.getByRole("checkbox", { name: "Je l'ai" })).toHaveCount(0);
+
   const jeux = page.getByRole("region", { name: "Jeux compatibles (2)" });
   await expect(jeux).toContainText("Jeu hors catalogue e2e");
   await expect(jeux).toContainText("hors catalogue");

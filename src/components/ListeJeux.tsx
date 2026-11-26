@@ -8,7 +8,7 @@ import { noterPositionCatalogue } from "@/lib/catalogue/defilement";
 import { decouperFrise } from "@/lib/catalogue/frise";
 import { premiersDesGroupes } from "@/lib/catalogue/lots";
 import { REGIONS, type VersionAffichee } from "@/lib/catalogue/types";
-import { possede } from "@/lib/collection/collection";
+import { possede, possedeAmiibo } from "@/lib/collection/collection";
 import {
   CouvertureCarte,
   EtiquettesGuide,
@@ -20,6 +20,7 @@ import {
   ImageCarteAmiibo,
   legendeAmiibo,
   lienAmiibo,
+  MarquePossede,
 } from "./CarteAmiibo";
 import { Disponibilite } from "./Disponibilite";
 import { EtiquetteAVenir } from "./EtiquetteAVenir";
@@ -85,6 +86,9 @@ export const ListeJeux = memo(function ListeJeux({
   // Étiquettes JAP / US / PAL en vert pour les versions possédées (US-16) ; rien pour un visiteur.
   const possedees = (v: VersionAffichee) =>
     possessions ? REGIONS.filter((r) => possede(possessions, v.jeu.id, r)) : [];
+  // Amiibo possédé (US-30) : marque verte ; rien pour un visiteur.
+  const amiiboPossede = (v: VersionAffichee) =>
+    !!possessions && !!v.amiibo && possedeAmiibo(possessions, v.amiibo.id);
 
   return (
     <div className="flex flex-col gap-3.5">
@@ -94,6 +98,7 @@ export const ListeJeux = memo(function ListeJeux({
           lien={lien}
           surClic={noter}
           aVenir={(v) => estAVenir(v, aujourdhui)}
+          amiiboPossede={amiiboPossede}
         />
       )}
 
@@ -140,10 +145,13 @@ export const ListeJeux = memo(function ListeJeux({
                         </>
                       ) : v.amiibo ? (
                         <>
-                          <ImageCarteAmiibo
-                            v={v}
-                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
-                          />
+                          <div className="relative">
+                            <ImageCarteAmiibo
+                              v={v}
+                              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
+                            />
+                            {amiiboPossede(v) && <MarquePossede surPhoto />}
+                          </div>
                           <div className="flex flex-col gap-[3px]">
                             <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
                               {v.sortie.titre}
@@ -243,6 +251,7 @@ export const ListeJeux = memo(function ListeJeux({
                             <div className="flex flex-wrap items-center gap-1">
                               {estAVenir(v, aujourdhui) && <EtiquetteAVenir />}
                               <EtiquettesAmiibo v={v} />
+                              {amiiboPossede(v) && <MarquePossede />}
                             </div>
                           </div>
                         </>

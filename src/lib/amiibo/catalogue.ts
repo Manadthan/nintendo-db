@@ -22,6 +22,8 @@ export type SortieAmiiboCatalogue = {
 
 /** Un amiibo tel que /amiibo.json l'envoie : le strict nécessaire à sa carte, à la recherche et aux filtres. */
 export type AmiiboCatalogue = {
+  /** Identifiant en base : « Je l'ai » (US-30). */
+  id: string;
   slug: string;
   nom: string;
   nomJap: string | null;
@@ -38,6 +40,7 @@ export type AmiiboCatalogue = {
 
 /** Une ligne de `amiibo`, telle que la renvoie la requête de la route. */
 export type LigneAmiiboCatalogue = {
+  id: string;
   slug: string;
   nom: string;
   nom_jap: string | null;
@@ -78,6 +81,7 @@ export function versAmiiboCatalogue(
 ): AmiiboCatalogue[] {
   return lignes
     .map((l) => ({
+      id: l.id,
       slug: l.slug,
       nom: l.nom,
       nomJap: l.nom_jap,
@@ -152,6 +156,7 @@ export function versionsAmiibo(
       {
         ...version,
         amiibo: {
+          id: a.id,
           slug: a.slug,
           type: a.type,
           serieAmiibo: a.serieAmiibo,
