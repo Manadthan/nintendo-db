@@ -15,4 +15,9 @@
 - coches des versions à venir #278
 - décidé le 26/11 : menu « même jeu que » pour une annonce japonaise non reliée ; PR 6 en deux : calculs, puis page
 - calculs de l'import des annonces #280
-- à faire : page « Import → Annonces » (PR 6b), relais redéposé (titres européens en anglais), premier import, bilan
+- page « Import → Annonces » #283 ; boîte US recadrée (marge et boîtier rouge retirés, image en largeur ignorée)
+- 26/11 : relais redéposé (titres européens en anglais) ; premier import par le propriétaire : 7 jeux Switch 2 à venir
+  (Metroid Ravenous, Xenoblade Chronicles 3 NS2 Edition, Hyrule Warriors AoC DE, Xenoblade Genesis, Kirby and the
+  World Beyond, Pokémon Winds, Pokémon Waves), 3 versions japonaises reliées par le menu, 2 boîtes US copiées
+- e2e : jeu annoncé ajouté puis supprimé depuis l'administration (bande, étiquette, fiche sans case)
+- à faire : bilan
