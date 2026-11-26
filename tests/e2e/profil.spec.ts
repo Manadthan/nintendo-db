@@ -112,6 +112,8 @@ test("Mon profil résume la collection du collectionneur et ses derniers ajouts 
   await expect(page).toHaveURL("/profil");
   const collection = page.getByRole("region", { name: "Ma collection" });
   await expect(collection).toContainText("Votre collection est vide");
+  // Amiibo (US-30) : la ligne « Amiibo : N / total » (amiibo de test : tests/e2e/amiibo.sql).
+  await expect(collection.getByLabel(/^Amiibo : 0 sur \d+$/)).toBeVisible();
   await expect(
     page.getByRole("region", { name: "Derniers ajouts" }),
   ).toHaveCount(0);
