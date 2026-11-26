@@ -14,5 +14,7 @@
 - fiche de l'amiibo `/amiibo/[slug]`, bloc « Amiibo (N) » de la fiche du jeu, plan du site, AmiiboAPI dans « À propos » (PR 4)
 - catalogue : `/amiibo.json`, coche « Amiibo » (`?voir=`), cartes en grille / liste / frise, compteur « N jeux, M guides et P amiibo », recherche, filtres Année / Série (séries ramenées aux noms de nos jeux, choix du 26/11) / Console, tris (PR 5)
 - prix eBay de l'amiibo : route `/api/prix/amiibo/[slug]`, bloc sur la fiche (PR 6, #289)
-- « Je l'ai » (US-30, choix du 26/11 : les amiibo suivent le filtre « Ma collection », PR 7 en deux) : case sur la fiche, marque verte dans le catalogue, filtre `?collection=` (PR 7a)
-- à faire : Mon profil et profil public (« Amiibo : N / total », derniers ajouts, `profil_public()` : migration, PR 7b), bilan ; 30 amiibo sans date JAP (dont Sword Kirby, Noir Dedede)
+- « Je l'ai » (US-30, choix du 26/11 : les amiibo suivent le filtre « Ma collection », PR 7 en deux) : case sur la fiche, marque verte dans le catalogue, filtre `?collection=` (PR 7a, #291)
+- Mon profil et profil public : « Amiibo : N / total », derniers ajouts mêlés, `profil_public()` remplacée (migration 0036, PR 7b, #292)
+- **étape terminée le 26/11** : bilan (BILAN §18), SPEC US-29 à US-31 cochées
+- reste pour plus tard : 30 amiibo sans date JAP (dont Sword Kirby, Noir Dedede) ; amiibo à venir dans la bande « À venir » (étape 31)
