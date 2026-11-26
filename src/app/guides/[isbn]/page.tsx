@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CaseGuide } from "@/components/CaseGuide";
 import {
   CouvertureGuide,
   MentionCouverture,
@@ -122,6 +123,8 @@ export default async function PageGuide({
                 {guide.editeur && ` · ${guide.editeur}`}
               </p>
             </div>
+
+            <CaseGuide guideId={guide.id} />
 
             <dl className="grid grid-cols-2 gap-x-3 gap-y-3.5 rounded-xl border border-bordure bg-carte p-3.5">
               <Info libelle="Éditeur" valeur={guide.editeur} />

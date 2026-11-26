@@ -12,6 +12,8 @@ import { type Couverture, choisirCouverture } from "./couverture";
 
 /** Un guide tel que /guides.json l'envoie : le strict nécessaire à sa carte, les jeux par leur identifiant. */
 export type GuideCatalogue = {
+  /** Identifiant en base : possession du guide. */
+  id: string;
   isbn: string;
   titre: string;
   editeur: string | null;
@@ -25,6 +27,7 @@ export type GuideCatalogue = {
 
 /** Une ligne de `guides` avec ses liens, telle que la renvoie la requête de la route. */
 export type LigneGuideCatalogue = {
+  id: string;
   isbn: string;
   titre: string;
   editeur: string | null;
@@ -42,6 +45,7 @@ export function versGuidesCatalogue(
   return lignes
     .filter((l) => l.guides_jeux.length > 0)
     .map((l) => ({
+      id: l.id,
       isbn: l.isbn,
       titre: l.titre,
       editeur: l.editeur,
@@ -76,7 +80,7 @@ export function relierGuides(
 /**
  * Cartes des guides, mêlées aux jeux du catalogue : la « sortie » porte le titre et la date du guide (tris, groupes,
  * frise, filtre Année), le « jeu » est le premier jeu couvert, sans note (filtres Console, Genre, Développeur, Série ;
- * tri par note : en fin). Son identifiant commence par « guide: » (jamais une possession).
+ * tri par note : en fin). Son identifiant commence par « guide: » (la possession passe par `guide.id`).
  */
 export function versionsGuides(
   guides: readonly GuideRelie[],
@@ -96,7 +100,12 @@ export function versionsGuides(
           precision: g.precision,
           jaquette: null,
         },
-        guide: { isbn: g.isbn, editeur: g.editeur, couverture: g.couverture },
+        guide: {
+          id: g.id,
+          isbn: g.isbn,
+          editeur: g.editeur,
+          couverture: g.couverture,
+        },
       },
     ];
   });

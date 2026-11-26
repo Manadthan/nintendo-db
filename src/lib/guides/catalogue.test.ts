@@ -16,6 +16,7 @@ const ligne = (
   google: string | null = null,
   copie: string | null = null,
 ): LigneGuideCatalogue => ({
+  id: `id-${isbn}`,
   isbn,
   titre: `Guide ${isbn}`,
   editeur: "KADOKAWA",
@@ -73,6 +74,7 @@ describe("guides du catalogue (/guides.json)", () => {
       ]),
     ).toEqual([
       {
+        id: "id-9784000000017",
         isbn: "9784000000017",
         titre: "Guide 9784000000017",
         editeur: "KADOKAWA",
@@ -82,6 +84,7 @@ describe("guides du catalogue (/guides.json)", () => {
         jeux: ["c"],
       },
       {
+        id: "id-9784000000024",
         isbn: "9784000000024",
         titre: "Guide 9784000000024",
         editeur: "KADOKAWA",
@@ -91,6 +94,7 @@ describe("guides du catalogue (/guides.json)", () => {
         jeux: ["a", "b"],
       },
       {
+        id: "id-9784000000031",
         isbn: "9784000000031",
         titre: "Guide 9784000000031",
         editeur: "KADOKAWA",
@@ -131,7 +135,7 @@ describe("cartes des guides dans le catalogue", () => {
     [{ ...jeu("fe-birthright"), metacritic: 81 }],
   );
 
-  it("porte le titre et la date du guide, le jeu couvert sans note et jamais possédé", () => {
+  it("porte le titre et la date du guide, le jeu couvert sans note et son identifiant de possession", () => {
     const [v] = versionsGuides(guide ? [guide] : []);
     expect(v?.sortie).toMatchObject({
       titre: "Guide 9784000000017",
@@ -144,6 +148,7 @@ describe("cartes des guides dans le catalogue", () => {
       console: { slug: "3ds", nom: "3DS" },
     });
     expect(v?.guide).toEqual({
+      id: "id-9784000000017",
       isbn: "9784000000017",
       editeur: "KADOKAWA",
       couverture: { source: "google", id: "abcDEF12345_" },

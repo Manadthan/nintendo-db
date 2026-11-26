@@ -3,14 +3,17 @@ import { trier } from "@/lib/catalogue/catalogue";
 import type { JeuCatalogue } from "@/lib/catalogue/types";
 
 import { versionsAmiibo } from "@/lib/amiibo/catalogue";
+import { versionsGuides } from "@/lib/guides/catalogue";
 import {
   avecAmiibo,
+  avecGuide,
   avecVersion,
   cleVersion,
   ensemble,
   filtrerCollection,
   possede,
   possedeAmiibo,
+  possedeGuide,
 } from "./collection";
 
 describe("ma collection (US-16)", () => {
@@ -144,5 +147,48 @@ describe("amiibo (US-30)", () => {
     expect(
       noms(filtrerCollection(versions, "manquants", possessions, "TOUS")),
     ).toEqual(["tulin"]);
+  });
+});
+
+describe("guides possédés", () => {
+  const guide = (id: string, isbn: string) => ({
+    id,
+    isbn,
+    titre: `Guide ${isbn}`,
+    editeur: "KADOKAWA",
+    date: "2023-11-01",
+    precision: "mois" as const,
+    couverture: null,
+    jeux: [jeu("mk8", "wii-u")],
+  });
+  const possessions = ensemble(
+    [{ game_id: "id-g1", region: "JAP" }],
+    [{ amiibo_id: "id-g1" }],
+    [{ guide_id: "id-g1" }],
+  );
+
+  it("une case par guide, distincte des jeux et des amiibo au même identifiant", () => {
+    expect(possedeGuide(possessions, "id-g1")).toBe(true);
+    expect(possedeAmiibo(possessions, "id-g1")).toBe(true);
+    expect(possede(possessions, "id-g1", "JAP")).toBe(true);
+    const sans = avecGuide(possessions, "id-g1", false);
+    expect(possedeGuide(sans, "id-g1")).toBe(false);
+    expect(possedeAmiibo(sans, "id-g1")).toBe(true);
+    expect(possede(sans, "id-g1", "JAP")).toBe(true);
+    expect(possedeGuide(avecGuide(sans, "id-g2", true), "id-g2")).toBe(true);
+  });
+
+  it("le filtre Collection s'applique aussi aux guides", () => {
+    const versions = versionsGuides([
+      guide("id-g1", "9784000000017"),
+      guide("id-g2", "9784000000024"),
+    ]);
+    const isbns = (l: typeof versions) => l.map((v) => v.guide?.isbn);
+    expect(
+      isbns(filtrerCollection(versions, "possedes", possessions, "TOUS")),
+    ).toEqual(["9784000000017"]);
+    expect(
+      isbns(filtrerCollection(versions, "manquants", possessions, "JAP")),
+    ).toEqual(["9784000000024"]);
   });
 });

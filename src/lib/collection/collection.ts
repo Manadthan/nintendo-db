@@ -18,17 +18,22 @@ export const cleVersion = (gameId: string, region: Region) =>
 /** Clé d'un amiibo possédé (US-30 : une case par amiibo, pas par région) ; jamais celle d'une version de jeu. */
 export const cleAmiibo = (amiiboId: string) => `amiibo:${amiiboId}`;
 
+/** Clé d'un guide possédé (une case par guide) ; jamais celle d'une version de jeu ni d'un amiibo. */
+export const cleGuide = (guideId: string) => `guide:${guideId}`;
+
 /**
- * Ensemble des possessions, à partir des lignes des tables `possessions` (versions des jeux) et
- * `possessions_amiibo` (US-30).
+ * Ensemble des possessions, à partir des lignes des tables `possessions` (versions des jeux),
+ * `possessions_amiibo` (US-30) et `possessions_guides`.
  */
 export function ensemble(
   lignes: { game_id: string; region: Region }[],
   amiibo: { amiibo_id: string }[] = [],
+  guides: { guide_id: string }[] = [],
 ): ReadonlySet<string> {
   return new Set([
     ...lignes.map((l) => cleVersion(l.game_id, l.region)),
     ...amiibo.map((a) => cleAmiibo(a.amiibo_id)),
+    ...guides.map((g) => cleGuide(g.guide_id)),
   ]);
 }
 
@@ -47,6 +52,24 @@ export function avecAmiibo(
   const suite = new Set(possessions);
   if (avoir) suite.add(cleAmiibo(amiiboId));
   else suite.delete(cleAmiibo(amiiboId));
+  return suite;
+}
+
+/** Le guide est-il possédé ? */
+export const possedeGuide = (
+  possessions: ReadonlySet<string>,
+  guideId: string,
+) => possessions.has(cleGuide(guideId));
+
+/** Nouvel ensemble après avoir coché ou décoché un guide ; l'ancien n'est pas modifié. */
+export function avecGuide(
+  possessions: ReadonlySet<string>,
+  guideId: string,
+  avoir: boolean,
+): ReadonlySet<string> {
+  const suite = new Set(possessions);
+  if (avoir) suite.add(cleGuide(guideId));
+  else suite.delete(cleGuide(guideId));
   return suite;
 }
 
@@ -71,7 +94,7 @@ export function avecVersion(
 
 /**
  * Version affichée possédée ? Sur un marché (JAP, US, PAL) : la version de ce marché. Marché « Tous » : au moins une
- * des versions du jeu (SPEC v1.14). Un amiibo : sa case, quel que soit le marché (US-30).
+ * des versions du jeu (SPEC v1.14). Un amiibo ou un guide : sa case, quel que soit le marché.
  */
 export function affichePossedee(
   possessions: ReadonlySet<string>,
@@ -79,6 +102,7 @@ export function affichePossedee(
   marche: Marche,
 ): boolean {
   if (v.amiibo) return possedeAmiibo(possessions, v.amiibo.id);
+  if (v.guide) return possedeGuide(possessions, v.guide.id);
   return marche === "TOUS"
     ? REGIONS.some((r) => possede(possessions, v.jeu.id, r))
     : possede(possessions, v.jeu.id, v.region);
@@ -94,10 +118,7 @@ export function filtrerCollection(
   marche: Marche,
 ): VersionAffichee[] {
   if (!filtre) return versions;
-  // Un guide (US-27, ADR-19 point 8) ne se possède pas : le filtre montre les jeux et les amiibo (US-30, choix du 26/11).
   return versions.filter(
-    (v) =>
-      !v.guide &&
-      affichePossedee(possessions, v, marche) === (filtre === "possedes"),
+    (v) => affichePossedee(possessions, v, marche) === (filtre === "possedes"),
   );
 }
