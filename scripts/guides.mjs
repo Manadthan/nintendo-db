@@ -11,7 +11,7 @@
 // NDL refuse aussi parfois presque tout depuis la session (26/11/2026 : 2 h pour 31 jeux Switch 2) : la tâche GitHub
 // « Guides NDL » lance la planche avec --deposer (guides-{console}.json et la planche dans le bucket privé gametdb,
 // guides/), puis la session les reprend avant l'écriture :
-//   npm run session -- scripts/guides.mjs --recuperer /dossier --console wii
+//   npm run session -- scripts/guides.mjs --recuperer /dossier --console wii   (+ couvertures Google Books, planche refaite)
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -231,12 +231,35 @@ async function chercher(slugConsole, dossier, limite) {
       console.log(`${n + 1}/${cibles.length} jeux, ${parIsbn.size} guides`);
   }
 
-  // Couvertures : un livre Google Books avec vignette, et une vraie image (pas la PNG « image not available »).
   const guides = [...parIsbn.values()].sort(
     (a, b) =>
       a.jeux[0].slug.localeCompare(b.jeux[0].slug) ||
       (a.date ?? "").localeCompare(b.date ?? ""),
   );
+  if (!process.argv.includes("--sans-couvertures")) await couvertures(guides);
+  mkdirSync(dossier, { recursive: true });
+  const fichier = join(dossier, `guides-${slugConsole}.json`);
+  writeFileSync(
+    fichier,
+    JSON.stringify(
+      { console: slugConsole, cree_le: new Date().toISOString(), guides },
+      null,
+      1,
+    ),
+  );
+  await planche(guides, join(dossier, `planche-${slugConsole}.jpg`));
+  if (process.argv.includes("--deposer")) await deposer(dossier, slugConsole);
+  console.log(
+    `${guides.length} guides (${guides.filter((g) => g.google_books_id).length} avec couverture) → ${fichier}`,
+  );
+}
+
+/**
+ * Couvertures : un livre Google Books avec vignette, et une vraie image (pas la PNG « image not available »).
+ * Pas dans la tâche GitHub (--sans-couvertures) : Google Books y refuse la clé (429, 26/11/2026, 5 h perdues) ;
+ * la session les cherche en récupérant la planche.
+ */
+async function couvertures(guides) {
   for (const g of guides) {
     const id = idGoogleBooks(
       await lire(
@@ -253,21 +276,6 @@ async function chercher(slugConsole, dossier, limite) {
     if (meta && meta.format !== "png" && meta.width >= 80)
       g.google_books_id = id;
   }
-  mkdirSync(dossier, { recursive: true });
-  const fichier = join(dossier, `guides-${slugConsole}.json`);
-  writeFileSync(
-    fichier,
-    JSON.stringify(
-      { console: slugConsole, cree_le: new Date().toISOString(), guides },
-      null,
-      1,
-    ),
-  );
-  await planche(guides, join(dossier, `planche-${slugConsole}.jpg`));
-  if (process.argv.includes("--deposer")) await deposer(dossier, slugConsole);
-  console.log(
-    `${guides.length} guides (${guides.filter((g) => g.google_books_id).length} avec couverture) → ${fichier}`,
-  );
 }
 
 const echappe = (t) =>
@@ -357,7 +365,15 @@ async function recuperer(dossier, slugConsole) {
     if (error) throw new Error(`lecture ${nom} : ${error.message}`);
     writeFileSync(join(dossier, nom), Buffer.from(await data.arrayBuffer()));
   }
-  console.log(`planche ${slugConsole} récupérée dans ${dossier}`);
+  // Couvertures cherchées ici, puis planche refaite avec elles (la tâche GitHub ne les cherche pas).
+  const fichier = join(dossier, `guides-${slugConsole}.json`);
+  const lu = JSON.parse(readFileSync(fichier, "utf8"));
+  await couvertures(lu.guides);
+  writeFileSync(fichier, JSON.stringify(lu, null, 1));
+  await planche(lu.guides, join(dossier, `planche-${slugConsole}.jpg`));
+  console.log(
+    `planche ${slugConsole} récupérée dans ${dossier} : ${lu.guides.length} guides, ${lu.guides.filter((g) => g.google_books_id).length} avec couverture`,
+  );
 }
 
 // ——— 2. Écriture des guides de la planche ———

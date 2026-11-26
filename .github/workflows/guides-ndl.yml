@@ -8,6 +8,7 @@ name: Guides NDL
 # Une tâche par console, en parallèle : NDL freine par adresse, et chaque machine de GitHub a la sienne (26/11 : 2 h
 # sans finir les 44 jeux Wii U, consoles l'une après l'autre). Les réponses de NDL sont gardées (cache de GitHub,
 # même après un arrêt à la limite de temps) : relancer la tâche reprend où elle s'était arrêtée.
+# Sans les couvertures Google Books : la clé y est refusée (429) ; la session les cherche en récupérant la planche.
 # Lancée à la main (Actions → Guides NDL → Run workflow).
 on:
   workflow_dispatch:
@@ -66,8 +67,7 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
-          GOOGLE_BOOKS_CLE: ${{ secrets.GOOGLE_BOOKS_CLE }}
-        run: node scripts/guides.mjs --console "${{ matrix.console }}" --planche guides --deposer
+        run: node scripts/guides.mjs --console "${{ matrix.console }}" --planche guides --deposer --sans-couvertures
       - name: Garder les réponses lues
         if: always()
         uses: actions/cache/save@v4
