@@ -172,6 +172,7 @@ test("Statistiques : état du catalogue et filtre « sans code produit » de la 
 test("un jeu annoncé apparaît dans la bande « À venir », avec l'étiquette, sans case « je l'ai » (US-32)", async ({
   page,
 }) => {
+  test.setTimeout(60_000);
   const titre = "Jeu annoncé e2e";
   await seConnecter(page);
   await page.goto("/admin/jeux");
@@ -216,14 +217,23 @@ test("un jeu annoncé apparaît dans la bande « À venir », avec l'étiquette,
       page.getByText("À venir", { exact: true }).first(),
     ).toBeVisible();
     await expect(caseEurope(page)).toHaveCount(0);
+  } catch (erreur) {
+    // L'erreur du nettoyage remplacerait celle-ci dans le rapport : on la garde dans le journal.
+    console.error("Jeu annoncé e2e :", erreur);
+    throw erreur;
   } finally {
-    await page.goto(fiche);
-    const supprimer = page.getByRole("button", { name: "Supprimer ce jeu" });
-    await attendreHydratation(supprimer);
-    page.once("dialog", (d) => d.accept());
-    await supprimer.click();
-    await expect(
-      page.getByRole("status").filter({ hasText: "a été supprimé" }),
-    ).toBeVisible();
+    // Nettoyage réessayé : un jeu resté en base fausse les comptages des autres navigateurs (CI de #290, 26/11/2026 :
+    // bouton « Supprimer ce jeu » pas encore pris en main par React après 5 s).
+    await expect(async () => {
+      const reponse = await page.goto(fiche);
+      if (reponse?.status() === 404) return; // Déjà supprimé par un essai précédent.
+      const supprimer = page.getByRole("button", { name: "Supprimer ce jeu" });
+      await attendreHydratation(supprimer);
+      page.once("dialog", (d) => d.accept());
+      await supprimer.click();
+      await expect(
+        page.getByRole("status").filter({ hasText: "a été supprimé" }),
+      ).toBeVisible();
+    }).toPass({ timeout: 30_000 });
   }
 });
