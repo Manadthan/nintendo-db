@@ -68,6 +68,13 @@ export default async function PageAdmin() {
         <span aria-hidden="true">›</span>
       </Link>
       <Link
+        href="/admin/import/annonces"
+        className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
+      >
+        Import des annonces (jeux à venir)
+        <span aria-hidden="true">›</span>
+      </Link>
+      <Link
         href="/admin/import"
         className="flex items-center justify-between rounded-xl border border-bordure bg-carte p-4 text-sm font-semibold"
       >
