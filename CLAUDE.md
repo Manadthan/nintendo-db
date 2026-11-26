@@ -23,8 +23,8 @@ Suivre **`PLAYBOOK.md`** : intention → spec → design/maquettes → plan → 
 |---|---|---|
 | `PLAYBOOK.md` | Méthode SDLC appliquée au projet | v1.0 validée |
 | `intent/intent.md` | Problème, résultat attendu, contraintes, décisions | v1.8 à valider |
-| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.50 à valider |
-| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.44 à valider |
+| `docs/SPEC.md` | User stories + critères d'acceptation (= définition de « terminé ») | v1.52 à valider |
+| `docs/DESIGN.md` | Stack, ADR, modèle de données, sources de données, tests, risques | v1.45 à valider |
 | `docs/MAQUETTES.md` | Lien vers les maquettes (2 écrans de la v1, Statistiques, Frise, Collectionneurs, Prix eBay, Captures, Guides, À venir, Amiibo : `docs/maquettes/`) | v0.14 à valider |
 | `docs/avancement/` | Avancement détaillé des étapes en cours (un fichier par étape) | à jour |
 | `docs/BILAN.md` | Rétrospective : v1 (étapes 1 à 7), étapes 8 à 10 (§8), étapes 11 à 14 (§9), 15 à 17 (§10), 18 à 22 (§11), 23 à 27 (§12), audit de performance (§13), étape 25 (§14), étape 28 (§15), étape 29 (§16) : chiffres, réussites, difficultés, leçons | v1.10 à valider |
@@ -154,6 +154,7 @@ Tests unitaires à côté du code (`*.test.ts`). Couleurs Tailwind (jetons clair
   - [x] Étape 29 — Guides japonais (攻略本) : intention v1.6 (#236) puis v1.7 (3DS et Switch d'abord, guides seulement) ; études #238 #239 #241 #243 #244 (DESIGN §1 septdecies) ; SPEC US-27 + US-28 (v1.47) et maquettes (v0.12) #245 ; ADR-19 #246 ; migration 0031 #247 ; script #248 à #251 #273 ; page du guide #252 #254, fiche #256, catalogue #259 #261 #262 ; remplissage du 25/11 : 159 guides (3DS 92, Switch 68), 114 couvertures
   - [ ] Étape 30 — Amiibo : `docs/avancement/etape-30.md`
   - [ ] Étape 31 — À venir (jeux, guides, amiibo) sur l'accueil : `docs/avancement/etape-31.md`
+  - [ ] Couvertures Amazon Japon des guides (reprise de l'étape 29) : `docs/avancement/couvertures-amazon.md`
   - [ ] Étapes suivantes (DESIGN §11) : à définir avec le propriétaire
 - [x] Bilan final de la v1 : `docs/BILAN.md` v1.1 ; étapes 8 à 10 : v1.2 ; étapes 11 à 14 : v1.3 ; étapes 15 à 17 : v1.4 ; étapes 18 à 22 : v1.5 ; étapes 23 à 27 : v1.6 ; audit de performance : v1.7 ; étape 25 : v1.8 ; étape 28 : v1.9 ; étape 29 : v1.10
 
