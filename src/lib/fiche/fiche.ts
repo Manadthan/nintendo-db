@@ -1,3 +1,8 @@
+import {
+  versAmiiboDuJeu,
+  type AmiiboDuJeu,
+  type LigneAmiiboDuJeu,
+} from "@/lib/amiibo/fiche";
 import { versionAffichee } from "@/lib/catalogue/catalogue";
 import { versJeuCatalogue, type LigneJeu } from "@/lib/catalogue/lignes";
 import {
@@ -42,6 +47,8 @@ export type JeuFiche = JeuCatalogue & {
   rawgSlug: string | null;
   /** Guides japonais du jeu (US-27, bloc « Guides (N) »), du plus ancien au plus récent ; vide sans guide. */
   guides: GuideFiche[];
+  /** Amiibo que le jeu lit (US-29, bloc « Amiibo (N) »), du plus ancien au plus récent ; vide sans amiibo. */
+  amiibo: AmiiboDuJeu[];
 };
 
 export type GuideFiche = {
@@ -83,6 +90,7 @@ export type LigneFiche = Omit<LigneJeu, "releases"> & {
         } | null;
       }[]
     | null;
+  amiibo_jeux?: LigneAmiiboDuJeu[] | null;
   consoles: { slug: string; nom: string };
   releases: (LigneJeu["releases"][number] & {
     code_produit: string | null;
@@ -132,6 +140,7 @@ export function versJeuFiche(ligne: LigneFiche): JeuFiche {
         annee: g.date_parution?.slice(0, 4) ?? null,
         googleBooksId: g.google_books_id,
       })),
+    amiibo: versAmiiboDuJeu(ligne.amiibo_jeux ?? []),
   };
 }
 
