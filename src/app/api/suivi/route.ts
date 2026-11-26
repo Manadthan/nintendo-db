@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import {
   versAmiiboCatalogue,
   type LigneAmiiboCatalogue,
@@ -11,6 +12,7 @@ import {
   versGuidesCatalogue,
   type LigneGuideCatalogue,
 } from "@/lib/guides/catalogue";
+import { TAG_CATALOGUE } from "@/lib/statistiques/charger";
 import { calculerSuivi, verifierJetonSuivi } from "@/lib/suivi/suivi";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { supabaseEnv } from "@/lib/supabase/env";
@@ -23,37 +25,59 @@ export const dynamic = "force-dynamic";
 
 const ENTETES = { "Cache-Control": "no-store" } as const;
 
-async function chargerGuidesCatalogue() {
-  const supabase = createSupabasePublicClient();
-  const lignes = await toutesLesPages(
-    (de, a) =>
-      supabase
-        .from("guides")
-        .select(
-          "id, isbn, titre, editeur, date_parution, precision_date, couverture, google_books_id, guides_jeux(game_id)",
-        )
-        .order("id")
-        .range(de, a),
-    "Guides du catalogue",
-  );
-  return versGuidesCatalogue(lignes as unknown as LigneGuideCatalogue[]);
-}
+// Le catalogue public est gardé 5 min en cache (vidé dès qu'un jeu change dans l'admin, ADR-11) pour répondre en
+// ~150 ms à mon-site-sdlc ; les possessions du propriétaire, elles, sont toujours lues en direct à chaque appel.
+const chargerBaseSuivi = unstable_cache(
+  async () => {
+    const [jeux, consoles] = await Promise.all([
+      chargerCatalogue(),
+      chargerConsoles(),
+    ]);
+    return { jeux, consoles };
+  },
+  ["suivi-catalogue-base"],
+  { revalidate: 300, tags: [TAG_CATALOGUE] },
+);
 
-async function chargerAmiiboCatalogue() {
-  const supabase = createSupabasePublicClient();
-  const lignes = await toutesLesPages(
-    (de, a) =>
-      supabase
-        .from("amiibo")
-        .select(
-          "id, slug, nom, nom_jap, type, serie_amiibo, serie_jeux, image_path, amiibo_sorties(region, date_sortie, precision_date), amiibo_jeux(games(consoles(slug)))",
-        )
-        .order("id")
-        .range(de, a),
-    "Amiibo du catalogue",
-  );
-  return versAmiiboCatalogue(lignes as unknown as LigneAmiiboCatalogue[]);
-}
+const chargerGuidesCatalogue = unstable_cache(
+  async () => {
+    const supabase = createSupabasePublicClient();
+    const lignes = await toutesLesPages(
+      (de, a) =>
+        supabase
+          .from("guides")
+          .select(
+            "id, isbn, titre, editeur, date_parution, precision_date, couverture, google_books_id, guides_jeux(game_id)",
+          )
+          .order("id")
+          .range(de, a),
+      "Guides du catalogue",
+    );
+    return versGuidesCatalogue(lignes as unknown as LigneGuideCatalogue[]);
+  },
+  ["suivi-catalogue-guides"],
+  { revalidate: 300, tags: [TAG_CATALOGUE] },
+);
+
+const chargerAmiiboCatalogue = unstable_cache(
+  async () => {
+    const supabase = createSupabasePublicClient();
+    const lignes = await toutesLesPages(
+      (de, a) =>
+        supabase
+          .from("amiibo")
+          .select(
+            "id, slug, nom, nom_jap, type, serie_amiibo, serie_jeux, image_path, amiibo_sorties(region, date_sortie, precision_date), amiibo_jeux(games(consoles(slug)))",
+          )
+          .order("id")
+          .range(de, a),
+      "Amiibo du catalogue",
+    );
+    return versAmiiboCatalogue(lignes as unknown as LigneAmiiboCatalogue[]);
+  },
+  ["suivi-catalogue-amiibo"],
+  { revalidate: 300, tags: [TAG_CATALOGUE] },
+);
 
 async function chargerPossessionsProprietaire(voir: {
   jeux: boolean;
@@ -135,9 +159,8 @@ export async function GET(request: Request) {
     marcheDepuisTexte(new URLSearchParams(search).get("marche")) ?? "TOUS";
   const voir = voirEffectif(voirDepuisParametres(search), marche);
 
-  const [jeux, consoles, guides, amiibo, possessions] = await Promise.all([
-    chargerCatalogue(),
-    chargerConsoles(),
+  const [{ jeux, consoles }, guides, amiibo, possessions] = await Promise.all([
+    chargerBaseSuivi(),
     voir.guides ? chargerGuidesCatalogue() : Promise.resolve([]),
     voir.amiibo ? chargerAmiiboCatalogue() : Promise.resolve([]),
     chargerPossessionsProprietaire(voir),
