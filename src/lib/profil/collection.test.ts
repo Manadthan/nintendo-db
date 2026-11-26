@@ -4,6 +4,7 @@ import {
   derniersAjouts,
   jeuxParConsole,
   resumeCollection,
+  syntheseProfil,
   type LigneAjout,
 } from "@/lib/profil/collection";
 import type { JeuStat } from "@/lib/statistiques/statistiques";
@@ -144,5 +145,59 @@ describe("jeuxParConsole (US-23)", () => {
         ],
       },
     ]);
+  });
+});
+
+describe("amiibo dans le profil (US-30)", () => {
+  const BASE = "https://exemple.supabase.co";
+  const ID = "277927c3-29c7-415e-bcf4-378515375c0d";
+  const version = (cree_le: string): LigneAjout => ({
+    region: "PAL",
+    cree_le,
+    games: {
+      slug: "splatoon",
+      consoles: { slug: "wii-u", nom: "Wii U" },
+      releases: [{ region: "PAL", titre: "Splatoon", jaquette_path: null }],
+    },
+  });
+  const amiibo = (slug: string, cree_le: string) => ({
+    cree_le,
+    amiibo: { slug, nom: slug, image_path: `${ID}/figurine-abc` },
+  });
+
+  it("mêle versions et amiibo du plus récent au plus ancien, 6 au plus", () => {
+    const ajouts = derniersAjouts(
+      [version("2026-11-20T10:00:00Z"), version("2026-11-25T10:00:00Z")],
+      BASE,
+      [
+        amiibo("sidon", "2026-11-26T10:00:00Z"),
+        ...["a", "b", "c", "d", "e"].map((s, i) =>
+          amiibo(s, `2026-11-2${i}T09:00:00Z`),
+        ),
+      ],
+    );
+    expect(ajouts).toHaveLength(6);
+    expect(ajouts[0]).toMatchObject({
+      titre: "sidon",
+      region: null,
+      console: null,
+      href: "/amiibo/sidon",
+    });
+    expect(ajouts[0]?.jaquetteSrcset).toContain(
+      `${BASE}/storage/v1/object/public/amiibo/${ID}/figurine-abc-300.webp 300w`,
+    );
+    expect(ajouts[1]).toMatchObject({ titre: "Splatoon", region: "PAL" });
+    // La version du 20/11 est la plus ancienne : elle sort des 6.
+    expect(ajouts.map((a) => a.titre)).not.toContain(undefined);
+    expect(ajouts.filter((a) => a.region === "PAL")).toHaveLength(1);
+  });
+
+  it("le résumé porte la ligne « Amiibo : N / total »", () => {
+    const { resume } = syntheseProfil([], [], ensemble([]), [], BASE, {
+      possedes: 3,
+      total: 954,
+      ajouts: [],
+    });
+    expect(resume.amiibo).toEqual({ possedes: 3, total: 954 });
   });
 });

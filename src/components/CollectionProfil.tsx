@@ -12,7 +12,10 @@ export function MaCollection({
   badges,
   publique = false,
 }: {
-  resume: ReturnType<typeof resumeCollection>;
+  resume: ReturnType<typeof resumeCollection> & {
+    /** Amiibo possédés et total du catalogue (US-30). */
+    amiibo: { possedes: number; total: number };
+  };
   /** Nombre de badges gagnés (US-24). */
   badges: number;
   /** Profil public (US-23) : « Collection », sans invitation à cocher. */
@@ -98,11 +101,37 @@ export function MaCollection({
           </ul>
         </>
       )}
+      {resume.amiibo.total > 0 && (
+        <p
+          aria-label={`Amiibo : ${resume.amiibo.possedes} sur ${resume.amiibo.total}`}
+          className="grid grid-cols-[minmax(0,7.5rem)_1fr_auto] items-center gap-3 border-t border-separateur pt-3 text-sm"
+        >
+          <span className="font-semibold">Amiibo</span>
+          <span
+            aria-hidden="true"
+            className="h-1.5 overflow-hidden rounded-full bg-surface"
+          >
+            <span
+              className="block h-full bg-accent"
+              style={{
+                width: `${Math.max((resume.amiibo.possedes / resume.amiibo.total) * 100, 2)}%`,
+              }}
+            />
+          </span>
+          <span className="tabular-nums text-texte-doux">
+            {resume.amiibo.possedes} / {resume.amiibo.total}
+          </span>
+        </p>
+      )}
     </section>
   );
 }
 
-/** « Derniers ajouts » de Mon profil (US-22) : les versions cochées le plus récemment. */
+/** Proportions de l'image d'un ajout : la boîte de la console du jeu ; la photo carrée d'un amiibo (US-30). */
+const proportions = (a: Ajout) =>
+  a.console ? classeProportions(a.console.slug) : "aspect-square";
+
+/** « Derniers ajouts » de Mon profil (US-22) : les versions et amiibo (US-30) cochés le plus récemment. */
 export function DerniersAjouts({ ajouts }: { ajouts: Ajout[] }) {
   if (ajouts.length === 0) return null;
   return (
@@ -122,17 +151,17 @@ export function DerniersAjouts({ ajouts }: { ajouts: Ajout[] }) {
                   sizes="110px"
                   alt=""
                   loading="lazy"
-                  className={`${classeProportions(a.console.slug)} w-full rounded-md border border-vignette-bordure bg-vignette object-contain`}
+                  className={`${proportions(a)} w-full rounded-md border border-vignette-bordure bg-vignette object-contain`}
                 />
               ) : (
                 <span
                   aria-hidden="true"
-                  className={`${classeProportions(a.console.slug)} block w-full rounded-md border border-vignette-bordure bg-vignette`}
+                  className={`${proportions(a)} block w-full rounded-md border border-vignette-bordure bg-vignette`}
                 />
               )}
               <span className="line-clamp-2 leading-snug">{a.titre}</span>
               <span className="w-fit rounded border border-possede px-1 text-[10px] font-semibold text-possede">
-                {a.region}
+                {a.region ?? "Amiibo"}
               </span>
             </Link>
           </li>
