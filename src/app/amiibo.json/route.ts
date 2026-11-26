@@ -17,7 +17,7 @@ export async function GET() {
       supabase
         .from("amiibo")
         .select(
-          "slug, nom, nom_jap, type, serie_amiibo, serie_jeux, image_path, amiibo_sorties(region, date_sortie, precision_date), amiibo_jeux(games(consoles(slug)))",
+          "id, slug, nom, nom_jap, type, serie_amiibo, serie_jeux, image_path, amiibo_sorties(region, date_sortie, precision_date), amiibo_jeux(games(consoles(slug)))",
         )
         .order("id")
         .range(de, a),

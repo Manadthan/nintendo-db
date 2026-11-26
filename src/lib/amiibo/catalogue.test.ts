@@ -23,6 +23,7 @@ const ligne = (
   consoles: (string | null)[],
   type: LigneAmiiboCatalogue["type"] = "figurine",
 ): LigneAmiiboCatalogue => ({
+  id: `id-${slug}`,
   slug,
   nom,
   nom_jap: null,

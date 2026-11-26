@@ -15,6 +15,8 @@ import { sortieAVenir } from "@/lib/catalogue/a-venir";
 import { formaterDate } from "@/lib/catalogue/catalogue";
 import { lireMarche } from "@/lib/catalogue/marche";
 import { REGIONS, type Marche, type Region } from "@/lib/catalogue/types";
+import { possedeAmiibo } from "@/lib/collection/collection";
+import { basculerAmiibo, useCollection } from "@/lib/collection/navigateur";
 import { BasculeRegion, NOMS_REGION } from "./BasculeRegion";
 import { ImageAmiibo } from "./ImageAmiibo";
 import { RetourCatalogue } from "./RetourCatalogue";
@@ -36,7 +38,7 @@ const LIEN = "text-accent underline-offset-2 hover:underline";
 
 /**
  * Fiche d'un amiibo (US-29, maquette amiibo-fiche.png) : photo, boîte américaine, bascule JAP / US / PAL sur la date
- * de sortie, informations, jeux compatibles, disponibilité, sources. Case « Je l'ai » (US-30) et prix eBay : plus tard.
+ * de sortie, case « Je l'ai » (connecté, US-30), informations, jeux compatibles, disponibilité, sources.
  */
 export function FicheAmiibo({
   amiibo,
@@ -54,6 +56,12 @@ export function FicheAmiibo({
   );
   const [choix, setChoix] = useState<Region | null>(null);
   const region = choix ?? regionAmiiboParDefaut(amiibo.sorties, marche);
+  // Ma collection (US-30) : une case par amiibo, seulement connecté, et seulement s'il est déjà sorti quelque part.
+  const collection = useCollection();
+  const sortiQuelquePart = REGIONS.some((r) => {
+    const s = amiibo.sorties[r];
+    return s.sortie && !sortieAVenir(s.date, s.precision, aujourdhui);
+  });
   const fenetre = useRef<HTMLDialogElement>(null);
   const type = LIBELLES_TYPE[amiibo.type];
 
@@ -135,6 +143,30 @@ export function FicheAmiibo({
               {NOMS_REGION[region]}
             </p>
           </div>
+
+          {collection.connecte && sortiQuelquePart && (
+            <div className="flex flex-col gap-2">
+              <label className="flex min-h-12 items-center gap-3 rounded-xl border border-bordure bg-carte px-3.5 text-[15px] font-semibold">
+                <input
+                  type="checkbox"
+                  checked={possedeAmiibo(collection.possessions, amiibo.id)}
+                  onChange={(e) =>
+                    void basculerAmiibo(amiibo.id, e.target.checked)
+                  }
+                  className="size-5 accent-possede"
+                />
+                Je l&apos;ai
+              </label>
+              {collection.erreur && (
+                <p
+                  role="alert"
+                  className="rounded-[10px] border border-erreur-bordure bg-erreur-fond px-3 py-2 text-sm text-erreur"
+                >
+                  {collection.erreur}
+                </p>
+              )}
+            </div>
+          )}
 
           <dl className="grid grid-cols-2 gap-x-3 gap-y-3.5 rounded-xl border border-bordure bg-carte p-3.5">
             <Info libelle="Série amiibo" valeur={amiibo.serieAmiibo} />

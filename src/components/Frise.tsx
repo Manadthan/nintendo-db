@@ -1,7 +1,11 @@
 import Link from "next/link";
 import type { AnneeFrise } from "@/lib/catalogue/frise";
 import type { VersionAffichee } from "@/lib/catalogue/types";
-import { EtiquettesAmiibo, ImageCarteAmiibo } from "./CarteAmiibo";
+import {
+  EtiquettesAmiibo,
+  ImageCarteAmiibo,
+  MarquePossede,
+} from "./CarteAmiibo";
 import { CouvertureCarte, EtiquettesGuide } from "./CarteGuide";
 import { EtiquetteAVenir } from "./EtiquetteAVenir";
 import { Jaquette } from "./Jaquette";
@@ -17,6 +21,7 @@ export function Frise({
   lien,
   surClic,
   aVenir,
+  amiiboPossede = () => false,
 }: {
   annees: AnneeFrise[];
   lien: (v: VersionAffichee) => string;
@@ -24,6 +29,8 @@ export function Frise({
   aVenir: (v: VersionAffichee) => boolean;
   /** Mémorise la position du catalogue avant d'ouvrir une fiche. */
   surClic: () => void;
+  /** Amiibo possédé (US-30) : marque verte sur la photo. */
+  amiiboPossede?: (v: VersionAffichee) => boolean;
 }) {
   return (
     <ol className="relative mx-auto w-full max-w-2xl before:absolute before:inset-y-0 before:left-1/2 before:-ml-px before:w-0.5 before:bg-filet">
@@ -68,11 +75,14 @@ export function Frise({
                   {v.guide ? (
                     <CouvertureCarte v={v} />
                   ) : v.amiibo ? (
-                    <ImageCarteAmiibo
-                      v={v}
-                      sizes="(max-width: 672px) 45vw, 300px"
-                      forme="carree"
-                    />
+                    <div className="relative">
+                      <ImageCarteAmiibo
+                        v={v}
+                        sizes="(max-width: 672px) 45vw, 300px"
+                        forme="carree"
+                      />
+                      {amiiboPossede(v) && <MarquePossede surPhoto />}
+                    </div>
                   ) : (
                     <div className="relative">
                       <Jaquette

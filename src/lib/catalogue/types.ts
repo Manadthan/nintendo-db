@@ -64,6 +64,8 @@ export type VersionAffichee = {
 
 /** Ce que la carte d'un amiibo affiche en plus (US-29). */
 export type AmiiboCarte = {
+  /** Identifiant en base : possession (US-30). */
+  id: string;
   slug: string;
   type: Database["public"]["Enums"]["amiibo_type"];
   serieAmiibo: string | null;

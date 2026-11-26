@@ -161,3 +161,47 @@ test("Statistiques : état du catalogue et filtre « sans code produit » de la 
   ).toHaveAttribute("aria-current", "page");
   await expect(page.getByText(/jeux Wii U sans code produit/)).toBeVisible();
 });
+
+// US-30 — Mes amiibo : une case par amiibo (amiibo de test, tests/e2e/amiibo.sql), marque verte et filtre Collection.
+test("connecté, je coche un amiibo ; marque verte et filtre Collection dans le catalogue", async ({
+  page,
+}) => {
+  const caseAmiibo = page.getByRole("checkbox", {
+    name: "Je l'ai",
+    exact: true,
+  });
+  const basculerAmiibo = async (avoir: boolean) => {
+    const enregistre = page.waitForResponse(
+      (r) =>
+        r.url().includes("/rest/v1/possessions_amiibo") &&
+        r.request().method() === (avoir ? "POST" : "DELETE"),
+    );
+    await (avoir ? caseAmiibo.check() : caseAmiibo.uncheck());
+    expect((await enregistre).ok()).toBe(true);
+  };
+
+  await seConnecter(page);
+  await page.goto("/amiibo/inkling-e2e");
+  await expect(caseAmiibo).not.toBeChecked();
+  await basculerAmiibo(true);
+  await page.reload();
+  await expect(caseAmiibo).toBeChecked();
+
+  await page.goto("/?voir=amiibo&collection=possedes");
+  await expect(
+    page.getByText("1 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /Inkling e2e/ })).toContainText(
+    "✓ Je l'ai",
+  );
+  await page.goto("/?voir=amiibo&collection=manquants");
+  await expect(
+    page.getByText("0 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+
+  // Nettoyage : décocher, et vérifier que c'est aussi enregistré.
+  await page.goto("/amiibo/inkling-e2e");
+  await basculerAmiibo(false);
+  await page.reload();
+  await expect(caseAmiibo).not.toBeChecked();
+});

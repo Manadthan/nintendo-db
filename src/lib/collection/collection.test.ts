@@ -2,12 +2,15 @@ import { describe, expect, it } from "vitest";
 import { trier } from "@/lib/catalogue/catalogue";
 import type { JeuCatalogue } from "@/lib/catalogue/types";
 
+import { versionsAmiibo } from "@/lib/amiibo/catalogue";
 import {
+  avecAmiibo,
   avecVersion,
   cleVersion,
   ensemble,
   filtrerCollection,
   possede,
+  possedeAmiibo,
 } from "./collection";
 
 describe("ma collection (US-16)", () => {
@@ -97,5 +100,49 @@ describe("filtre Collection et compteurs (US-16)", () => {
     expect(
       slugs(filtrerCollection(versions, "possedes", POSSESSIONS, "PAL")),
     ).toEqual(["melee"]);
+  });
+});
+
+describe("amiibo (US-30)", () => {
+  const amiibo = (id: string, slug: string) => ({
+    id,
+    slug,
+    nom: slug,
+    nomJap: null,
+    type: "figurine" as const,
+    serieAmiibo: null,
+    series: [],
+    image: null,
+    sorties: { PAL: { date: "2025-06-05", precision: "jour" as const } },
+    consoles: [],
+  });
+  const possessions = ensemble(
+    [{ game_id: "id-sidon", region: "PAL" }],
+    [{ amiibo_id: "id-sidon" }],
+  );
+
+  it("une case par amiibo, distincte des versions d'un jeu au même identifiant", () => {
+    expect(possedeAmiibo(possessions, "id-sidon")).toBe(true);
+    expect(possede(possessions, "id-sidon", "PAL")).toBe(true);
+    const sans = avecAmiibo(possessions, "id-sidon", false);
+    expect(possedeAmiibo(sans, "id-sidon")).toBe(false);
+    expect(possede(sans, "id-sidon", "PAL")).toBe(true);
+    expect(possedeAmiibo(avecAmiibo(sans, "id-tulin", true), "id-tulin")).toBe(
+      true,
+    );
+  });
+
+  it("le filtre Collection s'applique aussi aux amiibo (choix du 26/11)", () => {
+    const versions = versionsAmiibo(
+      [amiibo("id-sidon", "sidon"), amiibo("id-tulin", "tulin")],
+      "PAL",
+    );
+    const noms = (l: typeof versions) => l.map((v) => v.amiibo?.slug);
+    expect(
+      noms(filtrerCollection(versions, "possedes", possessions, "PAL")),
+    ).toEqual(["sidon"]);
+    expect(
+      noms(filtrerCollection(versions, "manquants", possessions, "TOUS")),
+    ).toEqual(["tulin"]);
   });
 });

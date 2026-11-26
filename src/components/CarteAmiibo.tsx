@@ -48,3 +48,16 @@ export function ImageCarteAmiibo({
     />
   );
 }
+
+/** Marque verte d'un amiibo possédé (US-30, jeton `possede`), sur la photo dans la grille et la frise. */
+export function MarquePossede({ surPhoto = false }: { surPhoto?: boolean }) {
+  return (
+    <span
+      className={`flex h-5 items-center rounded bg-possede px-1.5 text-[11px] font-bold text-inverse ${
+        surPhoto ? "absolute top-1.5 right-1.5 shadow-sm" : ""
+      }`}
+    >
+      ✓ Je l&apos;ai
+    </span>
+  );
+}
