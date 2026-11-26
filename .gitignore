@@ -24,3 +24,6 @@ supabase/.temp/
 # Système
 .DS_Store
 *.log
+
+# Hook « abonnement à la PR créée » (.claude/hooks/abonnement-pr.mjs) : état de la session
+.claude/derniere-pr.json
