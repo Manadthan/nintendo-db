@@ -63,10 +63,19 @@ jobs:
               if (!/^[a-z0-9-]+$/.test(consoleSlug)) throw new Error("console invalide: " + consoleSlug);
               const sauf = String(item.sauf || "").trim();
               if (sauf && !/^[0-9,]+$/.test(sauf)) throw new Error("sauf invalide: " + sauf);
-              console.log("=== Console:", consoleSlug, sauf ? "(sauf " + sauf + ")" : "(tous)", "===");
+              const ignorer = String(item.ignorer || "").trim();
+              if (ignorer && !/^[0-9,]+$/.test(ignorer)) throw new Error("ignorer invalide: " + ignorer);
+              const sansJeu = String(item.sansJeu || "").trim();
+              if (sansJeu && !/^[0-9a-z,:-]+$/.test(sansJeu)) throw new Error("sansJeu invalide: " + sansJeu);
+              const remplacerJeu = String(item.remplacerJeu || "").trim();
+              if (remplacerJeu && !/^[0-9a-z,:-]+$/.test(remplacerJeu)) throw new Error("remplacerJeu invalide: " + remplacerJeu);
+              console.log("=== Console:", consoleSlug, sauf ? "(sauf " + sauf + ")" : "(tous)", ignorer ? "(ignorer " + ignorer + ")" : "", "===");
               execFileSync("node", ["scripts/guides.mjs", "--recuperer", "tmp-guides", "--console", consoleSlug, "--sans-couvertures"], { stdio: "inherit" });
               const args = ["scripts/guides.mjs", "--ecrire", "tmp-guides", "--console", consoleSlug];
               if (sauf) args.push("--sauf", sauf);
+              if (ignorer) args.push("--ignorer", ignorer);
+              if (sansJeu) args.push("--sans-jeu", sansJeu);
+              if (remplacerJeu) args.push("--remplacer-jeu", remplacerJeu);
               execFileSync("node", args, { stdio: "inherit" });
             }
           '

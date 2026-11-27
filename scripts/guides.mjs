@@ -26,6 +26,8 @@ import {
   jugerLivre,
   pagesNdl,
   fichierPlanche,
+  filtrerJeuxGuide,
+  lireReglesLiens,
 } from "../src/lib/guides/guides.ts";
 import { lireNdl } from "../src/lib/guides/ndl.ts";
 
@@ -379,7 +381,14 @@ async function recuperer(dossier, slugConsole) {
 }
 
 // ——— 2. Écriture des guides de la planche ———
-async function ecrire(dossier, consoleDemandee, sauf) {
+async function ecrire(
+  dossier,
+  consoleDemandee,
+  sauf,
+  ignorer = new Set(),
+  sansJeu = new Map(),
+  remplacerJeu = new Map(),
+) {
   const fichier = join(dossier, fichierPlanche(consoleDemandee, undefined));
   const { console: slugConsole, guides } = JSON.parse(
     readFileSync(fichier, "utf8"),
@@ -388,17 +397,43 @@ async function ecrire(dossier, consoleDemandee, sauf) {
   const existants = new Map(
     (await tout("guides", "id, isbn, verrous")).map((g) => [g.isbn, g]),
   );
+  const jeuxParSlug = new Map();
+  if (remplacerJeu.size > 0) {
+    const consoles = await tout("consoles", "id, slug");
+    const consoleId = consoles.find((c) => c.slug === slugConsole)?.id;
+    if (!consoleId) throw new Error(`console inconnue : ${slugConsole}`);
+    const jeuxConsole = await tout("games", "id, slug", (q) =>
+      q.eq("console_id", consoleId),
+    );
+    for (const j of jeuxConsole) jeuxParSlug.set(j.slug, j);
+  }
   let ecrits = 0,
-    ecartes = 0;
+    ecartes = 0,
+    ignores = 0;
   for (const [i, g] of guides.entries()) {
-    if (sauf.has(i + 1)) {
+    const numero = i + 1;
+    if (ignorer.has(numero)) {
+      ignores++;
+      continue;
+    }
+    if (sauf.has(numero)) {
       const { error } = await supabase
         .from("guides_exclus")
-        .upsert({ isbn: g.isbn, raison: `planche ${slugConsole} n° ${i + 1}` });
+        .upsert({
+          isbn: g.isbn,
+          raison: `planche ${slugConsole} n° ${numero}`,
+        });
       if (error) throw new Error(`exclus ${g.isbn} : ${error.message}`);
       ecartes++;
       continue;
     }
+    const jeuxGardes = filtrerJeuxGuide(
+      g.jeux,
+      numero,
+      sansJeu,
+      remplacerJeu,
+      jeuxParSlug,
+    );
     const verrous = new Set(existants.get(g.isbn)?.verrous ?? []);
     const champs = {
       titre: g.titre,
@@ -420,7 +455,7 @@ async function ecrire(dossier, consoleDemandee, sauf) {
       .select("id")
       .single();
     if (error) throw new Error(`guide ${g.isbn} : ${error.message}`);
-    const liens = g.jeux.map((j) => ({ guide_id: data.id, game_id: j.id }));
+    const liens = jeuxGardes.map((j) => ({ guide_id: data.id, game_id: j.id }));
     const { error: e2 } = await supabase.from("guides_jeux").upsert(liens, {
       onConflict: "guide_id,game_id",
       ignoreDuplicates: true,
@@ -429,13 +464,15 @@ async function ecrire(dossier, consoleDemandee, sauf) {
     ecrits++;
   }
   console.log(
-    `${slugConsole} : ${ecrits} guides écrits, ${ecartes} écartés (guides_exclus)`,
+    `${slugConsole} : ${ecrits} guides écrits, ${ecartes} écartés (guides_exclus), ${ignores} ignorés (autre console)`,
   );
 }
 
 const dossierPlanche = option("--planche");
 const dossierEcriture = option("--ecrire");
 const dossierRecupere = option("--recuperer");
+const numeros = (nom) =>
+  new Set((option(nom) ?? "").split(",").filter(Boolean).map(Number));
 if (dossierRecupere)
   await recuperer(dossierRecupere, option("--console") ?? "");
 else if (dossierPlanche)
@@ -448,9 +485,12 @@ else if (dossierEcriture)
   await ecrire(
     dossierEcriture,
     option("--console") ?? "",
-    new Set((option("--sauf") ?? "").split(",").filter(Boolean).map(Number)),
+    numeros("--sauf"),
+    numeros("--ignorer"),
+    lireReglesLiens(option("--sans-jeu")),
+    lireReglesLiens(option("--remplacer-jeu")),
   );
 else
   console.log(
-    "--planche /dossier --console 3ds, ou --ecrire /dossier --console 3ds [--sauf n,n]",
+    "--planche /dossier --console 3ds, ou --ecrire /dossier --console 3ds [--sauf n,n] [--ignorer n,n] [--sans-jeu n:slug] [--remplacer-jeu n:slug]",
   );

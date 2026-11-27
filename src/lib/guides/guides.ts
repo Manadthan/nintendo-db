@@ -234,3 +234,56 @@ export function fichierPlanche(
     throw new Error(`planche de la console ${lue}, pas ${demandee}`);
   return `guides-${demandee}.json`;
 }
+
+/**
+ * Lit une liste d'ajustements de liens jeu ↔ guide passée à --sans-jeu ou --remplacer-jeu,
+ * au format « 18:mario-bros,22:custom-robo » → Map(numéro → Set(slugs)).
+ */
+export function lireReglesLiens(
+  texte: string | null | undefined,
+): Map<number, Set<string>> {
+  const regles = new Map<number, Set<string>>();
+  for (const brut of (texte ?? "").split(",")) {
+    const entree = brut.trim();
+    if (!entree) continue;
+    const m = entree.match(/^(\d+):([a-z0-9-]+)$/);
+    const numero = Number(m?.[1]);
+    const slug = m?.[2];
+    if (!m || !slug || numero <= 0)
+      throw new Error(`règle de lien invalide : ${entree}`);
+    const slugs = regles.get(numero) ?? new Set<string>();
+    slugs.add(slug);
+    regles.set(numero, slugs);
+  }
+  return regles;
+}
+
+/**
+ * Applique les règles --sans-jeu (retrait d'un lien erroné) et --remplacer-jeu (réassociation
+ * vers le bon jeu de la console) à la liste des jeux d'un guide avant écriture.
+ */
+export function filtrerJeuxGuide<T extends { slug: string }>(
+  jeux: readonly T[],
+  numero: number,
+  sansJeu: Map<number, Set<string>>,
+  remplacerJeu: Map<number, Set<string>>,
+  jeuxParSlug: Map<string, T>,
+): T[] {
+  const remplaces = remplacerJeu.get(numero);
+  if (remplaces && remplaces.size > 0) {
+    return [...remplaces].map((slug) => {
+      const cible = jeuxParSlug.get(slug);
+      if (!cible)
+        throw new Error(`planche n° ${numero} : jeu inconnu « ${slug} »`);
+      return cible;
+    });
+  }
+  const retires = sansJeu.get(numero);
+  if (!retires || retires.size === 0) return [...jeux];
+  const restants = jeux.filter((j) => !retires.has(j.slug));
+  if (restants.length === 0)
+    throw new Error(
+      `planche n° ${numero} : --sans-jeu retire tous les jeux du guide`,
+    );
+  return restants;
+}

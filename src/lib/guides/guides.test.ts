@@ -14,6 +14,8 @@ import {
   liensAchat,
   pagesNdl,
   fichierPlanche,
+  filtrerJeuxGuide,
+  lireReglesLiens,
   type JeuCherche,
 } from "./guides";
 import { lireNdl } from "./ndl";
@@ -301,5 +303,72 @@ describe("fichierPlanche (fichier relu par l'écriture)", () => {
   });
   it("refuse un fichier d'une autre console", () => {
     expect(() => fichierPlanche("switch", "3ds")).toThrow(/3ds/);
+  });
+});
+
+describe("lireReglesLiens et filtrerJeuxGuide (ajustement des liens jeu ↔ guide)", () => {
+  it("lit plusieurs règles n:slug et regroupe par numéro", () => {
+    const r = lireReglesLiens("18:mario-bros,43:pokemon-yellow,43:autre-jeu");
+    expect([...(r.get(18) ?? [])]).toEqual(["mario-bros"]);
+    expect([...(r.get(43) ?? [])]).toEqual(["pokemon-yellow", "autre-jeu"]);
+    expect(lireReglesLiens("").size).toBe(0);
+    expect(lireReglesLiens(null).size).toBe(0);
+  });
+
+  it("refuse une règle mal formée ou un numéro nul", () => {
+    expect(() => lireReglesLiens("18")).toThrow(/invalide/);
+    expect(() => lireReglesLiens("0:mario-bros")).toThrow(/invalide/);
+    expect(() => lireReglesLiens("18:Mario_Bros")).toThrow(/invalide/);
+  });
+
+  it("retire les jeux erronés avec --sans-jeu et refuse de tout retirer", () => {
+    const jeux = [
+      { id: "1", slug: "mario-bros" },
+      { id: "2", slug: "super-mario-bros" },
+    ];
+    expect(
+      filtrerJeuxGuide(
+        jeux,
+        18,
+        lireReglesLiens("18:mario-bros"),
+        new Map(),
+        new Map(),
+      ),
+    ).toEqual([{ id: "2", slug: "super-mario-bros" }]);
+
+    expect(() =>
+      filtrerJeuxGuide(
+        [{ id: "1", slug: "mario-bros" }],
+        18,
+        lireReglesLiens("18:mario-bros"),
+        new Map(),
+        new Map(),
+      ),
+    ).toThrow(/tous les jeux/);
+  });
+
+  it("réassocie vers le bon jeu de la console avec --remplacer-jeu", () => {
+    const jeuxParSlug = new Map([
+      ["pokemon-stadium-2", { id: "ps2", slug: "pokemon-stadium-2" }],
+    ]);
+    expect(
+      filtrerJeuxGuide(
+        [{ id: "ps1", slug: "pocket-monsters-stadium" }],
+        118,
+        new Map(),
+        lireReglesLiens("118:pokemon-stadium-2"),
+        jeuxParSlug,
+      ),
+    ).toEqual([{ id: "ps2", slug: "pokemon-stadium-2" }]);
+
+    expect(() =>
+      filtrerJeuxGuide(
+        [{ id: "ps1", slug: "pocket-monsters-stadium" }],
+        118,
+        new Map(),
+        lireReglesLiens("118:jeu-inexistant"),
+        jeuxParSlug,
+      ),
+    ).toThrow(/jeu inconnu/);
   });
 });
