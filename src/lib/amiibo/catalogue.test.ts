@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { filtrer, SANS_FILTRE, seriesProposees } from "@/lib/catalogue/filtres";
+import { trier } from "@/lib/catalogue/catalogue";
+import {
+  filtrer,
+  SANS_FILTRE,
+  seriesProposees,
+  typesAmiiboProposes,
+} from "@/lib/catalogue/filtres";
 import { contientMots, motsRecherche } from "@/lib/catalogue/recherche";
+import type { JeuCatalogue } from "@/lib/catalogue/types";
 import {
   seriesAmiibo,
   texteRechercheAmiibo,
@@ -181,6 +188,59 @@ describe("filtres et recherche", () => {
       "Animal Crossing",
       "Street Fighter",
       "The Legend of Zelda",
+    ]);
+  });
+
+  it("Type d'amiibo (SPEC v1.54) : garde le type choisi, cache les jeux et propose les types présents", () => {
+    const jeuTest: JeuCatalogue = {
+      id: "jeu-splatoon",
+      slug: "splatoon",
+      console: { slug: "wii-u", nom: "Wii U" },
+      developpeur: "Nintendo EAD",
+      editeur: "Nintendo",
+      genres: ["Tir"],
+      series: ["Splatoon"],
+      metacritic: 81,
+      sorties: {
+        JAP: {
+          sortie: true,
+          titre: "Splatoon",
+          titreRomanise: null,
+          date: "2015-05-28",
+          precision: "jour",
+          jaquette: null,
+        },
+        US: {
+          sortie: true,
+          titre: "Splatoon",
+          titreRomanise: null,
+          date: "2015-05-29",
+          precision: "jour",
+          jaquette: null,
+        },
+        PAL: {
+          sortie: true,
+          titre: "Splatoon",
+          titreRomanise: null,
+          date: "2015-05-29",
+          precision: "jour",
+          jaquette: null,
+        },
+      },
+    };
+    const meles = [...trier([jeuTest], "anciens", "TOUS"), ...tous];
+    expect(
+      slugs(filtrer(meles, { ...SANS_FILTRE, typeAmiibo: "figurine" })),
+    ).toEqual(["sidon"]);
+    expect(
+      slugs(filtrer(meles, { ...SANS_FILTRE, typeAmiibo: "carte" })),
+    ).toEqual(["isabelle-japon", "ryu-street-fighter-6"]);
+    expect(filtrer(meles, { ...SANS_FILTRE, typeAmiibo: "peluche" })).toEqual(
+      [],
+    );
+    expect(typesAmiiboProposes(meles)).toEqual([
+      { valeur: "figurine", libelle: "Figurine", nombre: 1 },
+      { valeur: "carte", libelle: "Carte", nombre: 2 },
     ]);
   });
 

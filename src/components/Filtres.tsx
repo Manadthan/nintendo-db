@@ -1,5 +1,6 @@
 "use client";
 
+import { LIBELLES_TYPE, type TypeAmiibo } from "@/lib/amiibo/fiche";
 import {
   DISPONIBILITES,
   SANS_FILTRE,
@@ -12,6 +13,11 @@ const CHAMP =
   "h-11 w-full rounded-[10px] border border-champ bg-carte px-2.5 text-base";
 
 type ConsoleProposee = { slug: string; nom: string; nombre: number };
+type TypeAmiiboPropose = {
+  valeur: TypeAmiibo;
+  libelle: string;
+  nombre: number;
+};
 
 type PropsPanneau = {
   filtres: Filtres;
@@ -23,6 +29,10 @@ type PropsPanneau = {
   developpeurs: { nom: string; nombre: number }[];
   /** Séries des jeux affichés, par ordre alphabétique, puis « Sans série » (SPEC v1.37). */
   series: { nom: string; nombre: number }[];
+  /** Types d'amiibo présents sur le marché (US-29, SPEC v1.54), affiché uniquement si « Amiibo » est coché. */
+  typesAmiibo?: TypeAmiiboPropose[];
+  /** Coche « Amiibo » active : affiche la liste « Type d'amiibo ». */
+  amiibo?: boolean;
   /** Filtre « Collection » (US-16), seulement pour le propriétaire connecté ; les compteurs sont dans Statistiques (US-18). */
   collection?: boolean;
 };
@@ -35,6 +45,8 @@ export function PanneauFiltres({
   genres,
   developpeurs,
   series,
+  typesAmiibo = [],
+  amiibo,
   collection,
 }: PropsPanneau) {
   const changer = (patch: Partial<Filtres>) =>
@@ -175,6 +187,33 @@ export function PanneauFiltres({
           )}
         </select>
       </label>
+      {amiibo && (
+        <label className="flex flex-col gap-1 text-[13px] text-texte-doux">
+          Type d&apos;amiibo
+          <select
+            value={filtres.typeAmiibo ?? ""}
+            onChange={(e) =>
+              changer({
+                typeAmiibo: (e.target.value || null) as TypeAmiibo | null,
+              })
+            }
+            className={CHAMP}
+          >
+            <option value="">Tous</option>
+            {typesAmiibo.map((t) => (
+              <option key={t.valeur} value={t.valeur}>
+                {t.libelle} ({t.nombre})
+              </option>
+            ))}
+            {filtres.typeAmiibo &&
+              !typesAmiibo.some((t) => t.valeur === filtres.typeAmiibo) && (
+                <option value={filtres.typeAmiibo}>
+                  {LIBELLES_TYPE[filtres.typeAmiibo]}
+                </option>
+              )}
+          </select>
+        </label>
+      )}
     </div>
   );
 }
@@ -208,6 +247,10 @@ export function FiltresActifs({
       retirer: { developpeur: null },
     },
     filtres.serie && { libelle: filtres.serie, retirer: { serie: null } },
+    filtres.typeAmiibo && {
+      libelle: LIBELLES_TYPE[filtres.typeAmiibo],
+      retirer: { typeAmiibo: null },
+    },
     filtres.collection && {
       libelle: filtres.collection === "possedes" ? "Possédés" : "Manquants",
       retirer: { collection: null },

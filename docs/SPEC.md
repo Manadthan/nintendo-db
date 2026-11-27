@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.53 — 26/11/2026 — statut : **à valider**
+> Version 1.54 — 27/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.54 | 27/11/2026 | US-29 : filtre **Type d'amiibo** (`?type=`, Figurine, Carte, Peluche, Bracelet, Bloc) dans le panneau Filtres lorsque « Amiibo » est coché ; cache les jeux et guides quand il est actif (choix du propriétaire du 27/11) |
 > | 1.53 | 26/11/2026 | US-09 : « Se déconnecter » ne ferme que la session de **cet appareil** (choix du propriétaire du 26/11 ; avant : tous les appareils du compte) |
 > | 1.52 | 26/11/2026 | **Couvertures des guides : Amazon Japon** (choix du propriétaire du 26/11, après l'étude des 159 guides : 159 couvertures Amazon sur 159, plus grandes et plus nettes que Google Books) : US-27, couvertures copiées chez nous depuis Amazon Japon, mention « Couverture : Amazon.co.jp » ; Google Books ne reste qu'en secours et pour le lien « Google Books › » |
 > | 1.51 | 25/11/2026 | **À venir** (choix du propriétaire du 25/11) : US-32, une version annoncée n'a pas de coche « ✓ » (catalogue, fiche) avant sa sortie |
@@ -240,8 +241,11 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       affichés » (seulement ce qui est coché).
 - [x] La **recherche** (US-05) porte aussi sur le nom de l'amiibo, sa série amiibo et sa série de jeux ; filtres
       (US-06) : **Année** (date de sortie), **Série** (série de jeux) et **Console** (amiibo lu par au moins un jeu de
-      cette console) s'appliquent ; Genre et Développeur ne concernent que les jeux et cachent les amiibo. Les tris
-      par titre et par date classent tout ensemble ; le tri par note place les amiibo à la fin. Frise : date de sortie.
+      cette console) s'appliquent ; Genre et Développeur ne concernent que les jeux et cachent les amiibo. Un filtre
+      **Type d'amiibo** (`?type=`, v1.54 : Figurine, Carte, Peluche, Bracelet, Bloc, avec le nombre par type sur le
+      marché) apparaît dans le panneau Filtres uniquement quand « Amiibo » est coché ; actif, il cache les jeux et les
+      guides (et se retire si on décoche « Amiibo »). Les tris par titre et par date classent tout ensemble ; le tri
+      par note place les amiibo à la fin. Frise : date de sortie.
 - [x] Un toucher sur la carte ouvre la **fiche de l'amiibo** (`/amiibo/{nom-serie}`) : image en grand, **photo de la
       boîte américaine** quand Nintendo US la montre (264 amiibo ; sinon rien), nom, type, série amiibo, série de jeux,
       éditeur ; **bascule JAP / US / PAL** (même composant que la fiche du jeu) qui change la **date de sortie** (« Non

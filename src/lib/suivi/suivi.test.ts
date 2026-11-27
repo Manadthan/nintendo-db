@@ -238,6 +238,43 @@ describe("calculerSuivi", () => {
     });
   });
 
+  it("applique ?type= uniquement quand ?voir=amiibo est actif et l'inclut dans le titre", () => {
+    const figurines = calculerSuivi({
+      search: "?voir=amiibo&type=figurine",
+      jeux: JEUX,
+      consoles: CONSOLES,
+      amiibo: AMIIBO,
+      possessions,
+      baseUrlSupabase: BASE_SUPABASE,
+    });
+    expect(figurines.owned).toBe(1);
+    expect(figurines.total).toBe(1);
+    expect(figurines.suggestedTitle).toBe("Amiibo · Figurine");
+
+    const cartes = calculerSuivi({
+      search: "?voir=jeux,amiibo&type=carte",
+      jeux: JEUX,
+      consoles: CONSOLES,
+      amiibo: AMIIBO,
+      possessions,
+      baseUrlSupabase: BASE_SUPABASE,
+    });
+    expect(cartes.owned).toBe(0);
+    expect(cartes.total).toBe(0);
+
+    // Sans « Amiibo » coché, ?type= est ignoré comme dans le catalogue.
+    const sansAmiibo = calculerSuivi({
+      search: "?type=figurine",
+      jeux: JEUX,
+      consoles: CONSOLES,
+      amiibo: AMIIBO,
+      possessions,
+      baseUrlSupabase: BASE_SUPABASE,
+    });
+    expect(sansAmiibo.total).toBe(3);
+    expect(sansAmiibo.suggestedTitle).toBe("Nintendo DB");
+  });
+
   it("retombe sur « Nintendo DB » sans filtre et gère l'absence de résultat", () => {
     const sansFiltre = calculerSuivi({
       search: "",

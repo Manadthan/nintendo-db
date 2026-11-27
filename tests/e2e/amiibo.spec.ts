@@ -131,3 +131,53 @@ test("la recherche trouve un amiibo par sa série ; les filtres s'appliquent", a
   await page.goto("/?voir=jeux,amiibo&genre=Action");
   await expect(page.getByText(/et 0 amiibo affichés?/)).toBeVisible();
 });
+
+test("filtre Type d'amiibo : visible seulement avec Amiibo coché, cache les jeux et s'efface au décochage (SPEC v1.54)", async ({
+  page,
+}) => {
+  // Sans « Amiibo » coché : pas de liste « Type d'amiibo », et ?type= dans l'adresse est ignoré.
+  await page.goto("/?type=figurine");
+  await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
+  await page.getByRole("button", { name: /^Filtres/ }).click();
+  await expect(
+    page.getByRole("combobox", { name: "Type d'amiibo", exact: true }),
+  ).toHaveCount(0);
+
+  // Avec « Jeux » et « Amiibo » cochés : la liste apparaît avec le nombre par type ; choisir Figurine cache les jeux.
+  await page.goto("/?voir=jeux,amiibo");
+  await expect(page.getByText("4 jeux et 1 amiibo affichés")).toBeVisible();
+  await page.getByRole("button", { name: /^Filtres/ }).click();
+  const types = page.getByRole("combobox", {
+    name: "Type d'amiibo",
+    exact: true,
+  });
+  await expect(types.getByRole("option")).toHaveText(["Tous", "Figurine (1)"]);
+  await types.selectOption("figurine");
+  await expect(page).toHaveURL(/type=figurine/);
+  await expect(
+    page.getByText("0 jeu et 1 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("list", { name: "Filtres actifs" })
+      .getByRole("button", { name: "Retirer le filtre Figurine", exact: true }),
+  ).toBeVisible();
+
+  // Décocher « Amiibo » retire le filtre ?type= et réaffiche les jeux.
+  await page.getByRole("checkbox", { name: "Amiibo" }).uncheck();
+  await expect(page).toHaveURL("/");
+  await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
+
+  // Lien partagé sur un type sans amiibo dans les données : 0 résultat et pastille effaçable.
+  await page.goto("/?voir=amiibo&type=carte");
+  await expect(
+    page.getByText("0 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+  await page
+    .getByRole("list", { name: "Filtres actifs" })
+    .getByRole("button", { name: "Retirer le filtre Carte", exact: true })
+    .click();
+  await expect(
+    page.getByText("1 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+});

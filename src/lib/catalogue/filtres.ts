@@ -1,4 +1,9 @@
 import {
+  LIBELLES_TYPE,
+  TYPES_AMIIBO,
+  type TypeAmiibo,
+} from "@/lib/amiibo/fiche";
+import {
   NINTENDO_FIRST_PARTY,
   cleStudio,
   estFirstParty,
@@ -21,6 +26,8 @@ export type Filtres = {
   developpeur: string | null;
   /** Série (SPEC v1.37), ou « Sans série » pour les jeux qui n'en ont pas. */
   serie: string | null;
+  /** Type d'amiibo (US-29, SPEC v1.54) : appliqué quand « Amiibo » est coché ; cache les jeux et guides. */
+  typeAmiibo: TypeAmiibo | null;
   /** Ma collection (US-16) : appliqué par le catalogue, et seulement pour le propriétaire connecté. */
   collection: "possedes" | "manquants" | null;
 };
@@ -32,6 +39,7 @@ export const SANS_FILTRE: Filtres = {
   genre: null,
   developpeur: null,
   serie: null,
+  typeAmiibo: null,
   collection: null,
 };
 
@@ -57,6 +65,7 @@ const PARAMETRES = {
   genre: "genre",
   developpeur: "dev",
   serie: "serie",
+  typeAmiibo: "type",
   collection: "collection",
 } as const satisfies Record<keyof Filtres, string>;
 
@@ -81,6 +90,7 @@ function developpePar(v: VersionAffichee, developpeur: string): boolean {
 /**
  * Console d'une version : celle du jeu ; un amiibo (US-29) est « sur » chaque console des jeux qui le lisent.
  * Genre et Développeur cachent les amiibo : ils n'ont ni genre ni studio.
+ * À l'inverse, Type d'amiibo cache les jeux et les guides.
  */
 const surConsole = (v: VersionAffichee, console: string) =>
   v.amiibo
@@ -102,7 +112,8 @@ export function filtrer(
       (!filtres.serie ||
         (filtres.serie === SANS_SERIE
           ? v.jeu.series.length === 0
-          : v.jeu.series.includes(filtres.serie))),
+          : v.jeu.series.includes(filtres.serie))) &&
+      (!filtres.typeAmiibo || v.amiibo?.type === filtres.typeAmiibo),
   );
 }
 
@@ -165,6 +176,17 @@ export function seriesProposees(
   ];
 }
 
+/** Types d'amiibo proposés (US-29, SPEC v1.54) : ceux présents parmi les amiibo affichés, dans l'ordre fixe, avec leur nombre. */
+export function typesAmiiboProposes(
+  versions: VersionAffichee[],
+): { valeur: TypeAmiibo; libelle: string; nombre: number }[] {
+  return TYPES_AMIIBO.map((valeur) => ({
+    valeur,
+    libelle: LIBELLES_TYPE[valeur],
+    nombre: versions.filter((v) => v.amiibo?.type === valeur).length,
+  })).filter((t) => t.nombre > 0);
+}
+
 /** Nombre de filtres actifs (affiché sur le bouton « Filtres »). */
 export const nombreActifs = (f: Filtres) =>
   Object.values(f).filter((v) => v !== null).length;
@@ -175,6 +197,7 @@ export function filtresDepuisParametres(recherche: string): Filtres {
   const dispo = params.get(PARAMETRES.disponibilite)?.toUpperCase();
   const an = params.get(PARAMETRES.annee);
   const console_ = params.get(PARAMETRES.console);
+  const typeAmiibo = params.get(PARAMETRES.typeAmiibo)?.toLowerCase();
   return {
     console:
       console_ && /^[a-z0-9]+(-[a-z0-9]+)*$/.test(console_) ? console_ : null,
@@ -184,6 +207,7 @@ export function filtresDepuisParametres(recherche: string): Filtres {
     genre: params.get(PARAMETRES.genre)?.trim() || null,
     developpeur: params.get(PARAMETRES.developpeur)?.trim() || null,
     serie: params.get(PARAMETRES.serie)?.trim() || null,
+    typeAmiibo: TYPES_AMIIBO.find((t) => t === typeAmiibo) ?? null,
     collection:
       (["possedes", "manquants"] as const).find(
         (c) => c === params.get(PARAMETRES.collection),

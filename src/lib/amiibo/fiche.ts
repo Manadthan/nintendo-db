@@ -21,6 +21,15 @@ import type { Database } from "@/types/database";
 
 export type TypeAmiibo = Database["public"]["Enums"]["amiibo_type"];
 
+/** Ordre d'affichage des types d'amiibo (US-29, SPEC v1.54). */
+export const TYPES_AMIIBO: readonly TypeAmiibo[] = [
+  "figurine",
+  "carte",
+  "peluche",
+  "bracelet",
+  "bloc",
+];
+
 /** Étiquette du type (US-29). */
 export const LIBELLES_TYPE: Record<TypeAmiibo, string> = {
   figurine: "Figurine",
