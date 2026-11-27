@@ -6,7 +6,7 @@ import {
   versionsAmiibo,
   type AmiiboCatalogue,
 } from "@/lib/amiibo/catalogue";
-import { urlImageAmiibo } from "@/lib/amiibo/fiche";
+import { LIBELLES_TYPE, urlImageAmiibo } from "@/lib/amiibo/fiche";
 import { trier, trierVersions } from "@/lib/catalogue/catalogue";
 import {
   DISPONIBILITES,
@@ -131,7 +131,12 @@ export function calculerSuivi({
   const marche = marcheDepuisTexte(params.get("marche")) ?? "TOUS";
   const voir = voirEffectif(voirDepuisParametres(search), marche);
   const tri = triDepuisParametres(search);
-  const filtres = { ...filtresDepuisParametres(search), collection: null };
+  const filtresBruts = filtresDepuisParametres(search);
+  const filtres = {
+    ...filtresBruts,
+    collection: null,
+    typeAmiibo: voir.amiibo ? filtresBruts.typeAmiibo : null,
+  };
   const rechercheBrute = params.get("q")?.trim() ?? "";
   const mots = motsRecherche(rechercheBrute);
 
@@ -189,9 +194,13 @@ export function calculerSuivi({
     ? (DISPONIBILITES.find((d) => d.valeur === filtres.disponibilite)
         ?.libelle ?? null)
     : null;
+  const libelleTypeAmiibo = filtres.typeAmiibo
+    ? LIBELLES_TYPE[filtres.typeAmiibo]
+    : null;
 
   const partiesTitre = [
     libelleVoir(voir),
+    libelleTypeAmiibo,
     nomConsole,
     filtres.serie,
     filtres.genre,

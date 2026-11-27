@@ -23,6 +23,7 @@ import {
   filtrer,
   developpeursProposes,
   seriesProposees,
+  typesAmiiboProposes,
   genresProposes,
   lireFiltres,
   nombreActifs,
@@ -225,8 +226,12 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
   const collection = useCollection();
   const connecte = collection.connecte === true;
   const filtres = useMemo(
-    () => (connecte ? filtresAdresse : { ...filtresAdresse, collection: null }),
-    [connecte, filtresAdresse],
+    () => ({
+      ...filtresAdresse,
+      collection: connecte ? filtresAdresse.collection : null,
+      typeAmiibo: voir.amiibo ? filtresAdresse.typeAmiibo : null,
+    }),
+    [connecte, voir.amiibo, filtresAdresse],
   );
   const [panneauOuvert, setPanneauOuvert] = useState(false);
   const actifs = nombreActifs(filtres);
@@ -448,7 +453,20 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
                 type="checkbox"
                 checked={voir[coche]}
                 disabled={grisee}
-                onChange={() => enregistrerVoir(basculer(voir, coche))}
+                onChange={() => {
+                  const suivant = basculer(voir, coche);
+                  enregistrerVoir(suivant);
+                  if (
+                    coche === "amiibo" &&
+                    !suivant.amiibo &&
+                    filtresAdresse.typeAmiibo
+                  ) {
+                    enregistrerFiltres({
+                      ...filtresAdresse,
+                      typeAmiibo: null,
+                    });
+                  }
+                }}
                 className="size-[18px] accent-accent"
               />
               {LIBELLES_COCHE[coche]}
@@ -520,6 +538,8 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
           genres={genresProposes(duMarche)}
           developpeurs={developpeursProposes(duMarche)}
           series={seriesProposees(duMarche)}
+          typesAmiibo={typesAmiiboProposes(duMarche)}
+          amiibo={voir.amiibo}
           collection={connecte}
         />
       )}
