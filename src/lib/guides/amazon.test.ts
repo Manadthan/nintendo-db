@@ -4,6 +4,7 @@ import {
   adressePageAmazon,
   cheminCouverture,
   estCouverture,
+  estFausseCouvertureAmazon,
   extraireCouverturePageAmazon,
   isbn10,
 } from "./amazon";
@@ -61,6 +62,37 @@ describe("estCouverture", () => {
   });
   it("garde une vraie couverture", () => {
     expect(estCouverture({ width: 353, height: 500 })).toBe(true);
+  });
+});
+
+describe("estFausseCouvertureAmazon", () => {
+  it("reconnaît le visuel générique bleu marine COVER COMING SOON (350×500)", () => {
+    expect(
+      estFausseCouvertureAmazon(350, 500, {
+        hautGauche: [64, 73, 88],
+        milieuDroite: [33, 59, 96],
+        bandeBasse: [255, 255, 250],
+        bordBas: [34, 55, 82],
+      }),
+    ).toBe(true);
+  });
+  it("ne rejette pas une vraie couverture même de taille proche", () => {
+    expect(
+      estFausseCouvertureAmazon(356, 500, {
+        hautGauche: [64, 73, 88],
+        milieuDroite: [33, 59, 96],
+        bandeBasse: [255, 255, 250],
+        bordBas: [34, 55, 82],
+      }),
+    ).toBe(false);
+    expect(
+      estFausseCouvertureAmazon(350, 500, {
+        hautGauche: [220, 40, 30],
+        milieuDroite: [33, 59, 96],
+        bandeBasse: [255, 255, 250],
+        bordBas: [34, 55, 82],
+      }),
+    ).toBe(false);
   });
 });
 

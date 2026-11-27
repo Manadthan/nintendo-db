@@ -14,6 +14,9 @@ on:
         description: "Copier les couvertures Amazon Japon manquantes (--nouveaux)"
         type: boolean
         default: true
+      retirer:
+        description: "ISBN séparés par des virgules dont la couverture doit être retirée (ex. faux visuels)"
+        default: ""
 
 permissions:
   contents: read
@@ -42,6 +45,11 @@ jobs:
         continue-on-error: true
         timeout-minutes: 10
         run: sudo apt-get update -qq && sudo apt-get install -y fonts-wqy-zenhei
+      - name: Retirer les couvertures invalides demandées
+        if: ${{ inputs.retirer != '' }}
+        env:
+          RETIRER: ${{ inputs.retirer }}
+        run: node scripts/couvertures-amazon.mjs --retirer "$RETIRER"
       - name: Écrire les guides validés par console
         env:
           PLAN_JSON: ${{ inputs.plan }}
