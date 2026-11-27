@@ -21,13 +21,13 @@ export function ImageAmiibo({
 }) {
   const cadre =
     forme === "boite"
-      ? "aspect-[27/38] rounded-md"
+      ? "aspect-[27/38] rounded-md p-[5%]"
       : forme === "petite"
-        ? "aspect-square rounded-md p-[6%]"
-        : "aspect-square rounded-xl";
+        ? "aspect-square rounded-md p-[4%]"
+        : "aspect-square rounded-xl p-[5%]";
   return (
     <div
-      className={`flex w-full items-center justify-center overflow-hidden border border-bordure bg-carte p-[8%] ${cadre}`}
+      className={`flex w-full items-center justify-center overflow-hidden border border-bordure bg-carte ${cadre}`}
     >
       {base ? (
         // eslint-disable-next-line @next/next/no-img-element -- images déjà en WebP 300/600 (ADR-21 point 2), pas de relais

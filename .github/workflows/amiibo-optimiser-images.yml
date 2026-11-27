@@ -1,0 +1,56 @@
+name: Optimiser les images d'amiibo
+
+# Retire le fond blanc opaque des figurines concernées (reprises en haute définition chez Nintendo US / Europe),
+# recadre les marges vides et optimise la compression WebP (effort 6, alphaQuality 80) dans le bucket « amiibo ».
+# Se déclenche une fois au merge sur main (si le script change) et peut être relancé à la main depuis l'onglet Actions.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/amiibo-optimiser-images.mjs"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Périmètre (tous = fond blanc + poids WebP ; fond-blanc = figurines à fond blanc seules)"
+        type: choice
+        default: "tous"
+        options:
+          - tous
+          - fond-blanc
+      essai:
+        description: "Essai sans écriture en base ni dans le stockage"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: amiibo-optimiser-images
+  cancel-in-progress: false
+
+jobs:
+  optimiser:
+    name: Détourer et optimiser les images d'amiibo
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Optimiser les images dans Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          MODE: ${{ inputs.mode || 'tous' }}
+          ESSAI: ${{ inputs.essai || false }}
+        run: |
+          if [ "$ESSAI" = "true" ]; then
+            node scripts/amiibo-optimiser-images.mjs --mode "$MODE" --essai
+          else
+            node scripts/amiibo-optimiser-images.mjs --mode "$MODE"
+          fi

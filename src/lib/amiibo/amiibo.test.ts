@@ -141,7 +141,7 @@ describe("Nintendo US", () => {
   it("ajoute la boîte d'un amiibo déjà connu, sans le dupliquer", () => {
     expect(avecUs.filter((a) => a.nom === "Sidon")).toHaveLength(1);
     expect(trouver(avecUs, "Sidon")?.boite).toMatch(
-      /^https:\/\/assets\.nintendo\.com\/image\/upload\/f_png,w_600\//,
+      /^https:\/\/assets\.nintendo\.com\/image\/upload\/f_png,w_1200\//,
     );
   });
 
@@ -183,7 +183,7 @@ describe("Nintendo US", () => {
 
   it("encode les espaces des adresses Cloudinary", () => {
     expect(imageNintendoUs("amiibo/Kirby Air RIders/kirby")).toBe(
-      "https://assets.nintendo.com/image/upload/f_png,w_600/amiibo/Kirby%20Air%20RIders/kirby",
+      "https://assets.nintendo.com/image/upload/f_png,w_1200/amiibo/Kirby%20Air%20RIders/kirby",
     );
   });
 });
