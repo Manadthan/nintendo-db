@@ -1,0 +1,48 @@
+name: Jaquettes Switch 2 manquantes
+
+# Ajoute les 8 jaquettes Switch 2 officielles manquantes vérifiées sur planche (boîtier rouge retiré, WebP 300/600/768).
+# Idempotent : seules les sorties encore sans jaquette (jaquette_path IS NULL) sont remplies.
+# Se déclenche une fois au merge sur main (si le script change) et peut être relancé à la main depuis l'onglet Actions.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/jaquettes-switch-2-manquantes.mjs"
+  workflow_dispatch:
+    inputs:
+      essai:
+        description: "Essai sans écriture en base ni dans le stockage"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jaquettes-switch-2-manquantes
+  cancel-in-progress: false
+
+jobs:
+  importer:
+    name: Importer les jaquettes Switch 2 manquantes
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Importer les jaquettes dans Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          ESSAI: ${{ inputs.essai || false }}
+        run: |
+          if [ "$ESSAI" = "true" ]; then
+            node scripts/jaquettes-switch-2-manquantes.mjs --essai
+          else
+            node scripts/jaquettes-switch-2-manquantes.mjs
+          fi
