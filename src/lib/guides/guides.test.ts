@@ -131,6 +131,32 @@ describe("consolesCitees", () => {
       consolesCitees("ゼノブレイド : 任天堂公式ガイドブック : Wii", []),
     ).toEqual(new Set(["wii"]));
   });
+  it("reconnaît les abréviations rétro (FC, Disk System, SFC, 任天堂64, GB, GBC, Famicom Mini→GBA)", () => {
+    expect(consolesCitees("ゼルダの伝説 : ディスクシステム攻略本", [])).toEqual(
+      new Set(["nes"]),
+    );
+    expect(consolesCitees("ファイアーエムブレム FC版完全攻略", [])).toEqual(
+      new Set(["nes"]),
+    );
+    expect(consolesCitees("スーパーメトロイド SFC攻略ガイド", [])).toEqual(
+      new Set(["snes"]),
+    );
+    expect(
+      consolesCitees("スーパーマリオ64 : 任天堂64公式ガイド", [
+        "スーパーマリオ64",
+      ]),
+    ).toEqual(new Set(["n64"]));
+    expect(
+      consolesCitees("ポケットモンスター金・銀 GBカラー公式ガイド", []),
+    ).toEqual(new Set(["gbc"]));
+    expect(consolesCitees("星のカービィ GB版攻略ガイド", [])).toEqual(
+      new Set(["gb"]),
+    );
+    expect(consolesCitees("ファミコンミニ完全攻略ガイド", [])).toEqual(
+      new Set(["gba"]),
+    );
+    expect(consolesCitees("16GB対応メモリー完全ガイド", [])).toEqual(new Set());
+  });
 });
 
 describe("jugerLivre sur des réponses NDL réelles", () => {

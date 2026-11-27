@@ -368,9 +368,11 @@ async function recuperer(dossier, slugConsole) {
   // Couvertures cherchées ici, puis planche refaite avec elles (la tâche GitHub ne les cherche pas).
   const fichier = join(dossier, `guides-${slugConsole}.json`);
   const lu = JSON.parse(readFileSync(fichier, "utf8"));
-  await couvertures(lu.guides);
-  writeFileSync(fichier, JSON.stringify(lu, null, 1));
-  await planche(lu.guides, join(dossier, `planche-${slugConsole}.jpg`));
+  if (!process.argv.includes("--sans-couvertures")) {
+    await couvertures(lu.guides);
+    writeFileSync(fichier, JSON.stringify(lu, null, 1));
+    await planche(lu.guides, join(dossier, `planche-${slugConsole}.jpg`));
+  }
   console.log(
     `planche ${slugConsole} récupérée dans ${dossier} : ${lu.guides.length} guides, ${lu.guides.filter((g) => g.google_books_id).length} avec couverture`,
   );

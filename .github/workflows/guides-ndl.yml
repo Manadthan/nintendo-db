@@ -68,6 +68,16 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
         run: node scripts/guides.mjs --console "${{ matrix.console }}" --planche guides --deposer --sans-couvertures
+      - name: Publier la planche en artifact (relecture)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: guides-planche-${{ matrix.console }}
+          path: |
+            guides/guides-${{ matrix.console }}.json
+            guides/planche-${{ matrix.console }}.jpg
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Garder les réponses lues
         if: always()
         uses: actions/cache/save@v4
