@@ -1,0 +1,79 @@
+name: Appliquer les guides validés
+
+# Écrit en production les guides japonais d'une ou plusieurs planches relues (déposées par « Guides NDL »
+# dans le bucket privé gametdb/guides/), applique les exclusions validées (`sauf`), puis copie les couvertures
+# Amazon Japon manquantes (y compris les anciens guides via le secours fiche produit) dans le bucket public `guides`.
+# Lancé à la main sur `main` uniquement, après validation des planches par le propriétaire.
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: 'JSON des consoles validées, ex. [{"console":"nes","sauf":"3,12"}] ([] pour couvertures seules)'
+        default: "[]"
+      couvertures:
+        description: "Copier les couvertures Amazon Japon manquantes (--nouveaux)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: guides-appliquer
+  cancel-in-progress: false
+
+jobs:
+  appliquer:
+    name: Écrire les guides et leurs couvertures
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Police japonaise des planches
+        continue-on-error: true
+        timeout-minutes: 10
+        run: sudo apt-get update -qq && sudo apt-get install -y fonts-wqy-zenhei
+      - name: Écrire les guides validés par console
+        env:
+          PLAN_JSON: ${{ inputs.plan }}
+        run: |
+          node -e '
+            const { execFileSync } = require("node:child_process");
+            const plan = JSON.parse(process.env.PLAN_JSON || "[]");
+            if (!Array.isArray(plan)) throw new Error("plan doit être un tableau JSON");
+            for (const item of plan) {
+              const consoleSlug = String(item.console || "").trim();
+              if (!/^[a-z0-9-]+$/.test(consoleSlug)) throw new Error("console invalide: " + consoleSlug);
+              const sauf = String(item.sauf || "").trim();
+              if (sauf && !/^[0-9,]+$/.test(sauf)) throw new Error("sauf invalide: " + sauf);
+              console.log("=== Console:", consoleSlug, sauf ? "(sauf " + sauf + ")" : "(tous)", "===");
+              execFileSync("node", ["scripts/guides.mjs", "--recuperer", "tmp-guides", "--console", consoleSlug, "--sans-couvertures"], { stdio: "inherit" });
+              const args = ["scripts/guides.mjs", "--ecrire", "tmp-guides", "--console", consoleSlug];
+              if (sauf) args.push("--sauf", sauf);
+              execFileSync("node", args, { stdio: "inherit" });
+            }
+          '
+      - name: Importer les couvertures Amazon Japon manquantes
+        if: ${{ inputs.couvertures }}
+        run: |
+          node scripts/couvertures-amazon.mjs --planche tmp-amazon --nouveaux
+          node scripts/couvertures-amazon.mjs --ecrire tmp-amazon
+      - name: Publier la planche Amazon en artifact (contrôle)
+        if: ${{ always() && inputs.couvertures }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: guides-couvertures-amazon
+          path: |
+            tmp-amazon/planche-amazon.jpg
+            tmp-amazon/couvertures-amazon.json
+          if-no-files-found: ignore
+          retention-days: 14

@@ -14,8 +14,10 @@ import { createClient } from "@supabase/supabase-js";
 import sharp from "sharp";
 import {
   adresseCouvertureAmazon,
+  adressePageAmazon,
   cheminCouverture,
   estCouverture,
+  extraireCouverturePageAmazon,
 } from "../src/lib/guides/amazon.ts";
 
 const { SUPABASE_URL, SUPABASE_SECRET_KEY } = process.env;
@@ -28,15 +30,72 @@ const option = (nom) => {
 };
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 const FICHIER = "couvertures-amazon.json";
+const ENTETES_AMAZON = {
+  "user-agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "accept-language": "ja-JP,ja;q=0.9",
+};
 
 // La planche ne lit pas `couverture` : elle peut tourner avant la migration 0035 en production.
 async function guides(colonnes = "isbn, titre, editeur, verrous") {
-  const { data, error } = await supabase
-    .from("guides")
-    .select(colonnes)
-    .order("isbn");
-  if (error) throw new Error(`lecture des guides : ${error.message}`);
-  return data;
+  let lignes = [];
+  for (let de = 0; ; de += 1000) {
+    const { data, error } = await supabase
+      .from("guides")
+      .select(colonnes)
+      .order("isbn")
+      .range(de, de + 999);
+    if (error) throw new Error(`lecture des guides : ${error.message}`);
+    lignes = lignes.concat(data);
+    if (data.length < 1000) return lignes;
+  }
+}
+
+/** Télécharge la couverture Amazon : chemin rapide /images/P/, sinon secours via la fiche amazon.co.jp/dp/{ISBN10}. */
+async function telechargerCouvertureAmazon(isbn, fichier) {
+  const adresse = adresseCouvertureAmazon(isbn);
+  if (!adresse) return { ok: false, raison: "ISBN 979" };
+  const reponse = await fetch(adresse, {
+    signal: AbortSignal.timeout(15_000),
+  }).catch(() => null);
+  await pause(500);
+  if (reponse?.ok) {
+    const octets = Buffer.from(await reponse.arrayBuffer());
+    const taille = await sharp(octets)
+      .metadata()
+      .catch(() => ({}));
+    if (estCouverture(taille)) {
+      writeFileSync(fichier, octets);
+      return { ok: true, taille };
+    }
+  }
+  const page = adressePageAmazon(isbn);
+  if (!page) return { ok: false, raison: "pas de couverture" };
+  const rPage = await fetch(page, {
+    headers: ENTETES_AMAZON,
+    signal: AbortSignal.timeout(15_000),
+  }).catch(() => null);
+  await pause(900);
+  if (!rPage?.ok) {
+    return {
+      ok: false,
+      raison: rPage ? `page HTTP ${rPage.status}` : "page injoignable",
+    };
+  }
+  const urlImage = extraireCouverturePageAmazon(await rPage.text());
+  if (!urlImage) return { ok: false, raison: "pas de couverture" };
+  const rImg = await fetch(urlImage, {
+    headers: ENTETES_AMAZON,
+    signal: AbortSignal.timeout(15_000),
+  }).catch(() => null);
+  if (!rImg?.ok) return { ok: false, raison: "image fiche injoignable" };
+  const octets = Buffer.from(await rImg.arrayBuffer());
+  const taille = await sharp(octets)
+    .metadata()
+    .catch(() => ({}));
+  if (!estCouverture(taille)) return { ok: false, raison: "pas de couverture" };
+  writeFileSync(fichier, octets);
+  return { ok: true, taille };
 }
 
 // ——— 1. Téléchargement et planche (lecture seule) ———
@@ -56,28 +115,20 @@ async function preparer(dossier, limite) {
       verrouilles++;
       continue;
     }
-    const adresse = adresseCouvertureAmazon(g.isbn);
     const fichier = join(dossier, "amazon", `${g.isbn}.jpg`);
-    if (!adresse) {
-      sans.push(`${g.isbn} (ISBN 979)`);
-      continue;
+    let taille;
+    if (existsSync(fichier)) {
+      taille = await sharp(fichier)
+        .metadata()
+        .catch(() => ({}));
     }
-    if (!existsSync(fichier)) {
-      const reponse = await fetch(adresse);
-      const octets = Buffer.from(await reponse.arrayBuffer());
-      await pause(1000);
-      if (!reponse.ok) {
-        sans.push(`${g.isbn} (HTTP ${reponse.status})`);
+    if (!estCouverture(taille ?? {})) {
+      const res = await telechargerCouvertureAmazon(g.isbn, fichier);
+      if (!res.ok) {
+        sans.push(`${g.isbn} (${res.raison})`);
         continue;
       }
-      writeFileSync(fichier, octets);
-    }
-    const taille = await sharp(fichier)
-      .metadata()
-      .catch(() => ({}));
-    if (!estCouverture(taille)) {
-      sans.push(`${g.isbn} (pas de couverture)`);
-      continue;
+      taille = res.taille;
     }
     retenus.push({
       isbn: g.isbn,
@@ -161,9 +212,10 @@ async function ecrire(dossier, sauf) {
       ignores.push(`n° ${i + 1} ${g.isbn} : verrouillé`);
       continue;
     }
-    // Même conversion que les jaquettes (WebP 82), à la taille d'origine : Amazon ne donne pas plus grand.
+    // Conversion WebP 82, bornée à 768 px de large (les fiches Amazon Japon montent jusqu'à 1920 px).
     const webp = await sharp(join(dossier, "amazon", `${g.isbn}.jpg`))
       .rotate()
+      .resize({ width: 768, withoutEnlargement: true })
       .webp({ quality: 82 })
       .toBuffer();
     const chemin = cheminCouverture(g.isbn, actuel.couverture);

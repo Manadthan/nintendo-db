@@ -18,6 +18,50 @@ export function adresseCouvertureAmazon(isbn13: string): string | null {
     : null;
 }
 
+/** Page produit Amazon Japon d'un ISBN (secours quand l'ancien chemin /images/P/ renvoie 1 px sur les guides rétro). */
+export function adressePageAmazon(isbn13: string): string | null {
+  const i10 = isbn10(isbn13);
+  return i10 ? `https://www.amazon.co.jp/dp/${i10}` : null;
+}
+
+/** Extrait l'URL de couverture haute résolution (`m.media-amazon.com/images/I/...`) depuis le HTML d'une fiche Amazon Japon. */
+export function extraireCouverturePageAmazon(html: string): string | null {
+  const brut =
+    html.match(
+      /id="(?:landingImage|imgBlkFront)"[^>]*data-a-dynamic-image="([^"]+)"/,
+    )?.[1] ??
+    html.match(
+      /"hiRes"\s*:\s*"(https:\/\/m\.media-amazon\.com\/images\/I\/[^"]+)"/,
+    )?.[1] ??
+    html.match(
+      /data-old-hires="(https:\/\/m\.media-amazon\.com\/images\/I\/[^"]+)"/,
+    )?.[1];
+  if (!brut) return null;
+  const decode = brut.replace(/&quot;/g, '"');
+  let url: string | null = null;
+  if (decode.startsWith("{")) {
+    try {
+      const carte = JSON.parse(decode) as Record<string, [number, number]>;
+      let maxAire = -1;
+      for (const [u, dims] of Object.entries(carte)) {
+        const aire = Array.isArray(dims) ? (dims[0] ?? 0) * (dims[1] ?? 0) : 0;
+        if (aire > maxAire) {
+          maxAire = aire;
+          url = u;
+        }
+      }
+    } catch {
+      return null;
+    }
+  } else {
+    url = decode;
+  }
+  if (!url || !/^https:\/\/m\.media-amazon\.com\/images\/I\//.test(url)) {
+    return null;
+  }
+  return url.replace(/\._[A-Z0-9,_]+_\.jpg$/i, ".jpg");
+}
+
 /** Amazon répond 200 avec une image d'1 px quand il n'a pas de couverture : seule une vraie image compte. */
 export function estCouverture(taille: {
   width?: number;

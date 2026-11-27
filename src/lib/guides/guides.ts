@@ -60,12 +60,21 @@ const MARQUES: readonly [string, RegExp][] = [
   ["wii-u", /wii\s*u/gi],
   ["wii", /wii/gi],
   ["gamecube", /ゲームキューブ|gamecube/gi],
-  ["snes", /スーパーファミコン|スーファミ|super\s*famicom/gi],
-  ["nes", /ファミリーコンピュータ|ファミコン|famicom/gi],
-  ["gba", /ゲームボーイアドバンス|gba/gi],
-  ["gbc", /ゲームボーイカラー/gi],
-  ["gb", /ゲームボーイ|game\s*boy/gi],
-  ["n64", /ニンテンドウ64|ニンテンドー64|nintendo\s*64|n64/gi],
+  [
+    "gba",
+    /ゲームボーイアドバンス|ファミコンミニ|(?<![a-z0-9])gba(?![a-z0-9])/gi,
+  ],
+  [
+    "snes",
+    /スーパーファミコン|スーファミ|super\s*famicom|(?<![a-z0-9])sfc(?![a-z0-9])/gi,
+  ],
+  [
+    "nes",
+    /ファミリーコンピュータ|ファミコン|ディスクシステム|famicom|(?<![a-z0-9])fc(?![a-z0-9])/gi,
+  ],
+  ["gbc", /ゲームボーイカラー|gbカラー|(?<![a-z0-9])gbc(?![a-z0-9])/gi],
+  ["gb", /ゲームボーイ|game\s*boy|(?<![a-z0-9])gb(?![a-z0-9])/gi],
+  ["n64", /ニンテンドウ64|ニンテンドー64|任天堂\s*64|nintendo\s*64|n64/gi],
   ["autre", /プレイステーション|playstation|ps[2-5]|xbox|steam/gi],
 ];
 

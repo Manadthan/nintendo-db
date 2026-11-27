@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
   adresseCouvertureAmazon,
+  adressePageAmazon,
   cheminCouverture,
   estCouverture,
+  extraireCouverturePageAmazon,
   isbn10,
 } from "./amazon";
 
@@ -26,6 +28,29 @@ describe("adresseCouvertureAmazon", () => {
       "https://images-na.ssl-images-amazon.com/images/P/4047289361.09.LZZZZZZZ.jpg",
     );
     expect(adresseCouvertureAmazon("9791032706671")).toBeNull();
+  });
+});
+
+describe("adressePageAmazon et extraireCouverturePageAmazon", () => {
+  it("construit l'URL de la fiche Amazon Japon par ISBN 10", () => {
+    expect(adressePageAmazon("9784091060235")).toBe(
+      "https://www.amazon.co.jp/dp/4091060234",
+    );
+    expect(adressePageAmazon("9791032706671")).toBeNull();
+  });
+  it("extrait l'image la plus grande de data-a-dynamic-image sans suffixe de réduction", () => {
+    const html = `<img id="landingImage" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/I/91tViShY+DL._SY342_.jpg&quot;:[342,256],&quot;https://m.media-amazon.com/images/I/91tViShY+DL._SY522_.jpg&quot;:[522,391]}" />`;
+    expect(extraireCouverturePageAmazon(html)).toBe(
+      "https://m.media-amazon.com/images/I/91tViShY+DL.jpg",
+    );
+  });
+  it("prend hiRes si data-a-dynamic-image est absent et renvoie null sans image", () => {
+    expect(
+      extraireCouverturePageAmazon(
+        `{"hiRes":"https://m.media-amazon.com/images/I/51NlcxflqZL._SL500_.jpg"}`,
+      ),
+    ).toBe("https://m.media-amazon.com/images/I/51NlcxflqZL.jpg");
+    expect(extraireCouverturePageAmazon("<html>rien</html>")).toBeNull();
   });
 });
 
