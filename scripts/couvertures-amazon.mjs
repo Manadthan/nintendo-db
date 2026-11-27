@@ -17,6 +17,7 @@ import {
   adressePageAmazon,
   cheminCouverture,
   estCouverture,
+  estFausseCouvertureAmazon,
   extraireCouverturePageAmazon,
 } from "../src/lib/guides/amazon.ts";
 
@@ -51,6 +52,25 @@ async function guides(colonnes = "isbn, titre, editeur, verrous") {
   }
 }
 
+async function estPlaceholderAmazon(octets) {
+  const { data, info } = await sharp(octets)
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true })
+    .catch(() => ({ data: null, info: null }));
+  if (!data || !info || info.width !== 350 || info.height !== 500) return false;
+  const px = (x, y) => {
+    const i = (y * info.width + x) * info.channels;
+    return [data[i], data[i + 1], data[i + 2]];
+  };
+  return estFausseCouvertureAmazon(info.width, info.height, {
+    hautGauche: px(10, 10),
+    milieuDroite: px(330, 250),
+    bandeBasse: px(175, 460),
+    bordBas: px(175, 495),
+  });
+}
+
 /** Télécharge la couverture Amazon : chemin rapide /images/P/, sinon secours via la fiche amazon.co.jp/dp/{ISBN10}. */
 async function telechargerCouvertureAmazon(isbn, fichier) {
   const adresse = adresseCouvertureAmazon(isbn);
@@ -64,7 +84,7 @@ async function telechargerCouvertureAmazon(isbn, fichier) {
     const taille = await sharp(octets)
       .metadata()
       .catch(() => ({}));
-    if (estCouverture(taille)) {
+    if (estCouverture(taille) && !(await estPlaceholderAmazon(octets))) {
       writeFileSync(fichier, octets);
       return { ok: true, taille };
     }
@@ -94,6 +114,9 @@ async function telechargerCouvertureAmazon(isbn, fichier) {
     .metadata()
     .catch(() => ({}));
   if (!estCouverture(taille)) return { ok: false, raison: "pas de couverture" };
+  if (await estPlaceholderAmazon(octets)) {
+    return { ok: false, raison: "visuel générique COVER COMING SOON" };
+  }
   writeFileSync(fichier, octets);
   return { ok: true, taille };
 }
@@ -243,13 +266,53 @@ async function ecrire(dossier, sauf) {
   for (const s of ignores) console.log(`  ${s}`);
 }
 
+// ——— 3. Retrait ponctuel de couvertures invalides (ex. faux visuels Amazon) ———
+async function retirer(isbns) {
+  let retirees = 0;
+  for (const isbn of isbns) {
+    const { data, error } = await supabase
+      .from("guides")
+      .select("isbn, couverture, verrous")
+      .eq("isbn", isbn)
+      .maybeSingle();
+    if (error) throw new Error(`lecture ${isbn} : ${error.message}`);
+    if (!data || !data.couverture || data.verrous.includes("couverture")) {
+      console.log(`  ignoré : ${isbn}`);
+      continue;
+    }
+    const { error: e1 } = await supabase
+      .from("guides")
+      .update({ couverture: null })
+      .eq("isbn", isbn);
+    if (e1) throw new Error(`maj ${isbn} : ${e1.message}`);
+    const { error: e2 } = await supabase.storage
+      .from("guides")
+      .remove([data.couverture]);
+    if (e2) console.log(`  fichier ${data.couverture} gardé : ${e2.message}`);
+    console.log(`  retiré : ${isbn} (${data.couverture})`);
+    retirees++;
+  }
+  console.log(`${retirees} couverture(s) retirée(s)`);
+}
+
 const dossierPlanche = option("--planche");
 const dossierEcriture = option("--ecrire");
-if (dossierPlanche)
+const aRetirer = option("--retirer");
+if (aRetirer)
+  await retirer(
+    aRetirer
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => /^\d{13}$/.test(s)),
+  );
+else if (dossierPlanche)
   await preparer(dossierPlanche, Number(option("--limite")) || undefined);
 else if (dossierEcriture)
   await ecrire(
     dossierEcriture,
     new Set((option("--sauf") ?? "").split(",").filter(Boolean).map(Number)),
   );
-else console.log("--planche /dossier, ou --ecrire /dossier [--sauf n,n]");
+else
+  console.log(
+    "--planche /dossier, --ecrire /dossier [--sauf n,n], ou --retirer isbn1,isbn2",
+  );

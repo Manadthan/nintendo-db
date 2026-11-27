@@ -70,6 +70,39 @@ export function estCouverture(taille: {
   return (taille.width ?? 0) >= 100 && (taille.height ?? 0) >= 100;
 }
 
+type Rgb = readonly [number, number, number];
+
+function rgbProche(a: Rgb, b: Rgb, tol = 14): boolean {
+  return (
+    Math.abs(a[0] - b[0]) <= tol &&
+    Math.abs(a[1] - b[1]) <= tol &&
+    Math.abs(a[2] - b[2]) <= tol
+  );
+}
+
+/**
+ * Détecte le visuel générique bleu marine « COVER COMING SOON » qu'Amazon Japon génère en 350×500
+ * pour certains anciens livres sans photo (repéré sur 3 guides GameCube le 27/11/2026).
+ */
+export function estFausseCouvertureAmazon(
+  largeur: number,
+  hauteur: number,
+  echantillons: {
+    hautGauche: Rgb;
+    milieuDroite: Rgb;
+    bandeBasse: Rgb;
+    bordBas: Rgb;
+  },
+): boolean {
+  if (largeur !== 350 || hauteur !== 500) return false;
+  return (
+    rgbProche(echantillons.hautGauche, [64, 73, 88]) &&
+    rgbProche(echantillons.milieuDroite, [33, 59, 96]) &&
+    rgbProche(echantillons.bandeBasse, [255, 255, 250]) &&
+    rgbProche(echantillons.bordBas, [34, 55, 82])
+  );
+}
+
 /** Chemin de la copie dans le bucket `guides` : version suivante, pour qu'une nouvelle image change d'adresse (ADR-04). */
 export function cheminCouverture(isbn: string, actuel: string | null): string {
   const version = Number(actuel?.match(/-(\d+)\.webp$/)?.[1] ?? 0) + 1;
