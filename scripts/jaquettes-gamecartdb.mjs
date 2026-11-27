@@ -35,6 +35,8 @@ const RELEASES = {
   "xenoblade-chronicles-x-definitive-edition-nintendo-switch-2-edition": "rel-western-xenoblade-chronicles-x-definitive-edition-nintendo-switch-2-edition",
   "yoshi-and-the-mysterious-book": "rel-western-yoshi-and-the-mysterious-book",
   "fire-emblem-fortunes-weave": "rel-western-fire-emblem-fortune-s-weave",
+  "metroid-ravenous": "rel-western-metroid-ravenous",
+  "xenoblade-chronicles-3-nintendo-switch-2-edition": "rel-western-xenoblade-chronicles-3-nintendo-switch-2-edition",
 };
 const FICHIER = { US: "", PAL: "--europe" };
 const TAILLES = [300, 600, 768];
