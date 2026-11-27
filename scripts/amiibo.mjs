@@ -20,6 +20,13 @@ import {
   lireAmiiboApi,
   rattacherJeux,
 } from "../src/lib/amiibo/amiibo.ts";
+import {
+  aFondBlanc,
+  doitDetourer,
+  OPTIONS_WEBP_AMIIBO,
+  retirerFondBlanc,
+  SEUIL_RECADRAGE,
+} from "../src/lib/amiibo/image.ts";
 
 const { SUPABASE_URL, SUPABASE_SECRET_KEY } = process.env;
 if (!SUPABASE_URL || !SUPABASE_SECRET_KEY)
@@ -242,15 +249,37 @@ const liste = JSON.parse(
   readFileSync(join(dossierEcriture, "amiibo.json"), "utf8"),
 );
 const version = Date.now().toString(36);
-const envoyer = async (id, nom, source) => {
+const envoyer = async (id, nom, source, type) => {
   if (!source.includes("githubusercontent")) await attendre(1000); // une demande par seconde chez Nintendo
   const r = await fetch(source);
   if (!r.ok) throw new Error(`${source} : HTTP ${r.status}`);
-  const brut = Buffer.from(await r.arrayBuffer());
+  let image = Buffer.from(await r.arrayBuffer());
+  if (nom === "figurine" && doitDetourer(type)) {
+    const { data, info } = await sharp(image)
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    if (aFondBlanc(data, info.width, info.height)) {
+      const detouree = retirerFondBlanc(data, info.width, info.height);
+      image = await sharp(detouree, {
+        raw: { width: info.width, height: info.height, channels: 4 },
+      })
+        .png()
+        .toBuffer();
+    }
+  }
+  try {
+    image = await sharp(image)
+      .trim({ threshold: SEUIL_RECADRAGE })
+      .png()
+      .toBuffer();
+  } catch {
+    // Image uniforme : garder telle quelle
+  }
   for (const taille of [300, 600]) {
-    const webp = await sharp(brut)
+    const webp = await sharp(image)
       .resize(taille, taille, { fit: "inside", withoutEnlargement: true })
-      .webp({ quality: 82 })
+      .webp(OPTIONS_WEBP_AMIIBO)
       .toBuffer();
     const chemin = `${id}/${nom}-${version}-${taille}.webp`;
     const { error } = await supabase.storage
@@ -310,9 +339,9 @@ for (const a of liste) {
   const images = {};
   try {
     if (a.image && !existant?.image_path && !verrous.has("image_path"))
-      images.image_path = await envoyer(id, "figurine", a.image);
+      images.image_path = await envoyer(id, "figurine", a.image, a.type);
     if (a.boite && !existant?.boite_path && !verrous.has("boite_path"))
-      images.boite_path = await envoyer(id, "boite", a.boite);
+      images.boite_path = await envoyer(id, "boite", a.boite, a.type);
   } catch (e) {
     ignores.push(`${a.n}. ${a.nom} : image non copiée (${e.message})`);
   }

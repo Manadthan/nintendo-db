@@ -231,9 +231,9 @@ export type AmiiboUs = {
   series?: string | null;
 };
 
-/** Adresse d'une image Nintendo US (Cloudinary, PNG 600 px). */
+/** Adresse d'une image Nintendo US (Cloudinary, PNG 1 200 px pour garder 600 px nets après recadrage). */
 export function imageNintendoUs(publicId: string): string {
-  return `https://assets.nintendo.com/image/upload/f_png,w_600/${publicId.split("/").map(encodeURIComponent).join("/")}`;
+  return `https://assets.nintendo.com/image/upload/f_png,w_1200/${publicId.split("/").map(encodeURIComponent).join("/")}`;
 }
 
 /**
