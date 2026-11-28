@@ -61,3 +61,16 @@ export function MarquePossede({ surPhoto = false }: { surPhoto?: boolean }) {
     </span>
   );
 }
+
+/** Marque rose d'un amiibo ou guide en liste de souhaits (jeton `souhait`). */
+export function MarqueSouhait({ surPhoto = false }: { surPhoto?: boolean }) {
+  return (
+    <span
+      className={`flex h-5 items-center rounded bg-souhait px-1.5 text-[11px] font-bold text-inverse ${
+        surPhoto ? "absolute top-1.5 right-1.5 shadow-sm" : ""
+      }`}
+    >
+      ★ Souhait
+    </span>
+  );
+}

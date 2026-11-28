@@ -657,6 +657,90 @@ export type Database = {
           },
         ];
       };
+      souhaits: {
+        Row: {
+          cree_le: string;
+          game_id: string;
+          region: Database["public"]["Enums"]["region"];
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          cree_le?: string;
+          game_id: string;
+          region: Database["public"]["Enums"]["region"];
+          user_id?: string;
+        };
+        Update: {
+          cree_le?: string;
+          game_id?: string;
+          region?: Database["public"]["Enums"]["region"];
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "souhaits_game_id_fkey";
+            columns: ["game_id"];
+            isOneToOne: false;
+            referencedRelation: "games";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      souhaits_amiibo: {
+        Row: {
+          amiibo_id: string;
+          cree_le: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          amiibo_id: string;
+          cree_le?: string;
+          user_id?: string;
+        };
+        Update: {
+          amiibo_id?: string;
+          cree_le?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "souhaits_amiibo_amiibo_id_fkey";
+            columns: ["amiibo_id"];
+            isOneToOne: false;
+            referencedRelation: "amiibo";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      souhaits_guides: {
+        Row: {
+          cree_le: string;
+          guide_id: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          cree_le?: string;
+          guide_id: string;
+          user_id?: string;
+        };
+        Update: {
+          cree_le?: string;
+          guide_id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "souhaits_guides_guide_id_fkey";
+            columns: ["guide_id"];
+            isOneToOne: false;
+            referencedRelation: "guides";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;

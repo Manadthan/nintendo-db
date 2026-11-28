@@ -15,8 +15,12 @@ import {
   regionParDefaut,
   type JeuFiche,
 } from "@/lib/fiche/fiche";
-import { basculerVersion, useCollection } from "@/lib/collection/navigateur";
-import { possede } from "@/lib/collection/collection";
+import {
+  basculerSouhaitVersion,
+  basculerVersion,
+  useCollection,
+} from "@/lib/collection/navigateur";
+import { possede, souhaite } from "@/lib/collection/collection";
 import { FORMES_REELLES } from "@/lib/jaquettes/proportions";
 import { AmiiboDuJeuBloc } from "./AmiiboDuJeu";
 import { BasculeRegion, NOMS_REGION } from "./BasculeRegion";
@@ -241,47 +245,72 @@ export function FicheJeu({
                 return (
                   <li
                     key={r}
-                    className="flex gap-3 border-t border-separateur px-3.5 py-3 first:border-t-0"
+                    className="flex flex-col gap-1.5 border-t border-separateur px-3.5 py-3 first:border-t-0 sm:flex-row sm:items-center sm:gap-3"
                   >
-                    <span
-                      aria-hidden="true"
-                      className={`w-4 font-bold ${s.sortie ? "text-accent-fonce" : "text-absent"}`}
-                    >
-                      {/* Version annoncée : pas de coche avant sa sortie (US-32, choix du 25/11). */}
-                      {s.sortie ? (aVenir(r) ? "·" : "✓") : "–"}
-                    </span>
-                    <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                      <span className="text-sm font-semibold">
-                        {NOMS_REGION[r]}{" "}
-                        <span className="font-normal text-texte-discret">
-                          ·{" "}
-                          {s.sortie
-                            ? `${aVenir(r) ? "à venir, " : ""}${formaterDate(s.date, s.precision)}`
-                            : "non sorti"}
-                        </span>
+                    <div className="flex min-w-0 flex-1 gap-3">
+                      <span
+                        aria-hidden="true"
+                        className={`w-4 font-bold ${s.sortie ? "text-accent-fonce" : "text-absent"}`}
+                      >
+                        {/* Version annoncée : pas de coche avant sa sortie (US-32, choix du 25/11). */}
+                        {s.sortie ? (aVenir(r) ? "·" : "✓") : "–"}
                       </span>
-                      {s.sortie && s.titre !== titre && (
-                        <span className="text-[13px] text-texte-doux">
-                          {s.titre}
+                      <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                        <span className="text-sm font-semibold">
+                          {NOMS_REGION[r]}{" "}
+                          <span className="font-normal text-texte-discret">
+                            ·{" "}
+                            {s.sortie
+                              ? `${aVenir(r) ? "à venir, " : ""}${formaterDate(s.date, s.precision)}`
+                              : "non sorti"}
+                          </span>
                         </span>
-                      )}
+                        {s.sortie && s.titre !== titre && (
+                          <span className="text-[13px] text-texte-doux">
+                            {s.titre}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    {collection.connecte && s.sortie && !aVenir(r) && (
-                      <label className="-my-1 flex min-h-11 shrink-0 items-center gap-2 text-[13px] font-medium">
-                        <input
-                          type="checkbox"
-                          checked={possede(collection.possessions, jeu.id, r)}
-                          onChange={(e) =>
-                            void basculerVersion(
-                              { gameId: jeu.id, region: r },
-                              e.target.checked,
-                            )
-                          }
-                          aria-label={`Je l'ai : version ${NOMS_REGION[r]}`}
-                          className="size-5 accent-accent"
-                        />
-                        Je l&apos;ai
-                      </label>
+                    {collection.connecte && s.sortie && (
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pl-7 sm:shrink-0 sm:pl-0">
+                        {!aVenir(r) && (
+                          <label className="-my-1 flex min-h-11 shrink-0 items-center gap-2 text-[13px] font-medium">
+                            <input
+                              type="checkbox"
+                              checked={possede(
+                                collection.possessions,
+                                jeu.id,
+                                r,
+                              )}
+                              onChange={(e) =>
+                                void basculerVersion(
+                                  { gameId: jeu.id, region: r },
+                                  e.target.checked,
+                                )
+                              }
+                              aria-label={`Je l'ai : version ${NOMS_REGION[r]}`}
+                              className="size-5 accent-possede"
+                            />
+                            Je l&apos;ai
+                          </label>
+                        )}
+                        <label className="-my-1 flex min-h-11 shrink-0 items-center gap-2 text-[13px] font-medium">
+                          <input
+                            type="checkbox"
+                            checked={souhaite(collection.souhaits, jeu.id, r)}
+                            onChange={(e) =>
+                              void basculerSouhaitVersion(
+                                { gameId: jeu.id, region: r },
+                                e.target.checked,
+                              )
+                            }
+                            aria-label={`Liste de souhaits : version ${NOMS_REGION[r]}`}
+                            className="size-5 accent-souhait"
+                          />
+                          Souhait
+                        </label>
+                      </div>
                     )}
                   </li>
                 );

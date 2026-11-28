@@ -15,8 +15,12 @@ import { sortieAVenir } from "@/lib/catalogue/a-venir";
 import { formaterDate } from "@/lib/catalogue/catalogue";
 import { lireMarche } from "@/lib/catalogue/marche";
 import { REGIONS, type Marche, type Region } from "@/lib/catalogue/types";
-import { possedeAmiibo } from "@/lib/collection/collection";
-import { basculerAmiibo, useCollection } from "@/lib/collection/navigateur";
+import { possedeAmiibo, souhaiteAmiibo } from "@/lib/collection/collection";
+import {
+  basculerAmiibo,
+  basculerSouhaitAmiibo,
+  useCollection,
+} from "@/lib/collection/navigateur";
 import { BasculeRegion, NOMS_REGION } from "./BasculeRegion";
 import { ImageAmiibo } from "./ImageAmiibo";
 import { PrixEbay } from "./PrixEbay";
@@ -147,19 +151,34 @@ export function FicheAmiibo({
             </p>
           </div>
 
-          {collection.connecte && sortiQuelquePart && (
+          {collection.connecte && (
             <div className="flex flex-col gap-2">
-              <label className="flex min-h-12 items-center gap-3 rounded-xl border border-bordure bg-carte px-3.5 text-[15px] font-semibold">
-                <input
-                  type="checkbox"
-                  checked={possedeAmiibo(collection.possessions, amiibo.id)}
-                  onChange={(e) =>
-                    void basculerAmiibo(amiibo.id, e.target.checked)
-                  }
-                  className="size-5 accent-possede"
-                />
-                Je l&apos;ai
-              </label>
+              <div className="flex flex-col gap-2 sm:flex-row">
+                {sortiQuelquePart && (
+                  <label className="flex min-h-12 flex-1 items-center gap-3 rounded-xl border border-bordure bg-carte px-3.5 text-[15px] font-semibold">
+                    <input
+                      type="checkbox"
+                      checked={possedeAmiibo(collection.possessions, amiibo.id)}
+                      onChange={(e) =>
+                        void basculerAmiibo(amiibo.id, e.target.checked)
+                      }
+                      className="size-5 accent-possede"
+                    />
+                    Je l&apos;ai
+                  </label>
+                )}
+                <label className="flex min-h-12 flex-1 items-center gap-3 rounded-xl border border-bordure bg-carte px-3.5 text-[15px] font-semibold">
+                  <input
+                    type="checkbox"
+                    checked={souhaiteAmiibo(collection.souhaits, amiibo.id)}
+                    onChange={(e) =>
+                      void basculerSouhaitAmiibo(amiibo.id, e.target.checked)
+                    }
+                    className="size-5 accent-souhait"
+                  />
+                  Liste de souhaits
+                </label>
+              </div>
               {collection.erreur && (
                 <p
                   role="alert"

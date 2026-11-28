@@ -35,7 +35,7 @@ export type Filtres = {
   /** Type d'amiibo (US-29, SPEC v1.54) : appliqué quand « Amiibo » est coché ; cache les jeux et guides. */
   typeAmiibo: TypeAmiibo | null;
   /** Ma collection (US-16) : appliqué par le catalogue, et seulement pour le propriétaire connecté. */
-  collection: "possedes" | "manquants" | null;
+  collection: "possedes" | "manquants" | "souhaits" | null;
   /** Inclure les items à venir (US-06, US-32, SPEC v1.55) : false par défaut (« Déjà sortis uniquement » cochée). */
   inclureAVenir: boolean;
   /** Inclure les items sans image (US-06, SPEC v1.55) : false par défaut (« Avec image uniquement » cochée). */
@@ -266,7 +266,7 @@ export function filtresDepuisParametres(recherche: string): Filtres {
     serie: params.get(PARAMETRES.serie)?.trim() || null,
     typeAmiibo: TYPES_AMIIBO.find((t) => t === typeAmiibo) ?? null,
     collection:
-      (["possedes", "manquants"] as const).find(
+      (["possedes", "manquants", "souhaits"] as const).find(
         (c) => c === params.get(PARAMETRES.collection),
       ) ?? null,
     inclureAVenir: params.get(PARAMETRES.inclureAVenir) === "1",

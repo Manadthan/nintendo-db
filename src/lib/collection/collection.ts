@@ -108,16 +108,35 @@ export function affichePossedee(
     : possede(possessions, v.jeu.id, v.region);
 }
 
-/** Filtre « Collection » (US-16) : tous, possédés ou manquants. */
-export type FiltreCollection = "possedes" | "manquants";
+/** L'amiibo est-il en liste de souhaits ? */
+export const souhaiteAmiibo = possedeAmiibo;
+
+/** Le guide est-il en liste de souhaits ? */
+export const souhaiteGuide = possedeGuide;
+
+/** La version est-elle en liste de souhaits ? */
+export const souhaite = possede;
+
+/**
+ * Version affichée en liste de souhaits ? Même règle que `affichePossedee` : sur un marché (JAP, US, PAL), la
+ * version de ce marché ; sur « Tous », au moins une des versions du jeu. Pour un amiibo ou un guide : sa case.
+ */
+export const afficheSouhaitee = affichePossedee;
+
+/** Filtre « Collection » (US-16) : tous, possédés, manquants ou liste de souhaits. */
+export type FiltreCollection = "possedes" | "manquants" | "souhaits";
 
 export function filtrerCollection(
   versions: VersionAffichee[],
   filtre: FiltreCollection | null,
   possessions: ReadonlySet<string>,
   marche: Marche,
+  souhaits: ReadonlySet<string> = new Set(),
 ): VersionAffichee[] {
   if (!filtre) return versions;
+  if (filtre === "souhaits") {
+    return versions.filter((v) => afficheSouhaitee(souhaits, v, marche));
+  }
   return versions.filter(
     (v) => affichePossedee(possessions, v, marche) === (filtre === "possedes"),
   );

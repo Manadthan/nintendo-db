@@ -192,3 +192,125 @@ describe("guides possédés", () => {
     ).toEqual(["9784000000024"]);
   });
 });
+
+describe("liste de souhaits (jeux, amiibo, guides)", () => {
+  const souhaits = ensemble(
+    [{ game_id: "mk8", region: "JAP" }],
+    [{ amiibo_id: "id-tulin" }],
+    [{ guide_id: "id-g2" }],
+  );
+
+  it("filtre les jeux souhaités sur le marché Tous ou sur le marché choisi", () => {
+    const versionsTous = trier(JEUX, "anciens", "TOUS");
+    expect(
+      slugs(
+        filtrerCollection(
+          versionsTous,
+          "souhaits",
+          POSSESSIONS,
+          "TOUS",
+          souhaits,
+        ),
+      ),
+    ).toEqual(["mk8"]);
+
+    const versionsJap = trier(JEUX, "anciens", "JAP");
+    expect(
+      slugs(
+        filtrerCollection(
+          versionsJap,
+          "souhaits",
+          POSSESSIONS,
+          "JAP",
+          souhaits,
+        ),
+      ),
+    ).toEqual(["mk8"]);
+
+    const versionsPal = trier(JEUX, "anciens", "PAL");
+    expect(
+      slugs(
+        filtrerCollection(
+          versionsPal,
+          "souhaits",
+          POSSESSIONS,
+          "PAL",
+          souhaits,
+        ),
+      ),
+    ).toEqual([]);
+  });
+
+  it("filtre aussi les amiibo et guides en liste de souhaits", () => {
+    const amiiboVersions = versionsAmiibo(
+      [
+        {
+          id: "id-sidon",
+          slug: "sidon",
+          nom: "sidon",
+          nomJap: null,
+          type: "figurine",
+          serieAmiibo: null,
+          series: [],
+          image: null,
+          sorties: { PAL: { date: "2025-06-05", precision: "jour" } },
+          consoles: [],
+        },
+        {
+          id: "id-tulin",
+          slug: "tulin",
+          nom: "tulin",
+          nomJap: null,
+          type: "figurine",
+          serieAmiibo: null,
+          series: [],
+          image: null,
+          sorties: { PAL: { date: "2025-06-05", precision: "jour" } },
+          consoles: [],
+        },
+      ],
+      "PAL",
+    );
+    expect(
+      filtrerCollection(
+        amiiboVersions,
+        "souhaits",
+        POSSESSIONS,
+        "PAL",
+        souhaits,
+      ).map((v) => v.amiibo?.slug),
+    ).toEqual(["tulin"]);
+
+    const guideVersions = versionsGuides([
+      {
+        id: "id-g1",
+        isbn: "9784000000017",
+        titre: "Guide 1",
+        editeur: "KADOKAWA",
+        date: "2023-11-01",
+        precision: "mois",
+        couverture: null,
+        jeux: [jeu("mk8", "wii-u")],
+      },
+      {
+        id: "id-g2",
+        isbn: "9784000000024",
+        titre: "Guide 2",
+        editeur: "KADOKAWA",
+        date: "2023-11-01",
+        precision: "mois",
+        couverture: null,
+        jeux: [jeu("mk8", "wii-u")],
+      },
+    ]);
+    expect(
+      filtrerCollection(
+        guideVersions,
+        "souhaits",
+        POSSESSIONS,
+        "TOUS",
+        souhaits,
+      ).map((v) => v.guide?.isbn),
+    ).toEqual(["9784000000024"]);
+  });
+});

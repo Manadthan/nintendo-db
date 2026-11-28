@@ -27,6 +27,8 @@
   --color-erreur-bordure: #f1c4c4;
   /* Ma collection (US-16) : coche verte sur les vignettes des versions possédées (blanc dessus : 5,1:1). */
   --color-possede: #1e7a3c;
+  /* Liste de souhaits : repère rose-framboise (blanc dessus : 6,1:1). */
+  --color-souhait: #b8255f;
   /* Jeu annoncé (US-32, ADR-20) : étiquette « À venir », texte orangé sur fond crème (6,4:1). */
   --color-avenir: #8a4a00;
   --color-avenir-fond: #fff3e0;
@@ -72,6 +74,7 @@
     --color-erreur-fond: #3a2124;
     --color-erreur-bordure: #6a3537;
     --color-possede: #2f9e55;
+    --color-souhait: #f472b6;
     --color-avenir: #f5b860;
     --color-avenir-fond: #3b2a14;
     --color-mc-bon: #2a8f40;
@@ -106,6 +109,7 @@
   --color-erreur-fond: #3a2124;
   --color-erreur-bordure: #6a3537;
   --color-possede: #2f9e55;
+  --color-souhait: #f472b6;
   --color-avenir: #f5b860;
   --color-avenir-fond: #3b2a14;
   --color-mc-bon: #2a8f40;
