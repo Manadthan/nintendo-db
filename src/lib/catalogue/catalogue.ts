@@ -1,5 +1,6 @@
 import { normaliser } from "@/lib/recherche/normaliser";
 import { cleTriDate } from "./a-venir";
+import { titreAffiche } from "./titre";
 import {
   REGIONS,
   type Groupe,
@@ -121,8 +122,8 @@ export function trierVersions(
   tri: Tri,
 ): VersionAffichee[] {
   const parTitre = (a: VersionAffichee, b: VersionAffichee) =>
-    normaliser(a.sortie.titre!).localeCompare(
-      normaliser(b.sortie.titre!),
+    normaliser(titreAffiche(a)).localeCompare(
+      normaliser(titreAffiche(b)),
       "fr",
     );
   if (tri === "az") return versions.sort(parTitre);

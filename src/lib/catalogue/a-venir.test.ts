@@ -157,4 +157,32 @@ describe("versionsAVenir : bande de l'accueil (US-32)", () => {
     ).toEqual(["metroid"]);
     expect(versionsAVenir([metroid], "PAL", auj)[0]!.region).toBe("PAL");
   });
+
+  it("à date égale au Japon, départage sur le titre romanisé (SPEC v1.56)", () => {
+    const zelda = avecSlug(
+      "zelda",
+      jeu({
+        JAP: sortie({
+          titre: "あいうえお",
+          titreRomanise: "Zelda",
+          date: "2027-01-28",
+          precision: "jour",
+        }),
+      }),
+    );
+    const animal = avecSlug(
+      "animal",
+      jeu({
+        JAP: sortie({
+          titre: "んんん",
+          titreRomanise: "Animal Crossing",
+          date: "2027-01-28",
+          precision: "jour",
+        }),
+      }),
+    );
+    expect(
+      versionsAVenir([zelda, animal], "JAP", auj).map((v) => v.jeu.slug),
+    ).toEqual(["animal", "zelda"]);
+  });
 });
