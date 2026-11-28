@@ -5,13 +5,24 @@ import { CouvertureGuide } from "./CouvertureGuide";
 export const lienGuide = (isbn: string) => `/guides/${isbn}`;
 
 /** Étiquettes « Guide » et console sous le titre d'un guide (maquette guides-catalogue.png). */
-export function EtiquettesGuide({ v }: { v: VersionAffichee }) {
+export function EtiquettesGuide({
+  v,
+  compact = false,
+}: {
+  v: VersionAffichee;
+  compact?: boolean;
+}) {
+  const taille = compact ? "h-4 px-1 text-[9px]" : "h-5 px-1.5 text-[11px]";
   return (
     <>
-      <span className="flex h-5 items-center rounded border border-accent-doux bg-accent-doux px-1.5 text-[11px] font-semibold text-accent-fonce">
+      <span
+        className={`flex items-center rounded border border-accent-doux bg-accent-doux font-semibold text-accent-fonce ${taille}`}
+      >
         Guide
       </span>
-      <span className="flex h-5 items-center rounded bg-texte px-1.5 text-[11px] font-semibold text-inverse">
+      <span
+        className={`flex items-center rounded bg-texte font-semibold text-inverse ${taille}`}
+      >
         {v.jeu.console.nom}
       </span>
     </>

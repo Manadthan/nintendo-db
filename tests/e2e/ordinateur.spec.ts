@@ -28,13 +28,29 @@ test("le catalogue est centré, limité à 1280 px, en 6 colonnes", async ({
     Math.abs(boite.x - (1440 - boite.x - boite.width)),
   ).toBeLessThanOrEqual(1);
 
-  const colonnes = await catalogue
-    .getByRole("list")
-    .first()
-    .evaluate(
-      (ul) => getComputedStyle(ul).gridTemplateColumns.split(" ").length,
-    );
-  expect(colonnes).toBe(6);
+  const colonnes = () =>
+    catalogue
+      .locator("ul[data-zoom]")
+      .first()
+      .evaluate(
+        (ul) => getComputedStyle(ul).gridTemplateColumns.split(" ").length,
+      );
+  expect(await colonnes()).toBe(6);
+  await sansDefilementHorizontal(page);
+
+  await page
+    .getByRole("button", { name: "Dézoomer la grille", exact: true })
+    .click();
+  expect(await colonnes()).toBe(8);
+  await sansDefilementHorizontal(page);
+
+  await page
+    .getByRole("button", { name: "Zoomer la grille", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Zoomer la grille", exact: true })
+    .click();
+  expect(await colonnes()).toBe(4);
   await sansDefilementHorizontal(page);
 });
 

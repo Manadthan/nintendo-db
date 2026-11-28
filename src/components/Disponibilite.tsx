@@ -13,6 +13,7 @@ export function Disponibilite({
   possedees = [],
   souhaitees = [],
   aujourdhui,
+  compact = false,
 }: {
   jeu: JeuCatalogue;
   /** Régions possédées par le propriétaire connecté (vide pour un visiteur). */
@@ -21,9 +22,14 @@ export function Disponibilite({
   souhaitees?: readonly Region[];
   /** Jour de préparation de la page : une version annoncée pas encore sortie n'a pas de coche (US-32, 25/11). */
   aujourdhui: string;
+  /** Mode compact de la grille (3 col. mobile) : étiquettes réduites qui peuvent passer à la ligne. */
+  compact?: boolean;
 }) {
   return (
-    <ul aria-label="Disponibilité" className="flex shrink-0 gap-1">
+    <ul
+      aria-label="Disponibilité"
+      className={`flex ${compact ? "flex-wrap gap-0.5" : "shrink-0 gap-1"}`}
+    >
       {disponibilite(jeu).map(({ region, sorti: annoncee }) => {
         const s = jeu.sorties[region];
         const aVenir =
@@ -35,7 +41,9 @@ export function Disponibilite({
           <li
             key={region}
             aria-label={`${NOMS[region]} : ${sorti ? "sorti" : aVenir ? "à venir" : "non sorti"}${possede ? ", possédé" : souhaite ? ", souhaité" : ""}`}
-            className={`flex h-5 shrink-0 items-center rounded border px-1 text-[10px] font-bold whitespace-nowrap ${
+            className={`flex shrink-0 items-center rounded border font-bold whitespace-nowrap ${
+              compact ? "h-4 px-1 text-[9px]" : "h-5 px-1 text-[10px]"
+            } ${
               possede
                 ? "border-possede bg-carte text-possede"
                 : souhaite

@@ -59,8 +59,16 @@ import { FiltresActifs, PanneauFiltres } from "./Filtres";
 import { versionsAVenir } from "@/lib/catalogue/a-venir";
 import { BandeAVenir } from "./BandeAVenir";
 import { ListeJeux } from "./ListeJeux";
+import { ZoomGrille } from "./ZoomGrille";
 import { triFrise } from "@/lib/catalogue/frise";
 import { abonnerTri, enregistrerTri, lireTri } from "@/lib/catalogue/tri";
+import {
+  ZOOM_PAR_DEFAUT,
+  abonnerZoom,
+  enregistrerZoom,
+  lireZoom,
+  type NiveauZoom,
+} from "@/lib/catalogue/zoom";
 import {
   COCHES,
   VOIR_PAR_DEFAUT,
@@ -176,6 +184,11 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
   // puis le choix enregistré dans ce navigateur.
   const vue = useSyncExternalStore(abonner, lireVue, () => "grille" as Vue);
   const changerVue = enregistrerVue;
+  const zoom = useSyncExternalStore<NiveauZoom>(
+    abonnerZoom,
+    lireZoom,
+    () => ZOOM_PAR_DEFAUT,
+  );
   // La frise ne connaît que les tris par date (SPEC v1.38) : A → Z et « mieux notés » y deviennent « plus récents ».
   const tri = vue === "frise" ? triFrise(triChoisi) : triChoisi;
 
@@ -524,20 +537,25 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
           Filtres{actifs ? ` · ${actifs}` : ""}
         </button>
         <div className="flex-1" />
-        <div role="group" aria-label="Affichage" className="flex gap-0.5">
-          {VUES.map((v) => (
-            <button
-              key={v}
-              type="button"
-              aria-pressed={vue === v}
-              onClick={() => changerVue(v)}
-              className={`h-9 rounded-lg px-2.5 text-[13px] font-medium ${
-                vue === v ? "bg-texte text-inverse" : "text-texte-doux"
-              }`}
-            >
-              {LIBELLES_VUE[v]}
-            </button>
-          ))}
+        <div className="flex items-center gap-2">
+          {vue === "grille" && (
+            <ZoomGrille niveau={zoom} surChangement={enregistrerZoom} />
+          )}
+          <div role="group" aria-label="Affichage" className="flex gap-0.5">
+            {VUES.map((v) => (
+              <button
+                key={v}
+                type="button"
+                aria-pressed={vue === v}
+                onClick={() => changerVue(v)}
+                className={`h-9 rounded-lg px-2.5 text-[13px] font-medium ${
+                  vue === v ? "bg-texte text-inverse" : "text-texte-doux"
+                }`}
+              >
+                {LIBELLES_VUE[v]}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       {panneauOuvert && (
@@ -610,6 +628,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
       >
         <ListeJeux
           vue={vue}
+          zoom={zoom}
           versions={versions}
           groupes={groupes}
           possessions={connecte ? collection.possessions : null}
