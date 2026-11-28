@@ -10,6 +10,12 @@ import { premiersDesGroupes } from "@/lib/catalogue/lots";
 import { titreAffiche } from "@/lib/catalogue/titre";
 import { REGIONS, type VersionAffichee } from "@/lib/catalogue/types";
 import {
+  CLASSES_GRILLE,
+  TAILLES_JAQUETTE,
+  ZOOM_PAR_DEFAUT,
+  type NiveauZoom,
+} from "@/lib/catalogue/zoom";
+import {
   possede,
   possedeAmiibo,
   possedeGuide,
@@ -39,6 +45,8 @@ import { NoteMetacritic } from "./NoteMetacritic";
 
 type Props = {
   vue: "grille" | "liste" | "frise";
+  /** Niveau de zoom en vue grille (1 / 2 / 3 col. mobile · 4 / 6 / 8 col. bureau). */
+  zoom?: NiveauZoom;
   versions: VersionAffichee[];
   groupes: { titre: string | null; versions: VersionAffichee[] }[];
   /** Versions possédées (US-16) ; `null` pour un visiteur : aucune étiquette verte. */
@@ -86,6 +94,7 @@ function compte(versions: VersionAffichee[], aujourdhui: string): string {
  */
 export const ListeJeux = memo(function ListeJeux({
   vue,
+  zoom = ZOOM_PAR_DEFAUT,
   versions,
   groupes,
   possessions,
@@ -93,6 +102,10 @@ export const ListeJeux = memo(function ListeJeux({
   limite,
   aujourdhui,
 }: Props) {
+  const compact = zoom === "compact";
+  const grand = zoom === "grand";
+  const tailleTitre = compact ? "text-xs" : grand ? "text-base" : "text-sm";
+  const tailleLegende = compact ? "truncate text-[11px]" : "text-xs";
   // Au clic sur un jeu : la hauteur et le nombre de jeux dessinés, pour le retour par « Précédent ».
   const noter = () => noterPositionCatalogue(limite);
   // Étiquettes JAP / US / PAL en vert pour les versions possédées (US-16) ; rien pour un visiteur.
@@ -141,36 +154,44 @@ export const ListeJeux = memo(function ListeJeux({
             )}
 
             {vue === "grille" ? (
-              // 2 colonnes sur téléphone, jusqu'à 6 sur grand écran (SPEC v1.36).
-              <ul className="grid grid-cols-2 gap-x-3 gap-y-[18px] sm:grid-cols-3 md:grid-cols-4 md:gap-x-4 lg:grid-cols-5 xl:grid-cols-6">
+              // 1 / 2 / 3 colonnes sur téléphone, 4 / 6 / 8 sur grand écran selon le zoom (défaut : normal, SPEC v1.36).
+              <ul data-zoom={zoom} className={CLASSES_GRILLE[zoom]}>
                 {groupe.affichees.map((v) => (
                   <li key={cle(v)}>
                     <Link
                       href={lien(v)}
                       onClick={noter}
-                      className="group flex flex-col gap-2"
+                      className={`group flex flex-col ${compact ? "gap-1" : "gap-2"}`}
                     >
                       {v.guide ? (
                         <>
                           <div className="relative">
                             <CouvertureCarte v={v} />
                             {guidePossede(v) ? (
-                              <MarquePossede surPhoto />
+                              <MarquePossede surPhoto compact={compact} />
                             ) : (
-                              guideSouhaite(v) && <MarqueSouhait surPhoto />
+                              guideSouhaite(v) && (
+                                <MarqueSouhait surPhoto compact={compact} />
+                              )
                             )}
                           </div>
-                          <div className="flex flex-col gap-[3px]">
+                          <div
+                            className={`flex flex-col ${compact ? "gap-0.5" : "gap-[3px]"}`}
+                          >
                             <span
                               lang="ja"
-                              className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline"
+                              className={`line-clamp-2 leading-tight font-semibold group-hover:underline ${tailleTitre}`}
                             >
                               {v.sortie.titre}
                             </span>
-                            <div className="flex flex-wrap items-center gap-1">
-                              <EtiquettesGuide v={v} />
+                            <div
+                              className={`flex flex-wrap items-center ${compact ? "gap-0.5" : "gap-1"}`}
+                            >
+                              <EtiquettesGuide v={v} compact={compact} />
                             </div>
-                            <span className="text-xs text-texte-discret">
+                            <span
+                              className={`text-texte-discret ${tailleLegende}`}
+                            >
                               {legendeGuide(v)}
                             </span>
                           </div>
@@ -180,24 +201,36 @@ export const ListeJeux = memo(function ListeJeux({
                           <div className="relative">
                             <ImageCarteAmiibo
                               v={v}
-                              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
+                              sizes={TAILLES_JAQUETTE[zoom]}
                             />
                             {amiiboPossede(v) ? (
-                              <MarquePossede surPhoto />
+                              <MarquePossede surPhoto compact={compact} />
                             ) : (
-                              amiiboSouhaite(v) && <MarqueSouhait surPhoto />
+                              amiiboSouhaite(v) && (
+                                <MarqueSouhait surPhoto compact={compact} />
+                              )
                             )}
                           </div>
-                          <div className="flex flex-col gap-[3px]">
-                            <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
+                          <div
+                            className={`flex flex-col ${compact ? "gap-0.5" : "gap-[3px]"}`}
+                          >
+                            <span
+                              className={`line-clamp-2 leading-tight font-semibold group-hover:underline ${tailleTitre}`}
+                            >
                               {v.sortie.titre}
                             </span>
-                            <span className="text-xs text-texte-discret">
+                            <span
+                              className={`text-texte-discret ${tailleLegende}`}
+                            >
                               {legendeAmiibo(v)}
                             </span>
-                            <div className="flex flex-wrap items-center gap-1">
-                              {estAVenir(v, aujourdhui) && <EtiquetteAVenir />}
-                              <EtiquettesAmiibo v={v} />
+                            <div
+                              className={`flex flex-wrap items-center ${compact ? "gap-0.5" : "gap-1"}`}
+                            >
+                              {estAVenir(v, aujourdhui) && (
+                                <EtiquetteAVenir compact={compact} />
+                              )}
+                              <EtiquettesAmiibo v={v} compact={compact} />
                             </div>
                           </div>
                         </>
@@ -209,25 +242,39 @@ export const ListeJeux = memo(function ListeJeux({
                               titre={titreAffiche(v)}
                               console={v.jeu.console.nom}
                               consoleSlug={v.jeu.console.slug}
-                              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
+                              sizes={TAILLES_JAQUETTE[zoom]}
                             />
-                            <NoteMetacritic note={v.jeu.metacritic} />
+                            <NoteMetacritic
+                              note={v.jeu.metacritic}
+                              petite={compact}
+                            />
                           </div>
-                          <div className="flex flex-col gap-[3px]">
-                            <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
+                          <div
+                            className={`flex flex-col ${compact ? "gap-0.5" : "gap-[3px]"}`}
+                          >
+                            <span
+                              className={`line-clamp-2 leading-tight font-semibold group-hover:underline ${tailleTitre}`}
+                            >
                               {titreAffiche(v)}
                             </span>
-                            <span className="text-xs text-texte-discret">
+                            <span
+                              className={`text-texte-discret ${tailleLegende}`}
+                            >
                               {formaterDate(v.sortie.date, v.sortie.precision)}{" "}
                               · {v.jeu.console.nom}
                             </span>
-                            <div className="flex flex-wrap items-center gap-1">
-                              {estAVenir(v, aujourdhui) && <EtiquetteAVenir />}
+                            <div
+                              className={`flex flex-wrap items-center ${compact ? "gap-0.5" : "gap-1"}`}
+                            >
+                              {estAVenir(v, aujourdhui) && (
+                                <EtiquetteAVenir compact={compact} />
+                              )}
                               <Disponibilite
                                 jeu={v.jeu}
                                 possedees={possedees(v)}
                                 souhaitees={souhaitees(v)}
                                 aujourdhui={aujourdhui}
+                                compact={compact}
                               />
                             </div>
                           </div>

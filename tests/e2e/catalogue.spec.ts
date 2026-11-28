@@ -146,3 +146,53 @@ test("vue Frise : années au centre, jeux en alternance, tris par date seulement
     page.getByLabel("Tri", { exact: true }).getByRole("option"),
   ).toHaveCount(4);
 });
+
+test("zoom et dézoom de la grille ajustent les colonnes, sont mémorisés et masqués hors grille", async ({
+  page,
+}) => {
+  const grille = page.locator("ul[data-zoom]").first();
+  const dezoom = page.getByRole("button", {
+    name: "Dézoomer la grille",
+    exact: true,
+  });
+  const zoom = page.getByRole("button", {
+    name: "Zoomer la grille",
+    exact: true,
+  });
+
+  const colonnes = () =>
+    grille.evaluate(
+      (ul) => getComputedStyle(ul).gridTemplateColumns.split(" ").length,
+    );
+
+  await expect(grille).toHaveAttribute("data-zoom", "normal");
+  expect(await colonnes()).toBe(2);
+  await expect(dezoom).toBeEnabled();
+  await expect(zoom).toBeEnabled();
+
+  await dezoom.click();
+  await expect(grille).toHaveAttribute("data-zoom", "compact");
+  expect(await colonnes()).toBe(3);
+  await expect(dezoom).toBeDisabled();
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(375);
+
+  await page.reload();
+  await expect(grille).toHaveAttribute("data-zoom", "compact");
+  expect(await colonnes()).toBe(3);
+
+  await zoom.click();
+  await zoom.click();
+  await expect(grille).toHaveAttribute("data-zoom", "grand");
+  expect(await colonnes()).toBe(1);
+  await expect(zoom).toBeDisabled();
+
+  // Masqué en vue Liste et Frise, retrouvé au retour sur Grille.
+  await page.getByRole("button", { name: "Liste", exact: true }).click();
+  await expect(zoom).toHaveCount(0);
+  await page.getByRole("button", { name: "Frise", exact: true }).click();
+  await expect(zoom).toHaveCount(0);
+  await page.getByRole("button", { name: "Grille", exact: true }).click();
+  await expect(grille).toHaveAttribute("data-zoom", "grand");
+});

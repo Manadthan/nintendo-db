@@ -8,14 +8,25 @@ export const lienAmiibo = (v: VersionAffichee) =>
   cheminAmiibo(v.amiibo?.slug ?? v.jeu.slug);
 
 /** Étiquettes « Amiibo » et type sous le nom (maquette amiibo-catalogue.png). */
-export function EtiquettesAmiibo({ v }: { v: VersionAffichee }) {
+export function EtiquettesAmiibo({
+  v,
+  compact = false,
+}: {
+  v: VersionAffichee;
+  compact?: boolean;
+}) {
+  const taille = compact ? "h-4 px-1 text-[9px]" : "h-5 px-1.5 text-[11px]";
   return (
     <>
-      <span className="flex h-5 items-center rounded border border-accent-doux bg-accent-doux px-1.5 text-[11px] font-semibold text-accent-fonce">
+      <span
+        className={`flex items-center rounded border border-accent-doux bg-accent-doux font-semibold text-accent-fonce ${taille}`}
+      >
         Amiibo
       </span>
       {v.amiibo && (
-        <span className="flex h-5 items-center rounded border border-champ bg-carte px-1.5 text-[11px] font-semibold">
+        <span
+          className={`flex items-center rounded border border-champ bg-carte font-semibold ${taille}`}
+        >
           {LIBELLES_TYPE[v.amiibo.type]}
         </span>
       )}
@@ -50,12 +61,18 @@ export function ImageCarteAmiibo({
 }
 
 /** Marque verte d'un amiibo possédé (US-30, jeton `possede`), sur la photo dans la grille et la frise. */
-export function MarquePossede({ surPhoto = false }: { surPhoto?: boolean }) {
+export function MarquePossede({
+  surPhoto = false,
+  compact = false,
+}: {
+  surPhoto?: boolean;
+  compact?: boolean;
+}) {
   return (
     <span
-      className={`flex h-5 items-center rounded bg-possede px-1.5 text-[11px] font-bold text-inverse ${
-        surPhoto ? "absolute top-1.5 right-1.5 shadow-sm" : ""
-      }`}
+      className={`flex items-center rounded bg-possede font-bold text-inverse ${
+        compact ? "h-4 px-1 text-[9px]" : "h-5 px-1.5 text-[11px]"
+      } ${surPhoto ? (compact ? "absolute top-1 right-1 shadow-sm" : "absolute top-1.5 right-1.5 shadow-sm") : ""}`}
     >
       ✓ Je l&apos;ai
     </span>
@@ -63,12 +80,18 @@ export function MarquePossede({ surPhoto = false }: { surPhoto?: boolean }) {
 }
 
 /** Marque rose d'un amiibo ou guide en liste de souhaits (jeton `souhait`). */
-export function MarqueSouhait({ surPhoto = false }: { surPhoto?: boolean }) {
+export function MarqueSouhait({
+  surPhoto = false,
+  compact = false,
+}: {
+  surPhoto?: boolean;
+  compact?: boolean;
+}) {
   return (
     <span
-      className={`flex h-5 items-center rounded bg-souhait px-1.5 text-[11px] font-bold text-inverse ${
-        surPhoto ? "absolute top-1.5 right-1.5 shadow-sm" : ""
-      }`}
+      className={`flex items-center rounded bg-souhait font-bold text-inverse ${
+        compact ? "h-4 px-1 text-[9px]" : "h-5 px-1.5 text-[11px]"
+      } ${surPhoto ? (compact ? "absolute top-1 right-1 shadow-sm" : "absolute top-1.5 right-1.5 shadow-sm") : ""}`}
     >
       ★ Souhait
     </span>
