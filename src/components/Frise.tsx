@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { AnneeFrise } from "@/lib/catalogue/frise";
+import { titreAffiche } from "@/lib/catalogue/titre";
 import type { VersionAffichee } from "@/lib/catalogue/types";
 import {
   EtiquettesAmiibo,
@@ -93,7 +94,7 @@ export function Frise({
                     <div className="relative">
                       <Jaquette
                         sortie={v.sortie}
-                        titre={v.sortie.titre!}
+                        titre={titreAffiche(v)}
                         console={v.jeu.console.nom}
                         consoleSlug={v.jeu.console.slug}
                         sizes="(max-width: 672px) 45vw, 300px"
@@ -104,7 +105,7 @@ export function Frise({
                     </div>
                   )}
                   <span className="mt-1 text-sm leading-tight font-semibold group-hover:underline">
-                    {v.sortie.titre}
+                    {titreAffiche(v)}
                   </span>
                   {v.guide ? (
                     <span className="flex flex-wrap gap-1">

@@ -184,6 +184,52 @@ describe("trier et grouperParAnnee (US-02)", () => {
     ).toEqual(["eclair", "mario-kart-8", "sing-party"]);
   });
 
+  it("trie de A à Z sur le titre romanisé au Japon, avec repli sur le titre japonais (SPEC v1.56)", () => {
+    const splatoon: JeuCatalogue = {
+      ...jeu("splatoon", "2015-05-28", null, null),
+      sorties: {
+        ...jeu("splatoon", "2015-05-28", null, null).sorties,
+        JAP: sortie("スプラトゥーン", "2015-05-28", {
+          titreRomanise: "Splatoon",
+        }),
+      },
+    };
+    const kirby: JeuCatalogue = {
+      ...jeu("kirby", "2015-01-22", null, null),
+      sorties: {
+        ...jeu("kirby", "2015-01-22", null, null).sorties,
+        JAP: sortie("タッチ! カービィ スーパーレインボー", "2015-01-22", {
+          titreRomanise: "Touch! Kirby Super Rainbow",
+        }),
+      },
+    };
+    const mario: JeuCatalogue = {
+      ...jeu("mario-kart-8", "2014-05-29", null, null),
+      sorties: {
+        ...jeu("mario-kart-8", "2014-05-29", null, null).sorties,
+        JAP: sortie("マリオカート8", "2014-05-29", {
+          titreRomanise: "Mario Kart 8",
+        }),
+      },
+    };
+    const sansRomanise: JeuCatalogue = {
+      ...jeu("sans-romanise", "2014-01-01", null, null),
+      sorties: {
+        ...jeu("sans-romanise", "2014-01-01", null, null).sorties,
+        JAP: sortie("ゼルダの伝説", "2014-01-01", { titreRomanise: null }),
+      },
+    };
+    expect(
+      trier([kirby, sansRomanise, splatoon, mario], "az", "JAP").map(
+        (v) => v.jeu.slug,
+      ),
+    ).toEqual(["mario-kart-8", "splatoon", "kirby", "sans-romanise"]);
+    // Sur « Tous », les jeux sortis uniquement au Japon sont aussi triés sur leur titre romanisé.
+    expect(
+      trier([kirby, splatoon, mario], "az", "TOUS").map((v) => v.jeu.slug),
+    ).toEqual(["mario-kart-8", "splatoon", "kirby"]);
+  });
+
   it("ne garde que les jeux sortis sur le marché choisi", () => {
     expect(trier(jeux, "anciens", "US").map((v) => v.jeu.slug)).toEqual([
       "sing-party",

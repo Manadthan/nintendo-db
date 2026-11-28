@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.55 — 28/11/2026 — statut : **à valider**
+> Version 1.56 — 28/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.56 | 28/11/2026 | US-02, US-03, US-32 : dans le catalogue (grille, liste, frise, bande « À venir ») et le tri A → Z, une version japonaise affiche son **titre romanisé** à la place de l'écriture japonaise (repli sur le titre japonais si absent) ; la fiche jeu garde le titre japonais avec le romanisé dessous (choix du propriétaire du 28/11) |
 > | 1.55 | 28/11/2026 | US-06 & US-32 : deux coches dans le panneau Filtres — **« Déjà sortis uniquement »** (`?avenir=1` si décochée) et **« Avec image uniquement »** (`?sans-image=1` si décochée), toutes deux **cochées par défaut** ; hors bande « À venir » (inchangée) ; `/api/suivi` aligné (choix du propriétaire du 28/11) |
 > | 1.54 | 27/11/2026 | US-29 : filtre **Type d'amiibo** (`?type=`, Figurine, Carte, Peluche, Bracelet, Bloc) dans le panneau Filtres lorsque « Amiibo » est coché ; cache les jeux et guides quand il est actif (choix du propriétaire du 27/11) |
 > | 1.53 | 26/11/2026 | US-09 : « Se déconnecter » ne ferme que la session de **cet appareil** (choix du propriétaire du 26/11 ; avant : tous les appareils du compte) |
@@ -80,7 +81,7 @@ Rendu dans l'esprit de gamecartdb.com, en français, pensé d'abord pour l'iPhon
 | Visiteurs | Tout le monde, **sans compte**, en lecture seule |
 | Administrateur | Le propriétaire, seul à pouvoir modifier (compte créé à la main) |
 | Appareil principal | iPhone 12 mini (375 × 812), Safari iOS ; **ordinateur** pris en charge (navigateur de bureau, dès 1024 px de large) |
-| Langue | Interface en français ; titres des jeux tels que publiés dans chaque région ; titre JAP en **japonais + romanisé** en dessous |
+| Langue | Interface en français ; titres des jeux tels que publiés dans chaque région ; titre JAP **romanisé** dans le catalogue (repli sur le japonais si absent), **japonais + romanisé** en dessous sur la fiche |
 
 ## 3. Vocabulaire
 
@@ -134,6 +135,10 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Avec un marché choisi : seuls les jeux sortis sur ce marché sont listés, avec **le titre, la date et la
       jaquette de ce marché**, sans recharger la page.
 - [ ] Avec « Tous » : titre, date et jaquette **PAL**, sinon US, sinon JAP pour un jeu non sorti en Europe.
+- [ ] Pour une version **japonaise** (marché Japon, ou « Tous » pour un jeu sorti uniquement au Japon), le catalogue
+      (grille, liste, frise, bande « À venir ») et le tri A → Z affichent et trient sur le **titre romanisé** lorsqu'il
+      est renseigné, sinon le titre japonais (v1.56) ; la fiche jeu conserve l'écriture japonaise avec la forme
+      romanisée dessous.
 - [ ] Le marché choisi est conservé à la visite suivante.
 
 #### US-04 — Voir la fiche d'un jeu (M)
@@ -675,7 +680,7 @@ DS, 3DS.
 
 | # | Question | Décision |
 |---|---|---|
-| 1 | Titre japonais | Écriture **japonaise** avec la version **romanisée** en dessous |
+| 1 | Titre japonais | Sur la fiche : écriture **japonaise** avec la version **romanisée** en dessous ; dans le catalogue (grille, liste, frise, bande « À venir ») et le tri A → Z : version **romanisée** à la place du japonais, avec repli sur le japonais si absent (v1.56) |
 | 2 | Région par défaut | **PAL** |
 | 3 | Code produit | **Importé de GameTDB** (v1.4) ; sinon « — », complété à la main |
 | 4 | Images | Jaquettes par région **copiées chez nous** : scans de boîtes GameTDB (v1.4) ; IGDB retiré (v1.6) |

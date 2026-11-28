@@ -1,3 +1,4 @@
+import { titreAffiche } from "./titre";
 import {
   REGIONS,
   type JeuCatalogue,
@@ -97,6 +98,6 @@ export function versionsAVenir(
   return versions.sort(
     (a, b) =>
       cle(a).localeCompare(cle(b)) ||
-      a.sortie.titre!.localeCompare(b.sortie.titre!, "fr"),
+      titreAffiche(a).localeCompare(titreAffiche(b), "fr"),
   );
 }

@@ -37,7 +37,11 @@ test("un marché ne garde que ses jeux, dans sa version, sans recharger la page"
   await expect(page).toHaveURL("/?marche=us");
 
   await marche(page).getByRole("button", { name: "Japon" }).click();
-  await expect(page.getByText("マリオカート8").first()).toBeVisible();
+  // SPEC v1.56 : le catalogue affiche le titre romanisé à la place du japonais (le japonais reste sur la fiche).
+  await expect(
+    page.getByText("Touch! Kirby Super Rainbow", { exact: true }).first(),
+  ).toBeVisible();
+  await expect(page.getByText("マリオカート8")).toHaveCount(0);
   await expect(page.getByText("29 mai 2014")).toBeVisible(); // date japonaise de Mario Kart 8
 
   // Toujours la même page : rien n'a été rechargé.
@@ -65,14 +69,37 @@ test("le marché choisi est conservé à la visite suivante, et la fiche s'ouvre
   );
 });
 
-test("un lien partagé avec ?marche=jap ouvre le catalogue sur le Japon", async ({
+test("un lien partagé avec ?marche=jap ouvre le catalogue sur le Japon avec les titres romanisés", async ({
   page,
 }) => {
   await page.goto("/?marche=jap");
   await expect(
     marche(page).getByRole("button", { name: "Japon" }),
   ).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByText("スプラトゥーン").first()).toBeVisible();
+  await expect(
+    page.getByText("Touch! Kirby Super Rainbow", { exact: true }).first(),
+  ).toBeVisible();
+  await expect(page.getByText("スプラトゥーン")).toHaveCount(0);
+
+  // Tri A → Z sur le titre romanisé (SPEC v1.56).
+  await page.getByLabel("Tri", { exact: true }).selectOption("az");
+  const titres = page.locator('a[href^="/jeux/wii-u/"] .font-semibold');
+  await expect(titres).toHaveText([
+    "Mario Kart 8",
+    "Splatoon",
+    "Touch! Kirby Super Rainbow",
+    "Wii Karaoke U",
+  ]);
+
+  // Liste et Frise affichent aussi le titre romanisé.
+  await page.getByRole("button", { name: "Liste", exact: true }).click();
+  await expect(
+    page.getByText("Touch! Kirby Super Rainbow", { exact: true }).first(),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Frise", exact: true }).click();
+  await expect(
+    page.getByText("Touch! Kirby Super Rainbow", { exact: true }).first(),
+  ).toBeVisible();
 });
 
 test("revenir à « Tous » réaffiche les versions PAL et retire le marché de l'adresse", async ({

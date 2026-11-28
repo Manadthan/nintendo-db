@@ -7,6 +7,7 @@ import { formaterDate } from "@/lib/catalogue/catalogue";
 import { noterPositionCatalogue } from "@/lib/catalogue/defilement";
 import { decouperFrise } from "@/lib/catalogue/frise";
 import { premiersDesGroupes } from "@/lib/catalogue/lots";
+import { titreAffiche } from "@/lib/catalogue/titre";
 import { REGIONS, type VersionAffichee } from "@/lib/catalogue/types";
 import {
   possede,
@@ -181,7 +182,7 @@ export const ListeJeux = memo(function ListeJeux({
                           <div className="relative">
                             <Jaquette
                               sortie={v.sortie}
-                              titre={v.sortie.titre!}
+                              titre={titreAffiche(v)}
                               console={v.jeu.console.nom}
                               consoleSlug={v.jeu.console.slug}
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
@@ -190,7 +191,7 @@ export const ListeJeux = memo(function ListeJeux({
                           </div>
                           <div className="flex flex-col gap-[3px]">
                             <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
-                              {v.sortie.titre}
+                              {titreAffiche(v)}
                             </span>
                             <span className="text-xs text-texte-discret">
                               {formaterDate(v.sortie.date, v.sortie.precision)}{" "}
@@ -272,7 +273,7 @@ export const ListeJeux = memo(function ListeJeux({
                           <div className="relative w-[54px] shrink-0">
                             <Jaquette
                               sortie={v.sortie}
-                              titre={v.sortie.titre!}
+                              titre={titreAffiche(v)}
                               console={v.jeu.console.nom}
                               consoleSlug={v.jeu.console.slug}
                               sizes="54px"
@@ -282,7 +283,7 @@ export const ListeJeux = memo(function ListeJeux({
                           </div>
                           <div className="flex min-w-0 flex-1 flex-col gap-1">
                             <span className="text-sm leading-tight font-semibold">
-                              {v.sortie.titre}
+                              {titreAffiche(v)}
                             </span>
                             <span className="text-xs text-texte-discret">
                               {formaterDate(v.sortie.date, v.sortie.precision)}{" "}

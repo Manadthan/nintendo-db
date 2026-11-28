@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CARTES_BANDE } from "@/lib/catalogue/a-venir";
 import { formaterDateCourte } from "@/lib/catalogue/catalogue";
+import { titreAffiche } from "@/lib/catalogue/titre";
 import type { VersionAffichee } from "@/lib/catalogue/types";
 import { Jaquette } from "./Jaquette";
 
@@ -34,7 +35,7 @@ export function BandeAVenir({ versions }: { versions: VersionAffichee[] }) {
               <div className="relative">
                 <Jaquette
                   sortie={v.sortie}
-                  titre={v.sortie.titre!}
+                  titre={titreAffiche(v)}
                   console={v.jeu.console.nom}
                   consoleSlug={v.jeu.console.slug}
                   sizes="132px"
@@ -44,7 +45,7 @@ export function BandeAVenir({ versions }: { versions: VersionAffichee[] }) {
                 </span>
               </div>
               <span className="line-clamp-2 text-[13px] leading-tight font-semibold group-hover:underline">
-                {v.sortie.titre}
+                {titreAffiche(v)}
               </span>
               <span className="text-xs text-texte-discret">
                 {v.jeu.console.nom}
