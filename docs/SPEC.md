@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.56 — 28/11/2026 — statut : **à valider**
+> Version 1.57 — 28/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.57 | 28/11/2026 | US-32 : dans la bande « À venir » sur « Tous », le **titre et la jaquette** suivent la priorité **PAL → US → JAP** (comme US-03), tout en conservant la **date la plus proche** des trois régions (choix du propriétaire du 28/11) |
 > | 1.56 | 28/11/2026 | US-02, US-03, US-32 : dans le catalogue (grille, liste, frise, bande « À venir ») et le tri A → Z, une version japonaise affiche son **titre romanisé** à la place de l'écriture japonaise (repli sur le titre japonais si absent) ; la fiche jeu garde le titre japonais avec le romanisé dessous (choix du propriétaire du 28/11) |
 > | 1.55 | 28/11/2026 | US-06 & US-32 : deux coches dans le panneau Filtres — **« Déjà sortis uniquement »** (`?avenir=1` si décochée) et **« Avec image uniquement »** (`?sans-image=1` si décochée), toutes deux **cochées par défaut** ; hors bande « À venir » (inchangée) ; `/api/suivi` aligné (choix du propriétaire du 28/11) |
 > | 1.54 | 27/11/2026 | US-29 : filtre **Type d'amiibo** (`?type=`, Figurine, Carte, Peluche, Bracelet, Bloc) dans le panneau Filtres lorsque « Amiibo » est coché ; cache les jeux et guides quand il est actif (choix du propriétaire du 27/11) |
@@ -277,8 +278,9 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Une carte par élément à venir : image (jaquette officielle ou vignette neutre pour un jeu, image pour un amiibo),
       **date annoncée** sur l'image, titre, et l'étiquette de la console (jeu) ou « Amiibo » et sa série (amiibo). Un
       toucher ouvre la fiche.
-- [ ] La date suit le marché choisi (US-03) ; un élément pas annoncé sur ce marché n'est pas dans la bande. « Tous » :
-      la date la plus proche des trois régions.
+- [ ] La date suit le marché choisi (US-03) ; un élément pas annoncé sur ce marché n'est pas dans la bande. Sur « Tous » :
+      **titre et jaquette** suivent la priorité **PAL → US → JAP** (comme US-03, v1.57), et la date reste **la plus
+      proche des trois régions**.
 - [ ] Une date imprécise s'écrit comme annoncée : « 28 janv. 2027 », « Janvier 2027 », « Printemps 2027 », « 2027 » ;
       sans date, « Date à venir », en fin de bande. Une date « à déterminer » des sources (31/12/2050 chez Nintendo
       Europe, 31/12 de l'année chez Nintendo US) n'est jamais affichée telle quelle.
