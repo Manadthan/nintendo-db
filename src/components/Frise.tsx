@@ -23,6 +23,7 @@ export function Frise({
   lien,
   surClic,
   aVenir,
+  jeuPossede = () => false,
   amiiboPossede = () => false,
   amiiboSouhaite = () => false,
   guidePossede = () => false,
@@ -34,6 +35,8 @@ export function Frise({
   aVenir: (v: VersionAffichee) => boolean;
   /** Mémorise la position du catalogue avant d'ouvrir une fiche. */
   surClic: () => void;
+  /** Jeu possédé : fanion vert sur la jaquette. */
+  jeuPossede?: (v: VersionAffichee) => boolean;
   /** Amiibo possédé (US-30) : marque verte sur la photo. */
   amiiboPossede?: (v: VersionAffichee) => boolean;
   /** Amiibo en liste de souhaits : marque rose sur la photo. */
@@ -84,7 +87,7 @@ export function Frise({
                   className="group flex w-[calc(50%-20px)] flex-col gap-1"
                 >
                   {v.guide ? (
-                    <div className="relative">
+                    <div className="relative overflow-hidden rounded-md">
                       <CouvertureCarte v={v} />
                       {guidePossede(v) ? (
                         <MarquePossede surPhoto />
@@ -93,7 +96,7 @@ export function Frise({
                       )}
                     </div>
                   ) : v.amiibo ? (
-                    <div className="relative">
+                    <div className="relative overflow-hidden rounded-xl">
                       <ImageCarteAmiibo
                         v={v}
                         sizes="(max-width: 672px) 45vw, 300px"
@@ -106,7 +109,7 @@ export function Frise({
                       )}
                     </div>
                   ) : (
-                    <div className="relative">
+                    <div className="relative overflow-hidden rounded-md">
                       <Jaquette
                         sortie={v.sortie}
                         titre={titreAffiche(v)}
@@ -117,6 +120,7 @@ export function Frise({
                         formeReelle
                       />
                       <NoteMetacritic note={v.jeu.metacritic} />
+                      {jeuPossede(v) && <MarquePossede surPhoto />}
                     </div>
                   )}
                   <span className="mt-1 text-sm leading-tight font-semibold group-hover:underline">

@@ -610,6 +610,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
       >
         <ListeJeux
           vue={vue}
+          marche={marche}
           versions={versions}
           groupes={groupes}
           possessions={connecte ? collection.possessions : null}

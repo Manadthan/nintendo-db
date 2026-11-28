@@ -6,7 +6,11 @@ import {
   versionsAmiibo,
   type AmiiboCatalogue,
 } from "@/lib/amiibo/catalogue";
-import { LIBELLES_TYPE, urlImageAmiibo } from "@/lib/amiibo/fiche";
+import {
+  cheminAmiibo,
+  LIBELLES_TYPE,
+  urlImageAmiibo,
+} from "@/lib/amiibo/fiche";
 import { aujourdhuiParis } from "@/lib/catalogue/a-venir";
 import { trier, trierVersions } from "@/lib/catalogue/catalogue";
 import {
@@ -20,6 +24,7 @@ import {
   motsRecherche,
   texteRecherche,
 } from "@/lib/catalogue/recherche";
+import { titreAffiche } from "@/lib/catalogue/titre";
 import { triDepuisParametres } from "@/lib/catalogue/tri";
 import type { JeuCatalogue, VersionAffichee } from "@/lib/catalogue/types";
 import {
@@ -38,6 +43,14 @@ import { adresseCouvertureGuide } from "@/lib/guides/couverture";
 import { cheminJaquette, urlJaquette } from "@/lib/jaquettes/stockage";
 import { NOM_SITE, URL_SITE } from "@/lib/referencement/referencement";
 
+export type ItemSuivi = {
+  id: string;
+  title: string;
+  imageUrl: string | null;
+  owned: boolean;
+  url: string;
+};
+
 export type ReponseSuivi = {
   source: "nintendo-db";
   owned: number;
@@ -45,6 +58,7 @@ export type ReponseSuivi = {
   coverUrl: string | null;
   suggestedTitle: string;
   url: string;
+  items?: ItemSuivi[];
 };
 
 /** Vérifie l'en-tête `Authorization: Bearer <jeton>` en temps constant (`timingSafeEqual`). */
@@ -84,6 +98,18 @@ function imageDeVersion(
   }
 }
 
+function urlDeVersion(v: VersionAffichee, base: string): string {
+  if (v.guide) return `${base}/guides/${v.guide.isbn}`;
+  if (v.amiibo) return `${base}${cheminAmiibo(v.amiibo.slug)}`;
+  return `${base}/jeux/${v.jeu.console.slug}/${v.jeu.slug}`;
+}
+
+function idDeVersion(v: VersionAffichee): string {
+  if (v.guide) return `guide:${v.guide.id}`;
+  if (v.amiibo) return `amiibo:${v.amiibo.id}`;
+  return `jeu:${v.jeu.id}:${v.region}`;
+}
+
 function libelleVoir(voir: Voir): string | null {
   if (voir.jeux && !voir.guides && !voir.amiibo) return null;
   const parties = [
@@ -98,6 +124,7 @@ function libelleVoir(voir: Voir): string | null {
 function urlCanonique(urlSite: string, search: string): string {
   const params = new URLSearchParams(search);
   params.delete("collection");
+  params.delete("items");
   const base = urlSite.replace(/\/+$/, "");
   const query = params.toString();
   return query ? `${base}/?${query}` : `${base}/`;
@@ -114,6 +141,8 @@ export type EntreeSuivi = {
   urlSite?: string;
   /** Jour de référence AAAA-MM-JJ (heure de Paris) pour les items à venir (US-32, SPEC v1.55). */
   aujourdhui?: string;
+  /** Retourne aussi le détail de chaque item filtré (utilisé pour le partage lecture seule). */
+  inclureItems?: boolean;
 };
 
 /**
@@ -130,6 +159,7 @@ export function calculerSuivi({
   baseUrlSupabase,
   urlSite = URL_SITE,
   aujourdhui = aujourdhuiParis(),
+  inclureItems,
 }: EntreeSuivi): ReponseSuivi {
   const params = new URLSearchParams(search);
   const marche = marcheDepuisTexte(params.get("marche")) ?? "TOUS";
@@ -219,7 +249,10 @@ export function calculerSuivi({
   const suggestedTitle =
     partiesTitre.length > 0 ? partiesTitre.join(" · ") : NOM_SITE;
 
-  return {
+  const base = urlSite.replace(/\/+$/, "");
+  const avecItems = inclureItems ?? params.get("items") === "1";
+
+  const reponse: ReponseSuivi = {
     source: "nintendo-db",
     owned,
     total,
@@ -227,4 +260,18 @@ export function calculerSuivi({
     suggestedTitle,
     url: urlCanonique(urlSite, search),
   };
+  if (avecItems) {
+    reponse.items = versions.map((v) => ({
+      id: idDeVersion(v),
+      title: v.guide
+        ? (v.sortie.titre ?? v.guide.isbn)
+        : v.amiibo
+          ? (v.sortie.titre ?? v.amiibo.slug)
+          : titreAffiche(v),
+      imageUrl: imageDeVersion(v, baseUrlSupabase),
+      owned: affichePossedee(possessions, v, marche),
+      url: urlDeVersion(v, base),
+    }));
+  }
+  return reponse;
 }

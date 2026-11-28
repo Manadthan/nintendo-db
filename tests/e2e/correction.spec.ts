@@ -131,7 +131,7 @@ test("note Metacritic saisie à la main : sur la fiche (avec lien) et sur la jaq
     exact: true,
   });
   await expect(note).toBeVisible();
-  // SPEC v1.30 : en surimpression, dans le coin en haut à droite de la jaquette (plus sur la ligne JAP / US / PAL).
+  // En surimpression, dans le coin en haut à gauche de la jaquette (l'angle haut droit porte le fanion « possédé »).
   const jaquette = page
     .getByRole("link")
     .filter({ has: note })
@@ -145,8 +145,8 @@ test("note Metacritic saisie à la main : sur la fiche (avec lien) et sur la jaq
   const j = boiteJaquette!;
   expect(n.y).toBeGreaterThanOrEqual(j.y);
   expect(n.y + n.height).toBeLessThanOrEqual(j.y + j.height / 2);
-  expect(n.x + n.width).toBeLessThanOrEqual(j.x + j.width + 0.5);
-  expect(n.x).toBeGreaterThanOrEqual(j.x + j.width / 2);
+  expect(n.x).toBeGreaterThanOrEqual(j.x - 0.5);
+  expect(n.x + n.width).toBeLessThanOrEqual(j.x + j.width / 2);
 
   // Nettoyage : note effacée (le champ reste verrouillé, sans effet sur les autres tests).
   await page.goto("/admin/jeux/wii-u/kirby-and-the-rainbow-paintbrush");
