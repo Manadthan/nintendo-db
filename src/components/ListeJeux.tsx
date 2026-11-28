@@ -8,8 +8,13 @@ import { noterPositionCatalogue } from "@/lib/catalogue/defilement";
 import { decouperFrise } from "@/lib/catalogue/frise";
 import { premiersDesGroupes } from "@/lib/catalogue/lots";
 import { titreAffiche } from "@/lib/catalogue/titre";
-import { REGIONS, type VersionAffichee } from "@/lib/catalogue/types";
 import {
+  REGIONS,
+  type Marche,
+  type VersionAffichee,
+} from "@/lib/catalogue/types";
+import {
+  affichePossedee,
   possede,
   possedeAmiibo,
   possedeGuide,
@@ -39,6 +44,7 @@ import { NoteMetacritic } from "./NoteMetacritic";
 
 type Props = {
   vue: "grille" | "liste" | "frise";
+  marche: Marche;
   versions: VersionAffichee[];
   groupes: { titre: string | null; versions: VersionAffichee[] }[];
   /** Versions possédées (US-16) ; `null` pour un visiteur : aucune étiquette verte. */
@@ -86,6 +92,7 @@ function compte(versions: VersionAffichee[], aujourdhui: string): string {
  */
 export const ListeJeux = memo(function ListeJeux({
   vue,
+  marche,
   versions,
   groupes,
   possessions,
@@ -98,6 +105,9 @@ export const ListeJeux = memo(function ListeJeux({
   // Étiquettes JAP / US / PAL en vert pour les versions possédées (US-16) ; rien pour un visiteur.
   const possedees = (v: VersionAffichee) =>
     possessions ? REGIONS.filter((r) => possede(possessions, v.jeu.id, r)) : [];
+  // Fanion vert sur la jaquette si la version affichée (ou une version sur « Tous ») est possédée.
+  const jeuPossede = (v: VersionAffichee) =>
+    !!possessions && affichePossedee(possessions, v, marche);
   // Étiquettes JAP / US / PAL en rose avec étoile pour les versions en liste de souhaits.
   const souhaitees = (v: VersionAffichee) =>
     souhaits ? REGIONS.filter((r) => souhaite(souhaits, v.jeu.id, r)) : [];
@@ -120,6 +130,7 @@ export const ListeJeux = memo(function ListeJeux({
           lien={lien}
           surClic={noter}
           aVenir={(v) => estAVenir(v, aujourdhui)}
+          jeuPossede={jeuPossede}
           amiiboPossede={amiiboPossede}
           amiiboSouhaite={amiiboSouhaite}
           guidePossede={guidePossede}
@@ -152,7 +163,7 @@ export const ListeJeux = memo(function ListeJeux({
                     >
                       {v.guide ? (
                         <>
-                          <div className="relative">
+                          <div className="relative overflow-hidden rounded-md">
                             <CouvertureCarte v={v} />
                             {guidePossede(v) ? (
                               <MarquePossede surPhoto />
@@ -177,7 +188,7 @@ export const ListeJeux = memo(function ListeJeux({
                         </>
                       ) : v.amiibo ? (
                         <>
-                          <div className="relative">
+                          <div className="relative overflow-hidden rounded-md">
                             <ImageCarteAmiibo
                               v={v}
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
@@ -203,7 +214,7 @@ export const ListeJeux = memo(function ListeJeux({
                         </>
                       ) : (
                         <>
-                          <div className="relative">
+                          <div className="relative overflow-hidden rounded-md">
                             <Jaquette
                               sortie={v.sortie}
                               titre={titreAffiche(v)}
@@ -212,6 +223,7 @@ export const ListeJeux = memo(function ListeJeux({
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
                             />
                             <NoteMetacritic note={v.jeu.metacritic} />
+                            {jeuPossede(v) && <MarquePossede surPhoto />}
                           </div>
                           <div className="flex flex-col gap-[3px]">
                             <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">

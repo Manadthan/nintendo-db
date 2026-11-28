@@ -380,5 +380,67 @@ describe("calculerSuivi", () => {
     expect(vide.total).toBe(0);
     expect(vide.coverUrl).toBeNull();
     expect(vide.suggestedTitle).toBe("inexistant");
+    expect(vide.items).toBeUndefined();
+  });
+
+  it("inclut le détail des jeux, guides et amiibo quand ?items=1 est demandé et retire items de l'URL", () => {
+    const pal = calculerSuivi({
+      search: "?voir=jeux,amiibo&console=wii-u&marche=pal&sans-image=1&items=1",
+      jeux: JEUX,
+      consoles: CONSOLES,
+      amiibo: AMIIBO,
+      possessions,
+      baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
+    });
+
+    expect(pal.url).toBe(
+      "https://nintendo-db.vercel.app/?voir=jeux%2Camiibo&console=wii-u&marche=pal&sans-image=1",
+    );
+    expect(pal.items).toEqual([
+      {
+        id: `jeu:${ID_SPLATOON}:PAL`,
+        title: "Splatoon",
+        imageUrl: `${BASE_SUPABASE}/storage/v1/object/public/jaquettes/${ID_SPLATOON}/pal-v1-300.webp`,
+        owned: true,
+        url: "https://nintendo-db.vercel.app/jeux/wii-u/splatoon",
+      },
+      {
+        id: `amiibo:${ID_AMIIBO}`,
+        title: "Inkling Girl",
+        imageUrl: `${BASE_SUPABASE}/storage/v1/object/public/amiibo/${ID_AMIIBO}/figurine-a1-300.webp`,
+        owned: true,
+        url: "https://nintendo-db.vercel.app/amiibo/inkling-girl",
+      },
+      {
+        id: `jeu:${ID_MK8}:PAL`,
+        title: "Mario Kart 8",
+        imageUrl: null,
+        owned: false,
+        url: "https://nintendo-db.vercel.app/jeux/wii-u/mario-kart-8",
+      },
+    ]);
+
+    const guides = calculerSuivi({
+      search: "?voir=guides&console=wii-u&items=1",
+      jeux: JEUX,
+      consoles: CONSOLES,
+      guides: GUIDES,
+      possessions,
+      baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
+    });
+    expect(guides.url).toBe(
+      "https://nintendo-db.vercel.app/?voir=guides&console=wii-u",
+    );
+    expect(guides.items).toEqual([
+      {
+        id: `guide:${ID_GUIDE}`,
+        title: "スプラトゥーン パーフェクトガイド",
+        imageUrl: `${BASE_SUPABASE}/storage/v1/object/public/guides/9784047336926-1.webp`,
+        owned: true,
+        url: "https://nintendo-db.vercel.app/guides/9784047336926",
+      },
+    ]);
   });
 });
