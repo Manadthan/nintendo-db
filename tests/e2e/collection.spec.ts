@@ -318,13 +318,19 @@ test("un jeu annoncé apparaît dans la bande « À venir », avec l'étiquette,
       liensJeu.last().getByRole("img", { name: `${titre} — jaquette à venir` }),
     ).toBeVisible();
 
-    // Fiche : date annoncée, étiquette, ni case « je l'ai » pour cette version.
+    // Fiche : date annoncée, étiquette, ni case « je l'ai » pour cette version, mais coche « Liste de souhaits » disponible.
     await carte.click();
     await expect(page.getByText(/Sortie prévue : 14 mars 2099/)).toBeVisible();
     await expect(
       page.getByText("À venir", { exact: true }).first(),
     ).toBeVisible();
     await expect(caseEurope(page)).toHaveCount(0);
+    await expect(
+      page.getByRole("checkbox", {
+        name: "Liste de souhaits : version Europe",
+        exact: true,
+      }),
+    ).toBeVisible();
   } catch (erreur) {
     // L'erreur du nettoyage remplacerait celle-ci dans le rapport : on la garde dans le journal.
     console.error("Jeu annoncé e2e :", erreur);
@@ -344,4 +350,111 @@ test("un jeu annoncé apparaît dans la bande « À venir », avec l'étiquette,
       ).toBeVisible();
     }).toPass({ timeout: 30_000 });
   }
+});
+
+test("connecté, la liste de souhaits fonctionne (jeu, amiibo, guide), est mutuellement exclusive avec « Je l'ai » et se filtre", async ({
+  page,
+}) => {
+  const caseSouhaitEurope = page.getByRole("checkbox", {
+    name: "Liste de souhaits : version Europe",
+    exact: true,
+  });
+  const caseSouhait = page.getByRole("checkbox", {
+    name: "Liste de souhaits",
+    exact: true,
+  });
+  const basculerSouhait = async (souhaiter: boolean) => {
+    const enregistre = page.waitForResponse(
+      (r) =>
+        r.url().includes("/rest/v1/souhaits") &&
+        r.request().method() === (souhaiter ? "POST" : "DELETE"),
+    );
+    await (souhaiter ? caseSouhaitEurope.check() : caseSouhaitEurope.uncheck());
+    expect((await enregistre).ok()).toBe(true);
+  };
+
+  await seConnecter(page);
+  await page.goto("/jeux/wii-u/splatoon");
+  await expect(caseSouhaitEurope).not.toBeChecked();
+  await basculerSouhait(true);
+  await page.reload();
+  await expect(caseSouhaitEurope).toBeChecked();
+
+  // Catalogue : étiquette PAL souhaitée et filtre « Liste de souhaits ».
+  await page.goto("/");
+  const splatoon = page.getByRole("link", { name: /Splatoon/ }).first();
+  await expect(
+    splatoon.getByRole("listitem", {
+      name: "Europe : sorti, souhaité",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: /^Filtres/ }).click();
+  const filtre = page.getByRole("combobox", {
+    name: "Collection",
+    exact: true,
+  });
+  await filtre.selectOption({ label: "Liste de souhaits" });
+  await expect(page).toHaveURL("/?collection=souhaits");
+  await expect(page.getByText("1 jeu affiché sur 4")).toBeVisible();
+
+  // Exclusivité mutuelle : cocher « Je l'ai » retire automatiquement de la liste de souhaits.
+  await page.goto("/jeux/wii-u/splatoon");
+  await basculer(page, true);
+  await expect(caseEurope(page)).toBeChecked();
+  await expect(caseSouhaitEurope).not.toBeChecked();
+  await page.reload();
+  await expect(caseEurope(page)).toBeChecked();
+  await expect(caseSouhaitEurope).not.toBeChecked();
+  await basculer(page, false);
+
+  // Amiibo en liste de souhaits.
+  await page.goto("/amiibo/inkling-e2e");
+  const ajoutAmiibo = page.waitForResponse(
+    (r) =>
+      r.url().includes("/rest/v1/souhaits_amiibo") &&
+      r.request().method() === "POST",
+  );
+  await caseSouhait.check();
+  expect((await ajoutAmiibo).ok()).toBe(true);
+  await page.goto("/?voir=amiibo&collection=souhaits");
+  await expect(
+    page.getByText("1 amiibo affiché", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /Inkling e2e/ })).toContainText(
+    "★ Souhait",
+  );
+  await page.goto("/amiibo/inkling-e2e");
+  const retraitAmiibo = page.waitForResponse(
+    (r) =>
+      r.url().includes("/rest/v1/souhaits_amiibo") &&
+      r.request().method() === "DELETE",
+  );
+  await caseSouhait.uncheck();
+  expect((await retraitAmiibo).ok()).toBe(true);
+
+  // Guide en liste de souhaits.
+  await page.goto("/guides/9784000000017");
+  const ajoutGuide = page.waitForResponse(
+    (r) =>
+      r.url().includes("/rest/v1/souhaits_guides") &&
+      r.request().method() === "POST",
+  );
+  await caseSouhait.check();
+  expect((await ajoutGuide).ok()).toBe(true);
+  await page.goto("/?voir=guides&collection=souhaits");
+  await expect(
+    page.getByText("1 guide affiché", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /マリオカート8 パーフェクトガイド/ }),
+  ).toContainText("★ Souhait");
+  await page.goto("/guides/9784000000017");
+  const retraitGuide = page.waitForResponse(
+    (r) =>
+      r.url().includes("/rest/v1/souhaits_guides") &&
+      r.request().method() === "DELETE",
+  );
+  await caseSouhait.uncheck();
+  expect((await retraitGuide).ok()).toBe(true);
 });

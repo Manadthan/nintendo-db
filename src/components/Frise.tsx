@@ -6,6 +6,7 @@ import {
   EtiquettesAmiibo,
   ImageCarteAmiibo,
   MarquePossede,
+  MarqueSouhait,
 } from "./CarteAmiibo";
 import { CouvertureCarte, EtiquettesGuide } from "./CarteGuide";
 import { EtiquetteAVenir } from "./EtiquetteAVenir";
@@ -23,7 +24,9 @@ export function Frise({
   surClic,
   aVenir,
   amiiboPossede = () => false,
+  amiiboSouhaite = () => false,
   guidePossede = () => false,
+  guideSouhaite = () => false,
 }: {
   annees: AnneeFrise[];
   lien: (v: VersionAffichee) => string;
@@ -33,8 +36,12 @@ export function Frise({
   surClic: () => void;
   /** Amiibo possédé (US-30) : marque verte sur la photo. */
   amiiboPossede?: (v: VersionAffichee) => boolean;
+  /** Amiibo en liste de souhaits : marque rose sur la photo. */
+  amiiboSouhaite?: (v: VersionAffichee) => boolean;
   /** Guide possédé : marque verte sur la couverture. */
   guidePossede?: (v: VersionAffichee) => boolean;
+  /** Guide en liste de souhaits : marque rose sur la couverture. */
+  guideSouhaite?: (v: VersionAffichee) => boolean;
 }) {
   return (
     <ol className="relative mx-auto w-full max-w-2xl before:absolute before:inset-y-0 before:left-1/2 before:-ml-px before:w-0.5 before:bg-filet">
@@ -79,7 +86,11 @@ export function Frise({
                   {v.guide ? (
                     <div className="relative">
                       <CouvertureCarte v={v} />
-                      {guidePossede(v) && <MarquePossede surPhoto />}
+                      {guidePossede(v) ? (
+                        <MarquePossede surPhoto />
+                      ) : (
+                        guideSouhaite(v) && <MarqueSouhait surPhoto />
+                      )}
                     </div>
                   ) : v.amiibo ? (
                     <div className="relative">
@@ -88,7 +99,11 @@ export function Frise({
                         sizes="(max-width: 672px) 45vw, 300px"
                         forme="carree"
                       />
-                      {amiiboPossede(v) && <MarquePossede surPhoto />}
+                      {amiiboPossede(v) ? (
+                        <MarquePossede surPhoto />
+                      ) : (
+                        amiiboSouhaite(v) && <MarqueSouhait surPhoto />
+                      )}
                     </div>
                   ) : (
                     <div className="relative">

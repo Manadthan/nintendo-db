@@ -310,6 +310,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
         filtres.collection,
         collection.possessions,
         marche,
+        collection.souhaits,
       ),
     [
       trouves,
@@ -321,6 +322,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
       aujourdhui,
       filtres,
       collection.possessions,
+      collection.souhaits,
     ],
   );
   const groupes = useMemo(
@@ -611,6 +613,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
           versions={versions}
           groupes={groupes}
           possessions={connecte ? collection.possessions : null}
+          souhaits={connecte ? collection.souhaits : null}
           limite={limite}
           aujourdhui={aujourdhui}
         />

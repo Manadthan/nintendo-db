@@ -646,4 +646,11 @@ describe("filtres mémorisés (audit de performance, B)", () => {
     expect(autre.console).toBe("wii");
     vi.unstubAllGlobals();
   });
+
+  it("lit et sérialise ?collection=souhaits", () => {
+    const f = filtresDepuisParametres("?collection=souhaits");
+    expect(f.collection).toBe("souhaits");
+    expect(nombreActifs(f)).toBe(1);
+    expect(avecFiltres("", f)).toBe("?collection=souhaits");
+  });
 });

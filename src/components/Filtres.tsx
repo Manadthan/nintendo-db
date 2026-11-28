@@ -108,6 +108,7 @@ export function PanneauFiltres({
               <option value="">Tous</option>
               <option value="possedes">Possédés</option>
               <option value="manquants">Manquants</option>
+              <option value="souhaits">Liste de souhaits</option>
             </select>
           </label>
         </div>
@@ -284,7 +285,12 @@ export function FiltresActifs({
       retirer: { typeAmiibo: null },
     },
     filtres.collection && {
-      libelle: filtres.collection === "possedes" ? "Possédés" : "Manquants",
+      libelle:
+        filtres.collection === "possedes"
+          ? "Possédés"
+          : filtres.collection === "souhaits"
+            ? "Liste de souhaits"
+            : "Manquants",
       retirer: { collection: null },
     },
     filtres.inclureAVenir && {

@@ -13,6 +13,9 @@ import {
   possede,
   possedeAmiibo,
   possedeGuide,
+  souhaite,
+  souhaiteAmiibo,
+  souhaiteGuide,
 } from "@/lib/collection/collection";
 import {
   CouvertureCarte,
@@ -26,6 +29,7 @@ import {
   legendeAmiibo,
   lienAmiibo,
   MarquePossede,
+  MarqueSouhait,
 } from "./CarteAmiibo";
 import { Disponibilite } from "./Disponibilite";
 import { EtiquetteAVenir } from "./EtiquetteAVenir";
@@ -39,6 +43,8 @@ type Props = {
   groupes: { titre: string | null; versions: VersionAffichee[] }[];
   /** Versions possédées (US-16) ; `null` pour un visiteur : aucune étiquette verte. */
   possessions: ReadonlySet<string> | null;
+  /** Versions en liste de souhaits ; `null` pour un visiteur : aucun repère souhait. */
+  souhaits: ReadonlySet<string> | null;
   /** Nombre de jeux à dessiner (affichage par lots, SPEC v1.41). */
   limite: number;
   /** Jour de préparation de la page (AAAA-MM-JJ, Paris) : étiquette « À venir » des jeux annoncés (US-32). */
@@ -83,6 +89,7 @@ export const ListeJeux = memo(function ListeJeux({
   versions,
   groupes,
   possessions,
+  souhaits,
   limite,
   aujourdhui,
 }: Props) {
@@ -91,12 +98,19 @@ export const ListeJeux = memo(function ListeJeux({
   // Étiquettes JAP / US / PAL en vert pour les versions possédées (US-16) ; rien pour un visiteur.
   const possedees = (v: VersionAffichee) =>
     possessions ? REGIONS.filter((r) => possede(possessions, v.jeu.id, r)) : [];
-  // Amiibo possédé (US-30) : marque verte ; rien pour un visiteur.
+  // Étiquettes JAP / US / PAL en rose avec étoile pour les versions en liste de souhaits.
+  const souhaitees = (v: VersionAffichee) =>
+    souhaits ? REGIONS.filter((r) => souhaite(souhaits, v.jeu.id, r)) : [];
+  // Amiibo possédé (US-30) ou souhaité : marque ; rien pour un visiteur.
   const amiiboPossede = (v: VersionAffichee) =>
     !!possessions && !!v.amiibo && possedeAmiibo(possessions, v.amiibo.id);
-  // Guide possédé : marque verte ; rien pour un visiteur.
+  const amiiboSouhaite = (v: VersionAffichee) =>
+    !!souhaits && !!v.amiibo && souhaiteAmiibo(souhaits, v.amiibo.id);
+  // Guide possédé ou souhaité : marque ; rien pour un visiteur.
   const guidePossede = (v: VersionAffichee) =>
     !!possessions && !!v.guide && possedeGuide(possessions, v.guide.id);
+  const guideSouhaite = (v: VersionAffichee) =>
+    !!souhaits && !!v.guide && souhaiteGuide(souhaits, v.guide.id);
 
   return (
     <div className="flex flex-col gap-3.5">
@@ -107,7 +121,9 @@ export const ListeJeux = memo(function ListeJeux({
           surClic={noter}
           aVenir={(v) => estAVenir(v, aujourdhui)}
           amiiboPossede={amiiboPossede}
+          amiiboSouhaite={amiiboSouhaite}
           guidePossede={guidePossede}
+          guideSouhaite={guideSouhaite}
         />
       )}
 
@@ -138,7 +154,11 @@ export const ListeJeux = memo(function ListeJeux({
                         <>
                           <div className="relative">
                             <CouvertureCarte v={v} />
-                            {guidePossede(v) && <MarquePossede surPhoto />}
+                            {guidePossede(v) ? (
+                              <MarquePossede surPhoto />
+                            ) : (
+                              guideSouhaite(v) && <MarqueSouhait surPhoto />
+                            )}
                           </div>
                           <div className="flex flex-col gap-[3px]">
                             <span
@@ -162,7 +182,11 @@ export const ListeJeux = memo(function ListeJeux({
                               v={v}
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
                             />
-                            {amiiboPossede(v) && <MarquePossede surPhoto />}
+                            {amiiboPossede(v) ? (
+                              <MarquePossede surPhoto />
+                            ) : (
+                              amiiboSouhaite(v) && <MarqueSouhait surPhoto />
+                            )}
                           </div>
                           <div className="flex flex-col gap-[3px]">
                             <span className="line-clamp-2 text-sm leading-tight font-semibold group-hover:underline">
@@ -202,6 +226,7 @@ export const ListeJeux = memo(function ListeJeux({
                               <Disponibilite
                                 jeu={v.jeu}
                                 possedees={possedees(v)}
+                                souhaitees={souhaitees(v)}
                                 aujourdhui={aujourdhui}
                               />
                             </div>
@@ -238,7 +263,11 @@ export const ListeJeux = memo(function ListeJeux({
                             </span>
                             <div className="flex flex-wrap items-center gap-1">
                               <EtiquettesGuide v={v} />
-                              {guidePossede(v) && <MarquePossede />}
+                              {guidePossede(v) ? (
+                                <MarquePossede />
+                              ) : (
+                                guideSouhaite(v) && <MarqueSouhait />
+                              )}
                               <span className="text-xs text-texte-discret">
                                 {legendeGuide(v)}
                               </span>
@@ -264,7 +293,11 @@ export const ListeJeux = memo(function ListeJeux({
                             <div className="flex flex-wrap items-center gap-1">
                               {estAVenir(v, aujourdhui) && <EtiquetteAVenir />}
                               <EtiquettesAmiibo v={v} />
-                              {amiiboPossede(v) && <MarquePossede />}
+                              {amiiboPossede(v) ? (
+                                <MarquePossede />
+                              ) : (
+                                amiiboSouhaite(v) && <MarqueSouhait />
+                              )}
                             </div>
                           </div>
                         </>
@@ -294,6 +327,7 @@ export const ListeJeux = memo(function ListeJeux({
                               <Disponibilite
                                 jeu={v.jeu}
                                 possedees={possedees(v)}
+                                souhaitees={souhaitees(v)}
                                 aujourdhui={aujourdhui}
                               />
                             </div>

@@ -18,6 +18,7 @@ export type EtatCollection = {
   /** `null` tant que la session n'est pas connue (rien n'est affiché) ; `false` pour un visiteur. */
   connecte: boolean | null;
   possessions: ReadonlySet<string>;
+  souhaits: ReadonlySet<string>;
   /** Message d'une écriture refusée ou impossible (réseau), affiché sur la page. */
   erreur: string | null;
 };
@@ -25,6 +26,7 @@ export type EtatCollection = {
 const INITIAL: EtatCollection = {
   connecte: null,
   possessions: new Set(),
+  souhaits: new Set(),
   erreur: null,
 };
 let etat = INITIAL;
@@ -36,19 +38,31 @@ function changer(patch: Partial<EtatCollection>) {
   for (const rappel of abonnes) rappel();
 }
 
+function tableAbsente(error: { code?: string } | null): boolean {
+  return error?.code === "PGRST205" || error?.code === "42P01";
+}
+
 async function charger() {
   // Sans cookie de session : visiteur, et la bibliothèque Supabase n'est pas téléchargée.
   const supabase = await clientSiSession();
   if (!supabase) return changer({ connecte: false });
   const { data } = await supabase.auth.getSession();
   if (!data.session) return changer({ connecte: false });
-  // Versions des jeux, amiibo (US-30) et guides, lus ensemble ; la RLS ne rend que les lignes du compte connecté.
-  const [jeux, amiibo, guides] = await Promise.all([
-    supabase.from("possessions").select("game_id, region"),
-    supabase.from("possessions_amiibo").select("amiibo_id"),
-    supabase.from("possessions_guides").select("guide_id"),
-  ]);
-  if (jeux.error || amiibo.error || guides.error)
+  // Possessions et souhaits (jeux, amiibo, guides), lus ensemble ; la RLS ne rend que les lignes du compte connecté.
+  const [jeux, amiibo, guides, souhaitsJeux, souhaitsAmiibo, souhaitsGuides] =
+    await Promise.all([
+      supabase.from("possessions").select("game_id, region"),
+      supabase.from("possessions_amiibo").select("amiibo_id"),
+      supabase.from("possessions_guides").select("guide_id"),
+      supabase.from("souhaits").select("game_id, region"),
+      supabase.from("souhaits_amiibo").select("amiibo_id"),
+      supabase.from("souhaits_guides").select("guide_id"),
+    ]);
+  const erreurSouhaits =
+    (souhaitsJeux.error && !tableAbsente(souhaitsJeux.error)) ||
+    (souhaitsAmiibo.error && !tableAbsente(souhaitsAmiibo.error)) ||
+    (souhaitsGuides.error && !tableAbsente(souhaitsGuides.error));
+  if (jeux.error || amiibo.error || guides.error || erreurSouhaits)
     return changer({ connecte: true, erreur: "Collection illisible" });
   changer({
     connecte: true,
@@ -56,6 +70,11 @@ async function charger() {
       jeux.data ?? [],
       amiibo.data ?? [],
       guides.data ?? [],
+    ),
+    souhaits: ensemble(
+      souhaitsJeux.data ?? [],
+      souhaitsAmiibo.data ?? [],
+      souhaitsGuides.data ?? [],
     ),
   });
 }
@@ -80,11 +99,19 @@ export function useCollection(): EtatCollection {
 
 /**
  * Coche ou décoche une version : affichée aussitôt, puis écrite dans la base (la RLS vérifie que la ligne est bien
- * celle du compte connecté). En cas d'échec, la case revient à son état précédent et un message s'affiche.
+ * celle du compte connecté). Cocher retire automatiquement de la liste de souhaits. En cas d'échec, la case revient
+ * à son état précédent et un message s'affiche.
  */
 export async function basculerVersion(version: Version, avoir: boolean) {
-  const avant = etat.possessions;
-  changer({ possessions: avecVersion(avant, version, avoir), erreur: null });
+  const avantPossessions = etat.possessions;
+  const avantSouhaits = etat.souhaits;
+  changer({
+    possessions: avecVersion(avantPossessions, version, avoir),
+    souhaits: avoir
+      ? avecVersion(avantSouhaits, version, false)
+      : avantSouhaits,
+    erreur: null,
+  });
   const table = (await clientNavigateur()).from("possessions");
   const { error } = avoir
     ? await table.insert({ game_id: version.gameId, region: version.region })
@@ -95,37 +122,133 @@ export async function basculerVersion(version: Version, avoir: boolean) {
   // Une version déjà cochée (autre onglet) n'est pas une erreur.
   if (error && error.code !== "23505")
     changer({
-      possessions: avant,
+      possessions: avantPossessions,
+      souhaits: avantSouhaits,
       erreur: "Collection non enregistrée, réessaie dans un instant",
+    });
+}
+
+/** Coche ou décoche une version en liste de souhaits ; cocher retire automatiquement de « Je l'ai ». */
+export async function basculerSouhaitVersion(
+  version: Version,
+  souhaiter: boolean,
+) {
+  const avantPossessions = etat.possessions;
+  const avantSouhaits = etat.souhaits;
+  changer({
+    souhaits: avecVersion(avantSouhaits, version, souhaiter),
+    possessions: souhaiter
+      ? avecVersion(avantPossessions, version, false)
+      : avantPossessions,
+    erreur: null,
+  });
+  const table = (await clientNavigateur()).from("souhaits");
+  const { error } = souhaiter
+    ? await table.insert({ game_id: version.gameId, region: version.region })
+    : await table
+        .delete()
+        .eq("game_id", version.gameId)
+        .eq("region", version.region);
+  if (error && error.code !== "23505")
+    changer({
+      possessions: avantPossessions,
+      souhaits: avantSouhaits,
+      erreur: "Liste de souhaits non enregistrée, réessaie dans un instant",
     });
 }
 
 /** Coche ou décoche un amiibo (US-30), comme une version : affiché aussitôt, rétabli si l'écriture échoue. */
 export async function basculerAmiibo(amiiboId: string, avoir: boolean) {
-  const avant = etat.possessions;
-  changer({ possessions: avecAmiibo(avant, amiiboId, avoir), erreur: null });
+  const avantPossessions = etat.possessions;
+  const avantSouhaits = etat.souhaits;
+  changer({
+    possessions: avecAmiibo(avantPossessions, amiiboId, avoir),
+    souhaits: avoir
+      ? avecAmiibo(avantSouhaits, amiiboId, false)
+      : avantSouhaits,
+    erreur: null,
+  });
   const table = (await clientNavigateur()).from("possessions_amiibo");
   const { error } = avoir
     ? await table.insert({ amiibo_id: amiiboId })
     : await table.delete().eq("amiibo_id", amiiboId);
   if (error && error.code !== "23505")
     changer({
-      possessions: avant,
+      possessions: avantPossessions,
+      souhaits: avantSouhaits,
       erreur: "Collection non enregistrée, réessaie dans un instant",
+    });
+}
+
+/** Coche ou décoche un amiibo en liste de souhaits ; cocher retire automatiquement de « Je l'ai ». */
+export async function basculerSouhaitAmiibo(
+  amiiboId: string,
+  souhaiter: boolean,
+) {
+  const avantPossessions = etat.possessions;
+  const avantSouhaits = etat.souhaits;
+  changer({
+    souhaits: avecAmiibo(avantSouhaits, amiiboId, souhaiter),
+    possessions: souhaiter
+      ? avecAmiibo(avantPossessions, amiiboId, false)
+      : avantPossessions,
+    erreur: null,
+  });
+  const table = (await clientNavigateur()).from("souhaits_amiibo");
+  const { error } = souhaiter
+    ? await table.insert({ amiibo_id: amiiboId })
+    : await table.delete().eq("amiibo_id", amiiboId);
+  if (error && error.code !== "23505")
+    changer({
+      possessions: avantPossessions,
+      souhaits: avantSouhaits,
+      erreur: "Liste de souhaits non enregistrée, réessaie dans un instant",
     });
 }
 
 /** Coche ou décoche un guide, comme un amiibo : affiché aussitôt, rétabli si l'écriture échoue. */
 export async function basculerGuide(guideId: string, avoir: boolean) {
-  const avant = etat.possessions;
-  changer({ possessions: avecGuide(avant, guideId, avoir), erreur: null });
+  const avantPossessions = etat.possessions;
+  const avantSouhaits = etat.souhaits;
+  changer({
+    possessions: avecGuide(avantPossessions, guideId, avoir),
+    souhaits: avoir ? avecGuide(avantSouhaits, guideId, false) : avantSouhaits,
+    erreur: null,
+  });
   const table = (await clientNavigateur()).from("possessions_guides");
   const { error } = avoir
     ? await table.insert({ guide_id: guideId })
     : await table.delete().eq("guide_id", guideId);
   if (error && error.code !== "23505")
     changer({
-      possessions: avant,
+      possessions: avantPossessions,
+      souhaits: avantSouhaits,
       erreur: "Collection non enregistrée, réessaie dans un instant",
+    });
+}
+
+/** Coche ou décoche un guide en liste de souhaits ; cocher retire automatiquement de « Je l'ai ». */
+export async function basculerSouhaitGuide(
+  guideId: string,
+  souhaiter: boolean,
+) {
+  const avantPossessions = etat.possessions;
+  const avantSouhaits = etat.souhaits;
+  changer({
+    souhaits: avecGuide(avantSouhaits, guideId, souhaiter),
+    possessions: souhaiter
+      ? avecGuide(avantPossessions, guideId, false)
+      : avantPossessions,
+    erreur: null,
+  });
+  const table = (await clientNavigateur()).from("souhaits_guides");
+  const { error } = souhaiter
+    ? await table.insert({ guide_id: guideId })
+    : await table.delete().eq("guide_id", guideId);
+  if (error && error.code !== "23505")
+    changer({
+      possessions: avantPossessions,
+      souhaits: avantSouhaits,
+      erreur: "Liste de souhaits non enregistrée, réessaie dans un instant",
     });
 }
