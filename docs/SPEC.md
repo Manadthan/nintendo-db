@@ -3,10 +3,11 @@
 > Étape 2 du playbook : **quoi construire**, pas comment (les choix techniques vont dans `docs/DESIGN.md`).
 > Source : `intent/intent.md` v1.0.
 >
-> Version 1.54 — 27/11/2026 — statut : **à valider**
+> Version 1.55 — 28/11/2026 — statut : **à valider**
 >
 > | Version | Date | Changements |
 > |---|---|---|
+> | 1.55 | 28/11/2026 | US-06 & US-32 : deux coches dans le panneau Filtres — **« Déjà sortis uniquement »** (`?avenir=1` si décochée) et **« Avec image uniquement »** (`?sans-image=1` si décochée), toutes deux **cochées par défaut** ; hors bande « À venir » (inchangée) ; `/api/suivi` aligné (choix du propriétaire du 28/11) |
 > | 1.54 | 27/11/2026 | US-29 : filtre **Type d'amiibo** (`?type=`, Figurine, Carte, Peluche, Bracelet, Bloc) dans le panneau Filtres lorsque « Amiibo » est coché ; cache les jeux et guides quand il est actif (choix du propriétaire du 27/11) |
 > | 1.53 | 26/11/2026 | US-09 : « Se déconnecter » ne ferme que la session de **cet appareil** (choix du propriétaire du 26/11 ; avant : tous les appareils du compte) |
 > | 1.52 | 26/11/2026 | **Couvertures des guides : Amazon Japon** (choix du propriétaire du 26/11, après l'étude des 159 guides : 159 couvertures Amazon sur 159, plus grandes et plus nettes que Google Books) : US-27, couvertures copiées chez nous depuis Amazon Japon, mention « Couverture : Amazon.co.jp » ; Google Books ne reste qu'en secours et pour le lien « Google Books › » |
@@ -276,10 +277,11 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
 - [ ] Une date imprécise s'écrit comme annoncée : « 28 janv. 2027 », « Janvier 2027 », « Printemps 2027 », « 2027 » ;
       sans date, « Date à venir », en fin de bande. Une date « à déterminer » des sources (31/12/2050 chez Nintendo
       Europe, 31/12 de l'année chez Nintendo US) n'est jamais affichée telle quelle.
-- [ ] **Jeux** : un jeu annoncé est **dans le catalogue dès son annonce** (choix du 25/11), avec une étiquette
-      **« À venir »** sur sa carte (grille, liste, frise) et sur sa fiche, et sa date annoncée ; recherche, filtres et
-      tris s'appliquent comme aux autres jeux (tri par date : rangé à sa date annoncée ; une date à l'année seule ou à
-      la saison va à la fin de son année). Le compteur de l'année dit « N jeux à venir » quand ils le sont tous.
+- [ ] **Jeux** : un jeu annoncé est **masqué par défaut dans « Tous les jeux »** (SPEC v1.55 ; visible dans la bande
+      « À venir ») et s'y affiche en décochant **« Déjà sortis uniquement »** dans Filtres (`?avenir=1`), avec une
+      étiquette **« À venir »** sur sa carte (grille, liste, frise) et sur sa fiche, et sa date annoncée ; recherche,
+      filtres et tris s'appliquent comme aux autres jeux (tri par date : rangé à sa date annoncée ; une date à l'année
+      seule ou à la saison va à la fin de son année). Le compteur de l'année dit « N jeux à venir » quand ils le sont tous.
 - [ ] Le jour de sa sortie, l'étiquette disparaît et le jeu quitte la bande **sans intervention** (page refaite
       toutes les 5 minutes) ; jaquette de la boîte, code produit et date exacte arrivent avec l'import suivant (US-10).
 - [ ] Sur la fiche d'un jeu à venir : pas de case « je l'ai » (US-16) ni de prix eBay (US-25) avant sa sortie.
@@ -313,6 +315,12 @@ Priorités : **M** = indispensable (v1), **S** = souhaitable, **C** = bonus.
       un nom français existe (« Professeur Layton »), sinon le nom anglais ; une même série a un seul nom.
 - [ ] Les séries sont trouvées automatiquement (titre du jeu, puis Wikidata), pour les jeux existants comme pour les
       jeux importés ensuite ; un jeu sans série connue est « Sans série », jamais une série devinée au hasard.
+- [ ] **Déjà sortis uniquement** et **Avec image uniquement** (v1.55) : deux coches dans le panneau Filtres,
+      **cochées par défaut**, appliquées au catalogue (jeux, guides, amiibo) mais jamais à la bande « À venir ».
+      Un item à venir est masqué tant que « Déjà sortis uniquement » est cochée (`?avenir=1` pour l'inclure) ; un item
+      sans image (jaquette, couverture ou photo) est masqué tant que « Avec image uniquement » est cochée
+      (`?sans-image=1` pour l'inclure). Décocher une coche ajoute une pastille active effaçable en un tap ;
+      `/api/suivi` suit les mêmes règles.
 
 #### US-07 — Mentions et sources (M)
 - [ ] Une page « À propos » indique que le site est un projet de fan **non affilié à Nintendo**, que les titres et

@@ -16,6 +16,12 @@ test("le panneau s'ouvre depuis le bouton « Filtres »", async ({ page }) => {
   await expect(boutonFiltres(page)).toHaveAttribute("aria-expanded", "false");
   await boutonFiltres(page).click();
   await expect(boutonFiltres(page)).toHaveAttribute("aria-expanded", "true");
+  await expect(
+    page.getByRole("checkbox", { name: "Déjà sortis uniquement", exact: true }),
+  ).toBeChecked();
+  await expect(
+    page.getByRole("checkbox", { name: "Avec image uniquement", exact: true }),
+  ).toBeChecked();
   await expect(liste(page, "Console")).toBeVisible();
   await expect(liste(page, "Disponibilité")).toBeVisible();
   await expect(liste(page, "Année")).toBeVisible();
@@ -165,4 +171,47 @@ test("filtre Série : séries par ordre alphabétique, puis « Sans série » (S
     .getByRole("button", { name: "Retirer le filtre Splatoon", exact: true })
     .click();
   await expect(page.getByText("4 jeux affichés sur 4")).toBeVisible();
+});
+
+test("coches « Déjà sortis uniquement » et « Avec image uniquement » : pastilles, adresse et réinitialisation (SPEC v1.55)", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await boutonFiltres(page).click();
+  const sortis = page.getByRole("checkbox", {
+    name: "Déjà sortis uniquement",
+    exact: true,
+  });
+  const image = page.getByRole("checkbox", {
+    name: "Avec image uniquement",
+    exact: true,
+  });
+  await sortis.uncheck();
+  await image.uncheck();
+  await expect(page).toHaveURL("/?avenir=1&sans-image=1");
+  await expect(boutonFiltres(page)).toHaveText("Filtres · 2");
+  await expect(actifs(page).getByRole("button")).toHaveText([
+    "À venir inclus",
+    "Sans image inclus",
+    "Tout effacer",
+  ]);
+
+  await actifs(page)
+    .getByRole("button", {
+      name: "Retirer le filtre À venir inclus",
+      exact: true,
+    })
+    .click();
+  await expect(sortis).toBeChecked();
+  await expect(image).not.toBeChecked();
+  await expect(page).toHaveURL("/?sans-image=1");
+
+  await actifs(page)
+    .getByRole("button", {
+      name: "Retirer le filtre Sans image inclus",
+      exact: true,
+    })
+    .click();
+  await expect(image).toBeChecked();
+  await expect(page).toHaveURL("/");
 });

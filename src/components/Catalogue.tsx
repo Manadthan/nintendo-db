@@ -21,6 +21,7 @@ import {
   consolesProposees,
   enregistrerFiltres,
   filtrer,
+  filtrerVisibilite,
   developpeursProposes,
   seriesProposees,
   typesAmiiboProposes,
@@ -276,14 +277,19 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
       : tous.filter((a) => contientMots(textesAmiibo.get(a) ?? "", mots));
   }, [amiibo, textesAmiibo, rechercheAffichee]);
 
-  // Choix proposés : ceux du marché choisi, sans tenir compte de la recherche ni des autres filtres ; avec les amiibo
-  // quand ils sont cochés (leurs séries, années et consoles).
+  // Choix proposés : ceux du marché choisi (avec les deux coches de visibilité), sans tenir compte de la recherche ni
+  // des autres filtres ; avec les amiibo quand ils sont cochés (leurs séries, années et consoles).
   const duMarche = useMemo(
-    () => [
-      ...trier(jeux, "anciens", marche),
-      ...(voir.amiibo ? versionsAmiibo(amiibo ?? [], marche) : []),
-    ],
-    [jeux, marche, voir.amiibo, amiibo],
+    () =>
+      filtrerVisibilite(
+        [
+          ...trier(jeux, "anciens", marche),
+          ...(voir.amiibo ? versionsAmiibo(amiibo ?? [], marche) : []),
+        ],
+        filtres,
+        { marche, aujourdhui },
+      ),
+    [jeux, marche, voir.amiibo, amiibo, filtres, aujourdhui],
   );
   const versions = useMemo(
     () =>
@@ -299,6 +305,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
             tri,
           ),
           filtres,
+          { marche, aujourdhui },
         ),
         filtres.collection,
         collection.possessions,
@@ -311,6 +318,7 @@ export function Catalogue({ jeux, consoles, aujourdhui }: Props) {
       voir,
       tri,
       marche,
+      aujourdhui,
       filtres,
       collection.possessions,
     ],

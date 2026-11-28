@@ -160,30 +160,30 @@ describe("versionsAmiibo", () => {
 });
 
 describe("filtres et recherche", () => {
+  const CTX = { marche: "TOUS" as const, aujourdhui: "2026-11-28" };
   const tous = versionsAmiibo(AMIIBO, "TOUS");
   const slugs = (versions: typeof tous) => versions.map((v) => v.amiibo?.slug);
 
   it("Console : l'amiibo lu par au moins un jeu de cette console", () => {
-    expect(slugs(filtrer(tous, { ...SANS_FILTRE, console: "3ds" }))).toEqual([
-      "isabelle-japon",
-      "sidon",
-    ]);
-    expect(slugs(filtrer(tous, { ...SANS_FILTRE, console: "wii-u" }))).toEqual(
-      [],
-    );
+    expect(
+      slugs(filtrer(tous, { ...SANS_FILTRE, console: "3ds" }, CTX)),
+    ).toEqual(["isabelle-japon", "sidon"]);
+    expect(
+      slugs(filtrer(tous, { ...SANS_FILTRE, console: "wii-u" }, CTX)),
+    ).toEqual([]);
   });
 
   it("Genre et Développeur cachent les amiibo ; Série et Année s'appliquent", () => {
-    expect(filtrer(tous, { ...SANS_FILTRE, genre: "Action" })).toEqual([]);
+    expect(filtrer(tous, { ...SANS_FILTRE, genre: "Action" }, CTX)).toEqual([]);
     expect(
-      filtrer(tous, { ...SANS_FILTRE, developpeur: "Nintendo EPD" }),
+      filtrer(tous, { ...SANS_FILTRE, developpeur: "Nintendo EPD" }, CTX),
     ).toEqual([]);
     expect(
-      slugs(filtrer(tous, { ...SANS_FILTRE, serie: "Street Fighter" })),
+      slugs(filtrer(tous, { ...SANS_FILTRE, serie: "Street Fighter" }, CTX)),
     ).toEqual(["ryu-street-fighter-6"]);
-    expect(slugs(filtrer(tous, { ...SANS_FILTRE, annee: "2015" }))).toEqual([
-      "isabelle-japon",
-    ]);
+    expect(
+      slugs(filtrer(tous, { ...SANS_FILTRE, annee: "2015" }, CTX)),
+    ).toEqual(["isabelle-japon"]);
     expect(seriesProposees(tous).map((s) => s.nom)).toEqual([
       "Animal Crossing",
       "Street Fighter",
@@ -208,7 +208,7 @@ describe("filtres et recherche", () => {
           titreRomanise: null,
           date: "2015-05-28",
           precision: "jour",
-          jaquette: null,
+          jaquette: `${ID}/jap-1`,
         },
         US: {
           sortie: true,
@@ -216,7 +216,7 @@ describe("filtres et recherche", () => {
           titreRomanise: null,
           date: "2015-05-29",
           precision: "jour",
-          jaquette: null,
+          jaquette: `${ID}/us-1`,
         },
         PAL: {
           sortie: true,
@@ -224,20 +224,20 @@ describe("filtres et recherche", () => {
           titreRomanise: null,
           date: "2015-05-29",
           precision: "jour",
-          jaquette: null,
+          jaquette: `${ID}/pal-1`,
         },
       },
     };
     const meles = [...trier([jeuTest], "anciens", "TOUS"), ...tous];
     expect(
-      slugs(filtrer(meles, { ...SANS_FILTRE, typeAmiibo: "figurine" })),
+      slugs(filtrer(meles, { ...SANS_FILTRE, typeAmiibo: "figurine" }, CTX)),
     ).toEqual(["sidon"]);
     expect(
-      slugs(filtrer(meles, { ...SANS_FILTRE, typeAmiibo: "carte" })),
+      slugs(filtrer(meles, { ...SANS_FILTRE, typeAmiibo: "carte" }, CTX)),
     ).toEqual(["isabelle-japon", "ryu-street-fighter-6"]);
-    expect(filtrer(meles, { ...SANS_FILTRE, typeAmiibo: "peluche" })).toEqual(
-      [],
-    );
+    expect(
+      filtrer(meles, { ...SANS_FILTRE, typeAmiibo: "peluche" }, CTX),
+    ).toEqual([]);
     expect(typesAmiiboProposes(meles)).toEqual([
       { valeur: "figurine", libelle: "Figurine", nombre: 1 },
       { valeur: "carte", libelle: "Carte", nombre: 2 },

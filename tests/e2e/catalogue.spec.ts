@@ -55,9 +55,12 @@ test("chaque jeu montre son titre, sa date et sa disponibilité par région", as
     karaoke.getByLabel("Amérique du Nord : non sorti"),
   ).toBeVisible();
   await expect(karaoke.getByLabel("Europe : sorti")).toBeVisible();
-  // Avant l'import, vignette neutre (US-12).
+  // Jaquette de test (tests/e2e/images.sql).
   await expect(
-    karaoke.getByRole("img", { name: "Wii Karaoke U — jaquette à venir" }),
+    karaoke.getByRole("img", {
+      name: "Jaquette de Wii Karaoke U",
+      exact: true,
+    }),
   ).toBeVisible();
 });
 

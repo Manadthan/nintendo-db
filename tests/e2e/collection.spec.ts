@@ -292,11 +292,31 @@ test("un jeu annoncé apparaît dans la bande « À venir », avec l'étiquette,
 
     // Accueil : la bande montre le jeu (annoncé en Europe seulement) et sa date courte.
     await page.goto("/");
-    const carte = page
-      .getByRole("region", { name: /À venir/ })
-      .getByRole("link", { name: new RegExp(titre) });
+    const bande = page.getByRole("region", { name: /À venir/ });
+    const carte = bande.getByRole("link", { name: new RegExp(titre) });
     await expect(carte).toBeVisible();
     await expect(carte).toContainText("14 mars 2099");
+
+    // Catalogue « Tous les jeux » (SPEC v1.55) : masqué par défaut (à venir + sans jaquette) ; seul le lien de la
+    // bande « À venir » existe (1 lien, 4 jeux affichés sur 5). Visible quand les deux coches sont décochées.
+    const liensJeu = page.getByRole("link", { name: new RegExp(titre) });
+    await expect(page.getByText("4 jeux affichés sur 5")).toBeVisible();
+    await expect(liensJeu).toHaveCount(1);
+    await page.getByRole("button", { name: /^Filtres/ }).click();
+    await page
+      .getByRole("checkbox", { name: "Déjà sortis uniquement", exact: true })
+      .uncheck();
+    // Toujours masqué tant que « Avec image uniquement » reste cochée.
+    await expect(page.getByText("4 jeux affichés sur 5")).toBeVisible();
+    await expect(liensJeu).toHaveCount(1);
+    await page
+      .getByRole("checkbox", { name: "Avec image uniquement", exact: true })
+      .uncheck();
+    await expect(page.getByText("5 jeux affichés sur 5")).toBeVisible();
+    await expect(liensJeu).toHaveCount(2);
+    await expect(
+      liensJeu.last().getByRole("img", { name: `${titre} — jaquette à venir` }),
+    ).toBeVisible();
 
     // Fiche : date annoncée, étiquette, ni case « je l'ai » pour cette version.
     await carte.click();

@@ -60,6 +60,38 @@ export function PanneauFiltres({
       id="panneau-filtres"
       className="flex flex-col gap-3 rounded-xl border border-bordure bg-carte p-3"
     >
+      <div className="flex flex-wrap gap-2">
+        <label
+          className={`flex h-10 items-center gap-2 rounded-[10px] border px-3 text-sm font-medium ${
+            !filtres.inclureAVenir
+              ? "border-accent bg-carte"
+              : "border-champ bg-carte"
+          }`}
+        >
+          <input
+            type="checkbox"
+            checked={!filtres.inclureAVenir}
+            onChange={(e) => changer({ inclureAVenir: !e.target.checked })}
+            className="size-[18px] accent-accent"
+          />
+          Déjà sortis uniquement
+        </label>
+        <label
+          className={`flex h-10 items-center gap-2 rounded-[10px] border px-3 text-sm font-medium ${
+            !filtres.inclureSansImage
+              ? "border-accent bg-carte"
+              : "border-champ bg-carte"
+          }`}
+        >
+          <input
+            type="checkbox"
+            checked={!filtres.inclureSansImage}
+            onChange={(e) => changer({ inclureSansImage: !e.target.checked })}
+            className="size-[18px] accent-accent"
+          />
+          Avec image uniquement
+        </label>
+      </div>
       {collection && (
         <div className="flex flex-col gap-2">
           <label className="flex flex-col gap-1 text-[13px] text-texte-doux">
@@ -254,6 +286,14 @@ export function FiltresActifs({
     filtres.collection && {
       libelle: filtres.collection === "possedes" ? "Possédés" : "Manquants",
       retirer: { collection: null },
+    },
+    filtres.inclureAVenir && {
+      libelle: "À venir inclus",
+      retirer: { inclureAVenir: false },
+    },
+    filtres.inclureSansImage && {
+      libelle: "Sans image inclus",
+      retirer: { inclureSansImage: false },
     },
   ].filter((p) => !!p);
   if (pastilles.length === 0) return null;

@@ -3,6 +3,7 @@ import {
   TYPES_AMIIBO,
   type TypeAmiibo,
 } from "@/lib/amiibo/fiche";
+import { jeuAVenir, sortieAVenir } from "./a-venir";
 import {
   NINTENDO_FIRST_PARTY,
   cleStudio,
@@ -10,12 +11,17 @@ import {
   regrouperStudios,
   studios,
 } from "./developpeurs";
-import { REGIONS, type Region, type VersionAffichee } from "./types";
+import {
+  REGIONS,
+  type Marche,
+  type Region,
+  type VersionAffichee,
+} from "./types";
 
 /** Disponibilité (US-06) : sorti dans les 3 régions, ou exclusif à une région. */
 export type FiltreDisponibilite = "TOUTES" | Region;
 
-/** Filtres du catalogue (US-06) : null = pas de filtre sur ce critère. */
+/** Filtres du catalogue (US-06) : null / false = pas de filtre actif (valeur par défaut). */
 export type Filtres = {
   /** Adresse de la console (étape 8, US-01). */
   console: string | null;
@@ -30,6 +36,10 @@ export type Filtres = {
   typeAmiibo: TypeAmiibo | null;
   /** Ma collection (US-16) : appliqué par le catalogue, et seulement pour le propriétaire connecté. */
   collection: "possedes" | "manquants" | null;
+  /** Inclure les items à venir (US-06, US-32, SPEC v1.55) : false par défaut (« Déjà sortis uniquement » cochée). */
+  inclureAVenir: boolean;
+  /** Inclure les items sans image (US-06, SPEC v1.55) : false par défaut (« Avec image uniquement » cochée). */
+  inclureSansImage: boolean;
 };
 
 export const SANS_FILTRE: Filtres = {
@@ -41,6 +51,14 @@ export const SANS_FILTRE: Filtres = {
   serie: null,
   typeAmiibo: null,
   collection: null,
+  inclureAVenir: false,
+  inclureSansImage: false,
+};
+
+/** Contexte nécessaire pour savoir si un item est déjà sorti sur le marché affiché (US-06, US-32, SPEC v1.55). */
+export type ContexteFiltrage = {
+  marche: Marche;
+  aujourdhui: string;
 };
 
 /** Choix du filtre Série pour les jeux sans série connue (SPEC v1.37). */
@@ -67,6 +85,8 @@ const PARAMETRES = {
   serie: "serie",
   typeAmiibo: "type",
   collection: "collection",
+  inclureAVenir: "avenir",
+  inclureSansImage: "sans-image",
 } as const satisfies Record<keyof Filtres, string>;
 
 /** Année de la version affichée (celle du marché choisi, comme les groupes par année). */
@@ -97,12 +117,49 @@ const surConsole = (v: VersionAffichee, console: string) =>
     ? v.amiibo.consoles.includes(console)
     : v.jeu.console.slug === console;
 
+/** L'item affiché a-t-il une image (jaquette de jeu, couverture de guide, ou photo d'amiibo) ? (US-06, SPEC v1.55) */
+export function aUneImage(v: VersionAffichee): boolean {
+  if (v.guide) return v.guide.couverture !== null;
+  if (v.amiibo) return v.amiibo.image !== null;
+  return v.sortie.jaquette !== null;
+}
+
+/**
+ * L'item est-il encore à venir sur ce marché ? (US-06, US-32, SPEC v1.55)
+ * Jeu et amiibo suivent la même règle que la bande « À venir » (`jeuAVenir`) : déjà sorti dans une région n'est plus
+ * « à venir » sur « Tous ». Un guide suit sa propre date de parution.
+ */
+export function estItemAVenir(
+  v: VersionAffichee,
+  marche: Marche,
+  aujourdhui: string,
+): boolean {
+  if (v.guide)
+    return sortieAVenir(v.sortie.date, v.sortie.precision, aujourdhui);
+  return jeuAVenir(v.jeu, marche, aujourdhui);
+}
+
+/** Applique uniquement les deux coches de visibilité (« Déjà sortis uniquement », « Avec image uniquement »). */
+export function filtrerVisibilite(
+  versions: VersionAffichee[],
+  filtres: Pick<Filtres, "inclureAVenir" | "inclureSansImage">,
+  contexte: ContexteFiltrage,
+): VersionAffichee[] {
+  return versions.filter(
+    (v) =>
+      (filtres.inclureAVenir ||
+        !estItemAVenir(v, contexte.marche, contexte.aujourdhui)) &&
+      (filtres.inclureSansImage || aUneImage(v)),
+  );
+}
+
 /** Versions qui passent tous les filtres actifs (US-06 : filtres combinables). */
 export function filtrer(
   versions: VersionAffichee[],
   filtres: Filtres,
+  contexte: ContexteFiltrage,
 ): VersionAffichee[] {
-  return versions.filter(
+  return filtrerVisibilite(versions, filtres, contexte).filter(
     (v) =>
       (!filtres.console || surConsole(v, filtres.console)) &&
       (!filtres.disponibilite || disponible(v, filtres.disponibilite)) &&
@@ -187,9 +244,9 @@ export function typesAmiiboProposes(
   })).filter((t) => t.nombre > 0);
 }
 
-/** Nombre de filtres actifs (affiché sur le bouton « Filtres »). */
+/** Nombre de filtres actifs (affiché sur le bouton « Filtres ») : critères qui s'écartent du défaut. */
 export const nombreActifs = (f: Filtres) =>
-  Object.values(f).filter((v) => v !== null).length;
+  Object.values(f).filter((v) => v !== null && v !== false).length;
 
 /** Filtres lus dans les paramètres de l'adresse ; une valeur inconnue est ignorée. */
 export function filtresDepuisParametres(recherche: string): Filtres {
@@ -212,6 +269,8 @@ export function filtresDepuisParametres(recherche: string): Filtres {
       (["possedes", "manquants"] as const).find(
         (c) => c === params.get(PARAMETRES.collection),
       ) ?? null,
+    inclureAVenir: params.get(PARAMETRES.inclureAVenir) === "1",
+    inclureSansImage: params.get(PARAMETRES.inclureSansImage) === "1",
   };
 }
 
@@ -219,9 +278,11 @@ export function filtresDepuisParametres(recherche: string): Filtres {
 export function avecFiltres(recherche: string, filtres: Filtres): string {
   const params = new URLSearchParams(recherche);
   // `?dispo=jap` comme `?marche=jap` ; le genre garde sa casse (« Plates-formes 3D »).
-  const valeurs = {
+  const valeurs: Record<keyof Filtres, string | null> = {
     ...filtres,
     disponibilite: filtres.disponibilite?.toLowerCase() ?? null,
+    inclureAVenir: filtres.inclureAVenir ? "1" : null,
+    inclureSansImage: filtres.inclureSansImage ? "1" : null,
   };
   for (const cle of Object.keys(PARAMETRES) as (keyof Filtres)[]) {
     const valeur = valeurs[cle];
