@@ -2,6 +2,7 @@ import { normaliser } from "@/lib/recherche/normaliser";
 import { cleTriDate } from "./a-venir";
 import { titreAffiche } from "./titre";
 import {
+  PREFERENCE_TOUS,
   REGIONS,
   type Groupe,
   type JeuCatalogue,
@@ -11,9 +12,6 @@ import {
   type Tri,
   type VersionAffichee,
 } from "./types";
-
-/** Avec « Tous », la version affichée est PAL, sinon US, sinon JAP (US-03). */
-const PREFERENCE_TOUS: readonly Region[] = ["PAL", "US", "JAP"];
 
 /** Version d'un jeu à afficher pour un marché ; null si le jeu n'y est pas sorti. */
 export function versionAffichee(

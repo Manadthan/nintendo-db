@@ -7,6 +7,9 @@ export type PrecisionDate = Database["public"]["Enums"]["precision_date"];
 /** Ordre d'affichage des régions partout sur le site. */
 export const REGIONS: readonly Region[] = ["JAP", "US", "PAL"];
 
+/** Priorité d'affichage sur le marché « Tous » : PAL, sinon US, sinon JAP (US-03, US-32). */
+export const PREFERENCE_TOUS: readonly Region[] = ["PAL", "US", "JAP"];
+
 /** Marché choisi dans le catalogue (US-03) : une région, ou « Tous ». */
 export type Marche = Region | "TOUS";
 

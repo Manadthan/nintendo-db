@@ -111,8 +111,19 @@ describe("versionsAVenir : bande de l'accueil (US-32)", () => {
         titre: "メトロイド",
         date: "2027-01-28",
         precision: "jour",
+        jaquette: "metroid/JAP-1",
       }),
-      PAL: sortie({ date: "2027-02-25", precision: "jour" }),
+      US: sortie({
+        titre: "Metroid US",
+        date: "2027-02-20",
+        precision: "jour",
+        jaquette: "metroid/US-1",
+      }),
+      PAL: sortie({
+        date: "2027-02-25",
+        precision: "jour",
+        jaquette: "metroid/PAL-1",
+      }),
     }),
   );
   const kirby = avecSlug(
@@ -146,16 +157,84 @@ describe("versionsAVenir : bande de l'accueil (US-32)", () => {
     ).toEqual(["xeno", "metroid", "kirby"]);
   });
 
-  it("sur « Tous », la version à la date la plus proche des trois régions", () => {
-    const [v] = versionsAVenir([metroid], "TOUS", auj);
-    expect(v!.region).toBe("JAP");
+  it("sur « Tous », titre et jaquette suivent PAL → US → JAP, et la date reste la plus proche (SPEC v1.57)", () => {
+    const [pal] = versionsAVenir([metroid], "TOUS", auj);
+    expect(pal!.region).toBe("PAL");
+    expect(pal!.sortie.titre).toBe("Metroid Ravenous");
+    expect(pal!.sortie.jaquette).toBe("metroid/PAL-1");
+    expect(pal!.sortie.date).toBe("2027-01-28");
+    expect(pal!.sortie.precision).toBe("jour");
+
+    const sansPal = avecSlug(
+      "sans-pal",
+      jeu({
+        JAP: sortie({
+          titre: "ファイアーエムブレム",
+          date: "2027-01-10",
+          precision: "jour",
+          jaquette: "fe/JAP-1",
+        }),
+        US: sortie({
+          titre: "Fire Emblem US",
+          date: "2027-03-15",
+          precision: "jour",
+          jaquette: "fe/US-1",
+        }),
+      }),
+    );
+    const [us] = versionsAVenir([sansPal], "TOUS", auj);
+    expect(us!.region).toBe("US");
+    expect(us!.sortie.titre).toBe("Fire Emblem US");
+    expect(us!.sortie.jaquette).toBe("fe/US-1");
+    expect(us!.sortie.date).toBe("2027-01-10");
+
+    const japSeul = avecSlug(
+      "jap-seul",
+      jeu({
+        JAP: sortie({
+          titre: "マザー",
+          titreRomanise: "Mother",
+          date: "2027-04-01",
+          precision: "jour",
+        }),
+      }),
+    );
+    const [jap] = versionsAVenir([japSeul], "TOUS", auj);
+    expect(jap!.region).toBe("JAP");
+    expect(jap!.sortie.titreRomanise).toBe("Mother");
+    expect(jap!.sortie.date).toBe("2027-04-01");
   });
 
-  it("sur un marché, seulement les jeux annoncés sur ce marché, dans leur version", () => {
+  it("sur « Tous », à date égale (même clé de tri), garde PAL avant US avant JAP", () => {
+    const simultane = avecSlug(
+      "simultane",
+      jeu({
+        JAP: sortie({
+          titre: "ゼルダ",
+          date: "2027-12-31",
+          precision: "annee",
+        }),
+        PAL: sortie({
+          titre: "Zelda",
+          date: "2027-03-01",
+          precision: "saison",
+        }),
+      }),
+    );
+    const [v] = versionsAVenir([simultane], "TOUS", auj);
+    expect(v!.region).toBe("PAL");
+    expect(v!.sortie.titre).toBe("Zelda");
+    expect(v!.sortie.precision).toBe("saison");
+    expect(v!.sortie.date).toBe("2027-03-01");
+  });
+
+  it("sur un marché, seulement les jeux annoncés sur ce marché, dans leur version et à leur date", () => {
     expect(
       versionsAVenir([metroid, kirby], "JAP", auj).map((v) => v.jeu.slug),
     ).toEqual(["metroid"]);
-    expect(versionsAVenir([metroid], "PAL", auj)[0]!.region).toBe("PAL");
+    const [pal] = versionsAVenir([metroid], "PAL", auj);
+    expect(pal!.region).toBe("PAL");
+    expect(pal!.sortie.date).toBe("2027-02-25");
   });
 
   it("à date égale au Japon, départage sur le titre romanisé (SPEC v1.56)", () => {

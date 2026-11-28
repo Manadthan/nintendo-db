@@ -1,5 +1,6 @@
 import { titreAffiche } from "./titre";
 import {
+  PREFERENCE_TOUS,
   REGIONS,
   type JeuCatalogue,
   type Marche,
@@ -67,8 +68,9 @@ export function cleTriDate(
 export const CARTES_BANDE = 12;
 
 /**
- * Jeux de la bande « À venir » (US-32) : un jeu à venir sur le marché choisi, dans la version dont la date est la plus
- * proche (sur « Tous », la plus proche des trois régions), la sortie la plus proche d'abord.
+ * Jeux de la bande « À venir » (US-32, SPEC v1.57) : un jeu à venir sur le marché choisi, la sortie la plus proche
+ * d'abord. Sur « Tous », titre et jaquette suivent la priorité PAL → US → JAP (US-03), et la date reste la plus proche
+ * des trois régions.
  */
 export function versionsAVenir(
   jeux: JeuCatalogue[],
@@ -78,20 +80,31 @@ export function versionsAVenir(
   const versions: VersionAffichee[] = [];
   for (const jeu of jeux) {
     if (!jeuAVenir(jeu, marche, aujourdhui)) continue;
-    const regions = marche === "TOUS" ? REGIONS : [marche];
+    const regions = marche === "TOUS" ? PREFERENCE_TOUS : [marche];
     let choisie: VersionAffichee | null = null;
+    let dateProche: {
+      date: string | null;
+      precision: PrecisionDate | null;
+      cle: string;
+    } | null = null;
     for (const region of regions) {
       const sortie = jeu.sorties[region];
       if (!sortie.sortie || !sortie.titre) continue;
+      if (!choisie) choisie = { jeu, region, sortie };
       const cle = cleTriDate(sortie.date, sortie.precision) ?? "9999-12-31";
-      const cleChoisie = choisie
-        ? (cleTriDate(choisie.sortie.date, choisie.sortie.precision) ??
-          "9999-12-31")
-        : null;
-      if (cleChoisie === null || cle < cleChoisie)
-        choisie = { jeu, region, sortie };
+      if (!dateProche || cle < dateProche.cle)
+        dateProche = { date: sortie.date, precision: sortie.precision, cle };
     }
-    if (choisie) versions.push(choisie);
+    if (choisie && dateProche) {
+      versions.push({
+        ...choisie,
+        sortie: {
+          ...choisie.sortie,
+          date: dateProche.date,
+          precision: dateProche.precision,
+        },
+      });
+    }
   }
   const cle = (v: VersionAffichee) =>
     cleTriDate(v.sortie.date, v.sortie.precision) ?? "9999-12-31";
