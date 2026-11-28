@@ -7,6 +7,7 @@ import {
   type AmiiboCatalogue,
 } from "@/lib/amiibo/catalogue";
 import { LIBELLES_TYPE, urlImageAmiibo } from "@/lib/amiibo/fiche";
+import { aujourdhuiParis } from "@/lib/catalogue/a-venir";
 import { trier, trierVersions } from "@/lib/catalogue/catalogue";
 import {
   DISPONIBILITES,
@@ -111,6 +112,8 @@ export type EntreeSuivi = {
   possessions: ReadonlySet<string>;
   baseUrlSupabase: string;
   urlSite?: string;
+  /** Jour de référence AAAA-MM-JJ (heure de Paris) pour les items à venir (US-32, SPEC v1.55). */
+  aujourdhui?: string;
 };
 
 /**
@@ -126,6 +129,7 @@ export function calculerSuivi({
   possessions,
   baseUrlSupabase,
   urlSite = URL_SITE,
+  aujourdhui = aujourdhuiParis(),
 }: EntreeSuivi): ReponseSuivi {
   const params = new URLSearchParams(search);
   const marche = marcheDepuisTexte(params.get("marche")) ?? "TOUS";
@@ -167,6 +171,7 @@ export function calculerSuivi({
       tri,
     ),
     filtres,
+    { marche, aujourdhui },
   );
 
   const total = versions.length;

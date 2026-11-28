@@ -292,11 +292,35 @@ test("un jeu annoncé apparaît dans la bande « À venir », avec l'étiquette,
 
     // Accueil : la bande montre le jeu (annoncé en Europe seulement) et sa date courte.
     await page.goto("/");
-    const carte = page
-      .getByRole("region", { name: /À venir/ })
-      .getByRole("link", { name: new RegExp(titre) });
+    const bande = page.getByRole("region", { name: /À venir/ });
+    const carte = bande.getByRole("link", { name: new RegExp(titre) });
     await expect(carte).toBeVisible();
     await expect(carte).toContainText("14 mars 2099");
+
+    // Catalogue « Tous les jeux » (SPEC v1.55) : masqué par défaut (à venir + sans jaquette) ; visible quand les deux
+    // coches sont décochées.
+    const catalogue = page.getByRole("region", { name: "Tous les jeux" });
+    await expect(
+      catalogue.getByRole("link", { name: new RegExp(titre) }),
+    ).toHaveCount(0);
+    await page.getByRole("button", { name: /^Filtres/ }).click();
+    await page
+      .getByRole("checkbox", { name: "Déjà sortis uniquement", exact: true })
+      .uncheck();
+    // Toujours masqué tant que « Avec image uniquement » reste cochée.
+    await expect(
+      catalogue.getByRole("link", { name: new RegExp(titre) }),
+    ).toHaveCount(0);
+    await page
+      .getByRole("checkbox", { name: "Avec image uniquement", exact: true })
+      .uncheck();
+    const carteCatalogue = catalogue.getByRole("link", {
+      name: new RegExp(titre),
+    });
+    await expect(carteCatalogue).toBeVisible();
+    await expect(
+      carteCatalogue.getByRole("img", { name: `${titre} — jaquette à venir` }),
+    ).toBeVisible();
 
     // Fiche : date annoncée, étiquette, ni case « je l'ai » pour cette version.
     await carte.click();

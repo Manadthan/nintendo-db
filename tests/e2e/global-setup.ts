@@ -58,4 +58,48 @@ export default async function globalSetup() {
       .upsert({ user_id: compte.id, pseudo, role }, { onConflict: "user_id" });
     if (e2) throw e2;
   }
+
+  // Dépose des WebP valides dans les buckets locaux pour les images de tests/e2e/images.sql (SPEC v1.55), afin que
+  // toutes les balises <img> aient une vraie image 200 OK en Chromium et WebKit.
+  const sharp = (await import("sharp")).default;
+  const imageBoite = await sharp({
+    create: { width: 27, height: 38, channels: 3, background: "#e5e7eb" },
+  })
+    .webp()
+    .toBuffer();
+  const [{ data: sorties }, { data: amiibos }] = await Promise.all([
+    admin
+      .from("releases")
+      .select("jaquette_path")
+      .not("jaquette_path", "is", null),
+    admin.from("amiibo").select("image_path").not("image_path", "is", null),
+  ]);
+  const envois: Promise<unknown>[] = [];
+  for (const s of sorties ?? []) {
+    if (!s.jaquette_path) continue;
+    for (const taille of [300, 600, 768]) {
+      envois.push(
+        admin.storage
+          .from("jaquettes")
+          .upload(`${s.jaquette_path}-${taille}.webp`, imageBoite, {
+            contentType: "image/webp",
+            upsert: true,
+          }),
+      );
+    }
+  }
+  for (const a of amiibos ?? []) {
+    if (!a.image_path) continue;
+    for (const taille of [300, 600]) {
+      envois.push(
+        admin.storage
+          .from("amiibo")
+          .upload(`${a.image_path}-${taille}.webp`, imageBoite, {
+            contentType: "image/webp",
+            upsert: true,
+          }),
+      );
+    }
+  }
+  await Promise.all(envois);
 }

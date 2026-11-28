@@ -118,6 +118,9 @@ jobs:
       # Amiibo de test (US-29) : chargé de même avant le build qui prépare les fiches des amiibo.
       - name: Amiibo de test
         run: psql "postgresql://postgres:postgres@127.0.0.1:54322/postgres" -v ON_ERROR_STOP=1 -f tests/e2e/amiibo.sql
+      # Images de test (SPEC v1.55) : les jeux de départ et l'amiibo ont une image par défaut.
+      - name: Images de test
+        run: psql "postgresql://postgres:postgres@127.0.0.1:54322/postgres" -v ON_ERROR_STOP=1 -f tests/e2e/images.sql
       - run: npm run e2e
       - name: Rapport en cas d'échec
         if: failure()

@@ -186,16 +186,32 @@ describe("calculerSuivi", () => {
       consoles: CONSOLES,
       possessions,
       baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
     });
 
+    // MK8 n'a pas de jaquette : masqué par défaut (SPEC v1.55), inclus avec ?sans-image=1.
     expect(res).toEqual({
       source: "nintendo-db",
       owned: 1,
-      total: 2,
+      total: 1,
       coverUrl: `${BASE_SUPABASE}/storage/v1/object/public/jaquettes/${ID_SPLATOON}/pal-v1-300.webp`,
       suggestedTitle: "Wii U · Europe",
       url: "https://nintendo-db.vercel.app/?console=wii-u&marche=pal",
     });
+
+    const avecSansImage = calculerSuivi({
+      search: "?console=wii-u&marche=pal&sans-image=1",
+      jeux: JEUX,
+      consoles: CONSOLES,
+      possessions,
+      baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
+    });
+    expect(avecSansImage.owned).toBe(1);
+    expect(avecSansImage.total).toBe(2);
+    expect(avecSansImage.url).toBe(
+      "https://nintendo-db.vercel.app/?console=wii-u&marche=pal&sans-image=1",
+    );
   });
 
   it("prend en compte les guides possédés et leur couverture quand ?voir=guides", () => {
@@ -206,6 +222,7 @@ describe("calculerSuivi", () => {
       guides: GUIDES,
       possessions,
       baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
     });
 
     expect(res).toEqual({
@@ -226,6 +243,7 @@ describe("calculerSuivi", () => {
       amiibo: AMIIBO,
       possessions,
       baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
     });
 
     expect(res).toEqual({
@@ -246,6 +264,7 @@ describe("calculerSuivi", () => {
       amiibo: AMIIBO,
       possessions,
       baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
     });
     expect(figurines.owned).toBe(1);
     expect(figurines.total).toBe(1);
@@ -258,6 +277,7 @@ describe("calculerSuivi", () => {
       amiibo: AMIIBO,
       possessions,
       baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
     });
     expect(cartes.owned).toBe(0);
     expect(cartes.total).toBe(0);
@@ -270,9 +290,68 @@ describe("calculerSuivi", () => {
       amiibo: AMIIBO,
       possessions,
       baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
     });
-    expect(sansAmiibo.total).toBe(3);
+    expect(sansAmiibo.total).toBe(2);
     expect(sansAmiibo.suggestedTitle).toBe("Nintendo DB");
+  });
+
+  it("masque par défaut les jeux à venir et les inclut avec ?avenir=1 (SPEC v1.55)", () => {
+    const ID_FUTUR = "00000000-0000-0000-0000-000000000004";
+    const futur: JeuCatalogue = {
+      ...JEUX[2]!,
+      id: ID_FUTUR,
+      slug: "metroid-futur",
+      sorties: {
+        JAP: {
+          sortie: false,
+          titre: null,
+          titreRomanise: null,
+          date: null,
+          precision: null,
+          jaquette: null,
+        },
+        US: {
+          sortie: false,
+          titre: null,
+          titreRomanise: null,
+          date: null,
+          precision: null,
+          jaquette: null,
+        },
+        PAL: {
+          sortie: true,
+          titre: "Metroid Futur",
+          titreRomanise: null,
+          date: "2027-06-01",
+          precision: "jour",
+          jaquette: `${ID_FUTUR}/pal-1`,
+        },
+      },
+    };
+    const jeux = [...JEUX, futur];
+    const parDefaut = calculerSuivi({
+      search: "?console=switch",
+      jeux,
+      consoles: CONSOLES,
+      possessions,
+      baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
+    });
+    expect(parDefaut.total).toBe(1);
+
+    const avecAVenir = calculerSuivi({
+      search: "?console=switch&avenir=1",
+      jeux,
+      consoles: CONSOLES,
+      possessions,
+      baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
+    });
+    expect(avecAVenir.total).toBe(2);
+    expect(avecAVenir.url).toBe(
+      "https://nintendo-db.vercel.app/?console=switch&avenir=1",
+    );
   });
 
   it("retombe sur « Nintendo DB » sans filtre et gère l'absence de résultat", () => {
@@ -282,10 +361,11 @@ describe("calculerSuivi", () => {
       consoles: CONSOLES,
       possessions,
       baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
     });
     expect(sansFiltre.suggestedTitle).toBe("Nintendo DB");
-    expect(sansFiltre.owned).toBe(2);
-    expect(sansFiltre.total).toBe(3);
+    expect(sansFiltre.owned).toBe(1);
+    expect(sansFiltre.total).toBe(2);
     expect(sansFiltre.url).toBe("https://nintendo-db.vercel.app/");
 
     const vide = calculerSuivi({
@@ -294,6 +374,7 @@ describe("calculerSuivi", () => {
       consoles: CONSOLES,
       possessions,
       baseUrlSupabase: BASE_SUPABASE,
+      aujourdhui: "2026-11-28",
     });
     expect(vide.owned).toBe(0);
     expect(vide.total).toBe(0);
